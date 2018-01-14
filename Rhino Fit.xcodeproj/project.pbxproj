@@ -14,6 +14,7 @@
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
 		8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */; };
+		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitTests.swift; sourceTree = "<group>"; };
 		8A7D6EB1200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8A7D6E99200BF92E00AA0FA7 /* ViewController.swift */,
+				8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */,
 				8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */,
 				8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
@@ -205,6 +208,7 @@
 				8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */,
 				8A7D6E9A200BF92E00AA0FA7 /* ViewController.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
+				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
