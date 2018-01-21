@@ -1,0 +1,6 @@
+framework module Pods_Rhino_Fit {
+  umbrella header "Pods-Rhino Fit-umbrella.h"
+
+  export *
+  module * { export * }
+}

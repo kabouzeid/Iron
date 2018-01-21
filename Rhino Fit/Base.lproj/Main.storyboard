@@ -6,14 +6,17 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Training-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +61,7 @@
             </objects>
             <point key="canvasLocation" x="1164" y="419"/>
         </scene>
-        <!--Exercises-->
+        <!--All-->
         <scene sceneID="K7D-qF-WAS">
             <objects>
                 <tableViewController id="kEQ-bF-8Th" customClass="ExercisesTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,30 +69,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exercise" textLabel="ULn-xE-DCL" detailTextLabel="Vue-pD-mav" style="IBUITableViewCellStyleSubtitle" id="lIa-kt-fi6">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exercise" rowHeight="80" id="hU2-R6-spN" customClass="ExerciseTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lIa-kt-fi6" id="488-1b-QJn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hU2-R6-spN" id="Fbf-0I-gKj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ULn-xE-DCL">
-                                            <rect key="frame" x="16.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vue-pD-mav">
-                                            <rect key="frame" x="15.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0F-Ij-raq">
+                                            <rect key="frame" x="16" y="11" width="58" height="58"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="X0F-Ij-raq" secondAttribute="height" multiplier="1:1" id="T3J-aT-ski"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PDf-ye-vlm">
+                                            <rect key="frame" x="82" y="18.333333333333332" width="273" height="42.666666666666671"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHf-1k-iQL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="273" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mJ-lq-md7">
+                                                    <rect key="frame" x="0.0" y="28.333333333333332" width="273" height="14.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="X0F-Ij-raq" firstAttribute="top" secondItem="Fbf-0I-gKj" secondAttribute="topMargin" id="2xc-3j-50w"/>
+                                        <constraint firstAttribute="trailing" secondItem="PDf-ye-vlm" secondAttribute="trailing" constant="20" symbolic="YES" id="5sx-l4-v5t"/>
+                                        <constraint firstItem="X0F-Ij-raq" firstAttribute="leading" secondItem="Fbf-0I-gKj" secondAttribute="leadingMargin" id="8jW-m0-Bf2"/>
+                                        <constraint firstItem="X0F-Ij-raq" firstAttribute="bottom" secondItem="Fbf-0I-gKj" secondAttribute="bottomMargin" id="kQp-d4-5td"/>
+                                        <constraint firstItem="PDf-ye-vlm" firstAttribute="centerY" secondItem="X0F-Ij-raq" secondAttribute="centerY" id="nXl-tX-Yuh"/>
+                                        <constraint firstItem="PDf-ye-vlm" firstAttribute="leading" secondItem="X0F-Ij-raq" secondAttribute="trailing" constant="8" symbolic="YES" id="vd8-4b-Rbz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="82" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="exerciseDetail" destination="7mJ-lq-md7" id="9UF-88-J3p"/>
+                                    <outlet property="exerciseImage" destination="X0F-Ij-raq" id="e86-Zg-ZHR"/>
+                                    <outlet property="exerciseTitle" destination="uHf-1k-iQL" id="drW-bx-pqZ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -97,7 +124,7 @@
                             <outlet property="delegate" destination="kEQ-bF-8Th" id="fYi-oZ-ctR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Exercises" id="Pmr-lX-k1W"/>
+                    <navigationItem key="navigationItem" title="All" id="Pmr-lX-k1W"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AiH-gx-2Q2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -125,6 +152,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qjF-BQ-klg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jHH-Jg-rnG">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
