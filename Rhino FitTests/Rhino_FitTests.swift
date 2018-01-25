@@ -21,15 +21,44 @@ class Rhino_FitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+//    func testExample() {
+//        // This is an example of a functional test case.
+//        // Use XCTAssert and related functions to verify your tests produce the correct results.
+//    }
+    
+    func testEverkineticParseSpeed() {
+        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
+        if let jsonString = try? String(contentsOf: jsonUrl) {
+            self.measure {
+                _ = EverkineticParser.parse(jsonString: jsonString)
+            }
+        }
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testEverkineticGroupingSpeed() {
+        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
+        if let jsonString = try? String(contentsOf: jsonUrl) {
+            let exercises = EverkineticParser.parse(jsonString: jsonString)
+            self.measure {
+                _ = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
+            }
+        }
+    }
+    
+    func testEverkineticGrouping() {
+        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
+        if let jsonString = try? String(contentsOf: jsonUrl) {
+            let exercises = EverkineticParser.parse(jsonString: jsonString)
+            let groups = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
+            var totalCount = 0
+            for group in groups {
+                totalCount += group.count
+                
+                for exercise in group {
+                    XCTAssert(exercise.muscleGroup == group.first!.muscleGroup)
+                }
+            }
+            XCTAssert(totalCount == exercises.count)
         }
     }
     

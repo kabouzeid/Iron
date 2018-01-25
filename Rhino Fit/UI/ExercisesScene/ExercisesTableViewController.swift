@@ -14,19 +14,13 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     
     // MARK: - Model
     
-    var exercises: [Exercise] = {
-        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        if let jsonString = try? String(contentsOf: jsonUrl) {
-            return EverkineticParser.parse(jsonString: jsonString)
-        }
-        return []
-        }() {
+    var exercises: [Exercise] = [] {
         didSet {
             filterExercises(by: filterText, force: true)
         }
     }
     
-    private var displayExercises = [Exercise]() {
+    private var displayExercises = [[Exercise]]() {
         didSet {
             if tableView != nil {
                 tableView.reloadData()
@@ -45,24 +39,27 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     func filterExercises(by: String, force : Bool = false) {
         if force || filterText != by.lowercased() {
             filterText = by.lowercased()
-            displayExercises = exercises.filter { exercise in
+            displayExercises = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises.filter { exercise in
                 if filterText.isEmpty {
                     return true
                 }
                 return exercise.title.lowercased().contains(filterText)
-            }
+            })
         }
     }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         filterExercises(by: filterText, force: true)
         
-        tableView.rowHeight = 80
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController?.searchResultsUpdater = self
+        
+        definesPresentationContext = true // prevents black screen when switching tabs while searching
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,11 +69,18 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return displayExercises.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayExercises.count
+        return displayExercises[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if displayExercises.count > 1 {
+            return displayExercises[section][0].muscleGroup
+        }
+        return nil
     }
     
     var imageCache = [Int: UIImage]()
@@ -85,7 +89,7 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
         let cell = tableView.dequeueReusableCell(withIdentifier: "exercise", for: indexPath) as! ExerciseTableViewCell
 
         // Clear data
-        let exercise = displayExercises[indexPath.row]
+        let exercise = displayExercises[indexPath.section][indexPath.row]
         cell.exerciseTitle.text = exercise.title
         cell.exerciseDetail.text = exercise.description
         cell.exerciseImage.image = imageCache[exercise.id]
@@ -115,6 +119,12 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            let exercise = displayExercises[indexPath.section][indexPath.row]
+            exerciseDetailViewController.exercise = exercise
+            exerciseDetailViewController.title = exercise.title
+        }
     }
 
 }

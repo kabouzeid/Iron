@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class EverkineticParser {
+struct EverkineticParser {
     
     static func parse(jsonString: String) -> [Exercise] {
         let json = JSON(parseJSON: jsonString)
