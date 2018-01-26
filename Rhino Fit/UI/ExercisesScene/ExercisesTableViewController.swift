@@ -81,10 +81,8 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
 
-        // Clear data
         let exercise = displayExercises[indexPath.section][indexPath.row]
         cell.textLabel?.text = exercise.title
-        cell.detailTextLabel?.text = exerciseDetailText(exercise: exercise)
 
         return cell
     }
@@ -102,18 +100,4 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
             exerciseDetailViewController.title = exercise.title
         }
     }
-    
-    // MARK: - Private funcs
-    
-    private func exerciseDetailText(exercise: Exercise) -> String {
-        if let primary = exercise.primaryMuscleCommonName.first {
-            var detailText = primary.capitalized
-            if let secondary = exercise.secondaryMuscleCommonName.first {
-                detailText += " and " + secondary
-            }
-            return detailText
-        }
-        return ""
-    }
-
 }
