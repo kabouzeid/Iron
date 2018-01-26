@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="200" id="FjY-dZ-mtX" customClass="ExerciseImageTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="200" id="FjY-dZ-mtX" customClass="ExerciseImageTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FjY-dZ-mtX" id="LI8-d0-JfS">
@@ -139,7 +139,7 @@
                                     <outlet property="exerciseImage" destination="65Y-hR-mYJ" id="Dyv-7r-Sx0"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="muscleCell" textLabel="PDH-rO-OB5" detailTextLabel="Vqx-7x-1hs" style="IBUITableViewCellStyleValue2" id="dQo-l9-BYZ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="muscleCell" textLabel="PDH-rO-OB5" detailTextLabel="Vqx-7x-1hs" style="IBUITableViewCellStyleValue2" id="dQo-l9-BYZ">
                                 <rect key="frame" x="0.0" y="255.33333333333334" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dQo-l9-BYZ" id="WSO-8I-t4R">
@@ -163,7 +163,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" textLabel="pPc-Hf-EKw" style="IBUITableViewCellStyleDefault" id="mIO-de-wUV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="textCell" textLabel="pPc-Hf-EKw" style="IBUITableViewCellStyleDefault" id="mIO-de-wUV">
                                 <rect key="frame" x="0.0" y="299.33333333333337" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mIO-de-wUV" id="iHz-TG-huL">
