@@ -7888,7 +7888,6 @@
             "svg/0244-tension.svg"
         ],
         "png": [
-            "png/0244-relaxation.png",
             "png/0244-tension.png"
         ]
     },
@@ -9695,11 +9694,7 @@
         ],
         "references": [],
         "svg": [],
-        "png": [
-            "png/cuban-dumbbell-press-1.png",
-            "png/cuban-dumbbell-press-2.png",
-            "png/cuban-dumbbell-press-3.png"
-        ]
+        "png": []
     },
     {
         "id": "0302",
