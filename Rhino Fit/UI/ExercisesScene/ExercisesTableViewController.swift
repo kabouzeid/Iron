@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import Benchmark
 
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
@@ -62,10 +61,6 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
         definesPresentationContext = true // prevents black screen when switching tabs while searching
     }
     
-    override func didReceiveMemoryWarning() {
-        imageCache = [:]
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,41 +73,22 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if displayExercises.count > 1 {
-            return displayExercises[section][0].muscleGroup
+            return displayExercises[section][0].muscleGroup.capitalized
         }
         return nil
     }
     
-    var imageCache = [Int: UIImage]()
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exercise", for: indexPath) as! ExerciseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
 
         // Clear data
         let exercise = displayExercises[indexPath.section][indexPath.row]
-        cell.exerciseTitle.text = exercise.title
-        cell.exerciseDetail.text = exercise.description
-        cell.exerciseImage.image = imageCache[exercise.id]
-
-        if cell.exerciseImage.image == nil && !exercise.png.isEmpty {
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(exercise.png[0])
-                if let imageData = try? Data(contentsOf: url) {
-                    let image = UIImage(data: imageData)
-                    self?.imageCache[exercise.id] = image
-                    DispatchQueue.main.async {
-                        if let originalCell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
-                            originalCell.exerciseImage.image = image
-                            originalCell.layoutSubviews()
-                        }
-                    }
-                }
-            }
-        }
+        cell.textLabel?.text = exercise.title
+        cell.detailTextLabel?.text = exerciseDetailText(exercise: exercise)
 
         return cell
     }
-
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -125,6 +101,19 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
             exerciseDetailViewController.exercise = exercise
             exerciseDetailViewController.title = exercise.title
         }
+    }
+    
+    // MARK: - Private funcs
+    
+    private func exerciseDetailText(exercise: Exercise) -> String {
+        if let primary = exercise.primaryMuscleCommonName.first {
+            var detailText = primary.capitalized
+            if let secondary = exercise.secondaryMuscleCommonName.first {
+                detailText += " and " + secondary
+            }
+            return detailText
+        }
+        return ""
     }
 
 }

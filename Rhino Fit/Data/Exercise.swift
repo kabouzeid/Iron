@@ -25,7 +25,7 @@ struct Exercise {
         get {
             return primaryMuscle.flatMap({ (muscle) -> String? in
                 return commonName(muscle: muscle)
-            })
+            }).uniq()
         }
     }
     
@@ -33,7 +33,7 @@ struct Exercise {
         get {
             return secondaryMuscle.flatMap({ (muscle) -> String? in
                 return commonName(muscle: muscle)
-            })
+            }).uniq()
         }
     }
     
@@ -46,31 +46,33 @@ struct Exercise {
     private func commonName(muscle: String) -> String {
         switch muscle {
         case "abdominals":
-            return "Abdominals"
+            return "abdominals"
         case "biceps brachii":
-            return "Biceps"
+            return "biceps"
         case "deltoid":
-            return "Shoulders"
+            return "shoulders"
         case "erector spinae":
-            return "Lower back"
+            return "lower back"
         case "gastrocnemius":
-            return "Calves"
+            fallthrough
+        case "soleus":
+            return "calves"
         case "glutaeus maximus":
-            return "Glutes"
+            return "glutes"
         case "ischiocrural muscles":
-            return "Hamstrings"
+            return "hamstrings"
         case "latissimus dorsi":
-            return "Latissimus"
+            return "latissimus"
         case "obliques":
-            return "Obliques"
+            return "obliques"
         case "pectoralis major":
-            return "Chest"
+            return "chest"
         case "quadriceps":
-            return "Quadriceps"
+            return "quadriceps"
         case "trapezius":
-            return "Trapezius"
+            return "trapezius"
         case "triceps brachii":
-            return "Triceps"
+            return "triceps"
         default:
             return muscle
         }
@@ -83,17 +85,17 @@ struct Exercise {
         case "abdominals":
             fallthrough
         case "obliques":
-            return "Abdominal"
+            return "abdominals"
             
         // Arms
         case "biceps brachii":
             fallthrough
         case "triceps brachii":
-            return "Arms"
+            return "arms"
             
         // Shoulders
         case "deltoid":
-            return "Shoulders"
+            return "shoulders"
             
         // Back
         case "trapezius":
@@ -101,7 +103,7 @@ struct Exercise {
         case "latissimus dorsi":
             fallthrough
         case "erector spinae":
-            return "Back"
+            return "back"
             
         // Legs
         case "ischiocrural muscles":
@@ -109,20 +111,43 @@ struct Exercise {
         case "quadriceps":
             fallthrough
         case "gastrocnemius":
-            return "Legs"
+            return "legs"
             
         // Glutes
         case "glutaeus maximus":
-            return "Glutes"
+            return "glutes"
         
         // Chest
         case "pectoralis major":
-            return "Chest"
+            return "chest"
             
         // Other
         default:
-            return "Other"
+            return "other"
         }
     }
+
+}
+
+extension Array where Element: Equatable {
     
+    public func uniq() -> [Element] {
+        var arrayCopy = self
+        arrayCopy.uniqInPlace()
+        return arrayCopy
+    }
+    
+    mutating private func uniqInPlace() {
+        var seen = [Element]()
+        var index = 0
+        while self.count > index {
+            let element = self[index]
+            if seen.contains(element) {
+                remove(at: index)
+            } else {
+                seen.append(element)
+                index += 1
+            }
+        }
+    }
 }

@@ -37,7 +37,7 @@ class ExerciseGroupsTableViewController: UITableViewController {
             cell.textLabel?.text = "All"
             cell.detailTextLabel?.text = countString(count: exercisesGrouped.flatMap{$0}.count)
         } else {
-            cell.textLabel?.text = exercisesGrouped[indexPath.row][0].muscleGroup
+            cell.textLabel?.text = exercisesGrouped[indexPath.row][0].muscleGroup.capitalized
             cell.detailTextLabel?.text = countString(count: exercisesGrouped[indexPath.row].count)
         }
 
@@ -62,7 +62,7 @@ class ExerciseGroupsTableViewController: UITableViewController {
             } else {
                 let exercises = exercisesGrouped[indexPath.row]
                 exerciseTableViewController.exercises = exercises
-                exerciseTableViewController.title = exercises.first?.muscleGroup
+                exerciseTableViewController.title = exercises.first?.muscleGroup.capitalized
             }
         }
     }

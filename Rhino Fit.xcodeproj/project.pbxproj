@@ -21,7 +21,6 @@
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
-		8AC2B327200D450200DC68BE /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B326200D450200DC68BE /* ExerciseTableViewCell.swift */; };
 		ACD0EC9B0D331A9B4BDF72CA /* Pods_Rhino_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */; };
 		B2B5464AE119C7DA15FA73ED /* Pods_Rhino_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */; };
 /* End PBXBuildFile section */
@@ -59,7 +58,6 @@
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
-		8AC2B326200D450200DC68BE /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */,
-				8AC2B326200D450200DC68BE /* ExerciseTableViewCell.swift */,
 			);
 			path = ExercisesScene;
 			sourceTree = "<group>";
@@ -421,7 +418,6 @@
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
 				8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */,
-				8AC2B327200D450200DC68BE /* ExerciseTableViewCell.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
