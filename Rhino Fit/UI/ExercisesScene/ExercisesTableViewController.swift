@@ -12,17 +12,10 @@ import SwiftyJSON
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var exerciseDetailPresenter: ExerciseDetailPresenter?
-    var cellAccessoryType: UITableViewCellAccessoryType = .disclosureIndicator {
-        didSet {
-            if tableView != nil {
-                tableView.reloadData()
-            }
-        }
-    }
-    
+
     // MARK: - Model
     
-    var exercises: [Exercise] = [] {
+    var exercises = [Exercise]() {
         didSet {
             filterExercises(by: filterText, force: true)
         }
@@ -92,7 +85,6 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
 
         let exercise = displayExercises[indexPath.section][indexPath.row]
         cell.textLabel?.text = exercise.title
-        cell.accessoryType = cellAccessoryType
 
         return cell
     }
