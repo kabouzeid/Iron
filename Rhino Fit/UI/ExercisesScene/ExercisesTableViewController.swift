@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
+    var exerciseDetailPresenter: ExerciseDetailPresenter?
+    
     // MARK: - Model
     
     var exercises: [Exercise] = [] {
@@ -87,6 +89,13 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let exerciseDetailPresenter = exerciseDetailPresenter {
+            exerciseDetailPresenter.presentExerciseDetail(exercise: displayExercises[indexPath.section][indexPath.row])
+            tableView.deselectRow(at: indexPath, animated: true) // willAppear not called when comming back
+        }
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,7 +106,14 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
             let indexPath = tableView.indexPathForSelectedRow {
             let exercise = displayExercises[indexPath.section][indexPath.row]
             exerciseDetailViewController.exercise = exercise
-            exerciseDetailViewController.title = exercise.title
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return exerciseDetailPresenter == nil
+    }
+}
+
+protocol ExerciseDetailPresenter {
+    func presentExerciseDetail(exercise: Exercise)
 }

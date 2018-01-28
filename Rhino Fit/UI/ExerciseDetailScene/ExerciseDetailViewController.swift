@@ -15,6 +15,7 @@ class ExerciseDetailViewController: UITableViewController {
             if tableView != nil {
                 tableView.reloadData()
             }
+            self.title = exercise == nil ? nil : exercise!.title
         }
     }
 

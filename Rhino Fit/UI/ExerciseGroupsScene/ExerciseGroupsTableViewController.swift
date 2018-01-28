@@ -8,12 +8,23 @@
 
 import UIKit
 
-class ExerciseGroupsTableViewController: UITableViewController {
+class ExerciseGroupsTableViewController: UITableViewController, ExerciseDetailPresenter {
     
+
+
     var exercisesGrouped = EverkineticDataProvider.loadExercisesGrouped()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let exerciseTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseTableViewController") as! ExercisesTableViewController
+        exerciseTableViewController.exercises = exercisesGrouped.flatMap{$0}
+        exerciseTableViewController.exerciseDetailPresenter = self
+        navigationItem.searchController = UISearchController(searchResultsController: exerciseTableViewController)
+        navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController?.searchResultsUpdater = exerciseTableViewController
+        
+        definesPresentationContext = true // prevents black screen when switching tabs while searching
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +76,16 @@ class ExerciseGroupsTableViewController: UITableViewController {
                 exerciseTableViewController.title = exercises.first?.muscleGroup.capitalized
             }
         }
+        
+        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
+            exerciseDetailViewController.exercise = exerciseToPresent
+        }
+    }
+
+    private var exerciseToPresent: Exercise?
+    func presentExerciseDetail(exercise: Exercise) {
+        exerciseToPresent = exercise
+        performSegue(withIdentifier: "ShowExerciseDetail", sender: self)
     }
 
 }

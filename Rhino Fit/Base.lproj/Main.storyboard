@@ -62,14 +62,14 @@
         <!--Exercises Table View Controller-->
         <scene sceneID="K7D-qF-WAS">
             <objects>
-                <tableViewController id="kEQ-bF-8Th" customClass="ExercisesTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExerciseTableViewController" id="kEQ-bF-8Th" customClass="ExercisesTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3bH-TR-aip">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="exerciseCell" textLabel="XTK-fd-5xW" style="IBUITableViewCellStyleDefault" id="e8V-CB-uan" customClass="ExerciseTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="exerciseCell" textLabel="XTK-fd-5xW" style="IBUITableViewCellStyleDefault" id="e8V-CB-uan">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e8V-CB-uan" id="ylH-9P-Qag">
@@ -99,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AiH-gx-2Q2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2889" y="1312"/>
+            <point key="canvasLocation" x="2905" y="966"/>
         </scene>
         <!--Exercise Detail View Controller-->
         <scene sceneID="a6r-aZ-cCx">
@@ -229,6 +229,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Exercises" id="nGZ-tf-dth"/>
+                    <connections>
+                        <segue destination="EsE-Ae-YG9" kind="show" identifier="ShowExerciseDetail" id="8eC-Ci-m6Y"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNB-xg-JSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -302,4 +305,7 @@
         <image name="training" width="28" height="28"/>
         <image name="user_male" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="avt-n4-udd"/>
+    </inferredMetricsTieBreakers>
 </document>
