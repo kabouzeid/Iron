@@ -12,6 +12,13 @@ import SwiftyJSON
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var exerciseDetailPresenter: ExerciseDetailPresenter?
+    var cellAccessoryType: UITableViewCellAccessoryType = .disclosureIndicator {
+        didSet {
+            if tableView != nil {
+                tableView.reloadData()
+            }
+        }
+    }
     
     // MARK: - Model
     
@@ -85,6 +92,7 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
 
         let exercise = displayExercises[indexPath.section][indexPath.row]
         cell.textLabel?.text = exercise.title
+        cell.accessoryType = cellAccessoryType
 
         return cell
     }
@@ -110,7 +118,7 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        return exerciseDetailPresenter == nil
+        return !(sender is UITableViewCell) || exerciseDetailPresenter == nil // sender is cell => presenter = nil
     }
 }
 
