@@ -17,7 +17,7 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseDetailPr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let exerciseTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseTableViewController") as! ExercisesTableViewController
+        let exerciseTableViewController = UIStoryboard(name: "Exercises", bundle: nil).instantiateViewController(withIdentifier: "ExerciseTableViewController") as! ExercisesTableViewController
         exerciseTableViewController.exercises = exercisesGrouped.flatMap{$0}
         exerciseTableViewController.exerciseDetailPresenter = self
         navigationItem.searchController = UISearchController(searchResultsController: exerciseTableViewController)

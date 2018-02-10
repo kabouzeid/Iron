@@ -23,6 +23,8 @@
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
+		8AD40829202F979800A73E05 /* Training.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD40827202F979800A73E05 /* Training.storyboard */; };
+		8AD4082C202F97E200A73E05 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD4082A202F97E200A73E05 /* Exercises.storyboard */; };
 		ACD0EC9B0D331A9B4BDF72CA /* Pods_Rhino_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */; };
 		B2B5464AE119C7DA15FA73ED /* Pods_Rhino_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,8 @@
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
+		8AD40828202F979800A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Training.storyboard; sourceTree = "<group>"; };
+		8AD4082B202F97E200A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Exercises.storyboard; sourceTree = "<group>"; };
 		975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +136,8 @@
 				8AABF2AC20168900009C047D /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */,
+				8AD4082A202F97E200A73E05 /* Exercises.storyboard */,
+				8AD40827202F979800A73E05 /* Training.storyboard */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
 				8A7D6E9E200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld */,
@@ -303,9 +309,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AD40829202F979800A73E05 /* Training.storyboard in Resources */,
 				8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,
+				8AD4082C202F97E200A73E05 /* Exercises.storyboard in Resources */,
 				8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +483,22 @@
 				8A7D6EA4200BF92E00AA0FA7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8AD40827202F979800A73E05 /* Training.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AD40828202F979800A73E05 /* Base */,
+			);
+			name = Training.storyboard;
+			sourceTree = "<group>";
+		};
+		8AD4082A202F97E200A73E05 /* Exercises.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AD4082B202F97E200A73E05 /* Base */,
+			);
+			name = Exercises.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
