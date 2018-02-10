@@ -95,15 +95,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8A2F6BC7202E22CB00CB241A /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */,
-			);
-			name = Extension;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +127,7 @@
 		8A7D6E96200BF92E00AA0FA7 /* Rhino Fit */ = {
 			isa = PBXGroup;
 			children = (
-				8A2F6BC7202E22CB00CB241A /* Extension */,
+				8AD40826202F96CB00A73E05 /* Extension */,
 				8AABF2A6201683C8009C047D /* Data */,
 				8AABF2AC20168900009C047D /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
@@ -202,6 +193,14 @@
 				8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */,
 			);
 			path = ExerciseGroupsScene;
+			sourceTree = "<group>";
+		};
+		8AD40826202F96CB00A73E05 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		9500C407BE043857C54B4BA6 /* Pods */ = {
