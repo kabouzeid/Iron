@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExerciseGroupsTableViewController: UITableViewController, ExerciseDetailPresenter {
+class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectionHandler {
     
 
 
@@ -19,7 +19,7 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseDetailPr
         
         let exerciseTableViewController = UIStoryboard(name: "Exercises", bundle: nil).instantiateViewController(withIdentifier: "ExerciseTableViewController") as! ExercisesTableViewController
         exerciseTableViewController.exercises = exercisesGrouped.flatMap{$0}
-        exerciseTableViewController.exerciseDetailPresenter = self
+        exerciseTableViewController.exerciseSelectionHandler = self
         navigationItem.searchController = UISearchController(searchResultsController: exerciseTableViewController)
         navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController?.searchResultsUpdater = exerciseTableViewController
@@ -83,7 +83,7 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseDetailPr
     }
 
     private var exerciseToPresent: Exercise?
-    func presentExerciseDetail(exercise: Exercise) {
+    func handleSelection(exercise: Exercise) {
         exerciseToPresent = exercise
         performSegue(withIdentifier: "ShowExerciseDetail", sender: self)
     }

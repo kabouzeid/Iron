@@ -11,7 +11,14 @@ import SwiftyJSON
 
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
-    var exerciseDetailPresenter: ExerciseDetailPresenter?
+    var exerciseSelectionHandler: ExerciseSelectionHandler?
+    var accessoryType: UITableViewCellAccessoryType = .disclosureIndicator {
+        didSet {
+            if tableView != nil {
+                tableView.reloadData()
+            }
+        }
+    }
 
     // MARK: - Model
     
@@ -85,13 +92,14 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
 
         let exercise = displayExercises[indexPath.section][indexPath.row]
         cell.textLabel?.text = exercise.title
+        cell.accessoryType = accessoryType
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let exerciseDetailPresenter = exerciseDetailPresenter {
-            exerciseDetailPresenter.presentExerciseDetail(exercise: displayExercises[indexPath.section][indexPath.row])
+        if let exerciseDetailPresenter = exerciseSelectionHandler {
+            exerciseDetailPresenter.handleSelection(exercise: displayExercises[indexPath.section][indexPath.row])
             tableView.deselectRow(at: indexPath, animated: true) // willAppear not called when comming back
         }
     }
@@ -110,10 +118,10 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        return !(sender is UITableViewCell) || exerciseDetailPresenter == nil // sender is cell => presenter = nil
+        return !(sender is UITableViewCell) || exerciseSelectionHandler == nil // sender is cell => delegate = nil
     }
 }
 
-protocol ExerciseDetailPresenter {
-    func presentExerciseDetail(exercise: Exercise)
+protocol ExerciseSelectionHandler {
+    func handleSelection(exercise: Exercise)
 }

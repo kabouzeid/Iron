@@ -8,18 +8,14 @@
 
 import UIKit
 
-class StartTrainingViewController: UIViewController {
+class StartTrainingViewController: UIViewController, UITabBarControllerDelegate {
 
     @IBOutlet weak var button: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         button.layer.cornerRadius = 8
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        tabBarController?.delegate = self
     }
 
     // MARK: - Navigation
@@ -41,5 +37,8 @@ class StartTrainingViewController: UIViewController {
             }
         }
     }
-
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return viewController != navigationController || tabBarController.selectedViewController != navigationController // disable double tap tabbar for this tab only
+    }
 }
