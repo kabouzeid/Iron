@@ -126,28 +126,4 @@ struct Exercise {
             return "other"
         }
     }
-
-}
-
-extension Array where Element: Equatable {
-    
-    public func uniq() -> [Element] {
-        var arrayCopy = self
-        arrayCopy.uniqInPlace()
-        return arrayCopy
-    }
-    
-    mutating private func uniqInPlace() {
-        var seen = [Element]()
-        var index = 0
-        while self.count > index {
-            let element = self[index]
-            if seen.contains(element) {
-                remove(at: index)
-            } else {
-                seen.append(element)
-                index += 1
-            }
-        }
-    }
 }

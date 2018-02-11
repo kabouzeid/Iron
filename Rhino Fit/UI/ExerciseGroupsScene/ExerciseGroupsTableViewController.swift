@@ -9,8 +9,6 @@
 import UIKit
 
 class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectionHandler {
-    
-
 
     var exercisesGrouped = EverkineticDataProvider.loadExercisesGrouped()
 
@@ -42,7 +40,7 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectio
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseGroup", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseGroupCell", for: indexPath)
         
         if indexPath.section == 0 {
             cell.textLabel?.text = "All"

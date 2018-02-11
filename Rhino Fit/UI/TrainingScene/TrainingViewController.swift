@@ -8,11 +8,28 @@
 
 import UIKit
 
-class TrainingViewController: UIViewController, ExerciseSelectionHandler {
+class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITableViewDelegate, UITableViewDataSource {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0 // TODO
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
+        // TODO init cell
+        return cell
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
