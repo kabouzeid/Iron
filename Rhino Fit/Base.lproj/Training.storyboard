@@ -48,6 +48,9 @@
                                             <constraint firstAttribute="height" constant="49" id="QGE-ew-f6u"/>
                                         </constraints>
                                         <state key="normal" title="Continue With Plan"/>
+                                        <connections>
+                                            <segue destination="X3d-Gd-7W1" kind="show" identifier="continue with plan" id="lnS-Y2-5Pd"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -164,7 +167,6 @@
         <!--Training-->
         <scene sceneID="ghR-Yc-7TV">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3ba-XP-oVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ob1-FP-r6X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Training" image="training" id="Maz-TI-QsM"/>
                     <toolbarItems/>
@@ -178,6 +180,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ukX-gM-g09"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ba-XP-oVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1161.5999999999999" y="-1252.4630541871923"/>
         </scene>
@@ -186,4 +189,7 @@
         <image name="training" width="28" height="28"/>
         <image name="training-hero" width="341" height="341"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3zb-e6-bqh"/>
+    </inferredMetricsTieBreakers>
 </document>
