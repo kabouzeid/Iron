@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ob1-FP-r6X">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,17 +17,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="StartTrainingViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="You can either start a new training session and add exercises on the fly, or continue with the next day in your plan." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyd-mY-LdF">
-                                <rect key="frame" x="16" y="380.5" width="343" height="66.5"/>
+                                <rect key="frame" x="16" y="491.66666666666669" width="343" height="66.333333333333314"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SHU-Nt-yz5">
-                                <rect key="frame" x="49" y="496" width="277" height="106"/>
+                                <rect key="frame" x="49" y="607" width="277" height="106"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0v6-3h-qm0">
                                         <rect key="frame" x="0.0" y="0.0" width="277" height="49"/>
@@ -49,13 +49,13 @@
                                         </constraints>
                                         <state key="normal" title="Continue With Plan"/>
                                         <connections>
-                                            <segue destination="X3d-Gd-7W1" kind="show" identifier="continue with plan" id="lnS-Y2-5Pd"/>
+                                            <segue destination="X3d-Gd-7W1" kind="show" identifier="continue with plan" id="aCC-2k-b9p"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="training-hero" translatesAutoresizingMaskIntoConstraints="NO" id="b5E-2o-BPw">
-                                <rect key="frame" x="49" y="87.5" width="277" height="277"/>
+                                <rect key="frame" x="49" y="198.66666666666663" width="277" height="277"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="b5E-2o-BPw" secondAttribute="height" multiplier="1:1" id="lC0-cb-NuQ"/>
                                 </constraints>
@@ -91,11 +91,11 @@
             <objects>
                 <viewController modalPresentationStyle="currentContext" id="X3d-Gd-7W1" customClass="TrainingViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IJB-Ox-mFx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeR-nQ-968">
-                                <rect key="frame" x="0.0" y="116" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6c-MD-bVY">
                                         <rect key="frame" x="16" y="10" width="343" height="21"/>
@@ -122,34 +122,38 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-KN-j3t">
-                                <rect key="frame" x="0.0" y="156" width="375" height="462"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="549"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exerciseCell" textLabel="Hry-X8-Fwj" detailTextLabel="M03-8T-TvG" style="IBUITableViewCellStyleValue1" id="7oO-f1-YZS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exerciseCell" textLabel="Hry-X8-Fwj" detailTextLabel="M03-8T-TvG" style="IBUITableViewCellStyleSubtitle" id="7oO-f1-YZS">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7oO-f1-YZS" id="jcM-2D-GrG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Bench Press: Barbell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hry-X8-Fwj">
-                                                    <rect key="frame" x="15" y="12" width="157.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="5" width="157.66666666666666" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 of 4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M03-8T-TvG">
-                                                    <rect key="frame" x="314.5" y="12" width="45.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 of 4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M03-8T-TvG">
+                                                    <rect key="frame" x="15" y="25.333333333333332" width="33.666666666666664" height="14.333333333333334"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="CKU-WW-XmR" kind="show" id="Fak-NM-BgW"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -172,7 +176,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Bhm-mp-hsF">
                             <connections>
-                                <segue destination="DXa-B4-9lg" kind="show" id="mBl-OR-oca"/>
+                                <segue destination="DXa-B4-9lg" kind="show" identifier="" id="mBl-OR-oca"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -191,7 +195,37 @@
                 <viewControllerPlaceholder storyboardName="Exercises" referencedIdentifier="ExerciseTableViewController" id="DXa-B4-9lg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDh-Mx-dOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3816" y="-1522"/>
+            <point key="canvasLocation" x="3638" y="-1659"/>
+        </scene>
+        <!--Training Exercise View Controller-->
+        <scene sceneID="0Jz-eK-cRy">
+            <objects>
+                <viewController storyboardIdentifier="TrainingExerciseViewController" id="Jz8-lg-GaJ" customClass="TrainingExerciseViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="geH-6K-r1V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="soa-ha-8PI">
+                                <rect key="frame" x="67" y="342" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xAb-gW-CMA"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zKQ-3m-ZQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4940" y="-1252"/>
+        </scene>
+        <!--Training Exercise Page View Controller-->
+        <scene sceneID="EGm-pa-cmO">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CKU-WW-XmR" customClass="TrainingExercisePageViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PdQ-t4-0za" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4001" y="-1252"/>
         </scene>
         <!--Training-->
         <scene sceneID="ghR-Yc-7TV">
@@ -201,7 +235,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Usy-4I-R5r">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -219,6 +253,6 @@
         <image name="training-hero" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3zb-e6-bqh"/>
+        <segue reference="aCC-2k-b9p"/>
     </inferredMetricsTieBreakers>
 </document>

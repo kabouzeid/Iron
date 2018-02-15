@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
+		8A4863042035A476004B1067 /* TrainingExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863032035A476004B1067 /* TrainingExercisePageViewController.swift */; };
+		8A4863062035A48D004B1067 /* TrainingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863052035A48D004B1067 /* TrainingExerciseViewController.swift */; };
 		8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */; };
 		8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
@@ -21,6 +24,10 @@
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
+		8AB8A5952034C097004366F2 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5942034C097004366F2 /* Training.swift */; };
+		8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */; };
+		8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5982034C0BA004366F2 /* TrainingSet.swift */; };
+		8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* CoreDataHelper.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
 		8AD40829202F979800A73E05 /* Training.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD40827202F979800A73E05 /* Training.storyboard */; };
@@ -46,8 +53,11 @@
 		16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.debug.xcconfig"; sourceTree = "<group>"; };
 		6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80558E9154ADBCE77B4762E7 /* Pods-Rhino FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino FitTests/Pods-Rhino FitTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		8A4863032035A476004B1067 /* TrainingExercisePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExercisePageViewController.swift; sourceTree = "<group>"; };
+		8A4863052035A48D004B1067 /* TrainingExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseViewController.swift; sourceTree = "<group>"; };
 		8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseImageTableViewCell.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rhino Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +74,10 @@
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
+		8AB8A5942034C097004366F2 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
+		8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExercise.swift; sourceTree = "<group>"; };
+		8AB8A5982034C0BA004366F2 /* TrainingSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSet.swift; sourceTree = "<group>"; };
+		8AB972F6203583E40099507B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AD40828202F979800A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Training.storyboard; sourceTree = "<group>"; };
@@ -155,7 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */,
+				8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */,
 				8A7D6EB1200BF92E00AA0FA7 /* Info.plist */,
+				8AB972F6203583E40099507B /* CoreDataHelper.swift */,
 			);
 			path = "Rhino FitTests";
 			sourceTree = "<group>";
@@ -186,6 +202,8 @@
 				8AABF2AD20168906009C047D /* ExercisesScene */,
 				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
 				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
+				8A4863032035A476004B1067 /* TrainingExercisePageViewController.swift */,
+				8A4863052035A48D004B1067 /* TrainingExerciseViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -204,6 +222,16 @@
 				8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */,
 			);
 			path = ExerciseGroupsScene;
+			sourceTree = "<group>";
+		};
+		8AB8A5932034C072004366F2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8AB8A5942034C097004366F2 /* Training.swift */,
+				8AB8A5982034C0BA004366F2 /* TrainingSet.swift */,
+				8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		8AD40826202F96CB00A73E05 /* Extension */ = {
@@ -234,6 +262,7 @@
 		8AD40835202FC7C200A73E05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AB8A5932034C072004366F2 /* CoreData */,
 				8AC2B322200D2C8000DC68BE /* Exercise.swift */,
 			);
 			path = Model;
@@ -466,16 +495,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A4863062035A48D004B1067 /* TrainingExerciseViewController.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
 				8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */,
+				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AD40830202FA82300A73E05 /* TrainingViewController.swift in Sources */,
+				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
+				8A4863042035A476004B1067 /* TrainingExercisePageViewController.swift in Sources */,
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
+				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
 				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,
 				8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */,
 				8AD40834202FC71B00A73E05 /* ArrayExtension.swift in Sources */,
@@ -486,7 +520,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */,
 				8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */,
+				8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
