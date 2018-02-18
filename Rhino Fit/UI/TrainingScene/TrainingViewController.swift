@@ -11,13 +11,8 @@ import CoreData
 
 class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITableViewDelegate, UITableViewDataSource {
     
-    var persistentContainer: NSPersistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer {
-        didSet {
-            training = fetchOrCreateCurrentTraining()
-            tableView.reloadData()
-        }
-    }
-    
+    private var persistentContainer = AppDelegate.instance.persistentContainer
+
     private var _training: Training?
     private var training: Training {
         get {
@@ -55,6 +50,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         if let selected = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selected, animated: true)
         }
@@ -89,9 +85,17 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
         // TODO
         let trainingExercise = training.trainingExercises![indexPath.row] as! TrainingExercise
-        let exercise = findExercise(id: Int(trainingExercise.exerciseId))
-        cell.textLabel?.text = exercise.title
-        cell.detailTextLabel?.text = "\(trainingExercise.numberOfCompletedSets() ?? 0) of \(trainingExercise.trainingSets?.count ?? 0)"
+        let completedSets = trainingExercise.completedSets ?? 0
+        let totalSets = trainingExercise.trainingSets?.count ?? 0
+        cell.textLabel?.text = trainingExercise.exercise?.title
+        cell.detailTextLabel?.text = "\(completedSets) of \(totalSets)"
+        if completedSets == totalSets { // completed exercise
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.detailTextLabel?.textColor = UIColor.lightGray
+        } else {
+            cell.textLabel?.textColor = UIColor.darkText
+            cell.detailTextLabel?.textColor = UIColor.darkGray
+        }
         return cell
     }
     
@@ -100,7 +104,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let exerciseTableViewController = segue.destination as? ExercisesTableViewController {
-            exerciseTableViewController.exercises = EverkineticDataProvider.loadExercises()
+            exerciseTableViewController.exercises = EverkineticDataProvider.exercises
             exerciseTableViewController.exerciseSelectionHandler = self
             exerciseTableViewController.accessoryType = .none
             exerciseTableViewController.navigationItem.hidesSearchBarWhenScrolling = false
@@ -126,14 +130,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         
         tableView.reloadData()
     }
-    
-    private var exercises = EverkineticDataProvider.loadExercises()
-    private func findExercise(id: Int) -> Exercise {
-        return exercises.filter({ (exercise) -> Bool in
-            return exercise.id == id
-        })[0] // should always work
-    }
-    
+
     private func createDefaultTrainingSets() -> NSOrderedSet {
         var trainingSets = [TrainingSet]()
         for _ in 0...3 {

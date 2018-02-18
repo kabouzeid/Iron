@@ -10,7 +10,7 @@ import UIKit
 
 class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectionHandler {
 
-    var exercisesGrouped = EverkineticDataProvider.loadExercisesGrouped()
+    var exercisesGrouped = EverkineticDataProvider.exercisesGrouped
 
     override func viewDidLoad() {
         super.viewDidLoad()

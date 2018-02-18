@@ -8,8 +8,20 @@
 
 import Foundation
 
-struct EverkineticDataProvider {
-    static func loadExercises() -> [Exercise] {
+class EverkineticDataProvider {
+    static let exercises = loadExercises()
+    static let exercisesGrouped = splitIntoMuscleGroups(exercises: loadExercises())
+    
+    static func findExercise(id: Int) -> Exercise? {
+        if let foundExercise = exercises.first(where: { (exercise) -> Bool in
+            return exercise.id == id
+        }) {
+            return foundExercise
+        }
+        return nil
+    }
+    
+    private static func loadExercises() -> [Exercise] {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
         if let jsonString = try? String(contentsOf: jsonUrl) {
             return EverkineticParser.parse(jsonString: jsonString).sorted(by: { (a, b) -> Bool in
@@ -18,11 +30,7 @@ struct EverkineticDataProvider {
         }
         return []
     }
-    
-    static func loadExercisesGrouped() -> [[Exercise]] {
-        return splitIntoMuscleGroups(exercises: loadExercises())
-    }
-    
+
     static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {
         var groups: [[Exercise]] = []
         var nextIndex = 0

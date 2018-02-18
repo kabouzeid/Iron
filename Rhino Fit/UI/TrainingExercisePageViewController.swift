@@ -14,14 +14,16 @@ class TrainingExercisePageViewController: UIPageViewController {
     var initialTrainingExercise: TrainingExercise? {
         didSet {
             setViewControllers([instantiateTrainingExerciseViewController(with: initialTrainingExercise!)], direction: .forward, animated: true)
+            title = viewControllers![0].title
         }
     }
-//    private var persistentContainer: NSPersistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
         delegate = self
+        view.backgroundColor = UIColor.white
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     private func instantiateTrainingExerciseViewController(with trainingExercise: TrainingExercise) -> TrainingExerciseViewController {
@@ -33,6 +35,11 @@ class TrainingExercisePageViewController: UIPageViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        viewControllers?[0].setEditing(editing, animated: animated)
     }
     
 
@@ -71,5 +78,10 @@ extension TrainingExercisePageViewController: UIPageViewControllerDataSource {
 }
 
 extension TrainingExercisePageViewController: UIPageViewControllerDelegate {
-    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if let newViewController = pageViewController.viewControllers?[0] {
+            title = newViewController.title
+            isEditing = newViewController.isEditing
+        }
+    }
 }

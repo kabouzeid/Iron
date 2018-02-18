@@ -27,9 +27,9 @@ class Rhino_FitCoreDataTests: XCTestCase {
     func testTrainingExerciseNumberOfCompletedSets() {
         let trainingExercise = try! persistenContainer.viewContext.fetch(TrainingExercise.fetchRequest() as NSFetchRequest<TrainingExercise>)[0]
         let count = trainingExercise.trainingSets?.filter({ (set) -> Bool in
-            (set as! TrainingSet).repetitions != 0
+            (set as! TrainingSet).isCompleted == true
         }).count
-        assert(trainingExercise.numberOfCompletedSets() == count)
+        assert(trainingExercise.completedSets == count)
     }
 
     func initStubs() {
@@ -37,8 +37,10 @@ class Rhino_FitCoreDataTests: XCTestCase {
             let trainingSetEntity = NSEntityDescription.entity(forEntityName: "TrainingSet", in: persistenContainer.viewContext)!
             let Set1 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
             Set1.repetitions = 3
+            Set1.isCompleted = true
             let Set2 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
             Set2.repetitions = 2
+            Set2.isCompleted = true
             let Set3 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
             Set3.repetitions = 1
             let Set4 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)

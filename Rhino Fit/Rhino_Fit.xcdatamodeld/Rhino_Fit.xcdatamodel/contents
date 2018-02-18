@@ -12,13 +12,14 @@
         <relationship name="trainingSets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TrainingSet" inverseName="trainingExercise" inverseEntity="TrainingSet" syncable="YES"/>
     </entity>
     <entity name="TrainingSet" representedClassName=".TrainingSet" syncable="YES" codeGenerationType="category">
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="repetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="trainingExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise" syncable="YES"/>
     </entity>
     <elements>
         <element name="Training" positionX="189" positionY="-144" width="128" height="103"/>
         <element name="TrainingExercise" positionX="432" positionY="-126" width="128" height="88"/>
-        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="88"/>
+        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="103"/>
     </elements>
 </model>

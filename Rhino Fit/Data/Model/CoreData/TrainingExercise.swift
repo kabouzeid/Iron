@@ -9,12 +9,20 @@
 import CoreData
 
 class TrainingExercise: NSManagedObject {
-    func numberOfCompletedSets() -> Int? {
-        let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND repetitions != 0", self)
-        if let count = try? managedObjectContext?.count(for: fetchRequest) {
-            return count
+    var completedSets: Int? {
+        get {
+            let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND isCompleted == %@", self, NSNumber(booleanLiteral: true))
+            if let count = try? managedObjectContext?.count(for: fetchRequest) {
+                return count
+            }
+            return nil
         }
-        return nil
+    }
+    
+    var exercise: Exercise? {
+        get {
+            return EverkineticDataProvider.findExercise(id: Int(exerciseId))
+        }
     }
 }
