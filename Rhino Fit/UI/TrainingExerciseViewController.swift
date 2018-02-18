@@ -79,7 +79,14 @@ class TrainingExerciseViewController: UIViewController {
         if let set = currentSet, let row = trainingExercise?.trainingSets?.index(of: set) {
             let indexPath = IndexPath.init(row: row, section: 0)
             if set.repetitions == 0 {
-                set.repetitions = 1
+                if row > 0 {
+                    let previousSet = trainingExercise!.trainingSets![row - 1] as! TrainingSet
+                    set.repetitions = previousSet.repetitions
+                    set.weight = previousSet.weight
+                } else {
+                    // TODO set reps and weight to the most recent values from the past
+                    set.repetitions = 1
+                }
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
@@ -137,17 +144,20 @@ class TrainingExerciseViewController: UIViewController {
     }
     
     private func hidePickerView() {
-        pickerView.alpha = 0
-        UIView.animate(withDuration: 0.3, animations: {
+        self.pickerView.alpha = 0
+        UIView.animate(withDuration: 0.2, animations: {
             self.pickerView.isHidden = true
+            self.stackView.layoutIfNeeded()
         })
     }
     
     private func showPickerView() {
-        pickerView.alpha = 1
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.pickerView.isHidden = false
-        })
+            self.stackView.layoutIfNeeded()
+        }) { _ in
+            self.pickerView.alpha = 1
+        }
     }
 }
 
