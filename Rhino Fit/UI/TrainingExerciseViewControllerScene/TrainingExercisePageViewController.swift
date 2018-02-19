@@ -23,7 +23,23 @@ class TrainingExercisePageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         view.backgroundColor = UIColor.white
-        navigationItem.rightBarButtonItem = editButtonItem
+        
+        navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItems?.append(UIBarButtonItem.init(title: "Show", style: .plain, target: self, action: #selector(showExercise)))
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Set", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // workaround for iOS 11 bug
+        self.navigationController?.navigationBar.tintAdjustmentMode = .normal
+        self.navigationController?.navigationBar.tintAdjustmentMode = .automatic
+    }
+    
+    @objc
+    private func showExercise() {
+        performSegue(withIdentifier: "show exercise detail", sender: self)
     }
     
     private func instantiateTrainingExerciseViewController(with trainingExercise: TrainingExercise) -> TrainingExerciseViewController {
@@ -39,19 +55,21 @@ class TrainingExercisePageViewController: UIPageViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        viewControllers?[0].setEditing(editing, animated: animated)
+        if let trainingExerciseViewController = viewControllers?[0], trainingExerciseViewController.isEditing != editing {
+            // only set if neccessary
+            trainingExerciseViewController.setEditing(editing, animated: animated)
+        }
     }
     
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
+            let trainingExerciseViewController = viewControllers?[0] as? TrainingExerciseViewController
+            exerciseDetailViewController.exercise = trainingExerciseViewController?.trainingExercise?.exercise
+        }
     }
-    */
 
 }
 

@@ -55,7 +55,7 @@
         <!--Exercise Detail View Controller-->
         <scene sceneID="a6r-aZ-cCx">
             <objects>
-                <tableViewController id="EsE-Ae-YG9" customClass="ExerciseDetailViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExerciseDetailViewController" id="EsE-Ae-YG9" customClass="ExerciseDetailViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="o2Q-RJ-HYk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

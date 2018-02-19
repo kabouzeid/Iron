@@ -22,6 +22,7 @@
 		8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */; };
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
+		8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AB8A5952034C097004366F2 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5942034C097004366F2 /* Training.swift */; };
@@ -72,6 +73,7 @@
 		8A7D6EB1200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
+		8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetTableViewCell.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AB8A5942034C097004366F2 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
@@ -176,6 +178,16 @@
 			path = "Rhino FitTests";
 			sourceTree = "<group>";
 		};
+		8AA947F2203B8864005D1758 /* TrainingExerciseViewControllerScene */ = {
+			isa = PBXGroup;
+			children = (
+				8A4863032035A476004B1067 /* TrainingExercisePageViewController.swift */,
+				8A4863052035A48D004B1067 /* TrainingExerciseViewController.swift */,
+				8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */,
+			);
+			path = TrainingExerciseViewControllerScene;
+			sourceTree = "<group>";
+		};
 		8AABF2A6201683C8009C047D /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,8 +214,7 @@
 				8AABF2AD20168906009C047D /* ExercisesScene */,
 				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
 				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
-				8A4863032035A476004B1067 /* TrainingExercisePageViewController.swift */,
-				8A4863052035A48D004B1067 /* TrainingExerciseViewController.swift */,
+				8AA947F2203B8864005D1758 /* TrainingExerciseViewControllerScene */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -503,6 +514,7 @@
 				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
+				8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */,
 				8AD40830202FA82300A73E05 /* TrainingViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,

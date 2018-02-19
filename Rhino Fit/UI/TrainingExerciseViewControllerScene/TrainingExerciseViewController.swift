@@ -15,7 +15,7 @@ class TrainingExerciseViewController: UIViewController {
             title = trainingExercise?.exercise?.title
             if tableView != nil {
                 tableView.reloadData()
-                selectCurrentSet()
+                selectCurrentSet(animated: true)
             }
         }
     }
@@ -38,8 +38,8 @@ class TrainingExerciseViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-
-        selectCurrentSet()
+        
+        selectCurrentSet(animated: false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +57,7 @@ class TrainingExerciseViewController: UIViewController {
                 currentSet!.isCompleted = true
                 tableView.reloadRows(at: [selected], with: .automatic)
             }
-            selectCurrentSet()
+            selectCurrentSet(animated: true)
         } else {
             // TODO go to next exercise or finish workout
             print("Go to next exercise or finish workout")
@@ -74,10 +74,11 @@ class TrainingExerciseViewController: UIViewController {
     }
     */
     
-    private func selectCurrentSet() {
+    private func selectCurrentSet(animated: Bool) {
         // then select the row of the current exercise
-        if let set = currentSet, let row = trainingExercise?.trainingSets?.index(of: set) {
-            let indexPath = IndexPath.init(row: row, section: 0)
+        if let set = currentSet {
+            let row = trainingExercise!.trainingSets!.index(of: set)
+            let indexPath = IndexPath(row: row, section: 0)
             if set.repetitions == 0 {
                 if row > 0 {
                     let previousSet = trainingExercise!.trainingSets![row - 1] as! TrainingSet
@@ -89,30 +90,30 @@ class TrainingExerciseViewController: UIViewController {
                 }
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-            setPickerTo(trainingSet: set)
+            setPickerTo(trainingSet: set, animated: animated)
+            tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
         } else {
             if let selected = tableView.indexPathForSelectedRow {
-                tableView.deselectRow(at: selected, animated: true)
+                tableView.deselectRow(at: selected, animated: animated)
             }
-            setPickerTo(trainingSet: nil) // hides the picker
+            setPickerTo(trainingSet: nil, animated: animated) // hides the picker
         }
     }
     
-    private func setPickerTo(trainingSet: TrainingSet?) {
+    private func setPickerTo(trainingSet: TrainingSet?, animated: Bool) {
         guard trainingSet != nil else {
             if !isEditing {
-                hidePickerView()
+                hidePickerView(animated: animated)
             }
             return
         }
         let weightRows = rowsFor(weight: trainingSet!.weight)
-        pickerView.selectRow(rowFor(reps: Int(trainingSet!.repetitions)), inComponent: 0, animated: true)
-        pickerView.selectRow(weightRows.0, inComponent: 1, animated: true)
-        pickerView.selectRow(weightRows.1, inComponent: 2, animated: true)
+        pickerView.selectRow(rowFor(reps: Int(trainingSet!.repetitions)), inComponent: 0, animated: animated)
+        pickerView.selectRow(weightRows.0, inComponent: 1, animated: animated)
+        pickerView.selectRow(weightRows.1, inComponent: 2, animated: animated)
         
         if !isEditing {
-            showPickerView()
+            showPickerView(animated: animated)
         }
     }
     
@@ -120,18 +121,23 @@ class TrainingExerciseViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         
-        // show/hide the whole stack view
-        self.pickerView.alpha = editing ? 0 : 1
-        self.completeSetButton.alpha = 0
-        UIView.animate(withDuration: 0.3) {
-            self.pickerView.isHidden = editing
-            self.completeSetButton.isHidden = editing
-            self.completeSetButton.alpha = editing ? 0 : 1
-            self.stackView.layoutIfNeeded()
+        if editing {
+            hideStackView(animated: animated)
+        } else {
+            showStackView(animated: animated)
+            selectCurrentSet(animated: animated)
         }
-        
-        if !editing {
-            selectCurrentSet()
+    }
+    
+    @objc
+    func addSet() {
+        if trainingExercise != nil {
+            let trainingSet = TrainingSet(context: trainingExercise!.managedObjectContext!)
+            trainingExercise!.addToTrainingSets(trainingSet)
+            
+            let indexPath = IndexPath(row: trainingExercise!.trainingSets!.count - 1, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+            selectCurrentSet(animated: true)
         }
     }
     
@@ -143,20 +149,41 @@ class TrainingExerciseViewController: UIViewController {
         return IndexPath(row: trainingExercise!.trainingSets!.index(of: trainingSet), section: 0)
     }
     
-    private func hidePickerView() {
+    private func hidePickerView(animated: Bool) {
         self.pickerView.alpha = 0
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
             self.pickerView.isHidden = true
             self.stackView.layoutIfNeeded()
         })
     }
     
-    private func showPickerView() {
-        UIView.animate(withDuration: 0.2, animations: {
+    private func showPickerView(animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
             self.pickerView.isHidden = false
             self.stackView.layoutIfNeeded()
         }) { _ in
             self.pickerView.alpha = 1
+        }
+    }
+    
+    private func hideStackView(animated: Bool) {
+        self.pickerView.alpha = 0
+        self.completeSetButton.alpha = 0
+        UIView.animate(withDuration: animated ? 0.3 : 0) {
+            self.pickerView.isHidden = true
+            self.completeSetButton.isHidden = true
+            self.stackView.layoutIfNeeded()
+        }
+    }
+    
+    private func showStackView(animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
+            self.pickerView.isHidden = false
+            self.completeSetButton.isHidden = false
+            self.stackView.layoutIfNeeded()
+        }) { _ in
+            self.pickerView.alpha = 1
+            self.completeSetButton.alpha = 1
         }
     }
 }
@@ -169,13 +196,19 @@ extension TrainingExerciseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return trainingExercise?.trainingSets?.count ?? 0
+            return (trainingExercise?.trainingSets?.count ?? 0) + 1 // + 1 for the addSet row
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addSetCell", for: indexPath) as! AddSetTableViewCell
+            cell.addSetButton.addTarget(self, action: #selector(addSet), for: .touchUpInside)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "setCell", for: indexPath)
         let trainingSet = self.trainingSet(of: indexPath)
 
@@ -185,7 +218,7 @@ extension TrainingExerciseViewController: UITableViewDataSource {
         } else {
             cell.textLabel?.text = "Set \(indexPath.row + 1)"
         }
-        cell.detailTextLabel?.text = String(indexPath.row + 1)
+        cell.detailTextLabel?.text = "\(indexPath.row + 1)"
         
         if trainingSet == currentSet {
             cell.textLabel?.textColor = UIColor.darkText
@@ -212,20 +245,37 @@ extension TrainingExerciseViewController: UITableViewDataSource {
         if editingStyle == .delete {
             let trainingSet = self.trainingSet(of: indexPath)
             trainingExercise?.removeFromTrainingSets(trainingSet)
-            tableView.reloadData()
-            selectCurrentSet()
+            tableView.performBatchUpdates({
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }, completion: { _ in
+                tableView.reloadSections([0], with: .automatic)
+            })
+            selectCurrentSet(animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if !isEditing {
+            return .none // disable swipe to delete
+        }
+        if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
+            return .none
+        }
+        return .delete
     }
 }
 
 extension TrainingExerciseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
+            return false
+        }
         let trainingSet = self.trainingSet(of: indexPath)
         return trainingSet.isCompleted || trainingSet == currentSet
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        setPickerTo(trainingSet: self.trainingSet(of: indexPath))
+        setPickerTo(trainingSet: self.trainingSet(of: indexPath), animated: true)
     }
 }
 
