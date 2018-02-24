@@ -99,13 +99,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeR-nQ-968">
                                 <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6c-MD-bVY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2w-7v-MQL">
+                                        <rect key="frame" x="149" y="7" width="77" height="30"/>
+                                        <state key="normal" title="Start Timer">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startTimer:" destination="X3d-Gd-7W1" eventType="touchUpInside" id="k54-04-7Xk"/>
+                                        </connections>
+                                    </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6c-MD-bVY">
                                         <rect key="frame" x="16" y="12" width="343" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkY-zz-N9m">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkY-zz-N9m">
                                         <rect key="frame" x="16" y="12" width="343" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,7 +126,9 @@
                                     <constraint firstAttribute="height" constant="44" id="9ut-ZF-Lnl"/>
                                     <constraint firstItem="vkY-zz-N9m" firstAttribute="leading" secondItem="yeR-nQ-968" secondAttribute="leading" constant="16" id="Blf-Xw-VzV"/>
                                     <constraint firstAttribute="trailing" secondItem="vkY-zz-N9m" secondAttribute="trailing" constant="16" id="M9y-sx-xiP"/>
+                                    <constraint firstItem="f2w-7v-MQL" firstAttribute="centerX" secondItem="yeR-nQ-968" secondAttribute="centerX" id="Quf-6I-xqO"/>
                                     <constraint firstItem="S6c-MD-bVY" firstAttribute="leading" secondItem="yeR-nQ-968" secondAttribute="leading" constant="16" id="Wzm-ch-1fr"/>
+                                    <constraint firstItem="f2w-7v-MQL" firstAttribute="centerY" secondItem="yeR-nQ-968" secondAttribute="centerY" id="gns-Zd-mB8"/>
                                     <constraint firstAttribute="trailing" secondItem="S6c-MD-bVY" secondAttribute="trailing" constant="16" id="xWS-sZ-BNT"/>
                                     <constraint firstItem="vkY-zz-N9m" firstAttribute="centerY" secondItem="yeR-nQ-968" secondAttribute="centerY" id="z60-8q-B4x"/>
                                     <constraint firstItem="S6c-MD-bVY" firstAttribute="centerY" secondItem="yeR-nQ-968" secondAttribute="centerY" id="zlF-72-o1N"/>
@@ -183,7 +194,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="elapsedTimeLabel" destination="S6c-MD-bVY" id="O2w-ho-oaE"/>
+                        <outlet property="startTimerButton" destination="f2w-7v-MQL" id="hdX-LC-bxz"/>
                         <outlet property="tableView" destination="dZE-KN-j3t" id="3VU-TL-gzM"/>
+                        <outlet property="timeLabel" destination="vkY-zz-N9m" id="vLv-Yh-aKR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mee-0k-Dre" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -42,8 +42,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
                 
                 let training = Training(context: persistentContainer.viewContext)
                 training.isCurrentTraining = true
-                training.date = Date()
-                
+
                 let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
                 trainingViewController.training = training
             case "continue with plan":
@@ -52,7 +51,6 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
                 // TODO actually get the training from the current plan
                 let training = Training(context: persistentContainer.viewContext)
                 training.isCurrentTraining = true
-                training.date = Date()
                 training.title = "StrongLifts 5x5" // Stub, for testing only
                 
                 let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController

@@ -68,6 +68,11 @@ class TrainingExerciseViewController: UIViewController {
                 selectedSet.isCompleted = true
                 tableView.reloadRows(at: [selected], with: .automatic)
                 
+                let training = trainingExercise!.training!
+                if training.start == nil {
+                    training.start = Date()
+                }
+                
                 moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
             }
             selectCurrentSet(animated: true)

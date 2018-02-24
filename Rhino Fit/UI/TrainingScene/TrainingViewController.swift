@@ -14,11 +14,14 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     var training: Training? {
         didSet {
             title = training?.title
-            if tableView != nil {
-                tableView.reloadData()
+            tableView?.reloadData()
+            if startTimerButton != nil, elapsedTimeLabel != nil, timeLabel != nil {
+                updateTimerViewState(animated: false)
             }
         }
     }
+    
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +34,66 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         tableView.reloadData()
         if let selected = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selected, animated: true)
         }
+        
+        updateTimerViewState(animated: false)
     }
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var startTimerButton: UIButton!
+    @IBAction func startTimer(_ sender: UIButton) {
+        if training?.start == nil {
+            training?.start = Date()
+        }
+        updateTimerViewState(animated: true)
+    }
+    @IBOutlet weak var elapsedTimeLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    private func updateTimerViewState(animated: Bool) {
+        if self.training?.start != nil {
+            UIView.animate(withDuration: animated ? 0.3 : 0) {
+                self.startTimerButton.isHidden = true
+                self.startTimerButton.alpha = 0
+                self.elapsedTimeLabel.isHidden = false
+                self.elapsedTimeLabel.alpha = 1
+                self.timeLabel.isHidden = false
+                self.timeLabel.alpha = 1
+            }
+            startUpdateTimeLabel()
+        } else {
+            UIView.animate(withDuration: animated ? 0.3 : 0) {
+                self.startTimerButton.isHidden = false
+                self.startTimerButton.alpha = 1
+                self.elapsedTimeLabel.isHidden = true
+                self.elapsedTimeLabel.alpha = 0
+                self.timeLabel.isHidden = true
+                self.timeLabel.alpha = 0
+            }
+            stopUpdateTimeLabel()
+        }
+    }
+    
+    private func startUpdateTimeLabel() {
+        if timer == nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
+                if let elapsedTime = self.training?.start?.timeIntervalSinceNow {
+                    self.timeLabel.text = (-elapsedTime).stringFormatted()
+                }
+            })
+        }
+        timer?.fire()
+    }
+    
+    private func stopUpdateTimeLabel() {
+        print("invalidated")
+        timer?.invalidate()
+        timer = nil
+    }
     
     // MARK: Data Source
     
