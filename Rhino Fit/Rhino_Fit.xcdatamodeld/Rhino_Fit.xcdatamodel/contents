@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Training" representedClassName=".Training" syncable="YES" codeGenerationType="category">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCurrentTraining" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="trainingExercises" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TrainingExercise" inverseName="training" inverseEntity="TrainingExercise" syncable="YES"/>
+        <attribute name="title" attributeType="String" defaultValueString="Training" syncable="YES"/>
+        <relationship name="trainingExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingExercise" inverseName="training" inverseEntity="TrainingExercise" syncable="YES"/>
     </entity>
     <entity name="TrainingExercise" representedClassName=".TrainingExercise" syncable="YES" codeGenerationType="category">
-        <attribute name="exerciseId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="training" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="trainingExercises" inverseEntity="Training" syncable="YES"/>
-        <relationship name="trainingSets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TrainingSet" inverseName="trainingExercise" inverseEntity="TrainingSet" syncable="YES"/>
+        <attribute name="exerciseId" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="training" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="trainingExercises" inverseEntity="Training" syncable="YES"/>
+        <relationship name="trainingSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingSet" inverseName="trainingExercise" inverseEntity="TrainingSet" syncable="YES"/>
     </entity>
     <entity name="TrainingSet" representedClassName=".TrainingSet" syncable="YES" codeGenerationType="category">
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="repetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="trainingExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise" syncable="YES"/>
+        <relationship name="trainingExercise" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Training" positionX="189" positionY="-144" width="128" height="103"/>
+        <element name="Training" positionX="189" positionY="-144" width="128" height="118"/>
         <element name="TrainingExercise" positionX="432" positionY="-126" width="128" height="88"/>
         <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="103"/>
     </elements>

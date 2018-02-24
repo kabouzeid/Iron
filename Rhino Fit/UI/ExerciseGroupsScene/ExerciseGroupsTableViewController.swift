@@ -19,9 +19,8 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectio
         exerciseTableViewController.exercises = exercisesGrouped.flatMap{$0}
         exerciseTableViewController.exerciseSelectionHandler = self
         navigationItem.searchController = UISearchController(searchResultsController: exerciseTableViewController)
-        navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController?.searchResultsUpdater = exerciseTableViewController
-        
+
         definesPresentationContext = true // prevents black screen when switching tabs while searching
     }
 
@@ -67,7 +66,7 @@ class ExerciseGroupsTableViewController: UITableViewController, ExerciseSelectio
             let indexPath = tableView.indexPathForSelectedRow {
             if indexPath.section == 0 { // All
                 exerciseTableViewController.exercises = exercisesGrouped.flatMap{$0}
-                exerciseTableViewController.title = "All"
+                exerciseTableViewController.title = "All Exercises"
             } else {
                 let exercises = exercisesGrouped[indexPath.row]
                 exerciseTableViewController.exercises = exercises

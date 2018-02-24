@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Exercises Table View Controller-->
+        <!--Title-->
         <scene sceneID="K7D-qF-WAS">
             <objects>
                 <tableViewController storyboardIdentifier="ExerciseTableViewController" id="kEQ-bF-8Th" customClass="ExercisesTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,13 +46,13 @@
                             <outlet property="delegate" destination="kEQ-bF-8Th" id="fYi-oZ-ctR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Pmr-lX-k1W"/>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="1g9-F7-bhl"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AiH-gx-2Q2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2905" y="966"/>
         </scene>
-        <!--Exercise Detail View Controller-->
+        <!--Title-->
         <scene sceneID="a6r-aZ-cCx">
             <objects>
                 <tableViewController storyboardIdentifier="ExerciseDetailViewController" id="EsE-Ae-YG9" customClass="ExerciseDetailViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
@@ -131,6 +131,7 @@
                             <outlet property="delegate" destination="EsE-Ae-YG9" id="q7O-P1-rgb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="aHg-jq-Mth"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eD8-Ab-u0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,6 +216,6 @@
         <image name="list" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8eC-Ci-m6Y"/>
+        <segue reference="avt-n4-udd"/>
     </inferredMetricsTieBreakers>
 </document>

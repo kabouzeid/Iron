@@ -18,4 +18,30 @@ class Training: NSManagedObject {
         }
         return nil
     }
+    
+    static func deleteCurrentTraining(context: NSManagedObjectContext) {
+        if let currentTraining = fetchCurrentTraining(context: context) {
+            context.delete(currentTraining)
+        }
+    }
+    
+    var numberOfCompletedExercises: Int? {
+        get {
+            let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "training == %@ AND ALL trainingSets.isCompleted == %@", self, NSNumber(booleanLiteral: true))
+            if let count = try? managedObjectContext?.count(for: fetchRequest) {
+                return count
+            }
+            return nil
+        }
+    }
+    
+    var isCompleted: Bool? {
+        get {
+            if let completedCount = numberOfCompletedExercises {
+                return completedCount == trainingExercises!.count
+            }
+            return nil
+        }
+    }
 }

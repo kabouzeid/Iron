@@ -20,6 +20,16 @@ class TrainingExerciseViewController: UIViewController {
         }
     }
     
+    var completeExerciseTitle: String? {
+        didSet {
+            if actionButton != nil && currentSet == nil {
+                actionButton.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+            }
+        }
+    }
+    
+    var delegate: TrainingExerciseViewControllerDelegate?
+    
     private var currentSet: TrainingSet? {
         get {
             if let currentSet = trainingExercise?.trainingSets?.first(where: { (object) -> Bool in
@@ -49,18 +59,20 @@ class TrainingExerciseViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var completeSetButton: UIButton!
-    @IBAction func completeSet(_ sender: UIButton) {
+    @IBOutlet weak var actionButton: UIButton!
+    @IBAction func performButtonAction(_ sender: UIButton) {
         if let selected = tableView.indexPathForSelectedRow {
-            if self.trainingSet(of: selected) == currentSet {
-                assert(currentSet!.repetitions > 0, "Tried to complete set with 0 repetitions")
-                currentSet!.isCompleted = true
+            let selectedSet = trainingSet(of: selected)
+            if selectedSet == currentSet {
+                assert(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
+                selectedSet.isCompleted = true
                 tableView.reloadRows(at: [selected], with: .automatic)
+                
+                moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
             }
             selectCurrentSet(animated: true)
         } else {
-            // TODO go to next exercise or finish workout
-            print("Go to next exercise or finish workout")
+            delegate?.completeExercise(trainingExerciseViewController: self)
         }
     }
     @IBOutlet weak var stackView: UIStackView!
@@ -73,6 +85,24 @@ class TrainingExerciseViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    private func moveExerciseBehindLastCompleted(trainingExercise: TrainingExercise) {
+        let training = trainingExercise.training!
+        let firstUncompleted = training.trainingExercises!.first(where: { (exercise) -> Bool in
+            let exercise = exercise as! TrainingExercise
+            return !exercise.isCompleted! && exercise != trainingExercise
+        })
+        if firstUncompleted != nil {
+            let firstUncompleted = firstUncompleted! as! TrainingExercise
+            training.removeFromTrainingExercises(trainingExercise)
+            let index = training.trainingExercises!.index(of: firstUncompleted)
+            training.insertIntoTrainingExercises(trainingExercise, at: index)
+        } else { // all other exercises are already completed
+            training.removeFromTrainingExercises(trainingExercise)
+            training.addToTrainingExercises(trainingExercise)
+        }
+        delegate?.exerciseOrderDidChange()
+    }
     
     private func selectCurrentSet(animated: Bool) {
         // then select the row of the current exercise
@@ -101,20 +131,27 @@ class TrainingExerciseViewController: UIViewController {
     }
     
     private func setPickerTo(trainingSet: TrainingSet?, animated: Bool) {
-        guard trainingSet != nil else {
-            if !isEditing {
-                hidePickerView(animated: animated)
-            }
+        if isEditing {
             return
         }
+        if trainingSet == nil {
+            hidePickerView(animated: animated)
+            actionButton.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+            return
+        }
+        
         let weightRows = rowsFor(weight: trainingSet!.weight)
         pickerView.selectRow(rowFor(reps: Int(trainingSet!.repetitions)), inComponent: 0, animated: animated)
         pickerView.selectRow(weightRows.0, inComponent: 1, animated: animated)
         pickerView.selectRow(weightRows.1, inComponent: 2, animated: animated)
         
-        if !isEditing {
-            showPickerView(animated: animated)
+        if trainingSet == currentSet {
+            actionButton.setTitle("Complete Set", for: .normal)
+        } else {
+            actionButton.setTitle("Ok", for: .normal)
         }
+
+        showPickerView(animated: animated)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -132,12 +169,18 @@ class TrainingExerciseViewController: UIViewController {
     @objc
     func addSet() {
         if trainingExercise != nil {
+            let wasCompleted = trainingExercise!.isCompleted!
+
             let trainingSet = TrainingSet(context: trainingExercise!.managedObjectContext!)
             trainingExercise!.addToTrainingSets(trainingSet)
             
             let indexPath = IndexPath(row: trainingExercise!.trainingSets!.count - 1, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
             selectCurrentSet(animated: true)
+            
+            if wasCompleted {
+                moveExerciseBehindLastCompleted(trainingExercise: trainingExercise!)
+            }
         }
     }
     
@@ -168,10 +211,10 @@ class TrainingExerciseViewController: UIViewController {
     
     private func hideStackView(animated: Bool) {
         self.pickerView.alpha = 0
-        self.completeSetButton.alpha = 0
+        self.actionButton.alpha = 0
         UIView.animate(withDuration: animated ? 0.3 : 0) {
             self.pickerView.isHidden = true
-            self.completeSetButton.isHidden = true
+            self.actionButton.isHidden = true
             self.stackView.layoutIfNeeded()
         }
     }
@@ -179,11 +222,11 @@ class TrainingExerciseViewController: UIViewController {
     private func showStackView(animated: Bool) {
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.pickerView.isHidden = false
-            self.completeSetButton.isHidden = false
+            self.actionButton.isHidden = false
             self.stackView.layoutIfNeeded()
         }) { _ in
             self.pickerView.alpha = 1
-            self.completeSetButton.alpha = 1
+            self.actionButton.alpha = 1
         }
     }
 }
@@ -243,6 +286,8 @@ extension TrainingExerciseViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let wasCompleted = trainingExercise!.isCompleted!
+            
             let trainingSet = self.trainingSet(of: indexPath)
             trainingExercise?.removeFromTrainingSets(trainingSet)
             tableView.performBatchUpdates({
@@ -251,6 +296,10 @@ extension TrainingExerciseViewController: UITableViewDataSource {
                 tableView.reloadSections([0], with: .automatic)
             })
             selectCurrentSet(animated: true)
+            
+            if !wasCompleted && trainingExercise!.isCompleted! {
+                moveExerciseBehindLastCompleted(trainingExercise: trainingExercise!)
+            }
         }
     }
     
@@ -386,4 +435,9 @@ extension TrainingExerciseViewController: UIPickerViewDelegate {
     private func repetitionsFor(row: Int) -> Int {
         return row + 1
     }
+}
+
+protocol TrainingExerciseViewControllerDelegate {
+    func completeExercise(trainingExerciseViewController: TrainingExerciseViewController)
+    func exerciseOrderDidChange()
 }

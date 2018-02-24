@@ -80,6 +80,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="0Ic-Mk-GEN"/>
                     <connections>
                         <outlet property="button" destination="0v6-3h-qm0" id="QH1-U7-GP6"/>
+                        <segue destination="X3d-Gd-7W1" kind="show" identifier="continue last training" id="BHR-ve-Qma"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -172,7 +173,7 @@
                     <navigationItem key="navigationItem" id="J4U-1a-OaV">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cnW-fU-dUG">
                             <connections>
-                                <segue destination="zev-HV-ZHg" kind="unwind" identifier="" unwindAction="comeBackToStartTrainingWithSegue:" id="PUe-ta-g6t"/>
+                                <segue destination="zev-HV-ZHg" kind="unwind" identifier="cancel training" unwindAction="comeBackToStartTrainingWithSegue:" id="PUe-ta-g6t"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Bhm-mp-hsF">
@@ -242,14 +243,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyO-UF-3fW">
-                                                    <rect key="frame" x="159.66666666666666" y="7" width="55" height="30"/>
+                                                    <rect key="frame" x="15" y="11" width="345" height="22"/>
                                                     <state key="normal" title="Add Set"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="OyO-UF-3fW" firstAttribute="top" secondItem="2u8-Ow-eSW" secondAttribute="top" constant="7" id="TEh-In-S1I"/>
-                                                <constraint firstItem="OyO-UF-3fW" firstAttribute="centerX" secondItem="2u8-Ow-eSW" secondAttribute="centerX" id="W8S-Hy-yfH"/>
-                                                <constraint firstAttribute="bottom" secondItem="OyO-UF-3fW" secondAttribute="bottom" constant="6.6666666666666643" id="yzT-oO-w7n"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OyO-UF-3fW" secondAttribute="trailing" id="CSM-1Q-cxN"/>
+                                                <constraint firstItem="OyO-UF-3fW" firstAttribute="top" secondItem="2u8-Ow-eSW" secondAttribute="topMargin" id="LfD-oZ-L66"/>
+                                                <constraint firstItem="OyO-UF-3fW" firstAttribute="leading" secondItem="2u8-Ow-eSW" secondAttribute="leadingMargin" id="cda-kC-O7o"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OyO-UF-3fW" secondAttribute="bottom" id="sFo-mh-Kc6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -281,7 +283,7 @@
                                                 <rect key="frame" x="0.0" y="100" width="359" height="30"/>
                                                 <state key="normal" title="Complete Set"/>
                                                 <connections>
-                                                    <action selector="completeSet:" destination="Jz8-lg-GaJ" eventType="touchUpInside" id="e7o-AA-eFB"/>
+                                                    <action selector="performButtonAction:" destination="Jz8-lg-GaJ" eventType="touchUpInside" id="e7o-AA-eFB"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -313,7 +315,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="completeSetButton" destination="vMv-fZ-kiU" id="3b0-Tj-46l"/>
+                        <outlet property="actionButton" destination="vMv-fZ-kiU" id="3b0-Tj-46l"/>
                         <outlet property="pickerView" destination="lET-2Y-HmH" id="6si-t7-7i4"/>
                         <outlet property="stackView" destination="KVg-vH-y8x" id="8g8-eX-Xrq"/>
                         <outlet property="tableView" destination="soa-ha-8PI" id="lMF-TR-IS9"/>
@@ -369,6 +371,6 @@
         <image name="training-hero" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aCC-2k-b9p"/>
+        <segue reference="3zb-e6-bqh"/>
     </inferredMetricsTieBreakers>
 </document>

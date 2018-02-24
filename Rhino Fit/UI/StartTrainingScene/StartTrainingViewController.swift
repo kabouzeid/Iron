@@ -9,6 +9,8 @@
 import UIKit
 
 class StartTrainingViewController: UIViewController, UITabBarControllerDelegate {
+    
+    let persistentContainer = AppDelegate.instance.persistentContainer
 
     @IBOutlet weak var button: UIButton!
     
@@ -16,6 +18,10 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
         super.viewDidLoad()
         button.layer.cornerRadius = 8
         tabBarController?.delegate = self
+        
+        if Training.fetchCurrentTraining(context: persistentContainer.viewContext) != nil {
+            performSegue(withIdentifier: "continue last training", sender: self)
+        }
     }
 
     // MARK: - Navigation
@@ -28,10 +34,29 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
         // Pass the selected object to the new view controller.
         if let id = segue.identifier {
             switch (id) {
+            case "continue last training":
+                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                trainingViewController.training = Training.fetchCurrentTraining(context: persistentContainer.viewContext)
             case "start new training":
-                segue.destination.wrappedViewController().navigationItem.title = "Training"
+                Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
+                
+                let training = Training(context: persistentContainer.viewContext)
+                training.isCurrentTraining = true
+                training.date = Date()
+                
+                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                trainingViewController.training = training
             case "continue with plan":
-                segue.destination.wrappedViewController().navigationItem.title = "Stronglifts (Example)"
+                Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
+                
+                // TODO actually get the training from the current plan
+                let training = Training(context: persistentContainer.viewContext)
+                training.isCurrentTraining = true
+                training.date = Date()
+                training.title = "StrongLifts 5x5" // Stub, for testing only
+                
+                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                trainingViewController.training = training
             default:
                 break
             }

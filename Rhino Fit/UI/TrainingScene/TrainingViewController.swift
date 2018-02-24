@@ -11,34 +11,15 @@ import CoreData
 
 class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITableViewDelegate, UITableViewDataSource {
     
-    private var persistentContainer = AppDelegate.instance.persistentContainer
-
-    private var _training: Training?
-    private var training: Training {
-        get {
-            if (_training == nil) {
-                _training = fetchOrCreateCurrentTraining()
+    var training: Training? {
+        didSet {
+            title = training?.title
+            if tableView != nil {
+                tableView.reloadData()
             }
-            return _training!
-        }
-        set {
-            _training = newValue
         }
     }
-    
-    private func fetchOrCreateCurrentTraining() -> Training {
-        // check if there already is a current training
-        if let fetchedTraining = Training.fetchCurrentTraining(context: persistentContainer.viewContext) {
-            return fetchedTraining
-        } else {
-            // otherwise create a new one
-            let training = Training(context: persistentContainer.viewContext)
-            training.isCurrentTraining = true
-            training.date = Date()
-            return training
-        }
-    }
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,32 +42,29 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     // MARK: Data Source
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let trainingExercise = training.trainingExercises![sourceIndexPath.row] as! TrainingExercise
-        training.removeFromTrainingExercises(trainingExercise)
-        training.insertIntoTrainingExercises(trainingExercise, at: destinationIndexPath.row)
+        let trainingExercise = training!.trainingExercises![sourceIndexPath.row] as! TrainingExercise
+        training!.removeFromTrainingExercises(trainingExercise)
+        training!.insertIntoTrainingExercises(trainingExercise, at: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let trainingExercise = training.trainingExercises![indexPath.row] as! TrainingExercise
-            training.removeFromTrainingExercises(trainingExercise)
+            let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
+            training!.removeFromTrainingExercises(trainingExercise)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let exerciseArray = training.trainingExercises {
-            return exerciseArray.count
-        }
-        return 0
+        return training?.trainingExercises?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
         // TODO
-        let trainingExercise = training.trainingExercises![indexPath.row] as! TrainingExercise
-        let completedSets = trainingExercise.completedSets ?? 0
-        let totalSets = trainingExercise.trainingSets?.count ?? 0
+        let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
+        let completedSets = trainingExercise.numberOfCompletedSets!
+        let totalSets = trainingExercise.trainingSets!.count
         cell.textLabel?.text = trainingExercise.exercise?.title
         cell.detailTextLabel?.text = "\(completedSets) of \(totalSets)"
         if completedSets == totalSets { // completed exercise
@@ -111,7 +89,12 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
             exerciseTableViewController.title = "Add Exercise"
         } else if let trainingExercisePageViewController = segue.destination as? TrainingExercisePageViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-            trainingExercisePageViewController.initialTrainingExercise = (training.trainingExercises![indexPath.row] as! TrainingExercise)
+            trainingExercisePageViewController.initialTrainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
+        } else if segue.identifier == "cancel training" {
+            if training?.managedObjectContext != nil {
+                Training.deleteCurrentTraining(context: training!.managedObjectContext!)
+                try? training!.managedObjectContext!.save()
+            }
         }
     }
     
@@ -123,7 +106,11 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     func handleSelection(exercise: Exercise) {
         navigationController?.popToViewController(self, animated: true)
         
-        let trainingExercise = TrainingExercise(context: persistentContainer.viewContext)
+        if training?.managedObjectContext == nil {
+            return
+        }
+        
+        let trainingExercise = TrainingExercise(context: training!.managedObjectContext!)
         trainingExercise.exerciseId = Int16(exercise.id)
         trainingExercise.training = training
         trainingExercise.addToTrainingSets(createDefaultTrainingSets())
@@ -133,8 +120,13 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
 
     private func createDefaultTrainingSets() -> NSOrderedSet {
         var trainingSets = [TrainingSet]()
+        
+        if training?.managedObjectContext == nil {
+            return NSOrderedSet(array: trainingSets)
+        }
+        
         for _ in 0...3 {
-            let trainingSet = TrainingSet(context: persistentContainer.viewContext)
+            let trainingSet = TrainingSet(context: training!.managedObjectContext!)
             // TODO add default reps and weight
             trainingSets.append(trainingSet)
         }

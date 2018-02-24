@@ -9,5 +9,4 @@
 import CoreData
 
 class TrainingSet: NSManagedObject {
-
 }

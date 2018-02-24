@@ -210,8 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				8AD4082E202FA81200A73E05 /* TrainingScene */,
-				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
 				8AABF2AD20168906009C047D /* ExercisesScene */,
+				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
 				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
 				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
 				8AA947F2203B8864005D1758 /* TrainingExerciseViewControllerScene */,
