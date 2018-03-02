@@ -353,9 +353,11 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CKU-WW-XmR" customClass="TrainingExercisePageViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="weZ-lz-6Hh" kind="show" identifier="show exercise detail" id="jvL-Kq-aoY"/>
+                        <segue destination="beD-vK-hAs" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="HZn-6A-Fv8"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdQ-t4-0za" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="beD-vK-hAs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4001" y="-1252"/>
         </scene>

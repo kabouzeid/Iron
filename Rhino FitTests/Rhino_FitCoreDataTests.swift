@@ -57,15 +57,21 @@ class Rhino_FitCoreDataTests: XCTestCase {
             Set4.repetitions = 0
             let Set5 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
             Set5.repetitions = 0
+            let Set6 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
+            Set6.repetitions = 3
+            Set6.isCompleted = true
 
             let trainingExerciseEntity = NSEntityDescription.entity(forEntityName: "TrainingExercise", in: persistenContainer.viewContext)!
             let trainingExercise = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
             trainingExercise.addToTrainingSets([Set1,Set2,Set3,Set4,Set5])
             trainingExercise.exerciseId = 1
+            let trainingExercise2 = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
+            trainingExercise2.addToTrainingSets([Set6])
+            trainingExercise2.exerciseId = 2
             
             let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
             let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
-            training.addToTrainingExercises(trainingExercise)
+            training.addToTrainingExercises([trainingExercise, trainingExercise2])
             training.start = Date()
             
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
@@ -96,6 +102,7 @@ class Rhino_FitCoreDataTests: XCTestCase {
         // create a training
         let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
         let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
+        training.isCurrentTraining = true
         trainingExercise1.training = training
         trainingExercise2.training = training
         XCTAssertNoThrow(try persistenContainer.viewContext.save()) //everything set

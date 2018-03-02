@@ -30,11 +30,6 @@ class TrainingExercisePageViewController: UIPageViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Set", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
     }
     
-    @objc
-    func testing() {
-        print("rtap")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // workaround for iOS 11 bug
@@ -57,7 +52,8 @@ class TrainingExercisePageViewController: UIPageViewController {
     
     private func allOtherExercisesCompleted(exercise: TrainingExercise) -> Bool {
         let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "training == %@ AND SELF != %@ AND ALL trainingSets.isCompleted == %@", exercise.training!, exercise, NSNumber(booleanLiteral: true))
+        fetchRequest.predicate = NSPredicate(format: "training == %@ AND SELF != %@ AND NOT (ANY trainingSets.isCompleted == %@)", exercise.training!, exercise, NSNumber(booleanLiteral: false))
+        _ = exercise.training!.isCompleted
         if let count = try? exercise.managedObjectContext?.count(for: fetchRequest), let total = exercise.training?.trainingExercises?.count {
             return count == total - 1
         }
@@ -91,6 +87,12 @@ class TrainingExercisePageViewController: UIPageViewController {
         if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
             let trainingExerciseViewController = viewControllers?[0] as? TrainingExerciseViewController
             exerciseDetailViewController.exercise = trainingExerciseViewController?.trainingExercise?.exercise
+        } else if segue.identifier == "finish training", let training = (sender as? TrainingExerciseViewController)?.trainingExercise!.training! {
+            assert(training.isCompleted!, "Attempted to finish uncompleted training!")
+            training.isCurrentTraining = false
+            training.end = Date()
+            
+            AppDelegate.instance.saveContext()
         }
     }
 
@@ -150,11 +152,11 @@ extension TrainingExercisePageViewController: UIPageViewControllerDelegate {
 extension TrainingExercisePageViewController: TrainingExerciseViewControllerDelegate {
     func completeExercise(trainingExerciseViewController: TrainingExerciseViewController) {
         if let trainingExercise = trainingExerciseViewController.trainingExercise, trainingExercise.training!.isCompleted! {
-            print("Finish Training")
+            performSegue(withIdentifier: "finish training", sender: trainingExerciseViewController)
         } else if let trainingExercise = trainingExerciseAfter(trainingExercise: trainingExerciseViewController.trainingExercise) {
             initialTrainingExercise = trainingExercise
         } else {
-            print("Warning: exercises seem to be in wrong order!") // should never happen
+            fatalError("Exercises seem to be in wrong order!") // should never happen
         }
     }
     

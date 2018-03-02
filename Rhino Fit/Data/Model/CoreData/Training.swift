@@ -28,7 +28,7 @@ class Training: NSManagedObject {
     var numberOfCompletedExercises: Int? {
         get {
             let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "training == %@ AND ALL trainingSets.isCompleted == %@", self, NSNumber(booleanLiteral: true))
+            fetchRequest.predicate = NSPredicate(format: "training == %@ AND NOT (ANY trainingSets.isCompleted == %@)", self, NSNumber(booleanLiteral: false)) // ALL is not supported
             if let count = try? managedObjectContext?.count(for: fetchRequest) {
                 return count
             }
