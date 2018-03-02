@@ -90,7 +90,6 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     }
     
     private func stopUpdateTimeLabel() {
-        print("invalidated")
         timer?.invalidate()
         timer = nil
     }
@@ -101,6 +100,14 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         let trainingExercise = training!.trainingExercises![sourceIndexPath.row] as! TrainingExercise
         training!.removeFromTrainingExercises(trainingExercise)
         training!.insertIntoTrainingExercises(trainingExercise, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return !(training!.trainingExercises![indexPath.row] as! TrainingExercise).isCompleted!
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return (training!.trainingExercises![proposedDestinationIndexPath.row] as! TrainingExercise).isCompleted! ? sourceIndexPath : proposedDestinationIndexPath
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

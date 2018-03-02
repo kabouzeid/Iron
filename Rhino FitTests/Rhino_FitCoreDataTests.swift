@@ -66,7 +66,7 @@ class Rhino_FitCoreDataTests: XCTestCase {
             let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
             let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
             training.addToTrainingExercises(trainingExercise)
-            training.date = Date()
+            training.start = Date()
             
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
         }

@@ -130,6 +130,26 @@
 			path = ExerciseDetailScene;
 			sourceTree = "<group>";
 		};
+		8A5809412049E2300070D794 /* Training */ = {
+			isa = PBXGroup;
+			children = (
+				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
+				8AD4082E202FA81200A73E05 /* TrainingScene */,
+				8AA947F2203B8864005D1758 /* TrainingExerciseViewControllerScene */,
+			);
+			path = Training;
+			sourceTree = "<group>";
+		};
+		8A5809432049E2590070D794 /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				8AABF2AD20168906009C047D /* ExercisesScene */,
+				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
+				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
+			);
+			path = Exercises;
+			sourceTree = "<group>";
+		};
 		8A7D6E8B200BF92E00AA0FA7 = {
 			isa = PBXGroup;
 			children = (
@@ -211,12 +231,8 @@
 		8AABF2AC20168900009C047D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8AD4082E202FA81200A73E05 /* TrainingScene */,
-				8AABF2AD20168906009C047D /* ExercisesScene */,
-				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
-				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
-				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
-				8AA947F2203B8864005D1758 /* TrainingExerciseViewControllerScene */,
+				8A5809412049E2300070D794 /* Training */,
+				8A5809432049E2590070D794 /* Exercises */,
 			);
 			path = UI;
 			sourceTree = "<group>";
