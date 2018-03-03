@@ -4,7 +4,7 @@
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isCurrentTraining" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" attributeType="String" defaultValueString="Training" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="trainingExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingExercise" inverseName="training" inverseEntity="TrainingExercise" syncable="YES"/>
     </entity>
     <entity name="TrainingExercise" representedClassName=".TrainingExercise" syncable="YES" codeGenerationType="category">

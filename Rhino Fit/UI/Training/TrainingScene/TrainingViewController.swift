@@ -13,7 +13,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
     
     var training: Training? {
         didSet {
-            title = training?.title
+            title = training?.displayTitle
             tableView?.reloadData()
             if startTimerButton != nil, elapsedTimeLabel != nil, timeLabel != nil {
                 updateTimerViewState(animated: false)
@@ -30,6 +30,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         tableView.dataSource = self
         
         navigationItem.rightBarButtonItems?.append(editButtonItem)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Training", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +116,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
             let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
             training!.removeFromTrainingExercises(trainingExercise)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            title = training?.displayTitle
         }
     }
     
@@ -179,6 +181,8 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         trainingExercise.addToTrainingSets(createDefaultTrainingSets())
         
         tableView.reloadData()
+        
+        title = training?.displayTitle
     }
 
     private func createDefaultTrainingSets() -> NSOrderedSet {

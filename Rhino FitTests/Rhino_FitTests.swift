@@ -62,4 +62,14 @@ class Rhino_FitTests: XCTestCase {
         }
     }
     
+    func testUniq() {
+        let array = ["Hello","Me","That","Me","Hello","Me","as","the"]
+        XCTAssertEqual(array.uniq(), ["Hello","Me","That","as","the"])
+    }
+    
+    func testSortByFrequency() {
+        let array = ["Hello","Me","That","Me","Hello","Me"]
+        XCTAssertEqual(array.sortedByFrequency(), ["Me","Hello","That"])
+    }
+    
 }

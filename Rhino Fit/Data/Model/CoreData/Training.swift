@@ -44,4 +44,28 @@ class Training: NSManagedObject {
             return nil
         }
     }
+    
+    var displayTitle: String {
+        get {
+            if title == nil {
+                var muscleGroups = [String]()
+                for case let trainingExercise as TrainingExercise in trainingExercises! {
+                    if let exercise = trainingExercise.exercise {
+                        muscleGroups.append(exercise.muscleGroup)
+                    }
+                }
+                muscleGroups.sortByFrequency()
+                
+                switch muscleGroups.count {
+                case 0:
+                    return "Training"
+                case 1:
+                    return muscleGroups[0].capitalized
+                default:
+                    return "\(muscleGroups[0].capitalized) and \(muscleGroups[1].capitalized)"
+                }
+            }
+            return title! // safe
+        }
+    }
 }

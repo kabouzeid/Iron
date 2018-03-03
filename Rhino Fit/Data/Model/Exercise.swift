@@ -24,7 +24,7 @@ struct Exercise {
     var primaryMuscleCommonName: [String] {
         get {
             return primaryMuscle.flatMap({ (muscle) -> String? in
-                return commonName(muscle: muscle)
+                return Exercise.commonName(muscle: muscle)
             }).uniq()
         }
     }
@@ -32,7 +32,7 @@ struct Exercise {
     var secondaryMuscleCommonName: [String] {
         get {
             return secondaryMuscle.flatMap({ (muscle) -> String? in
-                return commonName(muscle: muscle)
+                return Exercise.commonName(muscle: muscle)
             }).uniq()
         }
     }
@@ -43,7 +43,7 @@ struct Exercise {
         }
     }
     
-    private func commonName(muscle: String) -> String {
+    static func commonName(muscle: String) -> String {
         switch muscle {
         case "abdominals":
             return "abdominals"
@@ -106,6 +106,8 @@ struct Exercise {
             return "back"
             
         // Legs
+        case "glutaeus maximus":
+            fallthrough
         case "ischiocrural muscles":
             fallthrough
         case "quadriceps":
@@ -113,10 +115,6 @@ struct Exercise {
         case "gastrocnemius":
             return "legs"
             
-        // Glutes
-        case "glutaeus maximus":
-            return "glutes"
-        
         // Chest
         case "pectoralis major":
             return "chest"

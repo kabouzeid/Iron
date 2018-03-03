@@ -16,7 +16,7 @@ extension Array where Element: Equatable {
         return arrayCopy
     }
     
-    mutating private func uniqInPlace() {
+    mutating public func uniqInPlace() {
         var seen = [Element]()
         var index = 0
         while self.count > index {
