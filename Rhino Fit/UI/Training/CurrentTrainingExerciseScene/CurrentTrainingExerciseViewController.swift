@@ -315,6 +315,9 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
             return .none
         }
+        if trainingExercise?.trainingSets?.count == 1 {
+            return .none // don't allow to delete the last set
+        }
         return .delete
     }
 }
