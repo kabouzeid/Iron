@@ -35,7 +35,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
         if let id = segue.identifier {
             switch (id) {
             case "continue last training":
-                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
                 trainingViewController.training = Training.fetchCurrentTraining(context: persistentContainer.viewContext)
             case "start new training":
                 Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
@@ -43,7 +43,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
                 let training = Training(context: persistentContainer.viewContext)
                 training.isCurrentTraining = true
 
-                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
                 trainingViewController.training = training
             case "continue with plan":
                 Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
@@ -53,7 +53,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
                 training.isCurrentTraining = true
                 training.title = "StrongLifts 5x5" // Stub, for testing only
                 
-                let trainingViewController = segue.destination.wrappedViewController() as! TrainingViewController
+                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
                 trainingViewController.training = training
             default:
                 break

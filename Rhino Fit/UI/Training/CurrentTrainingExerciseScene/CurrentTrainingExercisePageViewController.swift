@@ -1,5 +1,5 @@
 //
-//  TrainingExercisePageViewController.swift
+//  CurrentTrainingExercisePageViewController.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 15.02.18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TrainingExercisePageViewController: UIPageViewController {
+class CurrentTrainingExercisePageViewController: UIPageViewController {
     var initialTrainingExercise: TrainingExercise? {
         didSet {
             let viewController = instantiateTrainingExerciseViewController(with: initialTrainingExercise!)
@@ -42,8 +42,8 @@ class TrainingExercisePageViewController: UIPageViewController {
         performSegue(withIdentifier: "show exercise detail", sender: self)
     }
     
-    private func instantiateTrainingExerciseViewController(with trainingExercise: TrainingExercise) -> TrainingExerciseViewController {
-        let trainingExerciseViewController = UIStoryboard(name: "Training", bundle: nil).instantiateViewController(withIdentifier: "TrainingExerciseViewController") as! TrainingExerciseViewController
+    private func instantiateTrainingExerciseViewController(with trainingExercise: TrainingExercise) -> CurrentTrainingExerciseViewController {
+        let trainingExerciseViewController = UIStoryboard(name: "Training", bundle: nil).instantiateViewController(withIdentifier: "TrainingExerciseViewController") as! CurrentTrainingExerciseViewController
         trainingExerciseViewController.trainingExercise = trainingExercise
         trainingExerciseViewController.completeExerciseTitle = completeExerciseTitle(exercise: trainingExercise)
         trainingExerciseViewController.delegate = self
@@ -85,11 +85,12 @@ class TrainingExercisePageViewController: UIPageViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
-            let trainingExerciseViewController = viewControllers?[0] as? TrainingExerciseViewController
+            let trainingExerciseViewController = viewControllers?[0] as? CurrentTrainingExerciseViewController
             exerciseDetailViewController.exercise = trainingExerciseViewController?.trainingExercise?.exercise
-        } else if segue.identifier == "finish training", let training = (sender as? TrainingExerciseViewController)?.trainingExercise!.training! {
+        } else if segue.identifier == "finish training", let training = (sender as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
             assert(training.isCompleted!, "Attempted to finish uncompleted training!")
             training.isCurrentTraining = false
+            training.start = training.start ?? Date() // just to be sure
             training.end = Date()
             
             AppDelegate.instance.saveContext()
@@ -98,16 +99,16 @@ class TrainingExercisePageViewController: UIPageViewController {
 
 }
 
-extension TrainingExercisePageViewController: UIPageViewControllerDataSource {
+extension CurrentTrainingExercisePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let trainingExercise = trainingExerciseBefore(trainingExercise: (viewController as! TrainingExerciseViewController).trainingExercise) {
+        if let trainingExercise = trainingExerciseBefore(trainingExercise: (viewController as! CurrentTrainingExerciseViewController).trainingExercise) {
             return instantiateTrainingExerciseViewController(with: trainingExercise)
         }
         return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let trainingExercise = trainingExerciseAfter(trainingExercise: (viewController as! TrainingExerciseViewController).trainingExercise) {
+        if let trainingExercise = trainingExerciseAfter(trainingExercise: (viewController as! CurrentTrainingExerciseViewController).trainingExercise) {
             return instantiateTrainingExerciseViewController(with: trainingExercise)
         }
         return nil
@@ -134,7 +135,7 @@ extension TrainingExercisePageViewController: UIPageViewControllerDataSource {
     }
 }
 
-extension TrainingExercisePageViewController: UIPageViewControllerDelegate {
+extension CurrentTrainingExercisePageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if let newViewController = pageViewController.viewControllers?[0] {
             title = newViewController.title
@@ -143,14 +144,14 @@ extension TrainingExercisePageViewController: UIPageViewControllerDelegate {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        if let newViewController = pendingViewControllers[0] as? TrainingExerciseViewController {
+        if let newViewController = pendingViewControllers[0] as? CurrentTrainingExerciseViewController {
             newViewController.completeExerciseTitle = completeExerciseTitle(exercise: newViewController.trainingExercise)
         }
     }
 }
 
-extension TrainingExercisePageViewController: TrainingExerciseViewControllerDelegate {
-    func completeExercise(trainingExerciseViewController: TrainingExerciseViewController) {
+extension CurrentTrainingExercisePageViewController: TrainingExerciseViewControllerDelegate {
+    func completeExercise(trainingExerciseViewController: CurrentTrainingExerciseViewController) {
         if let trainingExercise = trainingExerciseViewController.trainingExercise, trainingExercise.training!.isCompleted! {
             performSegue(withIdentifier: "finish training", sender: trainingExerciseViewController)
         } else if let trainingExercise = trainingExerciseAfter(trainingExercise: trainingExerciseViewController.trainingExercise) {

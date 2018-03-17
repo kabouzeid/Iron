@@ -1,5 +1,5 @@
 //
-//  TrainingExerciseViewController.swift
+//  CurrentTrainingExerciseViewController.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 15.02.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrainingExerciseViewController: UIViewController {
+class CurrentTrainingExerciseViewController: UIViewController {
     
     var trainingExercise: TrainingExercise? {
         didSet {
@@ -99,8 +99,8 @@ class TrainingExerciseViewController: UIViewController {
         })
         if firstUncompleted != nil {
             let firstUncompleted = firstUncompleted! as! TrainingExercise
-            training.removeFromTrainingExercises(trainingExercise)
             let index = training.trainingExercises!.index(of: firstUncompleted)
+            training.removeFromTrainingExercises(trainingExercise)
             training.insertIntoTrainingExercises(trainingExercise, at: index)
         } else { // all other exercises are already completed
             training.removeFromTrainingExercises(trainingExercise)
@@ -236,7 +236,7 @@ class TrainingExerciseViewController: UIViewController {
     }
 }
 
-extension TrainingExerciseViewController: UITableViewDataSource {
+extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1 // TODO add more sections for the other days
     }
@@ -261,8 +261,7 @@ extension TrainingExerciseViewController: UITableViewDataSource {
         let trainingSet = self.trainingSet(of: indexPath)
 
         if trainingSet.isCompleted || trainingSet == currentSet {
-            let repetitions = trainingSet.repetitions
-            cell.textLabel?.text = "\(repetitions) Repetition\(repetitions == 1 ? "" : "s") x \(trainingSet.weight) kg"
+            cell.textLabel?.text = trainingSet.displayTitle
         } else {
             cell.textLabel?.text = "Set \(indexPath.row + 1)"
         }
@@ -294,7 +293,8 @@ extension TrainingExerciseViewController: UITableViewDataSource {
             let wasCompleted = trainingExercise!.isCompleted!
             
             let trainingSet = self.trainingSet(of: indexPath)
-            trainingExercise?.removeFromTrainingSets(trainingSet)
+            trainingExercise!.removeFromTrainingSets(trainingSet)
+            trainingSet.managedObjectContext?.delete(trainingSet)
             tableView.performBatchUpdates({
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }, completion: { _ in
@@ -319,7 +319,7 @@ extension TrainingExerciseViewController: UITableViewDataSource {
     }
 }
 
-extension TrainingExerciseViewController: UITableViewDelegate {
+extension CurrentTrainingExerciseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
             return false
@@ -333,7 +333,7 @@ extension TrainingExerciseViewController: UITableViewDelegate {
     }
 }
 
-extension TrainingExerciseViewController: UIPickerViewDataSource {
+extension CurrentTrainingExerciseViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
@@ -352,7 +352,7 @@ extension TrainingExerciseViewController: UIPickerViewDataSource {
     }
 }
 
-extension TrainingExerciseViewController: UIPickerViewDelegate {
+extension CurrentTrainingExerciseViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let indexPath = tableView.indexPathForSelectedRow {
             let trainingExercise = self.trainingSet(of: indexPath)
@@ -443,6 +443,6 @@ extension TrainingExerciseViewController: UIPickerViewDelegate {
 }
 
 protocol TrainingExerciseViewControllerDelegate {
-    func completeExercise(trainingExerciseViewController: TrainingExerciseViewController)
+    func completeExercise(trainingExerciseViewController: CurrentTrainingExerciseViewController)
     func exerciseOrderDidChange()
 }

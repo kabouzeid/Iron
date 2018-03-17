@@ -9,4 +9,9 @@
 import CoreData
 
 class TrainingSet: NSManagedObject {
+    var displayTitle: String {
+        get {
+            return "\(repetitions) Repetition\(repetitions == 1 ? "" : "s") x \(weight) kg" // TODO lbs support
+        }
+    }
 }

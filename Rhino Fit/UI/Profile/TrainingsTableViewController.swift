@@ -53,7 +53,7 @@ class TrainingsTableViewController: UITableViewController {
         let training = trainings![indexPath.row]
         
         cell.textLabel?.text = training.displayTitle
-        cell.detailTextLabel?.text = "\(dateFormatter.string(from: training.start!)) | \(training.end!.timeIntervalSince(training.start!).stringFormattedWithLetters())"
+        cell.detailTextLabel?.text = "\(dateFormatter.string(from: training.start!)) for \(training.end!.timeIntervalSince(training.start!).stringFormattedWithLetters())"
 
         return cell
     }
@@ -67,14 +67,13 @@ class TrainingsTableViewController: UITableViewController {
         }
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let trainingDetailTableViewController = segue.destination as? TrainingDetailTableViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            trainingDetailTableViewController.training = trainings![indexPath.row]
+        }
     }
-    */
 
 }

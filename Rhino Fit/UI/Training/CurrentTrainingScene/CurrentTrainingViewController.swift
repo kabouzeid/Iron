@@ -1,5 +1,5 @@
 //
-//  TrainingViewController.swift
+//  CurrentTrainingViewController.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 10.02.18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITableViewDelegate, UITableViewDataSource {
+class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler, UITableViewDelegate, UITableViewDataSource {
     
     var training: Training? {
         didSet {
@@ -115,8 +115,9 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
         if editingStyle == .delete {
             let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
             training!.removeFromTrainingExercises(trainingExercise)
+            trainingExercise.managedObjectContext?.delete(trainingExercise)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            title = training?.displayTitle
+            title = training!.displayTitle
         }
     }
     
@@ -152,7 +153,7 @@ class TrainingViewController: UIViewController, ExerciseSelectionHandler, UITabl
             exerciseTableViewController.accessoryType = .none
             exerciseTableViewController.navigationItem.hidesSearchBarWhenScrolling = false
             exerciseTableViewController.title = "Add Exercise"
-        } else if let trainingExercisePageViewController = segue.destination as? TrainingExercisePageViewController,
+        } else if let trainingExercisePageViewController = segue.destination as? CurrentTrainingExercisePageViewController,
             let indexPath = tableView.indexPathForSelectedRow {
             trainingExercisePageViewController.initialTrainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
         } else if segue.identifier == "cancel training" {

@@ -86,12 +86,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="Icq-3i-7Tv"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="-1252"/>
+            <point key="canvasLocation" x="2098" y="-1252"/>
         </scene>
-        <!--Training View Controller-->
+        <!--Current Training View Controller-->
         <scene sceneID="ZIn-XF-Zm1">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="X3d-Gd-7W1" customClass="TrainingViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="X3d-Gd-7W1" customClass="CurrentTrainingViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IJB-Ox-mFx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -211,12 +211,12 @@
                 <viewControllerPlaceholder storyboardName="Exercises" referencedIdentifier="ExerciseTableViewController" id="DXa-B4-9lg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDh-Mx-dOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3638" y="-1659"/>
+            <point key="canvasLocation" x="3726" y="-1718"/>
         </scene>
-        <!--Training Exercise View Controller-->
+        <!--Current Training Exercise View Controller-->
         <scene sceneID="0Jz-eK-cRy">
             <objects>
-                <viewController storyboardIdentifier="TrainingExerciseViewController" id="Jz8-lg-GaJ" customClass="TrainingExerciseViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrainingExerciseViewController" id="Jz8-lg-GaJ" customClass="CurrentTrainingExerciseViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="geH-6K-r1V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKQ-3m-ZQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4628" y="-1252"/>
+            <point key="canvasLocation" x="4738" y="-1253"/>
         </scene>
         <!--ExerciseDetailViewController-->
         <scene sceneID="Dy0-kR-D6L">
@@ -345,12 +345,12 @@
                 <viewControllerPlaceholder storyboardName="Exercises" referencedIdentifier="ExerciseDetailViewController" id="weZ-lz-6Hh" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Z8-8y-ogT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5226" y="-1252"/>
+            <point key="canvasLocation" x="4602" y="-1718"/>
         </scene>
-        <!--Training Exercise Page View Controller-->
+        <!--Current Training Exercise Page View Controller-->
         <scene sceneID="EGm-pa-cmO">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CKU-WW-XmR" customClass="TrainingExercisePageViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CKU-WW-XmR" customClass="CurrentTrainingExercisePageViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="weZ-lz-6Hh" kind="show" identifier="show exercise detail" id="jvL-Kq-aoY"/>
                         <segue destination="beD-vK-hAs" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="HZn-6A-Fv8"/>
@@ -359,7 +359,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdQ-t4-0za" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="beD-vK-hAs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4001" y="-1252"/>
+            <point key="canvasLocation" x="3865" y="-1252"/>
         </scene>
         <!--Training-->
         <scene sceneID="ghR-Yc-7TV">
@@ -379,7 +379,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ba-XP-oVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="-1253"/>
+            <point key="canvasLocation" x="1250" y="-1252"/>
         </scene>
     </scenes>
     <resources>
