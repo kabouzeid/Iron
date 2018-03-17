@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 class CurrentTrainingExerciseViewController: UIViewController {
     
     var trainingExercise: TrainingExercise? {
         didSet {
+            trainingExerciseHistory = trainingExercise?.history!
             title = trainingExercise?.exercise?.title
+            tableView?.reloadData()
             if tableView != nil {
-                tableView.reloadData()
                 selectCurrentSet(animated: true)
             }
         }
     }
     
+    private var trainingExerciseHistory: [TrainingExercise]?
+
     var completeExerciseTitle: String? {
         didSet {
             if actionButton != nil && currentSet == nil {
@@ -40,9 +44,16 @@ class CurrentTrainingExerciseViewController: UIViewController {
             return nil
         }
     }
+    
+    private let dateFormatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
+        
         pickerView.dataSource = self
         pickerView.delegate = self
         
@@ -115,13 +126,18 @@ class CurrentTrainingExerciseViewController: UIViewController {
             let row = trainingExercise!.trainingSets!.index(of: set)
             let indexPath = IndexPath(row: row, section: 0)
             if set.repetitions == 0 {
-                if row > 0 {
+                if row > 0 { // not the first set
                     let previousSet = trainingExercise!.trainingSets![row - 1] as! TrainingSet
                     set.repetitions = previousSet.repetitions
                     set.weight = previousSet.weight
                 } else {
-                    // TODO set reps and weight to the most recent values from the past
-                    set.repetitions = 1
+                    if let mostRecentSet = trainingExerciseHistory!.first?.trainingSets?.firstObject as? TrainingSet {
+                        // use the most recent values if available
+                        set.repetitions = mostRecentSet.repetitions
+                        set.weight = mostRecentSet.weight
+                    } else {
+                        set.repetitions = 1
+                    }
                 }
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
@@ -190,7 +206,11 @@ class CurrentTrainingExerciseViewController: UIViewController {
     }
     
     private func trainingSet(of indexPath: IndexPath) -> TrainingSet {
-        return trainingExercise!.trainingSets![indexPath.row] as! TrainingSet
+        if indexPath.section == 0 {
+            return trainingExercise!.trainingSets![indexPath.row] as! TrainingSet
+        } else {
+            return trainingExerciseHistory![indexPath.section - 1].trainingSets![indexPath.row] as! TrainingSet
+        }
     }
     
     private func indexPath(of trainingSet: TrainingSet) -> IndexPath {
@@ -238,7 +258,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
 extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 // TODO add more sections for the other days
+        return 1 + (trainingExerciseHistory?.count ?? 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -246,7 +266,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         case 0:
             return (trainingExercise?.trainingSets?.count ?? 0) + 1 // + 1 for the addSet row
         default:
-            return 0
+            return trainingExerciseHistory?[section - 1].trainingSets?.count ?? 0
         }
     }
     
@@ -281,10 +301,9 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Today"
-        // TODO other days
+            return "Now"
         default:
-            return nil
+            return dateFormatter.string(from: trainingExerciseHistory![section - 1].training!.start!)
         }
     }
     
@@ -318,6 +337,9 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         if trainingExercise?.trainingSets?.count == 1 {
             return .none // don't allow to delete the last set
         }
+        if indexPath.section != 0 {
+            return .none
+        }
         return .delete
     }
 }
@@ -325,6 +347,9 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
 extension CurrentTrainingExerciseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
+            return false
+        }
+        if indexPath.section != 0 {
             return false
         }
         let trainingSet = self.trainingSet(of: indexPath)
