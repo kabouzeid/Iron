@@ -93,10 +93,8 @@ class Rhino_FitAdvancedCoreDataTests: XCTestCase {
         let trainingExercise1 = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
         trainingSet1.trainingExercise = trainingExercise1
         print(try! persistenContainer.viewContext.fetch(TrainingSet.fetchRequest() as NSFetchRequest<TrainingSet>))
-        print(trainingExercise1.trainingSets?.count)
         persistenContainer.viewContext.delete(trainingSet1)
         print(try! persistenContainer.viewContext.fetch(TrainingSet.fetchRequest() as NSFetchRequest<TrainingSet>))
-        print(trainingExercise1.trainingSets?.count)
 
         let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
         let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
