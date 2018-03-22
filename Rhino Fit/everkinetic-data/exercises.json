@@ -3929,8 +3929,10 @@
             "svg/0121-tension.svg"
         ],
         "png": [
-            "png/0121-relaxation.png",
-            "png/0121-tension.png"
+            "png/0121-relaxation1.png",
+            "png/0121-tension1.png",
+            "png/0121-relaxation2.png",
+            "png/0121-tension2.png"
         ]
     },
     {
@@ -4402,7 +4404,8 @@
             "svg/0134-tension.svg"
         ],
         "png": [
-            "png/0134-relaxation.png",
+            "png/0134-relaxation1.png",
+            "png/0134-relaxation2.png",
             "png/0134-tension.png"
         ]
     },
@@ -4510,7 +4513,8 @@
             "svg/0137-tension.svg"
         ],
         "png": [
-            "png/0137-relaxation.png",
+            "png/0137-relaxation1.png",
+            "png/0137-relaxation2.png",
             "png/0137-tension.png"
         ]
     },
@@ -9694,7 +9698,11 @@
         ],
         "references": [],
         "svg": [],
-        "png": []
+        "png": [
+          "png/0300-relaxation1.png",
+          "png/0300-relaxation2.png",
+          "png/0300-tension.png"
+        ]
     },
     {
         "id": "0302",
@@ -9720,6 +9728,34 @@
             "With slow controlled movements, raise the bar back to the starting position."
         ],
         "tips": [],
+        "references": [],
+        "svg": [],
+        "png": []
+    },
+    {
+        "id": "9001",
+        "name": "military-press",
+        "title": "Military Press",
+        "primer": "An exercise for the shoulder and triceps strengthening.",
+        "type": "compound",
+        "primary": [
+            "deltoid"
+        ],
+        "secondary": [
+            "triceps brachii"
+        ],
+        "equipment": [
+            "barbell"
+        ],
+        "steps": [
+            "Stand with the barbell on your upper chest, back straight and abs drawn in.",
+            "Grip the bar with your palms facing outwards and your hands shoulder width apart",
+            "With bar in front of your head, press upwards extending your arms but not locking them.",
+            "Pause at the top and then in a controlled movement lower the bar to the starting position."
+        ],
+        "tips": [
+            "This exercise can also be performed with the bar in the starting position behind your head."
+        ],
         "references": [],
         "svg": [],
         "png": []
