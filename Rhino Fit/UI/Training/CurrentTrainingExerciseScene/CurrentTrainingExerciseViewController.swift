@@ -104,17 +104,16 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
     private func moveExerciseBehindLastCompleted(trainingExercise: TrainingExercise) {
         let training = trainingExercise.training!
+        training.removeFromTrainingExercises(trainingExercise) // remove before doing the other stuff!
         let firstUncompleted = training.trainingExercises!.first(where: { (exercise) -> Bool in
             let exercise = exercise as! TrainingExercise
-            return !exercise.isCompleted! && exercise != trainingExercise
+            return !exercise.isCompleted!
         })
         if firstUncompleted != nil {
             let firstUncompleted = firstUncompleted! as! TrainingExercise
             let index = training.trainingExercises!.index(of: firstUncompleted)
-            training.removeFromTrainingExercises(trainingExercise)
             training.insertIntoTrainingExercises(trainingExercise, at: index)
         } else { // all other exercises are already completed
-            training.removeFromTrainingExercises(trainingExercise)
             training.addToTrainingExercises(trainingExercise)
         }
         delegate?.exerciseOrderDidChange()
