@@ -45,12 +45,21 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
     }
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var startTimerButton: UIButton!
     @IBAction func startTimer(_ sender: UIButton) {
         if training?.start == nil {
             training?.start = Date()
         }
         updateTimerViewState(animated: true)
+    }
+    @IBAction func confirmCancelCurrentTraining(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: "The current training will be deleted.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel Training", style: .destructive) { [weak self] _ in
+            self?.performSegue(withIdentifier: "cancel training", sender: self)
+        })
+        alert.addAction(UIAlertAction(title: "Continue Training", style: .cancel))
+        present(alert, animated: true)
     }
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

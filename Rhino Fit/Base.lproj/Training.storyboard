@@ -184,7 +184,7 @@
                     <navigationItem key="navigationItem" id="J4U-1a-OaV">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cnW-fU-dUG">
                             <connections>
-                                <segue destination="zev-HV-ZHg" kind="unwind" identifier="cancel training" unwindAction="comeBackToStartTrainingWithSegue:" id="PUe-ta-g6t"/>
+                                <action selector="confirmCancelCurrentTraining:" destination="X3d-Gd-7W1" id="YoR-v6-iUp"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Bhm-mp-hsF">
@@ -194,16 +194,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="cnW-fU-dUG" id="Agl-QG-FRT"/>
                         <outlet property="elapsedTimeLabel" destination="S6c-MD-bVY" id="O2w-ho-oaE"/>
                         <outlet property="startTimerButton" destination="f2w-7v-MQL" id="hdX-LC-bxz"/>
                         <outlet property="tableView" destination="dZE-KN-j3t" id="3VU-TL-gzM"/>
                         <outlet property="timeLabel" destination="vkY-zz-N9m" id="vLv-Yh-aKR"/>
+                        <segue destination="zev-HV-ZHg" kind="unwind" identifier="cancel training" unwindAction="comeBackToStartTrainingWithSegue:" id="cYg-Zp-BJH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mee-0k-Dre" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zev-HV-ZHg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3012" y="-1253"/>
+            <point key="canvasLocation" x="2974" y="-1253"/>
         </scene>
         <!--ExerciseTableViewController-->
         <scene sceneID="HiV-wg-8vH">
