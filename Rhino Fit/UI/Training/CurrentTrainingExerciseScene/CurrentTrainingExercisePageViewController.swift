@@ -25,7 +25,7 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
         view.backgroundColor = UIColor.white
         
         navigationItem.rightBarButtonItem = self.editButtonItem
-        navigationItem.rightBarButtonItems?.append(UIBarButtonItem.init(image: #imageLiteral(resourceName: "show"), style: .plain, target: self, action: #selector(showExercise)))
+        navigationItem.rightBarButtonItems?.append(UIBarButtonItem.init(image: #imageLiteral(resourceName: "info"), style: .plain, target: self, action: #selector(showExercise)))
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Set", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
     }
