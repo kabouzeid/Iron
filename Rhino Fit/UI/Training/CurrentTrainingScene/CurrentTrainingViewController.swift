@@ -158,8 +158,8 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
             trainingExercisePageViewController.initialTrainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
         } else if segue.identifier == "cancel training" {
             if training?.managedObjectContext != nil {
-                Training.deleteCurrentTraining(context: training!.managedObjectContext!)
-                try? training!.managedObjectContext!.save()
+                training!.managedObjectContext!.delete(training!)
+                AppDelegate.instance.saveContext()
             }
         }
     }

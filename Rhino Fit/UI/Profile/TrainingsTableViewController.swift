@@ -60,7 +60,7 @@ class TrainingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            AppDelegate.instance.persistentContainer.viewContext.delete(trainings![indexPath.row])
+            trainings![indexPath.row].managedObjectContext?.delete(trainings![indexPath.row])
             trainings!.remove(at: indexPath.row)
             AppDelegate.instance.saveContext()
             tableView.deleteRows(at: [indexPath], with: .automatic)
