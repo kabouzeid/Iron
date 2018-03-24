@@ -142,12 +142,15 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         let totalSets = trainingExercise.trainingSets!.count
         cell.textLabel?.text = trainingExercise.exercise?.title
         cell.detailTextLabel?.text = "\(completedSets) of \(totalSets)"
+        cell.tintColor = UIColor.lightGray
         if completedSets == totalSets { // completed exercise
             cell.textLabel?.textColor = UIColor.lightGray
             cell.detailTextLabel?.textColor = UIColor.lightGray
+            cell.accessoryType = .checkmark
         } else {
             cell.textLabel?.textColor = UIColor.darkText
             cell.detailTextLabel?.textColor = UIColor.darkGray
+            cell.accessoryType = .disclosureIndicator
         }
         return cell
     }
