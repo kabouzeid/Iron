@@ -159,7 +159,7 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         if let exerciseTableViewController = segue.destination as? ExercisesTableViewController {
             exerciseTableViewController.exercises = EverkineticDataProvider.exercises
             exerciseTableViewController.exerciseSelectionHandler = self
-            exerciseTableViewController.accessoryType = .none
+            exerciseTableViewController.accessoryType = .detailButton
             exerciseTableViewController.navigationItem.hidesSearchBarWhenScrolling = false
             exerciseTableViewController.title = "Add Exercise"
         } else if let trainingExercisePageViewController = segue.destination as? CurrentTrainingExercisePageViewController,

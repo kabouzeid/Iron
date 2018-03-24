@@ -14,9 +14,7 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     var exerciseSelectionHandler: ExerciseSelectionHandler?
     var accessoryType: UITableViewCellAccessoryType = .disclosureIndicator {
         didSet {
-            if tableView != nil {
-                tableView.reloadData()
-            }
+            tableView?.reloadData()
         }
     }
 
@@ -103,20 +101,24 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
             tableView.deselectRow(at: indexPath, animated: true) // willAppear not called when comming back
         }
     }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        performSegue(withIdentifier: "show exercise detail", sender: indexPath)
+    }
 
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController,
-            let indexPath = tableView.indexPathForSelectedRow {
+            let indexPath = sender as? IndexPath ?? tableView.indexPathForSelectedRow { // when manually performed, the sender is the index path
             let exercise = displayExercises[indexPath.section][indexPath.row]
             exerciseDetailViewController.exercise = exercise
         }
     }
-    
+
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return !(sender is UITableViewCell) || exerciseSelectionHandler == nil // sender is cell => delegate = nil
     }

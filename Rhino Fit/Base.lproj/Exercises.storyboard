@@ -37,7 +37,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="EsE-Ae-YG9" kind="show" id="avt-n4-udd"/>
+                                    <segue destination="EsE-Ae-YG9" kind="show" identifier="show exercise detail" id="avt-n4-udd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
