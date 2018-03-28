@@ -73,7 +73,8 @@ class TrainingsTableViewController: UITableViewController {
         if let trainingDetailTableViewController = segue.destination as? TrainingDetailTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
             trainingDetailTableViewController.training = trainings![indexPath.row]
+            trainingDetailTableViewController.isEditable = true
         }
     }
-
+    
 }

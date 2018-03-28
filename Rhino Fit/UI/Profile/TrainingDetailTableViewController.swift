@@ -19,19 +19,24 @@ class TrainingDetailTableViewController: UITableViewController {
             }
         }
     }
-
+    
+    var isEditable = false {
+        didSet {
+            self.navigationItem.rightBarButtonItem = isEditable ? self.editButtonItem : nil
+        }
+    }
+    
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var setsLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
         setLabels()
     }
     
     func setLabels() {
-        durationLabel.text = training?.end!.timeIntervalSince(training!.start!).stringFormattedWithLetters()
+        durationLabel.text = (training?.end ?? Date()).timeIntervalSince(training?.start ?? Date()).stringFormattedWithLetters()
         let numberOfSets = training?.trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
             let trainingExercise = trainingExercise as! TrainingExercise
             return count + trainingExercise.trainingSets!.count

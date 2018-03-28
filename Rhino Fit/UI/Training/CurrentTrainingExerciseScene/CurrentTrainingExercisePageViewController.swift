@@ -84,17 +84,27 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
-            let trainingExerciseViewController = viewControllers?[0] as? CurrentTrainingExerciseViewController
-            exerciseDetailViewController.exercise = trainingExerciseViewController?.trainingExercise?.exercise
-        } else if segue.identifier == "finish training", let training = (sender as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
+        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController,
+            let trainingExerciseViewController = viewControllers?[0] as? CurrentTrainingExerciseViewController {
+            exerciseDetailViewController.exercise = trainingExerciseViewController.trainingExercise?.exercise
+        } else if segue.identifier == "finish training",
+            let training = (viewControllers?[0] as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
             assert(training.isCompleted!, "Attempted to finish uncompleted training!")
             training.isCurrentTraining = false
             training.start = training.start ?? Date() // just to be sure
             training.end = Date()
             
             AppDelegate.instance.saveContext()
+        } else if let trainingDetailViewController = segue.destination as? TrainingDetailTableViewController,
+            let training = (viewControllers?[0] as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
+            trainingDetailViewController.training = training
+            trainingDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishTraining))
         }
+    }
+    
+    @objc
+    private func finishTraining() {
+        performSegue(withIdentifier: "finish training", sender: viewControllers?[0])
     }
 
 }
@@ -153,7 +163,7 @@ extension CurrentTrainingExercisePageViewController: UIPageViewControllerDelegat
 extension CurrentTrainingExercisePageViewController: TrainingExerciseViewControllerDelegate {
     func completeExercise(trainingExerciseViewController: CurrentTrainingExerciseViewController) {
         if let trainingExercise = trainingExerciseViewController.trainingExercise, trainingExercise.training!.isCompleted! {
-            performSegue(withIdentifier: "finish training", sender: trainingExerciseViewController)
+            performSegue(withIdentifier: "show training detail", sender: self) // user can finish from there
         } else if let trainingExercise = trainingExerciseAfter(trainingExercise: trainingExerciseViewController.trainingExercise) {
             initialTrainingExercise = trainingExercise
         } else {

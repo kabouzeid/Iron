@@ -349,6 +349,14 @@
             </objects>
             <point key="canvasLocation" x="4602" y="-1718"/>
         </scene>
+        <!--TrainingDetailViewController-->
+        <scene sceneID="1Q0-XI-A4S">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="training detail view controller" storyboardName="Profile" referencedIdentifier="TrainingDetailViewController" id="DXj-Tp-D37" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxf-2P-ynj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4662" y="-1660"/>
+        </scene>
         <!--Current Training Exercise Page View Controller-->
         <scene sceneID="EGm-pa-cmO">
             <objects>
@@ -356,6 +364,7 @@
                     <connections>
                         <segue destination="weZ-lz-6Hh" kind="show" identifier="show exercise detail" id="jvL-Kq-aoY"/>
                         <segue destination="beD-vK-hAs" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="HZn-6A-Fv8"/>
+                        <segue destination="DXj-Tp-D37" kind="show" identifier="show training detail" id="obh-ak-zbX"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdQ-t4-0za" userLabel="First Responder" sceneMemberID="firstResponder"/>
