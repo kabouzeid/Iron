@@ -14,12 +14,37 @@ class TrainingDetailTableViewController: UITableViewController {
         didSet {
             title = training?.displayTitle
             tableView?.reloadData()
+            if timeLabel != nil && setsLabel != nil && weightLabel != nil {
+                setLabels()
+            }
         }
     }
 
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var setsLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        setLabels()
+    }
+    
+    func setLabels() {
+        timeLabel.text = training?.end!.timeIntervalSince(training!.start!).stringFormattedWithLetters()
+        let numberOfSets = training?.trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
+            let trainingExercise = trainingExercise as! TrainingExercise
+            return count + trainingExercise.trainingSets!.count
+        })
+        setsLabel.text = "\(numberOfSets ?? 0) Sets"
+        let totalWeight = training?.trainingExercises!.reduce(0, { (weight, trainingExercise) -> Float in
+            let trainingExercise = trainingExercise as! TrainingExercise
+            return weight + trainingExercise.trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
+                let trainingSet = trainingSet as! TrainingSet
+                return weight + trainingSet.weight
+            })
+        })
+        weightLabel.text = "\(totalWeight ?? 0) kg"
     }
 
     override func didReceiveMemoryWarning() {
