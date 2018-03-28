@@ -14,6 +14,7 @@
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */; };
 		8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */; };
+		8A4FAAFD206BAF8C004A2806 /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */; };
 		8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */; };
 		8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */; };
 		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
@@ -67,6 +68,7 @@
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
 		8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExercisePageViewController.swift; sourceTree = "<group>"; };
 		8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExerciseViewController.swift; sourceTree = "<group>"; };
+		8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
 		8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseImageTableViewCell.swift; sourceTree = "<group>"; };
 		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */,
 				8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */,
 				8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */,
+				8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 			files = (
 				8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */,
 				8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */,
+				8A4FAAFD206BAF8C004A2806 /* FloatExtension.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,

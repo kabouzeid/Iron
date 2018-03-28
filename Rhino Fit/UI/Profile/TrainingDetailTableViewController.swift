@@ -14,13 +14,13 @@ class TrainingDetailTableViewController: UITableViewController {
         didSet {
             title = training?.displayTitle
             tableView?.reloadData()
-            if timeLabel != nil && setsLabel != nil && weightLabel != nil {
+            if durationLabel != nil && setsLabel != nil && weightLabel != nil {
                 setLabels()
             }
         }
     }
 
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var setsLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
@@ -31,12 +31,12 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     func setLabels() {
-        timeLabel.text = training?.end!.timeIntervalSince(training!.start!).stringFormattedWithLetters()
+        durationLabel.text = training?.end!.timeIntervalSince(training!.start!).stringFormattedWithLetters()
         let numberOfSets = training?.trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
             let trainingExercise = trainingExercise as! TrainingExercise
             return count + trainingExercise.trainingSets!.count
         })
-        setsLabel.text = "\(numberOfSets ?? 0) Sets"
+        setsLabel.text = "\(numberOfSets ?? 0)"
         let totalWeight = training?.trainingExercises!.reduce(0, { (weight, trainingExercise) -> Float in
             let trainingExercise = trainingExercise as! TrainingExercise
             return weight + trainingExercise.trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
@@ -44,7 +44,7 @@ class TrainingDetailTableViewController: UITableViewController {
                 return weight + trainingSet.weight
             })
         })
-        weightLabel.text = "\(totalWeight ?? 0) kg"
+        weightLabel.text = "\((totalWeight ?? 0).clean) kg"
     }
 
     override func didReceiveMemoryWarning() {
