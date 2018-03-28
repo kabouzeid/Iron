@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A0721A7205DB36C006A68CC /* Rhino_FitAdvancedCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0721A6205DB36C006A68CC /* Rhino_FitAdvancedCoreDataTests.swift */; };
 		8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
@@ -61,7 +60,6 @@
 		16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.debug.xcconfig"; sourceTree = "<group>"; };
 		6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80558E9154ADBCE77B4762E7 /* Pods-Rhino FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino FitTests/Pods-Rhino FitTests.release.xcconfig"; sourceTree = "<group>"; };
-		8A0721A6205DB36C006A68CC /* Rhino_FitAdvancedCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitAdvancedCoreDataTests.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			children = (
 				8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */,
 				8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */,
-				8A0721A6205DB36C006A68CC /* Rhino_FitAdvancedCoreDataTests.swift */,
 				8A7D6EB1200BF92E00AA0FA7 /* Info.plist */,
 				8AB972F6203583E40099507B /* CoreDataHelper.swift */,
 			);
@@ -584,7 +581,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */,
-				8A0721A7205DB36C006A68CC /* Rhino_FitAdvancedCoreDataTests.swift in Sources */,
 				8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */,
 				8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */,
 			);

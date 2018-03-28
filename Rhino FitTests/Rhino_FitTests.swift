@@ -21,11 +21,6 @@ class Rhino_FitTests: XCTestCase {
         super.tearDown()
     }
     
-//    func testExample() {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//    }
-    
     func testEverkineticParseSpeed() {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
         if let jsonString = try? String(contentsOf: jsonUrl) {
