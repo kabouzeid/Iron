@@ -19,15 +19,15 @@ extension TimeInterval {
     
     func stringFormattedWithLetters() -> String {
         let hours = Int(self) / 3600
-        let minutes = Int(self / 60) - Int(hours * 60)
+        var minutes = Int(self / 60) - Int(hours * 60)
+        
         let seconds = Int(self) - (Int(self / 60) * 60)
+        minutes = minutes + (seconds >= 30 ? 1 : 0) // round minutes up
         
         if hours == 0 {
-            if minutes == 0 {
-                return String(format: "%ds", seconds)
-            }
-            return String(format: "%dm %ds", minutes, seconds)
+            return String(format: "%dm", minutes)
+        } else {
+            return String(format: "%dh %dm", hours, minutes)
         }
-        return String(format: "%dh %dm", hours, minutes + (seconds >= 30 ? 1 : 0)) // round seconds
     }
 }
