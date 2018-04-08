@@ -11,6 +11,8 @@
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
+		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
+		8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */; };
 		8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */; };
 		8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */; };
 		8A4FAAFD206BAF8C004A2806 /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */; };
@@ -64,6 +66,8 @@
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
+		8A442AD6207A428500A2BDBD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExercisePageViewController.swift; sourceTree = "<group>"; };
 		8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExerciseViewController.swift; sourceTree = "<group>"; };
 		8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 				8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */,
 				8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */,
 				8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */,
+				8A442AD6207A428500A2BDBD /* DateExtension.swift */,
+				8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */,
+				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */,
@@ -567,6 +574,7 @@
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */,
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
+				8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */,
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,

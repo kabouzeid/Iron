@@ -36,20 +36,9 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     func setLabels() {
-        durationLabel.text = (training?.end ?? Date()).timeIntervalSince(training?.start ?? Date()).stringFormattedWithLetters()
-        let numberOfSets = training?.trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
-            let trainingExercise = trainingExercise as! TrainingExercise
-            return count + trainingExercise.trainingSets!.count
-        })
-        setsLabel.text = "\(numberOfSets ?? 0)"
-        let totalWeight = training?.trainingExercises!.reduce(0, { (weight, trainingExercise) -> Float in
-            let trainingExercise = trainingExercise as! TrainingExercise
-            return weight + trainingExercise.trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
-                let trainingSet = trainingSet as! TrainingSet
-                return weight + trainingSet.weight
-            })
-        })
-        weightLabel.text = "\((totalWeight ?? 0).clean) kg"
+        durationLabel.text = training?.duration.stringFormattedWithLetters()
+        setsLabel.text = "\(training?.numberOfSets ?? 0)"
+        weightLabel.text = "\((training?.totalWeight ?? 0).clean) kg"
     }
 
     override func didReceiveMemoryWarning() {

@@ -68,4 +68,25 @@ class Training: NSManagedObject {
             return title! // safe
         }
     }
+    
+    var duration: TimeInterval {
+        return (end ?? Date()).timeIntervalSince(start ?? Date())
+    }
+    
+    var numberOfSets: Int {
+        return trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
+            let trainingExercise = trainingExercise as! TrainingExercise
+            return count + trainingExercise.trainingSets!.count
+        })
+    }
+    
+    var totalWeight: Float {
+        return trainingExercises!.reduce(0, { (weight, trainingExercise) -> Float in
+            let trainingExercise = trainingExercise as! TrainingExercise
+            return weight + trainingExercise.trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
+                let trainingSet = trainingSet as! TrainingSet
+                return weight + trainingSet.weight
+            })
+        })
+    }
 }
