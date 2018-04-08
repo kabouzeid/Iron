@@ -23,7 +23,7 @@ struct Exercise {
     
     var primaryMuscleCommonName: [String] {
         get {
-            return primaryMuscle.flatMap({ (muscle) -> String? in
+            return primaryMuscle.map({ (muscle) -> String in
                 return Exercise.commonName(muscle: muscle)
             }).uniq()
         }
@@ -31,7 +31,7 @@ struct Exercise {
     
     var secondaryMuscleCommonName: [String] {
         get {
-            return secondaryMuscle.flatMap({ (muscle) -> String? in
+            return secondaryMuscle.map({ (muscle) -> String in
                 return Exercise.commonName(muscle: muscle)
             }).uniq()
         }
