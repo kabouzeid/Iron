@@ -37,8 +37,6 @@ import UIKit
         button.setTitle("Ok", for: .normal)
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         addArrangedSubview(button)
-        
-        print(button.frame)
     }
     
     @objc
