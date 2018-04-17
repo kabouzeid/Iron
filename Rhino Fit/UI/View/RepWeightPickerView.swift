@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class RepWeightPicker: UIStackView {
+@IBDesignable class RepWeightPickerView: UIStackView {
     var delegate: RepWeightPickerDelegate?
     
     var pickerView: UIPickerView!
@@ -29,14 +29,12 @@ import UIKit
 
         pickerView = UIPickerView()
         pickerView.setContentCompressionResistancePriority(.defaultLow, for: .vertical) // so the button has higher priority
-//        pickerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         pickerView.delegate = self
         pickerView.dataSource = self
         addArrangedSubview(pickerView)
 
         button = UIButton(type: .system)
         button.setTitle("Ok", for: .normal)
-//        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         addArrangedSubview(button)
         
@@ -45,7 +43,7 @@ import UIKit
     
     @objc
     private func buttonClicked() {
-        delegate?.repWeightPickerButtonClicked(self)
+        delegate?.repWeightPickerViewButtonClicked(self)
     }
     
     func select(weight: Float, animated: Bool) {
@@ -76,22 +74,22 @@ import UIKit
 }
 
 protocol RepWeightPickerDelegate {
-    func repWeightPicker(_ repWeightPicker: RepWeightPicker, didSelect repetitions: Int)
+    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect repetitions: Int)
     
-    func repWeightPicker(_ repWeightPicker: RepWeightPicker, didSelect weight: Float)
+    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Float)
     
-    func repWeightPickerButtonClicked(_ repWeightPicker: RepWeightPicker)
+    func repWeightPickerViewButtonClicked(_ repWeightPickerView: RepWeightPickerView)
 }
 
-extension RepWeightPicker: UIPickerViewDelegate {
+extension RepWeightPickerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            delegate?.repWeightPicker(self, didSelect: repetitionsFor(row: row))
+            delegate?.repWeightPickerView(self, didSelect: repetitionsFor(row: row))
         case 1:
-            delegate?.repWeightPicker(self, didSelect: weightFor(first: row, second: pickerView.selectedRow(inComponent: 2)))
+            delegate?.repWeightPickerView(self, didSelect: weightFor(first: row, second: pickerView.selectedRow(inComponent: 2)))
         case 2:
-            delegate?.repWeightPicker(self, didSelect: weightFor(first: pickerView.selectedRow(inComponent: 1), second: row))
+            delegate?.repWeightPickerView(self, didSelect: weightFor(first: pickerView.selectedRow(inComponent: 1), second: row))
         default:
             break
         }
@@ -141,7 +139,7 @@ extension RepWeightPicker: UIPickerViewDelegate {
     }
 }
 
-extension RepWeightPicker: UIPickerViewDataSource {
+extension RepWeightPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
