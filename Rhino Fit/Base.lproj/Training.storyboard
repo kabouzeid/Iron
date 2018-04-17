@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ob1-FP-r6X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ob1-FP-r6X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -228,7 +228,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="setCell" textLabel="Xrf-vU-YTg" detailTextLabel="a29-zs-2bI" style="IBUITableViewCellStyleValue1" id="Hii-Mm-VWg">
-                                        <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hii-Mm-VWg" id="sJu-hQ-ppY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
@@ -286,33 +286,22 @@
                                             <constraint firstAttribute="height" constant="1" id="Xnt-GR-gB1"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KVg-vH-y8x">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZH-8G-bJA" customClass="RepWeightPicker" customModule="Rhino_Fit" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="359" height="130"/>
-                                        <subviews>
-                                            <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="lET-2Y-HmH">
-                                                <rect key="frame" x="0.0" y="0.0" width="359" height="100"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="UMw-08-ULU"/>
-                                                </constraints>
-                                            </pickerView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMv-fZ-kiU">
-                                                <rect key="frame" x="0.0" y="100" width="359" height="30"/>
-                                                <state key="normal" title="Complete Set"/>
-                                                <connections>
-                                                    <action selector="performButtonAction:" destination="Jz8-lg-GaJ" eventType="touchUpInside" id="e7o-AA-eFB"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="VfZ-wn-cy8"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="KVg-vH-y8x" firstAttribute="top" secondItem="Q9A-0V-se3" secondAttribute="topMargin" id="50d-HH-hAW"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="KVg-vH-y8x" secondAttribute="trailing" id="RlF-WK-ovM"/>
+                                    <constraint firstItem="QZH-8G-bJA" firstAttribute="leading" secondItem="Q9A-0V-se3" secondAttribute="leadingMargin" id="5o3-Gm-xSS"/>
                                     <constraint firstItem="n7M-hv-2CN" firstAttribute="leading" secondItem="Q9A-0V-se3" secondAttribute="leading" id="aAE-ei-VFM"/>
-                                    <constraint firstItem="KVg-vH-y8x" firstAttribute="leading" secondItem="Q9A-0V-se3" secondAttribute="leadingMargin" id="i5R-W0-5wt"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="QZH-8G-bJA" secondAttribute="trailing" id="bli-VR-B7J"/>
                                     <constraint firstItem="n7M-hv-2CN" firstAttribute="top" secondItem="Q9A-0V-se3" secondAttribute="top" id="iHL-w5-kjn"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="KVg-vH-y8x" secondAttribute="bottom" id="lMm-oI-VhJ"/>
                                     <constraint firstAttribute="trailing" secondItem="n7M-hv-2CN" secondAttribute="trailing" id="mOj-ed-tDI"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="QZH-8G-bJA" secondAttribute="bottom" id="wdy-34-8X8"/>
+                                    <constraint firstItem="QZH-8G-bJA" firstAttribute="top" secondItem="Q9A-0V-se3" secondAttribute="topMargin" id="zXf-Mv-aOJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -331,15 +320,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="actionButton" destination="vMv-fZ-kiU" id="3b0-Tj-46l"/>
-                        <outlet property="pickerView" destination="lET-2Y-HmH" id="6si-t7-7i4"/>
-                        <outlet property="stackView" destination="KVg-vH-y8x" id="8g8-eX-Xrq"/>
+                        <outlet property="repWeightPicker" destination="QZH-8G-bJA" id="8Eb-O3-nyw"/>
                         <outlet property="tableView" destination="soa-ha-8PI" id="lMF-TR-IS9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKQ-3m-ZQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4738" y="-1253"/>
+            <point key="canvasLocation" x="4852" y="-1252"/>
         </scene>
         <!--ExerciseDetailViewController-->
         <scene sceneID="Dy0-kR-D6L">

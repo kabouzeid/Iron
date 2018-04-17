@@ -26,8 +26,8 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
     var completeExerciseTitle: String? {
         didSet {
-            if actionButton != nil && currentSet == nil {
-                actionButton.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+            if currentSet == nil {
+                repWeightPicker?.button?.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
             }
         }
     }
@@ -54,8 +54,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
         dateFormatter.timeStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
         
-        pickerView.dataSource = self
-        pickerView.delegate = self
+        repWeightPicker.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -69,29 +68,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var actionButton: UIButton!
-    @IBAction func performButtonAction(_ sender: UIButton) {
-        if let selected = tableView.indexPathForSelectedRow {
-            let selectedSet = trainingSet(of: selected)
-            if selectedSet == currentSet {
-                assert(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
-                selectedSet.isCompleted = true
-                tableView.reloadRows(at: [selected], with: .automatic)
-                
-                let training = trainingExercise!.training!
-                if training.start == nil {
-                    training.start = Date()
-                }
-                
-                moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
-            }
-            selectCurrentSet(animated: true)
-        } else {
-            delegate?.completeExercise(trainingExerciseViewController: self)
-        }
-    }
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var repWeightPicker: RepWeightPicker!
     /*
     // MARK: - Navigation
 
@@ -140,35 +117,33 @@ class CurrentTrainingExerciseViewController: UIViewController {
                 }
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            setPickerTo(trainingSet: set, animated: animated)
+            setRepWeightPickerTo(trainingSet: set, animated: animated)
             tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
         } else {
             if let selected = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selected, animated: animated)
             }
-            setPickerTo(trainingSet: nil, animated: animated) // hides the picker
+            setRepWeightPickerTo(trainingSet: nil, animated: animated) // hides the picker
         }
     }
     
-    private func setPickerTo(trainingSet: TrainingSet?, animated: Bool) {
+    private func setRepWeightPickerTo(trainingSet: TrainingSet?, animated: Bool) {
         if isEditing {
             return
         }
         if trainingSet == nil {
-            hidePickerView(animated: animated)
-            actionButton.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+            hideRepWeightPickerView(animated: animated)
+            repWeightPicker.button.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
             return
         }
         
-        let weightRows = rowsFor(weight: trainingSet!.weight)
-        pickerView.selectRow(rowFor(reps: Int(trainingSet!.repetitions)), inComponent: 0, animated: animated)
-        pickerView.selectRow(weightRows.0, inComponent: 1, animated: animated)
-        pickerView.selectRow(weightRows.1, inComponent: 2, animated: animated)
-        
+        repWeightPicker.select(weight: trainingSet!.weight, animated: animated)
+        repWeightPicker.select(repetitions: Int(trainingSet!.repetitions), animated: animated)
+
         if trainingSet == currentSet {
-            actionButton.setTitle("Complete Set", for: .normal)
+            repWeightPicker.button.setTitle("Complete Set", for: .normal)
         } else {
-            actionButton.setTitle("Ok", for: .normal)
+            repWeightPicker.button.setTitle("Ok", for: .normal)
         }
 
         showPickerView(animated: animated)
@@ -216,41 +191,41 @@ class CurrentTrainingExerciseViewController: UIViewController {
         return IndexPath(row: trainingExercise!.trainingSets!.index(of: trainingSet), section: 0)
     }
     
-    private func hidePickerView(animated: Bool) {
-        self.pickerView.alpha = 0
+    private func hideRepWeightPickerView(animated: Bool) {
+        repWeightPicker.pickerView.alpha = 0
         UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
-            self.pickerView.isHidden = true
-            self.stackView.layoutIfNeeded()
+            self.repWeightPicker.pickerView.isHidden = true
+            self.repWeightPicker.layoutIfNeeded()
         })
     }
     
     private func showPickerView(animated: Bool) {
         UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
-            self.pickerView.isHidden = false
-            self.stackView.layoutIfNeeded()
+            self.repWeightPicker.pickerView.isHidden = false
+            self.repWeightPicker.layoutIfNeeded()
         }) { _ in
-            self.pickerView.alpha = 1
+            self.repWeightPicker.pickerView.alpha = 1
         }
     }
     
     private func hideStackView(animated: Bool) {
-        self.pickerView.alpha = 0
-        self.actionButton.alpha = 0
+        repWeightPicker.pickerView.alpha = 0
+        repWeightPicker.button.alpha = 0
         UIView.animate(withDuration: animated ? 0.3 : 0) {
-            self.pickerView.isHidden = true
-            self.actionButton.isHidden = true
-            self.stackView.layoutIfNeeded()
+            self.repWeightPicker.pickerView.isHidden = true
+            self.repWeightPicker.button.isHidden = true
+            self.repWeightPicker.layoutIfNeeded()
         }
     }
     
     private func showStackView(animated: Bool) {
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
-            self.pickerView.isHidden = false
-            self.actionButton.isHidden = false
-            self.stackView.layoutIfNeeded()
+            self.repWeightPicker.pickerView.isHidden = false
+            self.repWeightPicker.button.isHidden = false
+            self.repWeightPicker.layoutIfNeeded()
         }) { _ in
-            self.pickerView.alpha = 1
-            self.actionButton.alpha = 1
+            self.repWeightPicker.pickerView.alpha = 1
+            self.repWeightPicker.button.alpha = 1
         }
     }
 }
@@ -356,120 +331,55 @@ extension CurrentTrainingExerciseViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        setPickerTo(trainingSet: self.trainingSet(of: indexPath), animated: true)
+        setRepWeightPickerTo(trainingSet: self.trainingSet(of: indexPath), animated: true)
     }
 }
 
-extension CurrentTrainingExerciseViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return 2998
-        case 1:
-            return 2999
-        case 2:
-            return 4
-        default:
-           return 0
-        }
-    }
-}
-
-extension CurrentTrainingExerciseViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
+    func repWeightPicker(_ repWeightPicker: RepWeightPicker, didSelect repetitions: Int) {
         if let indexPath = tableView.indexPathForSelectedRow {
             let trainingExercise = self.trainingSet(of: indexPath)
-            switch component {
-            case 0:
-                trainingExercise.repetitions = Int16(repetitionsFor(row: row))
-            case 1:
-                let second = rowsFor(weight: trainingExercise.weight).1
-                trainingExercise.weight = weightFor(first: row, second: second)
-            case 2:
-                let first = rowsFor(weight: trainingExercise.weight).0
-                trainingExercise.weight = weightFor(first: first, second: row)
-            default:
-                break
-            }
+            trainingExercise.repetitions = Int16(repetitions)
+            
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label: UILabel
-        if view == nil {
-            label = UILabel()
+    func repWeightPicker(_ repWeightPicker: RepWeightPicker, didSelect weight: Float) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let trainingExercise = self.trainingSet(of: indexPath)
+            trainingExercise.weight = weight
+            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        }
+    }
+    
+    func repWeightPickerButtonClicked(_ repWeightPicker: RepWeightPicker) {
+        if let selected = tableView.indexPathForSelectedRow {
+            let selectedSet = trainingSet(of: selected)
+            if selectedSet == currentSet {
+                assert(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
+                selectedSet.isCompleted = true
+                tableView.reloadRows(at: [selected], with: .automatic)
+                
+                let training = trainingExercise!.training!
+                if training.start == nil {
+                    training.start = Date()
+                }
+                
+                moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
+            }
+            selectCurrentSet(animated: true)
         } else {
-            label = view as! UILabel
+            delegate?.completeExercise(trainingExerciseViewController: self)
         }
-        label.text = titleFor(row: row, component: component)
-        label.font = UIFont.systemFont(ofSize: 21)
-        switch component {
-        case 0:
-            label.textAlignment = NSTextAlignment.right
-        case 1:
-            label.textAlignment = NSTextAlignment.right
-        case 2:
-            label.textAlignment = NSTextAlignment.left
-        default:
-            break
-        }
-        return label
-    }
-    
-    private func titleFor(row: Int, component: Int) -> String? {
-        switch component {
-        case 0:
-            return "\(String(row + 1)) x"
-        case 1:
-            return String(row)
-        case 2:
-            return ".\(String(row * 25)) kg"
-        default:
-            return nil
-        }
-    }
-    
-    private func rowFor(reps: Int) -> Int {
-        return reps - 1
-    }
-    
-    private func rowsFor(weight: Float) -> (Int, Int) {
-        let integer = Int(weight.rounded(.down))
-        let comma = Int((weight*100).rounded(.down)) % 100
-        
-        var first = integer
-        var second = 0
-        switch comma {
-        case 0..<13:
-            break
-        case 13..<38:
-            second = 1
-        case 38..<68:
-            second = 2
-        case 68..<88:
-            second = 3
-        default:
-            first += 1
-        }
-        return(first, second)
-    }
-    
-    private func weightFor(first: Int, second: Int) -> Float {
-        return Float(first) + Float(second)*0.25
-    }
-    
-    private func repetitionsFor(row: Int) -> Int {
-        return row + 1
     }
 }
 
 protocol TrainingExerciseViewControllerDelegate {
     func completeExercise(trainingExerciseViewController: CurrentTrainingExerciseViewController)
+    
     func exerciseOrderDidChange()
 }
