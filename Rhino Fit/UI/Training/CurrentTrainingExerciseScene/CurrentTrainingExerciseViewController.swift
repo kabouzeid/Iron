@@ -22,8 +22,6 @@ class CurrentTrainingExerciseViewController: UIViewController {
         }
     }
     
-    private var trainingExerciseHistory: [TrainingExercise]?
-
     var completeExerciseTitle: String? {
         didSet {
             if currentSet == nil {
@@ -32,17 +30,23 @@ class CurrentTrainingExerciseViewController: UIViewController {
         }
     }
     
+    var allowSwipeToDelete = true
+    
     var delegate: TrainingExerciseViewControllerDelegate?
     
+    private var trainingExerciseHistory: [TrainingExercise]?
+
     private var currentSet: TrainingSet? {
-        get {
-            if let currentSet = trainingExercise?.trainingSets?.first(where: { (object) -> Bool in
-                return !(object as! TrainingSet).isCompleted
-            }) as? TrainingSet {
-                return currentSet
-            }
-            return nil
+        if let currentSet = trainingExercise?.trainingSets?.first(where: { (object) -> Bool in
+            return !(object as! TrainingSet).isCompleted
+        }) as? TrainingSet {
+            return currentSet
         }
+        return nil
+    }
+    
+    private var isCurrentTraining: Bool {
+        return trainingExercise?.training?.isCurrentTraining ?? false
     }
     
     private let dateFormatter = DateFormatter()
@@ -59,6 +63,8 @@ class CurrentTrainingExerciseViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        navigationItem.rightBarButtonItem = editButtonItem
+        
         selectCurrentSet(animated: false)
     }
     
@@ -69,17 +75,12 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var repWeightPickerView: RepWeightPickerView!
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     private func moveExerciseBehindLastCompleted(trainingExercise: TrainingExercise) {
+        guard isCurrentTraining else {
+           return // only move exercises when in current training
+        }
+        
         let training = trainingExercise.training!
         training.removeFromTrainingExercises(trainingExercise) // remove before doing the other stuff!
         let firstUncompleted = training.trainingExercises!.first(where: { (exercise) -> Bool in
@@ -97,7 +98,6 @@ class CurrentTrainingExerciseViewController: UIViewController {
     }
     
     private func selectCurrentSet(animated: Bool) {
-        // then select the row of the current exercise
         if let set = currentSet {
             let row = trainingExercise!.trainingSets!.index(of: set)
             let indexPath = IndexPath(row: row, section: 0)
@@ -128,12 +128,14 @@ class CurrentTrainingExerciseViewController: UIViewController {
     }
     
     private func setRepWeightPickerTo(trainingSet: TrainingSet?, animated: Bool) {
-        if isEditing {
+        guard !isEditing else {
             return
         }
-        if trainingSet == nil {
-            hideRepWeightPickerView(animated: animated)
-            repWeightPickerView.button.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+        guard trainingSet != nil else {
+            if isCurrentTraining {
+                repWeightPickerView.button.setTitle(completeExerciseTitle ?? "Complete Exercise", for: .normal)
+            }
+            repWeightPickerView.show(pickerView: false, button: isCurrentTraining, animated: animated)
             return
         }
         
@@ -146,7 +148,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
             repWeightPickerView.button.setTitle("Ok", for: .normal)
         }
 
-        showPickerView(animated: animated)
+        repWeightPickerView.show(pickerView: true, button: true, animated: animated)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -154,27 +156,27 @@ class CurrentTrainingExerciseViewController: UIViewController {
         tableView.setEditing(editing, animated: animated)
         
         if editing {
-            hideStackView(animated: animated)
+            repWeightPickerView.show(pickerView: false, button: false, animated: animated)
         } else {
-            showStackView(animated: animated)
-            selectCurrentSet(animated: animated)
+            selectCurrentSet(animated: animated) // also shows the picker view again if necessary
         }
     }
     
     @objc
     func addSet() {
-        if trainingExercise != nil {
-            let wasCompleted = trainingExercise!.isCompleted!
+        if let trainingExercise = trainingExercise {
+            let wasCompleted = trainingExercise.isCompleted!
 
-            let trainingSet = TrainingSet(context: trainingExercise!.managedObjectContext!)
-            trainingExercise!.addToTrainingSets(trainingSet)
+            let trainingSet = TrainingSet(context: trainingExercise.managedObjectContext!)
+            trainingSet.isCompleted = !isCurrentTraining // if not current training then mark set as completed
+            trainingExercise.addToTrainingSets(trainingSet)
             
-            let indexPath = IndexPath(row: trainingExercise!.trainingSets!.count - 1, section: 0)
+            let indexPath = IndexPath(row: trainingExercise.trainingSets!.count - 1, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
             selectCurrentSet(animated: true)
             
             if wasCompleted {
-                moveExerciseBehindLastCompleted(trainingExercise: trainingExercise!)
+                moveExerciseBehindLastCompleted(trainingExercise: trainingExercise)
             }
         }
     }
@@ -189,44 +191,6 @@ class CurrentTrainingExerciseViewController: UIViewController {
     
     private func indexPath(of trainingSet: TrainingSet) -> IndexPath {
         return IndexPath(row: trainingExercise!.trainingSets!.index(of: trainingSet), section: 0)
-    }
-    
-    private func hideRepWeightPickerView(animated: Bool) {
-        repWeightPickerView.pickerView.alpha = 0
-        UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
-            self.repWeightPickerView.pickerView.isHidden = true
-            self.repWeightPickerView.layoutIfNeeded()
-        })
-    }
-    
-    private func showPickerView(animated: Bool) {
-        UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
-            self.repWeightPickerView.pickerView.isHidden = false
-            self.repWeightPickerView.layoutIfNeeded()
-        }) { _ in
-            self.repWeightPickerView.pickerView.alpha = 1
-        }
-    }
-    
-    private func hideStackView(animated: Bool) {
-        repWeightPickerView.pickerView.alpha = 0
-        repWeightPickerView.button.alpha = 0
-        UIView.animate(withDuration: animated ? 0.3 : 0) {
-            self.repWeightPickerView.pickerView.isHidden = true
-            self.repWeightPickerView.button.isHidden = true
-            self.repWeightPickerView.layoutIfNeeded()
-        }
-    }
-    
-    private func showStackView(animated: Bool) {
-        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
-            self.repWeightPickerView.pickerView.isHidden = false
-            self.repWeightPickerView.button.isHidden = false
-            self.repWeightPickerView.layoutIfNeeded()
-        }) { _ in
-            self.repWeightPickerView.pickerView.alpha = 1
-            self.repWeightPickerView.button.alpha = 1
-        }
     }
 }
 
@@ -261,7 +225,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         }
         cell.detailTextLabel?.text = "\(indexPath.row + 1)"
         
-        if trainingSet == currentSet {
+        if trainingSet == currentSet || (!isCurrentTraining && indexPath.section == 0) {
             cell.textLabel?.textColor = UIColor.darkText
             cell.detailTextLabel?.textColor = UIColor.darkGray
         } else {
@@ -302,19 +266,23 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if !isEditing {
+        if !allowSwipeToDelete && !isEditing {
             return .none // disable swipe to delete
         }
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
-            return .none
-        }
-        if trainingExercise?.trainingSets?.count == 1 {
-            return .none // don't allow to delete the last set
+            return false // don't allow to delete the add set button
         }
         if indexPath.section != 0 {
-            return .none
+            return false // don't allow to delete the sets in the history
         }
-        return .delete
+        if trainingExercise?.trainingSets?.count == 1 {
+            return false // don't allow to delete the last set
+        }
+        return true
     }
 }
 

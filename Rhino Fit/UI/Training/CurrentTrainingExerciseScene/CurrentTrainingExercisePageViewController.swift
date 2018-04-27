@@ -47,6 +47,7 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
         trainingExerciseViewController.trainingExercise = trainingExercise
         trainingExerciseViewController.completeExerciseTitle = completeExerciseTitle(exercise: trainingExercise)
         trainingExerciseViewController.delegate = self
+        trainingExerciseViewController.allowSwipeToDelete = false // don't want swipe to delete when we have paging
         return trainingExerciseViewController
     }
     

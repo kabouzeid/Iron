@@ -321,6 +321,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Yrq-hM-slM" kind="show" identifier="show exercise" id="Yke-gq-2l7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -338,6 +341,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZw-0W-tmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2880.8000000000002" y="1291.6256157635469"/>
+        </scene>
+        <!--TrainingExerciseViewController-->
+        <scene sceneID="78l-Uh-751">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Training" referencedIdentifier="TrainingExerciseViewController" id="Yrq-hM-slM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jjq-RQ-aYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3652" y="1263"/>
         </scene>
         <!--Profile-->
         <scene sceneID="xgl-0F-h1V">

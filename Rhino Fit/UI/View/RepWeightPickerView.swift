@@ -38,7 +38,7 @@ import UIKit
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         addArrangedSubview(button)
     }
-    
+
     @objc
     private func buttonClicked() {
         delegate?.repWeightPickerViewButtonClicked(self)
@@ -68,6 +68,30 @@ import UIKit
     
     func select(repetitions: Int, animated: Bool) {
         pickerView.selectRow(repetitions - 1, inComponent: 0, animated: animated)
+    }
+    
+    func show(pickerView: Bool, button: Bool, animated: Bool) {
+        if pickerView {
+            addArrangedSubview(self.pickerView)
+        }
+        if button {
+            addArrangedSubview(self.button)
+        }
+        
+        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
+            self.pickerView.isHidden = !pickerView
+            self.button.isHidden = !button
+            self.layoutIfNeeded()
+        })
+        
+        if !pickerView {
+            removeArrangedSubview(self.pickerView)
+            self.pickerView.removeFromSuperview()
+        }
+        if !button {
+            removeArrangedSubview(self.button)
+            self.button.removeFromSuperview()
+        }
     }
 }
 
