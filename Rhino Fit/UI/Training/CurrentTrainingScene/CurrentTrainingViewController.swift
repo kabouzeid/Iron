@@ -59,6 +59,7 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
             self?.performSegue(withIdentifier: "cancel training", sender: self)
         })
         alert.addAction(UIAlertAction(title: "Continue Training", style: .cancel))
+        alert.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem // iPad
         present(alert, animated: true)
     }
     @IBOutlet weak var elapsedTimeLabel: UILabel!

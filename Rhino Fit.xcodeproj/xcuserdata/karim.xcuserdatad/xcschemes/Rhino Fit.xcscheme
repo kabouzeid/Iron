@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Rhino Fit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8A36D64820A5BE0C003D59E6"
+               BuildableName = "Rhino FitFastlaneSnapshot.xctest"
+               BlueprintName = "Rhino FitFastlaneSnapshot"
+               ReferencedContainer = "container:Rhino Fit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -35,6 +49,16 @@
                BlueprintIdentifier = "8A7D6EAA200BF92E00AA0FA7"
                BuildableName = "Rhino FitTests.xctest"
                BlueprintName = "Rhino FitTests"
+               ReferencedContainer = "container:Rhino Fit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8A9C5A6D20A6F86A00DEBCC5"
+               BuildableName = "Rhino FitUITests.xctest"
+               BlueprintName = "Rhino FitUITests"
                ReferencedContainer = "container:Rhino Fit.xcodeproj">
             </BuildableReference>
          </TestableReference>

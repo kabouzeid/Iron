@@ -10,6 +10,8 @@
 		8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
+		8A36D64C20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */; };
+		8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */; };
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
 		8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */; };
@@ -30,6 +32,7 @@
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */; };
+		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
 		8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
@@ -49,7 +52,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8A36D64E20A5BE0C003D59E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
+			remoteInfo = "Rhino Fit";
+		};
 		8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
+			remoteInfo = "Rhino Fit";
+		};
+		8A9C5A7320A6F86A00DEBCC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
 			proxyType = 1;
@@ -66,6 +83,10 @@
 		8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitFastlaneSnapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitFastlaneSnapshot.swift; sourceTree = "<group>"; };
+		8A36D64D20A5BE0C003D59E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -90,6 +111,9 @@
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitUITests.swift; sourceTree = "<group>"; };
+		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetTableViewCell.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +133,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8A36D64620A5BE0C003D59E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A7D6E91200BF92E00AA0FA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,6 +156,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A9C5A6B20A6F86A00DEBCC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -135,6 +173,16 @@
 				975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A36D64A20A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */,
+				8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */,
+				8A36D64D20A5BE0C003D59E6 /* Info.plist */,
+			);
+			path = "Rhino FitFastlaneSnapshot";
 			sourceTree = "<group>";
 		};
 		8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */ = {
@@ -179,6 +227,8 @@
 			children = (
 				8A7D6E96200BF92E00AA0FA7 /* Rhino Fit */,
 				8A7D6EAE200BF92E00AA0FA7 /* Rhino FitTests */,
+				8A36D64A20A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */,
+				8A9C5A6F20A6F86A00DEBCC5 /* Rhino FitUITests */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				9500C407BE043857C54B4BA6 /* Pods */,
 				0F66DB06EF93426734398018 /* Frameworks */,
@@ -190,6 +240,8 @@
 			children = (
 				8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */,
 				8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */,
+				8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */,
+				8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,6 +275,15 @@
 				8AB972F6203583E40099507B /* CoreDataHelper.swift */,
 			);
 			path = "Rhino FitTests";
+			sourceTree = "<group>";
+		};
+		8A9C5A6F20A6F86A00DEBCC5 /* Rhino FitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */,
+				8A9C5A7220A6F86A00DEBCC5 /* Info.plist */,
+			);
+			path = "Rhino FitUITests";
 			sourceTree = "<group>";
 		};
 		8AA947F2203B8864005D1758 /* CurrentTrainingExerciseScene */ = {
@@ -352,6 +413,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8A36D64820A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Rhino FitFastlaneSnapshot" */;
+			buildPhases = (
+				8A36D64520A5BE0C003D59E6 /* Sources */,
+				8A36D64620A5BE0C003D59E6 /* Frameworks */,
+				8A36D64720A5BE0C003D59E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */,
+			);
+			name = "Rhino FitFastlaneSnapshot";
+			productName = "Rhino FitFastlaneSnapshot";
+			productReference = 8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Rhino Fit" */;
@@ -393,22 +472,50 @@
 			productReference = 8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8A9C5A6D20A6F86A00DEBCC5 /* Rhino FitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Rhino FitUITests" */;
+			buildPhases = (
+				8A9C5A6A20A6F86A00DEBCC5 /* Sources */,
+				8A9C5A6B20A6F86A00DEBCC5 /* Frameworks */,
+				8A9C5A6C20A6F86A00DEBCC5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */,
+			);
+			name = "Rhino FitUITests";
+			productName = "Rhino FitUITests";
+			productReference = 8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8A7D6E8C200BF92E00AA0FA7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
+					8A36D64820A5BE0C003D59E6 = {
+						CreatedOnToolsVersion = 9.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
+					};
 					8A7D6E93200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 					8A7D6EAA200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
+					};
+					8A9C5A6D20A6F86A00DEBCC5 = {
+						CreatedOnToolsVersion = 9.3.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
 					};
@@ -429,11 +536,20 @@
 			targets = (
 				8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */,
 				8A7D6EAA200BF92E00AA0FA7 /* Rhino FitTests */,
+				8A36D64820A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */,
+				8A9C5A6D20A6F86A00DEBCC5 /* Rhino FitUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8A36D64720A5BE0C003D59E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A7D6E92200BF92E00AA0FA7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +565,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8A7D6EA9200BF92E00AA0FA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A9C5A6C20A6F86A00DEBCC5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -562,6 +685,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8A36D64520A5BE0C003D59E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A36D64C20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift in Sources */,
+				8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A7D6E90200BF92E00AA0FA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,13 +738,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A9C5A6A20A6F86A00DEBCC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
+			targetProxy = 8A36D64E20A5BE0C003D59E6 /* PBXContainerItemProxy */;
+		};
 		8A7D6EAD200BF92E00AA0FA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
 			targetProxy = 8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */;
+		};
+		8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
+			targetProxy = 8A9C5A7320A6F86A00DEBCC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -661,6 +811,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8A36D65020A5BE0C003D59E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JU32M8U949;
+				INFOPLIST_FILE = "Rhino FitFastlaneSnapshot/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitFastlaneSnapshot";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Rhino Fit";
+			};
+			name = Debug;
+		};
+		8A36D65120A5BE0C003D59E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JU32M8U949;
+				INFOPLIST_FILE = "Rhino FitFastlaneSnapshot/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitFastlaneSnapshot";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Rhino Fit";
+			};
+			name = Release;
+		};
 		8A7D6EB2200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -777,12 +959,14 @@
 			baseConfigurationReference = 16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JU32M8U949;
 				INFOPLIST_FILE = "Rhino Fit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-Fit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -793,12 +977,14 @@
 			baseConfigurationReference = 9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JU32M8U949;
 				INFOPLIST_FILE = "Rhino Fit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-Fit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -840,9 +1026,50 @@
 			};
 			name = Release;
 		};
+		8A9C5A7620A6F86A00DEBCC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JU32M8U949;
+				INFOPLIST_FILE = "Rhino FitUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Rhino Fit";
+			};
+			name = Debug;
+		};
+		8A9C5A7720A6F86A00DEBCC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JU32M8U949;
+				INFOPLIST_FILE = "Rhino FitUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Rhino Fit";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Rhino FitFastlaneSnapshot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A36D65020A5BE0C003D59E6 /* Debug */,
+				8A36D65120A5BE0C003D59E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Rhino Fit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -866,6 +1093,15 @@
 			buildConfigurations = (
 				8A7D6EB8200BF92E00AA0FA7 /* Debug */,
 				8A7D6EB9200BF92E00AA0FA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Rhino FitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A9C5A7620A6F86A00DEBCC5 /* Debug */,
+				8A9C5A7720A6F86A00DEBCC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
