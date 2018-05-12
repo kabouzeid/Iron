@@ -28,21 +28,24 @@ class TrainingsTableViewController: UITableViewController {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
-        
+
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        setLabels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // TODO: learn how to implement NSFetchedResultsController
         let request: NSFetchRequest<Training> =  Training.fetchRequest()
         request.predicate = NSPredicate(format: "isCurrentTraining != %@", NSNumber(booleanLiteral: true))
         request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
         trainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(request)
         tableView.reloadData()
+
+        updateSummary()
     }
     
-    private func setLabels() {
+    private func updateSummary() {
         let calendar = Calendar(identifier: .iso8601)
         let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date())!
         let fourteenDaysAgo = calendar.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
@@ -144,6 +147,8 @@ class TrainingsTableViewController: UITableViewController {
             trainings!.remove(at: indexPath.row)
             AppDelegate.instance.saveContext()
             tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            updateSummary()
         }
     }
 
