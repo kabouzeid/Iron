@@ -63,10 +63,10 @@ class TrainingsTableViewController: UITableViewController {
         }
         
         let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Float) in
-            return (result.0 + training.duration, result.1 + training.numberOfSets, result.2 + training.totalWeight)
+            return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
         }
         let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Float) in
-            return (result.0 + training.duration, result.1 + training.numberOfSets, result.2 + training.totalWeight)
+            return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
         }
 
         let durationEntry = summaryView.entries[0]

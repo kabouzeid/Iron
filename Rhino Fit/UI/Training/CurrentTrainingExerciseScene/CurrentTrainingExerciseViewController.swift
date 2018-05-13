@@ -18,6 +18,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
             tableView?.reloadData()
             if tableView != nil {
                 selectCurrentSet(animated: true)
+                updateSummary()
             }
         }
     }
@@ -67,6 +68,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
 
         selectCurrentSet(animated: false)
+        updateSummary()
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,7 +78,19 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var repWeightPickerView: RepWeightPickerView!
-    
+    @IBOutlet weak var summaryView: SummaryView!
+
+    private func updateSummary() {
+        let repetitionsEntry = summaryView.entries[0]
+        let weightEntry = summaryView.entries[1]
+
+        repetitionsEntry.title.text = "Repetitions"
+        weightEntry.title.text = "Weight"
+
+        repetitionsEntry.text.text = "\(trainingExercise?.numberOfCompletedRepetitions ?? 0)"
+        weightEntry.text.text = "\((trainingExercise?.totalCompletedWeight ?? 0).clean) kg"
+    }
+
     private func moveExerciseBehindLastCompleted(trainingExercise: TrainingExercise) {
         guard isCurrentTraining else {
            return // only move exercises when in current training
@@ -127,6 +141,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
                 }
             }
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            updateSummary()
         }
         setRepWeightPickerTo(trainingSet: set, animated: animated)
         tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
@@ -255,7 +270,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return isCurrentTraining ? "Now" : nil
+            return nil
         default:
             return dateFormatter.string(from: trainingExerciseHistory![section - 1].training!.start!)
         }
@@ -274,6 +289,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
                 tableView.reloadSections([0], with: .automatic)
             })
             selectCurrentSet(animated: true)
+            updateSummary()
             
             if !wasCompleted && trainingExercise!.isCompleted! {
                 moveExerciseBehindLastCompleted(trainingExercise: trainingExercise!)
@@ -327,6 +343,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            updateSummary()
         }
     }
     
@@ -337,6 +354,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            updateSummary()
         }
     }
     
@@ -354,6 +372,8 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
                 }
                 
                 moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
+
+                updateSummary()
             }
             selectCurrentSet(animated: true)
         } else {

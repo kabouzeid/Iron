@@ -86,6 +86,8 @@ class SummaryEntryView: UIView {
         // constraints
         rootStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         rootStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        rootStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        rootStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
 
         let textStackView = UIStackView()
         textStackView.axis = .vertical

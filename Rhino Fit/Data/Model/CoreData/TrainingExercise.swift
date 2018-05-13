@@ -46,4 +46,20 @@ class TrainingExercise: NSManagedObject {
             return nil
         }
     }
+
+    var numberOfCompletedRepetitions: Int {
+        // TODO: do this with a predicate
+        return trainingSets!.reduce(0, { (count, trainingSet) -> Int in
+            let trainingSet = trainingSet as! TrainingSet
+            return count + (trainingSet.isCompleted ? Int(trainingSet.repetitions) : 0)
+        })
+    }
+
+    var totalCompletedWeight: Float {
+        // TODO: do this with a predicate
+        return trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
+            let trainingSet = trainingSet as! TrainingSet
+            return weight + (trainingSet.isCompleted ? trainingSet.weight * Float(trainingSet.repetitions) : 0)
+        })
+    }
 }

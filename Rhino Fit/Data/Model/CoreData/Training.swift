@@ -73,20 +73,19 @@ class Training: NSManagedObject {
         return (end ?? Date()).timeIntervalSince(start ?? Date())
     }
     
-    var numberOfSets: Int {
+    var numberOfCompletedSets: Int {
+        // TODO: do this with a predicate
         return trainingExercises!.reduce(0, { (count, trainingExercise) -> Int in
             let trainingExercise = trainingExercise as! TrainingExercise
-            return count + trainingExercise.trainingSets!.count
+            return count + (trainingExercise.numberOfCompletedSets ?? 0)
         })
     }
     
-    var totalWeight: Float {
+    var totalCompletedWeight: Float {
+        // TODO: do this with a predicate
         return trainingExercises!.reduce(0, { (weight, trainingExercise) -> Float in
             let trainingExercise = trainingExercise as! TrainingExercise
-            return weight + trainingExercise.trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
-                let trainingSet = trainingSet as! TrainingSet
-                return weight + trainingSet.weight
-            })
+            return weight + trainingExercise.totalCompletedWeight
         })
     }
 }

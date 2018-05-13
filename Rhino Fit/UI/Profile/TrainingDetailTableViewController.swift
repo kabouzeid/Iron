@@ -121,8 +121,8 @@ class TrainingDetailTableViewController: UITableViewController {
         weightEntry.title.text = "Weight"
 
         durationEntry.text.text = training?.duration.stringFormattedWithLetters()
-        setsEntry.text.text = "\(training?.numberOfSets ?? 0)"
-        weightEntry.text.text = "\((training?.totalWeight ?? 0).clean) kg"
+        setsEntry.text.text = "\(training?.numberOfCompletedSets ?? 0)"
+        weightEntry.text.text = "\((training?.totalCompletedWeight ?? 0).clean) kg"
     }
 
     private func durationCellType(at: Int) -> DurationCellType {
