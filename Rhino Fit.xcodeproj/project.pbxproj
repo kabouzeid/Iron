@@ -23,6 +23,7 @@
 		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
 		8A5C08CB205DA06200E78BE7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5C08CD205DA06200E78BE7 /* Profile.storyboard */; };
 		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
+		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */; };
 		8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld */; };
@@ -32,8 +33,8 @@
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */; };
-		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
 		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
+		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
 		8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
@@ -99,6 +100,7 @@
 		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
 		8A5C08CC205DA06200E78BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
+		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rhino Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6E9C200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,10 +114,10 @@
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetTableViewCell.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */,
+				8A70888B20A85C6400EF9ADE /* SummaryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
+				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,

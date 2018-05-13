@@ -14,7 +14,7 @@ class TrainingDetailTableViewController: UITableViewController {
         didSet {
             title = training?.displayTitle
             tableView?.reloadData()
-            if durationLabel != nil && setsLabel != nil && weightLabel != nil {
+            if summaryView != nil {
                 updateSummary()
             }
         }
@@ -72,11 +72,9 @@ class TrainingDetailTableViewController: UITableViewController {
         case start
         case end
     }
-    
-    @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var setsLabel: UILabel!
-    @IBOutlet weak var weightLabel: UILabel!
-    
+
+    @IBOutlet weak var summaryView: SummaryView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,9 +112,17 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     private func updateSummary() {
-        durationLabel.text = training?.duration.stringFormattedWithLetters()
-        setsLabel.text = "\(training?.numberOfSets ?? 0)"
-        weightLabel.text = "\((training?.totalWeight ?? 0).clean) kg"
+        let durationEntry = summaryView.entries[0]
+        let setsEntry = summaryView.entries[1]
+        let weightEntry = summaryView.entries[2]
+
+        durationEntry.title.text = "Duration"
+        setsEntry.title.text = "Sets"
+        weightEntry.title.text = "Weight"
+
+        durationEntry.text.text = training?.duration.stringFormattedWithLetters()
+        setsEntry.text.text = "\(training?.numberOfSets ?? 0)"
+        weightEntry.text.text = "\((training?.totalWeight ?? 0).clean) kg"
     }
 
     private func durationCellType(at: Int) -> DurationCellType {

@@ -15,13 +15,8 @@ class TrainingsTableViewController: UITableViewController {
 
     private let dateFormatter = DateFormatter()
 
-    @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var setsLabel: UILabel!
-    @IBOutlet weak var weightLabel: UILabel!
-    @IBOutlet weak var durationPercentLabel: UILabel!
-    @IBOutlet weak var setsPercentLabel: UILabel!
-    @IBOutlet weak var weightPercentLabel: UILabel!
-    
+    @IBOutlet weak var summaryView: SummaryView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,52 +68,63 @@ class TrainingsTableViewController: UITableViewController {
         let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Float) in
             return (result.0 + training.duration, result.1 + training.numberOfSets, result.2 + training.totalWeight)
         }
-        
-        durationLabel.text = valuesSevenDaysAgo.0.stringFormattedWithLetters()
-        setsLabel.text = "\(valuesSevenDaysAgo.1)"
-        weightLabel.text = "\(valuesSevenDaysAgo.2.clean) kg"
+
+        let durationEntry = summaryView.entries[0]
+        let setsEntry = summaryView.entries[1]
+        let weightEntry = summaryView.entries[2]
+
+        durationEntry.title.text = "Duration\nLast 7 Days"
+        setsEntry.title.text = "Sets\nLast 7 Days"
+        weightEntry.title.text = "Weight\nLast 7 Days"
+
+        durationEntry.text.text = valuesSevenDaysAgo.0.stringFormattedWithLetters()
+        setsEntry.text.text = "\(valuesSevenDaysAgo.1)"
+        weightEntry.text.text = "\(valuesSevenDaysAgo.2.clean) kg"
         
         var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1) * 100)
         durationPercent = abs(durationPercent) < 0.1 ? 0 : durationPercent
         if durationPercent > 0 {
-            durationPercentLabel.textColor = UIColor.appleGreen
-            durationPercentLabel.text = "+"
+            durationEntry.detail.textColor = UIColor.appleGreen
+            durationEntry.detail.text = "+"
         } else if durationPercent < 0 {
-            durationPercentLabel.textColor = UIColor.appleRed
-            durationPercentLabel.text = ""
+            durationEntry.detail.textColor = UIColor.appleRed
+            durationEntry.detail.text = ""
         } else {
-            durationPercentLabel.textColor = UIColor.darkGray
-            durationPercentLabel.text = "+"
+            durationEntry.detail.textColor = UIColor.darkGray
+            durationEntry.detail.text = "+"
         }
-        durationPercentLabel.text! += String(format: "%.1f", durationPercent) + "%"
+        durationEntry.detail.text! += String(format: "%.1f", durationPercent) + "%"
+        durationEntry.detail.isHidden = false
         
         var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1) * 100)
         setsPercent = abs(setsPercent) < 0.1 ? 0 : setsPercent
         if setsPercent > 0 {
-            setsPercentLabel.textColor = UIColor.appleGreen
-            setsPercentLabel.text = "+"
+            setsEntry.detail.textColor = UIColor.appleGreen
+            setsEntry.detail.text = "+"
         } else if setsPercent < 0 {
-            setsPercentLabel.textColor = UIColor.appleRed
-            setsPercentLabel.text = ""
+            setsEntry.detail.textColor = UIColor.appleRed
+            setsEntry.detail.text = ""
         } else {
-            setsPercentLabel.textColor = UIColor.darkGray
-            setsPercentLabel.text = "+"
+            setsEntry.detail.textColor = UIColor.darkGray
+            setsEntry.detail.text = "+"
         }
-        setsPercentLabel.text! += String(format: "%.1f", setsPercent) + "%"
+        setsEntry.detail.text! += String(format: "%.1f", setsPercent) + "%"
+        setsEntry.detail.isHidden = false
         
         var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1) * 100)
         weightPercent = abs(weightPercent) < 0.1 ? 0 : weightPercent
         if weightPercent > 0 {
-            weightPercentLabel.textColor = UIColor.appleGreen
-            weightPercentLabel.text = "+"
+            weightEntry.detail.textColor = UIColor.appleGreen
+            weightEntry.detail.text = "+"
         } else if weightPercent < 0 {
-            weightPercentLabel.textColor = UIColor.appleRed
-            weightPercentLabel.text = ""
+            weightEntry.detail.textColor = UIColor.appleRed
+            weightEntry.detail.text = ""
         } else {
-            weightPercentLabel.textColor = UIColor.darkGray
-            weightPercentLabel.text = "+"
+            weightEntry.detail.textColor = UIColor.darkGray
+            weightEntry.detail.text = "+"
         }
-        weightPercentLabel.text! += String(format: "%.1f", weightPercent) + "%"
+        weightEntry.detail.text! += String(format: "%.1f", weightPercent) + "%"
+        weightEntry.detail.isHidden = false
     }
 
     // MARK: - Table view data source
