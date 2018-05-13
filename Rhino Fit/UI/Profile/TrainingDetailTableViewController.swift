@@ -89,6 +89,8 @@ class TrainingDetailTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: use NSFetchedResultsController
+        tableView.reloadData()
         updateSummary()
     }
     

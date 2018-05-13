@@ -63,8 +63,9 @@ class CurrentTrainingExerciseViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        navigationItem.rightBarButtonItem = editButtonItem
-        
+        navigationItem.rightBarButtonItems?.insert(editButtonItem, at: 0)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
+
         selectCurrentSet(animated: false)
     }
     
@@ -96,35 +97,39 @@ class CurrentTrainingExerciseViewController: UIViewController {
         }
         delegate?.exerciseOrderDidChange()
     }
-    
+
     private func selectCurrentSet(animated: Bool) {
         if let set = currentSet {
-            let row = trainingExercise!.trainingSets!.index(of: set)
-            let indexPath = IndexPath(row: row, section: 0)
-            if set.repetitions == 0 {
-                if row > 0 { // not the first set
-                    let previousSet = trainingExercise!.trainingSets![row - 1] as! TrainingSet
-                    set.repetitions = previousSet.repetitions
-                    set.weight = previousSet.weight
-                } else {
-                    if let mostRecentSet = trainingExerciseHistory!.first?.trainingSets?.firstObject as? TrainingSet {
-                        // use the most recent values if available
-                        set.repetitions = mostRecentSet.repetitions
-                        set.weight = mostRecentSet.weight
-                    } else {
-                        set.repetitions = 1
-                    }
-                }
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-            setRepWeightPickerTo(trainingSet: set, animated: animated)
-            tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
+            select(set: set, animated: animated)
         } else {
             if let selected = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selected, animated: animated)
             }
             setRepWeightPickerTo(trainingSet: nil, animated: animated) // hides the picker
         }
+    }
+
+    private func select(set: TrainingSet, animated: Bool) {
+        let index = trainingExercise!.trainingSets!.index(of: set)
+        let indexPath = IndexPath(row: index, section: 0)
+        if set.repetitions == 0 {
+            if index > 0 { // not the first set
+                let previousSet = trainingExercise!.trainingSets![index - 1] as! TrainingSet
+                set.repetitions = previousSet.repetitions
+                set.weight = previousSet.weight
+            } else {
+                if let mostRecentSet = trainingExerciseHistory!.first?.trainingSets?.firstObject as? TrainingSet {
+                    // use the most recent values if available
+                    set.repetitions = mostRecentSet.repetitions
+                    set.weight = mostRecentSet.weight
+                } else {
+                    set.repetitions = 1
+                }
+            }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        setRepWeightPickerTo(trainingSet: set, animated: animated)
+        tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
     }
     
     private func setRepWeightPickerTo(trainingSet: TrainingSet?, animated: Bool) {
@@ -173,8 +178,13 @@ class CurrentTrainingExerciseViewController: UIViewController {
             
             let indexPath = IndexPath(row: trainingExercise.trainingSets!.count - 1, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
-            selectCurrentSet(animated: true)
-            
+            if isCurrentTraining {
+                selectCurrentSet(animated: true)
+            } else {
+                // this also sets the initial reps and weight
+                select(set: trainingSet, animated: true)
+            }
+
             if wasCompleted {
                 moveExerciseBehindLastCompleted(trainingExercise: trainingExercise)
             }
@@ -191,6 +201,12 @@ class CurrentTrainingExerciseViewController: UIViewController {
     
     private func indexPath(of trainingSet: TrainingSet) -> IndexPath {
         return IndexPath(row: trainingExercise!.trainingSets!.index(of: trainingSet), section: 0)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
+            exerciseDetailViewController.exercise = trainingExercise?.exercise
+        }
     }
 }
 

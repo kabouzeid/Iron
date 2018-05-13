@@ -215,7 +215,7 @@
             </objects>
             <point key="canvasLocation" x="3726" y="-1718"/>
         </scene>
-        <!--Current Training Exercise View Controller-->
+        <!--Title-->
         <scene sceneID="0Jz-eK-cRy">
             <objects>
                 <viewController storyboardIdentifier="TrainingExerciseViewController" id="Jz8-lg-GaJ" customClass="CurrentTrainingExerciseViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
@@ -317,6 +317,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xAb-gW-CMA"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="KdI-Bn-XCh">
+                        <barButtonItem key="rightBarButtonItem" title="Show Exercise" image="info" id="fgH-LU-1Z9">
+                            <connections>
+                                <segue destination="weZ-lz-6Hh" kind="show" id="OV1-iO-oTe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -334,7 +341,7 @@
                 <viewControllerPlaceholder storyboardName="Exercises" referencedIdentifier="ExerciseDetailViewController" id="weZ-lz-6Hh" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Z8-8y-ogT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4602" y="-1718"/>
+            <point key="canvasLocation" x="5518" y="-1660"/>
         </scene>
         <!--TrainingDetailViewController-->
         <scene sceneID="1Q0-XI-A4S">
@@ -381,10 +388,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="info" width="24" height="24"/>
         <image name="training" width="28" height="28"/>
         <image name="training-hero" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="OV1-iO-oTe"/>
         <segue reference="3zb-e6-bqh"/>
     </inferredMetricsTieBreakers>
 </document>
