@@ -255,7 +255,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Now"
+            return isCurrentTraining ? "Now" : nil
         default:
             return dateFormatter.string(from: trainingExerciseHistory![section - 1].training!.start!)
         }
