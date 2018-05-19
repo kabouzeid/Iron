@@ -62,7 +62,7 @@ class Training: NSManagedObject {
                 case 1:
                     return muscleGroups[0].capitalized
                 default:
-                    return "\(muscleGroups[0].capitalized) and \(muscleGroups[1].capitalized)"
+                    return "\(muscleGroups[0].capitalized) & \(muscleGroups[1].capitalized)"
                 }
             }
             return title! // safe
