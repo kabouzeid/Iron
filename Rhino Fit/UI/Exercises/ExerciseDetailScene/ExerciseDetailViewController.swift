@@ -12,95 +12,123 @@ class ExerciseDetailViewController: UITableViewController {
     
     var exercise: Exercise? {
         didSet {
-            if tableView != nil {
-                tableView.reloadData()
-            }
-            self.title = exercise == nil ? nil : exercise!.title
+            updateSectionKeys()
+            tableView?.reloadData()
+            self.title = exercise?.title
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private enum SectionKey {
+        case image
+        case description
+        case muscles
+        case steps
+        case tips
     }
+
+    private var sectionKeys = [SectionKey]()
+
+    private func updateSectionKeys() {
+        sectionKeys.removeAll()
+        if let exercise = exercise {
+            if !exercise.png.isEmpty {
+                sectionKeys.append(.image)
+            }
+            if !exercise.description.isEmpty {
+                sectionKeys.append(.description)
+            }
+            if !(exercise.primaryMuscleCommonName.isEmpty && exercise.secondaryMuscleCommonName.isEmpty) {
+                sectionKeys.append(.muscles)
+            }
+            if !exercise.steps.isEmpty {
+                sectionKeys.append(.steps)
+            }
+            if !exercise.tips.isEmpty {
+                sectionKeys.append(.tips)
+            }
+        }
+    }
+
+    private var cachedImagesExerciseId = -1
+    private var cachedImages = [UIImage]()
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        cachedImagesExerciseId = -1
+        cachedImages.removeAll()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+        if sectionKeys[indexPath.section] == .image {
             return tableView.frame.width * (1/1.61) // golden ratio
         }
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        return UITableViewAutomaticDimension
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return exercise == nil ? 0 : 5
+        return sectionKeys.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let exercise = self.exercise! // should never be nil at this point
-        switch section {
-        case 0:
+        switch sectionKeys[section] {
+        case .image:
             return exercise.png.isEmpty ? 0 : 1
-        case 1:
+        case .description:
             return exercise.description.isEmpty ? 0 : 1
-        case 2:
+        case .muscles:
             return exercise.primaryMuscleCommonName.count + exercise.secondaryMuscleCommonName.count
-        case 3:
+        case .steps:
             return exercise.steps.count
-        case 4:
+        case .tips:
             return exercise.tips.count
-        default:
-            return 0
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.tableView(tableView, numberOfRowsInSection: section) == 0 {
-            return nil
-        }
-        switch section {
-        case 2:
+        switch sectionKeys[section] {
+        case .muscles:
             return "Muscles"
-        case 3:
+        case .steps:
             return "Steps"
-        case 4:
+        case .tips:
             return "Tips"
         default:
             return nil
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exercise = self.exercise! // should never be nil at this point
-        switch indexPath.section {
-        case 0:
+        switch sectionKeys[indexPath.section] {
+        case .image:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ExerciseImageTableViewCell
-            
-            var images = [UIImage]()
-            for png in exercise.png {
-                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
-                if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                    images.append(image)
+
+            if cachedImagesExerciseId != exercise.id {
+                cachedImages.removeAll()
+                for png in exercise.png {
+                    let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
+                    if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                        cachedImages.append(image)
+                    }
                 }
+                cachedImagesExerciseId = exercise.id
             }
-            
-            cell.exerciseImage.animationImages = images
+
+            cell.exerciseImage.animationImages = cachedImages
             cell.exerciseImage.animationDuration = 2.5
             cell.exerciseImage.startAnimating()
-            
+
             return cell
-        case 1:
+        case .description:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
             
             cell.textLabel?.text = exercise.description
             
             return cell
-        case 2:
+        case .muscles:
             let cell = tableView.dequeueReusableCell(withIdentifier: "muscleCell", for: indexPath)
             
             if exercise.primaryMuscleCommonName.count > indexPath.row {
@@ -112,29 +140,18 @@ class ExerciseDetailViewController: UITableViewController {
             }
             
             return cell
-        case 3:
+        case .steps:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
             
             cell.textLabel?.text = exercise.steps[indexPath.row]
             
             return cell
-        case 4:
+        case .tips:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
             
             cell.textLabel?.text = exercise.tips[indexPath.row]
 
             return cell
-        default:
-            return UITableViewCell() // should never happen
         }
     }
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
 }
