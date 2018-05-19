@@ -99,6 +99,7 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
         } else if let trainingDetailViewController = segue.destination as? TrainingDetailTableViewController,
             let training = (viewControllers?[0] as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
             trainingDetailViewController.training = training
+            trainingDetailViewController.alwaysShowTitleEditing = true
             trainingDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishTraining))
         }
     }

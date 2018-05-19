@@ -25,6 +25,21 @@ class TrainingDetailTableViewController: UITableViewController {
             self.navigationItem.rightBarButtonItem = isEditable ? self.editButtonItem : nil
         }
     }
+    var alwaysShowTitleEditing = false {
+        didSet {
+            if alwaysShowTitleEditing {
+                if !sectionKeys.contains(.exerciseTitle) {
+                    sectionKeys.insert(.exerciseTitle, at: 0)
+                    tableView?.insertSections([0], with: .none)
+                }
+            } else {
+                if let index = sectionKeys.index(of: .exerciseTitle) {
+                    sectionKeys.remove(at: index)
+                    tableView?.deleteSections([index], with: .none)
+                }
+            }
+        }
+    }
     
     private var sectionKeys = [SectionKey.exercises]
     private enum SectionKey {
@@ -112,7 +127,7 @@ class TrainingDetailTableViewController: UITableViewController {
                     }
                 }
             } else {
-                if let index = sectionKeys.index(of: .exerciseTitle) {
+                if !alwaysShowTitleEditing, let index = sectionKeys.index(of: .exerciseTitle) {
                     sectionKeys.remove(at: index)
                     tableView.deleteSections([index], with: .automatic)
                 }
@@ -299,7 +314,7 @@ class TrainingDetailTableViewController: UITableViewController {
         }
     }
     
-    var notReallyInEditingMode = false // a small hack necessary because when swiping to delete, setEditing() is called
+    private var notReallyInEditingMode = false // a small hack necessary because when swiping to delete, setEditing() is called
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         notReallyInEditingMode = true
         super.tableView(tableView, willBeginEditingRowAt: indexPath)
