@@ -26,7 +26,12 @@ class TrainingDetailTableViewController: UITableViewController {
         }
     }
     
-    private var sectionKeys = ["exercises"]
+    private var sectionKeys = [SectionKey.exercises]
+    private enum SectionKey {
+        case exerciseTitle
+        case duration
+        case exercises
+    }
     private let dateFormatter = DateFormatter()
     private var previousSelectedDate = SelectedDate.none
     private var selectedDate = SelectedDate.none {
@@ -34,7 +39,7 @@ class TrainingDetailTableViewController: UITableViewController {
             previousSelectedDate = selectedDate
         }
         didSet {
-            if let index = sectionKeys.index(of: "duration") {
+            if let index = sectionKeys.index(of: .duration) {
                 if previousSelectedDate != selectedDate {
 
                     tableView.performBatchUpdates({
@@ -81,7 +86,7 @@ class TrainingDetailTableViewController: UITableViewController {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
-        
+
         tableView.allowsSelectionDuringEditing = true
     }
 
@@ -96,12 +101,22 @@ class TrainingDetailTableViewController: UITableViewController {
         super.setEditing(editing, animated: animated)
         if isEditable {
             if editing {
-                if !notReallyInEditingMode && !sectionKeys.contains("duration") {
-                    sectionKeys.insert("duration", at: 0)
-                    tableView.insertSections([0], with: .automatic)
+                if !notReallyInEditingMode {
+                    if !sectionKeys.contains(.duration) {
+                        sectionKeys.insert(.duration, at: 0)
+                        tableView.insertSections([0], with: .automatic)
+                    }
+                    if !sectionKeys.contains(.exerciseTitle) {
+                        sectionKeys.insert(.exerciseTitle, at: 0)
+                        tableView.insertSections([0], with: .automatic)
+                    }
                 }
             } else {
-                if let index = sectionKeys.index(of: "duration") {
+                if let index = sectionKeys.index(of: .exerciseTitle) {
+                    sectionKeys.remove(at: index)
+                    tableView.deleteSections([index], with: .automatic)
+                }
+                if let index = sectionKeys.index(of: .duration) {
                     sectionKeys.remove(at: index)
                     tableView.deleteSections([index], with: .automatic)
                 }
@@ -165,18 +180,23 @@ class TrainingDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch sectionKeys[section] {
-        case "duration":
+        case .exerciseTitle:
+            return 1
+        case .duration:
             return selectedDate == .none ? 2 : 3
-        case "exercises":
+        case .exercises:
             return training?.trainingExercises!.count ?? 0
-        default:
-            fatalError("No section key for section \(section).")
         }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sectionKeys[indexPath.section] {
-        case "duration":
+        case .exerciseTitle:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "exercise title cell", for: indexPath) as! TitleTableViewCell
+            cell.delegate = self
+            cell.titleTextField.text = training?.title
+            return cell
+        case .duration:
             switch durationCellType(at: indexPath.row) {
             case .datePicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "date picker cell", for: indexPath) as! DatePickerTableViewCell
@@ -198,31 +218,29 @@ class TrainingDetailTableViewController: UITableViewController {
                 cell.detailTextLabel?.textColor = selectedDate == .start && indexPath.row == 0 || selectedDate == .end && indexPath.row == 1 ? cell.detailTextLabel?.tintColor : UIColor.black
                 return cell
             }
-        case "exercises":
+        case .exercises:
             let cell = tableView.dequeueReusableCell(withIdentifier: "exercise cell", for: indexPath)
             cell.accessoryType = isEditable ? .disclosureIndicator : .none
-            
+
             let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
             cell.textLabel?.text = trainingExercise.exercise?.title
             let setTitles = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle }
             cell.detailTextLabel?.text = setTitles.joined(separator: "\n")
-            
+
             return cell
-        default:
-            fatalError("No section key for section \(indexPath.section).")
         }
 
     }
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return isEditable && sectionKeys[indexPath.section] == "exercises"
+        return isEditable && sectionKeys[indexPath.section] == .exercises
     }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if sectionKeys[indexPath.section] == "exercises" {
+        if editingStyle == .delete { // should always be the case
+            if sectionKeys[indexPath.section] == .exercises{
                 let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
                 training!.removeFromTrainingExercises(trainingExercise)
                 trainingExercise.managedObjectContext?.delete(trainingExercise)
@@ -235,19 +253,23 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        if sectionKeys[indexPath.section] == "duration" {
+        switch sectionKeys[indexPath.section] {
+        case .exerciseTitle:
+            return false
+        case .duration:
             switch durationCellType(at: indexPath.row) {
             case .datePicker:
                 return false
             case .start, .end:
                 return isEditable
             }
+        case .exercises:
+            return isEditable && !isEditing
         }
-        return isEditable && !isEditing
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if sectionKeys[indexPath.section] == "duration" {
+        if sectionKeys[indexPath.section] == .duration{
             switch durationCellType(at: indexPath.row) {
             case .datePicker:
                 // do nothing
@@ -261,6 +283,14 @@ class TrainingDetailTableViewController: UITableViewController {
             }
         }
     }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if sectionKeys[indexPath.section] == .exerciseTitle {
+            return 44 // exercise title wouldn't have standard height otherwise
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let currentTrainingExerciseViewController = segue.destination as? CurrentTrainingExerciseViewController,
@@ -269,7 +299,7 @@ class TrainingDetailTableViewController: UITableViewController {
         }
     }
     
-    var notReallyInEditingMode = false // a small hack necessary because when swiping to delete setEditing() is called
+    var notReallyInEditingMode = false // a small hack necessary because when swiping to delete, setEditing() is called
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         notReallyInEditingMode = true
         super.tableView(tableView, willBeginEditingRowAt: indexPath)
@@ -282,18 +312,25 @@ extension TrainingDetailTableViewController: DatePickerTableViewCellDelegate {
         case .start:
             if date <= training!.end! { // should not be necessary, but just to be safe
                 training!.start = date
-                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.index(of: "duration")!)], with: .automatic)
+                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.index(of: .duration)!)], with: .automatic)
                 updateSummary()
             }
         case .end:
             if date >= training!.start! { // should not be necessary, but just to be safe
                 training!.end = date
-                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.index(of: "duration")!)], with: .automatic)
+                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.index(of: .duration)!)], with: .automatic)
                 updateSummary()
             }
         default:
             print("date changed called, but no date selected") // should never happen
             return
         }
+    }
+}
+
+extension TrainingDetailTableViewController: TitleTableViewCellDelegate {
+    func titleChanged(title: String?) {
+        training?.title = title
+        self.title = training?.displayTitle
     }
 }

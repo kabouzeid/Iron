@@ -32,6 +32,7 @@
 		8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */; };
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
+		8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */; };
 		8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */; };
 		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
@@ -113,6 +114,7 @@
 		8A7D6EB1200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
+		8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +364,7 @@
 				8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */,
 				8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */,
 				8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */,
+				8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */,
 				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
+				8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */,
