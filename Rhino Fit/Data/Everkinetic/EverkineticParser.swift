@@ -13,22 +13,22 @@ struct EverkineticParser {
     
     static func parse(jsonString: String) -> [Exercise] {
         let json = JSON(parseJSON: jsonString)
-        var exercises: [Exercise] = []
+        var exercises = [Exercise]()
         
         for i in 0 ..< json.count {
             let exerciseJson = json[i]
-            
-            let id = Int(exerciseJson["id"].string!)!
-            let title = exerciseJson["title"].string!
-            let description = exerciseJson["primer"].string!
-            let type = exerciseJson["type"].string!
-            let primaryMuscle = exerciseJson["primary"].arrayValue.map { $0.string! }
-            let secondaryMuscle = exerciseJson["secondary"].arrayValue.map { $0.string! }
-            let equipment = exerciseJson["equipment"].arrayValue.map { $0.string! }
-            let steps = exerciseJson["steps"].arrayValue.map { $0.string! }
-            let tips = exerciseJson["tips"].arrayValue.map { $0.string! }
-            let references = exerciseJson["references"].arrayValue.map { $0.string! }
-            let png = exerciseJson["png"].arrayValue.map { $0.string! }
+
+            let id = Int(exerciseJson["id"].stringValue)!
+            let title = exerciseJson["title"].stringValue
+            let description = exerciseJson["primer"].stringValue
+            let type = exerciseJson["type"].stringValue
+            let primaryMuscle = exerciseJson["primary"].arrayValue.map { $0.stringValue }
+            let secondaryMuscle = exerciseJson["secondary"].arrayValue.map { $0.stringValue }
+            let equipment = exerciseJson["equipment"].arrayValue.map { $0.stringValue }
+            let steps = exerciseJson["steps"].arrayValue.map { $0.stringValue }
+            let tips = exerciseJson["tips"].arrayValue.map { $0.stringValue }
+            let references = exerciseJson["references"].arrayValue.map { $0.stringValue }
+            let png = exerciseJson["png"].arrayValue.map { $0.stringValue }
             
             let exercise = Exercise(id: id, title: title, description: description, type: type, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: equipment, steps: steps, tips: tips, references: references, png: png)
             

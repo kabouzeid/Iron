@@ -32,7 +32,7 @@ class EverkineticDataProvider {
     }
 
     static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {
-        var groups: [[Exercise]] = []
+        var groups = [[Exercise]]()
         var nextIndex = 0
         let exercises = exercises.sorted { (a, b) -> Bool in
             a.muscleGroup < b.muscleGroup
