@@ -24,6 +24,7 @@ class ExerciseDetailViewController: UITableViewController {
         case muscles
         case steps
         case tips
+        case references
     }
 
     private var sectionKeys = [SectionKey]()
@@ -45,6 +46,9 @@ class ExerciseDetailViewController: UITableViewController {
             }
             if !exercise.tips.isEmpty {
                 sectionKeys.append(.tips)
+            }
+            if !exercise.references.isEmpty {
+                sectionKeys.append(.references)
             }
         }
     }
@@ -84,6 +88,8 @@ class ExerciseDetailViewController: UITableViewController {
             return exercise.steps.count
         case .tips:
             return exercise.tips.count
+        case .references:
+            return exercise.references.count
         }
     }
     
@@ -95,6 +101,8 @@ class ExerciseDetailViewController: UITableViewController {
             return "Steps"
         case .tips:
             return "Tips"
+        case .references:
+            return "References"
         default:
             return nil
         }
@@ -104,7 +112,7 @@ class ExerciseDetailViewController: UITableViewController {
         let exercise = self.exercise! // should never be nil at this point
         switch sectionKeys[indexPath.section] {
         case .image:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ExerciseImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "image cell", for: indexPath) as! ExerciseImageTableViewCell
 
             if cachedImagesExerciseId != exercise.id {
                 cachedImages.removeAll()
@@ -123,13 +131,11 @@ class ExerciseDetailViewController: UITableViewController {
 
             return cell
         case .description:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "text cell", for: indexPath)
             cell.textLabel?.text = exercise.description
-            
             return cell
         case .muscles:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "muscleCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "muscle cell", for: indexPath)
             
             if exercise.primaryMuscleCommonName.count > indexPath.row {
                 cell.textLabel?.text = "Primary"
@@ -141,17 +147,28 @@ class ExerciseDetailViewController: UITableViewController {
             
             return cell
         case .steps:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "text cell", for: indexPath)
             cell.textLabel?.text = exercise.steps[indexPath.row]
-            
             return cell
         case .tips:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "text cell", for: indexPath)
             cell.textLabel?.text = exercise.tips[indexPath.row]
-
             return cell
+        case .references:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "link cell", for: indexPath)
+            cell.textLabel?.text = exercise.references[indexPath.row]
+            return cell
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if sectionKeys[indexPath.section] == .references,
+            let url = URL(string: exercise!.references[indexPath.row]) {
+            UIApplication.shared.open(url)
+            // somehow the cell doesn't get deselected automatically
+            if let indexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
         }
     }
 }
