@@ -64,7 +64,7 @@ class ExerciseDetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if sectionKeys[indexPath.section] == .image {
-            return tableView.frame.width * (1/1.61) // golden ratio
+            return tableView.frame.width * (1/1.61) * 1.5 // golden ratio * 1.5
         }
         return UITableViewAutomaticDimension
     }
