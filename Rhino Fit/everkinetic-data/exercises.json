@@ -22,9 +22,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0001-relaxation.svg",
-            "svg/0001-tension.svg"
+        "pdf": [
+            "pdf/0001-relaxation.pdf",
+            "pdf/0001-tension.pdf"
         ],
         "png": [
             "png/0001-relaxation.png",
@@ -54,9 +54,9 @@
             "Make sure you maintain your chin at a 90 degree angle to your neck"
         ],
         "references": [],
-        "svg": [
-            "svg/0002-relaxation.svg",
-            "svg/0002-tension.svg"
+        "pdf": [
+            "pdf/0002-relaxation.pdf",
+            "pdf/0002-tension.pdf"
         ],
         "png": [
             "png/0002-relaxation.png",
@@ -87,7 +87,7 @@
             "Ensure that the seat and bar have been adjusted for optimal posture."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -117,9 +117,9 @@
             "This exercise can also be performed with the bar in the starting position behind your head."
         ],
         "references": [],
-        "svg": [
-            "svg/0004-relaxation.svg",
-            "svg/0004-tension.svg"
+        "pdf": [
+            "pdf/0004-relaxation.pdf",
+            "pdf/0004-tension.pdf"
         ],
         "png": [
             "png/0004-relaxation.png",
@@ -150,9 +150,9 @@
             "Do not do this exercise if you are experiencing any shoulder or neck pain."
         ],
         "references": [],
-        "svg": [
-            "svg/0005-relaxation.svg",
-            "svg/0005-tension.svg"
+        "pdf": [
+            "pdf/0005-relaxation.pdf",
+            "pdf/0005-tension.pdf"
         ],
         "png": [
             "png/0005-relaxation.png",
@@ -187,13 +187,13 @@
             "Do not perform this exercise if you have shoulder pain."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
         "id": "0007",
         "name": "front-barbell-raises",
-        "title": "Front Barbell Raises",
+        "title": "Front Raises: Barbell",
         "primer": "An exercise for shoulder, chest and forearm strengthening.",
         "type": "isolation",
         "primary": [
@@ -217,13 +217,13 @@
             "Do not perform this exercise if you have shoulder pain."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
         "id": "0008",
         "name": "front-cable-raises",
-        "title": "Front Cable Raises",
+        "title": "Front Raises: Cable",
         "primer": "An exercise for shoulders, chest and forearm strengthening.",
         "type": "isolation",
         "primary": [
@@ -249,9 +249,9 @@
             "Do not perform this exercise if you have shoulder pain."
         ],
         "references": [],
-        "svg": [
-            "svg/0008-relaxation.svg",
-            "svg/0008-tension.svg"
+        "pdf": [
+            "pdf/0008-relaxation.pdf",
+            "pdf/0008-tension.pdf"
         ],
         "png": [
             "png/0008-relaxation.png",
@@ -284,9 +284,9 @@
             "Bend your knees slightly when standing."
         ],
         "references": [],
-        "svg": [
-            "svg/0009-relaxation.svg",
-            "svg/0009-tension.svg"
+        "pdf": [
+            "pdf/0009-relaxation.pdf",
+            "pdf/0009-tension.pdf"
         ],
         "png": [
             "png/0009-relaxation.png",
@@ -321,7 +321,7 @@
             "Do not perform this exercise if you have any shoulder, elbow or wrist pain."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -350,7 +350,7 @@
             "Do not perform this exercise if you have shoulder, elbow or wrist pain."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -379,7 +379,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -409,9 +409,9 @@
             "Ensure you do not arch your back when pulling the bar up towards your chin."
         ],
         "references": [],
-        "svg": [
-            "svg/0013-relaxation.svg",
-            "svg/0013-tension.svg"
+        "pdf": [
+            "pdf/0013-relaxation.pdf",
+            "pdf/0013-tension.pdf"
         ],
         "png": [
             "png/0013-relaxation.png",
@@ -446,9 +446,9 @@
             "Do not arch your back when raising the barbell towards your chin."
         ],
         "references": [],
-        "svg": [
-            "svg/0014-relaxation.svg",
-            "svg/0014-tension.svg"
+        "pdf": [
+            "pdf/0014-relaxation.pdf",
+            "pdf/0014-tension.pdf"
         ],
         "png": [
             "png/0014-relaxation.png",
@@ -483,9 +483,9 @@
             "Do not arch your back when raising the bar to your shoulders."
         ],
         "references": [],
-        "svg": [
-            "svg/0015-relaxation.svg",
-            "svg/0015-tension.svg"
+        "pdf": [
+            "pdf/0015-relaxation.pdf",
+            "pdf/0015-tension.pdf"
         ],
         "png": [
             "png/0015-relaxation.png",
@@ -522,9 +522,9 @@
             "Do not perform this exercise if you have wrist, shoulder or elbow pain."
         ],
         "references": [],
-        "svg": [
-            "svg/0016-relaxation.svg",
-            "svg/0016-tension.svg"
+        "pdf": [
+            "pdf/0016-relaxation.pdf",
+            "pdf/0016-tension.pdf"
         ],
         "png": [
             "png/0016-relaxation.png",
@@ -560,9 +560,9 @@
             "Ensure your back remains straight throughout this exercise in order to prevent injury."
         ],
         "references": [],
-        "svg": [
-            "svg/0017-relaxation.svg",
-            "svg/0017-tension.svg"
+        "pdf": [
+            "pdf/0017-relaxation.pdf",
+            "pdf/0017-tension.pdf"
         ],
         "png": [
             "png/0017-relaxation.png",
@@ -596,9 +596,9 @@
             "Maintain a good upright posture ensuring no arching in the back in order to prevent injuries."
         ],
         "references": [],
-        "svg": [
-            "svg/0018-relaxation.svg",
-            "svg/0018-tension.svg"
+        "pdf": [
+            "pdf/0018-relaxation.pdf",
+            "pdf/0018-tension.pdf"
         ],
         "png": [
             "png/0018-relaxation.png",
@@ -633,9 +633,9 @@
             "Ensure the swiss ball is inflated enough to allow for smooth rhythmical circles."
         ],
         "references": [],
-        "svg": [
-            "svg/0019-relaxation.svg",
-            "svg/0019-tension.svg"
+        "pdf": [
+            "pdf/0019-relaxation.pdf",
+            "pdf/0019-tension.pdf"
         ],
         "png": [
             "png/0019-relaxation.png",
@@ -670,9 +670,9 @@
             "Maintain a good upright posture at all times during this exercise ensuring you do not arch your back."
         ],
         "references": [],
-        "svg": [
-            "svg/0020-relaxation.svg",
-            "svg/0020-tension.svg"
+        "pdf": [
+            "pdf/0020-relaxation.pdf",
+            "pdf/0020-tension.pdf"
         ],
         "png": [
             "png/0020-relaxation.png",
@@ -705,9 +705,9 @@
             "Ensure your back stays in contact with the bench at all times during this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0021-relaxation.svg",
-            "svg/0021-tension.svg"
+        "pdf": [
+            "pdf/0021-relaxation.pdf",
+            "pdf/0021-tension.pdf"
         ],
         "png": [
             "png/0021-relaxation.png",
@@ -744,9 +744,9 @@
             "Ensure you back is straight and that you maintain a good posture throughout this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0022-relaxation.svg",
-            "svg/0022-tension.svg"
+        "pdf": [
+            "pdf/0022-relaxation.pdf",
+            "pdf/0022-tension.pdf"
         ],
         "png": [
             "png/0022-relaxation.png",
@@ -777,9 +777,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0023-relaxation.svg",
-            "svg/0023-tension.svg"
+        "pdf": [
+            "pdf/0023-relaxation.pdf",
+            "pdf/0023-tension.pdf"
         ],
         "png": [
             "png/0023-relaxation.png",
@@ -815,9 +815,9 @@
             "maintain a good posture at all times throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0024-relaxation.svg",
-            "svg/0024-tension.svg"
+        "pdf": [
+            "pdf/0024-relaxation.pdf",
+            "pdf/0024-tension.pdf"
         ],
         "png": [
             "png/0024-relaxation.png",
@@ -851,9 +851,9 @@
             "Ensure that your back is straight at all times and do not lock your knees when rowing back."
         ],
         "references": [],
-        "svg": [
-            "svg/0025-relaxation.svg",
-            "svg/0025-tension.svg"
+        "pdf": [
+            "pdf/0025-relaxation.pdf",
+            "pdf/0025-tension.pdf"
         ],
         "png": [
             "png/0025-relaxation.png",
@@ -886,9 +886,9 @@
             "Ensure that the weight of the barbell is evenly distributed through both hands."
         ],
         "references": [],
-        "svg": [
-            "svg/0026-relaxation.svg",
-            "svg/0026-tension.svg"
+        "pdf": [
+            "pdf/0026-relaxation.pdf",
+            "pdf/0026-tension.pdf"
         ],
         "png": [
             "png/0026-relaxation.png",
@@ -921,9 +921,9 @@
             "For this exercise to be maximally effective your back should not move at all through out the contraction and relaxation."
         ],
         "references": [],
-        "svg": [
-            "svg/0027-relaxation.svg",
-            "svg/0027-tension.svg"
+        "pdf": [
+            "pdf/0027-relaxation.pdf",
+            "pdf/0027-tension.pdf"
         ],
         "png": [
             "png/0027-relaxation.png",
@@ -955,9 +955,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0028-relaxation.svg",
-            "svg/0028-tension.svg"
+        "pdf": [
+            "pdf/0028-relaxation.pdf",
+            "pdf/0028-tension.pdf"
         ],
         "png": [
             "png/0028-relaxation.png",
@@ -992,9 +992,9 @@
             "Keep your elbows close to your body throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0029-relaxation.svg",
-            "svg/0029-tension.svg"
+        "pdf": [
+            "pdf/0029-relaxation.pdf",
+            "pdf/0029-tension.pdf"
         ],
         "png": [
             "png/0029-relaxation.png",
@@ -1026,9 +1026,9 @@
             "Do not arch your back at all during the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0030-relaxation.svg",
-            "svg/0030-tension.svg"
+        "pdf": [
+            "pdf/0030-relaxation.pdf",
+            "pdf/0030-tension.pdf"
         ],
         "png": [
             "png/0030-relaxation.png",
@@ -1056,9 +1056,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0031-relaxation.svg",
-            "svg/0031-tension.svg"
+        "pdf": [
+            "pdf/0031-relaxation.pdf",
+            "pdf/0031-tension.pdf"
         ],
         "png": [
             "png/0031-relaxation.png",
@@ -1089,9 +1089,9 @@
             "ensure your back is straight and parallel to the floor throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0032-relaxation.svg",
-            "svg/0032-tension.svg"
+        "pdf": [
+            "pdf/0032-relaxation.pdf",
+            "pdf/0032-tension.pdf"
         ],
         "png": [
             "png/0032-relaxation.png",
@@ -1100,8 +1100,8 @@
     },
     {
         "id": "0033",
-        "name": "front-dumbbell-raise",
-        "title": "Front Dumbbell Raise",
+        "name": "front-dumbbell-raises",
+        "title": "Front Raises: Dumbbell",
         "primer": "This is an exercise for shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1114,14 +1114,13 @@
         "steps": [
             "Stand with a dumbbell in each hand with an overhand grip, your feet shoulder width apart and your abs drawn in.",
             "Keeping each arm straight raise your left arm to just above shoulder height.",
-            "Pause for a moment then in a controlled motion lower the weight to starting position and repeat with your right arm.",
-            "<h3></h3>"
+            "Pause for a moment then in a controlled motion lower the weight to starting position and repeat with your right arm."
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0033-relaxation.svg",
-            "svg/0033-tension.svg"
+        "pdf": [
+            "pdf/0033-relaxation.pdf",
+            "pdf/0033-tension.pdf"
         ],
         "png": [
             "png/0033-relaxation.png",
@@ -1154,9 +1153,9 @@
             "Ensure your back is straight throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0034-relaxation.svg",
-            "svg/0034-tension.svg"
+        "pdf": [
+            "pdf/0034-relaxation.pdf",
+            "pdf/0034-tension.pdf"
         ],
         "png": [
             "png/0034-relaxation.png",
@@ -1185,9 +1184,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0035-relaxation.svg",
-            "svg/0035-tension.svg"
+        "pdf": [
+            "pdf/0035-relaxation.pdf",
+            "pdf/0035-tension.pdf"
         ],
         "png": [
             "png/0035-relaxation.png",
@@ -1220,9 +1219,9 @@
             "Ensure your back is straight throughout this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0037-relaxation.svg",
-            "svg/0037-tension.svg"
+        "pdf": [
+            "pdf/0037-relaxation.pdf",
+            "pdf/0037-tension.pdf"
         ],
         "png": [
             "png/0037-relaxation.png",
@@ -1254,9 +1253,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0038-relaxation.svg",
-            "svg/0038-tension.svg"
+        "pdf": [
+            "pdf/0038-relaxation.pdf",
+            "pdf/0038-tension.pdf"
         ],
         "png": [
             "png/0038-relaxation.png",
@@ -1287,9 +1286,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0039-relaxation.svg",
-            "svg/0039-tension.svg"
+        "pdf": [
+            "pdf/0039-relaxation.pdf",
+            "pdf/0039-tension.pdf"
         ],
         "png": [
             "png/0039-relaxation.png",
@@ -1320,7 +1319,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -1345,9 +1344,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0041-relaxation.svg",
-            "svg/0041-tension.svg"
+        "pdf": [
+            "pdf/0041-relaxation.pdf",
+            "pdf/0041-tension.pdf"
         ],
         "png": [
             "png/0041-relaxation.png",
@@ -1358,14 +1357,14 @@
         "id": "0042",
         "name": "bench-press",
         "title": "Bench Press: Barbell",
-        "primer": "This is an exercise for the chest.",
+        "primer": "This is one of the best exercises for the chest.",
         "type": "compound",
         "primary": [
             "pectoralis major"
         ],
         "secondary": [
             "triceps brachii",
-            "deltoideus (clavicula)"
+            "deltoid"
         ],
         "equipment": [
             "bench",
@@ -1383,9 +1382,9 @@
         "references": [
             "https://youtu.be/LnhpKTXeIeg"
         ],
-        "svg": [
-            "svg/0042-relaxation.svg",
-            "svg/0042-tension.svg"
+        "pdf": [
+            "pdf/0042-relaxation.pdf",
+            "pdf/0042-tension.pdf"
         ],
         "png": [
             "png/0042-relaxation.png",
@@ -1420,9 +1419,9 @@
             "Do not bounce the bar off your chest always maintain a controlled motion."
         ],
         "references": [],
-        "svg": [
-            "svg/0043-relaxation.svg",
-            "svg/0043-tension.svg"
+        "pdf": [
+            "pdf/0043-relaxation.pdf",
+            "pdf/0043-tension.pdf"
         ],
         "png": [
             "png/0043-relaxation.png",
@@ -1454,9 +1453,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0044-relaxation.svg",
-            "svg/0044-tension.svg"
+        "pdf": [
+            "pdf/0044-relaxation.pdf",
+            "pdf/0044-tension.pdf"
         ],
         "png": [
             "png/0044-relaxation.png",
@@ -1490,9 +1489,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0045-relaxation.svg",
-            "svg/0045-tension.svg"
+        "pdf": [
+            "pdf/0045-relaxation.pdf",
+            "pdf/0045-tension.pdf"
         ],
         "png": [
             "png/0045-relaxation.png",
@@ -1526,9 +1525,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0046-relaxation.svg",
-            "svg/0046-tension.svg"
+        "pdf": [
+            "pdf/0046-relaxation.pdf",
+            "pdf/0046-tension.pdf"
         ],
         "png": [
             "png/0046-relaxation.png",
@@ -1558,7 +1557,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -1585,9 +1584,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0048-relaxation.svg",
-            "svg/0048-tension.svg"
+        "pdf": [
+            "pdf/0048-relaxation.pdf",
+            "pdf/0048-tension.pdf"
         ],
         "png": [
             "png/0048-relaxation.png",
@@ -1620,9 +1619,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0049-relaxation.svg",
-            "svg/0049-tension.svg"
+        "pdf": [
+            "pdf/0049-relaxation.pdf",
+            "pdf/0049-tension.pdf"
         ],
         "png": [
             "png/0049-relaxation.png",
@@ -1657,9 +1656,9 @@
             "Keep your arms straight with a slight bend in your elbows throughout this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0050-relaxation.svg",
-            "svg/0050-tension.svg"
+        "pdf": [
+            "pdf/0050-relaxation.pdf",
+            "pdf/0050-tension.pdf"
         ],
         "png": [
             "png/0050-relaxation.png",
@@ -1693,9 +1692,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0051-relaxation.svg",
-            "svg/0051-tension.svg"
+        "pdf": [
+            "pdf/0051-relaxation.pdf",
+            "pdf/0051-tension.pdf"
         ],
         "png": [
             "png/0051-relaxation.png",
@@ -1727,9 +1726,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0052-relaxation.svg",
-            "svg/0052-tension.svg"
+        "pdf": [
+            "pdf/0052-relaxation.pdf",
+            "pdf/0052-tension.pdf"
         ],
         "png": [
             "png/0052-relaxation.png",
@@ -1761,9 +1760,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0053-relaxation.svg",
-            "svg/0053-tension.svg"
+        "pdf": [
+            "pdf/0053-relaxation.pdf",
+            "pdf/0053-tension.pdf"
         ],
         "png": [
             "png/0053-relaxation.png",
@@ -1798,9 +1797,9 @@
             "Ensure not to lock your elbows once you have raised yourself up."
         ],
         "references": [],
-        "svg": [
-            "svg/0054-relaxation.svg",
-            "svg/0054-tension.svg"
+        "pdf": [
+            "pdf/0054-relaxation.pdf",
+            "pdf/0054-tension.pdf"
         ],
         "png": [
             "png/0054-relaxation.png",
@@ -1836,9 +1835,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0055-relaxation.svg",
-            "svg/0055-tension.svg"
+        "pdf": [
+            "pdf/0055-relaxation.pdf",
+            "pdf/0055-tension.pdf"
         ],
         "png": [
             "png/0055-relaxation.png",
@@ -1873,9 +1872,9 @@
             "Ensure your back and hips remain in contact with the bench at all times during this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0056-relaxation.svg",
-            "svg/0056-tension.svg"
+        "pdf": [
+            "pdf/0056-relaxation.pdf",
+            "pdf/0056-tension.pdf"
         ],
         "png": [
             "png/0056-relaxation.png",
@@ -1909,9 +1908,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0057-relaxation.svg",
-            "svg/0057-tension.svg"
+        "pdf": [
+            "pdf/0057-relaxation.pdf",
+            "pdf/0057-tension.pdf"
         ],
         "png": [
             "png/0057-relaxation.png",
@@ -1943,9 +1942,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0058-relaxation.svg",
-            "svg/0058-tension.svg"
+        "pdf": [
+            "pdf/0058-relaxation.pdf",
+            "pdf/0058-tension.pdf"
         ],
         "png": [
             "png/0058-relaxation.png",
@@ -1978,9 +1977,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0059-relaxation.svg",
-            "svg/0059-tension.svg"
+        "pdf": [
+            "pdf/0059-relaxation.pdf",
+            "pdf/0059-tension.pdf"
         ],
         "png": [
             "png/0059-relaxation.png",
@@ -2013,9 +2012,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0060-relaxation.svg",
-            "svg/0060-tension.svg"
+        "pdf": [
+            "pdf/0060-relaxation.pdf",
+            "pdf/0060-tension.pdf"
         ],
         "png": [
             "png/0060-relaxation.png",
@@ -2048,9 +2047,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0061-relaxation.svg",
-            "svg/0061-tension.svg"
+        "pdf": [
+            "pdf/0061-relaxation.pdf",
+            "pdf/0061-tension.pdf"
         ],
         "png": [
             "png/0061-relaxation.png",
@@ -2083,9 +2082,9 @@
             "Ensure your hips and back remain in contact with the bench throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0062-relaxation.svg",
-            "svg/0062-tension.svg"
+        "pdf": [
+            "pdf/0062-relaxation.pdf",
+            "pdf/0062-tension.pdf"
         ],
         "png": [
             "png/0062-relaxation.png",
@@ -2119,9 +2118,9 @@
             "Ensure your hips and back remain in contact with the bench at all times throughout the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0063-relaxation.svg",
-            "svg/0063-tension.svg"
+        "pdf": [
+            "pdf/0063-relaxation.pdf",
+            "pdf/0063-tension.pdf"
         ],
         "png": [
             "png/0063-relaxation.png",
@@ -2152,9 +2151,9 @@
             "Ensure your back and hips remain in contact with the bench at all times."
         ],
         "references": [],
-        "svg": [
-            "svg/0064-relaxation.svg",
-            "svg/0064-tension.svg"
+        "pdf": [
+            "pdf/0064-relaxation.pdf",
+            "pdf/0064-tension.pdf"
         ],
         "png": [
             "png/0064-relaxation.png",
@@ -2185,9 +2184,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0066-relaxation.svg",
-            "svg/0066-tension.svg"
+        "pdf": [
+            "pdf/0066-relaxation.pdf",
+            "pdf/0066-tension.pdf"
         ],
         "png": [
             "png/0066-relaxation.png",
@@ -2222,9 +2221,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0067-relaxation.svg",
-            "svg/0067-tension.svg"
+        "pdf": [
+            "pdf/0067-relaxation.pdf",
+            "pdf/0067-tension.pdf"
         ],
         "png": [
             "png/0067-relaxation.png",
@@ -2261,9 +2260,9 @@
             "Start with a lighter weight in order to perfect the exercise technique and then when progressing onto a heavier weight you should be spotted to ensure safety and injury prevention."
         ],
         "references": [],
-        "svg": [
-            "svg/0068-relaxation.svg",
-            "svg/0068-tension.svg"
+        "pdf": [
+            "pdf/0068-relaxation.pdf",
+            "pdf/0068-tension.pdf"
         ],
         "png": [
             "png/0068-relaxation.png",
@@ -2299,9 +2298,9 @@
             "Beginners may want to start on your knees with your feet off the ground so you are rocking into the Push Up."
         ],
         "references": [],
-        "svg": [
-            "svg/0069-relaxation.svg",
-            "svg/0069-tension.svg"
+        "pdf": [
+            "pdf/0069-relaxation.pdf",
+            "pdf/0069-tension.pdf"
         ],
         "png": [
             "png/0069-relaxation.png",
@@ -2332,9 +2331,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0070-relaxation.svg",
-            "svg/0070-tension.svg"
+        "pdf": [
+            "pdf/0070-relaxation.pdf",
+            "pdf/0070-tension.pdf"
         ],
         "png": [
             "png/0070-relaxation.png",
@@ -2363,9 +2362,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0071-relaxation.svg",
-            "svg/0071-tension.svg"
+        "pdf": [
+            "pdf/0071-relaxation.pdf",
+            "pdf/0071-tension.pdf"
         ],
         "png": [
             "png/0071-relaxation.png",
@@ -2400,9 +2399,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0072-relaxation.svg",
-            "svg/0072-tension.svg"
+        "pdf": [
+            "pdf/0072-relaxation.pdf",
+            "pdf/0072-tension.pdf"
         ],
         "png": [
             "png/0072-relaxation.png",
@@ -2437,7 +2436,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -2466,9 +2465,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0075-relaxation.svg",
-            "svg/0075-tension.svg"
+        "pdf": [
+            "pdf/0075-relaxation.pdf",
+            "pdf/0075-tension.pdf"
         ],
         "png": [
             "png/0075-relaxation.png",
@@ -2500,9 +2499,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0076-relaxation.svg",
-            "svg/0076-tension.svg"
+        "pdf": [
+            "pdf/0076-relaxation.pdf",
+            "pdf/0076-tension.pdf"
         ],
         "png": [
             "png/0076-relaxation.png",
@@ -2536,9 +2535,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0077-relaxation.svg",
-            "svg/0077-tension.svg"
+        "pdf": [
+            "pdf/0077-relaxation.pdf",
+            "pdf/0077-tension.pdf"
         ],
         "png": [
             "png/0077-relaxation.png",
@@ -2573,9 +2572,9 @@
             "Ensure your hips and back remain in contact with the bench throughout this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0078-relaxation.svg",
-            "svg/0078-tension.svg"
+        "pdf": [
+            "pdf/0078-relaxation.pdf",
+            "pdf/0078-tension.pdf"
         ],
         "png": [
             "png/0078-relaxation.png",
@@ -2609,9 +2608,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0079-relaxation.svg",
-            "svg/0079-tension.svg"
+        "pdf": [
+            "pdf/0079-relaxation.pdf",
+            "pdf/0079-tension.pdf"
         ],
         "png": [
             "png/0079-relaxation.png",
@@ -2644,9 +2643,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0080-relaxation.svg",
-            "svg/0080-tension.svg"
+        "pdf": [
+            "pdf/0080-relaxation.pdf",
+            "pdf/0080-tension.pdf"
         ],
         "png": [
             "png/0080-relaxation.png",
@@ -2681,9 +2680,9 @@
             "when you are doing this exercise for the first time, start on a lower weight in oder to perfect the technique."
         ],
         "references": [],
-        "svg": [
-            "svg/0081-relaxation.svg",
-            "svg/0081-tension.svg"
+        "pdf": [
+            "pdf/0081-relaxation.pdf",
+            "pdf/0081-tension.pdf"
         ],
         "png": [
             "png/0081-relaxation.png",
@@ -2719,9 +2718,9 @@
             "Ensure that your hips and back remain in contact through out the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0082-relaxation.svg",
-            "svg/0082-tension.svg"
+        "pdf": [
+            "pdf/0082-relaxation.pdf",
+            "pdf/0082-tension.pdf"
         ],
         "png": [
             "png/0082-relaxation.png",
@@ -2755,9 +2754,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0083-relaxation.svg",
-            "svg/0083-tension.svg"
+        "pdf": [
+            "pdf/0083-relaxation.pdf",
+            "pdf/0083-tension.pdf"
         ],
         "png": [
             "png/0083-relaxation.png",
@@ -2787,7 +2786,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -2813,9 +2812,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0085-relaxation.svg",
-            "svg/0085-tension.svg"
+        "pdf": [
+            "pdf/0085-relaxation.pdf",
+            "pdf/0085-tension.pdf"
         ],
         "png": [
             "png/0085-relaxation.png",
@@ -2848,9 +2847,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0086-relaxation.svg",
-            "svg/0086-tension.svg"
+        "pdf": [
+            "pdf/0086-relaxation.pdf",
+            "pdf/0086-tension.pdf"
         ],
         "png": [
             "png/0086-relaxation.png",
@@ -2883,9 +2882,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0087-relaxation.svg",
-            "svg/0087-tension.svg"
+        "pdf": [
+            "pdf/0087-relaxation.pdf",
+            "pdf/0087-tension.pdf"
         ],
         "png": [
             "png/0087-relaxation.png",
@@ -2920,7 +2919,7 @@
             "Ensure you contract your core and back muscles through out this exercise in order to prevent injury and maximise the effectiveness of this exercise."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -2949,7 +2948,7 @@
             "Ensure to contract your back and core muscles throughout this exercise to prevent injury and to maximise the effectiveness of the exercise."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -2981,9 +2980,9 @@
             "Ensure that your body remains in one line throughout this exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0090-relaxation.svg",
-            "svg/0090-tension.svg"
+        "pdf": [
+            "pdf/0090-relaxation.pdf",
+            "pdf/0090-tension.pdf"
         ],
         "png": [
             "png/0090-relaxation.png",
@@ -3018,9 +3017,9 @@
             "Ensure to hang dow completely before alternating to the other side."
         ],
         "references": [],
-        "svg": [
-            "svg/0091-relaxation.svg",
-            "svg/0091-tension.svg"
+        "pdf": [
+            "pdf/0091-relaxation.pdf",
+            "pdf/0091-tension.pdf"
         ],
         "png": [
             "png/0091-relaxation.png",
@@ -3050,9 +3049,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0092-relaxation.svg",
-            "svg/0092-tension.svg"
+        "pdf": [
+            "pdf/0092-relaxation.pdf",
+            "pdf/0092-tension.pdf"
         ],
         "png": [
             "png/0092-relaxation.png",
@@ -3082,9 +3081,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0093-relaxation.svg",
-            "svg/0093-tension.svg"
+        "pdf": [
+            "pdf/0093-relaxation.pdf",
+            "pdf/0093-tension.pdf"
         ],
         "png": [
             "png/0093-relaxation.png",
@@ -3116,9 +3115,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0094-relaxation.svg",
-            "svg/0094-tension.svg"
+        "pdf": [
+            "pdf/0094-relaxation.pdf",
+            "pdf/0094-tension.pdf"
         ],
         "png": [
             "png/0094-relaxation.png",
@@ -3148,9 +3147,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0095-relaxation.svg",
-            "svg/0095-tension.svg"
+        "pdf": [
+            "pdf/0095-relaxation.pdf",
+            "pdf/0095-tension.pdf"
         ],
         "png": [
             "png/0095-relaxation.png",
@@ -3181,9 +3180,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0096-relaxation.svg",
-            "svg/0096-tension.svg"
+        "pdf": [
+            "pdf/0096-relaxation.pdf",
+            "pdf/0096-tension.pdf"
         ],
         "png": [
             "png/0096-relaxation.png",
@@ -3218,7 +3217,7 @@
             "Ensure you maintain a straight back trough out this exercise."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -3248,9 +3247,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0098-relaxation.svg",
-            "svg/0098-tension.svg"
+        "pdf": [
+            "pdf/0098-relaxation.pdf",
+            "pdf/0098-tension.pdf"
         ],
         "png": [
             "png/0098-relaxation.png",
@@ -3259,9 +3258,9 @@
     },
     {
         "id": "0099",
-        "name": "barbell-dead-lifts",
-        "title": "Dead Lifts: Barbell",
-        "primer": "The techniques is identical to that of the Smith Machine dead lift except for the fact that this exercise provides less support.",
+        "name": "barbell-deadlift",
+        "title": "Deadlift: Barbell",
+        "primer": "The techniques is identical to that of the Smith Machine deadlift except for the fact that this exercise provides less support.",
         "type": "isolation",
         "primary": [
             "erector spinae"
@@ -3287,9 +3286,9 @@
         "references": [
             "https://youtu.be/iaDC0meiUtw"
         ],
-        "svg": [
-            "svg/0099-relaxation.svg",
-            "svg/0099-tension.svg"
+        "pdf": [
+            "pdf/0099-relaxation.pdf",
+            "pdf/0099-tension.pdf"
         ],
         "png": [
             "png/0099-relaxation.png",
@@ -3298,9 +3297,9 @@
     },
     {
         "id": "0100",
-        "name": "smith-machine-dead-lifts",
-        "title": "Dead Lifts: Smith Machine",
-        "primer": "This is the same as a Dead Lift but the Smith Machine allows for better control of the weight.",
+        "name": "smith-machine-deadlift",
+        "title": "Deadlift: Smith Machine",
+        "primer": "This is the same as a Deadlift but the Smith Machine allows for better control of the weight.",
         "type": "isolation",
         "primary": [
             "erector spinae"
@@ -3322,9 +3321,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0100-relaxation.svg",
-            "svg/0100-tension.svg"
+        "pdf": [
+            "pdf/0100-relaxation.pdf",
+            "pdf/0100-tension.pdf"
         ],
         "png": [
             "png/0100-relaxation.png",
@@ -3354,9 +3353,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0101-relaxation.svg",
-            "svg/0101-tension.svg"
+        "pdf": [
+            "pdf/0101-relaxation.pdf",
+            "pdf/0101-tension.pdf"
         ],
         "png": [
             "png/0101-relaxation.png",
@@ -3386,9 +3385,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0102-relaxation.svg",
-            "svg/0102-tension.svg"
+        "pdf": [
+            "pdf/0102-relaxation.pdf",
+            "pdf/0102-tension.pdf"
         ],
         "png": [
             "png/0102-relaxation.png",
@@ -3419,9 +3418,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0103-relaxation.svg",
-            "svg/0103-tension.svg"
+        "pdf": [
+            "pdf/0103-relaxation.pdf",
+            "pdf/0103-tension.pdf"
         ],
         "png": [
             "png/0103-relaxation.png",
@@ -3452,9 +3451,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0104-relaxation.svg",
-            "svg/0104-tension.svg"
+        "pdf": [
+            "pdf/0104-relaxation.pdf",
+            "pdf/0104-tension.pdf"
         ],
         "png": [
             "png/0104-relaxation.png",
@@ -3484,9 +3483,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0105-relaxation.svg",
-            "svg/0105-tension.svg"
+        "pdf": [
+            "pdf/0105-relaxation.pdf",
+            "pdf/0105-tension.pdf"
         ],
         "png": [
             "png/0105-relaxation.png",
@@ -3495,8 +3494,8 @@
     },
     {
         "id": "0107",
-        "name": "dumbbell-dead-lifts",
-        "title": "Dead Lifts: Dumbbell",
+        "name": "dumbbell-deadlift",
+        "title": "Deadlift: Dumbbell",
         "primer": "This is an exercise for lower back, hamstring and calves strengthening.",
         "type": "isolation",
         "primary": [
@@ -3523,9 +3522,9 @@
             "Do not increase the weight on this exercise until you have mastered the correct form."
         ],
         "references": [],
-        "svg": [
-            "svg/0107-relaxation.svg",
-            "svg/0107-tension.svg"
+        "pdf": [
+            "pdf/0107-relaxation.pdf",
+            "pdf/0107-tension.pdf"
         ],
         "png": [
             "png/0107-relaxation.png",
@@ -3553,9 +3552,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0109-relaxation.svg",
-            "svg/0109-tension.svg"
+        "pdf": [
+            "pdf/0109-relaxation.pdf",
+            "pdf/0109-tension.pdf"
         ],
         "png": [
             "png/0109-relaxation.png",
@@ -3585,9 +3584,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0111-relaxation.svg",
-            "svg/0111-tension.svg"
+        "pdf": [
+            "pdf/0111-relaxation.pdf",
+            "pdf/0111-tension.pdf"
         ],
         "png": [
             "png/0111-relaxation.png",
@@ -3617,9 +3616,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0112-relaxation.svg",
-            "svg/0112-tension.svg"
+        "pdf": [
+            "pdf/0112-relaxation.pdf",
+            "pdf/0112-tension.pdf"
         ],
         "png": [
             "png/0112-relaxation.png",
@@ -3647,9 +3646,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0113-relaxation.svg",
-            "svg/0113-tension.svg"
+        "pdf": [
+            "pdf/0113-relaxation.pdf",
+            "pdf/0113-tension.pdf"
         ],
         "png": [
             "png/0113-relaxation.png",
@@ -3686,9 +3685,9 @@
             "Your front knee should never go past the toes of that foot and should remain at a 90 degree angle in order, to prevent knee injury."
         ],
         "references": [],
-        "svg": [
-            "svg/0114-relaxation.svg",
-            "svg/0114-tension.svg"
+        "pdf": [
+            "pdf/0114-relaxation.pdf",
+            "pdf/0114-tension.pdf"
         ],
         "png": [
             "png/0114-relaxation.png",
@@ -3725,9 +3724,9 @@
             "Ensure not maintain your front knee at a 90 degree angle, in order to prevent knee injury."
         ],
         "references": [],
-        "svg": [
-            "svg/0115-relaxation.svg",
-            "svg/0115-tension.svg"
+        "pdf": [
+            "pdf/0115-relaxation.pdf",
+            "pdf/0115-tension.pdf"
         ],
         "png": [
             "png/0115-relaxation.png",
@@ -3758,9 +3757,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0116-relaxation.svg",
-            "svg/0116-tension.svg"
+        "pdf": [
+            "pdf/0116-relaxation.pdf",
+            "pdf/0116-tension.pdf"
         ],
         "png": [
             "png/0116-relaxation.png",
@@ -3788,9 +3787,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0117-relaxation.svg",
-            "svg/0117-tension.svg"
+        "pdf": [
+            "pdf/0117-relaxation.pdf",
+            "pdf/0117-tension.pdf"
         ],
         "png": [
             "png/0117-relaxation.png",
@@ -3799,9 +3798,9 @@
     },
     {
         "id": "0118",
-        "name": "romanian-dead-lift",
-        "title": "Romanian Dead Lift",
-        "primer": "This is an exercise similar to the regular dead lift and strengthens the hamstring, calves, quadriceps and gluts.",
+        "name": "romanian-deadlift",
+        "title": "Romanian Deadlift",
+        "primer": "This is an exercise similar to the regular deadlift and strengthens the hamstring, calves, quadriceps and gluts.",
         "type": "isolation",
         "primary": [
             "ischiocrural muscles"
@@ -3825,9 +3824,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0118-relaxation.svg",
-            "svg/0118-tension.svg"
+        "pdf": [
+            "pdf/0118-relaxation.pdf",
+            "pdf/0118-tension.pdf"
         ],
         "png": [
             "png/0118-relaxation.png",
@@ -3855,9 +3854,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0119-relaxation.svg",
-            "svg/0119-tension.svg"
+        "pdf": [
+            "pdf/0119-relaxation.pdf",
+            "pdf/0119-tension.pdf"
         ],
         "png": [
             "png/0119-relaxation.png",
@@ -3885,9 +3884,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0120-relaxation.svg",
-            "svg/0120-tension.svg"
+        "pdf": [
+            "pdf/0120-relaxation.pdf",
+            "pdf/0120-tension.pdf"
         ],
         "png": [
             "png/0120-relaxation.png",
@@ -3924,9 +3923,11 @@
             "Practice the walking lunge without any weights until you are comfortable with the movements."
         ],
         "references": [],
-        "svg": [
-            "svg/0121-relaxation.svg",
-            "svg/0121-tension.svg"
+        "pdf": [
+            "pdf/0121-relaxation1.pdf",
+            "pdf/0121-tension1.pdf",
+            "pdf/0121-relaxation2.pdf",
+            "pdf/0121-tension2.pdf"
         ],
         "png": [
             "png/0121-relaxation1.png",
@@ -3938,8 +3939,8 @@
     {
         "id": "0122",
         "name": "barbell-squat",
-        "title": "Barbell Squat",
-        "primer": "",
+        "title": "Squat: Barbell",
+        "primer": "This is the most important exercise for overall strength.",
         "type": "compound",
         "primary": [
             "quadriceps"
@@ -3951,7 +3952,6 @@
             "barbell"
         ],
         "steps": [
-            "This is an exercise for leg strengthening, mainly the quadriceps.",
             "Lifting a barbell off of a weight rack, position it on your shoulders.",
             "Place your feet slightly wider than shoulder width apart with your knees and toes pointed slightly outward.",
             "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
@@ -3960,9 +3960,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0122-relaxation.svg",
-            "svg/0122-tension.svg"
+        "pdf": [
+            "pdf/0122-relaxation.pdf",
+            "pdf/0122-tension.pdf"
         ],
         "png": [
             "png/0122-relaxation.png",
@@ -3997,9 +3997,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0123-relaxation.svg",
-            "svg/0123-tension.svg"
+        "pdf": [
+            "pdf/0123-relaxation.pdf",
+            "pdf/0123-tension.pdf"
         ],
         "png": [
             "png/0123-relaxation.png",
@@ -4008,8 +4008,8 @@
     },
     {
         "id": "0124",
-        "name": "smith-machine-squats",
-        "title": "Squats: Smith Machine",
+        "name": "smith-machine-squat",
+        "title": "Squat: Smith Machine",
         "primer": "This exercise is a variation of a squat using the Smith Machine.",
         "type": "compound",
         "primary": [
@@ -4035,9 +4035,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0124-relaxation.svg",
-            "svg/0124-tension.svg"
+        "pdf": [
+            "pdf/0124-relaxation.pdf",
+            "pdf/0124-tension.pdf"
         ],
         "png": [
             "png/0124-relaxation.png",
@@ -4069,9 +4069,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0125-relaxation.svg",
-            "svg/0125-tension.svg"
+        "pdf": [
+            "pdf/0125-relaxation.pdf",
+            "pdf/0125-tension.pdf"
         ],
         "png": [
             "png/0125-relaxation.png",
@@ -4106,9 +4106,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0126-relaxation.svg",
-            "svg/0126-tension.svg"
+        "pdf": [
+            "pdf/0126-relaxation.pdf",
+            "pdf/0126-tension.pdf"
         ],
         "png": [
             "png/0126-relaxation.png",
@@ -4141,9 +4141,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0127-relaxation.svg",
-            "svg/0127-tension.svg"
+        "pdf": [
+            "pdf/0127-relaxation.pdf",
+            "pdf/0127-tension.pdf"
         ],
         "png": [
             "png/0127-relaxation.png",
@@ -4179,9 +4179,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0128-relaxation.svg",
-            "svg/0128-tension.svg"
+        "pdf": [
+            "pdf/0128-relaxation.pdf",
+            "pdf/0128-tension.pdf"
         ],
         "png": [
             "png/0128-relaxation.png",
@@ -4217,9 +4217,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0129-relaxation.svg",
-            "svg/0129-tension.svg"
+        "pdf": [
+            "pdf/0129-relaxation.pdf",
+            "pdf/0129-tension.pdf"
         ],
         "png": [
             "png/0129-relaxation.png",
@@ -4228,8 +4228,8 @@
     },
     {
         "id": "0130",
-        "name": "squats-using-dumbbells",
-        "title": "Squats: Dumbbells",
+        "name": "squat-using-dumbbells",
+        "title": "Squat: Dumbbells",
         "primer": "This is a great overall exercise for the lower body that uses dumbbells.",
         "type": "compound",
         "primary": [
@@ -4254,9 +4254,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0130-relaxation.svg",
-            "svg/0130-tension.svg"
+        "pdf": [
+            "pdf/0130-relaxation.pdf",
+            "pdf/0130-tension.pdf"
         ],
         "png": [
             "png/0130-relaxation.png",
@@ -4265,8 +4265,8 @@
     },
     {
         "id": "0131",
-        "name": "side-squats-with-barbell",
-        "title": "Side Squats: Barbell",
+        "name": "side-squat-with-barbell",
+        "title": "Side Squat: Barbell",
         "primer": "This version of a squat works the hip adductors, helping build better core strength and coordination.",
         "type": "compound",
         "primary": [
@@ -4287,9 +4287,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0131-relaxation.svg",
-            "svg/0131-tension.svg"
+        "pdf": [
+            "pdf/0131-relaxation.pdf",
+            "pdf/0131-tension.pdf"
         ],
         "png": [
             "png/0131-relaxation.png",
@@ -4323,9 +4323,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0132-relaxation.svg",
-            "svg/0132-tension.svg"
+        "pdf": [
+            "pdf/0132-relaxation.pdf",
+            "pdf/0132-tension.pdf"
         ],
         "png": [
             "png/0132-relaxation.png",
@@ -4335,7 +4335,7 @@
     {
         "id": "0133",
         "name": "squat-to-bench-with-barbell",
-        "title": "Squats: Barbell (to Bench)",
+        "title": "Squat: Barbell (to Bench)",
         "primer": "This variation on a squat uses a bench to remind you how far down to squat.",
         "type": "compound",
         "primary": [
@@ -4363,9 +4363,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0133-relaxation.svg",
-            "svg/0133-tension.svg"
+        "pdf": [
+            "pdf/0133-relaxation.pdf",
+            "pdf/0133-tension.pdf"
         ],
         "png": [
             "png/0133-relaxation.png",
@@ -4399,9 +4399,10 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0134-relaxation.svg",
-            "svg/0134-tension.svg"
+        "pdf": [
+            "pdf/0134-relaxation1.pdf",
+            "pdf/0134-relaxation2.pdf",
+            "pdf/0134-tension.pdf"
         ],
         "png": [
             "png/0134-relaxation1.png",
@@ -4432,9 +4433,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0135-relaxation.svg",
-            "svg/0135-tension.svg"
+        "pdf": [
+            "pdf/0135-relaxation.pdf",
+            "pdf/0135-tension.pdf"
         ],
         "png": [
             "png/0135-relaxation.png",
@@ -4444,7 +4445,7 @@
     {
         "id": "0136",
         "name": "squat-to-bench-with-dumbbells",
-        "title": "Squats: Dumbbells (to Bench)",
+        "title": "Squat: Dumbbells (to Bench)",
         "primer": "This variation of a squat uses a bench to remind you how far down to squat.",
         "type": "compound",
         "primary": [
@@ -4472,9 +4473,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0136-relaxation.svg",
-            "svg/0136-tension.svg"
+        "pdf": [
+            "pdf/0136-relaxation.pdf",
+            "pdf/0136-tension.pdf"
         ],
         "png": [
             "png/0136-relaxation.png",
@@ -4508,9 +4509,10 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0137-relaxation.svg",
-            "svg/0137-tension.svg"
+        "pdf": [
+            "pdf/0137-relaxation1.pdf",
+            "pdf/0137-relaxation2.pdf",
+            "pdf/0137-tension.pdf"
         ],
         "png": [
             "png/0137-relaxation1.png",
@@ -4545,9 +4547,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0138-relaxation.svg",
-            "svg/0138-tension.svg"
+        "pdf": [
+            "pdf/0138-relaxation.pdf",
+            "pdf/0138-tension.pdf"
         ],
         "png": [
             "png/0138-relaxation.png",
@@ -4583,9 +4585,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0139-relaxation.svg",
-            "svg/0139-tension.svg"
+        "pdf": [
+            "pdf/0139-relaxation.pdf",
+            "pdf/0139-tension.pdf"
         ],
         "png": [
             "png/0139-relaxation.png",
@@ -4618,9 +4620,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0140-relaxation.svg",
-            "svg/0140-tension.svg"
+        "pdf": [
+            "pdf/0140-relaxation.pdf",
+            "pdf/0140-tension.pdf"
         ],
         "png": [
             "png/0140-relaxation.png",
@@ -4629,8 +4631,8 @@
     },
     {
         "id": "0141",
-        "name": "jefferson-squats-with-barbell",
-        "title": "Jefferson Squats: Barbell",
+        "name": "jefferson-squat-with-barbell",
+        "title": "Jefferson Squat: Barbell",
         "primer": "This exercise builds and shapes the inner thighs.",
         "type": "compound",
         "primary": [
@@ -4649,9 +4651,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0141-relaxation.svg",
-            "svg/0141-tension.svg"
+        "pdf": [
+            "pdf/0141-relaxation.pdf",
+            "pdf/0141-tension.pdf"
         ],
         "png": [
             "png/0141-relaxation.png",
@@ -4680,9 +4682,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0142-relaxation.svg",
-            "svg/0142-tension.svg"
+        "pdf": [
+            "pdf/0142-relaxation.pdf",
+            "pdf/0142-tension.pdf"
         ],
         "png": [
             "png/0142-relaxation.png",
@@ -4716,9 +4718,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0143-relaxation.svg",
-            "svg/0143-tension.svg"
+        "pdf": [
+            "pdf/0143-relaxation.pdf",
+            "pdf/0143-tension.pdf"
         ],
         "png": [
             "png/0143-relaxation.png",
@@ -4750,9 +4752,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0144-relaxation.svg",
-            "svg/0144-tension.svg"
+        "pdf": [
+            "pdf/0144-relaxation.pdf",
+            "pdf/0144-tension.pdf"
         ],
         "png": [
             "png/0144-relaxation.png",
@@ -4761,8 +4763,8 @@
     },
     {
         "id": "0145",
-        "name": "narrow-stance-hack-squats",
-        "title": "Narrow Stance Hack Squats",
+        "name": "narrow-stance-hack-squat",
+        "title": "Narrow Stance Hack Squat",
         "primer": "Like the Hack Squat, this exercise works the muscles of the leg.",
         "type": "compound",
         "primary": [
@@ -4787,9 +4789,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0145-relaxation.svg",
-            "svg/0145-tension.svg"
+        "pdf": [
+            "pdf/0145-relaxation.pdf",
+            "pdf/0145-tension.pdf"
         ],
         "png": [
             "png/0145-relaxation.png",
@@ -4825,9 +4827,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0146-relaxation.svg",
-            "svg/0146-tension.svg"
+        "pdf": [
+            "pdf/0146-relaxation.pdf",
+            "pdf/0146-tension.pdf"
         ],
         "png": [
             "png/0146-relaxation.png",
@@ -4865,9 +4867,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0147-relaxation.svg",
-            "svg/0147-tension.svg"
+        "pdf": [
+            "pdf/0147-relaxation.pdf",
+            "pdf/0147-tension.pdf"
         ],
         "png": [
             "png/0147-relaxation.png",
@@ -4906,9 +4908,9 @@
             "Note: Bend your knees as you lift and lower the weight to help control the movement."
         ],
         "references": [],
-        "svg": [
-            "svg/0148-relaxation.svg",
-            "svg/0148-tension.svg"
+        "pdf": [
+            "pdf/0148-relaxation.pdf",
+            "pdf/0148-tension.pdf"
         ],
         "png": [
             "png/0148-relaxation.png",
@@ -4918,7 +4920,7 @@
     {
         "id": "0150",
         "name": "one-arm-side-deadlift-with-barbell",
-        "title": "Dead Lift: Barbell (One Arm Side)",
+        "title": "Deadlift: Barbell (One Arm Side)",
         "primer": "This is an advanced exercise that works most of the muscles of the body.",
         "type": "compound",
         "primary": [
@@ -4944,9 +4946,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0150-relaxation.svg",
-            "svg/0150-tension.svg"
+        "pdf": [
+            "pdf/0150-relaxation.pdf",
+            "pdf/0150-tension.pdf"
         ],
         "png": [
             "png/0150-relaxation.png",
@@ -4982,9 +4984,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0151-relaxation.svg",
-            "svg/0151-tension.svg"
+        "pdf": [
+            "pdf/0151-relaxation.pdf",
+            "pdf/0151-tension.pdf"
         ],
         "png": [
             "png/0151-relaxation.png",
@@ -5018,9 +5020,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0152-relaxation.svg",
-            "svg/0152-tension.svg"
+        "pdf": [
+            "pdf/0152-relaxation.pdf",
+            "pdf/0152-tension.pdf"
         ],
         "png": [
             "png/0152-relaxation.png",
@@ -5029,8 +5031,8 @@
     },
     {
         "id": "0154",
-        "name": "speed-squats-with-barbell",
-        "title": "Speed Squats: Barbell",
+        "name": "speed-squat-with-barbell",
+        "title": "Speed Squat: Barbell",
         "primer": "This version of the squat uses an empty barbell and moves at a faster pace than the standard squat.",
         "type": "compound",
         "primary": [
@@ -5055,9 +5057,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0154-relaxation.svg",
-            "svg/0154-tension.svg"
+        "pdf": [
+            "pdf/0154-relaxation.pdf",
+            "pdf/0154-tension.pdf"
         ],
         "png": [
             "png/0154-relaxation.png",
@@ -5066,8 +5068,8 @@
     },
     {
         "id": "0155",
-        "name": "squats-with-exercise-bands",
-        "title": "Squats: Exercise Bands",
+        "name": "squat-with-exercise-bands",
+        "title": "Squat: Exercise Bands",
         "primer": "This version of the Squat uses flexible exercise bands for resistance instead of weights.",
         "type": "compound",
         "primary": [
@@ -5091,9 +5093,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0155-relaxation.svg",
-            "svg/0155-tension.svg"
+        "pdf": [
+            "pdf/0155-relaxation.pdf",
+            "pdf/0155-tension.pdf"
         ],
         "png": [
             "png/0155-relaxation.png",
@@ -5123,9 +5125,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0156-relaxation.svg",
-            "svg/0156-tension.svg"
+        "pdf": [
+            "pdf/0156-relaxation.pdf",
+            "pdf/0156-tension.pdf"
         ],
         "png": [
             "png/0156-relaxation.png",
@@ -5155,9 +5157,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0157-relaxation.svg",
-            "svg/0157-tension.svg"
+        "pdf": [
+            "pdf/0157-relaxation.pdf",
+            "pdf/0157-tension.pdf"
         ],
         "png": [
             "png/0157-relaxation.png",
@@ -5186,9 +5188,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0158-relaxation.svg",
-            "svg/0158-tension.svg"
+        "pdf": [
+            "pdf/0158-relaxation.pdf",
+            "pdf/0158-tension.pdf"
         ],
         "png": [
             "png/0158-relaxation.png",
@@ -5222,9 +5224,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0160-relaxation.svg",
-            "svg/0160-tension.svg"
+        "pdf": [
+            "pdf/0160-relaxation.pdf",
+            "pdf/0160-tension.pdf"
         ],
         "png": [
             "png/0160-relaxation.png",
@@ -5233,8 +5235,8 @@
     },
     {
         "id": "0161",
-        "name": "zecher-squats",
-        "title": "Zecher Squats",
+        "name": "zecher-squat",
+        "title": "Zecher Squat",
         "primer": "This variation of squat is similar to a Front Squat, it works to build the Upper muscles of the quadriceps (thighs).",
         "type": "compound",
         "primary": [
@@ -5260,9 +5262,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0161-relaxation.svg",
-            "svg/0161-tension.svg"
+        "pdf": [
+            "pdf/0161-relaxation.pdf",
+            "pdf/0161-tension.pdf"
         ],
         "png": [
             "png/0161-relaxation.png",
@@ -5295,9 +5297,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0162-relaxation.svg",
-            "svg/0162-tension.svg"
+        "pdf": [
+            "pdf/0162-relaxation.pdf",
+            "pdf/0162-tension.pdf"
         ],
         "png": [
             "png/0162-relaxation.png",
@@ -5328,9 +5330,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0163-relaxation.svg",
-            "svg/0163-tension.svg"
+        "pdf": [
+            "pdf/0163-relaxation.pdf",
+            "pdf/0163-tension.pdf"
         ],
         "png": [
             "png/0163-relaxation.png",
@@ -5360,9 +5362,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0164-relaxation.svg",
-            "svg/0164-tension.svg"
+        "pdf": [
+            "pdf/0164-relaxation.pdf",
+            "pdf/0164-tension.pdf"
         ],
         "png": [
             "png/0164-relaxation.png",
@@ -5393,9 +5395,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0165-relaxation.svg",
-            "svg/0165-tension.svg"
+        "pdf": [
+            "pdf/0165-relaxation.pdf",
+            "pdf/0165-tension.pdf"
         ],
         "png": [
             "png/0165-relaxation.png",
@@ -5425,9 +5427,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0166-relaxation.svg",
-            "svg/0166-tension.svg"
+        "pdf": [
+            "pdf/0166-relaxation.pdf",
+            "pdf/0166-tension.pdf"
         ],
         "png": [
             "png/0166-relaxation.png",
@@ -5459,9 +5461,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0168-relaxation.svg",
-            "svg/0168-tension.svg"
+        "pdf": [
+            "pdf/0168-relaxation.pdf",
+            "pdf/0168-tension.pdf"
         ],
         "png": [
             "png/0168-relaxation.png",
@@ -5488,9 +5490,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0169-relaxation.svg",
-            "svg/0169-tension.svg"
+        "pdf": [
+            "pdf/0169-relaxation.pdf",
+            "pdf/0169-tension.pdf"
         ],
         "png": [
             "png/0169-relaxation.png",
@@ -5517,9 +5519,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0170-relaxation.svg",
-            "svg/0170-tension.svg"
+        "pdf": [
+            "pdf/0170-relaxation.pdf",
+            "pdf/0170-tension.pdf"
         ],
         "png": [
             "png/0170-relaxation.png",
@@ -5548,9 +5550,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0171-relaxation.svg",
-            "svg/0171-tension.svg"
+        "pdf": [
+            "pdf/0171-relaxation.pdf",
+            "pdf/0171-tension.pdf"
         ],
         "png": [
             "png/0171-relaxation.png",
@@ -5581,9 +5583,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0172-relaxation.svg",
-            "svg/0172-tension.svg"
+        "pdf": [
+            "pdf/0172-relaxation.pdf",
+            "pdf/0172-tension.pdf"
         ],
         "png": [
             "png/0172-relaxation.png",
@@ -5611,9 +5613,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0173-relaxation.svg",
-            "svg/0173-tension.svg"
+        "pdf": [
+            "pdf/0173-relaxation.pdf",
+            "pdf/0173-tension.pdf"
         ],
         "png": [
             "png/0173-relaxation.png",
@@ -5641,9 +5643,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0174-relaxation.svg",
-            "svg/0174-tension.svg"
+        "pdf": [
+            "pdf/0174-relaxation.pdf",
+            "pdf/0174-tension.pdf"
         ],
         "png": [
             "png/0174-relaxation.png",
@@ -5675,9 +5677,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0175-relaxation.svg",
-            "svg/0175-tension.svg"
+        "pdf": [
+            "pdf/0175-relaxation.pdf",
+            "pdf/0175-tension.pdf"
         ],
         "png": [
             "png/0175-relaxation.png",
@@ -5707,9 +5709,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0176-relaxation.svg",
-            "svg/0176-tension.svg"
+        "pdf": [
+            "pdf/0176-relaxation.pdf",
+            "pdf/0176-tension.pdf"
         ],
         "png": [
             "png/0176-relaxation.png",
@@ -5738,9 +5740,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0177-relaxation.svg",
-            "svg/0177-tension.svg"
+        "pdf": [
+            "pdf/0177-relaxation.pdf",
+            "pdf/0177-tension.pdf"
         ],
         "png": [
             "png/0177-relaxation.png",
@@ -5769,9 +5771,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0178-relaxation.svg",
-            "svg/0178-tension.svg"
+        "pdf": [
+            "pdf/0178-relaxation.pdf",
+            "pdf/0178-tension.pdf"
         ],
         "png": [
             "png/0178-relaxation.png",
@@ -5800,9 +5802,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0179-relaxation.svg",
-            "svg/0179-tension.svg"
+        "pdf": [
+            "pdf/0179-relaxation.pdf",
+            "pdf/0179-tension.pdf"
         ],
         "png": [
             "png/0179-relaxation.png",
@@ -5831,9 +5833,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0180-relaxation.svg",
-            "svg/0180-tension.svg"
+        "pdf": [
+            "pdf/0180-relaxation.pdf",
+            "pdf/0180-tension.pdf"
         ],
         "png": [
             "png/0180-relaxation.png",
@@ -5862,9 +5864,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0181-relaxation.svg",
-            "svg/0181-tension.svg"
+        "pdf": [
+            "pdf/0181-relaxation.pdf",
+            "pdf/0181-tension.pdf"
         ],
         "png": [
             "png/0181-relaxation.png",
@@ -5895,9 +5897,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0182-relaxation.svg",
-            "svg/0182-tension.svg"
+        "pdf": [
+            "pdf/0182-relaxation.pdf",
+            "pdf/0182-tension.pdf"
         ],
         "png": [
             "png/0182-relaxation.png",
@@ -5929,9 +5931,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0183-relaxation.svg",
-            "svg/0183-tension.svg"
+        "pdf": [
+            "pdf/0183-relaxation.pdf",
+            "pdf/0183-tension.pdf"
         ],
         "png": [
             "png/0183-relaxation.png",
@@ -5959,9 +5961,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0184-relaxation.svg",
-            "svg/0184-tension.svg"
+        "pdf": [
+            "pdf/0184-relaxation.pdf",
+            "pdf/0184-tension.pdf"
         ],
         "png": [
             "png/0184-relaxation.png",
@@ -5989,9 +5991,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0185-relaxation.svg",
-            "svg/0185-tension.svg"
+        "pdf": [
+            "pdf/0185-relaxation.pdf",
+            "pdf/0185-tension.pdf"
         ],
         "png": [
             "png/0185-relaxation.png",
@@ -6022,9 +6024,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0186-relaxation.svg",
-            "svg/0186-tension.svg"
+        "pdf": [
+            "pdf/0186-relaxation.pdf",
+            "pdf/0186-tension.pdf"
         ],
         "png": [
             "png/0186-relaxation.png",
@@ -6053,9 +6055,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0187-relaxation.svg",
-            "svg/0187-tension.svg"
+        "pdf": [
+            "pdf/0187-relaxation.pdf",
+            "pdf/0187-tension.pdf"
         ],
         "png": [
             "png/0187-relaxation.png",
@@ -6086,9 +6088,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0188-relaxation.svg",
-            "svg/0188-tension.svg"
+        "pdf": [
+            "pdf/0188-relaxation.pdf",
+            "pdf/0188-tension.pdf"
         ],
         "png": [
             "png/0188-relaxation.png",
@@ -6117,9 +6119,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0189-relaxation.svg",
-            "svg/0189-tension.svg"
+        "pdf": [
+            "pdf/0189-relaxation.pdf",
+            "pdf/0189-tension.pdf"
         ],
         "png": [
             "png/0189-relaxation.png",
@@ -6149,9 +6151,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0190-relaxation.svg",
-            "svg/0190-tension.svg"
+        "pdf": [
+            "pdf/0190-relaxation.pdf",
+            "pdf/0190-tension.pdf"
         ],
         "png": [
             "png/0190-relaxation.png",
@@ -6180,9 +6182,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0191-relaxation.svg",
-            "svg/0191-tension.svg"
+        "pdf": [
+            "pdf/0191-relaxation.pdf",
+            "pdf/0191-tension.pdf"
         ],
         "png": [
             "png/0191-relaxation.png",
@@ -6211,9 +6213,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0192-relaxation.svg",
-            "svg/0192-tension.svg"
+        "pdf": [
+            "pdf/0192-relaxation.pdf",
+            "pdf/0192-tension.pdf"
         ],
         "png": [
             "png/0192-relaxation.png",
@@ -6241,9 +6243,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0193-relaxation.svg",
-            "svg/0193-tension.svg"
+        "pdf": [
+            "pdf/0193-relaxation.pdf",
+            "pdf/0193-tension.pdf"
         ],
         "png": [
             "png/0193-relaxation.png",
@@ -6272,9 +6274,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0194-relaxation.svg",
-            "svg/0194-tension.svg"
+        "pdf": [
+            "pdf/0194-relaxation.pdf",
+            "pdf/0194-tension.pdf"
         ],
         "png": [
             "png/0194-relaxation.png",
@@ -6303,9 +6305,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0195-relaxation.svg",
-            "svg/0195-tension.svg"
+        "pdf": [
+            "pdf/0195-relaxation.pdf",
+            "pdf/0195-tension.pdf"
         ],
         "png": [
             "png/0195-relaxation.png",
@@ -6333,9 +6335,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0196-relaxation.svg",
-            "svg/0196-tension.svg"
+        "pdf": [
+            "pdf/0196-relaxation.pdf",
+            "pdf/0196-tension.pdf"
         ],
         "png": [
             "png/0196-relaxation.png",
@@ -6363,9 +6365,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0197-relaxation.svg",
-            "svg/0197-tension.svg"
+        "pdf": [
+            "pdf/0197-relaxation.pdf",
+            "pdf/0197-tension.pdf"
         ],
         "png": [
             "png/0197-relaxation.png",
@@ -6395,9 +6397,9 @@
             "Keep your elbows close to your head during the exercise."
         ],
         "references": [],
-        "svg": [
-            "svg/0198-relaxation.svg",
-            "svg/0198-tension.svg"
+        "pdf": [
+            "pdf/0198-relaxation.pdf",
+            "pdf/0198-tension.pdf"
         ],
         "png": [
             "png/0198-relaxation.png",
@@ -6427,9 +6429,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0199-relaxation.svg",
-            "svg/0199-tension.svg"
+        "pdf": [
+            "pdf/0199-relaxation.pdf",
+            "pdf/0199-tension.pdf"
         ],
         "png": [
             "png/0199-relaxation.png",
@@ -6459,7 +6461,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -6484,9 +6486,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0201-relaxation.svg",
-            "svg/0201-tension.svg"
+        "pdf": [
+            "pdf/0201-relaxation.pdf",
+            "pdf/0201-tension.pdf"
         ],
         "png": [
             "png/0201-relaxation.png",
@@ -6516,9 +6518,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0202-relaxation.svg",
-            "svg/0202-tension.svg"
+        "pdf": [
+            "pdf/0202-relaxation.pdf",
+            "pdf/0202-tension.pdf"
         ],
         "png": [
             "png/0202-relaxation.png",
@@ -6546,9 +6548,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0203-relaxation.svg",
-            "svg/0203-tension.svg"
+        "pdf": [
+            "pdf/0203-relaxation.pdf",
+            "pdf/0203-tension.pdf"
         ],
         "png": [
             "png/0203-relaxation.png",
@@ -6578,9 +6580,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0204-relaxation.svg",
-            "svg/0204-tension.svg"
+        "pdf": [
+            "pdf/0204-relaxation.pdf",
+            "pdf/0204-tension.pdf"
         ],
         "png": [
             "png/0204-relaxation.png",
@@ -6610,9 +6612,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0205-relaxation.svg",
-            "svg/0205-tension.svg"
+        "pdf": [
+            "pdf/0205-relaxation.pdf",
+            "pdf/0205-tension.pdf"
         ],
         "png": [
             "png/0205-relaxation.png",
@@ -6642,9 +6644,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0206-relaxation.svg",
-            "svg/0206-tension.svg"
+        "pdf": [
+            "pdf/0206-relaxation.pdf",
+            "pdf/0206-tension.pdf"
         ],
         "png": [
             "png/0206-relaxation.png",
@@ -6677,9 +6679,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0207-relaxation.svg",
-            "svg/0207-tension.svg"
+        "pdf": [
+            "pdf/0207-relaxation.pdf",
+            "pdf/0207-tension.pdf"
         ],
         "png": [
             "png/0207-relaxation.png",
@@ -6710,9 +6712,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0208-relaxation.svg",
-            "svg/0208-tension.svg"
+        "pdf": [
+            "pdf/0208-relaxation.pdf",
+            "pdf/0208-tension.pdf"
         ],
         "png": [
             "png/0208-relaxation.png",
@@ -6742,9 +6744,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0209-relaxation.svg",
-            "svg/0209-tension.svg"
+        "pdf": [
+            "pdf/0209-relaxation.pdf",
+            "pdf/0209-tension.pdf"
         ],
         "png": [
             "png/0209-relaxation.png",
@@ -6771,9 +6773,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0210-relaxation.svg",
-            "svg/0210-tension.svg"
+        "pdf": [
+            "pdf/0210-relaxation.pdf",
+            "pdf/0210-tension.pdf"
         ],
         "png": [
             "png/0210-relaxation.png",
@@ -6806,9 +6808,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0211-relaxation.svg",
-            "svg/0211-tension.svg"
+        "pdf": [
+            "pdf/0211-relaxation.pdf",
+            "pdf/0211-tension.pdf"
         ],
         "png": [
             "png/0211-relaxation.png",
@@ -6841,9 +6843,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0212-relaxation.svg",
-            "svg/0212-tension.svg"
+        "pdf": [
+            "pdf/0212-relaxation.pdf",
+            "pdf/0212-tension.pdf"
         ],
         "png": [
             "png/0212-relaxation.png",
@@ -6876,9 +6878,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0213-relaxation.svg",
-            "svg/0213-tension.svg"
+        "pdf": [
+            "pdf/0213-relaxation.pdf",
+            "pdf/0213-tension.pdf"
         ],
         "png": [
             "png/0213-relaxation.png",
@@ -6907,9 +6909,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0214-relaxation.svg",
-            "svg/0214-tension.svg"
+        "pdf": [
+            "pdf/0214-relaxation.pdf",
+            "pdf/0214-tension.pdf"
         ],
         "png": [
             "png/0214-relaxation.png",
@@ -6940,9 +6942,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0215-relaxation.svg",
-            "svg/0215-tension.svg"
+        "pdf": [
+            "pdf/0215-relaxation.pdf",
+            "pdf/0215-tension.pdf"
         ],
         "png": [
             "png/0215-relaxation.png",
@@ -6969,9 +6971,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0216-relaxation.svg",
-            "svg/0216-tension.svg"
+        "pdf": [
+            "pdf/0216-relaxation.pdf",
+            "pdf/0216-tension.pdf"
         ],
         "png": [
             "png/0216-relaxation.png",
@@ -7003,9 +7005,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0217-relaxation.svg",
-            "svg/0217-tension.svg"
+        "pdf": [
+            "pdf/0217-relaxation.pdf",
+            "pdf/0217-tension.pdf"
         ],
         "png": [
             "png/0217-relaxation.png",
@@ -7037,9 +7039,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0218-relaxation.svg",
-            "svg/0218-tension.svg"
+        "pdf": [
+            "pdf/0218-relaxation.pdf",
+            "pdf/0218-tension.pdf"
         ],
         "png": [
             "png/0218-relaxation.png",
@@ -7071,9 +7073,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0219-relaxation.svg",
-            "svg/0219-tension.svg"
+        "pdf": [
+            "pdf/0219-relaxation.pdf",
+            "pdf/0219-tension.pdf"
         ],
         "png": [
             "png/0219-relaxation.png",
@@ -7105,9 +7107,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0220-relaxation.svg",
-            "svg/0220-tension.svg"
+        "pdf": [
+            "pdf/0220-relaxation.pdf",
+            "pdf/0220-tension.pdf"
         ],
         "png": [
             "png/0220-relaxation.png",
@@ -7137,9 +7139,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0221-relaxation.svg",
-            "svg/0221-tension.svg"
+        "pdf": [
+            "pdf/0221-relaxation.pdf",
+            "pdf/0221-tension.pdf"
         ],
         "png": [
             "png/0221-relaxation.png",
@@ -7171,9 +7173,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0222-relaxation.svg",
-            "svg/0222-tension.svg"
+        "pdf": [
+            "pdf/0222-relaxation.pdf",
+            "pdf/0222-tension.pdf"
         ],
         "png": [
             "png/0222-relaxation.png",
@@ -7206,9 +7208,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0223-relaxation.svg",
-            "svg/0223-tension.svg"
+        "pdf": [
+            "pdf/0223-relaxation.pdf",
+            "pdf/0223-tension.pdf"
         ],
         "png": [
             "png/0223-relaxation.png",
@@ -7240,9 +7242,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0224-relaxation.svg",
-            "svg/0224-tension.svg"
+        "pdf": [
+            "pdf/0224-relaxation.pdf",
+            "pdf/0224-tension.pdf"
         ],
         "png": [
             "png/0224-relaxation.png",
@@ -7273,9 +7275,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0225-relaxation.svg",
-            "svg/0225-tension.svg"
+        "pdf": [
+            "pdf/0225-relaxation.pdf",
+            "pdf/0225-tension.pdf"
         ],
         "png": [
             "png/0225-relaxation.png",
@@ -7306,9 +7308,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0226-relaxation.svg",
-            "svg/0226-tension.svg"
+        "pdf": [
+            "pdf/0226-relaxation.pdf",
+            "pdf/0226-tension.pdf"
         ],
         "png": [
             "png/0226-relaxation.png",
@@ -7339,9 +7341,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0227-relaxation.svg",
-            "svg/0227-tension.svg"
+        "pdf": [
+            "pdf/0227-relaxation.pdf",
+            "pdf/0227-tension.pdf"
         ],
         "png": [
             "png/0227-relaxation.png",
@@ -7369,9 +7371,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0228-relaxation.svg",
-            "svg/0228-tension.svg"
+        "pdf": [
+            "pdf/0228-relaxation.pdf",
+            "pdf/0228-tension.pdf"
         ],
         "png": [
             "png/0228-relaxation.png",
@@ -7403,9 +7405,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0229-relaxation.svg",
-            "svg/0229-tension.svg"
+        "pdf": [
+            "pdf/0229-relaxation.pdf",
+            "pdf/0229-tension.pdf"
         ],
         "png": [
             "png/0229-relaxation.png",
@@ -7436,7 +7438,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -7463,9 +7465,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0231-relaxation.svg",
-            "svg/0231-tension.svg"
+        "pdf": [
+            "pdf/0231-relaxation.pdf",
+            "pdf/0231-tension.pdf"
         ],
         "png": [
             "png/0231-relaxation.png",
@@ -7496,9 +7498,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0232-relaxation.svg",
-            "svg/0232-tension.svg"
+        "pdf": [
+            "pdf/0232-relaxation.pdf",
+            "pdf/0232-tension.pdf"
         ],
         "png": [
             "png/0232-relaxation.png",
@@ -7527,9 +7529,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0233-relaxation.svg",
-            "svg/0233-tension.svg"
+        "pdf": [
+            "pdf/0233-relaxation.pdf",
+            "pdf/0233-tension.pdf"
         ],
         "png": [
             "png/0233-relaxation.png",
@@ -7558,9 +7560,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0234-relaxation.svg",
-            "svg/0234-tension.svg"
+        "pdf": [
+            "pdf/0234-relaxation.pdf",
+            "pdf/0234-tension.pdf"
         ],
         "png": [
             "png/0234-relaxation.png",
@@ -7591,9 +7593,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0235-relaxation.svg",
-            "svg/0235-tension.svg"
+        "pdf": [
+            "pdf/0235-relaxation.pdf",
+            "pdf/0235-tension.pdf"
         ],
         "png": [
             "png/0235-relaxation.png",
@@ -7622,9 +7624,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0236-relaxation.svg",
-            "svg/0236-tension.svg"
+        "pdf": [
+            "pdf/0236-relaxation.pdf",
+            "pdf/0236-tension.pdf"
         ],
         "png": [
             "png/0236-relaxation.png",
@@ -7658,9 +7660,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0237-relaxation.svg",
-            "svg/0237-tension.svg"
+        "pdf": [
+            "pdf/0237-relaxation.pdf",
+            "pdf/0237-tension.pdf"
         ],
         "png": [
             "png/0237-relaxation.png",
@@ -7691,9 +7693,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0238-relaxation.svg",
-            "svg/0238-tension.svg"
+        "pdf": [
+            "pdf/0238-relaxation.pdf",
+            "pdf/0238-tension.pdf"
         ],
         "png": [
             "png/0238-relaxation.png",
@@ -7726,9 +7728,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0239-relaxation.svg",
-            "svg/0239-tension.svg"
+        "pdf": [
+            "pdf/0239-relaxation.pdf",
+            "pdf/0239-tension.pdf"
         ],
         "png": [
             "png/0239-relaxation.png",
@@ -7757,9 +7759,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0240-relaxation.svg",
-            "svg/0240-tension.svg"
+        "pdf": [
+            "pdf/0240-relaxation.pdf",
+            "pdf/0240-tension.pdf"
         ],
         "png": [
             "png/0240-relaxation.png",
@@ -7789,9 +7791,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0241-relaxation.svg",
-            "svg/0241-tension.svg"
+        "pdf": [
+            "pdf/0241-relaxation.pdf",
+            "pdf/0241-tension.pdf"
         ],
         "png": [
             "png/0241-relaxation.png",
@@ -7822,9 +7824,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0242-relaxation.svg",
-            "svg/0242-tension.svg"
+        "pdf": [
+            "pdf/0242-relaxation.pdf",
+            "pdf/0242-tension.pdf"
         ],
         "png": [
             "png/0242-relaxation.png",
@@ -7855,9 +7857,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0243-relaxation.svg",
-            "svg/0243-tension.svg"
+        "pdf": [
+            "pdf/0243-relaxation.pdf",
+            "pdf/0243-tension.pdf"
         ],
         "png": [
             "png/0243-relaxation.png",
@@ -7888,10 +7890,12 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0244-tension.svg"
+        "pdf": [
+            "pdf/0244-relaxation.pdf",
+            "pdf/0244-tension.pdf"
         ],
         "png": [
+            "png/0244-relaxation.png",
             "png/0244-tension.png"
         ]
     },
@@ -7919,9 +7923,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0245-relaxation.svg",
-            "svg/0245-tension.svg"
+        "pdf": [
+            "pdf/0245-relaxation.pdf",
+            "pdf/0245-tension.pdf"
         ],
         "png": [
             "png/0245-relaxation.png",
@@ -7952,9 +7956,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0246-relaxation.svg",
-            "svg/0246-tension.svg"
+        "pdf": [
+            "pdf/0246-relaxation.pdf",
+            "pdf/0246-tension.pdf"
         ],
         "png": [
             "png/0246-relaxation.png",
@@ -7987,9 +7991,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0247-relaxation.svg",
-            "svg/0247-tension.svg"
+        "pdf": [
+            "pdf/0247-relaxation.pdf",
+            "pdf/0247-tension.pdf"
         ],
         "png": [
             "png/0247-relaxation.png",
@@ -8023,9 +8027,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0248-relaxation.svg",
-            "svg/0248-tension.svg"
+        "pdf": [
+            "pdf/0248-relaxation.pdf",
+            "pdf/0248-tension.pdf"
         ],
         "png": [
             "png/0248-relaxation.png",
@@ -8058,9 +8062,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0249-relaxation.svg",
-            "svg/0249-tension.svg"
+        "pdf": [
+            "pdf/0249-relaxation.pdf",
+            "pdf/0249-tension.pdf"
         ],
         "png": [
             "png/0249-relaxation.png",
@@ -8093,9 +8097,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0250-relaxation.svg",
-            "svg/0250-tension.svg"
+        "pdf": [
+            "pdf/0250-relaxation.pdf",
+            "pdf/0250-tension.pdf"
         ],
         "png": [
             "png/0250-relaxation.png",
@@ -8126,9 +8130,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0251-relaxation.svg",
-            "svg/0251-tension.svg"
+        "pdf": [
+            "pdf/0251-relaxation.pdf",
+            "pdf/0251-tension.pdf"
         ],
         "png": [
             "png/0251-relaxation.png",
@@ -8159,9 +8163,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0252-relaxation.svg",
-            "svg/0252-tension.svg"
+        "pdf": [
+            "pdf/0252-relaxation.pdf",
+            "pdf/0252-tension.pdf"
         ],
         "png": [
             "png/0252-relaxation.png",
@@ -8191,9 +8195,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0253-relaxation.svg",
-            "svg/0253-tension.svg"
+        "pdf": [
+            "pdf/0253-relaxation.pdf",
+            "pdf/0253-tension.pdf"
         ],
         "png": [
             "png/0253-relaxation.png",
@@ -8225,9 +8229,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0254-relaxation.svg",
-            "svg/0254-tension.svg"
+        "pdf": [
+            "pdf/0254-relaxation.pdf",
+            "pdf/0254-tension.pdf"
         ],
         "png": [
             "png/0254-relaxation.png",
@@ -8258,9 +8262,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0255-relaxation.svg",
-            "svg/0255-tension.svg"
+        "pdf": [
+            "pdf/0255-relaxation.pdf",
+            "pdf/0255-tension.pdf"
         ],
         "png": [
             "png/0255-relaxation.png",
@@ -8293,9 +8297,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0256-relaxation.svg",
-            "svg/0256-tension.svg"
+        "pdf": [
+            "pdf/0256-relaxation.pdf",
+            "pdf/0256-tension.pdf"
         ],
         "png": [
             "png/0256-relaxation.png",
@@ -8325,9 +8329,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0257-relaxation.svg",
-            "svg/0257-tension.svg"
+        "pdf": [
+            "pdf/0257-relaxation.pdf",
+            "pdf/0257-tension.pdf"
         ],
         "png": [
             "png/0257-relaxation.png",
@@ -8359,9 +8363,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0258-relaxation.svg",
-            "svg/0258-tension.svg"
+        "pdf": [
+            "pdf/0258-relaxation.pdf",
+            "pdf/0258-tension.pdf"
         ],
         "png": [
             "png/0258-relaxation.png",
@@ -8371,7 +8375,7 @@
     {
         "id": "0259",
         "name": "biceps-curl-with-deadlift-with-barbell",
-        "title": "Dead Lift: Barbell (Biceps Curl)",
+        "title": "Deadlift: Barbell (Biceps Curl)",
         "primer": "This exercise combines a bicep curl with a deadlift.",
         "type": "isolation",
         "primary": [
@@ -8398,9 +8402,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0259-relaxation.svg",
-            "svg/0259-tension.svg"
+        "pdf": [
+            "pdf/0259-relaxation.pdf",
+            "pdf/0259-tension.pdf"
         ],
         "png": [
             "png/0259-relaxation.png",
@@ -8435,9 +8439,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0260-relaxation.svg",
-            "svg/0260-tension.svg"
+        "pdf": [
+            "pdf/0260-relaxation.pdf",
+            "pdf/0260-tension.pdf"
         ],
         "png": [
             "png/0260-relaxation.png",
@@ -8468,9 +8472,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0261-relaxation.svg",
-            "svg/0261-tension.svg"
+        "pdf": [
+            "pdf/0261-relaxation.pdf",
+            "pdf/0261-tension.pdf"
         ],
         "png": [
             "png/0261-relaxation.png",
@@ -8506,9 +8510,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0262-relaxation.svg",
-            "svg/0262-tension.svg"
+        "pdf": [
+            "pdf/0262-relaxation.pdf",
+            "pdf/0262-tension.pdf"
         ],
         "png": [
             "png/0262-relaxation.png",
@@ -8545,9 +8549,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0263-relaxation.svg",
-            "svg/0263-tension.svg"
+        "pdf": [
+            "pdf/0263-relaxation.pdf",
+            "pdf/0263-tension.pdf"
         ],
         "png": [
             "png/0263-relaxation.png",
@@ -8586,9 +8590,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0264-relaxation.svg",
-            "svg/0264-tension.svg"
+        "pdf": [
+            "pdf/0264-relaxation.pdf",
+            "pdf/0264-tension.pdf"
         ],
         "png": [
             "png/0264-relaxation.png",
@@ -8627,9 +8631,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0265-relaxation.svg",
-            "svg/0265-tension.svg"
+        "pdf": [
+            "pdf/0265-relaxation.pdf",
+            "pdf/0265-tension.pdf"
         ],
         "png": [
             "png/0265-relaxation.png",
@@ -8668,9 +8672,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0266-relaxation.svg",
-            "svg/0266-tension.svg"
+        "pdf": [
+            "pdf/0266-relaxation.pdf",
+            "pdf/0266-tension.pdf"
         ],
         "png": [
             "png/0266-relaxation.png",
@@ -8702,9 +8706,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0267-relaxation.svg",
-            "svg/0267-tension.svg"
+        "pdf": [
+            "pdf/0267-relaxation.pdf",
+            "pdf/0267-tension.pdf"
         ],
         "png": [
             "png/0267-relaxation.png",
@@ -8740,9 +8744,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0268-relaxation.svg",
-            "svg/0268-tension.svg"
+        "pdf": [
+            "pdf/0268-relaxation.pdf",
+            "pdf/0268-tension.pdf"
         ],
         "png": [
             "png/0268-relaxation.png",
@@ -8777,9 +8781,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0269-relaxation.svg",
-            "svg/0269-tension.svg"
+        "pdf": [
+            "pdf/0269-relaxation.pdf",
+            "pdf/0269-tension.pdf"
         ],
         "png": [
             "png/0269-relaxation.png",
@@ -8807,9 +8811,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0270-relaxation.svg",
-            "svg/0270-tension.svg"
+        "pdf": [
+            "pdf/0270-relaxation.pdf",
+            "pdf/0270-tension.pdf"
         ],
         "png": [
             "png/0270-relaxation.png",
@@ -8840,7 +8844,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -8864,9 +8868,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0272-relaxation.svg",
-            "svg/0272-tension.svg"
+        "pdf": [
+            "pdf/0272-relaxation.pdf",
+            "pdf/0272-tension.pdf"
         ],
         "png": [
             "png/0272-relaxation.png",
@@ -8897,9 +8901,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0273-relaxation.svg",
-            "svg/0273-tension.svg"
+        "pdf": [
+            "pdf/0273-relaxation.pdf",
+            "pdf/0273-tension.pdf"
         ],
         "png": [
             "png/0273-relaxation.png",
@@ -8929,9 +8933,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0274-relaxation.svg",
-            "svg/0274-tension.svg"
+        "pdf": [
+            "pdf/0274-relaxation.pdf",
+            "pdf/0274-tension.pdf"
         ],
         "png": [
             "png/0274-relaxation.png",
@@ -8962,9 +8966,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0275-relaxation.svg",
-            "svg/0275-tension.svg"
+        "pdf": [
+            "pdf/0275-relaxation.pdf",
+            "pdf/0275-tension.pdf"
         ],
         "png": [
             "png/0275-relaxation.png",
@@ -8994,9 +8998,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0276-relaxation.svg",
-            "svg/0276-tension.svg"
+        "pdf": [
+            "pdf/0276-relaxation.pdf",
+            "pdf/0276-tension.pdf"
         ],
         "png": [
             "png/0276-relaxation.png",
@@ -9026,9 +9030,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0277-relaxation.svg",
-            "svg/0277-tension.svg"
+        "pdf": [
+            "pdf/0277-relaxation.pdf",
+            "pdf/0277-tension.pdf"
         ],
         "png": [
             "png/0277-relaxation.png",
@@ -9058,9 +9062,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0278-relaxation.svg",
-            "svg/0278-tension.svg"
+        "pdf": [
+            "pdf/0278-relaxation.pdf",
+            "pdf/0278-tension.pdf"
         ],
         "png": [
             "png/0278-relaxation.png",
@@ -9091,9 +9095,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0279-relaxation.svg",
-            "svg/0279-tension.svg"
+        "pdf": [
+            "pdf/0279-relaxation.pdf",
+            "pdf/0279-tension.pdf"
         ],
         "png": [
             "png/0279-relaxation.png",
@@ -9123,9 +9127,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0280-relaxation.svg",
-            "svg/0280-tension.svg"
+        "pdf": [
+            "pdf/0280-relaxation.pdf",
+            "pdf/0280-tension.pdf"
         ],
         "png": [
             "png/0280-relaxation.png",
@@ -9154,9 +9158,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0281-relaxation.svg",
-            "svg/0281-tension.svg"
+        "pdf": [
+            "pdf/0281-relaxation.pdf",
+            "pdf/0281-tension.pdf"
         ],
         "png": [
             "png/0281-relaxation.png",
@@ -9185,9 +9189,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0282-relaxation.svg",
-            "svg/0282-tension.svg"
+        "pdf": [
+            "pdf/0282-relaxation.pdf",
+            "pdf/0282-tension.pdf"
         ],
         "png": [
             "png/0282-relaxation.png",
@@ -9217,7 +9221,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -9245,9 +9249,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0284-relaxation.svg",
-            "svg/0284-tension.svg"
+        "pdf": [
+            "pdf/0284-relaxation.pdf",
+            "pdf/0284-tension.pdf"
         ],
         "png": [
             "png/0284-relaxation.png",
@@ -9280,9 +9284,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0285-relaxation.svg",
-            "svg/0285-tension.svg"
+        "pdf": [
+            "pdf/0285-relaxation.pdf",
+            "pdf/0285-tension.pdf"
         ],
         "png": [
             "png/0285-relaxation.png",
@@ -9315,9 +9319,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0286-relaxation.svg",
-            "svg/0286-tension.svg"
+        "pdf": [
+            "pdf/0286-relaxation.pdf",
+            "pdf/0286-tension.pdf"
         ],
         "png": [
             "png/0286-relaxation.png",
@@ -9345,9 +9349,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0287-relaxation.svg",
-            "svg/0287-tension.svg"
+        "pdf": [
+            "pdf/0287-relaxation.pdf",
+            "pdf/0287-tension.pdf"
         ],
         "png": [
             "png/0287-relaxation.png",
@@ -9377,9 +9381,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0288-relaxation.svg",
-            "svg/0288-tension.svg"
+        "pdf": [
+            "pdf/0288-relaxation.pdf",
+            "pdf/0288-tension.pdf"
         ],
         "png": [
             "png/0288-relaxation.png",
@@ -9408,9 +9412,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0289-relaxation.svg",
-            "svg/0289-tension.svg"
+        "pdf": [
+            "pdf/0289-relaxation.pdf",
+            "pdf/0289-tension.pdf"
         ],
         "png": [
             "png/0289-relaxation.png",
@@ -9439,9 +9443,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0290-relaxation.svg",
-            "svg/0290-tension.svg"
+        "pdf": [
+            "pdf/0290-relaxation.pdf",
+            "pdf/0290-tension.pdf"
         ],
         "png": [
             "png/0290-relaxation.png",
@@ -9471,9 +9475,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0291-relaxation.svg",
-            "svg/0291-tension.svg"
+        "pdf": [
+            "pdf/0291-relaxation.pdf",
+            "pdf/0291-tension.pdf"
         ],
         "png": [
             "png/0291-relaxation.png",
@@ -9503,9 +9507,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0292-relaxation.svg",
-            "svg/0292-tension.svg"
+        "pdf": [
+            "pdf/0292-relaxation.pdf",
+            "pdf/0292-tension.pdf"
         ],
         "png": [
             "png/0292-relaxation.png",
@@ -9536,9 +9540,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0293-relaxation.svg",
-            "svg/0293-tension.svg"
+        "pdf": [
+            "pdf/0293-relaxation.pdf",
+            "pdf/0293-tension.pdf"
         ],
         "png": [
             "png/0293-relaxation.png",
@@ -9567,9 +9571,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0294-relaxation.svg",
-            "svg/0294-tension.svg"
+        "pdf": [
+            "pdf/0294-relaxation.pdf",
+            "pdf/0294-tension.pdf"
         ],
         "png": [
             "png/0294-relaxation.png",
@@ -9600,9 +9604,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0295-relaxation.svg",
-            "svg/0295-tension.svg"
+        "pdf": [
+            "pdf/0295-relaxation.pdf",
+            "pdf/0295-tension.pdf"
         ],
         "png": [
             "png/0295-relaxation.png",
@@ -9631,9 +9635,9 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [
-            "svg/0296-relaxation.svg",
-            "svg/0296-tension.svg"
+        "pdf": [
+            "pdf/0296-relaxation.pdf",
+            "pdf/0296-tension.pdf"
         ],
         "png": [
             "png/0296-relaxation.png",
@@ -9666,7 +9670,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -9697,7 +9701,11 @@
             "Maintain a good upright posture through out the exercise."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [
+          "pdf/0300-relaxation1.pdf",
+          "pdf/0300-relaxation2.pdf",
+          "pdf/0300-tension.pdf"
+        ],
         "png": [
           "png/0300-relaxation1.png",
           "png/0300-relaxation2.png",
@@ -9729,7 +9737,7 @@
         ],
         "tips": [],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     },
     {
@@ -9757,7 +9765,7 @@
             "This exercise can also be performed with the bar in the starting position behind your head."
         ],
         "references": [],
-        "svg": [],
+        "pdf": [],
         "png": []
     }
 ]
