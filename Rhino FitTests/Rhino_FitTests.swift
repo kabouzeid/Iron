@@ -23,40 +23,49 @@ class Rhino_FitTests: XCTestCase {
     
     func testEverkineticParseSpeed() {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        if let jsonString = try? String(contentsOf: jsonUrl) {
-            self.measure {
-                _ = EverkineticParser.parse(jsonString: jsonString)
-            }
+        let jsonString = try! String(contentsOf: jsonUrl)
+        self.measure {
+            _ = EverkineticParser.parse(jsonString: jsonString)
         }
     }
     
     func testEverkineticGroupingSpeed() {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        if let jsonString = try? String(contentsOf: jsonUrl) {
-            let exercises = EverkineticParser.parse(jsonString: jsonString)
-            self.measure {
-                _ = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
-            }
+        let jsonString = try! String(contentsOf: jsonUrl)
+        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        self.measure {
+            _ = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
         }
     }
     
     func testEverkineticGrouping() {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        if let jsonString = try? String(contentsOf: jsonUrl) {
-            let exercises = EverkineticParser.parse(jsonString: jsonString)
-            let groups = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
-            var totalCount = 0
-            for group in groups {
-                totalCount += group.count
-                
-                for exercise in group {
-                    XCTAssert(exercise.muscleGroup == group.first!.muscleGroup)
-                }
+        let jsonString = try! String(contentsOf: jsonUrl)
+        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        let groups = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
+        var totalCount = 0
+        for group in groups {
+            totalCount += group.count
+
+            for exercise in group {
+                XCTAssert(exercise.muscleGroup == group.first!.muscleGroup)
             }
-            XCTAssert(totalCount == exercises.count)
+        }
+        XCTAssert(totalCount == exercises.count)
+    }
+
+    func testEverkineticPNGsExist() {
+        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
+        let jsonString = try! String(contentsOf: jsonUrl)
+        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        for exercise in exercises {
+            for png in exercise.png {
+                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
+                XCTAssertNoThrow(try Data(contentsOf: url))
+            }
         }
     }
-    
+
     func testUniq() {
         let array = ["Hello","Me","That","Me","Hello","Me","as","the"]
         XCTAssertEqual(array.uniq(), ["Hello","Me","That","as","the"])
