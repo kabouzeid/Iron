@@ -9670,8 +9670,14 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0298-relaxation.pdf",
+            "pdf/0298-tension.pdf"
+        ],
+        "png": [
+            "png/0298-relaxation.png",
+            "png/0298-tension.png"
+        ]
     },
     {
         "id": "0300",
@@ -9765,7 +9771,42 @@
             "This exercise can also be performed with the bar in the starting position behind your head."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/9001-relaxation.pdf",
+            "pdf/9001-tension.pdf"
+        ],
+        "png": [
+            "png/9001-relaxation.png",
+            "png/9001-tension.png"
+        ]
+    },
+    {
+        "id": "9002",
+        "name": "face-pulls",
+        "title": "Face Pulls",
+        "primer": "An excellent exercise for the rear shoulders.",
+        "type": "compound",
+        "primary": [
+            "deltoid"
+        ],
+        "secondary": [],
+        "equipment": [
+            "cable"
+        ],
+        "steps": [
+            "Stand in front of a pulley with a rope attached.",
+            "Pull the rope directly towards your face, while separating your hands and keeping your upper arms parallel to the ground."
+        ],
+        "tips": [],
+        "references": [],
+        "pdf": [
+            "pdf/9002-relaxation.pdf",
+            "pdf/9002-tension.pdf"
+        ],
+        "png": [
+            "png/9002-relaxation.png",
+            "png/9002-tension.png"
+        ]
     }
+
 ]
