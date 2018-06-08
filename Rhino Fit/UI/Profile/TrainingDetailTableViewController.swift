@@ -253,7 +253,7 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete { // should always be the case
             if sectionKeys[indexPath.section] == .exercises{
                 let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
@@ -303,7 +303,7 @@ class TrainingDetailTableViewController: UITableViewController {
         if sectionKeys[indexPath.section] == .exerciseTitle {
             return 44 // exercise title wouldn't have standard height otherwise
         } else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     

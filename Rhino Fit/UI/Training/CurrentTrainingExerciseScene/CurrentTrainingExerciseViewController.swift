@@ -276,7 +276,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let wasCompleted = trainingExercise!.isCompleted!
             
@@ -297,7 +297,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if !allowSwipeToDelete && !isEditing {
             return .none // disable swipe to delete
         }

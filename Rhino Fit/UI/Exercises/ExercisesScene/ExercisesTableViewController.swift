@@ -12,7 +12,7 @@ import SwiftyJSON
 class ExercisesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var exerciseSelectionHandler: ExerciseSelectionHandler?
-    var accessoryType: UITableViewCellAccessoryType = .disclosureIndicator {
+    var accessoryType: UITableViewCell.AccessoryType = .disclosureIndicator {
         didSet {
             tableView?.reloadData()
         }

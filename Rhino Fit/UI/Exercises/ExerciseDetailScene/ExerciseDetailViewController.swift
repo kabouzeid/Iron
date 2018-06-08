@@ -66,7 +66,7 @@ class ExerciseDetailViewController: UITableViewController {
         if sectionKeys[indexPath.section] == .image {
             return tableView.frame.width * (1/1.61) * 1.5 // golden ratio * 1.5
         }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     // MARK: - Table view data source

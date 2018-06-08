@@ -121,7 +121,7 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         return (training!.trainingExercises![proposedDestinationIndexPath.row] as! TrainingExercise).isCompleted! ? sourceIndexPath : proposedDestinationIndexPath
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
             training!.removeFromTrainingExercises(trainingExercise)
