@@ -1,15 +1,20 @@
 PODS:
   - Benchmark (2.0)
-  - SwiftyJSON (4.0.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Benchmark
   - SwiftyJSON
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Benchmark
+    - SwiftyJSON
+
 SPEC CHECKSUMS:
   Benchmark: 3c9951f79ae716f1dc3c8256f1f2db05eea7b534
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
 PODFILE CHECKSUM: 00b8b579ffd579d53ac214ef0d9cf9ed0d62fe22
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

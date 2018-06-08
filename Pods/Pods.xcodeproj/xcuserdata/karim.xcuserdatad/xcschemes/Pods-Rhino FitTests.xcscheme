@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1000"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "907BA24FB2DB5E8C5FE1EDD641AE68AF"
+               BlueprintIdentifier = "846A42835755666BFEBF49E7F3C41E55"
                BuildableName = "Pods_Rhino_FitTests.framework"
                BlueprintName = "Pods-Rhino FitTests"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "907BA24FB2DB5E8C5FE1EDD641AE68AF"
+            BlueprintIdentifier = "846A42835755666BFEBF49E7F3C41E55"
             BuildableName = "Pods_Rhino_FitTests.framework"
             BlueprintName = "Pods-Rhino FitTests"
             ReferencedContainer = "container:Pods.xcodeproj">
