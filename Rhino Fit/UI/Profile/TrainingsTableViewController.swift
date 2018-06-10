@@ -15,7 +15,7 @@ class TrainingsTableViewController: UITableViewController {
     private var sevenDaysFetchedResultsController: NSFetchedResultsController<Training>!
     private var fourteenDaysFetchedResultsController: NSFetchedResultsController<Training>!
 
-    private let summaryFetchedResultsDelegate = SimpleNSFetchedResultsControllerDelegate()
+    private let summaryFetchedResultsDelegate = SimpleFetchedResultsControllerDelegate()
 
     private let dateFormatter = DateFormatter()
 

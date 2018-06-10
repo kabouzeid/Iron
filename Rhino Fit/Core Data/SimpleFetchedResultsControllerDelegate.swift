@@ -8,7 +8,7 @@
 
 import CoreData
 
-class SimpleNSFetchedResultsControllerDelegate : NSObject, NSFetchedResultsControllerDelegate {
+class SimpleFetchedResultsControllerDelegate : NSObject, NSFetchedResultsControllerDelegate {
     var onDidChange: (() -> ())?
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         onDidChange?()
