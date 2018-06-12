@@ -26,7 +26,6 @@ class Training: NSManagedObject {
     }
 
     static let dateFormatter: DateFormatter = {
-        print("init dateFormatter")
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
