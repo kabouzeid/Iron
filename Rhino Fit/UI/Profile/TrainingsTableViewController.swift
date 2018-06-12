@@ -186,6 +186,8 @@ class TrainingsTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Fetched results controller delegate
+
 extension TrainingsTableViewController : NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
