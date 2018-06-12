@@ -81,8 +81,8 @@ class TrainingDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.allowsSelectionDuringEditing = true
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
