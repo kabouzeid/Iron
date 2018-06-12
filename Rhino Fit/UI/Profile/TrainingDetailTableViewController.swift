@@ -25,6 +25,7 @@ class TrainingDetailTableViewController: UITableViewController {
             self.navigationItem.rightBarButtonItem = isEditable ? self.editButtonItem : nil
         }
     }
+
     var alwaysShowTitleEditing = false {
         didSet {
             if alwaysShowTitleEditing {
@@ -42,12 +43,7 @@ class TrainingDetailTableViewController: UITableViewController {
     }
     
     private var sectionKeys = [SectionKey.exercises]
-    private enum SectionKey {
-        case exerciseTitle
-        case duration
-        case exercises
-    }
-    private let dateFormatter = DateFormatter()
+
     private var previousSelectedDate = SelectedDate.none
     private var selectedDate = SelectedDate.none {
         willSet {
@@ -80,18 +76,8 @@ class TrainingDetailTableViewController: UITableViewController {
             }
         }
     }
-    
-    private enum SelectedDate {
-        case none
-        case start
-        case end
-    }
 
-    private enum DurationCellType {
-        case datePicker
-        case start
-        case end
-    }
+    private let dateFormatter = DateFormatter()
 
     @IBOutlet weak var summaryView: SummaryView!
 
@@ -348,4 +334,23 @@ extension TrainingDetailTableViewController: TitleTableViewCellDelegate {
         training?.title = title
         self.title = training?.displayTitle
     }
+}
+
+
+private enum SelectedDate {
+    case none
+    case start
+    case end
+}
+
+private enum DurationCellType {
+    case datePicker
+    case start
+    case end
+}
+
+private enum SectionKey {
+    case exerciseTitle
+    case duration
+    case exercises
 }
