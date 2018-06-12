@@ -63,7 +63,13 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         present(alert, animated: true)
     }
     @IBOutlet weak var elapsedTimeLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel! {
+        didSet {
+            if timeLabel != nil {
+                timeLabel.font = timeLabel.font.monospacedDigitFont
+            }
+        }
+    }
     
     private func updateTimerViewState(animated: Bool) {
         if self.training?.start != nil {
@@ -88,12 +94,20 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
             stopUpdateTimeLabel()
         }
     }
-    
+
+    private static let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
     private func startUpdateTimeLabel() {
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
                 if let elapsedTime = self.training?.start?.timeIntervalSinceNow {
-                    self.timeLabel.text = (-elapsedTime).stringFormatted()
+
+                    self.timeLabel.text = CurrentTrainingViewController.durationFormatter.string(from: -elapsedTime)
                 }
             })
         }

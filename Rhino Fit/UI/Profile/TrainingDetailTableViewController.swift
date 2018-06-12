@@ -77,19 +77,12 @@ class TrainingDetailTableViewController: UITableViewController {
         }
     }
 
-    private let dateFormatter = DateFormatter()
-
     @IBOutlet weak var summaryView: SummaryView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        dateFormatter.doesRelativeDateFormatting = true
 
         tableView.allowsSelectionDuringEditing = true
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -97,7 +90,7 @@ class TrainingDetailTableViewController: UITableViewController {
         tableView.reloadData()
         updateSummary()
     }
-    
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if isEditable {
@@ -136,7 +129,7 @@ class TrainingDetailTableViewController: UITableViewController {
         setsEntry.title.text = "Sets"
         weightEntry.title.text = "Weight"
 
-        durationEntry.text.text = training?.duration.stringFormattedWithLetters()
+        durationEntry.text.text = training != nil ? Training.durationFormatter.string(from: training!.duration) : nil
         setsEntry.text.text = "\(training?.numberOfCompletedSets ?? 0)"
         weightEntry.text.text = "\((training?.totalCompletedWeight ?? 0).clean) kg"
     }
@@ -215,7 +208,7 @@ class TrainingDetailTableViewController: UITableViewController {
             case .start, .end:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "duration cell", for: indexPath)
                 cell.textLabel?.text = indexPath.row == 0 ? "Start" : "End"
-                cell.detailTextLabel?.text = dateFormatter.string(from: indexPath.row == 0 ? training!.start! : training!.end!)
+                cell.detailTextLabel?.text = Training.dateFormatter.string(from: indexPath.row == 0 ? training!.start! : training!.end!)
                 cell.detailTextLabel?.textColor = selectedDate == .start && indexPath.row == 0 || selectedDate == .end && indexPath.row == 1 ? cell.detailTextLabel?.tintColor : UIColor.black
                 return cell
             }

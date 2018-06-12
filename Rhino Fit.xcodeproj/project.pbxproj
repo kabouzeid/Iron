@@ -20,6 +20,7 @@
 		8A4FAAFD206BAF8C004A2806 /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */; };
 		8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */; };
 		8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */; };
+		8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */; };
 		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
 		8A5C08CB205DA06200E78BE7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5C08CD205DA06200E78BE7 /* Profile.storyboard */; };
 		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
@@ -33,7 +34,6 @@
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */; };
-		8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */; };
 		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
 		8A96921C20CC99D300E72430 /* SimpleFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96921B20CC99D300E72430 /* SimpleFetchedResultsControllerDelegate.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
@@ -99,6 +99,7 @@
 		8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
 		8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseImageTableViewCell.swift; sourceTree = "<group>"; };
+		8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
 		8A5C08CC205DA06200E78BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
@@ -116,7 +117,6 @@
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
-		8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		8A96921B20CC99D300E72430 /* SimpleFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,11 +385,11 @@
 			children = (
 				8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */,
 				8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */,
-				8A8CEB7B2040F99100A44D17 /* TimeIntervalExtension.swift */,
 				8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */,
 				8A4FAAFC206BAF8C004A2806 /* FloatExtension.swift */,
 				8A442AD6207A428500A2BDBD /* DateExtension.swift */,
 				8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */,
+				8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -691,7 +691,6 @@
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
-				8A8CEB7C2040F99100A44D17 /* TimeIntervalExtension.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */,
@@ -699,6 +698,7 @@
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
 				8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */,
+				8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */,
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
 				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,

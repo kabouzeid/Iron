@@ -17,8 +17,6 @@ class TrainingsTableViewController: UITableViewController {
 
     private let summaryFetchedResultsDelegate = SimpleFetchedResultsControllerDelegate()
 
-    private let dateFormatter = DateFormatter()
-
     @IBOutlet weak var summaryView: SummaryView!
 
     override func viewDidLoad() {
@@ -26,20 +24,13 @@ class TrainingsTableViewController: UITableViewController {
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
 
-        initDateFormatter()
-
         initFetchedResultsController()
         initSummaryFetchedResultsControllers()
         try? fetchedResultsController.performFetch()
         try? sevenDaysFetchedResultsController.performFetch()
         try? fourteenDaysFetchedResultsController.performFetch()
-        updateSummary()
-    }
 
-    private func initDateFormatter() {
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        dateFormatter.doesRelativeDateFormatting = true
+        updateSummary()
     }
 
     private func initFetchedResultsController() {
@@ -67,7 +58,7 @@ class TrainingsTableViewController: UITableViewController {
         let training = fetchedResultsController.object(at: indexPath)
 
         cell.textLabel?.text = training.displayTitle
-        cell.detailTextLabel?.text = "\(dateFormatter.string(from: training.start!)) for \(training.end!.timeIntervalSince(training.start!).stringFormattedWithLetters())"
+        cell.detailTextLabel?.text = "\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)"
 
         return cell
     }
@@ -135,7 +126,7 @@ class TrainingsTableViewController: UITableViewController {
         setsEntry.title.text = "Sets\nLast 7 Days"
         weightEntry.title.text = "Weight\nLast 7 Days"
 
-        durationEntry.text.text = valuesSevenDaysAgo.0.stringFormattedWithLetters()
+        durationEntry.text.text = Training.durationFormatter.string(from: valuesSevenDaysAgo.0)!
         setsEntry.text.text = "\(valuesSevenDaysAgo.1)"
         weightEntry.text.text = "\(valuesSevenDaysAgo.2.clean) kg"
 

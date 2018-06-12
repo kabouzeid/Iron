@@ -24,6 +24,23 @@ class Training: NSManagedObject {
             context.delete(currentTraining)
         }
     }
+
+    static let dateFormatter: DateFormatter = {
+        print("init dateFormatter")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
+        return dateFormatter
+    }()
+
+    static let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.maximumUnitCount = 2
+        return formatter
+    }()
     
     var numberOfCompletedExercises: Int? {
         get {
