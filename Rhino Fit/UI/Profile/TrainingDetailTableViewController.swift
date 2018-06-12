@@ -9,7 +9,7 @@
 import UIKit
 
 class TrainingDetailTableViewController: UITableViewController {
-    
+
     var training: Training? {
         didSet {
             title = training?.displayTitle
@@ -85,9 +85,11 @@ class TrainingDetailTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        if let selection = tableView.indexPathForSelectedRow {
+            tableView.reloadRows(at: [selection], with: .none)
+            tableView.selectRow(at: selection, animated: false, scrollPosition: .none)
+        }
         super.viewWillAppear(animated)
-        // TODO: use NSFetchedResultsController
-        tableView.reloadData()
         updateSummary()
     }
 
