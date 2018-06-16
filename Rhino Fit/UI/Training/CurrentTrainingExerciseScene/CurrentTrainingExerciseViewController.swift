@@ -273,15 +273,19 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let wasCompleted = trainingExercise!.isCompleted!
-            
+
             let trainingSet = self.trainingSet(of: indexPath)
             trainingExercise!.removeFromTrainingSets(trainingSet)
             trainingSet.managedObjectContext?.delete(trainingSet)
-            tableView.performBatchUpdates({
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }, completion: { _ in
-                tableView.reloadSections([0], with: .automatic)
-            })
+
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            // reload all sets after the deleted set because of the set counter
+            var reloadPaths = [IndexPath]()
+            for i in indexPath.row..<(trainingExercise?.trainingSets?.count ?? 0) {
+                reloadPaths.append(IndexPath(row: i, section: 0))
+            }
+            tableView.reloadRows(at: reloadPaths, with: .automatic)
+
             selectCurrentSet(animated: true)
             updateSummary()
             
