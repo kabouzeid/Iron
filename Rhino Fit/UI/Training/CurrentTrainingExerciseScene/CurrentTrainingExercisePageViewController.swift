@@ -22,8 +22,8 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = self
-        view.backgroundColor = UIColor.white
-        
+        view.backgroundColor = UIColor.groupTableViewBackground
+
         navigationItem.rightBarButtonItem = self.editButtonItem
         navigationItem.rightBarButtonItems?.append(UIBarButtonItem.init(image: #imageLiteral(resourceName: "info"), style: .plain, target: self, action: #selector(showExercise)))
         

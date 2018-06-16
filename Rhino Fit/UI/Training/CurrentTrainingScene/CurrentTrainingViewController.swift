@@ -106,7 +106,6 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
                 if let elapsedTime = self.training?.start?.timeIntervalSinceNow {
-
                     self.timeLabel.text = CurrentTrainingViewController.durationFormatter.string(from: -elapsedTime)
                 }
             })
