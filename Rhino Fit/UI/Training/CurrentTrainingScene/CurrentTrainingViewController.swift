@@ -28,20 +28,20 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
 
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         navigationItem.rightBarButtonItems?.append(editButtonItem)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Training", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
     }
-    
+
+    private var reload = true
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.reloadData()
-        if let selected = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selected, animated: true)
+        if reload {
+            // for now there is no easy way to figure out which cells have changed
+            tableView.reloadData()
+            updateTimerViewState(animated: false) // training could have been started
+            reload = false
         }
-        
-        updateTimerViewState(animated: false)
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -182,6 +182,7 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
             exerciseTableViewController.title = "Add Exercise"
         } else if let trainingExercisePageViewController = segue.destination as? CurrentTrainingExercisePageViewController,
             let indexPath = tableView.indexPathForSelectedRow {
+            reload = true // make sure to reload the table view when we come back
             trainingExercisePageViewController.initialTrainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
         } else if segue.identifier == "cancel training" {
             if training?.managedObjectContext != nil {
@@ -199,17 +200,19 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
     func handleSelection(exercise: Exercise) {
         navigationController?.popToViewController(self, animated: true)
         
-        if training?.managedObjectContext == nil {
+        guard let managedObjectContext = training?.managedObjectContext else {
             return
         }
         
-        let trainingExercise = TrainingExercise(context: training!.managedObjectContext!)
+        let trainingExercise = TrainingExercise(context: managedObjectContext)
         trainingExercise.exerciseId = Int16(exercise.id)
         trainingExercise.training = training
         trainingExercise.addToTrainingSets(createDefaultTrainingSets())
-        
-        tableView.reloadData()
-        
+
+        let insertedIndex = training!.trainingExercises!.index(of: trainingExercise)
+        assert(insertedIndex != NSNotFound, "Just added trainig exercise not found")
+        tableView.insertRows(at: [IndexPath(row: insertedIndex, section: 0)], with: .automatic)
+
         title = training?.displayTitle
     }
 
