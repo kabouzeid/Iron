@@ -28,7 +28,7 @@ import UIKit
         self.axis = .vertical
 
         pickerView = UIPickerView()
-        pickerView.setContentCompressionResistancePriority(.defaultLow, for: .vertical) // so the button has higher priority
+        pickerView.setContentCompressionResistancePriority(.defaultLow, for: .vertical) // so the button is not compressed
         pickerView.delegate = self
         pickerView.dataSource = self
         addArrangedSubview(pickerView)
