@@ -50,14 +50,8 @@ class CurrentTrainingExerciseViewController: UIViewController {
         return trainingExercise?.training?.isCurrentTraining ?? false
     }
     
-    private let dateFormatter = DateFormatter()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        dateFormatter.doesRelativeDateFormatting = true
         
         repWeightPickerView.delegate = self
         
@@ -272,7 +266,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         case 0:
             return nil
         default:
-            return dateFormatter.string(from: trainingExerciseHistory![section - 1].training!.start!)
+            return Training.dateFormatter.string(from: trainingExerciseHistory![section - 1].training!.start!)
         }
     }
     

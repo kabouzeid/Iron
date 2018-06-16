@@ -11,14 +11,14 @@ import CoreData
 
 class TrainingsTableViewController: UITableViewController {
 
-    private var trainings: [Training]?
-
-    private var fetchRequest: NSFetchRequest<Training> {
-        let request: NSFetchRequest<Training> =  Training.fetchRequest()
+    private static let fetchRequest: NSFetchRequest<Training> = {
+        let request: NSFetchRequest<Training> = Training.fetchRequest()
         request.predicate = NSPredicate(format: "isCurrentTraining != %@", NSNumber(booleanLiteral: true))
         request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
         return request
-    }
+    }()
+
+    private var trainings: [Training]?
 
     @IBOutlet weak var summaryView: SummaryView!
 
@@ -30,7 +30,7 @@ class TrainingsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         var fullReload = true
         if let selection = tableView.indexPathForSelectedRow {
-            let fetchedTrainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(fetchRequest)
+            let fetchedTrainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsTableViewController.fetchRequest)
             if trainings!.first!.objectID == fetchedTrainings?.first?.objectID { // the training did not move positions
                 fullReload = false
                 tableView.reloadRows(at: [selection], with: .none)
@@ -41,7 +41,7 @@ class TrainingsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         if fullReload { // we don't know where a new training might have been inserted, reload everything!
-            trainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(fetchRequest)
+            trainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsTableViewController.fetchRequest)
             tableView.reloadData()
         }
         updateSummary()
