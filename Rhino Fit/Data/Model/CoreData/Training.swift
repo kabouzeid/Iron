@@ -14,7 +14,7 @@ class Training: NSManagedObject {
         request.predicate = NSPredicate(format: "isCurrentTraining == %@", NSNumber(booleanLiteral: true))
         if let res = try? context.fetch(request), !res.isEmpty {
             assert(res.count == 1, "More than one training marked as current training.")
-            return res[0]
+            return res.first!
         }
         return nil
     }

@@ -35,26 +35,30 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
         if let id = segue.identifier {
             switch (id) {
             case "continue last training":
-                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
-                trainingViewController.training = Training.fetchCurrentTraining(context: persistentContainer.viewContext)
+                if let trainingViewController = segue.destination as? CurrentTrainingViewController,
+                    let training = Training.fetchCurrentTraining(context: persistentContainer.viewContext) {
+                    trainingViewController.training = training
+                }
             case "start new training":
-                Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
-                
-                let training = Training(context: persistentContainer.viewContext)
-                training.isCurrentTraining = true
+                if let trainingViewController = segue.destination as? CurrentTrainingViewController {
+                    Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
 
-                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
-                trainingViewController.training = training
+                    let training = Training(context: persistentContainer.viewContext)
+                    training.isCurrentTraining = true
+
+                    trainingViewController.training = training
+                }
             case "continue with plan":
-                Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
-                
-                // TODO actually get the training from the current plan
-                let training = Training(context: persistentContainer.viewContext)
-                training.isCurrentTraining = true
-                training.title = "StrongLifts 5x5" // Stub, for testing only
-                
-                let trainingViewController = segue.destination.wrappedViewController() as! CurrentTrainingViewController
-                trainingViewController.training = training
+                if let trainingViewController = segue.destination.wrappedViewController() as? CurrentTrainingViewController {
+                    Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
+
+                    // TODO actually get the training from the current plan
+                    let training = Training(context: persistentContainer.viewContext)
+                    training.isCurrentTraining = true
+                    training.title = "StrongLifts 5x5" // Stub, for testing only
+
+                    trainingViewController.training = training
+                }
             default:
                 break
             }
@@ -62,6 +66,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        return viewController != navigationController || tabBarController.selectedViewController != navigationController // disable double tap tabbar for this tab only
+        // disable double tap on tab for this tab
+        return viewController != navigationController || tabBarController.selectedViewController != navigationController
     }
 }
