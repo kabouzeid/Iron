@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -53,7 +53,7 @@
 		11BC050845B2BCE145C87AFEB08476CB /* Benchmark-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Benchmark-prefix.pch"; sourceTree = "<group>"; };
 		1F6B1E40922F22CB7483B2385F986BE9 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
 		2B074B2A73C947A644215DC7A2B1DCC8 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		2CDBD3DDB045BB59980AB14C49FBE977 /* Benchmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Benchmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CDBD3DDB045BB59980AB14C49FBE977 /* Benchmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Benchmark.framework; path = Benchmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FEDBDEEE9016815C997677C2D15EEA8 /* Pods-Rhino Fit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Rhino Fit.modulemap"; sourceTree = "<group>"; };
 		31CD76303BEF6084FA7AF58B647DFB76 /* Pods-Rhino Fit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Rhino Fit-acknowledgements.plist"; sourceTree = "<group>"; };
 		331B99A6690D5FC057498768D1D592D4 /* Pods-Rhino Fit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Rhino Fit-frameworks.sh"; sourceTree = "<group>"; };
@@ -66,16 +66,16 @@
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5A7FBB88AB28A48D15EB795F4C427049 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		5D4BCF10AE806128EB7E57E8A286E843 /* Pods-Rhino Fit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Rhino Fit-umbrella.h"; sourceTree = "<group>"; };
-		6A412C49E65BEE9B6EA6AED11D077278 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A412C49E65BEE9B6EA6AED11D077278 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75564A5D6221A10E1E12F9002B3C521C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7932987C1AE8410526C7A4F6E7928456 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		81E67CFF0C3BE2E972D280AE64E19FA4 /* Pods-Rhino FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Rhino FitTests.release.xcconfig"; sourceTree = "<group>"; };
 		832D32567DA21E484B76E157004FE1D6 /* Benchmark-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Benchmark-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		948A8448A04D59F9E4DCC87F95139575 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		961EBE87737C90C68C82A809B871C1FA /* Pods-Rhino FitTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Rhino FitTests-resources.sh"; sourceTree = "<group>"; };
 		A192075C5B2AF2FC05971EAF755225C7 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		A2813A64BDB1EC693B3A973A295610D6 /* Pods_Rhino_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2813A64BDB1EC693B3A973A295610D6 /* Pods_Rhino_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Rhino_Fit.framework; path = "Pods-Rhino Fit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D631C2F3C51641B58706A6DEF73860 /* Benchmark.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Benchmark.modulemap; sourceTree = "<group>"; };
 		AA181EA4F0DC97E302C58B031E80B75D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEB54C7752E8CD31A0BD4D6329E53D5E /* Pods-Rhino Fit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Rhino Fit-dummy.m"; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		BC0563F611213ECB13D28E41846F5794 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D90C21D429D41456FAB946085A6A1D4E /* Pods-Rhino FitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Rhino FitTests.modulemap"; sourceTree = "<group>"; };
 		DB3BC6908EC43EC5776129BDDCA18233 /* Pods-Rhino Fit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Rhino Fit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E9AC3841CD3E287B512FCCED58DB8CAC /* Pods_Rhino_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9AC3841CD3E287B512FCCED58DB8CAC /* Pods_Rhino_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Rhino_FitTests.framework; path = "Pods-Rhino FitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09707ADEE3D7D93088051EF9C97CDC /* Pods-Rhino FitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Rhino FitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F25C8DBE3E6A3FE3612C5423391B11BE /* Pods-Rhino FitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Rhino FitTests-dummy.m"; sourceTree = "<group>"; };
 		F96D51B00DD5E1BA099E5FCE6D0FEDC4 /* Benchmark.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Benchmark.swift; path = Benchmark/Benchmark.swift; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 				F96D51B00DD5E1BA099E5FCE6D0FEDC4 /* Benchmark.swift */,
 				DCC965D03E8EA2235C72739B95529F94 /* Support Files */,
 			);
+			name = Benchmark;
 			path = Benchmark;
 			sourceTree = "<group>";
 		};
@@ -261,6 +262,7 @@
 				1F6B1E40922F22CB7483B2385F986BE9 /* SwiftyJSON.swift */,
 				2ABD062E847F750BB5C4201C7D050AAE /* Support Files */,
 			);
+			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -380,15 +382,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1000;
-				TargetAttributes = {
-					70405AFAFDDF712534F09B5D052501ED = {
-						LastSwiftMigration = 1000;
-					};
-					8ED161764C36055B31818983E1552AA3 = {
-						LastSwiftMigration = 1000;
-					};
-				};
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -532,6 +526,38 @@
 			};
 			name = Debug;
 		};
+		249124F5AB37E288EFC83CA7EE6B3F09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 948A8448A04D59F9E4DCC87F95139575 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyJSON;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		2737DDC89257F21A654509711106035A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81E67CFF0C3BE2E972D280AE64E19FA4 /* Pods-Rhino FitTests.release.xcconfig */;
@@ -565,71 +591,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		76A9F03A49FC4E4EF1DF0BB294D61E15 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E8E0DA2876D8147EEE1FB2608C86651 /* Benchmark.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Benchmark/Benchmark-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Benchmark/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Benchmark/Benchmark.modulemap";
-				PRODUCT_MODULE_NAME = Benchmark;
-				PRODUCT_NAME = Benchmark;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		80999AE7107472689C0944FCF723BF9C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E8E0DA2876D8147EEE1FB2608C86651 /* Benchmark.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Benchmark/Benchmark-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Benchmark/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Benchmark/Benchmark.modulemap";
-				PRODUCT_MODULE_NAME = Benchmark;
-				PRODUCT_NAME = Benchmark;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		8F0DEB8D024C89F34B483F488CB89F4B /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -666,9 +627,9 @@
 			};
 			name = Release;
 		};
-		B835B973D739AF3D35676F6F9244DF16 /* Debug */ = {
+		BDA25BA72CC94A1C225FCD2F0B44CCF5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 948A8448A04D59F9E4DCC87F95139575 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = 4E8E0DA2876D8147EEE1FB2608C86651 /* Benchmark.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -679,24 +640,25 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Benchmark/Benchmark-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Benchmark/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				PRODUCT_MODULE_NAME = SwiftyJSON;
-				PRODUCT_NAME = SwiftyJSON;
+				MODULEMAP_FILE = "Target Support Files/Benchmark/Benchmark.modulemap";
+				PRODUCT_MODULE_NAME = Benchmark;
+				PRODUCT_NAME = Benchmark;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		D26758BB7F0291B901D5E48A9A4143CC /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -727,6 +689,38 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D3D383729480CC2FEA582634980F9AAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E8E0DA2876D8147EEE1FB2608C86651 /* Benchmark.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Benchmark/Benchmark-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Benchmark/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Benchmark/Benchmark.modulemap";
+				PRODUCT_MODULE_NAME = Benchmark;
+				PRODUCT_NAME = Benchmark;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -766,7 +760,7 @@
 			};
 			name = Debug;
 		};
-		E4F51308E66E8FCCF7A67460181DFF50 /* Release */ = {
+		E024BB5474AEA75488960061787C5AC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 948A8448A04D59F9E4DCC87F95139575 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
@@ -853,7 +847,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -882,8 +875,8 @@
 		CC50E77DDD2CD66342033A8FF61F5344 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B835B973D739AF3D35676F6F9244DF16 /* Debug */,
-				E4F51308E66E8FCCF7A67460181DFF50 /* Release */,
+				249124F5AB37E288EFC83CA7EE6B3F09 /* Debug */,
+				E024BB5474AEA75488960061787C5AC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -900,8 +893,8 @@
 		E02CC628DDBA5904E908735D306E5E0C /* Build configuration list for PBXNativeTarget "Benchmark" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80999AE7107472689C0944FCF723BF9C /* Debug */,
-				76A9F03A49FC4E4EF1DF0BB294D61E15 /* Release */,
+				D3D383729480CC2FEA582634980F9AAF /* Debug */,
+				BDA25BA72CC94A1C225FCD2F0B44CCF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
