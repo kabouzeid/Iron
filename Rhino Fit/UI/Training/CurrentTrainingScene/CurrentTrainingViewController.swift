@@ -208,6 +208,8 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         trainingExercise.training = training
         trainingExercise.addToTrainingSets(createDefaultTrainingSets())
 
+        AppDelegate.instance.saveContext()
+
         let insertedIndex = training!.trainingExercises!.index(of: trainingExercise)
         assert(insertedIndex != NSNotFound, "Just added trainig exercise not found")
         tableView.insertRows(at: [IndexPath(row: insertedIndex, section: 0)], with: .automatic)

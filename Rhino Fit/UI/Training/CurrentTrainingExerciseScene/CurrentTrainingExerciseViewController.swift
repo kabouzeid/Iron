@@ -338,13 +338,12 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         if let indexPath = tableView.indexPathForSelectedRow {
             let trainingExercise = self.trainingSet(of: indexPath)
             trainingExercise.repetitions = Int16(repetitions)
-            
+            // we don't want to lose any sets the user has done when something crashes
+            AppDelegate.instance.saveContext()
+
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             updateSummary()
-
-            // we don't want to lose any sets the user has done when something crashes
-            AppDelegate.instance.saveContext()
         }
     }
     
@@ -352,13 +351,12 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         if let indexPath = tableView.indexPathForSelectedRow {
             let trainingExercise = self.trainingSet(of: indexPath)
             trainingExercise.weight = weight
-            
+            // we don't want to lose any sets the user has done when something crashes
+            AppDelegate.instance.saveContext()
+
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             updateSummary()
-
-            // we don't want to lose any sets the user has done when something crashes
-            AppDelegate.instance.saveContext()
         }
     }
     
@@ -368,19 +366,16 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             if selectedSet == currentSet {
                 assert(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
                 selectedSet.isCompleted = true
-                tableView.reloadRows(at: [selected], with: .automatic)
-                
+                moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
                 let training = trainingExercise!.training!
                 if training.start == nil {
                     training.start = Date()
                 }
-                
-                moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
-
-                updateSummary()
-
                 // we don't want to lose any sets the user has done when something crashes
                 AppDelegate.instance.saveContext()
+
+                tableView.reloadRows(at: [selected], with: .automatic)
+                updateSummary()
             }
             selectCurrentSet(animated: true)
         } else {
