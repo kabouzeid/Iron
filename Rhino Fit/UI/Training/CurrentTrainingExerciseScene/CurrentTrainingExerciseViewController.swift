@@ -342,6 +342,9 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             updateSummary()
+
+            // we don't want to lose any sets the user has done when something crashes
+            AppDelegate.instance.saveContext()
         }
     }
     
@@ -353,6 +356,9 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             updateSummary()
+
+            // we don't want to lose any sets the user has done when something crashes
+            AppDelegate.instance.saveContext()
         }
     }
     
@@ -372,6 +378,9 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
                 moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
 
                 updateSummary()
+
+                // we don't want to lose any sets the user has done when something crashes
+                AppDelegate.instance.saveContext()
             }
             selectCurrentSet(animated: true)
         } else {
