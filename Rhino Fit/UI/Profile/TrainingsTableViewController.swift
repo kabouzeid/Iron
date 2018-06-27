@@ -28,22 +28,20 @@ class TrainingsTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        var fullReload = true
-        if let selection = tableView.indexPathForSelectedRow {
-            let fetchedTrainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsTableViewController.fetchRequest)
-            if trainings!.first!.objectID == fetchedTrainings?.first?.objectID { // the training did not move positions
-                fullReload = false
-                tableView.reloadRows(at: [selection], with: .none)
-                tableView.selectRow(at: selection, animated: false, scrollPosition: .none)
-            }
+        let fetchedTrainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsTableViewController.fetchRequest)
+        if trainings?.count != fetchedTrainings?.count {
+            // at least one new training and we don't know at which position
+            trainings = fetchedTrainings
+            tableView.reloadData()
+        } else if let selection = tableView.indexPathForSelectedRow,
+            trainings!.first!.objectID == fetchedTrainings?.first?.objectID {
+            // no new trainings were added and the selected training did not move from its position
+            tableView.reloadRows(at: [selection], with: .none)
+            tableView.selectRow(at: selection, animated: false, scrollPosition: .none)
         }
 
         super.viewWillAppear(animated)
 
-        if fullReload { // we don't know where a new training might have been inserted, reload everything!
-            trainings = try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsTableViewController.fetchRequest)
-            tableView.reloadData()
-        }
         updateSummary()
     }
 
