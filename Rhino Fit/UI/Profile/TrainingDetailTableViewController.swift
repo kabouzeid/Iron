@@ -26,15 +26,23 @@ class TrainingDetailTableViewController: UITableViewController {
         }
     }
 
-    var alwaysShowTitleEditing = false {
+    var alwaysShowEditingSections = false {
         didSet {
-            if alwaysShowTitleEditing {
+            if alwaysShowEditingSections {
                 if !sectionKeys.contains(.exerciseTitle) {
                     sectionKeys.insert(.exerciseTitle, at: 0)
                     tableView?.insertSections([0], with: .none)
                 }
+                if !sectionKeys.contains(.duration) {
+                    sectionKeys.insert(.duration, at: 1)
+                    tableView?.insertSections([1], with: .none)
+                }
             } else {
                 if let index = sectionKeys.index(of: .exerciseTitle) {
+                    sectionKeys.remove(at: index)
+                    tableView?.deleteSections([index], with: .none)
+                }
+                if let index = sectionKeys.index(of: .duration) {
                     sectionKeys.remove(at: index)
                     tableView?.deleteSections([index], with: .none)
                 }
@@ -98,23 +106,25 @@ class TrainingDetailTableViewController: UITableViewController {
         if isEditable {
             if editing {
                 if !notReallyInEditingMode {
-                    if !sectionKeys.contains(.duration) {
-                        sectionKeys.insert(.duration, at: 0)
-                        tableView.insertSections([0], with: .automatic)
-                    }
                     if !sectionKeys.contains(.exerciseTitle) {
                         sectionKeys.insert(.exerciseTitle, at: 0)
                         tableView.insertSections([0], with: .automatic)
                     }
+                    if !sectionKeys.contains(.duration) {
+                        sectionKeys.insert(.duration, at: 1)
+                        tableView.insertSections([1], with: .automatic)
+                    }
                 }
             } else {
-                if !alwaysShowTitleEditing, let index = sectionKeys.index(of: .exerciseTitle) {
-                    sectionKeys.remove(at: index)
-                    tableView.deleteSections([index], with: .automatic)
-                }
-                if let index = sectionKeys.index(of: .duration) {
-                    sectionKeys.remove(at: index)
-                    tableView.deleteSections([index], with: .automatic)
+                if !alwaysShowEditingSections {
+                    if let index = sectionKeys.index(of: .exerciseTitle) {
+                        sectionKeys.remove(at: index)
+                        tableView.deleteSections([index], with: .automatic)
+                    }
+                    if let index = sectionKeys.index(of: .duration) {
+                        sectionKeys.remove(at: index)
+                        tableView.deleteSections([index], with: .automatic)
+                    }
                 }
                 selectedDate = .none
             }
@@ -257,7 +267,7 @@ class TrainingDetailTableViewController: UITableViewController {
             case .datePicker:
                 return false
             case .start, .end:
-                return isEditable
+                return isEditable || alwaysShowEditingSections
             }
         case .exercises:
             return isEditable && !isEditing

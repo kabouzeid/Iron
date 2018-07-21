@@ -90,16 +90,21 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
             exerciseDetailViewController.exercise = trainingExerciseViewController.trainingExercise?.exercise
         } else if segue.identifier == "finish training",
             let training = (viewControllers?[0] as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
-            assert(training.isCompleted!, "Attempted to finish uncompleted training!")
-            training.isCurrentTraining = false
+            assert(training.isCompleted!, "Attempt to finish uncompleted training")
+            assert(training.start != nil, "Attempt to save training that has not started")
+            assert(training.end != nil, "Attempt to save training that has not ended")
             training.start = training.start ?? Date() // just to be sure
-            training.end = Date()
-            
+            training.end = training.end ?? Date() // just to be sure
+            training.isCurrentTraining = false
+
             AppDelegate.instance.saveContext()
         } else if let trainingDetailViewController = segue.destination as? TrainingDetailTableViewController,
             let training = (viewControllers?[0] as? CurrentTrainingExerciseViewController)?.trainingExercise!.training! {
+            assert(training.isCompleted!, "Attempt to finish uncompleted training")
+            assert(training.start != nil)
+            training.end = Date()
             trainingDetailViewController.training = training
-            trainingDetailViewController.alwaysShowTitleEditing = true
+            trainingDetailViewController.alwaysShowEditingSections = true
             trainingDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishTraining))
         }
     }
