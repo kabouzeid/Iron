@@ -210,7 +210,7 @@ class TrainingDetailTableViewController: UITableViewController {
                 if selectedDate == .start {
                     cell.datePicker.setDate(training!.start!, animated: false)
                     cell.datePicker.minimumDate = nil
-                    cell.datePicker.maximumDate = training!.end!
+                    cell.datePicker.maximumDate = min(training!.end!, Date()) // don't allow to set start to the future
                 } else {
                     cell.datePicker.setDate(training!.end!, animated: false)
                     cell.datePicker.minimumDate = training!.start!
