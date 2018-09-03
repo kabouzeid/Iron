@@ -42,7 +42,7 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
         filterExercises(by: searchController.searchBar.text!)
     }
     
-    func filterExercises(by: String, force : Bool = false) {
+    func filterExercises(by: String, force: Bool = false) {
         if force || filterText != by.lowercased() {
             filterText = by.lowercased()
             displayExercises = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises.filter { exercise in
