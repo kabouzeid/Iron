@@ -5439,7 +5439,7 @@
     {
         "id": "0168",
         "name": "decline-close-grip-bench-to-skull-crusher",
-        "title": "Decline Close Grip Bench to Skull Crusher",
+        "title": "Skull Crusher (Decline, Close Grip)",
         "primer": "This exercise combines a close grip bench press with triceps extension.",
         "type": "isolation",
         "primary": [
@@ -5814,7 +5814,7 @@
     {
         "id": "0180",
         "name": "lying-close-grip-triceps-press-to-chin-with-barbell",
-        "title": "Lying Close Grip Triceps Press to Chin with Barbell",
+        "title": "Skull Crusher (Close Grip)",
         "primer": "This exercise is a classic for building the triceps.",
         "type": "isolation",
         "primary": [
@@ -5828,8 +5828,9 @@
             "Lie on a flat bench on your back, with your head at one end.",
             "Grasp a bar with a close grip, approximately 6 inches apart.",
             "Raise the bar straight up over your shoulders, keeping your elbows close in.",
-            "Slowly lower the bar in an arc towards your chin.",
-            "Return the bar to the starting position."
+            "Slowly lower the bar in an arc over your head.",
+            "Return the bar to the starting position.",
+            "Note: Keep your arms straight throughout this exercise moving only your elbows."
         ],
         "tips": [],
         "references": [],
@@ -5909,7 +5910,7 @@
     {
         "id": "0183",
         "name": "lying-triceps-press-with-barbell",
-        "title": "Lying Triceps Press with Barbell",
+        "title": "Skull Crusher",
         "primer": "This is another classic exercise for building the triceps.",
         "type": "isolation",
         "primary": [
@@ -5922,9 +5923,9 @@
             "barbell"
         ],
         "steps": [
-            "Lie on a flat bench with your head at one end.",
+            "Lie on a flat bench on your back, with your head at one end.",
             "Grasp an EZ or Curl bar with an overhand grip.",
-            "Raise the bar straight up over your shoulders, taking care to keep your elbows in close.",
+            "Raise the bar straight up over your shoulders, keeping your elbows close in.",
             "Slowly lower the bar in an arc over your head.",
             "Return the bar to the starting position.",
             "Note: Keep your arms straight throughout this exercise moving only your elbows."
@@ -9717,34 +9718,6 @@
           "png/0300-relaxation2.png",
           "png/0300-tension.png"
         ]
-    },
-    {
-        "id": "0302",
-        "name": "smith-machine-incline-bench-press",
-        "title": "Bench Press: Smith Machine (Incline)",
-        "primer": "",
-        "type": "isolation",
-        "primary": [
-            "pectoralis major"
-        ],
-        "secondary": [
-            "triceps brachii"
-        ],
-        "equipment": [
-            "smith machine"
-        ],
-        "steps": [
-            "This is an exercise for chest, shoulder and triceps strengthening.",
-            "Place an incline bench at a 45 degree angle in the middle of the Smith Machine.",
-            "Align the bench so the bar is across the upper portion of your chest.",
-            "Grasp the bar with a shoulder width grip.",
-            "Unlock the bar and slowly lower the weight to your chest, do not bounce the bar on your chest.",
-            "With slow controlled movements, raise the bar back to the starting position."
-        ],
-        "tips": [],
-        "references": [],
-        "pdf": [],
-        "png": []
     },
     {
         "id": "9001",
