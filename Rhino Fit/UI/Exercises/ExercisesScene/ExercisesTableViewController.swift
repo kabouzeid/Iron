@@ -43,13 +43,20 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func filterExercises(by: String, force: Bool = false) {
-        if force || filterText != by.lowercased() {
-            filterText = by.lowercased()
+        let by = by.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if force || filterText != by {
+            filterText = by
             displayExercises = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises.filter { exercise in
                 if filterText.isEmpty {
                     return true
                 }
-                return exercise.title.lowercased().contains(filterText)
+                let split = filterText.split(separator: " ")
+                for s in split {
+                    if !exercise.title.lowercased().contains(s) {
+                        return false
+                    }
+                }
+                return true
             })
         }
     }
