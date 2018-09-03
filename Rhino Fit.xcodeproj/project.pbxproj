@@ -213,8 +213,8 @@
 		8A5809432049E2590070D794 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				8AABF2AD20168906009C047D /* ExercisesScene */,
 				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
+				8AABF2AD20168906009C047D /* ExercisesScene */,
 				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
 			);
 			path = Exercises;
