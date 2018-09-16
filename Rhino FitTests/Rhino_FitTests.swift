@@ -75,5 +75,11 @@ class Rhino_FitTests: XCTestCase {
         let array = ["Hello","Me","That","Me","Hello","Me"]
         XCTAssertEqual(array.sortedByFrequency(), ["Me","Hello","That"])
     }
+
+    func testFloatShortStringValue() {
+        XCTAssertEqual(Float(1.23456).shortStringValue, "1.23")
+        XCTAssertEqual(Float(1.2).shortStringValue, "1.2")
+        XCTAssertEqual(Float(1).shortStringValue, "1")
+    }
     
 }

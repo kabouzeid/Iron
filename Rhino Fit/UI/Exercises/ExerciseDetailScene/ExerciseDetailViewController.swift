@@ -64,7 +64,7 @@ class ExerciseDetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if sectionKeys[indexPath.section] == .image {
-            return tableView.frame.width * (1/1.61) * 1.5 // golden ratio * 1.5
+            return min(tableView.frame.width * (1/1.61) * 1.5, (tableView.frame.height - tableView.safeAreaInsets.top - tableView.safeAreaInsets.bottom) * 0.7) // golden ratio * 1.5
         }
         return UITableView.automaticDimension
     }
@@ -169,6 +169,14 @@ class ExerciseDetailViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
+        }
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let exerciseStatisticsViewController = segue.destination as? ExerciseStatisticsTableViewController {
+            exerciseStatisticsViewController.exercise = exercise
         }
     }
 }

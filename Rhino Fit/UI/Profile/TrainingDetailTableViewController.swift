@@ -143,7 +143,7 @@ class TrainingDetailTableViewController: UITableViewController {
 
         durationEntry.text.text = training != nil ? Training.durationFormatter.string(from: training!.duration) : nil
         setsEntry.text.text = "\(training?.numberOfCompletedSets ?? 0)"
-        weightEntry.text.text = "\((training?.totalCompletedWeight ?? 0).clean) kg"
+        weightEntry.text.text = "\((training?.totalCompletedWeight ?? 0).shortStringValue) kg"
     }
 
     private func durationCellType(at: Int) -> DurationCellType {

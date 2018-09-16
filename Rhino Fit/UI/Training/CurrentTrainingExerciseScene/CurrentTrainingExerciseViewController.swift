@@ -82,7 +82,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
         weightEntry.title.text = "Weight"
 
         repetitionsEntry.text.text = "\(trainingExercise?.numberOfCompletedRepetitions ?? 0)"
-        weightEntry.text.text = "\((trainingExercise?.totalCompletedWeight ?? 0).clean) kg"
+        weightEntry.text.text = "\((trainingExercise?.totalCompletedWeight ?? 0).shortStringValue) kg"
     }
 
     private func moveExerciseBehindLastCompleted(trainingExercise: TrainingExercise) {

@@ -127,7 +127,7 @@ class TrainingsTableViewController: UITableViewController {
 
         durationEntry.text.text = Training.durationFormatter.string(from: valuesSevenDaysAgo.0)!
         setsEntry.text.text = "\(valuesSevenDaysAgo.1)"
-        weightEntry.text.text = "\(valuesSevenDaysAgo.2.clean) kg"
+        weightEntry.text.text = "\(valuesSevenDaysAgo.2.shortStringValue) kg"
 
         var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1) * 100)
         durationPercent = abs(durationPercent) < 0.1 ? 0 : durationPercent

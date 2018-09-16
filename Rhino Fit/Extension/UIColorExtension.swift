@@ -11,4 +11,5 @@ import UIKit
 extension UIColor {
     static var appleGreen = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
     static var appleRed = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
+    static var veryLightGray = UIColor(white: 0.9, alpha: 1)
 }

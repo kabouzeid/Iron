@@ -9,7 +9,12 @@
 import Foundation
 
 extension Float {
-    var clean: String {
-        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    var shortStringValue: String {
+        if self.truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "%.0f", self)
+        } else if (self * 10).truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "%.1f", self)
+        }
+        return String(format: "%.2f", self)
     }
 }

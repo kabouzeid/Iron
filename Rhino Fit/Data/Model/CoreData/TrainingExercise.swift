@@ -37,14 +37,18 @@ class TrainingExercise: NSManagedObject {
     
     var history: [TrainingExercise]? {
         get {
-            let request: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-            request.predicate = NSPredicate(format: "training.isCurrentTraining != %@ AND exerciseId == %@ AND training.start < %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId), (training!.start ?? Date()) as NSDate)
-            request.sortDescriptors = [NSSortDescriptor(key: "training.start", ascending: false)]
-            if let trainingExercises = try? managedObjectContext?.fetch(request){
-                return trainingExercises
+            if let context = managedObjectContext {
+                return TrainingExercise.fetchHistory(of: Int(exerciseId), until: (training!.start ?? Date()), context: context)
             }
             return nil
         }
+    }
+
+    static func fetchHistory(of exerciseId: Int, until: Date, context: NSManagedObjectContext) -> [TrainingExercise]? {
+        let request: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
+        request.predicate = NSPredicate(format: "training.isCurrentTraining != %@ AND exerciseId == %@ AND training.start < %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId), until as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(key: "training.start", ascending: false)]
+        return try? context.fetch(request)
     }
 
     var numberOfCompletedRepetitions: Int {

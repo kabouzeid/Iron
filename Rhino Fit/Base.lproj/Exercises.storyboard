@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kwB-1n-pQE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kwB-1n-pQE">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -148,11 +147,61 @@
                             <outlet property="delegate" destination="EsE-Ae-YG9" id="q7O-P1-rgb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="aHg-jq-Mth"/>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="aHg-jq-Mth">
+                        <barButtonItem key="backBarButtonItem" title="Exercise" id="13V-Yz-pfj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Statistics" image="stats" id="S1N-dO-dE3">
+                            <connections>
+                                <segue destination="WDY-pB-AXn" kind="show" id="0tc-yZ-iuv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eD8-Ab-u0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3772" y="1312"/>
+        </scene>
+        <!--Exercise Statistics Table View Controller-->
+        <scene sceneID="ODb-F5-z7E">
+            <objects>
+                <tableViewController id="WDY-pB-AXn" customClass="ExerciseStatisticsTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hbI-Az-Pl1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chart cell" rowHeight="200" id="O8X-Le-j2V" userLabel="graph cell" customClass="ChartCell" customModule="Rhino_Fit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O8X-Le-j2V" id="Nzr-bG-8Kw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-qZ-gIy" customClass="SegmentedChartView" customModule="Rhino_Fit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="11" width="375" height="178"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="leading" secondItem="Nzr-bG-8Kw" secondAttribute="leading" id="K4Z-lm-Hv6"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="CyD-qZ-gIy" secondAttribute="bottom" id="Orl-kk-vsM"/>
+                                        <constraint firstAttribute="trailing" secondItem="CyD-qZ-gIy" secondAttribute="trailing" id="Yob-kQ-kCJ"/>
+                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="top" secondItem="Nzr-bG-8Kw" secondAttribute="topMargin" id="pmv-YC-EAQ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="segmentedChartView" destination="CyD-qZ-gIy" id="Wfv-CN-LqG"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WDY-pB-AXn" id="FyG-jK-eRv"/>
+                            <outlet property="delegate" destination="WDY-pB-AXn" id="g60-lx-DyA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fG7-f8-S9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4764" y="1312"/>
         </scene>
         <!--Exercises-->
         <scene sceneID="uNE-Me-qzY">
@@ -231,6 +280,7 @@
     </scenes>
     <resources>
         <image name="list" width="30" height="30"/>
+        <image name="stats" width="54" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="avt-n4-udd"/>
