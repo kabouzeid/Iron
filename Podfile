@@ -6,8 +6,7 @@ target 'Rhino Fit' do
   # Pods for Rhino Fit
   pod 'SwiftyJSON'
   pod 'Benchmark'
-  # Only until Swift 4.2 is officially supported by Charts
-  pod 'Charts', :git => 'https://github.com/jlcanale/Charts', :branch => 'Swift-4.2', :inhibit_warnings => true
+  pod 'Charts'
 
   target 'Rhino FitTests' do
     inherit! :search_paths

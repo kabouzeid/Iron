@@ -274,7 +274,7 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
             stop()
         }
 
-		open func add(to runloop: RunLoop, forMode mode: RunLoopMode)
+        open func add(to runloop: RunLoop, forMode mode: RunLoop.Mode)
         {
             if displayLink != nil
             {
@@ -286,7 +286,7 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
             }
 		}
 
-		open func remove(from: RunLoop, forMode: RunLoopMode)
+        open func remove(from: RunLoop, forMode: RunLoop.Mode)
         {
             stop()
 		}
@@ -394,6 +394,23 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
     
 	open class NSUIView: NSView
     {
+        /// A private constant to set the accessibility role during initialization.
+        /// It ensures parity with the iOS element ordering as well as numbered counts of chart components.
+        /// (See Platform+Accessibility for details)
+        private let role: NSAccessibility.Role = .list
+
+        public override init(frame frameRect: NSRect)
+        {
+            super.init(frame: frameRect)
+            setAccessibilityRole(role)
+        }
+
+        required public init?(coder decoder: NSCoder)
+        {
+            super.init(coder: decoder)
+            setAccessibilityRole(role)
+        }
+
 		public final override var isFlipped: Bool
         {
 			return true
@@ -403,7 +420,6 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
         {
 			self.setNeedsDisplay(self.bounds)
 		}
-
         
 		public final override func touchesBegan(with event: NSEvent)
         {

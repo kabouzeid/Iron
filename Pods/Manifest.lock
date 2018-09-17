@@ -1,35 +1,26 @@
 PODS:
   - Benchmark (2.0)
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
+  - Charts (3.2.0):
+    - Charts/Core (= 3.2.0)
+  - Charts/Core (3.2.0)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Benchmark
-  - Charts (from `https://github.com/jlcanale/Charts`, branch `Swift-4.2`)
+  - Charts
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Benchmark
+    - Charts
     - SwiftyJSON
-
-EXTERNAL SOURCES:
-  Charts:
-    :branch: Swift-4.2
-    :git: https://github.com/jlcanale/Charts
-
-CHECKOUT OPTIONS:
-  Charts:
-    :commit: ed67b785524581ebacca09389263a72676149a26
-    :git: https://github.com/jlcanale/Charts
 
 SPEC CHECKSUMS:
   Benchmark: 3c9951f79ae716f1dc3c8256f1f2db05eea7b534
-  Charts: 82c6776516b844809f55228d720129a9dc25b9f2
+  Charts: 680c8328bd5e90cb14f67e00d2176f3113d19141
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 4bf64f4f6307121abd8c0f5dc1125227a338379f
+PODFILE CHECKSUM: 7ebf46a742d3f7707778ed6aad3088392582d770
 
 COCOAPODS: 1.5.3
