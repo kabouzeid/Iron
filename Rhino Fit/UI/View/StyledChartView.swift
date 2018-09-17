@@ -96,6 +96,11 @@ class StyledChartView: LineChartView {
         self.legend.form = Legend.Form.circle
         self.legend.font = .boldSystemFont(ofSize: 10)
         self.legend.textColor = .lightGray
+
+        // no data
+        self.noDataText = "No data available"
+        self.noDataFont = UIFont.preferredFont(forTextStyle: .headline)
+        self.noDataTextColor = .lightGray
     }
 
 
