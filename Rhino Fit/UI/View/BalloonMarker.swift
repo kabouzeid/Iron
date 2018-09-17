@@ -72,18 +72,19 @@ class BalloonMarker: IMarker
         var offset = self.offset
         guard let chartView = chartView else { return offset }
 
-        let padding: CGFloat = 8
         var origin = point
         origin.x -= size.width / 2
 
-        if origin.x + offset.x - padding < 0.0
+        if origin.x + offset.x - (chartView.layoutMargins.left - 8) < 0.0
         {
-            offset.x = padding - origin.x
+            offset.x = (chartView.layoutMargins.left - 8) - origin.x
         }
-        else if origin.x + size.width + offset.x + padding > chartView.bounds.size.width
+        else if origin.x + size.width + offset.x + (chartView.layoutMargins.right - 5) > chartView.bounds.size.width
         {
-            offset.x = chartView.bounds.size.width - origin.x - size.width - padding
+            offset.x = chartView.bounds.size.width - origin.x - size.width - (chartView.layoutMargins.right - 5) // corner radius = 5
         }
+
+        offset.y = max(chartView.layoutMargins.top, offset.y - size.height)
 
         return offset
     }
@@ -99,7 +100,7 @@ class BalloonMarker: IMarker
         var rect = CGRect(
             origin: CGPoint(
                 x: point.x + offset.x,
-                y: 0),
+                y: offset.y),
             size: size)
         rect.origin.x -= size.width / 2.0
 

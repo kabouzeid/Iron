@@ -26,8 +26,7 @@
 		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
 		8A5C08CB205DA06200E78BE7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5C08CD205DA06200E78BE7 /* Profile.storyboard */; };
 		8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
-		8A643E19214909DD0044C3A1 /* SegmentedChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A643E18214909DD0044C3A1 /* SegmentedChartView.xib */; };
-		8A643E1B21490C520044C3A1 /* SegmentedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* SegmentedChartView.swift */; };
+		8A643E1B21490C520044C3A1 /* StyledChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledChartView.swift */; };
 		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
 		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
@@ -109,8 +108,7 @@
 		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
 		8A5C08CC205DA06200E78BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		8A643E132147B8430044C3A1 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
-		8A643E18214909DD0044C3A1 /* SegmentedChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentedChartView.xib; sourceTree = "<group>"; };
-		8A643E1A21490C520044C3A1 /* SegmentedChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedChartView.swift; sourceTree = "<group>"; };
+		8A643E1A21490C520044C3A1 /* StyledChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledChartView.swift; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
 		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rhino Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,8 +234,7 @@
 			children = (
 				8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */,
 				8A70888B20A85C6400EF9ADE /* SummaryView.swift */,
-				8A643E18214909DD0044C3A1 /* SegmentedChartView.xib */,
-				8A643E1A21490C520044C3A1 /* SegmentedChartView.swift */,
+				8A643E1A21490C520044C3A1 /* StyledChartView.swift */,
 				8A643E132147B8430044C3A1 /* BalloonMarker.swift */,
 			);
 			path = View;
@@ -579,7 +576,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AD40829202F979800A73E05 /* Training.storyboard in Resources */,
-				8A643E19214909DD0044C3A1 /* SegmentedChartView.xib in Resources */,
 				8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,
@@ -681,7 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */,
-				8A643E1B21490C520044C3A1 /* SegmentedChartView.swift in Sources */,
+				8A643E1B21490C520044C3A1 /* StyledChartView.swift in Sources */,
 				8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */,
 				8A4FAAFD206BAF8C004A2806 /* FloatExtension.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,

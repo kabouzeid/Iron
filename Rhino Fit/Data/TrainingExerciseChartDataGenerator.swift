@@ -22,31 +22,8 @@ class TrainingExerciseChartDataGenerator {
     }
     private var trainingExerciseHistory = [TrainingExercise]()
 
-    let xAxisDateFormatter: DateFormatter
-    let xAxisYearDateFormatter: DateFormatter
-    let balloonDateFormatter: DateFormatter
-    let balloonYearDateFormatter: DateFormatter
-
-    let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
-
     init(exercise: Exercise? = nil) {
         self.exercise = exercise
-
-        // init the date formatters, it's cheaper to init them just once
-        xAxisDateFormatter = DateFormatter()
-        balloonDateFormatter = DateFormatter()
-        xAxisYearDateFormatter = DateFormatter()
-        balloonYearDateFormatter = DateFormatter()
-
-        xAxisDateFormatter.doesRelativeDateFormatting = true
-        balloonDateFormatter.doesRelativeDateFormatting = true
-        xAxisYearDateFormatter.doesRelativeDateFormatting = true
-        balloonYearDateFormatter.doesRelativeDateFormatting = true
-
-        xAxisDateFormatter.setLocalizedDateFormatFromTemplate("MMMd")
-        balloonDateFormatter.setLocalizedDateFormatFromTemplate("MMMdjmm")
-        xAxisYearDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMMd")
-        balloonYearDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMMdjmm")
     }
 
     enum MeasurementType: CaseIterable {
@@ -102,32 +79,18 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    func formatters(for measurementType: MeasurementType, timeFrame: TimeFrame) -> (IAxisValueFormatter, IAxisValueFormatter, BalloonValueFormatter) {
-        let balloonValueFormatter = BaseBalloonValueFormatter()
+    let balloonValueFormatter = DateBalloonValueFormatter(append: nil)
+    let kgBalloonValueFormatter = DateBalloonValueFormatter(append: "kg")
+    let xAxisValueFormatter = DateAxisFormatter()
+    let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
 
-        let xAxisDateFormatter: DateFormatter
-        let balloonDateFormatter: DateFormatter
-
-        switch timeFrame {
-        case .month, .threeMonths, .year:
-            xAxisDateFormatter = self.xAxisDateFormatter
-            balloonDateFormatter = self.balloonDateFormatter
-        case .all:
-            xAxisDateFormatter = xAxisYearDateFormatter
-            balloonDateFormatter = balloonYearDateFormatter
-        }
-
-        let xAxisValueFormatter = DateAxisFormatter(dateFormatter: xAxisDateFormatter)
-        balloonValueFormatter.xFormatter = { balloonDateFormatter.string(from: valueToDate(value: $0)) }
-
+    func formatters(for measurementType: MeasurementType) -> (IAxisValueFormatter, IAxisValueFormatter, BalloonValueFormatter) {
         switch measurementType {
         case .oneRM, .totalWeight:
-            balloonValueFormatter.yFormatter = { Float($0).shortStringValue + "kg" }
+            return (xAxisValueFormatter, yAxisValueFormatter, kgBalloonValueFormatter)
         case .totalSets, .totalRepetitions:
-            balloonValueFormatter.yFormatter = { Float($0).shortStringValue }
+            return (xAxisValueFormatter, yAxisValueFormatter, balloonValueFormatter)
         }
-
-        return (xAxisValueFormatter, yAxisValueFormatter, balloonValueFormatter)
     }
 
     func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame) -> LineChartData {
@@ -174,27 +137,54 @@ class TrainingExerciseChartDataGenerator {
     // MARK: - Formatter
     class DateAxisFormatter: IAxisValueFormatter {
         let dateFormatter: DateFormatter
+        let yearDateFormatter: DateFormatter
 
-        init(dateFormatter: DateFormatter) {
-            self.dateFormatter = dateFormatter
+        weak var chartView: LineChartView!
+
+        init() {
+            dateFormatter = DateFormatter()
+            yearDateFormatter = DateFormatter()
+            dateFormatter.doesRelativeDateFormatting = true
+            yearDateFormatter.doesRelativeDateFormatting = true
+            dateFormatter.setLocalizedDateFormatFromTemplate("MMMd")
+            yearDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMMd")
         }
 
         func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            return dateFormatter.string(from: valueToDate(value: value))
+            let date = valueToDate(value: value)
+            if Calendar.current.compare(date, to: Date(), toGranularity: .year) == .orderedSame {
+                return dateFormatter.string(from: date)
+            }
+            return yearDateFormatter.string(from: date)
         }
     }
 
-    class BaseBalloonValueFormatter: BalloonValueFormatter {
-        typealias Formatter = (Double) -> String?
-        var xFormatter: Formatter?
-        var yFormatter: Formatter?
+    class DateBalloonValueFormatter: BalloonValueFormatter {
+        let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
+        let dateFormatter: DateFormatter
+        let yearDateFormatter: DateFormatter
+        let append: String?
+
+        init(append: String?) {
+            self.append = append
+            dateFormatter = DateFormatter()
+            yearDateFormatter = DateFormatter()
+            dateFormatter.doesRelativeDateFormatting = true
+            yearDateFormatter.doesRelativeDateFormatting = true
+            dateFormatter.setLocalizedDateFormatFromTemplate("MMMdjmm")
+            yearDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMMdjmm")
+        }
 
         func stringForXValue(x: Double) -> String? {
-            return xFormatter?(x)
+            let date = valueToDate(value: x)
+            if Calendar.current.compare(valueToDate(value: x), to: Date(), toGranularity: .year) == .orderedSame {
+                return dateFormatter.string(from: date)
+            }
+            return yearDateFormatter.string(from: date)
         }
 
         func stringForYValue(y: Double) -> String? {
-            return yFormatter?(y)
+            return yAxisValueFormatter.stringForValue(y, axis: nil) + (append ?? "")
         }
     }
 }

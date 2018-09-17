@@ -176,20 +176,42 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-qZ-gIy" customClass="SegmentedChartView" customModule="Rhino_Fit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="11" width="375" height="178"/>
+                                        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-qZ-gIy" customClass="StyledChartView" customModule="Rhino_Fit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OxU-tE-BcE">
+                                                    <rect key="frame" x="0.0" y="-22" width="157.66666666666666" height="38.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bench Press: Barbell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIF-he-lbp">
+                                                            <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="20.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoO-PL-yWg">
+                                                            <rect key="frame" x="0.0" y="24.333333333333332" width="56" height="14.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="leading" secondItem="Nzr-bG-8Kw" secondAttribute="leading" id="K4Z-lm-Hv6"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="CyD-qZ-gIy" secondAttribute="bottom" id="Orl-kk-vsM"/>
-                                        <constraint firstAttribute="trailing" secondItem="CyD-qZ-gIy" secondAttribute="trailing" id="Yob-kQ-kCJ"/>
-                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="top" secondItem="Nzr-bG-8Kw" secondAttribute="topMargin" id="pmv-YC-EAQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="CyD-qZ-gIy" secondAttribute="bottom" id="7Qj-NQ-58u"/>
+                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="leading" secondItem="Nzr-bG-8Kw" secondAttribute="leading" id="LdL-dL-aSk"/>
+                                        <constraint firstAttribute="trailing" secondItem="CyD-qZ-gIy" secondAttribute="trailing" id="TUY-E8-bw3"/>
+                                        <constraint firstItem="CyD-qZ-gIy" firstAttribute="top" secondItem="Nzr-bG-8Kw" secondAttribute="top" id="wsB-It-hx6"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="segmentedChartView" destination="CyD-qZ-gIy" id="Wfv-CN-LqG"/>
+                                    <outlet property="detailLabel" destination="uoO-PL-yWg" id="VFm-fZ-fpe"/>
+                                    <outlet property="styledChartView" destination="CyD-qZ-gIy" id="Wfv-CN-LqG"/>
+                                    <outlet property="titleLabel" destination="hIF-he-lbp" id="CX3-If-3ZK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -198,6 +220,22 @@
                             <outlet property="delegate" destination="WDY-pB-AXn" id="g60-lx-DyA"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="5Jt-bV-o3l">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="OTy-mv-ZN3">
+                            <rect key="frame" x="100" y="7" width="267" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Month"/>
+                                <segment title="3 Months"/>
+                                <segment title="Year"/>
+                                <segment title="All"/>
+                            </segments>
+                            <connections>
+                                <action selector="timeFrameChanged:" destination="WDY-pB-AXn" eventType="valueChanged" id="QpS-zg-Nf1"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fG7-f8-S9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import Benchmark
 
-class ExerciseStatisticsTableViewController: UITableViewController, ChartCellDelegate {
+class ExerciseStatisticsTableViewController: UITableViewController {
 
     var exercise: Exercise? {
         didSet {
@@ -20,26 +20,26 @@ class ExerciseStatisticsTableViewController: UITableViewController, ChartCellDel
         }
     }
 
+    @IBAction func timeFrameChanged(_ sender: UISegmentedControl) {
+        selectedTimeFrame = TrainingExerciseChartDataGenerator.TimeFrame.allCases[sender.selectedSegmentIndex]
+    }
+
+    private var selectedTimeFrame: TrainingExerciseChartDataGenerator.TimeFrame = .threeMonths {
+        didSet {
+            if exercise != nil {
+                tableViewEntries = createTableViewEntries()
+            }
+        }
+    }
     private var chartDataGenerator = TrainingExerciseChartDataGenerator()
 
     private class TableViewEntry {
         let measurementType: TrainingExerciseChartDataGenerator.MeasurementType
-        let timeFrames: [TrainingExerciseChartDataGenerator.TimeFrame]
-        let segmentTitles: [String]
-
         var hasBeenAnimated = false
-        var selectedSegmentIndex = 1
+        var cache: LineChartData?
 
-        var selectedTimeFrame: TrainingExerciseChartDataGenerator.TimeFrame {
-            return timeFrames[selectedSegmentIndex]
-        }
-
-        var cache: [Int : LineChartData] = [:]
-
-        init(measurementType: TrainingExerciseChartDataGenerator.MeasurementType, timeFrames: [TrainingExerciseChartDataGenerator.TimeFrame]) {
+        init(measurementType: TrainingExerciseChartDataGenerator.MeasurementType) {
             self.measurementType = measurementType
-            self.timeFrames = timeFrames
-            self.segmentTitles = timeFrames.map { $0.title }
         }
     }
     private var tableViewEntries = [TableViewEntry]() {
@@ -50,15 +50,19 @@ class ExerciseStatisticsTableViewController: UITableViewController, ChartCellDel
 
     private func createTableViewEntries() -> [TableViewEntry] {
         return TrainingExerciseChartDataGenerator.MeasurementType.allCases.map {
-            TableViewEntry(measurementType: $0, timeFrames: TrainingExerciseChartDataGenerator.TimeFrame.allCases)
+            TableViewEntry(measurementType: $0)
         }
     }
 
-    private func updateChartView(segmentedChartView: SegmentedChartView, with entry: TableViewEntry) {
-        let formatters = chartDataGenerator.formatters(for: entry.measurementType, timeFrame: entry.selectedTimeFrame)
-        let chartData = entry.cache[entry.selectedSegmentIndex] ?? chartDataGenerator.chartData(for: entry.measurementType, timeFrame: entry.selectedTimeFrame)
-        entry.cache[entry.selectedSegmentIndex] = chartData
-        segmentedChartView.updateChartView(with: chartData, xAxisFormatter: formatters.0, yAxisFormatter: formatters.1, balloonValueFormatter: formatters.2, showLegend: true)
+    private func updateChartView(styledChartView: StyledChartView, with entry: TableViewEntry) {
+        let formatters = chartDataGenerator.formatters(for: entry.measurementType)
+        let chartData = entry.cache ?? chartDataGenerator.chartData(for: entry.measurementType, timeFrame: selectedTimeFrame)
+        entry.cache = chartData
+
+        styledChartView.xAxis.valueFormatter = formatters.0
+        styledChartView.leftAxis.valueFormatter = formatters.1
+        styledChartView.balloonMarker.valueFormatter = formatters.2
+        styledChartView.data = chartData
     }
 
     // MARK: - Table view data source
@@ -75,15 +79,13 @@ class ExerciseStatisticsTableViewController: UITableViewController, ChartCellDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "chart cell", for: indexPath) as! ChartCell
         let entry = tableViewEntries[indexPath.section]
 
-        cell.delegate = self
-        cell.segmentedChartView.delegate = cell
-        cell.segmentedChartView.segmentTitles = entry.segmentTitles
-        cell.segmentedChartView.selectedSegmentIndex = entry.selectedSegmentIndex
+        cell.detailLabel.text = exercise?.title
+        cell.titleLabel.text = entry.measurementType.title
 
-        updateChartView(segmentedChartView: cell.segmentedChartView, with: entry)
+        updateChartView(styledChartView: cell.styledChartView, with: entry)
 
         if !entry.hasBeenAnimated { // animate just once
-            cell.segmentedChartView.animateChartView()
+            cell.styledChartView.animate()
             entry.hasBeenAnimated = true
         }
         return cell
@@ -96,28 +98,10 @@ class ExerciseStatisticsTableViewController: UITableViewController, ChartCellDel
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-
-    // MARK: - ChartCell
-
-    func chartCell(_ chartCell: ChartCell, didSelectSegmentIndex: Int) {
-        guard let indexPath = tableView.indexPath(for: chartCell) else { return } // should never happen
-        let entry = tableViewEntries[indexPath.section]
-        entry.selectedSegmentIndex = didSelectSegmentIndex
-
-        updateChartView(segmentedChartView: chartCell.segmentedChartView, with: entry)
-    }
 }
 
-protocol ChartCellDelegate: class {
-    func chartCell(_ chartCell: ChartCell, didSelectSegmentIndex: Int)
-}
-
-class ChartCell: UITableViewCell, SegmentedChartViewDelegate {
-    @IBOutlet weak var segmentedChartView: SegmentedChartView!
-
-    weak var delegate: ChartCellDelegate?
-
-    func segmentedChartView(_ segmentedChartView: SegmentedChartView, didSelectSegmentIndex: Int) {
-        delegate?.chartCell(self, didSelectSegmentIndex: didSelectSegmentIndex)
-    }
+class ChartCell: UITableViewCell {
+    @IBOutlet weak var styledChartView: StyledChartView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
 }
