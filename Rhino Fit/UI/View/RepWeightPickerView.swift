@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable class RepWeightPickerView: UIStackView {
-    var delegate: RepWeightPickerDelegate?
+    weak var delegate: RepWeightPickerDelegate?
     
     var pickerView: UIPickerView!
     var button: UIButton!
@@ -95,7 +95,7 @@ import UIKit
     }
 }
 
-protocol RepWeightPickerDelegate {
+protocol RepWeightPickerDelegate: AnyObject {
     func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect repetitions: Int)
     
     func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Float)
