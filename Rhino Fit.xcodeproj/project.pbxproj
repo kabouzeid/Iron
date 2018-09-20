@@ -758,8 +758,7 @@
 				8A5C08CC205DA06200E78BE7 /* Base */,
 			);
 			name = Profile.storyboard;
-			path = "/Users/karim/Code/XcodeProjects/RhinoFit/Rhino Fit";
-			sourceTree = "<absolute>";
+			sourceTree = "<group>";
 		};
 		8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
