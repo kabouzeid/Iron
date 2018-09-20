@@ -35,7 +35,6 @@ class ExerciseStatisticsTableViewController: UITableViewController {
 
     private class TableViewEntry {
         let measurementType: TrainingExerciseChartDataGenerator.MeasurementType
-        var hasBeenAnimated = false
         var cache: LineChartData?
 
         init(measurementType: TrainingExerciseChartDataGenerator.MeasurementType) {
@@ -85,10 +84,6 @@ class ExerciseStatisticsTableViewController: UITableViewController {
 
         updateChartView(styledChartView: cell.styledChartView, with: entry)
 
-        if !entry.hasBeenAnimated { // animate just once
-            cell.styledChartView.animate()
-            entry.hasBeenAnimated = true
-        }
         return cell
     }
 
