@@ -63,6 +63,7 @@ class ExerciseStatisticsTableViewController: UITableViewController {
         styledChartView.leftAxis.valueFormatter = formatters.1
         styledChartView.balloonMarker.valueFormatter = formatters.2
         styledChartView.data = chartData
+        styledChartView.fitScreen()
     }
 
     // MARK: - Table view data source
