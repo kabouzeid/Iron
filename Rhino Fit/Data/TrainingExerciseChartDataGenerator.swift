@@ -79,7 +79,7 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    let balloonValueFormatter = DateBalloonValueFormatter(append: nil)
+    let countBalloonValueFormatter = DateBalloonValueFormatter(append: "x")
     let kgBalloonValueFormatter = DateBalloonValueFormatter(append: "kg")
     let xAxisValueFormatter = DateAxisFormatter()
     let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
@@ -89,7 +89,7 @@ class TrainingExerciseChartDataGenerator {
         case .oneRM, .totalWeight:
             return (xAxisValueFormatter, yAxisValueFormatter, kgBalloonValueFormatter)
         case .totalSets, .totalRepetitions:
-            return (xAxisValueFormatter, yAxisValueFormatter, balloonValueFormatter)
+            return (xAxisValueFormatter, yAxisValueFormatter, countBalloonValueFormatter)
         }
     }
 
