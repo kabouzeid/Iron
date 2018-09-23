@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26C4457EB8DA9F385DA9F96A /* Pods_Sunrise_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
-		8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */; };
+		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
-		8A36D64C20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */; };
+		8A36D64C20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */; };
 		8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */; };
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
@@ -31,15 +32,15 @@
 		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */; };
-		8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld */; };
+		8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
-		8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */; };
+		8A7D6EB0200BF92E00AA0FA7 /* Sunrise_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */; };
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */; };
 		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
-		8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */; };
+		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
 		8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
@@ -54,8 +55,7 @@
 		8AD4082C202F97E200A73E05 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD4082A202F97E200A73E05 /* Exercises.storyboard */; };
 		8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */; };
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
-		ACD0EC9B0D331A9B4BDF72CA /* Pods_Rhino_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */; };
-		B2B5464AE119C7DA15FA73ED /* Pods_Rhino_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */; };
+		B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,16 +83,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BC075B5C41FFE2F61320901 /* Pods-Rhino FitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino FitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino FitTests/Pods-Rhino FitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.debug.xcconfig"; sourceTree = "<group>"; };
-		6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80558E9154ADBCE77B4762E7 /* Pods-Rhino FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino FitTests/Pods-Rhino FitTests.release.xcconfig"; sourceTree = "<group>"; };
+		17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Fit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit.debug.xcconfig"; sourceTree = "<group>"; };
+		318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit.release.xcconfig"; sourceTree = "<group>"; };
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
-		8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitCoreDataTests.swift; sourceTree = "<group>"; };
+		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitFastlaneSnapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitFastlaneSnapshot.swift; sourceTree = "<group>"; };
+		8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitFastlaneSnapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitFastlaneSnapshot.swift; sourceTree = "<group>"; };
 		8A36D64D20A5BE0C003D59E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
@@ -111,22 +110,22 @@
 		8A643E1A21490C520044C3A1 /* StyledChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledChartView.swift; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
 		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
-		8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rhino Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6E9C200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8A7D6E9F200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rhino_Fit.xcdatamodel; sourceTree = "<group>"; };
+		8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrainingsData.xcdatamodel; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A7D6EA4200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A7D6EA6200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitTests.swift; sourceTree = "<group>"; };
+		8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitTests.swift; sourceTree = "<group>"; };
 		8A7D6EB1200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
-		8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rhino FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhino_FitUITests.swift; sourceTree = "<group>"; };
+		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetTableViewCell.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
@@ -142,8 +141,9 @@
 		8AD4082B202F97E200A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Exercises.storyboard; sourceTree = "<group>"; };
 		8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingViewController.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableArrayExtension.swift; sourceTree = "<group>"; };
-		975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rhino_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rhino Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit.release.xcconfig"; sourceTree = "<group>"; };
+		A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B5464AE119C7DA15FA73ED /* Pods_Rhino_Fit.framework in Frameworks */,
+				B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACD0EC9B0D331A9B4BDF72CA /* Pods_Rhino_FitTests.framework in Frameworks */,
+				26C4457EB8DA9F385DA9F96A /* Pods_Sunrise_FitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,20 +183,20 @@
 		0F66DB06EF93426734398018 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F0DC61818D23003792140A0 /* Pods_Rhino_Fit.framework */,
-				975E1AD2ED9C8201C800776A /* Pods_Rhino_FitTests.framework */,
+				A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */,
+				C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8A36D64A20A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */ = {
+		8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */ = {
 			isa = PBXGroup;
 			children = (
 				8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */,
-				8A36D64B20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift */,
+				8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */,
 				8A36D64D20A5BE0C003D59E6 /* Info.plist */,
 			);
-			path = "Rhino FitFastlaneSnapshot";
+			path = "Sunrise FitFastlaneSnapshot";
 			sourceTree = "<group>";
 		};
 		8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */ = {
@@ -243,10 +243,10 @@
 		8A7D6E8B200BF92E00AA0FA7 = {
 			isa = PBXGroup;
 			children = (
-				8A7D6E96200BF92E00AA0FA7 /* Rhino Fit */,
-				8A7D6EAE200BF92E00AA0FA7 /* Rhino FitTests */,
-				8A36D64A20A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */,
-				8A9C5A6F20A6F86A00DEBCC5 /* Rhino FitUITests */,
+				8A7D6E96200BF92E00AA0FA7 /* Sunrise Fit */,
+				8A7D6EAE200BF92E00AA0FA7 /* Sunrise FitTests */,
+				8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */,
+				8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				9500C407BE043857C54B4BA6 /* Pods */,
 				0F66DB06EF93426734398018 /* Frameworks */,
@@ -256,15 +256,15 @@
 		8A7D6E95200BF92E00AA0FA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */,
-				8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */,
-				8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */,
-				8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */,
+				8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */,
+				8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */,
+				8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */,
+				8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8A7D6E96200BF92E00AA0FA7 /* Rhino Fit */ = {
+		8A7D6E96200BF92E00AA0FA7 /* Sunrise Fit */ = {
 			isa = PBXGroup;
 			children = (
 				8AD40826202F96CB00A73E05 /* Extension */,
@@ -277,31 +277,31 @@
 				8AD4082A202F97E200A73E05 /* Exercises.storyboard */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
-				8A7D6E9E200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld */,
+				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
 				8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */,
 				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
 			);
-			path = "Rhino Fit";
+			path = "Sunrise Fit";
 			sourceTree = "<group>";
 		};
-		8A7D6EAE200BF92E00AA0FA7 /* Rhino FitTests */ = {
+		8A7D6EAE200BF92E00AA0FA7 /* Sunrise FitTests */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D6EAF200BF92E00AA0FA7 /* Rhino_FitTests.swift */,
-				8A239AE7203580A1006BB38B /* Rhino_FitCoreDataTests.swift */,
+				8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */,
+				8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */,
 				8A7D6EB1200BF92E00AA0FA7 /* Info.plist */,
 				8AB972F6203583E40099507B /* CoreDataHelper.swift */,
 			);
-			path = "Rhino FitTests";
+			path = "Sunrise FitTests";
 			sourceTree = "<group>";
 		};
-		8A9C5A6F20A6F86A00DEBCC5 /* Rhino FitUITests */ = {
+		8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8A9C5A7020A6F86A00DEBCC5 /* Rhino_FitUITests.swift */,
+				8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */,
 				8A9C5A7220A6F86A00DEBCC5 /* Info.plist */,
 			);
-			path = "Rhino FitUITests";
+			path = "Sunrise FitUITests";
 			sourceTree = "<group>";
 		};
 		8AA947F2203B8864005D1758 /* CurrentTrainingExerciseScene */ = {
@@ -423,10 +423,10 @@
 		9500C407BE043857C54B4BA6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */,
-				9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */,
-				0BC075B5C41FFE2F61320901 /* Pods-Rhino FitTests.debug.xcconfig */,
-				80558E9154ADBCE77B4762E7 /* Pods-Rhino FitTests.release.xcconfig */,
+				17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */,
+				70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */,
+				318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */,
+				F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -434,9 +434,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A36D64820A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */ = {
+		8A36D64820A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Rhino FitFastlaneSnapshot" */;
+			buildConfigurationList = 8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Sunrise FitFastlaneSnapshot" */;
 			buildPhases = (
 				8A36D64520A5BE0C003D59E6 /* Sources */,
 				8A36D64620A5BE0C003D59E6 /* Frameworks */,
@@ -447,14 +447,14 @@
 			dependencies = (
 				8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */,
 			);
-			name = "Rhino FitFastlaneSnapshot";
+			name = "Sunrise FitFastlaneSnapshot";
 			productName = "Rhino FitFastlaneSnapshot";
-			productReference = 8A36D64920A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot.xctest */;
+			productReference = 8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */ = {
+		8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Rhino Fit" */;
+			buildConfigurationList = 8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise Fit" */;
 			buildPhases = (
 				315DAD69244E5A8B882AE950 /* [CP] Check Pods Manifest.lock */,
 				8A7D6E90200BF92E00AA0FA7 /* Sources */,
@@ -466,14 +466,14 @@
 			);
 			dependencies = (
 			);
-			name = "Rhino Fit";
+			name = "Sunrise Fit";
 			productName = "Rhino Fit";
-			productReference = 8A7D6E94200BF92E00AA0FA7 /* Rhino Fit.app */;
+			productReference = 8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8A7D6EAA200BF92E00AA0FA7 /* Rhino FitTests */ = {
+		8A7D6EAA200BF92E00AA0FA7 /* Sunrise FitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A7D6EB7200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Rhino FitTests" */;
+			buildConfigurationList = 8A7D6EB7200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise FitTests" */;
 			buildPhases = (
 				B77221BCC0C7CC76E9497C80 /* [CP] Check Pods Manifest.lock */,
 				8A7D6EA7200BF92E00AA0FA7 /* Sources */,
@@ -485,14 +485,14 @@
 			dependencies = (
 				8A7D6EAD200BF92E00AA0FA7 /* PBXTargetDependency */,
 			);
-			name = "Rhino FitTests";
+			name = "Sunrise FitTests";
 			productName = "Rhino FitTests";
-			productReference = 8A7D6EAB200BF92E00AA0FA7 /* Rhino FitTests.xctest */;
+			productReference = 8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8A9C5A6D20A6F86A00DEBCC5 /* Rhino FitUITests */ = {
+		8A9C5A6D20A6F86A00DEBCC5 /* Sunrise FitUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Rhino FitUITests" */;
+			buildConfigurationList = 8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Sunrise FitUITests" */;
 			buildPhases = (
 				8A9C5A6A20A6F86A00DEBCC5 /* Sources */,
 				8A9C5A6B20A6F86A00DEBCC5 /* Frameworks */,
@@ -503,9 +503,9 @@
 			dependencies = (
 				8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */,
 			);
-			name = "Rhino FitUITests";
+			name = "Sunrise FitUITests";
 			productName = "Rhino FitUITests";
-			productReference = 8A9C5A6E20A6F86A00DEBCC5 /* Rhino FitUITests.xctest */;
+			productReference = 8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -542,7 +542,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Rhino Fit" */;
+			buildConfigurationList = 8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Sunrise Fit" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -555,10 +555,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */,
-				8A7D6EAA200BF92E00AA0FA7 /* Rhino FitTests */,
-				8A36D64820A5BE0C003D59E6 /* Rhino FitFastlaneSnapshot */,
-				8A9C5A6D20A6F86A00DEBCC5 /* Rhino FitUITests */,
+				8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */,
+				8A7D6EAA200BF92E00AA0FA7 /* Sunrise FitTests */,
+				8A36D64820A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */,
+				8A9C5A6D20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -613,7 +613,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rhino Fit-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Sunrise Fit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -626,7 +626,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Benchmark/Benchmark.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -639,7 +639,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rhino Fit/Pods-Rhino Fit-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B77221BCC0C7CC76E9497C80 /* [CP] Check Pods Manifest.lock */ = {
@@ -653,7 +653,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rhino FitTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Sunrise FitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -667,7 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A36D64C20A5BE0C003D59E6 /* Rhino_FitFastlaneSnapshot.swift in Sources */,
+				8A36D64C20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift in Sources */,
 				8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,7 +685,7 @@
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
 				8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */,
-				8A7D6EA0200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld in Sources */,
+				8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */,
 				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */,
@@ -718,8 +718,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */,
-				8A7D6EB0200BF92E00AA0FA7 /* Rhino_FitTests.swift in Sources */,
-				8A239AE8203580A1006BB38B /* Rhino_FitCoreDataTests.swift in Sources */,
+				8A7D6EB0200BF92E00AA0FA7 /* Sunrise_FitTests.swift in Sources */,
+				8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A9C5A7120A6F86A00DEBCC5 /* Rhino_FitUITests.swift in Sources */,
+				8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,17 +736,17 @@
 /* Begin PBXTargetDependency section */
 		8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
 			targetProxy = 8A36D64E20A5BE0C003D59E6 /* PBXContainerItemProxy */;
 		};
 		8A7D6EAD200BF92E00AA0FA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
 			targetProxy = 8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */;
 		};
 		8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Rhino Fit */;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
 			targetProxy = 8A9C5A7320A6F86A00DEBCC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -801,13 +801,13 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitFastlaneSnapshot/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitFastlaneSnapshot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitFastlaneSnapshot";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitFastlaneSnapshot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rhino Fit";
+				TEST_TARGET_NAME = "Sunrise Fit";
 			};
 			name = Debug;
 		};
@@ -817,13 +817,13 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitFastlaneSnapshot/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitFastlaneSnapshot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitFastlaneSnapshot";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitFastlaneSnapshot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rhino Fit";
+				TEST_TARGET_NAME = "Sunrise Fit";
 			};
 			name = Release;
 		};
@@ -940,15 +940,15 @@
 		};
 		8A7D6EB5200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16A7135C00D94F1CDEDCEF20 /* Pods-Rhino Fit.debug.xcconfig */;
+			baseConfigurationReference = 17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino Fit/Info.plist";
+				INFOPLIST_FILE = "Sunrise Fit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-Fit";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Sunrise-Fit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -958,15 +958,15 @@
 		};
 		8A7D6EB6200BF92E00AA0FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D9704172984128D2BDC5466 /* Pods-Rhino Fit.release.xcconfig */;
+			baseConfigurationReference = 70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino Fit/Info.plist";
+				INFOPLIST_FILE = "Sunrise Fit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-Fit";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Sunrise-Fit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -976,37 +976,37 @@
 		};
 		8A7D6EB8200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BC075B5C41FFE2F61320901 /* Pods-Rhino FitTests.debug.xcconfig */;
+			baseConfigurationReference = 318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitTests/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-FitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Sunrise-FitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rhino Fit.app/Rhino Fit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise Fit.app/Sunrise Fit";
 			};
 			name = Debug;
 		};
 		8A7D6EB9200BF92E00AA0FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80558E9154ADBCE77B4762E7 /* Pods-Rhino FitTests.release.xcconfig */;
+			baseConfigurationReference = F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitTests/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Rhino-FitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kabouzeid.Sunrise-FitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rhino Fit.app/Rhino Fit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise Fit.app/Sunrise Fit";
 			};
 			name = Release;
 		};
@@ -1016,13 +1016,13 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitUITests/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rhino Fit";
+				TEST_TARGET_NAME = "Sunrise Fit";
 			};
 			name = Debug;
 		};
@@ -1032,20 +1032,20 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Rhino FitUITests/Info.plist";
+				INFOPLIST_FILE = "Sunrise FitUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Rhino-FitUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rhino Fit";
+				TEST_TARGET_NAME = "Sunrise Fit";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Rhino FitFastlaneSnapshot" */ = {
+		8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Sunrise FitFastlaneSnapshot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A36D65020A5BE0C003D59E6 /* Debug */,
@@ -1054,7 +1054,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Rhino Fit" */ = {
+		8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Sunrise Fit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A7D6EB2200BF92E00AA0FA7 /* Debug */,
@@ -1063,7 +1063,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Rhino Fit" */ = {
+		8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise Fit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A7D6EB5200BF92E00AA0FA7 /* Debug */,
@@ -1072,7 +1072,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A7D6EB7200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Rhino FitTests" */ = {
+		8A7D6EB7200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise FitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A7D6EB8200BF92E00AA0FA7 /* Debug */,
@@ -1081,7 +1081,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Rhino FitUITests" */ = {
+		8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Sunrise FitUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A9C5A7620A6F86A00DEBCC5 /* Debug */,
@@ -1093,13 +1093,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8A7D6E9E200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodeld */ = {
+		8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8A7D6E9F200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodel */,
+				8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */,
 			);
-			currentVersion = 8A7D6E9F200BF92E00AA0FA7 /* Rhino_Fit.xcdatamodel */;
-			path = Rhino_Fit.xcdatamodeld;
+			currentVersion = 8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */;
+			path = TrainingsData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

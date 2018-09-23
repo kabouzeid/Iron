@@ -1,6 +1,6 @@
 platform :ios, '9.0'
 
-target 'Rhino Fit' do
+target 'Sunrise Fit' do
   use_frameworks!
 
   # Pods for Rhino Fit
@@ -8,7 +8,7 @@ target 'Rhino Fit' do
   pod 'Benchmark'
   pod 'Charts'
 
-  target 'Rhino FitTests' do
+  target 'Sunrise FitTests' do
     inherit! :search_paths
     # Pods for testing
   end

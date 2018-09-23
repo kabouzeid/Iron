@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import Rhino_Fit
+@testable import Sunrise_Fit
 
-class Rhino_FitTests: XCTestCase {
+class Sunrise_FitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

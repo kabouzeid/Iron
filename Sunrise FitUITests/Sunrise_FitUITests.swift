@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Rhino_FitUITests: XCTestCase {
+class Sunrise_FitUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

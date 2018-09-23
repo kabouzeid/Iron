@@ -8,9 +8,9 @@
 
 import XCTest
 import CoreData
-@testable import Rhino_Fit
+@testable import Sunrise_Fit
 
-class Rhino_FitCoreDataTests: XCTestCase {
+class Sunrise_FitCoreDataTests: XCTestCase {
     let persistenContainer = setUpInMemoryNSPersistentContainer()
     
     override func setUp() {

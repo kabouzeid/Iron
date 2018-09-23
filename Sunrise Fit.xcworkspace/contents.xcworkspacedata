@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Rhino Fit.xcodeproj">
+      location = "group:/Users/karim/Code/XcodeProjects/SunriseFit/Sunrise Fit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

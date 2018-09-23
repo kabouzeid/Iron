@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Rhino_FitFastlaneSnapshot: XCTestCase {
+class Sunrise_FitFastlaneSnapshot: XCTestCase {
         
     override func setUp() {
         super.setUp()

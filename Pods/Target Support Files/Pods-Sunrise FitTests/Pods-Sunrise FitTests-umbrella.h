@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Rhino_FitVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Rhino_FitVersionString[];
+FOUNDATION_EXPORT double Pods_Sunrise_FitTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Sunrise_FitTestsVersionString[];
 

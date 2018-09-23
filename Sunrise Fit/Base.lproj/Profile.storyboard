@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3qS-LC-6BB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3qS-LC-6BB">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Profile-->
         <scene sceneID="Iey-Bh-1WV">
             <objects>
-                <tableViewController id="7H0-2d-dsd" customClass="TrainingsTableViewController" customModule="Rhino_Fit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="7H0-2d-dsd" customClass="TrainingsTableViewController" customModule="Sunrise_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="TBZ-zf-PjM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="NOD-f8-xUx" customClass="SummaryView" customModule="Rhino_Fit" customModuleProvider="target">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="NOD-f8-xUx" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <userDefinedRuntimeAttributes>
@@ -73,12 +72,12 @@
         <!--Title-->
         <scene sceneID="Hn0-E9-wJk">
             <objects>
-                <tableViewController storyboardIdentifier="TrainingDetailViewController" id="ufa-yo-wfC" customClass="TrainingDetailTableViewController" customModule="Rhino_Fit" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TrainingDetailViewController" id="ufa-yo-wfC" customClass="TrainingDetailTableViewController" customModule="Sunrise_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="73K-c6-Lva">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="fpE-4s-qNo" customClass="SummaryView" customModule="Rhino_Fit" customModuleProvider="target">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="fpE-4s-qNo" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <userDefinedRuntimeAttributes>
@@ -88,7 +87,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exercise title cell" id="buw-8m-peD" customClass="TitleTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exercise title cell" id="buw-8m-peD" customClass="TitleTableViewCell" customModule="Sunrise_Fit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="155.33333333333334" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="buw-8m-peD" id="sGi-gH-dTr">
@@ -137,7 +136,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="date picker cell" id="pXJ-gR-BqI" customClass="DatePickerTableViewCell" customModule="Rhino_Fit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="date picker cell" id="pXJ-gR-BqI" customClass="DatePickerTableViewCell" customModule="Sunrise_Fit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="243.33333333333337" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pXJ-gR-BqI" id="8fJ-pI-S1G">
@@ -145,7 +144,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IS2-9S-i1B">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <date key="date" timeIntervalSinceReferenceDate="546992839.51249099">
                                                 <!--2018-05-02 22:27:19 +0000-->
                                             </date>
