@@ -76,10 +76,10 @@ class Sunrise_FitTests: XCTestCase {
         XCTAssertEqual(array.sortedByFrequency(), ["Me","Hello","That"])
     }
 
-    func testFloatShortStringValue() {
-        XCTAssertEqual(Float(1.23456).shortStringValue, "1.23")
-        XCTAssertEqual(Float(1.2).shortStringValue, "1.2")
-        XCTAssertEqual(Float(1).shortStringValue, "1")
+    func testDoubleShortStringValue() {
+        XCTAssertEqual(Double(1.23456).shortStringValue, "1.23")
+        XCTAssertEqual(Double(1.2).shortStringValue, "1.2")
+        XCTAssertEqual(Double(1).shortStringValue, "1")
     }
     
 }

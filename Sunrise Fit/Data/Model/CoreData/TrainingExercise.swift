@@ -59,11 +59,11 @@ class TrainingExercise: NSManagedObject {
         })
     }
 
-    var totalCompletedWeight: Float {
+    var totalCompletedWeight: Double {
         // TODO: do this with a predicate
-        return trainingSets!.reduce(0, { (weight, trainingSet) -> Float in
+        return trainingSets!.reduce(0, { (weight, trainingSet) -> Double in
             let trainingSet = trainingSet as! TrainingSet
-            return weight + (trainingSet.isCompleted ? trainingSet.weight * Float(trainingSet.repetitions) : 0)
+            return weight + (trainingSet.isCompleted ? trainingSet.weight * Double(trainingSet.repetitions) : 0)
         })
     }
 }

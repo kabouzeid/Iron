@@ -44,7 +44,7 @@ import UIKit
         delegate?.repWeightPickerViewButtonClicked(self)
     }
     
-    func select(weight: Float, animated: Bool) {
+    func select(weight: Double, animated: Bool) {
         let integer = Int(weight.rounded(.down))
         let comma = Int((weight*100).rounded(.down)) % 100
         
@@ -98,7 +98,7 @@ import UIKit
 protocol RepWeightPickerDelegate: AnyObject {
     func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect repetitions: Int)
     
-    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Float)
+    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Double)
     
     func repWeightPickerViewButtonClicked(_ repWeightPickerView: RepWeightPickerView)
 }
@@ -152,8 +152,8 @@ extension RepWeightPickerView: UIPickerViewDelegate {
         }
     }
     
-    private func weightFor(first: Int, second: Int) -> Float {
-        return Float(first) + Float(second)*0.25
+    private func weightFor(first: Int, second: Int) -> Double {
+        return Double(first) + Double(second)*0.25
     }
     
     private func repetitionsFor(row: Int) -> Int {

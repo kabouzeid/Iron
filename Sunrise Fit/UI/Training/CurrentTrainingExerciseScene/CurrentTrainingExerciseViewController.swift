@@ -347,7 +347,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         }
     }
     
-    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Float) {
+    func repWeightPickerView(_ repWeightPickerView: RepWeightPickerView, didSelect weight: Double) {
         if let indexPath = tableView.indexPathForSelectedRow {
             let trainingExercise = self.trainingSet(of: indexPath)
             trainingExercise.weight = weight
