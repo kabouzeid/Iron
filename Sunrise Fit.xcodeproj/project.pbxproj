@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		26C4457EB8DA9F385DA9F96A /* Pods_Sunrise_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
+		8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265D21610D9800087448 /* FeedTableViewController.swift */; };
+		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
 		8A36D64C20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */; };
 		8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */; };
+		8A3C5F95218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */; };
+		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
 		8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */; };
@@ -25,9 +29,8 @@
 		8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */; };
 		8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */; };
 		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
-		8A5C08CB205DA06200E78BE7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5C08CD205DA06200E78BE7 /* Profile.storyboard */; };
 		8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
-		8A643E1B21490C520044C3A1 /* StyledChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledChartView.swift */; };
+		8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
 		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
@@ -51,8 +54,6 @@
 		8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
-		8AD40829202F979800A73E05 /* Training.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD40827202F979800A73E05 /* Training.storyboard */; };
-		8AD4082C202F97E200A73E05 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD4082A202F97E200A73E05 /* Exercises.storyboard */; };
 		8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */; };
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
 		B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */; };
@@ -87,6 +88,8 @@
 		318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit.release.xcconfig"; sourceTree = "<group>"; };
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
+		8A1C265D21610D9800087448 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerWeekChartInfo.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 		8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitFastlaneSnapshot.swift; sourceTree = "<group>"; };
 		8A36D64D20A5BE0C003D59E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLineChartViewBaseExtension.swift; sourceTree = "<group>"; };
+		8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBarChartView.swift; sourceTree = "<group>"; };
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -105,9 +110,8 @@
 		8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatisticsTableViewController.swift; sourceTree = "<group>"; };
 		8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
-		8A5C08CC205DA06200E78BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		8A643E132147B8430044C3A1 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
-		8A643E1A21490C520044C3A1 /* StyledChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledChartView.swift; sourceTree = "<group>"; };
+		8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledLineChartView.swift; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
 		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,8 +141,6 @@
 		8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsTableViewController.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
-		8AD40828202F979800A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Training.storyboard; sourceTree = "<group>"; };
-		8AD4082B202F97E200A73E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Exercises.storyboard; sourceTree = "<group>"; };
 		8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingViewController.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableArrayExtension.swift; sourceTree = "<group>"; };
 		A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,7 +236,8 @@
 			children = (
 				8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */,
 				8A70888B20A85C6400EF9ADE /* SummaryView.swift */,
-				8A643E1A21490C520044C3A1 /* StyledChartView.swift */,
+				8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */,
+				8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */,
 				8A643E132147B8430044C3A1 /* BalloonMarker.swift */,
 			);
 			path = View;
@@ -272,9 +275,6 @@
 				8AABF2AC20168900009C047D /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */,
-				8AD40827202F979800A73E05 /* Training.storyboard */,
-				8A5C08CD205DA06200E78BE7 /* Profile.storyboard */,
-				8AD4082A202F97E200A73E05 /* Exercises.storyboard */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
 				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
@@ -320,6 +320,7 @@
 				8AD40835202FC7C200A73E05 /* Model */,
 				8AABF2A7201683E8009C047D /* Everkinetic */,
 				8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */,
+				8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -340,6 +341,7 @@
 				8ABE62C5204B0DDB0035DB1B /* Profile */,
 				8A5809412049E2300070D794 /* Training */,
 				8A5809432049E2590070D794 /* Exercises */,
+				8A1C265D21610D9800087448 /* FeedTableViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -391,6 +393,7 @@
 				8A442AD6207A428500A2BDBD /* DateExtension.swift */,
 				8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */,
 				8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */,
+				8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -576,12 +579,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AD40829202F979800A73E05 /* Training.storyboard in Resources */,
 				8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,
-				8AD4082C202F97E200A73E05 /* Exercises.storyboard in Resources */,
-				8A5C08CB205DA06200E78BE7 /* Profile.storyboard in Resources */,
 				8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -678,7 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */,
-				8A643E1B21490C520044C3A1 /* StyledChartView.swift in Sources */,
+				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */,
 				8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,
@@ -693,12 +693,15 @@
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8AA947F4203B88C6005D1758 /* AddSetTableViewCell.swift in Sources */,
+				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
+				8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
 				8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
+				8A3C5F95218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift in Sources */,
 				8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */,
 				8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */,
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
@@ -708,6 +711,7 @@
 				8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */,
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
+				8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */,
 				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,
 				8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */,
 				8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */,
@@ -753,14 +757,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8A5C08CD205DA06200E78BE7 /* Profile.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A5C08CC205DA06200E78BE7 /* Base */,
-			);
-			name = Profile.storyboard;
-			sourceTree = "<group>";
-		};
 		8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -775,22 +771,6 @@
 				8A7D6EA4200BF92E00AA0FA7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		8AD40827202F979800A73E05 /* Training.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8AD40828202F979800A73E05 /* Base */,
-			);
-			name = Training.storyboard;
-			sourceTree = "<group>";
-		};
-		8AD4082A202F97E200A73E05 /* Exercises.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8AD4082B202F97E200A73E05 /* Base */,
-			);
-			name = Exercises.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -43,7 +43,7 @@ class CurrentTrainingExercisePageViewController: UIPageViewController {
     }
     
     private func instantiateTrainingExerciseViewController(with trainingExercise: TrainingExercise) -> CurrentTrainingExerciseViewController {
-        let trainingExerciseViewController = UIStoryboard(name: "Training", bundle: nil).instantiateViewController(withIdentifier: "TrainingExerciseViewController") as! CurrentTrainingExerciseViewController
+        let trainingExerciseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingExerciseViewController") as! CurrentTrainingExerciseViewController
         trainingExerciseViewController.trainingExercise = trainingExercise
         trainingExerciseViewController.completeExerciseTitle = completeExerciseTitle(exercise: trainingExercise)
         trainingExerciseViewController.delegate = self

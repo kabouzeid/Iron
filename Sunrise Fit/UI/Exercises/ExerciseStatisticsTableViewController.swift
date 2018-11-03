@@ -53,7 +53,7 @@ class ExerciseStatisticsTableViewController: UITableViewController {
         }
     }
 
-    private func updateChartView(styledChartView: StyledChartView, with entry: TableViewEntry) {
+    private func updateChartView(styledChartView: StyledLineChartView, with entry: TableViewEntry) {
         let formatters = chartDataGenerator.formatters(for: entry.measurementType)
         let chartData = entry.cache ?? chartDataGenerator.chartData(for: entry.measurementType, timeFrame: selectedTimeFrame)
         entry.cache = chartData
@@ -97,7 +97,7 @@ class ExerciseStatisticsTableViewController: UITableViewController {
 }
 
 class ChartCell: UITableViewCell {
-    @IBOutlet weak var styledChartView: StyledChartView!
+    @IBOutlet weak var styledChartView: StyledLineChartView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
 }
