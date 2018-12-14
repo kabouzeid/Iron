@@ -3532,6 +3532,33 @@
         ]
     },
     {
+        "id": "0108",
+        "name": "plank",
+        "title": "Plank",
+        "primer": "This is an exercise for core strengthening.",
+        "type": "compound",
+        "primary": [
+            "obliques"
+        ],
+        "secondary": [],
+        "equipment": [
+            "body"
+        ],
+        "steps": [
+            "Put your hands and knees on the floor.",
+            "Balance yourself on your feet and forearms.",
+            "Hold this position and slowly return back to the starting position."
+        ],
+        "tips": [],
+        "references": [],
+        "pdf": [
+            "pdf/0108-tension.pdf"
+        ],
+        "png": [
+            "png/0108-tension.png"
+        ]
+    },
+    {
         "id": "0109",
         "name": "bridging",
         "title": "Bridging",
@@ -3647,11 +3674,9 @@
         "tips": [],
         "references": [],
         "pdf": [
-            "pdf/0113-relaxation.pdf",
             "pdf/0113-tension.pdf"
         ],
         "png": [
-            "png/0113-relaxation.png",
             "png/0113-tension.png"
         ]
     },
@@ -9758,7 +9783,7 @@
         "name": "face-pulls",
         "title": "Face Pulls",
         "primer": "An excellent exercise for the rear shoulders.",
-        "type": "compound",
+        "type": "isolation",
         "primary": [
             "deltoid"
         ],
@@ -9781,5 +9806,4 @@
             "png/9002-tension.png"
         ]
     }
-
 ]
