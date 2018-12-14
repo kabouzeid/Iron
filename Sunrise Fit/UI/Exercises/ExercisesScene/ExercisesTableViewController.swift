@@ -58,9 +58,9 @@ class ExercisesTableViewController: UITableViewController, UISearchResultsUpdati
                 }
                 return true
             }).map { muscleGroup in
-                // sort each section by smallest title and then alphabetically
+                // if filter is not empty sort each section by smallest title and then alphabetically
                 return muscleGroup.sorted(by: { a, b in
-                    if a.title.count == b.title.count {
+                    if filterText.isEmpty || a.title.count == b.title.count {
                         return a.title < b.title
                     }
                     return a.title.count < b.title.count
