@@ -69,7 +69,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="chartView" destination="Tl9-Ij-iba" id="6ZP-lL-e5D"/>
+                                    <outlet property="chartView" destination="Tl9-Ij-iba" id="7qG-3L-hXl"/>
                                     <outlet property="detailLabel" destination="RWd-kh-iqW" id="2Yh-VL-BcY"/>
                                     <outlet property="titleLabel" destination="0h0-hj-3vd" id="AEr-8g-WWH"/>
                                 </connections>

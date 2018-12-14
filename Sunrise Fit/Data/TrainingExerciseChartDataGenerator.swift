@@ -23,10 +23,10 @@ class TrainingExerciseChartDataGenerator {
     private var trainingExerciseHistory = [TrainingExercise]()
 
     init(exercise: Exercise? = nil) {
-        self.exercise = exercise
+        defer { self.exercise = exercise } // without defer, didSet is not called
     }
 
-    enum MeasurementType: CaseIterable {
+    enum MeasurementType: String, CaseIterable {
         case oneRM
         case totalWeight
         case totalSets

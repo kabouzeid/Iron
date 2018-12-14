@@ -16,10 +16,17 @@ class FeedTableViewController: UITableViewController {
     
     private var trainingsPerWeekChartInfo: TrainingsPerWeekChartInfo?
     private var trainingsPerWeekChartDataCache: BarChartData?
+    
+    private var pinnedCharts = [UserDefaults.PinnedChart]()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateSummary()
+        
+        pinnedCharts = UserDefaults.standard.pinnedCharts()
+        trainingsPerWeekChartInfo = nil
+        trainingsPerWeekChartDataCache = nil
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -32,7 +39,7 @@ class FeedTableViewController: UITableViewController {
         if section == 0 {
             return 1
         }
-        return 0 // TODO: pinned charts
+        return pinnedCharts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,6 +68,23 @@ class FeedTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "line chart cell", for: indexPath) as! LineChartCell
+            let pinnedChart = pinnedCharts[indexPath.row]
+  
+            let exercise = EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId)
+            let chartDataGenerator = TrainingExerciseChartDataGenerator(exercise: exercise)
+
+            cell.detailLabel.text = exercise?.title
+            cell.titleLabel.text = pinnedChart.measurementType.title
+            
+            let formatters = chartDataGenerator.formatters(for: pinnedChart.measurementType)
+            let chartData = chartDataGenerator.chartData(for: pinnedChart.measurementType, timeFrame: .threeMonths)
+
+            cell.chartView.xAxis.valueFormatter = formatters.0
+            cell.chartView.leftAxis.valueFormatter = formatters.1
+            cell.chartView.balloonMarker.valueFormatter = formatters.2
+            
+            cell.chartView.data = chartData
+            cell.chartView.fitScreen()
             return cell
         }
     }
@@ -165,7 +189,7 @@ class FeedTableViewController: UITableViewController {
 // MARK: - Custom cells
 
 class BarChartCell: UITableViewCell {
-    @IBOutlet weak var chartView: BarChartView!
+    @IBOutlet weak var chartView: StyledBarChartView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
 }

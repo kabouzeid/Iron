@@ -14,13 +14,15 @@ class TrainingsPerWeekChartInfo {
 
     let xAxisValueFormatter: IAxisValueFormatter
     let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
+    
+    private static let NUMBER_OF_WEEKS = 8
 
-    // last 7 weeks + current week (current week is the last element)
+    // last weeks + current week (current week is the last element)
     private let weeks: [Date] = {
         var weeks = [Date]()
         var date = Date().startOfWeek! // this week
         weeks.append(date)
-        for _ in 1...7 { // last 7 weeks
+        for _ in 1...NUMBER_OF_WEEKS - 1 {
             date = date.yesterday!.startOfWeek!
             weeks.append(date)
         }
@@ -45,7 +47,7 @@ class TrainingsPerWeekChartInfo {
 
     private static let fetchRequest: NSFetchRequest<Training> = {
         let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@", NSNumber(booleanLiteral: true), Calendar.current.date(byAdding: Calendar.Component.weekOfYear ,value: -7, to: Date())!.startOfWeek! as NSDate)
+        request.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@", NSNumber(booleanLiteral: true), Calendar.current.date(byAdding: Calendar.Component.weekOfYear ,value: -(NUMBER_OF_WEEKS - 1), to: Date())!.startOfWeek! as NSDate)
         request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
         return request
     }()
