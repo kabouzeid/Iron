@@ -444,3 +444,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         return false
     }
 }
+
+class AddSetTableViewCell: UITableViewCell {
+    @IBOutlet weak var addSetButton: UIButton!
+}
