@@ -301,12 +301,12 @@
                                     <constraint firstAttribute="trailing" secondItem="46K-na-m2E" secondAttribute="trailing" constant="16" id="vbZ-A6-f5b"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c70-ZG-4Ez">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="c70-ZG-4Ez">
                                 <rect key="frame" x="0.0" y="132" width="375" height="597"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exerciseCell" textLabel="m8J-DN-Kg4" detailTextLabel="TfI-U3-k91" style="IBUITableViewCellStyleSubtitle" id="P77-rE-ncL">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P77-rE-ncL" id="JPo-Xf-HCA">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
@@ -332,6 +332,32 @@
                                             <segue destination="dEq-nb-v9x" kind="show" id="7hf-0X-d3Y"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addExerciseCell" id="33I-je-Ory" customClass="AddExerciseTableViewCell" customModule="Sunrise_Fit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99.333333333333343" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="33I-je-Ory" id="Cnp-JS-iBe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7K5-iD-HSw">
+                                                    <rect key="frame" x="15" y="11" width="345" height="22"/>
+                                                    <state key="normal" title="Add Exercise"/>
+                                                    <connections>
+                                                        <segue destination="gaE-NB-k6i" kind="show" id="4Bh-6t-lBp"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7K5-iD-HSw" firstAttribute="leading" secondItem="Cnp-JS-iBe" secondAttribute="leadingMargin" id="5kZ-BH-pqj"/>
+                                                <constraint firstItem="7K5-iD-HSw" firstAttribute="top" secondItem="Cnp-JS-iBe" secondAttribute="topMargin" id="btd-yl-eRk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7K5-iD-HSw" secondAttribute="trailing" id="gCd-it-BCM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7K5-iD-HSw" secondAttribute="bottom" id="mT7-N4-nGr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addExerciseButton" destination="7K5-iD-HSw" id="zCG-EO-8VQ"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                             </tableView>
@@ -352,11 +378,6 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VLy-gU-w00">
                             <connections>
                                 <action selector="confirmCancelCurrentTraining:" destination="d8T-WW-Uac" id="Y9p-QJ-jc6"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dhI-bu-VOi">
-                            <connections>
-                                <segue destination="gaE-NB-k6i" kind="show" id="yRl-oO-jVs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -500,9 +521,11 @@
                         <outlet property="summaryView" destination="mqt-kj-wfP" id="D87-mf-jXp"/>
                         <outlet property="tableView" destination="9In-Rc-Ewk" id="HRw-tU-gKZ"/>
                         <segue destination="AdN-FZ-j4a" kind="show" identifier="show training detail" id="0r4-bm-1HP"/>
+                        <segue destination="qcu-e9-Ly9" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="gck-3W-9uY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xhb-hb-ua2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qcu-e9-Ly9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3772" y="1657"/>
         </scene>
@@ -1047,7 +1070,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mwL-PW-mW3"/>
-        <segue reference="yRl-oO-jVs"/>
+        <segue reference="4Bh-6t-lBp"/>
         <segue reference="0r4-bm-1HP"/>
         <segue reference="pm6-K1-OZd"/>
         <segue reference="YIp-uJ-NPv"/>

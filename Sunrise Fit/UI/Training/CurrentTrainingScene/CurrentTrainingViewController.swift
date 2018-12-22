@@ -145,10 +145,13 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return training?.trainingExercises?.count ?? 0
+        return (training?.trainingExercises?.count ?? 0) + 1 // + 1 for the addExercise row
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == training?.trainingExercises?.count {
+            return tableView.dequeueReusableCell(withIdentifier: "addExerciseCell", for: indexPath) as! AddExerciseTableViewCell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath)
         // TODO
         let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
@@ -231,4 +234,8 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
         }
         return NSOrderedSet(array: trainingSets)
     }
+}
+
+class AddExerciseTableViewCell: UITableViewCell {
+    @IBOutlet weak var addExerciseButton: UIButton!
 }
