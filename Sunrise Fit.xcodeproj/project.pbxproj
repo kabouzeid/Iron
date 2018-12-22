@@ -22,7 +22,6 @@
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
 		8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */; };
-		8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */; };
 		8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */; };
 		8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* DoubleExtension.swift */; };
 		8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */; };
@@ -104,7 +103,6 @@
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8A442AD8207A58F500A2BDBD /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExercisePageViewController.swift; sourceTree = "<group>"; };
 		8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExerciseViewController.swift; sourceTree = "<group>"; };
 		8A4FAAFC206BAF8C004A2806 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 		8AA947F2203B8864005D1758 /* CurrentTrainingExerciseScene */ = {
 			isa = PBXGroup;
 			children = (
-				8A4863032035A476004B1067 /* CurrentTrainingExercisePageViewController.swift */,
 				8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */,
 				8AA947F3203B88C6005D1758 /* AddSetTableViewCell.swift */,
 			);
@@ -706,7 +703,6 @@
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A3C5F95218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaultsExtension.swift in Sources */,
-				8A4863042035A476004B1067 /* CurrentTrainingExercisePageViewController.swift in Sources */,
 				8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */,
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,

@@ -20,6 +20,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
                 selectCurrentSet(animated: true)
                 updateSummary()
             }
+            completeExerciseTitle = createCompleteExerciseTitle()
         }
     }
     
@@ -31,9 +32,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
         }
     }
     
-    var allowSwipeToDelete = true
-    
-    var delegate: TrainingExerciseViewControllerDelegate?
+    var allowSwipeToDelete = true // currently always true
     
     private var trainingExerciseHistory: [TrainingExercise]?
 
@@ -103,7 +102,6 @@ class CurrentTrainingExerciseViewController: UIViewController {
         } else { // all other exercises are already completed
             training.addToTrainingExercises(trainingExercise)
         }
-        delegate?.exerciseOrderDidChange()
     }
 
     private func selectCurrentSet(animated: Bool) {
@@ -215,7 +213,30 @@ class CurrentTrainingExerciseViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController {
             exerciseDetailViewController.exercise = trainingExercise?.exercise
+        } else if segue.identifier == "finish training" {
+            let training = trainingExercise!.training!
+            assert(training.isCompleted!, "Attempt to finish uncompleted training")
+            assert(training.start != nil, "Attempt to save training that has not started")
+            assert(training.end != nil, "Attempt to save training that has not ended")
+            training.start = training.start ?? Date() // just to be sure
+            training.end = training.end ?? Date() // just to be sure
+            training.isCurrentTraining = false
+            
+            AppDelegate.instance.saveContext()
+        } else if let trainingDetailViewController = segue.destination as? TrainingDetailTableViewController {
+            let training = trainingExercise!.training!
+            assert(training.isCompleted!, "Attempt to finish uncompleted training")
+            assert(training.start != nil, "Attempt to finish training that has not started")
+            training.end = Date()
+            trainingDetailViewController.training = training
+            trainingDetailViewController.alwaysShowEditingSections = true
+            trainingDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishTraining))
         }
+    }
+    
+    @objc
+    private func finishTraining() {
+        performSegue(withIdentifier: "finish training", sender: self)
     }
 }
 
@@ -379,13 +400,47 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
             }
             selectCurrentSet(animated: true)
         } else {
-            delegate?.completeExercise(trainingExerciseViewController: self)
+            completeExercise()
         }
     }
-}
-
-protocol TrainingExerciseViewControllerDelegate {
-    func completeExercise(trainingExerciseViewController: CurrentTrainingExerciseViewController)
     
-    func exerciseOrderDidChange()
+    func completeExercise() {
+        if trainingExercise?.training!.isCompleted! ?? false {
+            performSegue(withIdentifier: "show training detail", sender: self) // user can finish from there
+        } else if let next = nextTrainingExercise() {
+            trainingExercise = next
+        } else {
+            fatalError("Exercises seem to be in wrong order!") // should never happen
+        }
+    }
+    
+    func nextTrainingExercise() -> TrainingExercise? {
+        if let trainingExercises = trainingExercise?.training?.trainingExercises {
+            let newIndex = trainingExercises.index(of: trainingExercise!) + 1
+            if newIndex < trainingExercises.count {
+                return (trainingExercises[newIndex] as! TrainingExercise)
+            }
+        }
+        return nil
+    }
+    
+    private func createCompleteExerciseTitle() -> String? {
+        if trainingExercise == nil { // should actually never happen
+            return ""
+        }
+        return allOtherExercisesCompleted() ? "Finish Training" : "Next Exercise"
+    }
+    
+    private func allOtherExercisesCompleted() -> Bool {
+        guard let trainingExercise = trainingExercise else {
+            return true
+        }
+        let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "training == %@ AND SELF != %@ AND NOT (ANY trainingSets.isCompleted == %@)", trainingExercise.training!, trainingExercise, NSNumber(booleanLiteral: false))
+        _ = trainingExercise.training!.isCompleted
+        if let count = try? trainingExercise.managedObjectContext?.count(for: fetchRequest), let total = trainingExercise.training?.trainingExercises?.count {
+            return count == total - 1
+        }
+        return false
+    }
 }

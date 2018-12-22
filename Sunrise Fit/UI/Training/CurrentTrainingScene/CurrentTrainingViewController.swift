@@ -179,10 +179,10 @@ class CurrentTrainingViewController: UIViewController, ExerciseSelectionHandler,
             exerciseTableViewController.accessoryType = .detailButton
             exerciseTableViewController.navigationItem.hidesSearchBarWhenScrolling = false
             exerciseTableViewController.title = "Add Exercise"
-        } else if let trainingExercisePageViewController = segue.destination as? CurrentTrainingExercisePageViewController,
+        } else if let trainingExerciseViewController = segue.destination as? CurrentTrainingExerciseViewController,
             let indexPath = tableView.indexPathForSelectedRow {
             reload = true // make sure to reload the table view when we come back
-            trainingExercisePageViewController.initialTrainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
+            trainingExerciseViewController.trainingExercise = (training!.trainingExercises![indexPath.row] as! TrainingExercise)
         } else if segue.identifier == "cancel training" {
             if training?.managedObjectContext != nil {
                 training!.managedObjectContext!.delete(training!)

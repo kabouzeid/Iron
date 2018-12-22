@@ -329,7 +329,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="s0e-wc-hCG" kind="show" id="Bex-91-SmN"/>
+                                            <segue destination="dEq-nb-v9x" kind="show" id="7hf-0X-d3Y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -383,7 +383,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9In-Rc-Ewk">
-                                <rect key="frame" x="0.0" y="88" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="625"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="mqt-kj-wfP" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -445,7 +445,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsJ-3e-ZUZ">
-                                <rect key="frame" x="0.0" y="669" width="375" height="16"/>
+                                <rect key="frame" x="0.0" y="713" width="375" height="16"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-1F-bVk">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -499,26 +499,12 @@
                         <outlet property="repWeightPickerView" destination="Llf-CO-M4d" id="dif-5z-qp2"/>
                         <outlet property="summaryView" destination="mqt-kj-wfP" id="D87-mf-jXp"/>
                         <outlet property="tableView" destination="9In-Rc-Ewk" id="HRw-tU-gKZ"/>
+                        <segue destination="AdN-FZ-j4a" kind="show" identifier="show training detail" id="0r4-bm-1HP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xhb-hb-ua2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4004" y="1657"/>
-        </scene>
-        <!--Current Training Exercise Page View Controller-->
-        <scene sceneID="BSo-bE-nXd">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="s0e-wc-hCG" customClass="CurrentTrainingExercisePageViewController" customModule="Sunrise_Fit" customModuleProvider="target" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="cd3-fe-XVl" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="tZT-zP-uln"/>
-                        <segue destination="AdN-FZ-j4a" kind="show" identifier="show training detail" id="klV-Nl-oVX"/>
-                        <segue destination="eJH-cx-2gq" kind="show" identifier="show exercise detail" id="Mia-jC-k3r"/>
-                    </connections>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O7a-H3-s1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="cd3-fe-XVl" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="3777" y="1659"/>
+            <point key="canvasLocation" x="3772" y="1657"/>
         </scene>
         <!--Training-->
         <scene sceneID="j3F-jP-H8k">
@@ -1061,8 +1047,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mwL-PW-mW3"/>
-        <segue reference="PhQ-bR-dO7"/>
-        <segue reference="2Io-K3-alz"/>
+        <segue reference="yRl-oO-jVs"/>
+        <segue reference="0r4-bm-1HP"/>
+        <segue reference="pm6-K1-OZd"/>
         <segue reference="YIp-uJ-NPv"/>
     </inferredMetricsTieBreakers>
 </document>
