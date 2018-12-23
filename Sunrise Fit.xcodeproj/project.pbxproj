@@ -47,6 +47,7 @@
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AAF768D21CE71D7001C9D6B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768C21CE71D7001C9D6B /* TimerView.swift */; };
+		8AAF769021CFB80D001C9D6B /* TimerViewTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */; };
 		8AB8A5952034C097004366F2 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5942034C097004366F2 /* Training.swift */; };
 		8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */; };
 		8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5982034C0BA004366F2 /* TrainingSet.swift */; };
@@ -134,6 +135,7 @@
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AAF768C21CE71D7001C9D6B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewTrainingController.swift; sourceTree = "<group>"; };
 		8AB8A5942034C097004366F2 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExercise.swift; sourceTree = "<group>"; };
 		8AB8A5982034C0BA004366F2 /* TrainingSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSet.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		8AABF2AC20168900009C047D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8AAF768E21CFB7E2001C9D6B /* Controller */,
 				8A68F6122083969B0038CEB7 /* View */,
 				8ABE62C5204B0DDB0035DB1B /* Profile */,
 				8A5809412049E2300070D794 /* Training */,
@@ -359,6 +362,14 @@
 				8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */,
 			);
 			path = ExerciseGroupsScene;
+			sourceTree = "<group>";
+		};
+		8AAF768E21CFB7E2001C9D6B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		8AB8A5932034C072004366F2 /* CoreData */ = {
@@ -704,6 +715,7 @@
 				8A3C5F95218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaultsExtension.swift in Sources */,
 				8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */,
+				8AAF769021CFB80D001C9D6B /* TimerViewTrainingController.swift in Sources */,
 				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */,

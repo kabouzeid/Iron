@@ -15,11 +15,14 @@ class CurrentTrainingViewController: UIViewController {
         didSet {
             title = training?.displayTitle
             tableView?.reloadData()
+            timerViewTrainingController?.training = training
             if timerView != nil {
-                updateTimerViewState(animated: false)
+                timerViewTrainingController?.checkShowTimer(timerView, animated: false)
             }
         }
     }
+    
+    var timerViewTrainingController: TimerViewTrainingController?
     
     @IBOutlet weak var timerView: TimerView!
     
@@ -34,7 +37,9 @@ class CurrentTrainingViewController: UIViewController {
         
         timerView.title.text = "Elapsed time"
         timerView.button.setTitle("Start timer", for: .normal)
-        timerView.delegate = self
+        timerViewTrainingController = TimerViewTrainingController(training: training)
+        timerViewTrainingController?.checkShowTimer(timerView, animated: false)
+        timerView.delegate = timerViewTrainingController
     }
 
     private var reload = true
@@ -43,7 +48,7 @@ class CurrentTrainingViewController: UIViewController {
         if reload {
             // for now there is no easy way to figure out which cells have changed
             tableView.reloadData()
-            updateTimerViewState(animated: false) // training could have been started
+            timerViewTrainingController?.checkShowTimer(timerView, animated: false) // training could have been started
             reload = false
         }
     }
@@ -57,14 +62,6 @@ class CurrentTrainingViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Continue Training", style: .cancel))
         alert.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem // iPad
         present(alert, animated: true)
-    }
-
-    private func updateTimerViewState(animated: Bool) {
-        if self.training?.start != nil {
-            timerView.showTimer(animated: animated)
-        } else {
-            timerView.hideTimer(animated: animated)
-        }
     }
 
     // MARK: - Navigation
@@ -208,19 +205,6 @@ extension CurrentTrainingViewController: ExerciseSelectionHandler {
         tableView.insertRows(at: [IndexPath(row: insertedIndex, section: 0)], with: .automatic)
         
         title = training?.displayTitle
-    }
-}
-
-extension CurrentTrainingViewController: TimerViewDelegate {
-    func elapsedTime(_ timerView: TimerView) -> TimeInterval {
-        return -(self.training?.start?.timeIntervalSinceNow ?? 0.0)
-    }
-    
-    func timerViewButtonPressed(_ timerView: TimerView) {
-        if training?.start == nil {
-            training?.start = Date()
-        }
-        updateTimerViewState(animated: true)
     }
 }
 
