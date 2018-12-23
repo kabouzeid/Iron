@@ -94,14 +94,23 @@ class CurrentTrainingViewController: UIViewController {
         tableView.setEditing(editing, animated: animated)
     }
     
-    private func createDefaultTrainingSets() -> NSOrderedSet {
-        var trainingSets = [TrainingSet]()
+    private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
+        assert(training?.managedObjectContext != nil)
         
-        if training?.managedObjectContext == nil {
-            return NSOrderedSet(array: trainingSets)
+        var numberOfSets = 3
+        // if available use the media of the number of sets from the last month
+        if let history = trainingExercise.history {
+            let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+            let filteredAndSortedHistory = history
+                .filter({$0.training!.start != nil && $0.training!.start! > oneMonthAgo})
+                .sorted(by: {($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)})
+            if filteredAndSortedHistory.count > 2 {
+                let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
+                numberOfSets = median.trainingSets?.count ?? numberOfSets
+            }
         }
-        
-        for _ in 0...3 {
+        var trainingSets = [TrainingSet]()
+        for _ in 0..<numberOfSets {
             let trainingSet = TrainingSet(context: training!.managedObjectContext!)
             // TODO add default reps and weight
             trainingSets.append(trainingSet)
@@ -190,7 +199,7 @@ extension CurrentTrainingViewController: ExerciseSelectionHandler {
         let trainingExercise = TrainingExercise(context: managedObjectContext)
         trainingExercise.exerciseId = Int16(exercise.id)
         trainingExercise.training = training
-        trainingExercise.addToTrainingSets(createDefaultTrainingSets())
+        trainingExercise.addToTrainingSets(createDefaultTrainingSets(trainingExercise: trainingExercise))
         
         AppDelegate.instance.saveContext()
         
