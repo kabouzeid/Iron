@@ -40,6 +40,20 @@ class TrainingsTableViewController: UITableViewController {
 
         super.viewWillAppear(animated)
     }
+    
+    private func confirmDelete(indexPath: IndexPath) {
+        let alert = UIAlertController(title: nil, message: "This cannot be undone.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete training", style: .destructive) { [weak self] _ in
+            guard let training = self?.trainings![indexPath.row] else { return }
+            self?.trainings?.remove(at: indexPath.row)
+            AppDelegate.instance.persistentContainer.viewContext.delete(training)
+            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.popoverPresentationController?.sourceView = tableView.cellForRow(at: indexPath)
+        alert.popoverPresentationController?.sourceRect = tableView.cellForRow(at: indexPath)?.bounds ?? CGRect()
+        present(alert, animated: true)
+    }
 
     // MARK: - Table view data source
 
@@ -64,10 +78,7 @@ class TrainingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let training = trainings![indexPath.row]
-            trainings?.remove(at: indexPath.row)
-            AppDelegate.instance.persistentContainer.viewContext.delete(training)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            confirmDelete(indexPath: indexPath)
         }
     }
 
