@@ -23,6 +23,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
             completeExerciseTitle = createCompleteExerciseTitle()
             timerViewTrainingController?.training = trainingExercise?.training
             if timerView != nil {
+                timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !(trainingExercise?.training?.isCurrentTraining ?? false)
                 timerViewTrainingController?.checkShowTimer(timerView, animated: false)
             }
         }
@@ -71,6 +72,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
         selectCurrentSet(animated: false)
         updateSummary()
         
+        timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !(trainingExercise?.training?.isCurrentTraining ?? false)
         timerViewTrainingController = TimerViewTrainingController(training: trainingExercise?.training)
         timerView.delegate = timerViewTrainingController
         timerViewTrainingController?.checkShowTimer(timerView, animated: false)

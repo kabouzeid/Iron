@@ -16,7 +16,7 @@ public class TimerViewTrainingController {
     }
     
     func checkShowTimer(_ timerView: TimerView, animated: Bool) {
-        if training?.start != nil {
+        if training?.start != nil && training!.isCurrentTraining {
             timerView.showTimer(animated: animated)
         } else {
             timerView.hideTimer(animated: animated)
