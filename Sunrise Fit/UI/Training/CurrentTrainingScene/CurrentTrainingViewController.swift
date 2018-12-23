@@ -35,8 +35,6 @@ class CurrentTrainingViewController: UIViewController {
         navigationItem.rightBarButtonItems?.append(editButtonItem)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Training", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
         
-        timerView.title.text = "Elapsed time"
-        timerView.button.setTitle("Start timer", for: .normal)
         timerViewTrainingController = TimerViewTrainingController(training: training)
         timerViewTrainingController?.checkShowTimer(timerView, animated: false)
         timerView.delegate = timerViewTrainingController

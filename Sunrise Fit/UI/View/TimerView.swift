@@ -77,6 +77,11 @@ import UIKit
 
         // functionality
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
+        // default values
+        button.setTitle("Start timer", for: .normal)
+        title.text = "Elapsed time"
+        time.text = durationFormatter.string(from: 0)
     }
 
     @objc private func buttonPressed() {
