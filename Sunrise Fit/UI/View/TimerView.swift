@@ -35,6 +35,10 @@ import UIKit
         initSubViews()
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: 44)
+    }
+    
     private func initSubViews() {
         button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,8 +53,7 @@ import UIKit
         addSubview(time)
 
         // constraints
-        self.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
+
         button.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 

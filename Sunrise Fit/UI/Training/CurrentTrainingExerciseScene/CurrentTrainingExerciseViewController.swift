@@ -21,6 +21,10 @@ class CurrentTrainingExerciseViewController: UIViewController {
                 updateSummary()
             }
             completeExerciseTitle = createCompleteExerciseTitle()
+            timerViewTrainingController?.training = trainingExercise?.training
+            if timerView != nil {
+                timerViewTrainingController?.checkShowTimer(timerView, animated: false)
+            }
         }
     }
     
@@ -49,6 +53,10 @@ class CurrentTrainingExerciseViewController: UIViewController {
         return trainingExercise?.training?.isCurrentTraining ?? false
     }
     
+    var timerViewTrainingController: TimerViewTrainingController?
+    
+    @IBOutlet weak var timerView: TimerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +70,10 @@ class CurrentTrainingExerciseViewController: UIViewController {
 
         selectCurrentSet(animated: false)
         updateSummary()
+        
+        timerViewTrainingController = TimerViewTrainingController(training: trainingExercise?.training)
+        timerView.delegate = timerViewTrainingController
+        timerViewTrainingController?.checkShowTimer(timerView, animated: false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,7 +178,10 @@ class CurrentTrainingExerciseViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
-        
+        _setEditing(editing, animated: animated)
+    }
+    
+    private func _setEditing(_ editing: Bool, animated: Bool) {
         if editing {
             repWeightPickerView.show(pickerView: false, button: false, animated: animated)
         } else {
@@ -315,14 +330,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if !allowSwipeToDelete && !isEditing {
-            return .none // disable swipe to delete
-        }
-        return .delete
-    }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
             return false // don't allow to delete the add set button
@@ -335,9 +343,42 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         }
         return true
     }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0 && indexPath.row != trainingExercise?.trainingSets?.count && trainingSet(of: indexPath).isCompleted
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath.row != destinationIndexPath.row else { return }
+        assert(sourceIndexPath.section == 0)
+        assert(destinationIndexPath.section == 0)
+        
+        let trainingSet = trainingExercise!.trainingSets![sourceIndexPath.row] as! TrainingSet
+        trainingExercise?.removeFromTrainingSets(trainingSet)
+        trainingExercise?.insertIntoTrainingSets(trainingSet, at: destinationIndexPath.row)
+        
+        // a bit of a hack, reload() doesn't work here, also internally the cells are not moved yet
+        tableView.cellForRow(at: sourceIndexPath)?.detailTextLabel?.text = "\(destinationIndexPath.row + 1)"
+        if sourceIndexPath.row < destinationIndexPath.row {
+            for i in (sourceIndexPath.row + 1)...destinationIndexPath.row {
+                tableView.cellForRow(at: IndexPath(row: i, section: 0))?.detailTextLabel?.text = "\(i)"
+            }
+        } else {
+            for i in destinationIndexPath.row...(sourceIndexPath.row - 1) {
+                tableView.cellForRow(at: IndexPath(row: i, section: 0))?.detailTextLabel?.text = "\(i + 2)"
+            }
+        }
+    }
 }
 
 extension CurrentTrainingExerciseViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        guard proposedDestinationIndexPath.section == 0 && proposedDestinationIndexPath.row != trainingExercise?.trainingSets?.count else {
+            return sourceIndexPath
+        }
+        return (trainingExercise!.trainingSets![proposedDestinationIndexPath.row] as! TrainingSet).isCompleted ? proposedDestinationIndexPath : sourceIndexPath
+    }
+    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == trainingExercise?.trainingSets?.count {
             return false
@@ -349,8 +390,23 @@ extension CurrentTrainingExerciseViewController: UITableViewDelegate {
         return trainingSet.isCompleted || trainingSet == currentSet
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if !allowSwipeToDelete && !isEditing {
+            return .none // disable swipe to delete
+        }
+        return .delete
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         setRepWeightPickerTo(trainingSet: self.trainingSet(of: indexPath), animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        _setEditing(true, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        _setEditing(false, animated: true)
     }
 }
 
@@ -391,6 +447,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
                 let training = trainingExercise!.training!
                 if training.start == nil {
                     training.start = Date()
+                    timerViewTrainingController?.checkShowTimer(timerView, animated: true)
                 }
                 // we don't want to lose any sets the user has done when something crashes
                 AppDelegate.instance.saveContext()

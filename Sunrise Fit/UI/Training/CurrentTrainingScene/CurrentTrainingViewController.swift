@@ -32,12 +32,12 @@ class CurrentTrainingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        navigationItem.rightBarButtonItems?.append(editButtonItem)
+        navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Training", style: .plain, target: nil, action: nil) // when navigating to other VCs show only a short back button title
         
         timerViewTrainingController = TimerViewTrainingController(training: training)
-        timerViewTrainingController?.checkShowTimer(timerView, animated: false)
         timerView.delegate = timerViewTrainingController
+        timerViewTrainingController?.checkShowTimer(timerView, animated: false)
     }
 
     private var reload = true
@@ -116,7 +116,7 @@ class CurrentTrainingViewController: UIViewController {
 
 extension CurrentTrainingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if proposedDestinationIndexPath.row == training?.trainingExercises?.count {
+        guard proposedDestinationIndexPath.row != training?.trainingExercises?.count else {
             return sourceIndexPath // don't allow to move behind add exercise button
         }
         return (training!.trainingExercises![proposedDestinationIndexPath.row] as! TrainingExercise).isCompleted! ? sourceIndexPath : proposedDestinationIndexPath
@@ -127,6 +127,13 @@ extension CurrentTrainingViewController: UITableViewDelegate {
             return .none // disable swipe to delete
         }
         return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == training?.trainingExercises?.count {
+            return false
+        }
+        return true
     }
 }
 

@@ -366,8 +366,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbw-Ng-46a" customClass="TimerView" customModule="Sunrise_Fit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9In-Rc-Ewk">
-                                <rect key="frame" x="0.0" y="88" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="407"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="mqt-kj-wfP" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -429,7 +433,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsJ-3e-ZUZ">
-                                <rect key="frame" x="0.0" y="669" width="375" height="16"/>
+                                <rect key="frame" x="0.0" y="539" width="375" height="146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-1F-bVk">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -439,7 +443,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-CO-M4d" customClass="RepWeightPickerView" customModule="Sunrise_Fit" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="359" height="0.0"/>
+                                        <rect key="frame" x="8" y="8" width="359" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="1" id="HTL-PB-XlV"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="U5O-4Q-sdy"/>
@@ -460,11 +464,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Zbw-Ng-46a" firstAttribute="leading" secondItem="4wL-rg-tBe" secondAttribute="leading" id="0ZF-x1-NCx"/>
                             <constraint firstItem="4wL-rg-tBe" firstAttribute="bottom" secondItem="dsJ-3e-ZUZ" secondAttribute="bottom" id="3vU-Rq-P0w"/>
                             <constraint firstItem="9In-Rc-Ewk" firstAttribute="leading" secondItem="ii3-bb-jMU" secondAttribute="leading" id="MLY-CJ-I6Q"/>
+                            <constraint firstItem="Zbw-Ng-46a" firstAttribute="trailing" secondItem="4wL-rg-tBe" secondAttribute="trailing" id="PeN-dS-fqz"/>
                             <constraint firstItem="dsJ-3e-ZUZ" firstAttribute="leading" secondItem="ii3-bb-jMU" secondAttribute="leading" id="PkI-hv-FGb"/>
                             <constraint firstAttribute="trailing" secondItem="9In-Rc-Ewk" secondAttribute="trailing" id="c6w-ng-9uD"/>
-                            <constraint firstItem="9In-Rc-Ewk" firstAttribute="top" secondItem="4wL-rg-tBe" secondAttribute="top" id="cVw-AB-cKp"/>
+                            <constraint firstItem="9In-Rc-Ewk" firstAttribute="top" secondItem="Zbw-Ng-46a" secondAttribute="bottom" id="cVw-AB-cKp"/>
+                            <constraint firstItem="Zbw-Ng-46a" firstAttribute="top" secondItem="4wL-rg-tBe" secondAttribute="top" id="gfG-xI-87v"/>
                             <constraint firstItem="dsJ-3e-ZUZ" firstAttribute="top" secondItem="9In-Rc-Ewk" secondAttribute="bottom" id="iP8-eS-8Vy"/>
                             <constraint firstAttribute="trailing" secondItem="dsJ-3e-ZUZ" secondAttribute="trailing" id="rZZ-UC-RIC"/>
                         </constraints>
@@ -483,6 +490,7 @@
                         <outlet property="repWeightPickerView" destination="Llf-CO-M4d" id="dif-5z-qp2"/>
                         <outlet property="summaryView" destination="mqt-kj-wfP" id="D87-mf-jXp"/>
                         <outlet property="tableView" destination="9In-Rc-Ewk" id="HRw-tU-gKZ"/>
+                        <outlet property="timerView" destination="Zbw-Ng-46a" id="dNU-el-F2c"/>
                         <segue destination="AdN-FZ-j4a" kind="show" identifier="show training detail" id="0r4-bm-1HP"/>
                         <segue destination="qcu-e9-Ly9" kind="unwind" identifier="finish training" unwindAction="comeBackToStartTrainingWithSegue:" id="gck-3W-9uY"/>
                     </connections>
