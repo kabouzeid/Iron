@@ -263,45 +263,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6s-Mn-RXl">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6s-Mn-RXl" customClass="TimerView" customModule="Sunrise_Fit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="375" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WzK-Pb-0MT">
-                                        <rect key="frame" x="149" y="7" width="77" height="30"/>
-                                        <state key="normal" title="Start Timer">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startTimer:" destination="d8T-WW-Uac" eventType="touchUpInside" id="h9k-AZ-gd4"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46K-na-m2E">
-                                        <rect key="frame" x="16" y="11.666666666666671" width="343" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jme-Fp-dAW">
-                                        <rect key="frame" x="16" y="11.666666666666671" width="343" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="WzK-Pb-0MT" firstAttribute="centerY" secondItem="Z6s-Mn-RXl" secondAttribute="centerY" id="0NG-wl-COE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jme-Fp-dAW" secondAttribute="trailing" constant="16" id="4yo-GC-an4"/>
-                                    <constraint firstItem="Jme-Fp-dAW" firstAttribute="leading" secondItem="Z6s-Mn-RXl" secondAttribute="leading" constant="16" id="DWQ-Nw-3rt"/>
-                                    <constraint firstItem="WzK-Pb-0MT" firstAttribute="centerX" secondItem="Z6s-Mn-RXl" secondAttribute="centerX" id="GtN-Ie-BeS"/>
-                                    <constraint firstItem="46K-na-m2E" firstAttribute="centerY" secondItem="Z6s-Mn-RXl" secondAttribute="centerY" id="Hxc-vo-H2D"/>
-                                    <constraint firstAttribute="height" constant="44" id="JCw-lm-rVw"/>
-                                    <constraint firstItem="46K-na-m2E" firstAttribute="leading" secondItem="Z6s-Mn-RXl" secondAttribute="leading" constant="16" id="b9t-MG-BSy"/>
-                                    <constraint firstItem="Jme-Fp-dAW" firstAttribute="centerY" secondItem="Z6s-Mn-RXl" secondAttribute="centerY" id="fQF-lq-l7r"/>
-                                    <constraint firstAttribute="trailing" secondItem="46K-na-m2E" secondAttribute="trailing" constant="16" id="vbZ-A6-f5b"/>
-                                </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="c70-ZG-4Ez">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="c70-ZG-4Ez">
                                 <rect key="frame" x="0.0" y="132" width="375" height="597"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -382,11 +348,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="VLy-gU-w00" id="Gxn-Ph-cTz"/>
-                        <outlet property="elapsedTimeLabel" destination="46K-na-m2E" id="pdC-m1-Mfd"/>
-                        <outlet property="startTimerButton" destination="WzK-Pb-0MT" id="BUD-wy-ALb"/>
                         <outlet property="tableView" destination="c70-ZG-4Ez" id="MfI-Nd-haq"/>
-                        <outlet property="timeLabel" destination="Jme-Fp-dAW" id="7u4-tp-d0e"/>
+                        <outlet property="timerView" destination="Z6s-Mn-RXl" id="D3g-pK-kOn"/>
                         <segue destination="hZ8-p8-ma3" kind="unwind" identifier="cancel training" unwindAction="comeBackToStartTrainingWithSegue:" id="K0W-Bv-JbP"/>
                     </connections>
                 </viewController>
@@ -404,7 +367,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9In-Rc-Ewk">
-                                <rect key="frame" x="0.0" y="88" width="375" height="625"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="581"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="mqt-kj-wfP" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -466,7 +429,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsJ-3e-ZUZ">
-                                <rect key="frame" x="0.0" y="713" width="375" height="16"/>
+                                <rect key="frame" x="0.0" y="669" width="375" height="16"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-1F-bVk">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -1072,7 +1035,7 @@
         <segue reference="mwL-PW-mW3"/>
         <segue reference="4Bh-6t-lBp"/>
         <segue reference="0r4-bm-1HP"/>
-        <segue reference="pm6-K1-OZd"/>
+        <segue reference="7hf-0X-d3Y"/>
         <segue reference="YIp-uJ-NPv"/>
     </inferredMetricsTieBreakers>
 </document>
