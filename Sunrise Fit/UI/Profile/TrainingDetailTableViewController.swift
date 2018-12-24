@@ -303,10 +303,7 @@ class TrainingDetailTableViewController: UITableViewController {
         }
         if sectionKeys[indexPath.section] == .exercises {
             let exercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
-            let estimatedHeight = CGFloat(44 + exercise.trainingSets!.count * 24)
-            print(exercise.trainingSets!.count)
-            print(estimatedHeight)
-            return estimatedHeight
+            return CGFloat(44 + exercise.trainingSets!.count * 24)
         }
         return UITableView.automaticDimension
     }
