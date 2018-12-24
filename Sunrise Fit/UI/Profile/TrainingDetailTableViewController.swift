@@ -23,6 +23,50 @@ class TrainingDetailTableViewController: UITableViewController {
     var isEditable = false {
         didSet {
             self.navigationItem.rightBarButtonItem = isEditable ? self.editButtonItem : nil
+            self.navigationItem.rightBarButtonItems?.append(
+                UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(actionShare)))
+        }
+    }
+    
+    @objc
+    private func actionShare() {
+        guard let training = training else { return }
+        let activityViewController = UIActivityViewController(activityItems: [TrainingActivityItemSource(training: training)], applicationActivities: nil)
+        present(activityViewController, animated: true)
+    }
+    
+    private class TrainingActivityItemSource: NSObject, UIActivityItemSource {
+        let string: String
+        let training: Training
+        
+        init(training: Training) {
+            self.training = training
+            guard let trainingExercises = training.trainingExercises else {
+                string = ""
+                return
+            }
+            string = Training.dateFormatter.string(from: training.start ?? Date())
+                .appending("\n\(Training.durationFormatter.string(from: training.duration)!) total duration")
+                .appending("\n\(training.totalCompletedWeight) kg total weight")
+                .appending("\n\n")
+                .appending(trainingExercises.map { (trainingExercise) -> String in
+                    let trainingExercise = (trainingExercise as! TrainingExercise)
+                    let title = trainingExercise.exercise?.title ?? "Exercise"
+                    let sets = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle }.joined(separator: "\n")
+                    return [title, sets].joined(separator: "\n")
+                    }.joined(separator: "\n\n"))
+        }
+        
+        func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+            return string
+        }
+        
+        func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+            return string
+        }
+        
+        func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+            return "\(training.displayTitle) - \(Training.dateFormatter.string(from: training.start ?? Date()))"
         }
     }
 
