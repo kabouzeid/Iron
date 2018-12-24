@@ -218,6 +218,9 @@ extension CurrentTrainingViewController: ExerciseSelectionHandler {
         tableView.insertRows(at: [IndexPath(row: insertedIndex, section: 0)], with: .automatic)
         
         title = training?.displayTitle
+        
+        // keep the add exercise cell visible
+        tableView.scrollToRow(at: IndexPath(row: training!.trainingExercises!.count, section: 0), at: .middle, animated: true)
     }
 }
 
