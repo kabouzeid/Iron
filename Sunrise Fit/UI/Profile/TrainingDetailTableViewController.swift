@@ -293,9 +293,22 @@ class TrainingDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if sectionKeys[indexPath.section] == .exerciseTitle {
             return 44 // exercise title wouldn't have standard height otherwise
-        } else {
-            return UITableView.automaticDimension
         }
+        return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if sectionKeys[indexPath.section] == .exerciseTitle {
+            return 44
+        }
+        if sectionKeys[indexPath.section] == .exercises {
+            let exercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
+            let estimatedHeight = CGFloat(44 + exercise.trainingSets!.count * 24)
+            print(exercise.trainingSets!.count)
+            print(estimatedHeight)
+            return estimatedHeight
+        }
+        return UITableView.automaticDimension
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
