@@ -180,17 +180,13 @@ class CurrentTrainingExerciseViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
-        _setEditing(editing, animated: animated)
-    }
-    
-    private func _setEditing(_ editing: Bool, animated: Bool) {
         if editing {
             repWeightPickerView.show(pickerView: false, button: false, animated: animated)
         } else {
             selectCurrentSet(animated: animated) // also shows the picker view again if necessary
         }
     }
-    
+
     @objc
     func addSet() {
         if let trainingExercise = trainingExercise {
@@ -404,11 +400,11 @@ extension CurrentTrainingExerciseViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        _setEditing(true, animated: true)
+        setEditing(true, animated: true)
     }
 
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        _setEditing(false, animated: true)
+        setEditing(false, animated: true)
     }
 }
 

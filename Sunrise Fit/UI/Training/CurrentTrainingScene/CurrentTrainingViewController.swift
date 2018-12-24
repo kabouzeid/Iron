@@ -135,6 +135,14 @@ extension CurrentTrainingViewController: UITableViewDelegate {
         }
         return true
     }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        setEditing(true, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        setEditing(false, animated: true)
+    }
 }
 
 extension CurrentTrainingViewController: UITableViewDataSource {
