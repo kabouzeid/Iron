@@ -153,10 +153,17 @@ extension CurrentTrainingViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if (indexPath.row == training?.trainingExercises?.count) {
+        if indexPath.row == training?.trainingExercises?.count {
             return false // don't allow to move the add exercise button
         }
         return !(training!.trainingExercises![indexPath.row] as! TrainingExercise).isCompleted!
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == training?.trainingExercises?.count {
+            return false
+        }
+        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
