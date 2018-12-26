@@ -57,13 +57,13 @@ import UIKit
         button.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 
-        title.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.trailingAnchor.constraint(equalTo: title.trailingAnchor, constant: 16).isActive = true
+        title.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        title.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: title.trailingAnchor, constant: 16).isActive = true
         
-        time.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        time.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.trailingAnchor.constraint(equalTo: time.trailingAnchor, constant: 16).isActive = true
+        time.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        time.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: time.trailingAnchor, constant: 16).isActive = true
         
         // style
         backgroundColor = tintColor
