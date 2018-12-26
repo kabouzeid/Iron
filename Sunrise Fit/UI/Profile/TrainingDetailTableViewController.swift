@@ -370,17 +370,13 @@ extension TrainingDetailTableViewController: DatePickerTableViewCellDelegate {
     func dateChanged(date: Date) {
         switch selectedDate {
         case .start:
-            if date <= training!.end! { // should not be necessary, but just to be safe
-                training!.start = date
-                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.index(of: .duration)!)], with: .automatic)
-                updateSummary()
-            }
+            training!.start = min(date, training!.end!)
+            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.index(of: .duration)!)], with: .automatic)
+            updateSummary()
         case .end:
-            if date >= training!.start! { // should not be necessary, but just to be safe
-                training!.end = date
-                tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.index(of: .duration)!)], with: .automatic)
-                updateSummary()
-            }
+            training!.end = max(date, training!.start!)
+            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.index(of: .duration)!)], with: .automatic)
+            updateSummary()
         default:
             print("date changed called, but no date selected") // should never happen
             return
