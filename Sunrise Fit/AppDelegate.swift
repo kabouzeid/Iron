@@ -8,15 +8,25 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let unfinishedTrainingNotificationID = "unfinished_training"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Request notification permissions
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound])
+        { (granted, error) in
+            if let error = error { print(error) }
+        }
+        
         return true
     }
 
@@ -28,10 +38,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        // remind the user 15 mins after closing the app if the training ist still unfinished
+        if Training.fetchCurrentTraining(context: persistentContainer.viewContext) != nil {
+            let center = UNUserNotificationCenter.current()
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Unfinished training"
+            content.body = "Your current training is unfinished. Do you want to finish it?"
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15 * 60, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: unfinishedTrainingNotificationID, content: content, trigger: trigger)
+            
+            center.add(request) { (error) in
+                if let error = error {
+                    print("error \(String(describing: error))")
+                }
+            }
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        let center = UNUserNotificationCenter.current()
+        center.removeDeliveredNotifications(withIdentifiers: [unfinishedTrainingNotificationID])
+        center.removePendingNotificationRequests(withIdentifiers: [unfinishedTrainingNotificationID])
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
