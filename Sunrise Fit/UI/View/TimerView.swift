@@ -119,7 +119,7 @@ import UIKit
     
     private func startUpdateTimeLabel() {
         if timer == nil {
-            timer = Timer.scheduledTimer(withTimeInterval: refreshFrequency, repeats: true, block: { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: refreshFrequency, repeats: true, block: { [unowned self] _ in
                 if let elapsedTime = self.delegate?.elapsedTime(self) {
                     self.time.text = self.durationFormatter.string(from: elapsedTime)
                 }
@@ -131,6 +131,10 @@ import UIKit
     private func stopUpdateTimeLabel() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    deinit {
+        stopUpdateTimeLabel()
     }
 }
 
