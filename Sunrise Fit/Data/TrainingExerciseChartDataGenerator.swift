@@ -107,6 +107,10 @@ class TrainingExerciseChartDataGenerator {
             return {
                 $0.trainingSets!.map({ (trainingSet) -> Double in
                     let trainingSet = trainingSet as! TrainingSet
+                    if trainingSet.repetitions > 5 {
+                        // accuracy goes way down for more than 5 reps
+                        return 0
+                    }
                     return Double(trainingSet.weight) * (36 / (37 -     Double(trainingSet.repetitions))) // Brzycki 1RM formula
                 }).max() ?? 0
             }
