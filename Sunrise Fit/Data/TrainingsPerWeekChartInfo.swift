@@ -68,7 +68,7 @@ class TrainingsPerWeekChartInfo {
             let entry = BarChartDataEntry(x: xValue, y: yValue)
             entries.append(entry)
         }
-        return BarChartDataSet(values: entries, label: label)
+        return BarChartDataSet(entries: entries, label: label)
     }
     
     // MARK: - Formatter

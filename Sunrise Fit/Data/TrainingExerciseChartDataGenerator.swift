@@ -131,7 +131,7 @@ class TrainingExerciseChartDataGenerator {
         }
         entries.reverse() // fixes a strange bug, where the chart line is not drawn
 
-        return LineChartDataSet(values: entries, label: label)
+        return LineChartDataSet(entries: entries, label: label)
     }
 
     // MARK: - Formatter
