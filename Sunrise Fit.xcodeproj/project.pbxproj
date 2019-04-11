@@ -638,7 +638,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Benchmark/Benchmark.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -651,7 +651,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B77221BCC0C7CC76E9497C80 /* [CP] Check Pods Manifest.lock */ = {

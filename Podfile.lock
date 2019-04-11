@@ -1,9 +1,9 @@
 PODS:
   - Benchmark (2.0)
-  - Charts (3.2.0):
-    - Charts/Core (= 3.2.0)
-  - Charts/Core (3.2.0)
-  - SwiftyJSON (4.1.0)
+  - Charts (3.2.2):
+    - Charts/Core (= 3.2.2)
+  - Charts/Core (3.2.2)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - Benchmark
@@ -18,9 +18,9 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Benchmark: 3c9951f79ae716f1dc3c8256f1f2db05eea7b534
-  Charts: 680c8328bd5e90cb14f67e00d2176f3113d19141
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 4afe26635bdffa75053ac2ac620b6375b1cf3a56
+PODFILE CHECKSUM: 6519f47cd2ddc14a5ff35b528bed083a8eb3abaa
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
