@@ -7,20 +7,28 @@ PODS:
 
 DEPENDENCIES:
   - Benchmark
-  - Charts
+  - Charts (from `https://github.com/danielgindi/Charts.git`)
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Benchmark
-    - Charts
     - SwiftyJSON
+
+EXTERNAL SOURCES:
+  Charts:
+    :git: https://github.com/danielgindi/Charts.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: b155c2f64dbb6ef39d4e4099271b69cb05529474
+    :git: https://github.com/danielgindi/Charts.git
 
 SPEC CHECKSUMS:
   Benchmark: 3c9951f79ae716f1dc3c8256f1f2db05eea7b534
   Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 6519f47cd2ddc14a5ff35b528bed083a8eb3abaa
+PODFILE CHECKSUM: e8eb5e4c43a288fd657fd6333bb9e93eb22b9901
 
 COCOAPODS: 1.6.1

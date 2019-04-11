@@ -12,10 +12,6 @@
 import Foundation
 import CoreGraphics
 
-#if !os(OSX)
-    import UIKit
-#endif
-
 open class YAxisRendererHorizontalBarChart: YAxisRenderer
 {
     public override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?)
@@ -319,7 +315,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
                 let xOffset: CGFloat = l.lineWidth + l.xOffset
                 let yOffset: CGFloat = 2.0 + l.yOffset
 
-                if l.labelPosition == .rightTop
+                if l.labelPosition == .topRight
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
@@ -329,7 +325,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
                         align: .left,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
-                else if l.labelPosition == .rightBottom
+                else if l.labelPosition == .bottomRight
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
@@ -339,7 +335,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
                         align: .left,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
-                else if l.labelPosition == .leftTop
+                else if l.labelPosition == .topLeft
                 {
                     ChartUtils.drawText(context: context,
                         text: label,

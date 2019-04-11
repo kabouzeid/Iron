@@ -12,10 +12,6 @@
 import Foundation
 import CoreGraphics
 
-#if !os(OSX)
-    import UIKit
-#endif
-
 @objc(ChartYAxisRenderer)
 open class YAxisRenderer: AxisRendererBase
 {
@@ -147,7 +143,8 @@ open class YAxisRenderer: AxisRendererBase
                 text: text,
                 point: CGPoint(x: fixedPosition, y: positions[i].y + offset),
                 align: textAlign,
-                attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor])
+                attributes: [.font: labelFont, .foregroundColor: labelTextColor]
+            )
         }
     }
     
@@ -186,10 +183,7 @@ open class YAxisRenderer: AxisRendererBase
             }
             
             // draw the grid
-            for i in 0 ..< positions.count
-            {
-                drawGridLine(context: context, position: positions[i])
-            }
+            positions.forEach { drawGridLine(context: context, position: $0) }
         }
 
         if yAxis.drawZeroLineEnabled
@@ -344,7 +338,7 @@ open class YAxisRenderer: AxisRendererBase
                 let xOffset: CGFloat = 4.0 + l.xOffset
                 let yOffset: CGFloat = l.lineWidth + labelLineHeight + l.yOffset
                 
-                if l.labelPosition == .rightTop
+                if l.labelPosition == .topRight
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
@@ -354,7 +348,7 @@ open class YAxisRenderer: AxisRendererBase
                         align: .right,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
-                else if l.labelPosition == .rightBottom
+                else if l.labelPosition == .bottomRight
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
@@ -364,7 +358,7 @@ open class YAxisRenderer: AxisRendererBase
                         align: .right,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
-                else if l.labelPosition == .leftTop
+                else if l.labelPosition == .topLeft
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
