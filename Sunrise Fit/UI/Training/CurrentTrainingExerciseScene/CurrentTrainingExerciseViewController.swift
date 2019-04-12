@@ -23,7 +23,9 @@ class CurrentTrainingExerciseViewController: UIViewController {
             completeExerciseTitle = createCompleteExerciseTitle()
             timerViewTrainingController?.training = trainingExercise?.training
             if timerView != nil {
-                timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !(trainingExercise?.training?.isCurrentTraining ?? false)
+                let showTimerView = (trainingExercise?.training?.isCurrentTraining ?? false)
+                timerViewDefaultHeight.isActive = showTimerView
+                timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !showTimerView
                 timerViewTrainingController?.checkShowTimer(timerView, animated: false)
             }
         }
@@ -57,6 +59,7 @@ class CurrentTrainingExerciseViewController: UIViewController {
     var timerViewTrainingController: TimerViewTrainingController?
     
     @IBOutlet weak var timerView: TimerView!
+    @IBOutlet weak var timerViewDefaultHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +75,9 @@ class CurrentTrainingExerciseViewController: UIViewController {
         selectCurrentSet(animated: false)
         updateSummary()
         
-        timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !(trainingExercise?.training?.isCurrentTraining ?? false)
+        let showTimerView = (trainingExercise?.training?.isCurrentTraining ?? false)
+        timerViewDefaultHeight.isActive = showTimerView
+        timerView.heightAnchor.constraint(equalToConstant: 0).isActive = !showTimerView
         timerViewTrainingController = TimerViewTrainingController(training: trainingExercise?.training)
         timerView.delegate = timerViewTrainingController
         timerViewTrainingController?.checkShowTimer(timerView, animated: false)
