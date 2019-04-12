@@ -191,6 +191,10 @@ class TrainingExerciseChartDataGenerator {
             return yAxisValueFormatter.stringForValue(y, axis: nil) + (append ?? "")
         }
     }
+    
+    public static func dateEqualsValue(date: Date, value: Double) -> Bool {
+        return dateToValue(date: date) == value
+    }
 }
 
 private func dateToValue(date: Date) -> Double {

@@ -128,6 +128,8 @@
                     <navigationItem key="navigationItem" title="Feed" id="VZg-6s-MyP"/>
                     <connections>
                         <outlet property="summaryView" destination="i7A-aa-Et0" id="xjC-xg-hGO"/>
+                        <segue destination="eJH-cx-2gq" kind="show" identifier="show exercise" id="zxu-mI-xMU"/>
+                        <segue destination="Ybm-YO-Y3a" kind="show" identifier="show exercise history" id="dMj-it-3hD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHx-XS-CYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -396,7 +398,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9In-Rc-Ewk">
-                                <rect key="frame" x="0.0" y="132" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="451"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="mqt-kj-wfP" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -458,7 +460,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsJ-3e-ZUZ">
-                                <rect key="frame" x="0.0" y="713" width="375" height="16"/>
+                                <rect key="frame" x="0.0" y="583" width="375" height="146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-1F-bVk">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -468,7 +470,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-CO-M4d" customClass="RepWeightPickerView" customModule="Sunrise_Fit" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="359" height="0.0"/>
+                                        <rect key="frame" x="8" y="8" width="359" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="1" id="HTL-PB-XlV"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="U5O-4Q-sdy"/>
@@ -908,7 +910,7 @@
             </objects>
             <point key="canvasLocation" x="3772" y="3231"/>
         </scene>
-        <!--Exercise History Table View Controller-->
+        <!--Title-->
         <scene sceneID="W9a-ao-u3q">
             <objects>
                 <tableViewController id="Ybm-YO-Y3a" customClass="ExerciseHistoryTableViewController" customModule="Sunrise_Fit" customModuleProvider="target" sceneMemberID="viewController">
@@ -947,6 +949,7 @@
                             <outlet property="delegate" destination="Ybm-YO-Y3a" id="a64-OV-NkT"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="AvP-pZ-GNY"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RoY-Cq-QpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1119,7 +1122,8 @@
         <image name="training" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mwL-PW-mW3"/>
+        <segue reference="KCE-9K-WQV"/>
+        <segue reference="N1f-CI-Ual"/>
         <segue reference="4Bh-6t-lBp"/>
         <segue reference="0r4-bm-1HP"/>
         <segue reference="pm6-K1-OZd"/>

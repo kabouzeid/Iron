@@ -10,14 +10,24 @@ import UIKit
 
 class ExerciseHistoryTableViewController: UITableViewController {
     
+    var scrollTo: Int? // optional
     var trainingExercises: [TrainingExercise]? {
         didSet {
             tableView?.reloadData()
+            checkScrollTo()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkScrollTo()
+    }
+    
+    private func checkScrollTo() {
+        if let scrollTo = scrollTo {
+            tableView?.scrollToRow(at: IndexPath(row: 0, section: scrollTo), at: .top, animated: false)
+            self.scrollTo = nil
+        }
     }
 
     // MARK: - Table view data source

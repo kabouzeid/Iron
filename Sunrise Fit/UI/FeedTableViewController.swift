@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Charts
 
-class FeedTableViewController: UITableViewController {
+class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var summaryView: SummaryView!
     
@@ -85,10 +85,65 @@ class FeedTableViewController: UITableViewController {
             
             cell.chartView.data = chartData
             cell.chartView.fitScreen()
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pinnedChartHeaderTapped))
+            tapGestureRecognizer.delegate = self
+            cell.chartView.addGestureRecognizer(tapGestureRecognizer)
+
             return cell
         }
     }
     
+    private var tappedExercise: Exercise?
+    private var highlightedValue: Double?
+    
+    @objc
+    func pinnedChartHeaderTapped(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended,
+            let indexPath = tableView.indexPathForRow(at: sender.location(in: tableView)),
+            let chartView = sender.view as? StyledLineChartView {
+            
+            tappedExercise = EverkineticDataProvider.findExercise(id: pinnedCharts[indexPath.row].exerciseId)
+            
+            if chartView.markerVisible() {
+                highlightedValue = chartView.highlighted.first?.x
+                performSegue(withIdentifier: "show exercise history", sender: self)
+            } else {
+                performSegue(withIdentifier: "show exercise", sender: self)
+            }
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // only process touches on the header view
+        if let chartView = gestureRecognizer.view as? StyledLineChartView,
+            touch.location(in: chartView).y <= chartView.extraTopOffset {
+            return true
+        }
+        return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "show exercise history":
+            if let exerciseHistoryTableViewController = segue.destination as? ExerciseHistoryTableViewController, let exercise = tappedExercise {
+                exerciseHistoryTableViewController.title = exercise.title
+                let history = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext)
+                if let value = highlightedValue {
+                    // scroll to the entry corresponding to the highlighted value
+                    exerciseHistoryTableViewController.scrollTo = history?.firstIndex { TrainingExerciseChartDataGenerator.dateEqualsValue(date: $0.training!.start!, value: value) }
+                }
+                exerciseHistoryTableViewController.trainingExercises = history
+            }
+        case "show exercise":
+            if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController, let exercise = tappedExercise {
+                exerciseDetailViewController.exercise = exercise
+            }
+        default:
+            break
+        }
+    }
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return min(tableView.frame.width * (1/1.61), (tableView.frame.height - tableView.safeAreaInsets.top - tableView.safeAreaInsets.bottom) * 0.9) // golden ratio
     }
