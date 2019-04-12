@@ -178,5 +178,9 @@ class ExerciseDetailViewController: UITableViewController {
         if let exerciseStatisticsViewController = segue.destination as? ExerciseStatisticsTableViewController {
             exerciseStatisticsViewController.exercise = exercise
         }
+        if let exerciseHistoryTableViewController = segue.destination as? ExerciseHistoryTableViewController, let exercise = exercise {
+            exerciseHistoryTableViewController.title = exercise.title
+            exerciseHistoryTableViewController.trainingExercises = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext)
+        }
     }
 }

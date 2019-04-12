@@ -57,6 +57,7 @@
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
 		8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */; };
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
+		8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */; };
 		B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,7 @@
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingViewController.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableArrayExtension.swift; sourceTree = "<group>"; };
+		8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryTableViewController.swift; sourceTree = "<group>"; };
 		A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				8AABF2AD20168906009C047D /* ExercisesScene */,
 				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
 				8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */,
+				8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */,
 			);
 			path = Exercises;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
 				8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */,
+				8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */,
 				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,
 				8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */,
 				8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */,
