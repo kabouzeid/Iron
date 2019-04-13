@@ -1692,8 +1692,8 @@
     },
     {
         "id": "0084",
-        "name": "incline-chest-press",
-        "title": "Chest Press (Incline)",
+        "name": "incline-machine-bench-press",
+        "title": "Bench Press: Machine (Incline)",
         "primer": "This exercise is for strengthening the upper chest and is preferred among beginners as it provides support and control.",
         "type": "isolation",
         "primary": [
@@ -1718,8 +1718,8 @@
     },
     {
         "id": "0085",
-        "name": "decline-chest-press",
-        "title": "Chest Press (Decline)",
+        "name": "decline-machine-bench-press",
+        "title": "Bench Press: Machine (Decline)",
         "primer": "This is an exercise for the strengthening of the lower chest or pectoral muscles and is preferred by beginners as it provides support and stability.",
         "type": "isolation",
         "primary": [
