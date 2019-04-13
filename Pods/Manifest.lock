@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Charts:
-    :commit: b155c2f64dbb6ef39d4e4099271b69cb05529474
+    :commit: 13623d0239f170270952397614c1fc676d538cb8
     :git: https://github.com/danielgindi/Charts.git
 
 SPEC CHECKSUMS:
