@@ -498,7 +498,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "training == %@ AND SELF != %@ AND NOT (ANY trainingSets.isCompleted == %@)", trainingExercise.training!, trainingExercise, NSNumber(booleanLiteral: false))
         _ = trainingExercise.training!.isCompleted
-        if let count = try? trainingExercise.managedObjectContext?.count(for: fetchRequest), let total = trainingExercise.training?.trainingExercises?.count {
+        if let count = ((try? trainingExercise.managedObjectContext?.count(for: fetchRequest)) as Int??), let total = trainingExercise.training?.trainingExercises?.count {
             return count == total - 1
         }
         return false

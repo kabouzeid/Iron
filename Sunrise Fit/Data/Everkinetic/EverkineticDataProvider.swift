@@ -43,7 +43,7 @@ class EverkineticDataProvider {
                 exercise.muscleGroup == groupName
             })
             
-            nextIndex = exercises.index(where: { (exercise) -> Bool in
+            nextIndex = exercises.firstIndex(where: { (exercise) -> Bool in
                 exercise.id == muscleGroup.last!.id
             })! + 1
             

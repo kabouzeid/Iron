@@ -82,11 +82,11 @@ class TrainingDetailTableViewController: UITableViewController {
                     tableView?.insertSections([1], with: .none)
                 }
             } else {
-                if let index = sectionKeys.index(of: .exerciseTitle) {
+                if let index = sectionKeys.firstIndex(of: .exerciseTitle) {
                     sectionKeys.remove(at: index)
                     tableView?.deleteSections([index], with: .none)
                 }
-                if let index = sectionKeys.index(of: .duration) {
+                if let index = sectionKeys.firstIndex(of: .duration) {
                     sectionKeys.remove(at: index)
                     tableView?.deleteSections([index], with: .none)
                 }
@@ -102,7 +102,7 @@ class TrainingDetailTableViewController: UITableViewController {
             previousSelectedDate = selectedDate
         }
         didSet {
-            if let index = sectionKeys.index(of: .duration) {
+            if let index = sectionKeys.firstIndex(of: .duration) {
                 if previousSelectedDate != selectedDate {
 
                     tableView.performBatchUpdates({
@@ -161,11 +161,11 @@ class TrainingDetailTableViewController: UITableViewController {
                 }
             } else {
                 if !alwaysShowEditingSections {
-                    if let index = sectionKeys.index(of: .exerciseTitle) {
+                    if let index = sectionKeys.firstIndex(of: .exerciseTitle) {
                         sectionKeys.remove(at: index)
                         tableView.deleteSections([index], with: .automatic)
                     }
-                    if let index = sectionKeys.index(of: .duration) {
+                    if let index = sectionKeys.firstIndex(of: .duration) {
                         sectionKeys.remove(at: index)
                         tableView.deleteSections([index], with: .automatic)
                     }
@@ -371,11 +371,11 @@ extension TrainingDetailTableViewController: DatePickerTableViewCellDelegate {
         switch selectedDate {
         case .start:
             training!.start = min(date, training!.end!)
-            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.index(of: .duration)!)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .start), section: sectionKeys.firstIndex(of: .duration)!)], with: .automatic)
             updateSummary()
         case .end:
             training!.end = max(date, training!.start!)
-            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.index(of: .duration)!)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: durationCellIndexFor(type: .end), section: sectionKeys.firstIndex(of: .duration)!)], with: .automatic)
             updateSummary()
         default:
             print("date changed called, but no date selected") // should never happen

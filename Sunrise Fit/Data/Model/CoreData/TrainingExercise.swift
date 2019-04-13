@@ -13,7 +13,7 @@ class TrainingExercise: NSManagedObject {
         get {
             let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND isCompleted == %@", self, NSNumber(booleanLiteral: true))
-            if let count = try? managedObjectContext?.count(for: fetchRequest) {
+            if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
                 return count
             }
             return nil
