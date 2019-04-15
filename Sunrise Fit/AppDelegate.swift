@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             content.body = "Your current training is unfinished. Do you want to finish it?"
             content.sound = UNNotificationSound.default
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15 * 60, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15 * 60, repeats: true)
             
             let request = UNNotificationRequest(identifier: unfinishedTrainingNotificationID, content: content, trigger: trigger)
             
