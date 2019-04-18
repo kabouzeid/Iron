@@ -23,8 +23,14 @@
             "Ensure that the seat and bar have been adjusted for optimal posture."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0003-relaxation.pdf",
+            "pdf/0003-tension.pdf"
+        ],
+        "png": [
+            "png/0003-relaxation.png",
+            "png/0003-tension.png"
+        ]
     },
     {
         "id": "0004",
@@ -123,8 +129,14 @@
             "Do not perform this exercise if you have shoulder pain."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0006-relaxation.pdf",
+            "pdf/0006-tension.pdf"
+        ],
+        "png": [
+            "png/0006-relaxation.png",
+            "png/0006-tension.png"
+        ]
     },
     {
         "id": "0007",
@@ -153,8 +165,14 @@
             "Do not perform this exercise if you have shoulder pain."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0007-relaxation.pdf",
+            "pdf/0007-tension.pdf"
+        ],
+        "png": [
+            "png/0007-relaxation.png",
+            "png/0007-tension.png"
+        ]
     },
     {
         "id": "0008",
@@ -255,8 +273,14 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0012-relaxation.pdf",
+            "pdf/0012-tension.pdf"
+        ],
+        "png": [
+            "png/0012-relaxation.png",
+            "png/0012-tension.png"
+        ]
     },
     {
         "id": "0017",
@@ -786,33 +810,6 @@
         ]
     },
     {
-        "id": "0040",
-        "name": "dumbbell-raise",
-        "title": "Dumbbell Raise",
-        "primer": "This is an exercise for shoulder and biceps strengthening.",
-        "type": "isolation",
-        "primary": [
-            "deltoid"
-        ],
-        "secondary": [
-            "biceps brachii"
-        ],
-        "equipment": [
-            "dumbbells"
-        ],
-        "steps": [
-            "Stand upright with your feet shoulder width apart and a slight bend in your knees.",
-            "Grasp a dumbbell in each hand, in front of your thighs. This is your starting position.",
-            "Draw your abs in.",
-            "Raise the dumbbells up on either side of your ribs in a rowing motion by bending your elbows moving them outwards.",
-            "Lower to starting position and repeat."
-        ],
-        "tips": [],
-        "references": [],
-        "pdf": [],
-        "png": []
-    },
-    {
         "id": "0041",
         "name": "smith-machine-shoulder-shrugs",
         "title": "Shrugs: Smith Machine",
@@ -941,8 +938,14 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0047-relaxation.pdf",
+            "pdf/0047-tension.pdf"
+        ],
+        "png": [
+            "png/0047-relaxation.png",
+            "png/0047-tension.png"
+        ]
     },
     {
         "id": "0048",
@@ -1713,8 +1716,14 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0084-relaxation.pdf",
+            "pdf/0084-tension.pdf"
+        ],
+        "png": [
+            "png/0084-relaxation.png",
+            "png/0084-tension.png"
+        ]
     },
     {
         "id": "0085",
@@ -1785,7 +1794,7 @@
     {
         "id": "0087",
         "name": "pull-ups",
-        "title": "Pull Ups",
+        "title": "Pull Up",
         "primer": "This is an exercise in lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -1842,8 +1851,14 @@
             "Ensure to contract your back and core muscles throughout this exercise to prevent injury and to maximise the effectiveness of the exercise."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0089-relaxation.pdf",
+            "pdf/0089-tension.pdf"
+        ],
+        "png": [
+            "png/0089-relaxation.png",
+            "png/0089-tension.png"
+        ]
     },
     {
         "id": "0090",
@@ -1884,8 +1899,8 @@
     },
     {
         "id": "0092",
-        "name": "straight-arm-push-down",
-        "title": "Straight Arm Push Down",
+        "name": "straight-arm-pull-down",
+        "title": "Straight Arm Pulldown",
         "primer": "This exercise for strengthening the Lats and also works the Triceps.",
         "type": "isolation",
         "primary": [
@@ -1898,7 +1913,7 @@
             "cable"
         ],
         "steps": [
-            "Grasp wide grip pull down bar with a wide grip so your hands are on the portion of the bar which curves down.",
+            "Grasp wide grip pulldown bar with a wide grip so your hands are on the portion of the bar which curves down.",
             "Stand erect with your abs drawn in.",
             "Keeping a slight bend in your elbows and your wrist steady pull the bar down from the starting position to your upper thighs.",
             "With a controlled motion bring the bar back up to starting position."
@@ -1917,7 +1932,7 @@
     {
         "id": "0093",
         "name": "underhand-pull-down",
-        "title": "Pull Down (Underhand)",
+        "title": "Pulldown (Underhand)",
         "primer": "This is an exercise for lats and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1930,7 +1945,7 @@
             "cable"
         ],
         "steps": [
-            "Sitting upright with your abs drawn in grasp a Pull Down bar with and underhand grip shoulder width apart.",
+            "Sitting upright with your abs drawn in grasp a pulldown bar with and underhand grip shoulder width apart.",
             "Pull the bar down till the bar reaches your upper chest, keeping your elbows close to your body.",
             "Slowly return the bar to the starting position.",
             "Repeat."
@@ -1949,7 +1964,7 @@
     {
         "id": "0095",
         "name": "overhand-pull-down",
-        "title": "Pull Down (Overhand)",
+        "title": "Pulldown (Overhand)",
         "primer": "This is an exercise for lats and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1962,7 +1977,7 @@
             "cable"
         ],
         "steps": [
-            "Sitting upright with your abs drawn in grasp a Pull Down bar with and overhand grip shoulder width apart.",
+            "Sitting upright with your abs drawn in grasp a pulldown bar with and overhand grip shoulder width apart.",
             "Pull the bar down till the bar reaches your upper chest, keeping your elbows close to your body.",
             "Slowly return the bar to the starting position.",
             "Repeat."
@@ -1981,7 +1996,7 @@
     {
         "id": "0096",
         "name": "v-bar-pull-down",
-        "title": "Pull Down: V Bar ",
+        "title": "Pulldown: V Bar ",
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -1994,7 +2009,7 @@
             "cable"
         ],
         "steps": [
-            "Attach a V bar to the pull down pulley of a cable machine.",
+            "Attach a V bar to the pulldown pulley of a cable machine.",
             "Sitting upright with your abs drawn grasp the bar with an overhand grip, your palms facing in.",
             "Pull the bar straight down to your upper chest.",
             "Pause for a moment after touching the chest and then slowly return the bar to starting position.",
@@ -2014,7 +2029,7 @@
     {
         "id": "0097",
         "name": "wide-grip-lat-pull-down",
-        "title": "Pull Down (Wide Grip)",
+        "title": "Pulldown (Wide Grip)",
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -2029,7 +2044,7 @@
             "wide bar"
         ],
         "steps": [
-            "Sit at a cable pull down machine fitted with a wide bar.",
+            "Sit at a cable pulldown machine fitted with a wide bar.",
             "Grasp the bar with a wide overhand grip (palms facing forward) .",
             "With your abs drawn in and back straight pull the bar down to your upper chest.",
             "Pause for a moment and then return the bar to the starting position.",
@@ -2039,8 +2054,14 @@
             "Ensure you maintain a straight back trough out this exercise."
         ],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0097-relaxation.pdf",
+            "pdf/0097-tension.pdf"
+        ],
+        "png": [
+            "png/0097-relaxation.png",
+            "png/0097-tension.png"
+        ]
     },
     {
         "id": "0099",
@@ -3072,7 +3093,7 @@
     {
         "id": "0145",
         "name": "narrow-stance-hack-squat",
-        "title": "Hack Squat (Narrow Stance)",
+        "title": "Hack Squat: Machine (Narrow Stance)",
         "primer": "Like the Hack Squat, this exercise works the muscles of the leg.",
         "type": "compound",
         "primary": [
@@ -3281,14 +3302,16 @@
     },
     {
         "id": "0163",
-        "name": "incline-pushdown-with-cable",
-        "title": "Pushdown: Cable (Incline)",
+        "name": "seated-pulldown-with-cable",
+        "title": "Straight Arm Pulldown (Seated)",
         "primer": "This exercise uses cables to isolate and work the triceps.",
         "type": "isolation",
         "primary": [
+            "latissimus dorsi"
+        ],
+        "secondary": [
             "triceps brachii"
         ],
-        "secondary": [],
         "equipment": [
             "cable"
         ],
@@ -3786,7 +3809,7 @@
     {
         "id": "0188",
         "name": "close-triceps-pushups",
-        "title": "Pushups (Close, Triceps)",
+        "title": "Push Up (Close)",
         "primer": "This version of the Pushup isolates the tricep muscles.",
         "type": "compound",
         "primary": [
@@ -3942,7 +3965,7 @@
     },
     {
         "id": "0198",
-        "name": "standing-triceps-extension-2",
+        "name": "standing-triceps-extension",
         "title": "Triceps Extension: Dumbbell (Standing)",
         "primer": "This exercise works the triceps by reaching behind your neck.",
         "type": "isolation",
@@ -4027,8 +4050,14 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0200-relaxation.pdf",
+            "pdf/0200-tension.pdf"
+        ],
+        "png": [
+            "png/0200-relaxation.png",
+            "png/0200-tension.png"
+        ]
     },
     {
         "id": "0201",
@@ -5000,8 +5029,12 @@
         ],
         "tips": [],
         "references": [],
-        "pdf": [],
-        "png": []
+        "pdf": [
+            "pdf/0283-relaxation.pdf"
+        ],
+        "png": [
+            "png/0283-relaxation.png"
+        ]
     },
     {
         "id": "0284",
