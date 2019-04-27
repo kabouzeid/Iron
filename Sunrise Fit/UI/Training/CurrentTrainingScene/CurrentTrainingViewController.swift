@@ -93,16 +93,16 @@ class CurrentTrainingViewController: UIViewController {
         assert(training?.managedObjectContext != nil)
         
         var numberOfSets = 3
-        // if available use the media of the number of sets from the last month
-        if let history = trainingExercise.history {
-            let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+        // try to guess the number of sets
+        if let history = trainingExercise.history, history.count > 2 {
+            // one month since last training and at least three trainings
+            let cutoff = min(history[2].training!.start!, Calendar.current.date(byAdding: .month, value: -1, to: history.first!.training!.start!)!)
             let filteredAndSortedHistory = history
-                .filter({$0.training!.start != nil && $0.training!.start! > oneMonthAgo})
+                .filter({$0.training!.start != nil && $0.training!.start! >= cutoff})
                 .sorted(by: {($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)})
-            if filteredAndSortedHistory.count > 2 {
-                let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
-                numberOfSets = median.trainingSets?.count ?? numberOfSets
-            }
+            assert(filteredAndSortedHistory.count >= 3)
+            let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
+            numberOfSets = median.trainingSets?.count ?? numberOfSets
         }
         var trainingSets = [TrainingSet]()
         for _ in 0..<numberOfSets {
