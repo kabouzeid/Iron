@@ -233,18 +233,18 @@ class CurrentTrainingExerciseViewController: UIViewController {
             exerciseDetailViewController.exercise = trainingExercise?.exercise
         } else if segue.identifier == "finish training" {
             let training = trainingExercise!.training!
-            assert(training.isCompleted!, "Attempt to finish uncompleted training")
-            assert(training.start != nil, "Attempt to save training that has not started")
-            assert(training.end != nil, "Attempt to save training that has not ended")
+            precondition(training.isCompleted!, "Attempt to finish uncompleted training")
+            precondition(training.start != nil, "Attempt to save training that has not started")
             training.start = training.start ?? Date() // just to be sure
             training.end = training.end ?? Date() // just to be sure
+            precondition(training.start! <= training.end!, "Attempt to save training where start > end time")
             training.isCurrentTraining = false
             
             AppDelegate.instance.saveContext()
         } else if let trainingDetailViewController = segue.destination as? TrainingDetailTableViewController {
             let training = trainingExercise!.training!
-            assert(training.isCompleted!, "Attempt to finish uncompleted training")
-            assert(training.start != nil, "Attempt to finish training that has not started")
+            precondition(training.isCompleted!, "Attempt to finish uncompleted training")
+            precondition(training.start != nil, "Attempt to finish training that has not started")
             training.end = Date()
             trainingDetailViewController.training = training
             trainingDetailViewController.alwaysShowEditingSections = true
@@ -444,7 +444,7 @@ extension CurrentTrainingExerciseViewController: RepWeightPickerDelegate {
         if let selected = tableView.indexPathForSelectedRow {
             let selectedSet = trainingSet(of: selected)
             if selectedSet == currentSet {
-                assert(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
+                precondition(selectedSet.repetitions > 0, "Tried to complete set with 0 repetitions")
                 selectedSet.isCompleted = true
                 moveExerciseBehindLastCompleted(trainingExercise: selectedSet.trainingExercise!)
                 let training = trainingExercise!.training!

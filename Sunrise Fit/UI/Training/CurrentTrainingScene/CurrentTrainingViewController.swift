@@ -95,8 +95,6 @@ class CurrentTrainingViewController: UIViewController {
     }
     
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
-        assert(training?.managedObjectContext != nil)
-        
         var numberOfSets = 3
         // try to guess the number of sets
         if let history = trainingExercise.history, history.count > 2 {
@@ -222,7 +220,7 @@ extension CurrentTrainingViewController: ExerciseSelectionHandler {
         trainingExercise.exerciseId = Int16(exercise.id)
         trainingExercise.training = training
         trainingExercise.addToTrainingSets(createDefaultTrainingSets(trainingExercise: trainingExercise))
-        
+
         AppDelegate.instance.saveContext()
         
         let insertedIndex = training!.trainingExercises!.index(of: trainingExercise)

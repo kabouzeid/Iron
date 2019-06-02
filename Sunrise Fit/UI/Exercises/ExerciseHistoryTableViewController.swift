@@ -58,7 +58,6 @@ class ExerciseHistoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        assert(trainingExercises?[section].training?.isCompleted ?? false)
         return Training.dateFormatter.string(from: trainingExercises![section].training!.start!)
     }
 }
