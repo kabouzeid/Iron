@@ -398,7 +398,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9In-Rc-Ewk">
-                                <rect key="frame" x="0.0" y="132" width="375" height="451"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="407"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="mqt-kj-wfP" customClass="SummaryView" customModule="Sunrise_Fit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -460,7 +460,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsJ-3e-ZUZ">
-                                <rect key="frame" x="0.0" y="583" width="375" height="146"/>
+                                <rect key="frame" x="0.0" y="539" width="375" height="146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-1F-bVk">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -1125,8 +1125,8 @@
         <segue reference="KCE-9K-WQV"/>
         <segue reference="N1f-CI-Ual"/>
         <segue reference="4Bh-6t-lBp"/>
-        <segue reference="0r4-bm-1HP"/>
-        <segue reference="pm6-K1-OZd"/>
+        <segue reference="2Io-K3-alz"/>
+        <segue reference="7hf-0X-d3Y"/>
         <segue reference="YIp-uJ-NPv"/>
     </inferredMetricsTieBreakers>
 </document>
