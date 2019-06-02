@@ -47,8 +47,13 @@ class CurrentTrainingViewController: UIViewController {
             // for now there is no easy way to figure out which cells have changed
             tableView.reloadData()
             timerViewTrainingController?.checkShowTimer(timerView, animated: false) // training could have been started
-            reload = false
+            // NOTE: do not reset reload herer, since willAppear is also called when only peaking via swipe
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reload = false // only reset reload here, where we can be sure that we are really back
     }
 
     @IBOutlet weak var tableView: UITableView!
