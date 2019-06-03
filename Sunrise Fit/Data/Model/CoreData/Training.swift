@@ -36,8 +36,7 @@ class Training: NSManagedObject {
     static let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.maximumUnitCount = 2
+        formatter.allowedUnits = [.hour, .minute]
         return formatter
     }()
     
