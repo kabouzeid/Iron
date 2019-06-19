@@ -1,9 +1,9 @@
 PODS:
   - Benchmark (2.0)
-  - Charts (3.2.2):
-    - Charts/Core (= 3.2.2)
-  - Charts/Core (3.2.2)
-  - SwiftyJSON (4.3.0)
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Benchmark
@@ -21,14 +21,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Charts:
-    :commit: 13623d0239f170270952397614c1fc676d538cb8
+    :commit: e8505930018668b73500203afc13bb92fa585f8a
     :git: https://github.com/danielgindi/Charts.git
 
 SPEC CHECKSUMS:
   Benchmark: 3c9951f79ae716f1dc3c8256f1f2db05eea7b534
-  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Charts: bcd81a359eb40ff7606d198dfcc740032ca184fe
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: e8eb5e4c43a288fd657fd6333bb9e93eb22b9901
+PODFILE CHECKSUM: b9258510dc61e0f45eda741ab2bdf20a826c9e6c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.2
