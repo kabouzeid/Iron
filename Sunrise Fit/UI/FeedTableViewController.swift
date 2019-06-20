@@ -13,11 +13,16 @@ import Charts
 class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var summaryView: SummaryView!
-    
+
     private var trainingsPerWeekChartInfo: TrainingsPerWeekChartInfo?
     private var trainingsPerWeekChartDataCache: BarChartData?
     
     private var pinnedCharts = [UserDefaults.PinnedChart]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,14 +41,19 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return 1
+        case 1:
+            return pinnedCharts.count + 1
+        default:
+            fatalError("No such section.")
         }
-        return pinnedCharts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "bar chart cell", for: indexPath) as! BarChartCell
             cell.titleLabel.text = "Activity"
             cell.detailLabel.text = "Workouts per week"
@@ -66,7 +76,11 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
             cell.chartView.data = chartData
             cell.chartView.fitScreen()
             return cell
-        } else {
+        case 1:
+            if indexPath.row == pinnedCharts.count {
+                return tableView.dequeueReusableCell(withIdentifier: "add widget cell", for: indexPath)
+            }
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "line chart cell", for: indexPath) as! LineChartCell
             let pinnedChart = pinnedCharts[indexPath.row]
   
@@ -91,9 +105,44 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
             cell.chartView.addGestureRecognizer(tapGestureRecognizer)
 
             return cell
+        default:
+            fatalError("No such section.")
         }
     }
     
+    private func isItemEditable(indexPath: IndexPath) -> Bool {
+        return indexPath.section == 1 && indexPath.row != pinnedCharts.count
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return isItemEditable(indexPath: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let pinnedChart = pinnedCharts[indexPath.row]
+            UserDefaults.standard.removePinnedChart(exerciseId: pinnedChart.exerciseId, measurmentType: pinnedChart.measurementType)
+            pinnedCharts = UserDefaults.standard.pinnedCharts()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return isItemEditable(indexPath: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if isItemEditable(indexPath: proposedDestinationIndexPath) {
+            return proposedDestinationIndexPath
+        }
+        return sourceIndexPath
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        pinnedCharts.insert(pinnedCharts.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
+        UserDefaults.standard.setPinnedCharts(pinnedCharts: pinnedCharts)
+    }
+
     private var tappedExercise: Exercise?
     private var highlightedValue: Double?
     
@@ -124,27 +173,38 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "show exercise history":
-            if let exerciseHistoryTableViewController = segue.destination as? ExerciseHistoryTableViewController, let exercise = tappedExercise {
-                exerciseHistoryTableViewController.title = exercise.title
-                let history = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext)
-                if let value = highlightedValue {
-                    // scroll to the entry corresponding to the highlighted value
-                    exerciseHistoryTableViewController.scrollTo = history?.firstIndex { TrainingExerciseChartDataGenerator.dateEqualsValue(date: $0.training!.start!, value: value) }
+        if let exerciseTableViewController = segue.destination as? ExercisesTableViewController {
+            exerciseTableViewController.exercises = EverkineticDataProvider.exercises
+            exerciseTableViewController.exerciseSelectionHandler = self
+            exerciseTableViewController.accessoryType = .detailButton
+            exerciseTableViewController.navigationItem.hidesSearchBarWhenScrolling = false
+            exerciseTableViewController.title = "Add Widget"
+        } else {
+            switch segue.identifier {
+            case "show exercise history":
+                if let exerciseHistoryTableViewController = segue.destination as? ExerciseHistoryTableViewController, let exercise = tappedExercise {
+                    exerciseHistoryTableViewController.title = exercise.title
+                    let history = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext)
+                    if let value = highlightedValue {
+                        // scroll to the entry corresponding to the highlighted value
+                        exerciseHistoryTableViewController.scrollTo = history?.firstIndex { TrainingExerciseChartDataGenerator.dateEqualsValue(date: $0.training!.start!, value: value) }
+                    }
+                    exerciseHistoryTableViewController.trainingExercises = history
                 }
-                exerciseHistoryTableViewController.trainingExercises = history
+            case "show exercise":
+                if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController, let exercise = tappedExercise {
+                    exerciseDetailViewController.exercise = exercise
+                }
+            default:
+                break
             }
-        case "show exercise":
-            if let exerciseDetailViewController = segue.destination as? ExerciseDetailViewController, let exercise = tappedExercise {
-                exerciseDetailViewController.exercise = exercise
-            }
-        default:
-            break
         }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 && indexPath.row == pinnedCharts.count {
+            return UITableView.automaticDimension
+        }
         return min(tableView.frame.width * (1/1.61), (tableView.frame.height - tableView.safeAreaInsets.top - tableView.safeAreaInsets.bottom) * 0.9) // golden ratio
     }
     
@@ -238,6 +298,33 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
         }
         weightEntry.detail.text! += String(format: "%.1f", weightPercent) + "%"
         weightEntry.detail.isHidden = false
+    }
+}
+
+extension FeedTableViewController: ExerciseSelectionHandler {
+    func handleSelection(exercise: Exercise) {
+        navigationController?.popToViewController(self, animated: true)
+        
+        let alert = UIAlertController(title: nil, message: exercise.title, preferredStyle: .actionSheet)
+        for measurementType in TrainingExerciseChartDataGenerator.MeasurementType.allCases {
+            let action = UIAlertAction(title: measurementType.title, style: .default) { [weak self] _ in
+                UserDefaults.standard.addPinnedChart(exerciseId: exercise.id, measurmentType: measurementType)
+                self?.pinnedCharts = UserDefaults.standard.pinnedCharts()
+                guard let lastRowIndex = self?.pinnedCharts.count else { return }
+                self?.tableView.insertRows(at: [IndexPath(row: lastRowIndex - 1, section: 1)], with: .automatic)
+                self?.tableView.scrollToRow(at: IndexPath(row: lastRowIndex, section: 1), at: .middle, animated: true)
+            }
+            action.isEnabled = !UserDefaults.standard.hasPinnedChart(exerciseId: exercise.id, measurmentType: measurementType)
+            alert.addAction(action)
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        // for iPad (place popover in the middle of the screen)
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+        alert.popoverPresentationController?.permittedArrowDirections = []
+        
+        present(alert, animated: true)
     }
 }
 
