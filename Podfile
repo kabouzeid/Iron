@@ -6,7 +6,7 @@ target 'Sunrise Fit' do
   # Pods for Rhino Fit
   pod 'SwiftyJSON'
   pod 'Benchmark'
-  pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git'
+  pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :inhibit_warnings => true
 
   target 'Sunrise FitTests' do
     inherit! :search_paths
