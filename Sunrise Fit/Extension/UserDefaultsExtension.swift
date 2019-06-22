@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UserDefaults {
     enum Keys: String {
@@ -22,7 +23,9 @@ extension UserDefaults {
         }
     }
     
-    struct PinnedChart {
+    struct PinnedChart: Identifiable {
+        var id: String { "\(exerciseId) measurementType.title" }
+        
         let exerciseId: Int
         let measurementType: TrainingExerciseChartDataGenerator.MeasurementType
     }

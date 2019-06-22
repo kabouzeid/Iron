@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIColor {
-    static var appleGreen = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
-    static var appleRed = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
-    static var veryLightGray = UIColor(white: 0.9, alpha: 1)
+    var swiftUIColor: Color {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        return Color(hue: Double(hue), saturation: Double(saturation), brightness: Double(brightness), opacity: Double(alpha))
+    }
 }

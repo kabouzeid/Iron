@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qjF-BQ-klg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qjF-BQ-klg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -820,7 +819,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="image cell" rowHeight="200" id="GEN-rG-iDm" customClass="ExerciseImageTableViewCell" customModule="Sunrise_Fit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.333332061767578" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GEN-rG-iDm" id="R3O-vu-gJY">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -842,7 +841,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="muscle cell" textLabel="jT5-BU-LpA" detailTextLabel="2Py-aq-9Db" style="IBUITableViewCellStyleValue2" id="Q5t-YL-8uV">
-                                <rect key="frame" x="0.0" y="290.33333206176758" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="255.33333206176758" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q5t-YL-8uV" id="zpu-MX-n4x">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
@@ -866,7 +865,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="text cell" textLabel="XPP-f0-gSx" style="IBUITableViewCellStyleDefault" id="gmk-b5-QK5">
-                                <rect key="frame" x="0.0" y="334" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="299" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmk-b5-QK5" id="j7H-sp-eJv">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
@@ -883,7 +882,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="link cell" textLabel="dOz-4O-Rkp" style="IBUITableViewCellStyleDefault" id="g35-VX-qhf">
-                                <rect key="frame" x="0.0" y="377.66666793823242" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="342.66666793823242" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g35-VX-qhf" id="jn6-bN-Jcb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
@@ -976,19 +975,19 @@
             <objects>
                 <tableViewController id="4cc-fK-eFc" customClass="ExerciseStatisticsTableViewController" customModule="Sunrise_Fit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ynt-cF-JNd">
-                        <rect key="frame" x="0.0" y="0.0" width="267" height="29"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chart cell" rowHeight="200" id="236-DR-PiN" customClass="ChartCell" customModule="Sunrise_Fit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="267" height="200"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="236-DR-PiN" id="Kzr-ty-gLt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEi-Pv-Shm" customClass="StyledLineChartView" customModule="Sunrise_Fit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EDz-ES-wdw">
                                                     <rect key="frame" x="0.0" y="-22" width="50" height="104"/>
@@ -1033,7 +1032,7 @@
                     <navigationItem key="navigationItem" id="Yez-db-ZNU">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="iHh-xT-PRx">
-                            <rect key="frame" x="100" y="6.6666666666666679" width="267" height="29"/>
+                            <rect key="frame" x="100" y="5.6666666666666679" width="267" height="29.000000000000004"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Month"/>
@@ -1138,7 +1137,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dMj-it-3hD"/>
-        <segue reference="zxu-mI-xMU"/>
+        <segue reference="N1f-CI-Ual"/>
         <segue reference="3ak-5V-BGe"/>
         <segue reference="2Io-K3-alz"/>
         <segue reference="7hf-0X-d3Y"/>

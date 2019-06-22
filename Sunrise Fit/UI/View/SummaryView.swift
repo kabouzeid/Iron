@@ -94,11 +94,13 @@ class SummaryEntryView: UIView {
         textStackView.spacing = 0
         text = UILabel()
         text.textAlignment = .center
-        text.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        text.font = UIFont.preferredFont(forTextStyle: .title2)
+        text.textColor = UIColor.label
+        
         detail = UILabel()
         detail.textAlignment = .center
-        detail.font = UIFont.systemFont(ofSize: 17)
-        detail.textColor = UIColor.darkGray
+        detail.font = UIFont.preferredFont(forTextStyle: .body)
+        detail.textColor = UIColor.secondaryLabel
         textStackView.addArrangedSubview(text)
         textStackView.addArrangedSubview(detail)
 
@@ -106,7 +108,7 @@ class SummaryEntryView: UIView {
         title.textAlignment = .center
         title.numberOfLines = 0
         title.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        title.textColor = UIColor.lightGray
+        title.textColor = UIColor.secondaryLabel
 
         rootStackView.addArrangedSubview(textStackView)
         rootStackView.addArrangedSubview(title)

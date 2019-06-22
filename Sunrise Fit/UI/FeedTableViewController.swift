@@ -257,10 +257,10 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
         var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1) * 100)
         durationPercent = abs(durationPercent) < 0.1 ? 0 : durationPercent
         if durationPercent > 0 {
-            durationEntry.detail.textColor = UIColor.appleGreen
+            durationEntry.detail.textColor = UIColor.systemGreen
             durationEntry.detail.text = "+"
         } else if durationPercent < 0 {
-            durationEntry.detail.textColor = UIColor.appleRed
+            durationEntry.detail.textColor = UIColor.systemRed
             durationEntry.detail.text = ""
         } else {
             durationEntry.detail.textColor = UIColor.darkGray
@@ -272,10 +272,10 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
         var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1) * 100)
         setsPercent = abs(setsPercent) < 0.1 ? 0 : setsPercent
         if setsPercent > 0 {
-            setsEntry.detail.textColor = UIColor.appleGreen
+            setsEntry.detail.textColor = UIColor.systemGreen
             setsEntry.detail.text = "+"
         } else if setsPercent < 0 {
-            setsEntry.detail.textColor = UIColor.appleRed
+            setsEntry.detail.textColor = UIColor.systemRed
             setsEntry.detail.text = ""
         } else {
             setsEntry.detail.textColor = UIColor.darkGray
@@ -287,10 +287,10 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
         var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1) * 100)
         weightPercent = abs(weightPercent) < 0.1 ? 0 : weightPercent
         if weightPercent > 0 {
-            weightEntry.detail.textColor = UIColor.appleGreen
+            weightEntry.detail.textColor = UIColor.systemGreen
             weightEntry.detail.text = "+"
         } else if weightPercent < 0 {
-            weightEntry.detail.textColor = UIColor.appleRed
+            weightEntry.detail.textColor = UIColor.systemRed
             weightEntry.detail.text = ""
         } else {
             weightEntry.detail.textColor = UIColor.darkGray

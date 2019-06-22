@@ -18,18 +18,22 @@ extension BarLineChartViewBase {
         self.legend.enabled = false
         self.chartDescription?.enabled = false
         
+        let gridColor = UIColor.systemGray5
+        let axisLineColor = UIColor.systemGray4
+        let labelColor = UIColor.tertiaryLabel
+        
         // Y Axis
-        self.leftAxis.gridColor = .veryLightGray
-        self.leftAxis.axisLineColor = .lightGray
-        self.leftAxis.labelTextColor = .lightGray
+        self.leftAxis.gridColor = gridColor
+        self.leftAxis.axisLineColor = axisLineColor
+        self.leftAxis.labelTextColor = labelColor
         self.leftAxis.labelFont = .boldSystemFont(ofSize: 10)
         self.leftAxis.granularity = 1
         self.leftAxis.granularityEnabled = true
         
         self.rightAxis.enabled = false
-        self.rightAxis.gridColor = .veryLightGray
-        self.rightAxis.axisLineColor = .lightGray
-        self.rightAxis.labelTextColor = .lightGray
+        self.rightAxis.gridColor = gridColor
+        self.rightAxis.axisLineColor = axisLineColor
+        self.rightAxis.labelTextColor = labelColor
         self.rightAxis.labelFont = .boldSystemFont(ofSize: 10)
         self.rightAxis.granularity = 1
         self.rightAxis.granularityEnabled = true
@@ -39,21 +43,21 @@ extension BarLineChartViewBase {
         self.xAxis.labelPosition = .bottom
         self.xAxis.granularity = 1
         self.xAxis.granularityEnabled = true
-        self.xAxis.gridColor = .veryLightGray
-        self.xAxis.axisLineColor = .lightGray
-        self.xAxis.labelTextColor = .lightGray
-        self.xAxis.labelFont = .boldSystemFont(ofSize: 10)
+        self.xAxis.gridColor = gridColor
+        self.xAxis.axisLineColor = axisLineColor
+        self.xAxis.labelTextColor = labelColor
+        self.xAxis.labelFont = .boldSystemFont(ofSize: 10) // try caption
         
         // legend
         self.legend.enabled = false
         self.legend.form = Legend.Form.circle
         self.legend.font = .boldSystemFont(ofSize: 10)
-        self.legend.textColor = .lightGray
+        self.legend.textColor = labelColor
         
         // no data
         self.noDataText = "No data available"
-        self.noDataFont = UIFont.preferredFont(forTextStyle: .headline)
-        self.noDataTextColor = .lightGray
+        self.noDataFont = UIFont.preferredFont(forTextStyle: .body)
+        self.noDataTextColor = .secondaryLabel
     }
 
     // use this in the DataLoader funcs for optimal styling
