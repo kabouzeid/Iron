@@ -22,7 +22,9 @@ struct ContentView : View {
             HistoryView()
                 .tabItemLabel(
                     VStack {
-                        Image(systemName: "clock.fill")
+                        // TODO: replace with systemName when it becomes available
+//                        Image(systemName: "clock.fill")
+                        Image("clock")
                         Text("History")
                     }
                 )
