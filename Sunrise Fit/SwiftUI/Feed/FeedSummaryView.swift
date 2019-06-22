@@ -70,7 +70,7 @@ struct FeedSummaryView : UIViewRepresentable {
             durationEntry.detail.textColor = UIColor.systemRed
             durationEntry.detail.text = ""
         } else {
-            durationEntry.detail.textColor = UIColor.darkGray
+            durationEntry.detail.textColor = UIColor.tertiaryLabel
             durationEntry.detail.text = "+"
         }
         durationEntry.detail.text! += String(format: "%.1f", durationPercent) + "%"
@@ -85,7 +85,7 @@ struct FeedSummaryView : UIViewRepresentable {
             setsEntry.detail.textColor = UIColor.systemRed
             setsEntry.detail.text = ""
         } else {
-            setsEntry.detail.textColor = UIColor.darkGray
+            setsEntry.detail.textColor = UIColor.tertiaryLabel
             setsEntry.detail.text = "+"
         }
         setsEntry.detail.text! += String(format: "%.1f", setsPercent) + "%"
@@ -100,7 +100,7 @@ struct FeedSummaryView : UIViewRepresentable {
             weightEntry.detail.textColor = UIColor.systemRed
             weightEntry.detail.text = ""
         } else {
-            weightEntry.detail.textColor = UIColor.darkGray
+            weightEntry.detail.textColor = UIColor.tertiaryLabel
             weightEntry.detail.text = "+"
         }
         weightEntry.detail.text! += String(format: "%.1f", weightPercent) + "%"

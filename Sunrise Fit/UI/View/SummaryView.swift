@@ -100,7 +100,7 @@ class SummaryEntryView: UIView {
         detail = UILabel()
         detail.textAlignment = .center
         detail.font = UIFont.preferredFont(forTextStyle: .body)
-        detail.textColor = UIColor.secondaryLabel
+        detail.textColor = UIColor.tertiaryLabel
         textStackView.addArrangedSubview(text)
         textStackView.addArrangedSubview(detail)
 
