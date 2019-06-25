@@ -30,7 +30,10 @@ struct FeedView : View {
                         // TODO: present actual view to choose exercise
                         Text("Placeholder")
                     ) {
-                        Text("Add Widget")
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Add Widget")
+                        }
                     }
                 }
             }
@@ -43,7 +46,7 @@ struct FeedView : View {
 #if DEBUG
 struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
-        FeedView()
+        FeedView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

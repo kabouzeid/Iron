@@ -9,37 +9,34 @@
 import SwiftUI
 import CoreData
 
-struct FeedSummaryView : UIViewRepresentable {
-    func makeUIView(context: UIViewRepresentableContext<FeedSummaryView>) -> SummaryView {
-        let summaryView = SummaryView()
-        summaryView.entryCount = 3
-        return summaryView
-    }
+struct FeedSummaryView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
-    func updateUIView(_ uiView: SummaryView, context: UIViewRepresentableContext<FeedSummaryView>) {
-        updateSummary(summaryView: uiView)
-        return
+    var body: some View {
+        BannerView(entries: bannerViewEntries)
+            .lineLimit(nil)
     }
-    
-    private func updateSummary(summaryView: SummaryView) {
+
+    private var bannerViewEntries: [BannerViewEntry] {
+        var entries = [BannerViewEntry]()
         // create the fetch requests
         let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
         let sevenDaysRequest: NSFetchRequest<Training> = Training.fetchRequest()
         sevenDaysRequest.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@",
                                                  NSNumber(booleanLiteral: true),
                                                  sevenDaysAgo as NSDate)
-        
+
         let fourteenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
         let fourteenDaysRequest: NSFetchRequest<Training> = Training.fetchRequest()
         fourteenDaysRequest.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@ AND start < %@",
                                                     NSNumber(booleanLiteral: true),
                                                     fourteenDaysAgo as NSDate,
                                                     sevenDaysAgo as NSDate)
-        
+
         // fetch the objects
-        let trainingsFromSevenDaysAgo = (try? AppDelegate.instance.persistentContainer.viewContext.fetch(sevenDaysRequest)) ?? []
-        let trainingsFromFourteenDaysAgo = (try? AppDelegate.instance.persistentContainer.viewContext.fetch(fourteenDaysRequest)) ?? []
-        
+        let trainingsFromSevenDaysAgo = (try? trainingsDataStore.context.fetch(sevenDaysRequest)) ?? []
+        let trainingsFromFourteenDaysAgo = (try? trainingsDataStore.context.fetch(fourteenDaysRequest)) ?? []
+
         // compute the values
         let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
             return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
@@ -47,71 +44,87 @@ struct FeedSummaryView : UIViewRepresentable {
         let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
             return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
         }
-        
+
         // set the values
-        let durationEntry = summaryView.entries[0]
-        let setsEntry = summaryView.entries[1]
-        let weightEntry = summaryView.entries[2]
-        
-        durationEntry.title.text = "Duration\nLast 7 Days"
-        setsEntry.title.text = "Sets\nLast 7 Days"
-        weightEntry.title.text = "Weight\nLast 7 Days"
-        
-        durationEntry.text.text = Training.durationFormatter.string(from: valuesSevenDaysAgo.0)!
-        setsEntry.text.text = "\(valuesSevenDaysAgo.1)"
-        weightEntry.text.text = "\(valuesSevenDaysAgo.2.shortStringValue) kg"
-        
+
+        // Duration
+        var durationDetailText: String
+        var durationDetailColor: Color
         var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1) * 100)
         durationPercent = abs(durationPercent) < 0.1 ? 0 : durationPercent
         if durationPercent > 0 {
-            durationEntry.detail.textColor = UIColor.systemGreen
-            durationEntry.detail.text = "+"
+            durationDetailColor = Color.green
+            durationDetailText = "+"
         } else if durationPercent < 0 {
-            durationEntry.detail.textColor = UIColor.systemRed
-            durationEntry.detail.text = ""
+            durationDetailColor = Color.red
+            durationDetailText = ""
         } else {
-            durationEntry.detail.textColor = UIColor.tertiaryLabel
-            durationEntry.detail.text = "+"
+            durationDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            durationDetailText = "+"
         }
-        durationEntry.detail.text! += String(format: "%.1f", durationPercent) + "%"
-        durationEntry.detail.isHidden = false
-        
+        durationDetailText += String(format: "%.1f", durationPercent) + "%"
+
+        entries.append(
+            BannerViewEntry(id: 0,
+                            title: Text("Duration\nLast 7 Days"),
+                            text: Text(Training.durationFormatter.string(from: valuesSevenDaysAgo.0)!),
+                            detail: Text(durationDetailText),
+                            detailColor: durationDetailColor))
+
+        // Sets
+        var setsDetailText: String
+        var setsDetailColor: Color
         var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1) * 100)
         setsPercent = abs(setsPercent) < 0.1 ? 0 : setsPercent
         if setsPercent > 0 {
-            setsEntry.detail.textColor = UIColor.systemGreen
-            setsEntry.detail.text = "+"
+            setsDetailColor = Color.green
+            setsDetailText = "+"
         } else if setsPercent < 0 {
-            setsEntry.detail.textColor = UIColor.systemRed
-            setsEntry.detail.text = ""
+            setsDetailColor = Color.red
+            setsDetailText = ""
         } else {
-            setsEntry.detail.textColor = UIColor.tertiaryLabel
-            setsEntry.detail.text = "+"
+            setsDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            setsDetailText = "+"
         }
-        setsEntry.detail.text! += String(format: "%.1f", setsPercent) + "%"
-        setsEntry.detail.isHidden = false
-        
+        setsDetailText += String(format: "%.1f", setsPercent) + "%"
+        entries.append(
+            BannerViewEntry(id: 1,
+                            title: Text("Sets\nLast 7 Days"),
+                            text: Text(String(valuesSevenDaysAgo.1)),
+                            detail: Text(setsDetailText),
+                            detailColor: setsDetailColor))
+
+        // Weight
+        var weightDetailText: String
+        var weightDetailColor: Color
         var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1) * 100)
         weightPercent = abs(weightPercent) < 0.1 ? 0 : weightPercent
         if weightPercent > 0 {
-            weightEntry.detail.textColor = UIColor.systemGreen
-            weightEntry.detail.text = "+"
+            weightDetailColor = Color.green
+            weightDetailText = "+"
         } else if weightPercent < 0 {
-            weightEntry.detail.textColor = UIColor.systemRed
-            weightEntry.detail.text = ""
+            weightDetailColor = Color.red
+            weightDetailText = ""
         } else {
-            weightEntry.detail.textColor = UIColor.tertiaryLabel
-            weightEntry.detail.text = "+"
+            weightDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            weightDetailText = "+"
         }
-        weightEntry.detail.text! += String(format: "%.1f", weightPercent) + "%"
-        weightEntry.detail.isHidden = false
+        weightDetailText += String(format: "%.1f", weightPercent) + "%"
+        entries.append(
+            BannerViewEntry(id: 2,
+                            title: Text("Weight\nLast 7 Days"),
+                            text: Text("\(valuesSevenDaysAgo.2.shortStringValue) kg"),
+                            detail: Text(weightDetailText),
+                            detailColor: weightDetailColor))
+        
+        return entries
     }
 }
 
 #if DEBUG
 struct SUISummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        FeedSummaryView()
+        FeedSummaryView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

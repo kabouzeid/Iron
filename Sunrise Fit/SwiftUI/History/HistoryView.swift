@@ -25,16 +25,28 @@ struct HistoryView : View {
     
     var body: some View {
         NavigationView {
-            List(trainings.identified(by: \.objectID)) { training in
-                VStack(alignment: .leading) {
-                    Text(training.displayTitle)
-                        .font(.body)
-                    Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
-                        .font(.caption)
-                        .color(.secondary)
+            List {
+                ForEach(trainings.identified(by: \.objectID)) { training in
+                    NavigationButton(destination: TrainingDetailView(training: training)) {
+                        VStack(alignment: .leading) {
+                            Text(training.displayTitle)
+                                .font(.body)
+                            Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
+                                .font(.caption)
+                                .color(.secondary)
+                        }
+                    }
+                }
+                .onDelete { offsets in
+                    // TODO: confirm delete
+                    let trainings = self.trainings
+                    for index in offsets {
+                        self.trainingsDataStore.context.delete(trainings[index])
+                    }
                 }
             }
             .navigationBarTitle(Text("History"))
+            .navigationBarItems(trailing: EditButton())
         }
     }
 }
@@ -42,7 +54,7 @@ struct HistoryView : View {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView()
+        HistoryView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

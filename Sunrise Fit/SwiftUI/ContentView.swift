@@ -38,6 +38,7 @@ struct ContentView : View {
                 )
                 .tag(2)
             Text("Exercises")
+//            BannerView()
                 .tabItemLabel(
                     VStack {
                         Image("list")
@@ -45,7 +46,8 @@ struct ContentView : View {
                     }
                 )
                 .tag(3)
-            Text("Settings")
+//            Text("Settings")
+            TextSizeDemo()
                 .tabItemLabel(
                     VStack {
                         Image("settings")
@@ -61,7 +63,7 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

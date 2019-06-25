@@ -47,3 +47,33 @@ class TrainingsDataStore : BindableObject {
 var trainingsDataStore = {
    TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
 }()
+
+#if DEBUG
+// for testing in the canvas
+// TODO: add trainings etc
+var mockTrainingsDataStore: TrainingsDataStore = {
+    let persistenContainer = setUpInMemoryNSPersistentContainer()
+    return TrainingsDataStore(context: persistenContainer.viewContext)
+}()
+
+private func setUpInMemoryNSPersistentContainer() -> NSPersistentContainer {
+    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
+    
+    let container = NSPersistentContainer(name: "Rhino_Fit", managedObjectModel: managedObjectModel)
+    let description = NSPersistentStoreDescription()
+    description.type = NSInMemoryStoreType
+    description.shouldAddStoreAsynchronously = false // Make it simpler in test env
+    
+    container.persistentStoreDescriptions = [description]
+    container.loadPersistentStores { (description, error) in
+        // Check if the data store is in memory
+        precondition( description.type == NSInMemoryStoreType )
+        
+        // Check if creating container wrong
+        if let error = error {
+            fatalError("Create an in-mem coordinator failed \(error)")
+        }
+    }
+    return container
+}
+#endif

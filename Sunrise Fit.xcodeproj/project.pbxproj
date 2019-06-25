@@ -35,7 +35,11 @@
 		8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
 		8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */; };
+		8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */; };
+		8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift */; };
 		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
+		8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */; };
+		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */; };
 		8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */; };
@@ -129,7 +133,11 @@
 		8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledLineChartView.swift; sourceTree = "<group>"; };
 		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
 		8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TextSizeDemo.swift; sourceTree = "<group>"; };
+		8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailView.swift; sourceTree = "<group>"; };
+		8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailSummaryView.swift; sourceTree = "<group>"; };
 		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailView.swift; sourceTree = "<group>"; };
+		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6E9C200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -269,6 +277,15 @@
 				8AAF768C21CE71D7001C9D6B /* TimerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8A799F6222BFD30E00DD5E1B /* General */ = {
+			isa = PBXGroup;
+			children = (
+				8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */,
+				8A799F6522BFD33F00DD5E1B /* BannerView.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		8A7D6E8B200BF92E00AA0FA7 = {
@@ -425,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				8AC8063A22BABCAA00086032 /* ContentView.swift */,
-				8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */,
+				8A799F6222BFD30E00DD5E1B /* General */,
 				8AC8064222BADBD300086032 /* Feed */,
 				8AE7306922BE690B0005CF9F /* History */,
 			);
@@ -490,6 +507,9 @@
 			isa = PBXGroup;
 			children = (
 				8A59282F22BD8B5C00BFD57E /* HistoryView.swift */,
+				8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */,
+				8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift */,
+				8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -756,11 +776,13 @@
 				8A9BC5BA22BBACCB006CAA0F /* PinnedChartView.swift in Sources */,
 				8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */,
 				8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */,
+				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */,
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
+				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
 				8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */,
 				8A59283222BE575300BFD57E /* TrainingsDataStore.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
@@ -776,6 +798,7 @@
 				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
 				8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */,
+				8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
 				8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
@@ -794,6 +817,7 @@
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
 				8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */,
+				8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */,
 				8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */,
 				8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */,
 				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,
@@ -942,7 +966,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -995,7 +1019,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
