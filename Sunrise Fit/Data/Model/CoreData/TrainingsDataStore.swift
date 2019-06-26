@@ -92,7 +92,15 @@ func createMockTrainingsData(context: NSManagedObjectContext) {
         training.start = Calendar.current.date(byAdding: .day, value: -Int.random(in: 1...4) * i, to: Date())!
         training.end = Calendar.current.date(byAdding: .minute, value: Int.random(in: 80...120), to: training.start!)!
         
-        for j in [42, 99, 122] { // bench, dead, squat
+        let exerciseIds = [
+            [42, 48, 206], // bench press, cable crossover, triceps pushdown
+            [122], // squat
+            [9001], // overhead press
+            [291, 289], // crunches, cross-body crunches
+            [99], // deadlift
+            [211, 206], // biceps curls, triceps pushdown
+        ]
+        for j in exerciseIds[Int.random(in: 0..<exerciseIds.count)] { // bench, dead, squat
             let trainingExercise = TrainingExercise(context: context)
             trainingExercise.exerciseId = Int16(j)
             trainingExercise.training = training

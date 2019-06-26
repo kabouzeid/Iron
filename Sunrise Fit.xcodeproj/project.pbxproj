@@ -53,6 +53,7 @@
 		8A9BC5BA22BBACCB006CAA0F /* PinnedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* PinnedChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* PinnedChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* PinnedChartViewCell.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
+		8AA57E5F22C3EE2E00B9AC79 /* TrainingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AAF768D21CE71D7001C9D6B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768C21CE71D7001C9D6B /* TimerView.swift */; };
@@ -157,6 +158,7 @@
 		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExtension.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AAF768C21CE71D7001C9D6B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */,
 				8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */,
 				8A3C5F98218E3F4F00467DA6 /* UserDefaultsExtension.swift */,
+				8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
+				8AA57E5F22C3EE2E00B9AC79 /* TrainingExtension.swift in Sources */,
 				8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */,
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,

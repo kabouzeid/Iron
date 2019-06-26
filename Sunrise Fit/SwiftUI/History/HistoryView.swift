@@ -28,12 +28,16 @@ struct HistoryView : View {
             List {
                 ForEach(trainings.identified(by: \.objectID)) { training in
                     NavigationButton(destination: TrainingDetailView(training: training)) {
-                        VStack(alignment: .leading) {
-                            Text(training.displayTitle)
-                                .font(.body)
-                            Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
-                                .font(.caption)
-                                .color(.secondary)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(training.displayTitle)
+                                    .font(.body)
+                                Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
+                                    .font(.caption)
+                                    .color(.secondary)
+                            }
+                            Spacer()
+                            training.muscleGroupImage
                         }
                     }
                 }
