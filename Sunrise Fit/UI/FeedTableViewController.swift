@@ -58,7 +58,7 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
             cell.titleLabel.text = "Activity"
             cell.detailLabel.text = "Workouts per week"
             
-            trainingsPerWeekChartInfo = trainingsPerWeekChartInfo ?? TrainingsPerWeekChartInfo()
+            trainingsPerWeekChartInfo = trainingsPerWeekChartInfo ?? TrainingsPerWeekChartInfo(context: AppDelegate.instance.persistentContainer.viewContext)
             let chartData = trainingsPerWeekChartDataCache ?? trainingsPerWeekChartInfo!.chartData()
             trainingsPerWeekChartDataCache = chartData
             
@@ -85,7 +85,7 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
             let pinnedChart = pinnedCharts[indexPath.row]
   
             let exercise = EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId)
-            let chartDataGenerator = TrainingExerciseChartDataGenerator(exercise: exercise)
+            let chartDataGenerator = TrainingExerciseChartDataGenerator(context: AppDelegate.instance.persistentContainer.viewContext, exercise: exercise)
 
             cell.detailLabel.text = exercise?.title
             cell.titleLabel.text = pinnedChart.measurementType.title

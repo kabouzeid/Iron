@@ -30,7 +30,7 @@ struct TrainingDetailSummaryView : View {
 #if DEBUG
 struct TrainingDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        TrainingDetailSummaryView(training: Training(context: mockTrainingsDataStore.context)).environmentObject(mockTrainingsDataStore)
+        TrainingDetailSummaryView(training: mockTraining).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

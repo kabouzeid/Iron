@@ -6,9 +6,8 @@
 //  Copyright © 2018 Karim Abou Zeid Software. All rights reserved.
 //
 
-import Foundation
-import Charts
 import CoreData
+import Charts
 
 class TrainingsPerWeekChartInfo {
 
@@ -30,9 +29,9 @@ class TrainingsPerWeekChartInfo {
     }()
     private var trainingsPerWeek: [Int]
     
-    init() {
+    init(context: NSManagedObjectContext) {
         xAxisValueFormatter = WeekAxisFormatter(weeks: weeks)
-        let trainingHistory = (try? AppDelegate.instance.persistentContainer.viewContext.fetch(TrainingsPerWeekChartInfo.fetchRequest)) ?? []
+        let trainingHistory = (try? context.fetch(TrainingsPerWeekChartInfo.fetchRequest)) ?? []
         trainingsPerWeek = TrainingsPerWeekChartInfo.trainingsPerWeek(trainings: trainingHistory, weeks: weeks)
     }
     

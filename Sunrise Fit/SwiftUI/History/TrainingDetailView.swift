@@ -93,7 +93,7 @@ struct TrainingDetailView : View {
                         Text("Start")
                     }
 
-                    DatePicker($trainingViewModel.endInput, minimumDate: self.trainingViewModel.training.start!) {
+                    DatePicker($trainingViewModel.endInput, minimumDate: self.trainingViewModel.training.start!, maximumDate: Date()) {
                         Text("End")
                     }
                 }
@@ -137,10 +137,7 @@ struct TrainingDetailView : View {
 #if DEBUG
 struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        let training = Training(context: mockTrainingsDataStore.context)
-        training.start = Date()
-        training.end = Date()
-        return TrainingDetailView(training: training).environmentObject(mockTrainingsDataStore)
+        return TrainingDetailView(training: mockTraining).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

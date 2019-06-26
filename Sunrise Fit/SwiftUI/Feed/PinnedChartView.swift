@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct PinnedChartView : UIViewRepresentable {
+    var trainingsDataStore: TrainingsDataStore
     var pinnedChart: UserDefaults.PinnedChart
     
     func makeUIView(context: UIViewRepresentableContext<PinnedChartView>) -> StyledLineChartView {
@@ -22,7 +23,7 @@ struct PinnedChartView : UIViewRepresentable {
     
     func updateChartView(chartView: StyledLineChartView) {
         let exercise = EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId)
-        let chartDataGenerator = TrainingExerciseChartDataGenerator(exercise: exercise)
+        let chartDataGenerator = TrainingExerciseChartDataGenerator(context: trainingsDataStore.context, exercise: exercise)
         
         let formatters = chartDataGenerator.formatters(for: pinnedChart.measurementType)
         let chartData = chartDataGenerator.chartData(for: pinnedChart.measurementType, timeFrame: .threeMonths)
@@ -43,7 +44,7 @@ struct PinnedChartView : UIViewRepresentable {
 #if DEBUG
 struct PinnedChartView_Previews : PreviewProvider {
     static var previews: some View {
-        PinnedChartView(pinnedChart: UserDefaults.PinnedChart(exerciseId: 10, measurementType: .oneRM))
+        PinnedChartView(trainingsDataStore: mockTrainingsDataStore, pinnedChart: UserDefaults.PinnedChart(exerciseId: 42, measurementType: .totalRepetitions))
     }
 }
 #endif

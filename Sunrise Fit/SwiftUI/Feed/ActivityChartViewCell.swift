@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ActivityChartViewCell : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
     var body: some View {
         return VStack(alignment: .leading) {
             Text("Activity")
@@ -16,7 +18,7 @@ struct ActivityChartViewCell : View {
             Text("Workouts per week")
                 .font(.caption)
                 .color(.secondary)
-            ActivityChartView()
+            ActivityChartView(trainingsDataStore: trainingsDataStore)
                 .frame(height: 200)
         }
     }
@@ -25,7 +27,7 @@ struct ActivityChartViewCell : View {
 #if DEBUG
 struct ActivityChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        ActivityChartViewCell()
+        ActivityChartViewCell().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

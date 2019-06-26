@@ -10,6 +10,8 @@ import SwiftUI
 import Charts
 
 struct ActivityChartView : UIViewRepresentable {
+    var trainingsDataStore: TrainingsDataStore
+    
     func makeUIView(context: UIViewRepresentableContext<ActivityChartView>) -> StyledBarChartView {
         return StyledBarChartView()
     }
@@ -20,7 +22,7 @@ struct ActivityChartView : UIViewRepresentable {
     }
     
     func updateChartView(chartView: StyledBarChartView) {
-        let trainingsPerWeekChartInfo = TrainingsPerWeekChartInfo()
+        let trainingsPerWeekChartInfo = TrainingsPerWeekChartInfo(context: trainingsDataStore.context)
         let chartData = trainingsPerWeekChartInfo.chartData()
 
         chartView.xAxis.valueFormatter = trainingsPerWeekChartInfo.xAxisValueFormatter
@@ -42,7 +44,7 @@ struct ActivityChartView : UIViewRepresentable {
 #if DEBUG
 struct ActivityChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ActivityChartView()
+        ActivityChartView(trainingsDataStore: mockTrainingsDataStore)
     }
 }
 #endif

@@ -31,7 +31,7 @@ class ExerciseStatisticsTableViewController: UITableViewController {
             }
         }
     }
-    private var chartDataGenerator = TrainingExerciseChartDataGenerator()
+    private var chartDataGenerator = TrainingExerciseChartDataGenerator(context: AppDelegate.instance.persistentContainer.viewContext)
 
     private class TableViewEntry {
         let measurementType: TrainingExerciseChartDataGenerator.MeasurementType

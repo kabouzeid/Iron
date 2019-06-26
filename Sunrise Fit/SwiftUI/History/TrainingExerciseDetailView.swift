@@ -64,7 +64,7 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         let trainingExercise = TrainingExercise(context: mockTrainingsDataStore.context)
         trainingExercise.training = Training(context: mockTrainingsDataStore.context)
-        return TrainingExerciseDetailView(trainingExercise: trainingExercise).environmentObject(mockTrainingsDataStore)
+        return TrainingExerciseDetailView(trainingExercise: mockTraining.trainingExercises!.firstObject as! TrainingExercise).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

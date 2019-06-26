@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct PinnedChartViewCell : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
     var pinnedChart: UserDefaults.PinnedChart
     var exercise: Exercise? { EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId) }
     
@@ -19,7 +21,7 @@ struct PinnedChartViewCell : View {
             Text(pinnedChart.measurementType.title)
                 .font(.caption)
                 .color(.secondary)
-            PinnedChartView(pinnedChart: pinnedChart)
+            PinnedChartView(trainingsDataStore: trainingsDataStore, pinnedChart: pinnedChart)
                 .frame(height: 200)
         }
     }
@@ -28,7 +30,8 @@ struct PinnedChartViewCell : View {
 #if DEBUG
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        PinnedChartViewCell(pinnedChart: UserDefaults.PinnedChart(exerciseId: 10, measurementType: .oneRM))
+        PinnedChartViewCell(pinnedChart: UserDefaults.PinnedChart(exerciseId: 42, measurementType: .totalRepetitions))
+            .environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

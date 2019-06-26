@@ -6,7 +6,7 @@
 //  Copyright © 2018 Karim Abou Zeid Software. All rights reserved.
 //
 
-import Foundation
+import CoreData
 import Charts
 
 class TrainingExerciseChartDataGenerator {
@@ -14,15 +14,17 @@ class TrainingExerciseChartDataGenerator {
     var exercise: Exercise? {
         didSet {
             if let exercise = exercise {
-                trainingExerciseHistory = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext) ?? []
+                trainingExerciseHistory = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: context) ?? []
             } else {
                 trainingExerciseHistory = []
             }
         }
     }
     private var trainingExerciseHistory = [TrainingExercise]()
+    private var context: NSManagedObjectContext
 
-    init(exercise: Exercise? = nil) {
+    init(context: NSManagedObjectContext, exercise: Exercise? = nil) {
+        self.context = context
         defer { self.exercise = exercise } // without defer, didSet is not called
     }
 
