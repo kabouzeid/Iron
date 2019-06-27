@@ -1,5 +1,5 @@
 //
-//  SUISummaryView.swift
+//  FeedBannerView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.06.19.
@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FeedSummaryView : View {
+struct FeedBannerView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
     var body: some View {
@@ -124,7 +124,7 @@ struct FeedSummaryView : View {
 #if DEBUG
 struct SUISummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        FeedSummaryView().environmentObject(mockTrainingsDataStore)
+        FeedBannerView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

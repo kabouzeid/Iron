@@ -1,5 +1,5 @@
 //
-//  TrainingDetailSummaryView.swift
+//  TrainingDetailBannerView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 22.06.19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TrainingDetailSummaryView : View {
+struct TrainingDetailBannerView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     let training: Training
     
@@ -30,7 +30,7 @@ struct TrainingDetailSummaryView : View {
 #if DEBUG
 struct TrainingDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        TrainingDetailSummaryView(training: mockTraining).environmentObject(mockTrainingsDataStore)
+        TrainingDetailBannerView(training: mockTraining).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif
