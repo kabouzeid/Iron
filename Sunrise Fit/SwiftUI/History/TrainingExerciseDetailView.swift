@@ -11,6 +11,14 @@ import SwiftUI
 struct TrainingExerciseDetailView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     let trainingExercise: TrainingExercise
+    
+    private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
+        trainingExercise.trainingSets?.array as! [TrainingSet]
+    }
+    
+    private func indexedTrainingSets(for trainingExercise: TrainingExercise) -> [(Int, TrainingSet)] {
+        trainingSets(for: trainingExercise).enumerated().map { ($0 + 1, $1) }
+    }
 
     var body: some View {
         List {
@@ -20,9 +28,28 @@ struct TrainingExerciseDetailView : View {
                     .listRowBackground(trainingExercise.muscleGroupColor)
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
             }
-            
+
             Section {
-                TrainingExerciseSection(trainingExercise: trainingExercise)
+                ForEach(indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
+                    HStack {
+                        Text(trainingSet.displayTitle)
+                            .color(.primary)
+                        Spacer()
+                        Text("\(index)")
+                            .color(.secondary)
+                    }
+                }
+                .onDelete { offsets in
+//                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                    self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
+                }
+                .onMove { source, destination in
+                    // TODO: replace with swift 5.1 move() function when available
+                    guard let index = source.first else { return }
+                    guard let trainingSet = self.trainingExercise.trainingSets?[index] as? TrainingSet else { return }
+                    self.trainingExercise.removeFromTrainingSets(at: index)
+                    self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
+                }
                 Button(action: {
                     // TODO: add set
                 }) {
@@ -32,40 +59,46 @@ struct TrainingExerciseDetailView : View {
                     }
                 }
             }
-            
+
             ForEach((trainingExercise.history ?? []).identified(by: \.objectID)) { trainingExercise in
                 Section {
-                    TrainingExerciseSection(trainingExercise: trainingExercise)
+                    ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
+                        HStack {
+                            Text(trainingSet.displayTitle)
+                                .color(.secondary)
+                            Spacer()
+                            Text("\(index)")
+                                .color(.secondary)
+                        }
+                    }
                 }
-                .disabled(true)
             }
         }
         .listStyle(.grouped)
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
+        .navigationBarItems(trailing: EditButton())
     }
 }
 
 
-private struct TrainingExerciseSection : View {
-    @Environment(\.isEnabled) var isEnabled
-    var trainingExercise: TrainingExercise
-    
-    private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
-        trainingExercise.trainingSets?.array as! [TrainingSet]
-    }
-    
-    var body: some View {
-        ForEach(trainingSets(for: trainingExercise).enumerated().map { ($0 + 1, $1) }.identified(by: \.1.objectID)) { (index, trainingSet) in
-            HStack {
-                Text(trainingSet.displayTitle)
-                    .color(self.isEnabled ? .primary : .secondary)
-                Spacer()
-                Text(String(index))
-                    .color(.secondary)
-            }
-        }
-    }
-}
+//private struct TrainingExerciseSection : View {
+//    @Environment(\.isEnabled) var isEnabled
+//    var trainingExercise: TrainingExercise
+//
+//
+//
+//    var body: some View {
+//        ForEach(trainingSets(for: trainingExercise).enumerated().map { ($0 + 1, $1) }.identified(by: \.1.objectID)) { (index, trainingSet) in
+//            HStack {
+//                Text(trainingSet.displayTitle)
+//                    .color(self.isEnabled ? .primary : .secondary)
+//                Spacer()
+//                Text(String(index))
+//                    .color(.secondary)
+//            }
+//        }
+//    }
+//}
 
 #if DEBUG
 struct TrainingExerciseDetailView_Previews : PreviewProvider {

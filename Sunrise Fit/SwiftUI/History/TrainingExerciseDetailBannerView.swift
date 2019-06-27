@@ -29,7 +29,7 @@ struct TrainingExerciseDetailBannerView : View {
 #if DEBUG
 struct TrainingExerciseDetailBannerView_Previews : PreviewProvider {
     static var previews: some View {
-        TrainingExerciseDetailBannerView(trainingExercise: mockTrainingExercise)
+        TrainingExerciseDetailBannerView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

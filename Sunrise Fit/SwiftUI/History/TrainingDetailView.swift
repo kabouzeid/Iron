@@ -115,7 +115,14 @@ struct TrainingDetailView : View {
                     }
                 }
                 .onDelete { offsets in
-                        self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                }
+                .onMove { source, destination in
+                    // TODO: replace with swift 5.1 move() function when available
+                    guard let index = source.first else { return }
+                    guard let trainingExercise = self.trainingViewModel.training.trainingExercises?[index] as? TrainingExercise else { return }
+                    self.trainingViewModel.training.removeFromTrainingExercises(at: index)
+                    self.trainingViewModel.training.insertIntoTrainingExercises(trainingExercise, at: destination)
                 }
             }
         }
