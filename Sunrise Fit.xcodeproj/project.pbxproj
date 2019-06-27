@@ -53,11 +53,14 @@
 		8A9BC5BA22BBACCB006CAA0F /* PinnedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* PinnedChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* PinnedChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* PinnedChartViewCell.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
-		8AA57E5F22C3EE2E00B9AC79 /* TrainingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */; };
+		8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
 		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
 		8AAF768D21CE71D7001C9D6B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768C21CE71D7001C9D6B /* TimerView.swift */; };
 		8AAF769021CFB80D001C9D6B /* TimerViewTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */; };
+		8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA522C4FD250025D835 /* TrainingExerciseDetailBannerView.swift */; };
+		8AB14BA822C500070025D835 /* TrainingExercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */; };
+		8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */; };
 		8AB8A5952034C097004366F2 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5942034C097004366F2 /* Training.swift */; };
 		8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */; };
 		8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5982034C0BA004366F2 /* TrainingSet.swift */; };
@@ -155,11 +158,14 @@
 		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExtension.swift; sourceTree = "<group>"; };
+		8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Training+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
 		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
 		8AAF768C21CE71D7001C9D6B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewTrainingController.swift; sourceTree = "<group>"; };
+		8AB14BA522C4FD250025D835 /* TrainingExerciseDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailBannerView.swift; sourceTree = "<group>"; };
+		8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainingExercise+SwiftUI.swift"; sourceTree = "<group>"; };
+		8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AB8A5942034C097004366F2 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExercise.swift; sourceTree = "<group>"; };
 		8AB8A5982034C0BA004366F2 /* TrainingSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSet.swift; sourceTree = "<group>"; };
@@ -459,7 +465,9 @@
 				8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */,
 				8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */,
 				8A3C5F98218E3F4F00467DA6 /* UserDefaultsExtension.swift */,
-				8AA57E5E22C3EE2E00B9AC79 /* TrainingExtension.swift */,
+				8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */,
+				8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */,
+				8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -496,6 +504,7 @@
 				8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */,
 				8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift */,
 				8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */,
+				8AB14BA522C4FD250025D835 /* TrainingExerciseDetailBannerView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -687,6 +696,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
@@ -697,8 +707,9 @@
 				8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */,
 				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailSummaryView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,
+				8AB14BA822C500070025D835 /* TrainingExercise+SwiftUI.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
-				8AA57E5F22C3EE2E00B9AC79 /* TrainingExtension.swift in Sources */,
+				8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */,
 				8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */,
 				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
 				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
@@ -733,6 +744,7 @@
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A442AD9207A58F500A2BDBD /* UIColorExtension.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */,
+				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,
 				8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */,
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,

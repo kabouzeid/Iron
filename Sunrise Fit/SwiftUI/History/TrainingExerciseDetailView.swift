@@ -10,10 +10,17 @@ import SwiftUI
 
 struct TrainingExerciseDetailView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    var trainingExercise: TrainingExercise
+    let trainingExercise: TrainingExercise
 
     var body: some View {
         List {
+            Section {
+                TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
+                    .frame(height: 100)
+                    .listRowBackground(trainingExercise.muscleGroupColor)
+                    .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
+            }
+            
             Section {
                 TrainingExerciseSection(trainingExercise: trainingExercise)
                 Button(action: {
@@ -34,6 +41,7 @@ struct TrainingExerciseDetailView : View {
             }
         }
         .listStyle(.grouped)
+        .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
     }
 }
 
@@ -64,7 +72,7 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         let trainingExercise = TrainingExercise(context: mockTrainingsDataStore.context)
         trainingExercise.training = Training(context: mockTrainingsDataStore.context)
-        return TrainingExerciseDetailView(trainingExercise: mockTraining.trainingExercises!.firstObject as! TrainingExercise).environmentObject(mockTrainingsDataStore)
+        return TrainingExerciseDetailView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
     }
 }
 #endif

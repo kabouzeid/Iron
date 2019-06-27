@@ -65,6 +65,14 @@ var mockTraining: Training = {
     }
 }()
 
+var mockTrainingExercise: TrainingExercise = {
+   mockTraining.trainingExercises!.firstObject as! TrainingExercise
+}()
+
+var mockTrainingSet: TrainingSet = {
+    mockTrainingExercise.trainingSets!.firstObject as! TrainingSet
+}()
+
 private func setUpInMemoryNSPersistentContainer() -> NSPersistentContainer {
     let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
     

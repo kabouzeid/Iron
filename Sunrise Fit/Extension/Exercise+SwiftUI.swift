@@ -1,26 +1,16 @@
 //
-//  TrainingExtension.swift
+//  Exercise+SwiftUI.swift
 //  Sunrise Fit
 //
-//  Created by Karim Abou Zeid on 26.06.19.
+//  Created by Karim Abou Zeid on 27.06.19.
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
 //
 
 import Foundation
 import SwiftUI
 
-extension Training {
-    var muscleGroupImage: some View {
-        let muscleGroup = muscleGroups.first ?? ""
-        return imageFor(muscleGroup: muscleGroup).foregroundColor(colorFor(muscleGroup: muscleGroup))
-    }
-    
-    var muscleGroupColor: some View {
-        let muscleGroup = muscleGroups.first ?? ""
-        return colorFor(muscleGroup: muscleGroup)
-    }
-    
-    private func colorFor(muscleGroup: String) -> Color {
+extension Exercise {
+    static func colorFor(muscleGroup: String) -> Color {
         switch muscleGroup {
         case "abdominals":
             return .yellow
@@ -39,7 +29,7 @@ extension Training {
         }
     }
     
-    private func imageFor(muscleGroup: String) -> Image {
+    static func imageFor(muscleGroup: String) -> Image {
         switch muscleGroup {
         case "abdominals":
             return Image(systemName: "a.circle.fill")
