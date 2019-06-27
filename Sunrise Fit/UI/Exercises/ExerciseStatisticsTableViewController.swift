@@ -8,7 +8,6 @@
 
 import UIKit
 import Charts
-import Benchmark
 
 class ExerciseStatisticsTableViewController: UITableViewController {
 
