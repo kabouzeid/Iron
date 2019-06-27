@@ -10,7 +10,7 @@ import SwiftUI
 
 // best in its own section of a grouped List
 struct BannerView : View {
-    var entries: [BannerViewEntry] // TODO: use @ViewBuilder ?
+    let entries: [BannerViewEntry] // TODO: use @ViewBuilder ?
     
     var body: some View {
         HStack {

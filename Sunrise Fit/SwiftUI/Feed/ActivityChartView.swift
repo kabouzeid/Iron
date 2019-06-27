@@ -10,7 +10,7 @@ import SwiftUI
 import Charts
 
 struct ActivityChartView : UIViewRepresentable {
-    var trainingsDataStore: TrainingsDataStore
+    @ObjectBinding var trainingsDataStore: TrainingsDataStore
     
     func makeUIView(context: UIViewRepresentableContext<ActivityChartView>) -> StyledBarChartView {
         return StyledBarChartView()
@@ -44,7 +44,7 @@ struct ActivityChartView : UIViewRepresentable {
 #if DEBUG
 struct ActivityChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ActivityChartView(trainingsDataStore: mockTrainingsDataStore)
+        return ActivityChartView(trainingsDataStore: mockTrainingsDataStore)
     }
 }
 #endif

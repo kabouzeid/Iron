@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct PinnedChartView : UIViewRepresentable {
-    var trainingsDataStore: TrainingsDataStore
-    var pinnedChart: UserDefaults.PinnedChart
+    @ObjectBinding var trainingsDataStore: TrainingsDataStore
+    let pinnedChart: UserDefaults.PinnedChart
     
     func makeUIView(context: UIViewRepresentableContext<PinnedChartView>) -> StyledLineChartView {
         return StyledLineChartView()

@@ -11,7 +11,7 @@ import SwiftUI
 struct PinnedChartViewCell : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
-    var pinnedChart: UserDefaults.PinnedChart
+    let pinnedChart: UserDefaults.PinnedChart
     var exercise: Exercise? { EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId) }
     
     var body: some View {

@@ -11,7 +11,7 @@ import CoreData
 import Combine
 
 struct FeedView : View {
-    var pinnedCharts = UserDefaults.standard.pinnedCharts()
+    let pinnedCharts = UserDefaults.standard.pinnedCharts() // TODO: create bindable object for refresh
 
     var body: some View {
         return NavigationView {
