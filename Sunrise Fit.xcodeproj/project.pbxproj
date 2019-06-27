@@ -74,8 +74,6 @@
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
 		8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */; };
 		8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */; };
-		8AE5A81922C4E85A0076C1A0 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81822C4E85A0076C1A0 /* Charts */; };
-		8AE5A81A22C4E85A0076C1A0 /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81822C4E85A0076C1A0 /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,20 +99,6 @@
 			remoteInfo = "Rhino Fit";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8AE5A81B22C4E85A0076C1A0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8AE5A81A22C4E85A0076C1A0 /* Charts in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
@@ -206,7 +190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */,
-				8AE5A81922C4E85A0076C1A0 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,7 +526,6 @@
 				8A7D6E90200BF92E00AA0FA7 /* Sources */,
 				8A7D6E91200BF92E00AA0FA7 /* Frameworks */,
 				8A7D6E92200BF92E00AA0FA7 /* Resources */,
-				8AE5A81B22C4E85A0076C1A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -552,7 +534,6 @@
 			name = "Sunrise Fit";
 			packageProductDependencies = (
 				8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */,
-				8AE5A81822C4E85A0076C1A0 /* Charts */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */;
@@ -640,7 +621,6 @@
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
 				8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				8AE5A81722C4E85A0076C1A0 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -1155,14 +1135,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		8AE5A81722C4E85A0076C1A0 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yarshure/Charts";
-			requirement = {
-				kind = revision;
-				revision = 9c4f738575574817cfc8c6e8b81e7bae3e7cf184;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1170,11 +1142,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
-		};
-		8AE5A81822C4E85A0076C1A0 /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8AE5A81722C4E85A0076C1A0 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 
