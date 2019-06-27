@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26C4457EB8DA9F385DA9F96A /* Pods_Sunrise_FitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
 		8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265D21610D9800087448 /* FeedTableViewController.swift */; };
 		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
@@ -74,7 +73,6 @@
 		8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */; };
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
 		8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */; };
-		B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,9 +100,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Fit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit.debug.xcconfig"; sourceTree = "<group>"; };
-		318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Fit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit.release.xcconfig"; sourceTree = "<group>"; };
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
 		8A1C265D21610D9800087448 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerWeekChartInfo.swift; sourceTree = "<group>"; };
@@ -179,9 +174,6 @@
 		8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingViewController.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableArrayExtension.swift; sourceTree = "<group>"; };
 		8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryTableViewController.swift; sourceTree = "<group>"; };
-		A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Fit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_FitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise FitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise FitTests/Pods-Sunrise FitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +188,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B82A3228727F108C8327A30F /* Pods_Sunrise_Fit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +195,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26C4457EB8DA9F385DA9F96A /* Pods_Sunrise_FitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,15 +208,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F66DB06EF93426734398018 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A66127BE5364D508DCFE461B /* Pods_Sunrise_Fit.framework */,
-				C9B72894A7F0CF2D2CB08F75 /* Pods_Sunrise_FitTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,8 +279,6 @@
 				8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */,
 				8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
-				9500C407BE043857C54B4BA6 /* Pods */,
-				0F66DB06EF93426734398018 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -517,17 +496,6 @@
 			path = History;
 			sourceTree = "<group>";
 		};
-		9500C407BE043857C54B4BA6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */,
-				70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */,
-				318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */,
-				F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -553,11 +521,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise Fit" */;
 			buildPhases = (
-				315DAD69244E5A8B882AE950 /* [CP] Check Pods Manifest.lock */,
 				8A7D6E90200BF92E00AA0FA7 /* Sources */,
 				8A7D6E91200BF92E00AA0FA7 /* Frameworks */,
 				8A7D6E92200BF92E00AA0FA7 /* Resources */,
-				6392C8AD658C1DD710182B50 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -572,7 +538,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A7D6EB7200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise FitTests" */;
 			buildPhases = (
-				B77221BCC0C7CC76E9497C80 /* [CP] Check Pods Manifest.lock */,
 				8A7D6EA7200BF92E00AA0FA7 /* Sources */,
 				8A7D6EA8200BF92E00AA0FA7 /* Frameworks */,
 				8A7D6EA9200BF92E00AA0FA7 /* Resources */,
@@ -695,67 +660,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		315DAD69244E5A8B882AE950 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Sunrise Fit-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6392C8AD658C1DD710182B50 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Benchmark/Benchmark.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Benchmark.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sunrise Fit/Pods-Sunrise Fit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B77221BCC0C7CC76E9497C80 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Sunrise FitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A36D64520A5BE0C003D59E6 /* Sources */ = {
@@ -1033,7 +937,6 @@
 		};
 		8A7D6EB5200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17D1287A0C28456092CDCCB0 /* Pods-Sunrise Fit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1052,7 +955,6 @@
 		};
 		8A7D6EB6200BF92E00AA0FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70F74C2900D6C1D5D7B81A1E /* Pods-Sunrise Fit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1071,7 +973,6 @@
 		};
 		8A7D6EB8200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 318E99D4D5D8A82913CDFDFF /* Pods-Sunrise FitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1089,7 +990,6 @@
 		};
 		8A7D6EB9200BF92E00AA0FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6FF5D166BB1FC92919C76C6 /* Pods-Sunrise FitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -1,6 +1,0 @@
-framework module Benchmark {
-  umbrella header "Benchmark-umbrella.h"
-
-  export *
-  module * { export * }
-}

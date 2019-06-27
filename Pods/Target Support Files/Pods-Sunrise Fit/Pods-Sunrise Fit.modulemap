@@ -1,6 +1,0 @@
-framework module Pods_Sunrise_Fit {
-  umbrella header "Pods-Sunrise Fit-umbrella.h"
-
-  export *
-  module * { export * }
-}

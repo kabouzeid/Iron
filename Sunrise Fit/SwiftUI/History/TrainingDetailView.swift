@@ -69,7 +69,7 @@ struct TrainingDetailView : View {
             Section {
                 TrainingDetailSummaryView(training: trainingViewModel.training)
                     .frame(height: 100)
-                    .listRowBackground(Color.accentColor)
+                    .listRowBackground(trainingViewModel.training.muscleGroupColor)
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
             }
             

@@ -11,21 +11,50 @@ import SwiftUI
 
 extension Training {
     var muscleGroupImage: some View {
-        switch muscleGroups.first ?? "" {
+        let muscleGroup = muscleGroups.first ?? ""
+        return imageFor(muscleGroup: muscleGroup).foregroundColor(colorFor(muscleGroup: muscleGroup))
+    }
+    
+    var muscleGroupColor: some View {
+        let muscleGroup = muscleGroups.first ?? ""
+        return colorFor(muscleGroup: muscleGroup)
+    }
+    
+    private func colorFor(muscleGroup: String) -> Color {
+        switch muscleGroup {
         case "abdominals":
-            return Image(systemName: "a.circle.fill").foregroundColor(.yellow)
+            return .yellow
         case "arms":
-            return Image(systemName: "a.circle.fill").foregroundColor(.purple)
+            return .purple
         case "shoulders":
-            return Image(systemName: "s.circle.fill").foregroundColor(.orange)
+            return .orange
         case "back":
-            return Image(systemName: "b.circle.fill").foregroundColor(.blue)
+            return .blue
         case "legs":
-            return Image(systemName: "l.circle.fill").foregroundColor(.green)
+            return .green
         case "chest":
-            return Image(systemName: "c.circle.fill").foregroundColor(.red)
+            return .red
         default:
-            return Image(systemName: "o.circle.fill").foregroundColor(.secondary)
+            return .secondary
+        }
+    }
+    
+    private func imageFor(muscleGroup: String) -> Image {
+        switch muscleGroup {
+        case "abdominals":
+            return Image(systemName: "a.circle.fill")
+        case "arms":
+            return Image(systemName: "a.circle.fill")
+        case "shoulders":
+            return Image(systemName: "s.circle.fill")
+        case "back":
+            return Image(systemName: "b.circle.fill")
+        case "legs":
+            return Image(systemName: "l.circle.fill")
+        case "chest":
+            return Image(systemName: "c.circle.fill")
+        default:
+            return Image(systemName: "o.circle.fill")
         }
     }
 }
