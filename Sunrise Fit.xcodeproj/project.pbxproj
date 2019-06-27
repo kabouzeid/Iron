@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A12D7A922C4FB38006B29AA /* Charts */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
 		8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265D21610D9800087448 /* FeedTableViewController.swift */; };
 		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
@@ -190,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */,
+				8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +536,7 @@
 			name = "Sunrise Fit";
 			packageProductDependencies = (
 				8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */,
+				8A12D7A922C4FB38006B29AA /* Charts */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */;
@@ -621,6 +624,7 @@
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
 				8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -1127,6 +1131,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kabouzeid/Charts";
+			requirement = {
+				branch = swiftpm;
+				kind = branch;
+			};
+		};
 		8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -1138,6 +1150,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8A12D7A922C4FB38006B29AA /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
 		8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
