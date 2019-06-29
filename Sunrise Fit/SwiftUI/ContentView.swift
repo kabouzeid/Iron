@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView : View {
+    @State var draggerVal: Double = 7.36778
     var body: some View {
         TabbedView {
             FeedView()
@@ -37,8 +38,8 @@ struct ContentView : View {
                     }
                 )
                 .tag(2)
-            Text("Exercises")
-//            BannerView()
+//            Text("Exercises")
+            Dragger(value: $draggerVal, unit: Text("kg"), stepSize: 2.5, minValue: 0)
                 .tabItemLabel(
                     VStack {
                         Image("list")
