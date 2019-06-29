@@ -10,19 +10,21 @@ import SwiftUI
 
 struct Dragger : View {
     @Binding var value: Double
+    var numberFormatter: NumberFormatter = NumberFormatter()
     var unit: Text? = nil
     var stepSize: Double = 1
     var minValue: Double? = nil
     var maxValue: Double? = nil
     
     var body: some View {
-        _Dragger(value: $value, unit: unit, stepSize: stepSize, minValue: minValue, maxValue: maxValue, displayValue: value)
+        _Dragger(value: $value, numberFormatter: numberFormatter, unit: unit, stepSize: stepSize, minValue: minValue, maxValue: maxValue, displayValue: value)
     }
 }
 
-struct _Dragger : View {
+private struct _Dragger : View {
     // public
     @Binding var value: Double
+    var numberFormatter: NumberFormatter = NumberFormatter()
     var unit: Text? = nil
     var stepSize: Double = 1 // e.g. if barbell based exercise, set to 2.5
     var minValue: Double? = nil
@@ -39,14 +41,6 @@ struct _Dragger : View {
 
     private static let DRAGGER_MOVEMENT: Double = 3
     private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
-    
-    var doubleNumberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.allowsFloats = true
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
-        return formatter
-    }
     
     var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
@@ -121,7 +115,7 @@ struct _Dragger : View {
     
     var body: some View {
         HStack {
-            TextField($displayValue, formatter: doubleNumberFormatter)
+            TextField($displayValue, formatter: numberFormatter)
                 .font(Font.body.monospacedDigit())
                 .padding([.leading])
 

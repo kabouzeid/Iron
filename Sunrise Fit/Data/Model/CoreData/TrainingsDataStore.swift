@@ -116,7 +116,7 @@ func createMockTrainingsData(context: NSManagedObjectContext) {
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
                 let trainingSet = TrainingSet(context: context)
-                trainingSet.weight = Double(Int.random(in: 60...120))
+                trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
                 trainingSet.repetitions = Int16.random(in: 1...10)
                 trainingSet.isCompleted = true
                 trainingSet.trainingExercise = trainingExercise

@@ -17,14 +17,14 @@ private class TrainingViewModel: BindableObject {
         didSet {
             assert(startInput <= training.end!)
             training.start = startInput
-            didChange.send()
+            didChange.send() // not necessary?
         }
     }
     var endInput: Date {
         didSet {
             assert(endInput >= training.start!)
             training.end = endInput
-            didChange.send()
+            didChange.send() // not necessary?
         }
     }
     // we don't want to immediately write the title to core data

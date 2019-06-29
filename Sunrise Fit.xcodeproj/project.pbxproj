@@ -11,6 +11,7 @@
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
 		8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265D21610D9800087448 /* FeedTableViewController.swift */; };
 		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
+		8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */; };
 		8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E335222C5570B00B1E04B /* Dragger.swift */; };
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
@@ -109,6 +110,7 @@
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
 		8A1C265D21610D9800087448 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerWeekChartInfo.swift; sourceTree = "<group>"; };
+		8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetEditor.swift; sourceTree = "<group>"; };
 		8A1E335222C5570B00B1E04B /* Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragger.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A1D989422C7C6690071225D /* Training */ = {
+			isa = PBXGroup;
+			children = (
+				8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */,
+			);
+			path = Training;
+			sourceTree = "<group>";
+		};
 		8A1E335122C556DC00B1E04B /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +457,7 @@
 				8A799F6222BFD30E00DD5E1B /* General */,
 				8AC8064222BADBD300086032 /* Feed */,
 				8AE7306922BE690B0005CF9F /* History */,
+				8A1D989422C7C6690071225D /* Training */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -736,6 +747,7 @@
 				8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */,
+				8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */,
 				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
