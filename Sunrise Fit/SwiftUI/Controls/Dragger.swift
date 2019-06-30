@@ -33,6 +33,7 @@ private struct _Dragger : View {
     // private
     @State var displayValue: Double
     @State private var draggerOffset: Length = 0
+    @State private var isDragging: Bool = false
     @State private var feedbackOnMin: Bool = true
     @State private var feedbackOnMax: Bool = true
 
@@ -45,6 +46,7 @@ private struct _Dragger : View {
     var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { state in
+                self.isDragging = true
                 if self.selectionFeedbackGenerator == nil {
                     self.selectionFeedbackGenerator = UISelectionFeedbackGenerator()
                     self.selectionFeedbackGenerator?.prepare()
@@ -67,7 +69,7 @@ private struct _Dragger : View {
                         newValue += self.stepSize
                     }
                 }
-                assert(self.minValue ?? 0 <= self.maxValue ?? 0)
+                assert(self.minValue ?? -Double.greatestFiniteMagnitude <= self.maxValue ?? Double.greatestFiniteMagnitude)
                 if let minValue = self.minValue {
                     if newValue < minValue {
                         newValue = minValue
@@ -104,6 +106,7 @@ private struct _Dragger : View {
                 }
             }
             .onEnded { state in
+                self.isDragging = false
                 self.selectionFeedbackGenerator = nil
                 self.minMaxFeedbackGenerator = nil
                 self.feedbackOnMin = true
@@ -126,7 +129,7 @@ private struct _Dragger : View {
                     .offset(y: draggerOffset)
                     .animation(.fluidSpring())
             }
-            .foregroundColor(draggerOffset == 0 ? Color.secondary : UIColor.tertiaryLabel.swiftUIColor)
+            .foregroundColor(isDragging ? UIColor.tertiaryLabel.swiftUIColor : Color.secondary)
             .padding([.trailing])
             .padding([.top, .bottom], 6)
             .gesture(dragGesture)
@@ -141,14 +144,13 @@ struct MockDragger : View {
     var body: some View {
         VStack {
             Dragger(value: $value, unit: Text("kg"))
-            Divider()
-            Text("Value: \(value)")
         }
     }
 }
 struct Dragger_Previews : PreviewProvider {
     static var previews: some View {
         return MockDragger()
+                .previewLayout(.sizeThatFits)
     }
 }
 #endif

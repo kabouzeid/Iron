@@ -38,8 +38,8 @@ struct TrainingSetEditor : View {
     var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.allowsFloats = true
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 3
+        formatter.minimumFractionDigits = 1
         return formatter
     }
     
@@ -50,7 +50,7 @@ struct TrainingSetEditor : View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Dragger(value: $trainingSetViewModel.weightInput, unit: Text("kg"), stepSize: 2.5, minValue: 0)
+                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text("kg"), stepSize: 2.5, minValue: 0)
                 Dragger(value: $trainingSetViewModel.repetitionsInput, unit: Text("reps"), minValue: 1)
                 }
                 .padding([.top])
