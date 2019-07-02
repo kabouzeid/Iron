@@ -13,6 +13,7 @@
 		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
 		8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */; };
 		8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E335222C5570B00B1E04B /* Dragger.swift */; };
+		8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */; };
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
 		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
 		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
@@ -112,6 +113,7 @@
 		8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerWeekChartInfo.swift; sourceTree = "<group>"; };
 		8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetEditor.swift; sourceTree = "<group>"; };
 		8A1E335222C5570B00B1E04B /* Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragger.swift; sourceTree = "<group>"; };
+		8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
 		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			children = (
 				8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */,
 				8A799F6522BFD33F00DD5E1B /* BannerView.swift */,
+				8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
 				8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */,
 				8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */,
+				8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */,
 				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
 				8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,

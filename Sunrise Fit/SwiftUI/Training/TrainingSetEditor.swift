@@ -67,7 +67,7 @@ struct TrainingSetEditor : View {
                     }
                     }
                     .background(Rectangle()
-                        .foregroundColor(.init(white: 0.8))
+                        .foregroundColor(UIColor.systemGray4.swiftUIColor)
                         .cornerRadius(4))
                     .padding()
                 Button(action: {

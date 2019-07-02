@@ -19,7 +19,6 @@ struct FeedView : View {
                 Section {
                     ActivityChartViewCell()
                     FeedBannerView()
-                        .frame(height: 145)
                 }
                 
                 Section {
