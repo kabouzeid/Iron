@@ -9,19 +9,6 @@
 import SwiftUI
 
 struct Dragger : View {
-    @Binding var value: Double
-    var numberFormatter: NumberFormatter = NumberFormatter()
-    var unit: Text? = nil
-    var stepSize: Double = 1
-    var minValue: Double? = nil
-    var maxValue: Double? = nil
-    
-    var body: some View {
-        _Dragger(value: $value, numberFormatter: numberFormatter, unit: unit, stepSize: stepSize, minValue: minValue, maxValue: maxValue, displayValue: value)
-    }
-}
-
-private struct _Dragger : View {
     // public
     @Binding var value: Double
     var numberFormatter: NumberFormatter = NumberFormatter()
@@ -31,7 +18,7 @@ private struct _Dragger : View {
     var maxValue: Double? = nil
     
     // private
-    @State var displayValue: Double
+    @State private var tmpValue: Double? = nil
     @State private var draggerOffset: Length = 0
     @State private var isDragging: Bool = false
     @State private var feedbackOnMin: Bool = true
@@ -61,10 +48,10 @@ private struct _Dragger : View {
                     self.feedbackOnMax = true
                 }
                 if !self.isShowingLearningAnimation {
-                    self.draggerOffset = -CGFloat(delta > 0 ? min(delta, _Dragger.DRAGGER_MOVEMENT) : max(delta, -_Dragger.DRAGGER_MOVEMENT))
+                    self.draggerOffset = -CGFloat(delta > 0 ? min(delta, Dragger.DRAGGER_MOVEMENT) : max(delta, -Dragger.DRAGGER_MOVEMENT))
                 }
                 
-                let increment = (delta / _Dragger.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * self.stepSize
+                let increment = (delta / Dragger.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * self.stepSize
                 var newValue = self.value + increment
                 if increment != 0 {
                     let remainder = newValue.truncatingRemainder(dividingBy: self.stepSize)
@@ -103,10 +90,12 @@ private struct _Dragger : View {
                     }
                 }
                 
-                if self.displayValue != newValue {
-                    self.selectionFeedbackGenerator?.selectionChanged()
-                    self.selectionFeedbackGenerator?.prepare()
-                    self.displayValue = newValue
+                if self.tmpValue != newValue {
+                    if self.tmpValue != nil { // no feedback on init
+                        self.selectionFeedbackGenerator?.selectionChanged()
+                        self.selectionFeedbackGenerator?.prepare()
+                    }
+                    self.tmpValue = newValue
                 }
             }
             .onEnded { state in
@@ -115,16 +104,19 @@ private struct _Dragger : View {
                 self.minMaxFeedbackGenerator = nil
                 self.feedbackOnMin = true
                 self.feedbackOnMax = true
-                self.value = self.displayValue
+                self.value = self.tmpValue ?? self.value
+                self.tmpValue = nil
                 self.draggerOffset = 0
         }
     }
     
     var body: some View {
         HStack {
-            TextField($displayValue, formatter: numberFormatter)
+//            TextField($value, formatter: numberFormatter)
+            Text(numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? "")
                 .font(Font.body.monospacedDigit())
                 .padding([.leading])
+            Spacer() // Spacer not needed when using TextField!
 
             HStack {
                 unit
@@ -142,10 +134,10 @@ private struct _Dragger : View {
                     feedbackGenerator.notificationOccurred(.warning)
                     withAnimation(Animation.fluidSpring().speed(2)) {
                         self.isShowingLearningAnimation = true
-                        self.draggerOffset = Length(-_Dragger.DRAGGER_MOVEMENT)
+                        self.draggerOffset = Length(-Dragger.DRAGGER_MOVEMENT)
                     }
                     withAnimation(Animation.fluidSpring().speed(2).delay(0.5)) {
-                        self.draggerOffset = Length(_Dragger.DRAGGER_MOVEMENT)
+                        self.draggerOffset = Length(Dragger.DRAGGER_MOVEMENT)
                     }
                     withAnimation(Animation.fluidSpring().speed(2).delay(1)) {
                         self.draggerOffset = 0
@@ -158,18 +150,11 @@ private struct _Dragger : View {
 }
 
 #if DEBUG
-struct MockDragger : View {
-    @State var value: Double = 62.5
-
-    var body: some View {
-        VStack {
-            Dragger(value: $value, unit: Text("kg"))
-        }
-    }
-}
 struct Dragger_Previews : PreviewProvider {
+    static var value: Double = 50
     static var previews: some View {
-        return MockDragger()
+        return Dragger(
+            value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"))
                 .previewLayout(.sizeThatFits)
     }
 }
