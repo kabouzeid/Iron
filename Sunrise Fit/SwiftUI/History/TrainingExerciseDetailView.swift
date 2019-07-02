@@ -37,9 +37,11 @@ struct TrainingExerciseDetailView : View {
                     ForEach(indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
                         HStack {
                             Text(trainingSet.displayTitle)
+                                .font(Font.body.monospacedDigit())
                                 .color(.primary) // TODO: better make cell appear selected (grey cell bg)
                             Spacer()
                             Text("\(index)")
+                                .font(Font.body.monospacedDigit())
                                 .color(.secondary)
                         }
                             // TODO: use selection feature of List when it is released
@@ -76,9 +78,11 @@ struct TrainingExerciseDetailView : View {
                         ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
                             HStack {
                                 Text(trainingSet.displayTitle)
+                                    .font(Font.body.monospacedDigit())
                                     .color(.secondary)
                                 Spacer()
                                 Text("\(index)")
+                                    .font(Font.body.monospacedDigit())
                                     .color(.secondary)
                             }
                         }
@@ -89,10 +93,14 @@ struct TrainingExerciseDetailView : View {
             if selectedTrainingSet != nil {
                 VStack(spacing: 0) {
                     Divider()
-                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!)
+                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!, onComment: {
+                        // TODO
+                    }, onComplete: {
+                        // TODO
+                    })
                         // TODO: currently the gesture doesn't work when a background is set
 //                        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
-                    }
+                }
                     .transition(AnyTransition.move(edge: .bottom))
             }
         }

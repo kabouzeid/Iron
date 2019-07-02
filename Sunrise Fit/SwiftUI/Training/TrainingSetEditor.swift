@@ -34,6 +34,9 @@ private class TrainingSetViewModel : BindableObject {
 struct TrainingSetEditor : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObjectBinding private var trainingSetViewModel: TrainingSetViewModel
+    
+    var onComment: () -> Void
+    var onComplete: () -> Void
 
     var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -43,8 +46,10 @@ struct TrainingSetEditor : View {
         return formatter
     }
     
-    init(trainingSet: TrainingSet) {
+    init(trainingSet: TrainingSet, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
         trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet)
+        self.onComment = onComment
+        self.onComplete = onComplete
     }
     
     var body: some View {
@@ -56,7 +61,7 @@ struct TrainingSetEditor : View {
                 .padding([.top])
             HStack(spacing: 0) {
                 Button(action: {
-                    // TODO
+                    self.onComment()
                 }) {
                     HStack {
                         Spacer()
@@ -71,7 +76,7 @@ struct TrainingSetEditor : View {
                         .cornerRadius(4))
                     .padding()
                 Button(action: {
-                    // TODO
+                    self.onComplete()
                 }) {
                     HStack {
                         Spacer()

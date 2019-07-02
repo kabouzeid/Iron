@@ -153,8 +153,7 @@ struct Dragger : View {
 struct Dragger_Previews : PreviewProvider {
     static var value: Double = 50
     static var previews: some View {
-        return Dragger(
-            value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"))
+        Dragger(value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"))
                 .previewLayout(.sizeThatFits)
     }
 }

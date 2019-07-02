@@ -107,7 +107,7 @@ struct TrainingDetailView : View {
                             Text(trainingExercise.exercise?.title ?? "")
                                 .font(.body)
                             Text(self.trainingExerciseText(trainingExercise: trainingExercise))
-                                .font(.body)
+                                .font(Font.body.monospacedDigit())
                                 .color(.secondary)
                                 .lineLimit(nil)
                         }
