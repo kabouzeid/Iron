@@ -22,6 +22,7 @@ struct TrainingExerciseDetailView : View {
     }
     
     @State private var showTrainingSetEditor = true
+    @State private var selectedTrainingSet: TrainingSet? = nil
 
     var body: some View {
         VStack(spacing: 0) {
@@ -36,12 +37,19 @@ struct TrainingExerciseDetailView : View {
                     ForEach(indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
                         HStack {
                             Text(trainingSet.displayTitle)
-                                .color(.primary)
-                                Spacer()
-                                Text("\(index)")
-                                    .color(.secondary)
-                            }
+                                .color(.primary) // TODO: better make cell appear selected (grey cell bg)
+                            Spacer()
+                            Text("\(index)")
+                                .color(.secondary)
                         }
+                            // TODO: use selection feature of List when it is released
+                            .listRowBackground(self.selectedTrainingSet?.objectID == (trainingSet as TrainingSet).objectID ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
+                            .tapAction { // TODO: currently tap on Spacer() is not recognized
+                                withAnimation {
+                                    self.selectedTrainingSet = trainingSet
+                                }
+                            }
+                    }
                         .onDelete { offsets in
                             //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
                             self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
@@ -53,41 +61,41 @@ struct TrainingExerciseDetailView : View {
                             self.trainingExercise.removeFromTrainingSets(at: index)
                             self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
                         }
-                        Button(action: {
-                            // TODO: add set
-                        }) {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text("Add Set")
-                            }
+                    Button(action: {
+                        // TODO: add set
+                    }) {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Add Set")
                         }
                     }
+                }
                 
-                    ForEach((trainingExercise.history ?? []).identified(by: \.objectID)) { trainingExercise in
-                        Section {
-                            ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
-                                HStack {
-                                    Text(trainingSet.displayTitle)
-                                        .color(.secondary)
-                                        Spacer()
-                                        Text("\(index)")
-                                            .color(.secondary)
-                                    }
-                                }
+                ForEach((trainingExercise.history ?? []).identified(by: \.objectID)) { trainingExercise in
+                    Section {
+                        ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
+                            HStack {
+                                Text(trainingSet.displayTitle)
+                                    .color(.secondary)
+                                Spacer()
+                                Text("\(index)")
+                                    .color(.secondary)
                             }
                         }
                     }
-                    .listStyle(.grouped)
-                if showTrainingSetEditor {
-                    VStack(spacing: 0) {
-                        Divider()
-                        TrainingSetEditor(trainingSet: trainingExercise.trainingSets?.firstObject as! TrainingSet)
-                    // TODO: currently the gesture doesn't work when a background is set
-                            .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
-                    }
-                    .transition(AnyTransition.move(edge: .bottom))
                 }
             }
+                .listStyle(.grouped)
+            if selectedTrainingSet != nil {
+                VStack(spacing: 0) {
+                    Divider()
+                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!)
+                        // TODO: currently the gesture doesn't work when a background is set
+//                        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+                    }
+                    .transition(AnyTransition.move(edge: .bottom))
+            }
+        }
             .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
             .navigationBarItems(trailing: EditButton())
     }
