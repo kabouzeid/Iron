@@ -48,7 +48,11 @@ struct TrainingExerciseDetailView : View {
                             .listRowBackground(self.selectedTrainingSet?.objectID == (trainingSet as TrainingSet).objectID ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
                             .tapAction { // TODO: currently tap on Spacer() is not recognized
                                 withAnimation {
-                                    self.selectedTrainingSet = trainingSet
+                                    if self.selectedTrainingSet?.objectID == trainingSet.objectID {
+                                        self.selectedTrainingSet = nil
+                                    } else {
+                                        self.selectedTrainingSet = trainingSet
+                                    }
                                 }
                             }
                     }
