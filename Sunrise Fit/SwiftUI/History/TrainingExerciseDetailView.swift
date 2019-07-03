@@ -101,6 +101,7 @@ struct TrainingExerciseDetailView : View {
                             // TODO: use selection feature of List when it is released
                             .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
                             .tapAction { // TODO: currently tap on Spacer() is not recognized
+                                guard self.editMode?.value != .active else { return }
                                 withAnimation {
                                     if self.selectedTrainingSet == trainingSet {
                                         self.selectAndInit(set: nil)
@@ -117,13 +118,22 @@ struct TrainingExerciseDetailView : View {
                                 self.selectAndInit(set: self.firstUncompletedSet)
                             }
                         }
-                        .onMove { source, destination in
-                            // TODO: replace with swift 5.1 move() function when available
-                            guard let index = source.first else { return }
-                            guard let trainingSet = self.trainingExercise.trainingSets?[index] as? TrainingSet else { return }
-                            self.trainingExercise.removeFromTrainingSets(at: index)
-                            self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
-                        }
+                        // TODO: move is yet too buggy
+//                        .onMove { source, destination in
+//                            guard source.first != destination || source.count > 1 else { return }
+//                            // make sure the destination is completed
+//                            guard (self.trainingExercise.trainingSets![destination] as! TrainingSet).isCompleted else { return }
+//                            // make sure all sources are completed
+//                            guard source.reduce(true, { (allCompleted, index) in
+//                                allCompleted && (self.trainingExercise.trainingSets![index] as! TrainingSet).isCompleted
+//                            }) else { return }
+//
+//                            // TODO: replace with swift 5.1 move() function when available
+//                            guard let index = source.first else { return }
+//                            guard let trainingSet = self.trainingExercise.trainingSets?[index] as? TrainingSet else { return }
+//                            self.trainingExercise.removeFromTrainingSets(at: index)
+//                            self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
+//                        }
                     Button(action: {
                         let trainingSet = TrainingSet(context: self.trainingExercise.managedObjectContext!)
                         self.trainingExercise.addToTrainingSets(trainingSet)
