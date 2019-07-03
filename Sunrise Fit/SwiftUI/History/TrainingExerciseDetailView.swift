@@ -114,7 +114,7 @@ struct TrainingExerciseDetailView : View {
                             //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
                             self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
                             if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
-                                self.selectAndInit(set: nil)
+                                self.selectAndInit(set: self.firstUncompletedSet)
                             }
                         }
                         .onMove { source, destination in
