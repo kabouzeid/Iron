@@ -80,7 +80,7 @@ struct TrainingDetailView : View {
 //                        print("set \(self.trainingTitle) as title")
 //                    }
                     // TODO: add clear button
-                    TextField($trainingViewModel.titleInput, placeholder: Text("Title"), onEditingChanged: { isEditingTextField in
+                    TextField("Title", text: $trainingViewModel.titleInput, onEditingChanged: { isEditingTextField in
                         if !isEditingTextField {
                             self.trainingViewModel.adjustAndSaveTitleInput()
                         }
@@ -102,7 +102,7 @@ struct TrainingDetailView : View {
             Section {
                 ForEach(trainingExercises.identified(by: \.objectID)) { trainingExercise in
                     // TODO: navigation button -> Set Editor
-                    NavigationButton(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)) {
+                    NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise).environmentObject(self.trainingsDataStore)) {
                         VStack(alignment: .leading) {
                             Text(trainingExercise.exercise?.title ?? "")
                                 .font(.body)

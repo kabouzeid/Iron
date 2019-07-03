@@ -8,7 +8,6 @@
 
 import SwiftUI
 import CoreData
-import Combine
 
 struct FeedView : View {
     let pinnedCharts = UserDefaults.standard.pinnedCharts() // TODO: create bindable object for refresh
@@ -25,7 +24,7 @@ struct FeedView : View {
                     ForEach(pinnedCharts) { chart in
                         PinnedChartViewCell(pinnedChart: chart)
                     }
-                    PresentationButton(destination:
+                    PresentationLink(destination:
                         // TODO: present actual view to choose exercise
                         Text("Placeholder")
                     ) {

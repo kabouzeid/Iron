@@ -27,7 +27,8 @@ struct HistoryView : View {
         NavigationView {
             List {
                 ForEach(trainings.identified(by: \.objectID)) { training in
-                    NavigationButton(destination: TrainingDetailView(training: training)) {
+                    NavigationLink(destination: TrainingDetailView(training: training).environmentObject(self.trainingsDataStore)
+                    ) {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(training.displayTitle)
