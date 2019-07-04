@@ -123,6 +123,15 @@ struct TrainingDetailView : View {
                     self.trainingViewModel.training.removeFromTrainingExercises(at: index)
                     self.trainingViewModel.training.insertIntoTrainingExercises(trainingExercise, at: destination)
                 }
+                
+                Button(action: {
+                    // TODO: add exercise
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Add Exercise")
+                    }
+                }
             }
         }
         .listStyle(.grouped)
