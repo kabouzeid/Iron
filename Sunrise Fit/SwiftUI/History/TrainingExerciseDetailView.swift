@@ -33,10 +33,12 @@ struct TrainingExerciseDetailView : View {
     }
     
     private func selectAndInit(set: TrainingSet?) {
-        if set?.repetitions == 0 { // uninitialized
-            initRepsAndWeight(for: set!)
+        withAnimation {
+            if set?.repetitions == 0 { // uninitialized
+                initRepsAndWeight(for: set!)
+            }
+            selectedTrainingSet = set
         }
-        selectedTrainingSet = set
     }
     
     private func initRepsAndWeight(for set: TrainingSet) {
@@ -102,12 +104,10 @@ struct TrainingExerciseDetailView : View {
                             .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
                             .tapAction { // TODO: currently tap on Spacer() is not recognized
                                 guard self.editMode?.value != .active else { return }
-                                withAnimation {
-                                    if self.selectedTrainingSet == trainingSet {
-                                        self.selectAndInit(set: nil)
-                                    } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
-                                        self.selectAndInit(set: trainingSet)
-                                    }
+                                if self.selectedTrainingSet == trainingSet {
+                                    self.selectAndInit(set: nil)
+                                } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
+                                    self.selectAndInit(set: trainingSet)
                                 }
                             }
                     }
@@ -190,8 +190,8 @@ struct TrainingExerciseDetailView : View {
                         }
                         self.selectAndInit(set: self.firstUncompletedSet)
                     })
-                        // TODO: currently the gesture doesn't work when a background is set
-//                        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+                        // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
+                        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
                 }
                     .transition(AnyTransition.move(edge: .bottom))
             }
