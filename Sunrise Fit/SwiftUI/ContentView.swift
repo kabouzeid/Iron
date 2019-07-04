@@ -29,7 +29,7 @@ struct ContentView : View {
                     Text("Training")
                 }
                 .tag(2)
-            Text("Exercises")
+            ExerciseMuscleGroupsView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped)
                 .tabItem {
                     Image("list")
                     Text("Exercises")

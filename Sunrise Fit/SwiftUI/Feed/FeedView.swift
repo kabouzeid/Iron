@@ -13,7 +13,7 @@ struct FeedView : View {
     let pinnedCharts = UserDefaults.standard.pinnedCharts() // TODO: create bindable object for refresh
 
     var body: some View {
-        return NavigationView {
+        NavigationView {
             List {
                 Section {
                     ActivityChartViewCell()
