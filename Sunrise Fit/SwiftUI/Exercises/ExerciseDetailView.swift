@@ -11,14 +11,15 @@ import SwiftUI
 struct ExerciseDetailView : View {
     var exercise: Exercise
     
-    var exerciseImage: UIImage? {
+    var exerciseImages: [UIImage] {
+        var images = [UIImage]()
         for png in exercise.png {
             let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
             if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                return image
+                images.append(image)
             }
         }
-        return nil
+        return images
     }
     
     func imageHeight(geometry: GeometryProxy) -> Length {
@@ -30,9 +31,7 @@ struct ExerciseDetailView : View {
             List {
                 if !self.exercise.png.isEmpty {
                     Section {
-                        Image(uiImage: self.exerciseImage ?? UIImage())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                        AnimatedImageView(uiImages: self.exerciseImages, duration: 2)
                             .frame(height: self.imageHeight(geometry: geometry))
                     }
                 }
@@ -104,7 +103,7 @@ struct ExerciseDetailView : View {
 #if DEBUG
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 42)!)
+        ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
     }
 }
 #endif
