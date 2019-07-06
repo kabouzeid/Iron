@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct ExercisesView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercises: [Exercise]
     
     var body: some View {
         List(exercises.identified(by: \.id)) { exercise in
-            NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
+            NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise).environmentObject(self.trainingsDataStore))
         }
     }
 }

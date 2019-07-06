@@ -8,20 +8,19 @@
 
 import SwiftUI
 
-struct PinnedChartViewCell : View {
+struct ExerciseChartViewCell : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
-    let pinnedChart: UserDefaults.PinnedChart
-    var exercise: Exercise? { EverkineticDataProvider.findExercise(id: pinnedChart.exerciseId) }
+    var exercise: Exercise
+    var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(exercise?.title ?? "")
+            Text(exercise.title)
                 .font(.body)
-            Text(pinnedChart.measurementType.title)
+            Text(measurementType.title)
                 .font(.caption)
                 .color(.secondary)
-            PinnedChartView(trainingsDataStore: trainingsDataStore, pinnedChart: pinnedChart)
+            ExerciseChartView(exercise: exercise, measurementType: measurementType)
                 .frame(height: 200)
         }
     }
@@ -30,7 +29,7 @@ struct PinnedChartViewCell : View {
 #if DEBUG
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        PinnedChartViewCell(pinnedChart: UserDefaults.PinnedChart(exerciseId: 42, measurementType: .totalRepetitions))
+        ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
             .environmentObject(mockTrainingsDataStore)
     }
 }

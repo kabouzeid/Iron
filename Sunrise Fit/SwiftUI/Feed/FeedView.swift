@@ -22,7 +22,7 @@ struct FeedView : View {
                 
                 Section {
                     ForEach(pinnedCharts) { chart in
-                        PinnedChartViewCell(pinnedChart: chart)
+                        ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: chart.exerciseId)!, measurementType: chart.measurementType)
                     }
                     PresentationLink(destination:
                         // TODO: present actual view to choose exercise

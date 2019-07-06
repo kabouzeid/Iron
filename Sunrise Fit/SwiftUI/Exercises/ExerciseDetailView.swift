@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct ExerciseDetailView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercise: Exercise
     
-    var exerciseImages: [UIImage] {
+    private var exerciseImages: [UIImage] {
         var images = [UIImage]()
         for png in exercise.png {
             let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
@@ -22,7 +23,7 @@ struct ExerciseDetailView : View {
         return images
     }
     
-    func imageHeight(geometry: GeometryProxy) -> Length {
+    private func imageHeight(geometry: GeometryProxy) -> Length {
         min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
     }
     
@@ -97,13 +98,25 @@ struct ExerciseDetailView : View {
             .listStyle(.grouped)
         }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
+        .navigationBarItems(trailing:
+            HStack {
+                PresentationLink(destination: ExerciseHistoryView(exercise: exercise).environmentObject(trainingsDataStore)) {
+                    Image(systemName: "clock")
+                }
+                PresentationLink(destination: ExerciseStatisticsView(exercise: exercise).environmentObject(trainingsDataStore)) {
+                    Image(systemName: "waveform.path.ecg")
+                }
+            }
+        )
     }
 }
 
 #if DEBUG
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
+        NavigationView {
+            ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
+        }
     }
 }
 #endif

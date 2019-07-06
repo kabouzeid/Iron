@@ -18,7 +18,7 @@ struct ActivityChartViewCell : View {
             Text("Workouts per week")
                 .font(.caption)
                 .color(.secondary)
-            ActivityChartView(trainingsDataStore: trainingsDataStore)
+            ActivityChartView()
                 .frame(height: 200)
         }
     }

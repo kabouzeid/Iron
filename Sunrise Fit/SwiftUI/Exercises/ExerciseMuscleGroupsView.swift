@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ExerciseMuscleGroupsView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exerciseMuscleGroups: [[Exercise]]
     
     var body: some View {
@@ -17,6 +18,7 @@ struct ExerciseMuscleGroupsView : View {
                 Section {
                     NavigationLink(destination:
                         MuscleGroupSectionedExercisesView(exerciseMuscleGroups: exerciseMuscleGroups)
+                            .environmentObject(trainingsDataStore)
                             .navigationBarTitle(Text("All Exercises"), displayMode: .inline)) {
                         HStack {
                             Text("All")
@@ -30,6 +32,7 @@ struct ExerciseMuscleGroupsView : View {
                     ForEach(exerciseMuscleGroups.identified(by: \.first?.muscleGroup)) { exerciseGroup in
                         NavigationLink(destination:
                             ExercisesView(exercises: exerciseGroup)
+                                .environmentObject(self.trainingsDataStore)
                                 .navigationBarTitle(Text(exerciseGroup.first?.muscleGroup.capitalized ?? ""), displayMode: .inline)) {
                             HStack {
                                 Text(exerciseGroup.first?.muscleGroup.capitalized ?? "")

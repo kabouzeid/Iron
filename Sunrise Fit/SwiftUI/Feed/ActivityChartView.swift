@@ -9,42 +9,42 @@
 import SwiftUI
 import Charts
 
-struct ActivityChartView : UIViewRepresentable {
-    @ObjectBinding var trainingsDataStore: TrainingsDataStore
+struct ActivityChartView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
-    func makeUIView(context: UIViewRepresentableContext<ActivityChartView>) -> StyledBarChartView {
-        return StyledBarChartView()
+    private var trainingsPerWeekChartInfo: TrainingsPerWeekChartInfo {
+        TrainingsPerWeekChartInfo(context: trainingsDataStore.context)
     }
     
-    func updateUIView(_ uiView: StyledBarChartView, context: UIViewRepresentableContext<ActivityChartView>) {
-        updateChartView(chartView: uiView)
-        return
+    private var chartData: ChartData {
+        trainingsPerWeekChartInfo.chartData()
     }
     
-    func updateChartView(chartView: StyledBarChartView) {
-        let trainingsPerWeekChartInfo = TrainingsPerWeekChartInfo(context: trainingsDataStore.context)
-        let chartData = trainingsPerWeekChartInfo.chartData()
-
-        chartView.xAxis.valueFormatter = trainingsPerWeekChartInfo.xAxisValueFormatter
-        chartView.leftAxis.valueFormatter = trainingsPerWeekChartInfo.yAxisValueFormatter
-        
-        chartView.xAxis.labelCount = chartData.entryCount
-        chartView.leftAxis.axisMinimum = 0
-        chartView.dragXEnabled = false
-        chartView.scaleXEnabled = false
-        chartView.leftAxis.drawAxisLineEnabled = false
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.isUserInteractionEnabled = false
-        
-        chartView.data = chartData
-        chartView.fitScreen()
+    private var xAxisFormatter: IAxisValueFormatter {
+        trainingsPerWeekChartInfo.xAxisValueFormatter
+    }
+    
+    private var yAxisFormatter: IAxisValueFormatter {
+        trainingsPerWeekChartInfo.yAxisValueFormatter
+    }
+    
+    var body: some View {
+        _BarChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter) { chartView, chartData in
+            chartView.xAxis.labelCount = chartData.entryCount
+            chartView.leftAxis.axisMinimum = 0
+            chartView.dragXEnabled = false
+            chartView.scaleXEnabled = false
+            chartView.leftAxis.drawAxisLineEnabled = false
+            chartView.xAxis.drawGridLinesEnabled = false
+            chartView.isUserInteractionEnabled = false
+        }
     }
 }
 
 #if DEBUG
 struct ActivityChartView_Previews : PreviewProvider {
     static var previews: some View {
-        return ActivityChartView(trainingsDataStore: mockTrainingsDataStore)
+        ActivityChartView().environmentObject(mockTrainingsDataStore)
     }
 }
 #endif
