@@ -197,14 +197,21 @@ struct TrainingExerciseDetailView : View {
             }
         }
             .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
-            .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(trailing: HStack{
+                NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!).environmentObject(self.trainingsDataStore)) {
+                    Image(systemName: "info.circle")
+                }
+                EditButton()
+            })
     }
 }
 
 #if DEBUG
 struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        return TrainingExerciseDetailView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
+        NavigationView {
+        TrainingExerciseDetailView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
+        }
     }
 }
 #endif
