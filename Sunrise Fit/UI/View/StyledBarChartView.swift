@@ -11,36 +11,13 @@ import Charts
 
 class StyledBarChartView: BarChartView {
     var autoStyleData: Bool = true
-    
-    var headerViewSpacing: CGFloat = 8 {
-        didSet {
-            self.extraTopOffset = calculateExtraTopOffset()
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        assert(subviews.count <= 1, "Not more than one subview supported")
-        if let headerView = subviews.first {
-            headerView.translatesAutoresizingMaskIntoConstraints = false
-            headerView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor, constant: 0).isActive = true
-            headerView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
-            self.layoutMarginsGuide.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: 0).isActive = true
-        }
-        self.extraTopOffset = calculateExtraTopOffset()
-    }
-    
+
     override func layoutMarginsDidChange() {
         super.layoutMarginsDidChange()
-        self.extraTopOffset = calculateExtraTopOffset()
+        self.extraTopOffset = self.layoutMargins.top
         self.extraLeftOffset = self.layoutMargins.left
         self.extraRightOffset = self.layoutMargins.right
         self.extraBottomOffset = self.layoutMargins.bottom
-    }
-    
-    private func calculateExtraTopOffset() -> CGFloat {
-        let headerView = subviews.first
-        return (headerView != nil ? headerView!.frame.height + headerViewSpacing : 0) + self.layoutMargins.top
     }
     
     required init?(coder aDecoder: NSCoder) {

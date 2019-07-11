@@ -42,7 +42,7 @@ class BalloonMarker: IMarker
         paragraphStyle?.alignment = .center
         xDrawAttributes[.font] = UIFont.systemFont(ofSize: 12)
         xDrawAttributes[.paragraphStyle] = paragraphStyle
-        xDrawAttributes[.foregroundColor] = UIColor.white.withAlphaComponent(1/3)
+        xDrawAttributes[.foregroundColor] = UIColor.white.withAlphaComponent(2/3)
         yDrawAttributes[.font] = UIFont.boldSystemFont(ofSize: 14)
         yDrawAttributes[.paragraphStyle] = paragraphStyle
         yDrawAttributes[.foregroundColor] = UIColor.white // TODO: change to UIColor.black depending on chartView.tintColor
@@ -84,8 +84,12 @@ class BalloonMarker: IMarker
         {
             offset.x = chartView.bounds.size.width - origin.x - size.width - (chartView.layoutMargins.right - 5) // corner radius = 5
         }
-
-        offset.y = max(chartView.layoutMargins.top, offset.y - size.height)
+        
+        if origin.y - (size.height + 8) >= 0 {
+            offset.y -= (size.height + 8)
+        } else {
+            offset.y += 8
+        }
 
         return offset
     }
@@ -101,7 +105,7 @@ class BalloonMarker: IMarker
         var rect = CGRect(
             origin: CGPoint(
                 x: point.x + offset.x,
-                y: offset.y),
+                y: point.y + offset.y),
             size: size)
         rect.origin.x -= size.width / 2.0
 
