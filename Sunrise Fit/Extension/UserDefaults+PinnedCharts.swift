@@ -1,5 +1,5 @@
 //
-//  UserDefaultsExtension.swift
+//  UserDefaults+PinnedCharts.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 03.11.18.
@@ -10,8 +10,8 @@ import UIKit
 import SwiftUI
 
 extension UserDefaults {
-    enum Keys: String {
-        case pinnedCharstKey
+    enum PinnedChartsKeys: String {
+        case pinnedChartsKey
     }
     
     private class PinnedChartRaw: Codable {
@@ -31,7 +31,7 @@ extension UserDefaults {
     }
     
     func pinnedCharts() -> [PinnedChart] {
-        if let data = self.data(forKey: Keys.pinnedCharstKey.rawValue),
+        if let data = self.data(forKey: PinnedChartsKeys.pinnedChartsKey.rawValue),
             let pinnedCharts = try? JSONDecoder().decode([PinnedChartRaw].self, from: data) {
             let pinnedCharts = pinnedCharts.filter { TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue) != nil }
             return pinnedCharts.map {
@@ -49,7 +49,7 @@ extension UserDefaults {
                 exerciseId: $0.exerciseId,
                 measurementTypeRawValue: $0.measurementType.rawValue)
         })
-        self.set(data, forKey: Keys.pinnedCharstKey.rawValue)
+        self.set(data, forKey: PinnedChartsKeys.pinnedChartsKey.rawValue)
     }
     
     func addPinnedChart(exerciseId: Int, measurmentType: TrainingExerciseChartDataGenerator.MeasurementType) {

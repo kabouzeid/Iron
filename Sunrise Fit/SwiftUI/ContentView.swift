@@ -35,8 +35,7 @@ struct ContentView : View {
                     Text("Exercises")
                 }
                 .tag(3)
-//            Text("Settings")
-            TextSizeDemo()
+            SettingsView()
                 .tabItem {
                     Image("settings")
                     Text("Settings")
