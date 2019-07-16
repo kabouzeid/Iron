@@ -47,18 +47,18 @@ class TrainingsDataStore : BindableObject {
     }
 }
 
-var trainingsDataStore = TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
+let trainingsDataStore = TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
 
 #if DEBUG
 // for testing in the canvas
 // TODO: add trainings etc
-var mockTrainingsDataStore: TrainingsDataStore = {
+let mockTrainingsDataStore: TrainingsDataStore = {
     let persistenContainer = setUpInMemoryNSPersistentContainer()
     createMockTrainingsData(context: persistenContainer.viewContext)
     return TrainingsDataStore(context: persistenContainer.viewContext)
 }()
 
-var mockTraining: Training = {
+let mockTraining: Training = {
     do {
         return try mockTrainingsDataStore.context.fetch(Training.fetchRequest()).first as! Training
     } catch {
@@ -66,11 +66,11 @@ var mockTraining: Training = {
     }
 }()
 
-var mockTrainingExercise: TrainingExercise = {
+let mockTrainingExercise: TrainingExercise = {
    mockTraining.trainingExercises!.firstObject as! TrainingExercise
 }()
 
-var mockTrainingSet: TrainingSet = {
+let mockTrainingSet: TrainingSet = {
     mockTrainingExercise.trainingSets!.firstObject as! TrainingSet
 }()
 
