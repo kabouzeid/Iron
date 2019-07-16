@@ -9,35 +9,6 @@
 import SwiftUI
 import Combine
 
-// only temporarily here, put this in the environment later so other views can use it
-class SettingsStore: BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
-    
-    enum WeightUnit: String, CaseIterable, Hashable {
-        case metric
-        case imperial
-        
-        var title: String {
-            switch self {
-            case .metric:
-                return "Metric (kg)"
-            case .imperial:
-                return "Imperial (lb)"
-            }
-        }
-    }
-    
-    var weightUnit: WeightUnit {
-        get {
-            UserDefaults.standard.weightUnit
-        }
-        set {
-            UserDefaults.standard.weightUnit = newValue
-            didChange.send()
-        }
-    }
-}
-
 struct SettingsView : View {
     @ObjectBinding private var settingsStore = SettingsStore()
 
