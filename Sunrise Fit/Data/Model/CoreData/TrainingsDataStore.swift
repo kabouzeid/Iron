@@ -41,12 +41,13 @@ class TrainingsDataStore : BindableObject {
         }
     }
     
-    // TODO: need to cancel on deinit?
+    deinit {
+        // TODO: is this necessary?
+        cancellable?.cancel()
+    }
 }
 
-var trainingsDataStore = {
-   TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
-}()
+var trainingsDataStore = TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
 
 #if DEBUG
 // for testing in the canvas

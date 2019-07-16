@@ -37,3 +37,6 @@ class SettingsStore: BindableObject {
         }
     }
 }
+
+// TODO: put this in the SwiftUI view environment
+var settingsStore = SettingsStore()
