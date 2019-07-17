@@ -25,8 +25,34 @@ struct _LottieView : UIViewRepresentable {
 #if DEBUG
 struct LottieView_Previews : PreviewProvider {
     static var previews: some View {
-        _LottieView(name: "exploding_star") { animationView in
-            animationView.play(fromFrame: 3, toFrame: 60)
+        Group {
+            LottieDemoView(name: "exploding_star")
+                .previewDisplayName("exploding_star")
+        }
+    }
+}
+
+private struct LottieDemoView: View {
+    var name: String
+    
+    @State private var animate = false
+    
+    var body: some View {
+        ZStack {
+            VStack {
+                Spacer()
+                Button("Play Animation") {
+                    self.animate = true
+                }
+            }
+            if animate {
+                _LottieView(name: name) { animationView in
+                    animationView.play(fromFrame: 3, toFrame: 60) { _ in
+                        self.animate = false
+                    }
+                }
+                .animation(.basic())
+            }
         }
     }
 }
