@@ -283,7 +283,7 @@ extension CurrentTrainingExerciseViewController: UITableViewDataSource {
         let trainingSet = self.trainingSet(of: indexPath)
 
         if trainingSet.isCompleted || trainingSet == currentSet {
-            cell.textLabel?.text = trainingSet.displayTitle
+            cell.textLabel?.text = trainingSet.displayTitle(unit: .metric)
         } else {
             cell.textLabel?.text = "Set \(indexPath.row + 1)"
         }

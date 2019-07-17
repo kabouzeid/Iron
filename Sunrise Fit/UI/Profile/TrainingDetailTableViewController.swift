@@ -52,7 +52,7 @@ class TrainingDetailTableViewController: UITableViewController {
                 .appending(trainingExercises.map { (trainingExercise) -> String in
                     let trainingExercise = (trainingExercise as! TrainingExercise)
                     let title = trainingExercise.exercise?.title ?? "Exercise"
-                    let sets = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle }.joined(separator: "\n")
+                    let sets = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle(unit: .metric) }.joined(separator: "\n")
                     return [title, sets].joined(separator: "\n")
                     }.joined(separator: "\n\n"))
         }
@@ -274,7 +274,7 @@ class TrainingDetailTableViewController: UITableViewController {
 
             let trainingExercise = training!.trainingExercises![indexPath.row] as! TrainingExercise
             cell.textLabel?.text = trainingExercise.exercise?.title
-            let setTitles = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle }
+            let setTitles = trainingExercise.trainingSets!.map { ($0 as! TrainingSet).displayTitle(unit: .metric) }
             cell.detailTextLabel?.text = setTitles.joined(separator: "\n")
 
             return cell

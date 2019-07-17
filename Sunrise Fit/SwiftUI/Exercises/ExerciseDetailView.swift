@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ExerciseDetailView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercise: Exercise
     
@@ -100,10 +101,14 @@ struct ExerciseDetailView : View {
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack {
-                PresentationLink(destination: ExerciseHistoryView(exercise: exercise).environmentObject(trainingsDataStore)) {
+                PresentationLink(destination: ExerciseHistoryView(exercise: exercise)
+                    .environmentObject(trainingsDataStore)
+                    .environmentObject(settingsStore)) {
                     Image(systemName: "clock")
                 }
-                PresentationLink(destination: ExerciseStatisticsView(exercise: exercise).environmentObject(trainingsDataStore)) {
+                PresentationLink(destination: ExerciseStatisticsView(exercise: exercise)
+                    .environmentObject(trainingsDataStore)
+                    .environmentObject(settingsStore)) {
                     Image(systemName: "waveform.path.ecg")
                 }
             }
@@ -116,6 +121,8 @@ struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
+                .environmentObject(mockTrainingsDataStore)
+                .environmentObject(mockSettingsStoreMetric)
         }
     }
 }

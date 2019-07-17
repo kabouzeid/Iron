@@ -10,13 +10,13 @@ import SwiftUI
 import Combine
 
 struct SettingsView : View {
-    @ObjectBinding private var settingsStore = SettingsStore()
+    @EnvironmentObject var settingsStore: SettingsStore
 
     var body: some View {
         NavigationView {
             Form {
                 Picker("Weight Unit", selection: $settingsStore.weightUnit) {
-                    ForEach(SettingsStore.WeightUnit.allCases.identified(by: \.self)) { weightUnit in
+                    ForEach(WeightUnit.allCases.identified(by: \.self)) { weightUnit in
                         Text(weightUnit.title).tag(weightUnit)
                     }
                 }
@@ -30,6 +30,7 @@ struct SettingsView : View {
 struct SettingsView_Previews : PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

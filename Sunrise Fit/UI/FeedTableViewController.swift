@@ -90,8 +90,8 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
             cell.detailLabel.text = exercise?.title
             cell.titleLabel.text = pinnedChart.measurementType.title
             
-            let formatters = chartDataGenerator.formatters(for: pinnedChart.measurementType)
-            let chartData = chartDataGenerator.chartData(for: pinnedChart.measurementType, timeFrame: .threeMonths)
+            let formatters = chartDataGenerator.formatters(for: pinnedChart.measurementType, weightUnit: settingsStore.weightUnit)
+            let chartData = chartDataGenerator.chartData(for: pinnedChart.measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit)
 
             cell.chartView.xAxis.valueFormatter = formatters.0
             cell.chartView.leftAxis.valueFormatter = formatters.1

@@ -82,4 +82,8 @@ class Sunrise_FitTests: XCTestCase {
         XCTAssertEqual(Double(1).shortStringValue, "1")
     }
     
+    func testWeightUnitConversion() {
+        // TODO:
+    }
+    
 }

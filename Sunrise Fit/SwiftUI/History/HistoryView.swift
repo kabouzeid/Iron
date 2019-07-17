@@ -10,6 +10,7 @@ import SwiftUI
 import CoreData
 
 struct HistoryView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
     private var fetchRequest: NSFetchRequest<Training> {
@@ -27,7 +28,9 @@ struct HistoryView : View {
         NavigationView {
             List {
                 ForEach(trainings.identified(by: \.objectID)) { training in
-                    NavigationLink(destination: TrainingDetailView(training: training).environmentObject(self.trainingsDataStore)
+                    NavigationLink(destination: TrainingDetailView(training: training)
+                        .environmentObject(self.trainingsDataStore)
+                        .environmentObject(self.settingsStore)
                     ) {
                         HStack {
                             VStack(alignment: .leading) {
@@ -59,7 +62,9 @@ struct HistoryView : View {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView().environmentObject(mockTrainingsDataStore)
+        HistoryView()
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

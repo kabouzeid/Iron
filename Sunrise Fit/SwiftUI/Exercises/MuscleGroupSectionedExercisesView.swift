@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct MuscleGroupSectionedExercisesView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exerciseMuscleGroups: [[Exercise]]
     
@@ -17,7 +18,9 @@ struct MuscleGroupSectionedExercisesView : View {
             ForEach(exerciseMuscleGroups.identified(by: \.first?.muscleGroup)) { exercises in
                 Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
                     ForEach(exercises.identified(by: \.id)) { exercise in
-                        NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise).environmentObject(self.trainingsDataStore))
+                        NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
+                            .environmentObject(self.trainingsDataStore)
+                            .environmentObject(self.settingsStore))
                     }
                 }
             }
@@ -29,6 +32,8 @@ struct MuscleGroupSectionedExercisesView : View {
 struct MuscleGroupSectionedExercisesView_Previews : PreviewProvider {
     static var previews: some View {
         MuscleGroupSectionedExercisesView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

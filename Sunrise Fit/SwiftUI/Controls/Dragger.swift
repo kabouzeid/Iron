@@ -32,7 +32,7 @@ struct Dragger : View {
     private static let DRAGGER_MOVEMENT: Double = 3
     private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
     
-    var dragGesture: some Gesture {
+    private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { state in
                 self.isDragging = true

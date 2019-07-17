@@ -53,8 +53,8 @@ class ExerciseStatisticsTableViewController: UITableViewController {
     }
 
     private func updateChartView(styledChartView: StyledLineChartView, with entry: TableViewEntry) {
-        let formatters = chartDataGenerator.formatters(for: entry.measurementType)
-        let chartData = entry.cache ?? chartDataGenerator.chartData(for: entry.measurementType, timeFrame: selectedTimeFrame)
+        let formatters = chartDataGenerator.formatters(for: entry.measurementType, weightUnit: settingsStore.weightUnit)
+        let chartData = entry.cache ?? chartDataGenerator.chartData(for: entry.measurementType, timeFrame: selectedTimeFrame, weightUnit: settingsStore.weightUnit)
         entry.cache = chartData
 
         styledChartView.xAxis.valueFormatter = formatters.0

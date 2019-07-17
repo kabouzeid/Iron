@@ -24,6 +24,8 @@ struct ExerciseStatisticsView : View {
 struct ExerciseStatisticsView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseStatisticsView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

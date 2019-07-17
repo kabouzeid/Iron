@@ -8,10 +8,26 @@
 
 import SwiftUI
 import CoreData
+import Combine
+
+class MyCustomStoreType: BindableObject {
+    var didChange = PassthroughSubject<Void, Never>()
+    
+    var weightUnit: WeightUnit {
+        get {
+            UserDefaults.standard.weightUnit
+        }
+        set {
+            UserDefaults.standard.weightUnit = newValue
+            didChange.send()
+        }
+    }
+}
 
 struct FeedBannerView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
+
     var body: some View {
         BannerView(entries: bannerViewEntries)
             .lineLimit(nil)
@@ -113,7 +129,7 @@ struct FeedBannerView : View {
         entries.append(
             BannerViewEntry(id: 2,
                             title: Text("Weight\nLast 7 Days"),
-                            text: Text("\(valuesSevenDaysAgo.2.shortStringValue) kg"),
+                            text: Text(TrainingSet.weightStringFor(weightInKg: valuesSevenDaysAgo.2, unit: settingsStore.weightUnit)),
                             detail: Text(weightDetailText),
                             detailColor: weightDetailColor))
         
@@ -124,7 +140,10 @@ struct FeedBannerView : View {
 #if DEBUG
 struct SUISummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        FeedBannerView().environmentObject(mockTrainingsDataStore)
+        FeedBannerView()
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

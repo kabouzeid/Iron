@@ -11,6 +11,7 @@ import CoreData
 
 struct TrainingExerciseDetailView : View {
     @Environment(\.editMode) var editMode
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     let trainingExercise: TrainingExercise
     
@@ -91,8 +92,8 @@ struct TrainingExerciseDetailView : View {
                 Section {
                     ForEach(indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
                         HStack {
-//                            Text((trainingSet as TrainingSet).isCompleted || (trainingSet as TrainingSet) == self.firstUncompletedSet ? (trainingSet as TrainingSet).displayTitle : "Set \(index)")
-                            Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle : "Set \(index)")
+//                            Text((trainingSet as TrainingSet).isCompleted || (trainingSet as TrainingSet) == self.firstUncompletedSet ? (trainingSet as TrainingSet).displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
+                            Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
                                 .font(Font.body.monospacedDigit())
                                 .color(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
                             Spacer()
@@ -155,7 +156,7 @@ struct TrainingExerciseDetailView : View {
                     Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
                         ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
                             HStack {
-                                Text(trainingSet.displayTitle)
+                                Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
                                     .font(Font.body.monospacedDigit())
                                     .color(.secondary)
                                 Spacer()
@@ -171,7 +172,7 @@ struct TrainingExerciseDetailView : View {
             if selectedTrainingSet != nil && (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) && editMode?.value != .active {
                 VStack(spacing: 0) {
                     Divider()
-                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!, onComment: {
+                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!, weightUnit: self.settingsStore.weightUnit, onComment: {
                         // TODO
                     }, onComplete: {
                         guard let set = self.selectedTrainingSet else { return }
@@ -198,7 +199,9 @@ struct TrainingExerciseDetailView : View {
         }
             .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
             .navigationBarItems(trailing: HStack{
-                NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!).environmentObject(self.trainingsDataStore)) {
+                NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!)
+                    .environmentObject(self.trainingsDataStore)
+                    .environmentObject(self.settingsStore)) {
                     Image(systemName: "info.circle")
                 }
                 EditButton()
@@ -210,7 +213,9 @@ struct TrainingExerciseDetailView : View {
 struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-        TrainingExerciseDetailView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
+        TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
         }
     }
 }

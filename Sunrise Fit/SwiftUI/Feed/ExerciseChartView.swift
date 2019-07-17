@@ -10,6 +10,7 @@ import SwiftUI
 import Charts
 
 struct ExerciseChartView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     var exercise: Exercise
     var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
@@ -19,19 +20,19 @@ struct ExerciseChartView : View {
     }
     
     private var chartData: ChartData {
-        chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths)
+        chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit)
     }
     
     private var xAxisFormatter: IAxisValueFormatter {
-        chartDataGenerator.formatters(for: measurementType).0
+        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).0
     }
     
     private var yAxisFormatter: IAxisValueFormatter {
-        chartDataGenerator.formatters(for: measurementType).1
+        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).1
     }
     
     private var balloonFormatter: BalloonValueFormatter {
-        chartDataGenerator.formatters(for: measurementType).2
+        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).2
     }
     
     var body: some View {
@@ -42,7 +43,10 @@ struct ExerciseChartView : View {
 #if DEBUG
 struct ExerciseChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartView(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM).environmentObject(mockTrainingsDataStore)
+        ExerciseChartView(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

@@ -45,7 +45,7 @@ class ExerciseHistoryTableViewController: UITableViewController {
         let trainingSet = trainingExercises![indexPath.section].trainingSets![indexPath.row] as! TrainingSet
         
         assert(trainingSet.isCompleted)
-        cell.textLabel?.text = trainingSet.displayTitle
+        cell.textLabel?.text = trainingSet.displayTitle(unit: .metric)
         cell.detailTextLabel?.text = "\(indexPath.row + 1)"
         
 //        cell.textLabel?.textColor = UIColor.darkText

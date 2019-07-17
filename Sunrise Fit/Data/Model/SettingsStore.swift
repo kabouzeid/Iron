@@ -13,30 +13,39 @@ import Combine
 class SettingsStore: BindableObject {
     var didChange = PassthroughSubject<Void, Never>()
     
-    enum WeightUnit: String, CaseIterable, Hashable {
-        case metric
-        case imperial
-        
-        var title: String {
-            switch self {
-            case .metric:
-                return "Metric (kg)"
-            case .imperial:
-                return "Imperial (lb)"
-            }
-        }
+    private var userDefaults: UserDefaults
+    
+    fileprivate init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
     }
     
+    convenience init() {
+        self.init(userDefaults: UserDefaults.standard)
+    }
+
     var weightUnit: WeightUnit {
         get {
-            UserDefaults.standard.weightUnit
+            userDefaults.weightUnit
         }
         set {
-            UserDefaults.standard.weightUnit = newValue
+            userDefaults.weightUnit = newValue
             didChange.send()
         }
     }
 }
 
-// TODO: put this in the SwiftUI view environment
 let settingsStore = SettingsStore()
+
+#if DEBUG
+let mockSettingsStoreMetric: SettingsStore = {
+    let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_metric")!)
+    store.weightUnit = .metric
+    return store
+}()
+
+let mockSettingsStoreImperial: SettingsStore = {
+    let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_imperial")!)
+    store.weightUnit = .imperial
+    return store
+}()
+#endif

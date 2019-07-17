@@ -13,12 +13,12 @@ extension UserDefaults {
         case weightUnit
     }
 
-    var weightUnit: SettingsStore.WeightUnit {
+    var weightUnit: WeightUnit {
         set {
             self.set(newValue.rawValue, forKey: SettingsKeys.weightUnit.rawValue)
         }
         get {
-            SettingsStore.WeightUnit(rawValue: self.string(forKey: SettingsKeys.weightUnit.rawValue) ?? "") ?? .metric
+            WeightUnit(rawValue: self.string(forKey: SettingsKeys.weightUnit.rawValue) ?? "") ?? .metric
         }
     }
 }

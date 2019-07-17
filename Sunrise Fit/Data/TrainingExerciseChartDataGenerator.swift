@@ -81,43 +81,48 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    let countBalloonValueFormatter = DateBalloonValueFormatter(append: "x")
-    let kgBalloonValueFormatter = DateBalloonValueFormatter(append: "kg")
+    let countBalloonValueFormatter = DateBalloonValueFormatter(append: "×")
     let xAxisValueFormatter = DateAxisFormatter()
     let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
 
-    func formatters(for measurementType: MeasurementType) -> (IAxisValueFormatter, IAxisValueFormatter, BalloonValueFormatter) {
+    func formatters(for measurementType: MeasurementType, weightUnit: WeightUnit) -> (IAxisValueFormatter, IAxisValueFormatter, BalloonValueFormatter) {
         switch measurementType {
         case .oneRM, .totalWeight:
-            return (xAxisValueFormatter, yAxisValueFormatter, kgBalloonValueFormatter)
+            return (xAxisValueFormatter, yAxisValueFormatter, DateBalloonValueFormatter(append: weightUnit.abbrev))
         case .totalSets, .totalRepetitions:
             return (xAxisValueFormatter, yAxisValueFormatter, countBalloonValueFormatter)
         }
     }
 
-    func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame) -> LineChartData {
+    func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame, weightUnit: WeightUnit) -> LineChartData {
         let dataSet = generateChartDataSet(
             trainingExercises: trainingExerciseHistory.filter(timeFrame.filter),
-            trainingExerciseToValue: trainingExerciseToValue(for: measurementType),
+            trainingExerciseToValue: trainingExerciseToValue(for: measurementType, weightUnit: weightUnit),
             label: measurementType.title)
         return LineChartData(dataSet: dataSet)
     }
 
-    private func trainingExerciseToValue(for measurementType: MeasurementType) -> TrainingExerciseToValue {
+    private func trainingExerciseToValue(for measurementType: MeasurementType, weightUnit: WeightUnit) -> TrainingExerciseToValue {
         switch measurementType {
         case .oneRM:
             return {
-                $0.trainingSets!.map({ (trainingSet) -> Double in
-                    let trainingSet = trainingSet as! TrainingSet
-                    if trainingSet.repetitions > 5 {
-                        // accuracy goes way down for more than 5 reps
-                        return 0
-                    }
-                    return Double(trainingSet.weight) * (36 / (37 -     Double(trainingSet.repetitions))) // Brzycki 1RM formula
-                }).max() ?? 0
+                WeightUnit.convert(weight:
+                    $0.trainingSets!.map({ (trainingSet) -> Double in
+                        let trainingSet = trainingSet as! TrainingSet
+                        if trainingSet.repetitions > 5 {
+                            // accuracy goes way down for more than 5 reps
+                            return 0
+                        }
+                        return Double(trainingSet.weight) * (36 / (37 -     Double(trainingSet.repetitions))) // Brzycki 1RM formula
+                    }).max() ?? 0
+                    , from: .metric, to: weightUnit)
             }
         case .totalWeight:
-            return  { Double($0.totalCompletedWeight) }
+            return  {
+                WeightUnit.convert(weight:
+                    Double($0.totalCompletedWeight)
+                    , from: .metric, to: weightUnit)
+            }
         case .totalSets:
             return { Double($0.numberOfCompletedSets ?? 0) }
         case .totalRepetitions:

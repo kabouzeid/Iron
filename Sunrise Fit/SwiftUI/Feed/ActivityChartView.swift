@@ -44,7 +44,9 @@ struct ActivityChartView : View {
 #if DEBUG
 struct ActivityChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ActivityChartView().environmentObject(mockTrainingsDataStore)
+        ActivityChartView()
+            .environmentObject(mockTrainingsDataStore)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

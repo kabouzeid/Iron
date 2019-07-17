@@ -9,10 +9,13 @@
 import SwiftUI
 
 struct ExerciseHistoryView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
     var exercise: Exercise
     
     var history: [TrainingExercise] {
-        TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: AppDelegate.instance.persistentContainer.viewContext) ?? []
+        TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: trainingsDataStore.context) ?? []
     }
     
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
@@ -29,7 +32,7 @@ struct ExerciseHistoryView : View {
                 Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
                     ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { index, trainingSet in
                         HStack {
-                            Text(trainingSet.displayTitle)
+                            Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
                                 .font(Font.body.monospacedDigit())
                                 .color(.primary)
                             Spacer()
@@ -49,6 +52,8 @@ struct ExerciseHistoryView : View {
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseHistoryView(exercise: EverkineticDataProvider.findExercise(id: 42)!)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

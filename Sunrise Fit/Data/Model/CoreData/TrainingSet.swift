@@ -9,10 +9,20 @@
 import CoreData
 
 class TrainingSet: NSManagedObject {
-    var displayTitle: String {
-        get {
-//            "\(repetitions) Repetition\(repetitions == 1 ? "" : "s") x \(weight) kg" // TODO lbs support
-            "\(weight) kg × \(repetitions)" // TODO lbs support
-        }
+    func displayTitle(unit: WeightUnit) -> String {
+        "\(TrainingSet.weightStringFor(weightInKg: weight, unit: unit)) × \(repetitions)"
+    }
+    
+    static func weightStringFor(weightInKg: Double, unit: WeightUnit) -> String {
+        let weightInUnit = WeightUnit.convert(weight: weightInKg, from: .metric, to: unit)
+        return "\(weightNumberFormatter.string(from: weightInUnit as NSNumber) ?? String(weightInUnit)) \(unit.abbrev)"
+    }
+    
+    static var weightNumberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.maximumFractionDigits = 3
+        formatter.minimumFractionDigits = 1
+        return formatter
     }
 }

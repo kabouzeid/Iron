@@ -14,17 +14,21 @@ private class TrainingViewModel: BindableObject {
 
     var training: Training
     var startInput: Date {
-        didSet {
-            assert(startInput <= training.end!)
-            training.start = startInput
-            didChange.send() // not necessary?
+        set {
+            precondition(newValue <= training.end!)
+            training.start = newValue
+        }
+        get {
+            training.start!
         }
     }
     var endInput: Date {
-        didSet {
-            assert(endInput >= training.start!)
-            training.end = endInput
-            didChange.send() // not necessary?
+        set {
+            precondition(newValue >= training.start!)
+            training.end = newValue
+        }
+        get {
+            training.end!
         }
     }
     // we don't want to immediately write the title to core data
@@ -37,14 +41,12 @@ private class TrainingViewModel: BindableObject {
 
     init(training: Training) {
         self.training = training
-        // set the default values
-        startInput = training.start!
-        endInput = training.end!
         titleInput = training.title ?? ""
     }
 }
 
 struct TrainingDetailView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObjectBinding private var trainingViewModel: TrainingViewModel
     
@@ -60,7 +62,7 @@ struct TrainingDetailView : View {
     
     private func trainingExerciseText(trainingExercise: TrainingExercise) -> String {
         trainingExercise.trainingSets!
-            .map { ($0 as! TrainingSet).displayTitle }
+            .map { ($0 as! TrainingSet).displayTitle(unit: settingsStore.weightUnit) }
             .joined(separator: "\n")
     }
     
@@ -102,7 +104,9 @@ struct TrainingDetailView : View {
             Section {
                 ForEach(trainingExercises.identified(by: \.objectID)) { trainingExercise in
                     // TODO: navigation button -> Set Editor
-                    NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise).environmentObject(self.trainingsDataStore)) {
+                    NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
+                        .environmentObject(self.trainingsDataStore)
+                        .environmentObject(self.settingsStore)) {
                         VStack(alignment: .leading) {
                             Text(trainingExercise.exercise?.title ?? "")
                                 .font(.body)
@@ -152,7 +156,9 @@ struct TrainingDetailView : View {
 #if DEBUG
 struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        return TrainingDetailView(training: mockTraining).environmentObject(mockTrainingsDataStore)
+        return TrainingDetailView(training: mockTraining)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

@@ -44,7 +44,9 @@ struct FeedView : View {
 #if DEBUG
 struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
-        FeedView().environmentObject(mockTrainingsDataStore)
+        FeedView()
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
     }
 }
 #endif

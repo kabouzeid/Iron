@@ -31,6 +31,8 @@ struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
             .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

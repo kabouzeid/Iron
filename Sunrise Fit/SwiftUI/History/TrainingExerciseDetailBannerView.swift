@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct TrainingExerciseDetailBannerView : View {
+    @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     let trainingExercise: TrainingExercise
     
@@ -20,7 +21,7 @@ struct TrainingExerciseDetailBannerView : View {
         var entries = [BannerViewEntry]()
         
         entries.append(BannerViewEntry(id: 0, title: Text("Repetitions"), text: Text("\(trainingExercise.numberOfCompletedRepetitions)")))
-        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\((trainingExercise.totalCompletedWeight).shortStringValue) kg")))
+        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\(TrainingSet.weightStringFor(weightInKg: trainingExercise.totalCompletedWeight, unit: settingsStore.weightUnit))")))
         
         return entries
     }
@@ -29,7 +30,10 @@ struct TrainingExerciseDetailBannerView : View {
 #if DEBUG
 struct TrainingExerciseDetailBannerView_Previews : PreviewProvider {
     static var previews: some View {
-        TrainingExerciseDetailBannerView(trainingExercise: mockTrainingExercise).environmentObject(mockTrainingsDataStore)
+        TrainingExerciseDetailBannerView(trainingExercise: mockTrainingExercise)
+            .environmentObject(mockTrainingsDataStore)
+            .environmentObject(mockSettingsStoreMetric)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

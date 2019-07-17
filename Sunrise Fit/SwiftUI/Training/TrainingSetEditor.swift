@@ -13,21 +13,27 @@ private class TrainingSetViewModel : BindableObject {
     var didChange = PassthroughSubject<Void, Never>()
     
     var trainingSet: TrainingSet
+    var weightUnit: WeightUnit
     var weightInput: Double {
-        didSet {
-            trainingSet.weight = self.weightInput
+        set {
+            trainingSet.weight = WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric)
+        }
+        get {
+            WeightUnit.convert(weight: trainingSet.weight, from: .metric, to: weightUnit)
         }
     }
     var repetitionsInput: Double {
-        didSet {
-            trainingSet.repetitions = Int16(self.repetitionsInput)
+        set {
+            trainingSet.repetitions = Int16(newValue)
+        }
+        get {
+            Double(trainingSet.repetitions)
         }
     }
     
-    init(trainingSet: TrainingSet) {
+    init(trainingSet: TrainingSet, weightUnit: WeightUnit) {
         self.trainingSet = trainingSet
-        weightInput = trainingSet.weight
-        repetitionsInput = Double(trainingSet.repetitions)
+        self.weightUnit = weightUnit
     }
 }
 
@@ -46,8 +52,8 @@ struct TrainingSetEditor : View {
         return formatter
     }
     
-    init(trainingSet: TrainingSet, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
-        trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet)
+    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
+        trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
         self.onComment = onComment
         self.onComplete = onComplete
     }
@@ -55,7 +61,7 @@ struct TrainingSetEditor : View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text("kg"), stepSize: 2.5, minValue: 0)
+                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text(trainingSetViewModel.weightUnit.abbrev), stepSize: trainingSetViewModel.weightUnit.barbellIncrement, minValue: 0)
                 Dragger(value: $trainingSetViewModel.repetitionsInput, unit: Text("reps"), minValue: 1)
                 }
                 .padding([.top])
@@ -99,9 +105,15 @@ struct TrainingSetEditor : View {
 struct TrainingSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
-            TrainingSetEditor(trainingSet: mockTrainingSet)
+            TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .metric)
                 .environmentObject(mockTrainingsDataStore)
                 .previewLayout(.sizeThatFits)
+                .previewDisplayName("Metric")
+            
+            TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .imperial)
+                .environmentObject(mockTrainingsDataStore)
+                .previewLayout(.sizeThatFits)
+                .previewDisplayName("Imperial")
         }
     }
 }
