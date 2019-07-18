@@ -17,7 +17,7 @@ struct ActivityChartViewCell : View {
                 .font(.body)
             Text("Workouts per week")
                 .font(.caption)
-                .color(.secondary)
+                .foregroundColor(.secondary)
             ActivityChartView()
                 .frame(height: 200)
         }

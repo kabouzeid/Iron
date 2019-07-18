@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 private class TrainingSetViewModel : BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
+    var willChange = PassthroughSubject<Void, Never>()
     
     var trainingSet: TrainingSet
     var weightUnit: WeightUnit
@@ -72,7 +72,7 @@ struct TrainingSetEditor : View {
                     HStack {
                         Spacer()
                         Text("Comment")
-                            .color(.secondary)
+                            .foregroundColor(.secondary)
                             .padding(6)
                         Spacer()
                     }
@@ -87,7 +87,7 @@ struct TrainingSetEditor : View {
                     HStack {
                         Spacer()
                         Text("Complete Set")
-                            .color(.white)
+                            .foregroundColor(.white)
                             .padding(6)
                         Spacer()
                     }

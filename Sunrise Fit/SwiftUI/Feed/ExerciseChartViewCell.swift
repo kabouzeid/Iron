@@ -19,7 +19,7 @@ struct ExerciseChartViewCell : View {
                 .font(.body)
             Text(measurementType.title)
                 .font(.caption)
-                .color(.secondary)
+                .foregroundColor(.secondary)
             ExerciseChartView(exercise: exercise, measurementType: measurementType)
                 .frame(height: 200)
         }

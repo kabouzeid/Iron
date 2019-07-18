@@ -28,17 +28,17 @@ struct ExerciseHistoryView : View {
     
     var body: some View {
         List {
-            ForEach(history.identified(by: \.objectID)) { trainingExercise in
+            ForEach(history, id: \.objectID) { trainingExercise in
                 Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
-                    ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { index, trainingSet in
+                    ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { index, trainingSet in
                         HStack {
                             Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
                                 .font(Font.body.monospacedDigit())
-                                .color(.primary)
+                                .foregroundColor(.primary)
                             Spacer()
                             Text("\(index)")
                                 .font(Font.body.monospacedDigit())
-                                .color(.secondary)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }

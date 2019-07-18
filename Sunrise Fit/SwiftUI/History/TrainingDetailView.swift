@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 private class TrainingViewModel: BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
+    var willChange = PassthroughSubject<Void, Never>()
 
     var training: Training
     var startInput: Date {
@@ -32,7 +32,7 @@ private class TrainingViewModel: BindableObject {
         }
     }
     // we don't want to immediately write the title to core data
-    var titleInput: String { didSet { didChange.send() } }
+    var titleInput: String { willSet { willChange.send() } }
     // instead when the user is done typing we adjust and set the title here
     func adjustAndSaveTitleInput() {
         titleInput = titleInput.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -90,11 +90,11 @@ struct TrainingDetailView : View {
                 }
                 
                 Section {
-                    DatePicker($trainingViewModel.startInput, maximumDate: min(self.trainingViewModel.training.end!, Date())) {
+                    DatePicker(selection: $trainingViewModel.startInput, in: ...min(self.trainingViewModel.training.end!, Date())) {
                         Text("Start")
                     }
 
-                    DatePicker($trainingViewModel.endInput, minimumDate: self.trainingViewModel.training.start!, maximumDate: Date()) {
+                    DatePicker(selection: $trainingViewModel.endInput, in: self.trainingViewModel.training.start!...Date()) {
                         Text("End")
                     }
                 }
@@ -102,7 +102,7 @@ struct TrainingDetailView : View {
             
             
             Section {
-                ForEach(trainingExercises.identified(by: \.objectID)) { trainingExercise in
+                ForEach(trainingExercises, id: \.objectID) { trainingExercise in
                     // TODO: navigation button -> Set Editor
                     NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
                         .environmentObject(self.trainingsDataStore)
@@ -112,7 +112,7 @@ struct TrainingDetailView : View {
                                 .font(.body)
                             Text(self.trainingExerciseText(trainingExercise: trainingExercise))
                                 .font(Font.body.monospacedDigit())
-                                .color(.secondary)
+                                .foregroundColor(.secondary)
                                 .lineLimit(nil)
                         }
                     }

@@ -51,7 +51,7 @@ private struct LottieDemoView: View {
                         self.animate = false
                     }
                 }
-                .animation(.basic())
+                .animation(.easeInOut)
             }
         }
     }

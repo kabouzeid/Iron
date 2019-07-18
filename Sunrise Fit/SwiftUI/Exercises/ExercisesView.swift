@@ -14,7 +14,7 @@ struct ExercisesView : View {
     var exercises: [Exercise]
     
     var body: some View {
-        List(exercises.identified(by: \.id)) { exercise in
+        List(exercises, id: \.id) { exercise in
             NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
                 .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore))

@@ -16,7 +16,7 @@ struct SettingsView : View {
         NavigationView {
             Form {
                 Picker("Weight Unit", selection: $settingsStore.weightUnit) {
-                    ForEach(WeightUnit.allCases.identified(by: \.self)) { weightUnit in
+                    ForEach(WeightUnit.allCases, id: \.self) { weightUnit in
                         Text(weightUnit.title).tag(weightUnit)
                     }
                 }

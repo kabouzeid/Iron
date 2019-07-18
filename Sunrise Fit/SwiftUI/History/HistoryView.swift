@@ -27,7 +27,7 @@ struct HistoryView : View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(trainings.identified(by: \.objectID)) { training in
+                ForEach(trainings, id: \.objectID) { training in
                     NavigationLink(destination: TrainingDetailView(training: training)
                         .environmentObject(self.trainingsDataStore)
                         .environmentObject(self.settingsStore)
@@ -38,7 +38,7 @@ struct HistoryView : View {
                                     .font(.body)
                                 Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
                                     .font(.caption)
-                                    .color(.secondary)
+                                    .foregroundColor(.secondary)
                             }
                             Spacer()
                             training.muscleGroupImage

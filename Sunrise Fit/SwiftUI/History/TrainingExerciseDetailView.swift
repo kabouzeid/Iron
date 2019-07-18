@@ -79,133 +79,156 @@ struct TrainingExerciseDetailView : View {
     private func shouldHighlightRow(for set: TrainingSet) -> Bool {
         !self.isCurrentTraining || set == self.firstUncompletedSet
     }
+    
+    private var banner: some View {
+        TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
+                                .listRowBackground(trainingExercise.muscleGroupColor)
+                                .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
+    }
+    
+    private var currentTrainingSets: some View {
+        ForEach(indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
+                                HStack {
+        //                            Text((trainingSet as TrainingSet).isCompleted || (trainingSet as TrainingSet) == self.firstUncompletedSet ? (trainingSet as TrainingSet).displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
+                                    Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
+                                        .font(Font.body.monospacedDigit())
+                                        .foregroundColor(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
+                                    Spacer()
+                                    Text("\(index)")
+                                        .font(Font.body.monospacedDigit())
+                                        .foregroundColor(.secondary)
+                                }
+                                    // TODO: use selection feature of List when it is released
+                                    .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
+                                    .tapAction { // TODO: currently tap on Spacer() is not recognized
+                                        guard self.editMode?.value != .active else { return }
+                                        if self.selectedTrainingSet == trainingSet {
+                                            self.selectAndInit(set: nil)
+                                        } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
+                                            self.selectAndInit(set: trainingSet)
+                                        }
+                                    }
+                            }
+                                .onDelete { offsets in
+                                    //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                                    self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
+                                    if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
+                                        self.selectAndInit(set: self.firstUncompletedSet)
+                                    }
+                                }
+                                // TODO: move is yet too buggy
+        //                        .onMove { source, destination in
+        //                            guard source.first != destination || source.count > 1 else { return }
+        //                            // make sure the destination is completed
+        //                            guard (self.trainingExercise.trainingSets![destination] as! TrainingSet).isCompleted else { return }
+        //                            // make sure all sources are completed
+        //                            guard source.reduce(true, { (allCompleted, index) in
+        //                                allCompleted && (self.trainingExercise.trainingSets![index] as! TrainingSet).isCompleted
+        //                            }) else { return }
+        //
+        //                            // TODO: replace with swift 5.1 move() function when available
+        //                            guard let index = source.first else { return }
+        //                            guard let trainingSet = self.trainingExercise.trainingSets?[index] as? TrainingSet else { return }
+        //                            self.trainingExercise.removeFromTrainingSets(at: index)
+        //                            self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
+        //                        }
+    }
+    
+    private var addSetButton: some View {
+        Button(action: {
+                                let trainingSet = TrainingSet(context: self.trainingExercise.managedObjectContext!)
+                                self.trainingExercise.addToTrainingSets(trainingSet)
+                                self.selectAndInit(set: self.firstUncompletedSet)
+                                if !self.isCurrentTraining {
+                                    // don't allow uncompleted sets if not in current training
+                                    precondition(trainingSet.repetitions > 0, "Tried to complete set with 0 repetitions.")
+                                    trainingSet.isCompleted = true
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: "plus")
+                                    Text("Add Set")
+                                }
+                            }
+    }
+    
+    private var historyTrainingSets: some View {
+        ForEach((trainingExercise.history ?? []), id: \.objectID) { trainingExercise in
+                            Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
+                                ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
+                                    HStack {
+                                        Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
+                                            .font(Font.body.monospacedDigit())
+                                            .foregroundColor(.secondary)
+                                        Spacer()
+                                        Text("\(index)")
+                                            .font(Font.body.monospacedDigit())
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }
+                        }
+    }
+    
+    private var trainingSetEditor: some View {
+        VStack(spacing: 0) {
+                            Divider()
+                            TrainingSetEditor(trainingSet: self.selectedTrainingSet!, weightUnit: self.settingsStore.weightUnit, onComment: {
+                                // TODO
+                            }, onComplete: {
+                                guard let set = self.selectedTrainingSet else { return }
+                                    
+                                if !set.isCompleted {
+                                    precondition(set.repetitions > 0, "Tried to complete set with 0 repetitions.")
+                                    set.isCompleted = true
+                                    let training = set.trainingExercise!.training!
+                                    training.start = training.start ?? Date()
+                                    self.moveTrainingExerciseBehindLastBegun()
+                                    // we don't want to lose any sets the user has done when something crashes
+                                    // TODO: save the context here
+                                    let feedbackGenerator = UINotificationFeedbackGenerator()
+                                    feedbackGenerator.prepare()
+                                    feedbackGenerator.notificationOccurred(.success)
+                                }
+                                self.selectAndInit(set: self.firstUncompletedSet)
+                            })
+                                // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
+                                .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+                        }
+                            .transition(AnyTransition.move(edge: .bottom))
+    }
 
     var body: some View {
         VStack(spacing: 0) {
             List {
                 Section {
-                    TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
-                        .listRowBackground(trainingExercise.muscleGroupColor)
-                        .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
+                    banner
                 }
                 
                 Section {
-                    ForEach(indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
-                        HStack {
-//                            Text((trainingSet as TrainingSet).isCompleted || (trainingSet as TrainingSet) == self.firstUncompletedSet ? (trainingSet as TrainingSet).displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
-                            Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
-                                .font(Font.body.monospacedDigit())
-                                .color(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
-                            Spacer()
-                            Text("\(index)")
-                                .font(Font.body.monospacedDigit())
-                                .color(.secondary)
-                        }
-                            // TODO: use selection feature of List when it is released
-                            .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
-                            .tapAction { // TODO: currently tap on Spacer() is not recognized
-                                guard self.editMode?.value != .active else { return }
-                                if self.selectedTrainingSet == trainingSet {
-                                    self.selectAndInit(set: nil)
-                                } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
-                                    self.selectAndInit(set: trainingSet)
-                                }
-                            }
-                    }
-                        .onDelete { offsets in
-                            //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
-                            self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
-                            if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
-                                self.selectAndInit(set: self.firstUncompletedSet)
-                            }
-                        }
-                        // TODO: move is yet too buggy
-//                        .onMove { source, destination in
-//                            guard source.first != destination || source.count > 1 else { return }
-//                            // make sure the destination is completed
-//                            guard (self.trainingExercise.trainingSets![destination] as! TrainingSet).isCompleted else { return }
-//                            // make sure all sources are completed
-//                            guard source.reduce(true, { (allCompleted, index) in
-//                                allCompleted && (self.trainingExercise.trainingSets![index] as! TrainingSet).isCompleted
-//                            }) else { return }
-//
-//                            // TODO: replace with swift 5.1 move() function when available
-//                            guard let index = source.first else { return }
-//                            guard let trainingSet = self.trainingExercise.trainingSets?[index] as? TrainingSet else { return }
-//                            self.trainingExercise.removeFromTrainingSets(at: index)
-//                            self.trainingExercise.insertIntoTrainingSets(trainingSet, at: destination)
-//                        }
-                    Button(action: {
-                        let trainingSet = TrainingSet(context: self.trainingExercise.managedObjectContext!)
-                        self.trainingExercise.addToTrainingSets(trainingSet)
-                        self.selectAndInit(set: self.firstUncompletedSet)
-                        if !self.isCurrentTraining {
-                            // don't allow uncompleted sets if not in current training
-                            precondition(trainingSet.repetitions > 0, "Tried to complete set with 0 repetitions.")
-                            trainingSet.isCompleted = true
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Add Set")
-                        }
-                    }
+                    currentTrainingSets
+                    addSetButton
                 }
                 
-                ForEach((trainingExercise.history ?? []).identified(by: \.objectID)) { trainingExercise in
-                    Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
-                        ForEach(self.indexedTrainingSets(for: trainingExercise).identified(by: \.1.objectID)) { (index, trainingSet) in
-                            HStack {
-                                Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
-                                    .font(Font.body.monospacedDigit())
-                                    .color(.secondary)
-                                Spacer()
-                                Text("\(index)")
-                                    .font(Font.body.monospacedDigit())
-                                    .color(.secondary)
-                            }
-                        }
-                    }
-                }
+                historyTrainingSets
             }
-                .listStyle(.grouped)
-            if selectedTrainingSet != nil && (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) && editMode?.value != .active {
-                VStack(spacing: 0) {
-                    Divider()
-                    TrainingSetEditor(trainingSet: self.selectedTrainingSet!, weightUnit: self.settingsStore.weightUnit, onComment: {
-                        // TODO
-                    }, onComplete: {
-                        guard let set = self.selectedTrainingSet else { return }
-                            
-                        if !set.isCompleted {
-                            precondition(set.repetitions > 0, "Tried to complete set with 0 repetitions.")
-                            set.isCompleted = true
-                            let training = set.trainingExercise!.training!
-                            training.start = training.start ?? Date()
-                            self.moveTrainingExerciseBehindLastBegun()
-                            // we don't want to lose any sets the user has done when something crashes
-                            // TODO: save the context here
-                            let feedbackGenerator = UINotificationFeedbackGenerator()
-                            feedbackGenerator.prepare()
-                            feedbackGenerator.notificationOccurred(.success)
-                        }
-                        self.selectAndInit(set: self.firstUncompletedSet)
-                    })
-                        // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
-                        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
-                }
-                    .transition(AnyTransition.move(edge: .bottom))
+            .listStyle(.grouped)
+            
+            if selectedTrainingSet != nil &&
+                (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) &&
+                editMode?.value != .active {
+                trainingSetEditor
             }
         }
-            .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
-            .navigationBarItems(trailing: HStack{
-                NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!)
-                    .environmentObject(self.trainingsDataStore)
-                    .environmentObject(self.settingsStore)) {
+        .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
+        .navigationBarItems(trailing: HStack{
+            NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!)
+                .environmentObject(self.trainingsDataStore)
+                .environmentObject(self.settingsStore)) {
                     Image(systemName: "info.circle")
-                }
-                EditButton()
-            })
+            }
+            EditButton()
+        })
     }
 }
 

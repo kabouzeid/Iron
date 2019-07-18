@@ -441,9 +441,9 @@
 		8AABF2AC20168900009C047D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8AAF768E21CFB7E2001C9D6B /* Controller */,
 				8A68F6122083969B0038CEB7 /* View */,
 				8ABE62C5204B0DDB0035DB1B /* Profile */,
+				8AAF768E21CFB7E2001C9D6B /* Controller */,
 				8A5809412049E2300070D794 /* Training */,
 				8A5809432049E2590070D794 /* Exercises */,
 				8A1C265D21610D9800087448 /* FeedTableViewController.swift */,

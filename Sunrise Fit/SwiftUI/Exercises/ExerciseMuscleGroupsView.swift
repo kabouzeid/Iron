@@ -26,12 +26,12 @@ struct ExerciseMuscleGroupsView : View {
                             Text("All")
                             Spacer()
                             Text("(\(exerciseMuscleGroups.flatMap { $0 }.count))")
-                                .color(.secondary)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
                 Section {
-                    ForEach(exerciseMuscleGroups.identified(by: \.first?.muscleGroup)) { exerciseGroup in
+                    ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exerciseGroup in
                         NavigationLink(destination:
                             ExercisesView(exercises: exerciseGroup)
                                 .environmentObject(self.trainingsDataStore)
@@ -41,7 +41,7 @@ struct ExerciseMuscleGroupsView : View {
                                 Text(exerciseGroup.first?.muscleGroup.capitalized ?? "")
                                 Spacer()
                                 Text("(\(exerciseGroup.count))")
-                                    .color(.secondary)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }

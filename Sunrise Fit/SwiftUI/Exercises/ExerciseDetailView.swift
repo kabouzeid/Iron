@@ -13,6 +13,9 @@ struct ExerciseDetailView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercise: Exercise
     
+    @State private var showingStatistics = false
+    @State private var showingHistory = false
+    
     private var exerciseImages: [UIImage] {
         var images = [UIImage]()
         for png in exercise.png {
@@ -47,20 +50,20 @@ struct ExerciseDetailView : View {
                 
                 if !(self.exercise.primaryMuscleCommonName.isEmpty && self.exercise.secondaryMuscleCommonName.isEmpty) {
                     Section(header: Text("Muscles".uppercased())) {
-                        ForEach(self.exercise.primaryMuscleCommonName.identified(by: \.hashValue)) { primaryMuscle in
+                        ForEach(self.exercise.primaryMuscleCommonName, id: \.hashValue) { primaryMuscle in
                             HStack {
                                 Text(primaryMuscle.capitalized as String)
                                 Spacer()
                                 Text("Primary")
-                                    .color(.secondary)
+                                    .foregroundColor(.secondary)
                             }
                         }
-                        ForEach(self.exercise.secondaryMuscleCommonName.identified(by: \.hashValue)) { secondaryMuscle in
+                        ForEach(self.exercise.secondaryMuscleCommonName, id: \.hashValue) { secondaryMuscle in
                             HStack {
                                 Text(secondaryMuscle.capitalized as String)
                                 Spacer()
                                 Text("Secondary")
-                                    .color(.secondary)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -68,7 +71,7 @@ struct ExerciseDetailView : View {
                 
                 if !self.exercise.steps.isEmpty {
                     Section(header: Text("Steps".uppercased())) {
-                        ForEach(self.exercise.steps.identified(by: \.hashValue)) { step in
+                        ForEach(self.exercise.steps, id: \.hashValue) { step in
                             Text(step as String)
                                 .lineLimit(nil)
                         }
@@ -77,7 +80,7 @@ struct ExerciseDetailView : View {
                 
                 if !self.exercise.tips.isEmpty {
                     Section(header: Text("Tips".uppercased())) {
-                        ForEach(self.exercise.tips.identified(by: \.hashValue)) { tip in
+                        ForEach(self.exercise.tips, id: \.hashValue) { tip in
                             Text(tip as String)
                                 .lineLimit(nil)
                         }
@@ -86,7 +89,7 @@ struct ExerciseDetailView : View {
                 
                 if !self.exercise.references.isEmpty {
                     Section(header: Text("References".uppercased())) {
-                        ForEach(self.exercise.references.identified(by: \.hashValue)) { reference in
+                        ForEach(self.exercise.references, id: \.hashValue) { reference in
                             Button(reference as String) {
                                 if let url = URL(string: reference) {
                                     UIApplication.shared.open(url)
@@ -101,16 +104,22 @@ struct ExerciseDetailView : View {
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack {
-                PresentationLink(destination: ExerciseHistoryView(exercise: exercise)
-                    .environmentObject(trainingsDataStore)
-                    .environmentObject(settingsStore)) {
+                Button(action: { self.showingHistory = true }) {
                     Image(systemName: "clock")
                 }
-                PresentationLink(destination: ExerciseStatisticsView(exercise: exercise)
-                    .environmentObject(trainingsDataStore)
-                    .environmentObject(settingsStore)) {
+                .sheet(isPresented: $showingHistory) {
+                            ExerciseHistoryView(exercise: self.exercise)
+                                .environmentObject(self.trainingsDataStore)
+                                .environmentObject(self.settingsStore)
+                        }
+                Button(action: { self.showingStatistics = true }) {
                     Image(systemName: "waveform.path.ecg")
                 }
+                .sheet(isPresented: $showingStatistics) {
+                            ExerciseStatisticsView(exercise: self.exercise)
+                                .environmentObject(self.trainingsDataStore)
+                                .environmentObject(self.settingsStore)
+                        }
             }
         )
     }

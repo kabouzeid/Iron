@@ -26,8 +26,6 @@ struct Dragger : View {
 
     @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
     @State private var minMaxFeedbackGenerator: UINotificationFeedbackGenerator? = nil
-    
-    @State private var isShowingLearningAnimation: Bool = false
 
     private static let DRAGGER_MOVEMENT: Double = 3
     private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
@@ -47,9 +45,7 @@ struct Dragger : View {
                 if delta < 0 {
                     self.feedbackOnMax = true
                 }
-                if !self.isShowingLearningAnimation {
-                    self.draggerOffset = -CGFloat(delta > 0 ? min(delta, Dragger.DRAGGER_MOVEMENT) : max(delta, -Dragger.DRAGGER_MOVEMENT))
-                }
+                self.draggerOffset = -CGFloat(delta > 0 ? min(delta, Dragger.DRAGGER_MOVEMENT) : max(delta, -Dragger.DRAGGER_MOVEMENT))
                 
                 let increment = (delta / Dragger.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * self.stepSize
                 var newValue = self.value + increment
@@ -123,6 +119,7 @@ struct Dragger : View {
                 Image(systemName: "square.grid.4x3.fill")
                     .rotationEffect(Angle(degrees: 90))
                     .offset(y: draggerOffset)
+                    .animation(.interactiveSpring())
             }
             .foregroundColor(isDragging ? UIColor.tertiaryLabel.swiftUIColor : Color.secondary)
             .padding([.trailing])
@@ -132,17 +129,7 @@ struct Dragger : View {
                 .onEnded {
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.notificationOccurred(.warning)
-                    withAnimation(Animation.fluidSpring().speed(2)) {
-                        self.isShowingLearningAnimation = true
-                        self.draggerOffset = Length(-Dragger.DRAGGER_MOVEMENT)
-                    }
-                    withAnimation(Animation.fluidSpring().speed(2).delay(0.5)) {
-                        self.draggerOffset = Length(Dragger.DRAGGER_MOVEMENT)
-                    }
-                    withAnimation(Animation.fluidSpring().speed(2).delay(1)) {
-                        self.draggerOffset = 0
-                        self.isShowingLearningAnimation = false
-                    }
+                    // TODO: wiggle the dragger
                 }
             )
         }

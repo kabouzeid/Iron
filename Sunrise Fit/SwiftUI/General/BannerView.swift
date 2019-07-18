@@ -42,11 +42,11 @@ struct BannerViewEntry : View, Identifiable {
             if detail != nil {
                 detail!
                     .font(.body)
-                    .color(detailColor ?? UIColor.tertiaryLabel.swiftUIColor) // TODO: wait for .tertiaryLabel
+                    .foregroundColor(detailColor ?? UIColor.tertiaryLabel.swiftUIColor) // TODO: wait for .tertiaryLabel
             }
             title
                 .font(.subheadline)
-                .color(.secondary)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
         }

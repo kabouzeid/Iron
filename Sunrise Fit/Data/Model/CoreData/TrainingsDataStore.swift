@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 
 class TrainingsDataStore : BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
+    var willChange = PassthroughSubject<Void, Never>()
     
     let context: NSManagedObjectContext
     private var cancellable: Cancellable?
@@ -21,7 +21,7 @@ class TrainingsDataStore : BindableObject {
         self.context = context
         cancellable = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
             .sink { [weak self] (notification) in
-                self?.didChange.send()
+                self?.willChange.send() // it's a little to late here, but there is no willChange for CoreData
                 
                 print("data store changed")
 //                print("notification: \(notification)")

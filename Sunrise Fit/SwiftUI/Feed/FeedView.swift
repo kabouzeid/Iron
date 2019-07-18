@@ -11,6 +11,8 @@ import CoreData
 
 struct FeedView : View {
     let pinnedCharts = UserDefaults.standard.pinnedCharts() // TODO: create bindable object for refresh
+    
+    @State private var showingWidgetSelector = false
 
     var body: some View {
         NavigationView {
@@ -24,10 +26,9 @@ struct FeedView : View {
                     ForEach(pinnedCharts) { chart in
                         ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: chart.exerciseId)!, measurementType: chart.measurementType)
                     }
-                    PresentationLink(destination:
-                        // TODO: present actual view to choose exercise
-                        Text("Placeholder")
-                    ) {
+                    Button(action: {
+                        self.showingWidgetSelector = true
+                    }) {
                         HStack {
                             Image(systemName: "plus")
                             Text("Add Widget")
@@ -37,6 +38,10 @@ struct FeedView : View {
             }
             .listStyle(.grouped)
             .navigationBarTitle(Text("Feed"))
+            .sheet(isPresented: $showingWidgetSelector) {
+                // TODO: present actual view to choose exercise
+                Text("Placeholder")
+            }
         }
     }
 }

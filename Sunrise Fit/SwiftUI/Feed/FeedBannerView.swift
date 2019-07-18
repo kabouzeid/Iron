@@ -10,20 +10,6 @@ import SwiftUI
 import CoreData
 import Combine
 
-class MyCustomStoreType: BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
-    
-    var weightUnit: WeightUnit {
-        get {
-            UserDefaults.standard.weightUnit
-        }
-        set {
-            UserDefaults.standard.weightUnit = newValue
-            didChange.send()
-        }
-    }
-}
-
 struct FeedBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
