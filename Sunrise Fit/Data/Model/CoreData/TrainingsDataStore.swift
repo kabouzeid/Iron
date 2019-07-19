@@ -20,25 +20,27 @@ class TrainingsDataStore : BindableObject {
         print("init trainings data store")
         self.context = context
         cancellable = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
-            .sink { [weak self] (notification) in
-                self?.willChange.send() // it's a little to late here, but there is no willChange for CoreData
-                
+            .map { notification in
+                #if DEBUG
                 print("data store changed")
 //                print("notification: \(notification)")
-                guard let userInfo = notification.userInfo else { return }
-                
-                if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
+//                guard let userInfo = notification.userInfo else { return }
+//
+//                if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
 //                    print("insertions: \(inserts)")
-                }
-                
-                if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
+//                }
+//
+//                if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
 //                    print("updates \(updates)")
-                }
-                
-                if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
+//                }
+//
+//                if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
 //                    print("deletes \(deletes)")
-                }
-        }
+//                }
+                #endif
+                return () // Notification -> Void
+            }
+            .subscribe(willChange) // it's a little to late here, but there is no willChange for CoreData
     }
     
     deinit {
