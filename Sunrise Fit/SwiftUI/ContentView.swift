@@ -9,6 +9,23 @@
 import SwiftUI
 
 struct ContentView : View {
+    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
+    private func trainingView(training: Training?) -> some View {
+        ZStack {
+            if training != nil {
+                TrainingView(trainig: training!)
+                    .animation(.default)
+                    .transition(.scale)
+                
+            } else {
+                StartTrainingView()
+                    .animation(.default)
+                    .transition(.scale)
+            }
+        }
+    }
+    
     var body: some View {
         TabbedView {
             FeedView()
@@ -23,7 +40,7 @@ struct ContentView : View {
                     Text("History")
                 }
                 .tag(1)
-            Text("Training")
+            trainingView(training: Training.fetchCurrentTraining(context: trainingsDataStore.context))
                 .tabItem {
                     Image("training")
                     Text("Training")

@@ -121,11 +121,9 @@ struct TrainingDetailView : View {
                     self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
                 }
                 .onMove { source, destination in
-                    // TODO: replace with swift 5.1 move() function when available
-                    guard let index = source.first else { return }
-                    guard let trainingExercise = self.trainingViewModel.training.trainingExercises?[index] as? TrainingExercise else { return }
-                    self.trainingViewModel.training.removeFromTrainingExercises(at: index)
-                    self.trainingViewModel.training.insertIntoTrainingExercises(trainingExercise, at: destination)
+                    guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as! [TrainingExercise]? else { return }
+                    trainingExercises.move(fromOffsets: source, toOffset: destination)
+                    self.trainingViewModel.training.trainingExercises = NSOrderedSet(array: trainingExercises)
                 }
                 
                 Button(action: {

@@ -80,7 +80,7 @@ class Training: NSManagedObject {
     // no duplicate entries, sorted descending by frequency
     var muscleGroups: [String] {
         var muscleGroups = [String]()
-        for case let trainingExercise as TrainingExercise in trainingExercises! {
+        for case let trainingExercise as TrainingExercise in trainingExercises ?? [] {
             if let exercise = trainingExercise.exercise {
                 // even if there are no sets, add the muscle group at least once
                 for _ in 0..<(max(trainingExercise.trainingSets?.count ?? 1, 1)) {

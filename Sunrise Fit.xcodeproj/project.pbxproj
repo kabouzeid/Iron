@@ -58,6 +58,8 @@
 		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */; };
+		8A81570522E21E5400B4D27D /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570422E21E5400B4D27D /* StartTrainingView.swift */; };
+		8A81570722E2279000B4D27D /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570622E2279000B4D27D /* TrainingView.swift */; };
 		8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */; };
 		8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
 		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
@@ -180,6 +182,8 @@
 		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		8A81570422E21E5400B4D27D /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StartTrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Training/StartTrainingView.swift"; sourceTree = "<group>"; };
+		8A81570622E2279000B4D27D /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Training/TrainingView.swift"; sourceTree = "<group>"; };
 		8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		8A82AB9322DDE582007C0293 /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
 		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */,
+				8A81570422E21E5400B4D27D /* StartTrainingView.swift */,
+				8A81570622E2279000B4D27D /* TrainingView.swift */,
 			);
 			path = Training;
 			sourceTree = "<group>";
@@ -821,6 +827,7 @@
 				8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */,
 				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */,
+				8A81570722E2279000B4D27D /* TrainingView.swift in Sources */,
 				8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */,
 				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
@@ -853,6 +860,7 @@
 				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
+				8A81570522E21E5400B4D27D /* StartTrainingView.swift in Sources */,
 				8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */,
 				8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */,
 				8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */,
