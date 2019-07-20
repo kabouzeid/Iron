@@ -13,10 +13,32 @@ struct TrainingView: View {
     
     var trainig: Training
     
-    @State var showingCancelSheet = false
+    @State private var showingCancelSheet = false
+    @State private var showingExercisePickerSheet = false
     
     private var trainingExercises: [TrainingExercise] {
         trainig.trainingExercises?.array as! [TrainingExercise]? ?? []
+    }
+    
+    private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
+        var numberOfSets = 3
+        // try to guess the number of sets
+        if let history = trainingExercise.history, history.count > 2 {
+            // one month since last training and at least three trainings
+            let cutoff = min(history[2].training!.start!, Calendar.current.date(byAdding: .month, value: -1, to: history.first!.training!.start!)!)
+            let filteredAndSortedHistory = history
+                .filter({$0.training!.start != nil && $0.training!.start! >= cutoff})
+                .sorted(by: {($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)})
+            assert(filteredAndSortedHistory.count >= 3)
+            let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
+            numberOfSets = median.trainingSets?.count ?? numberOfSets
+        }
+        var trainingSets = [TrainingSet]()
+        for _ in 0..<numberOfSets {
+            let trainingSet = TrainingSet(context: trainingsDataStore.context)
+            trainingSets.append(trainingSet)
+        }
+        return NSOrderedSet(array: trainingSets)
     }
     
     private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
@@ -60,7 +82,7 @@ struct TrainingView: View {
                         }
                         
                         Button(action: {
-                            self.trainig.addToTrainingExercises(TrainingExercise(context: self.trainingsDataStore.context))
+                            self.showingExercisePickerSheet = true
                         }) {
                             HStack {
                                 Image(systemName: "plus")
@@ -89,6 +111,17 @@ struct TrainingView: View {
                 trailing:
                 EditButton()
             )
+            .sheet(isPresented: $showingExercisePickerSheet) {
+                ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selectionLabel: Text("Add")) { selection in
+                    for exercise in selection {
+                        let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
+                        self.trainig.addToTrainingExercises(trainingExercise)
+                        trainingExercise.exerciseId = Int16(exercise.id)
+                        trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                    }
+                    self.showingExercisePickerSheet = false
+                }
+            }
         }
     }
 }

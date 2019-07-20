@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Exercise {
+struct Exercise: Hashable {
     let id: Int
     let title: String
     let description: String // primer
