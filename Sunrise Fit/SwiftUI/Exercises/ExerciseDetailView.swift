@@ -127,6 +127,7 @@ struct ExerciseDetailView : View {
 }
 
 #if DEBUG
+// beta 4: preview crashes because of GeometryReader
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
