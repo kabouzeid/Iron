@@ -9,16 +9,25 @@
 import SwiftUI
 
 struct StartTrainingView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
+    private var plateImage: some View {
+        Image("plate")
+            .resizable()
+            .padding(48)
+            .aspectRatio(contentMode: ContentMode.fit)
+    }
     
     var body: some View {
         NavigationView {
             VStack {
-                Image("plate")
-                    .resizable()
-                    .padding(48)
-                    .aspectRatio(contentMode: ContentMode.fit)
-                
+                if colorScheme == .dark {
+                    plateImage.colorInvert()
+                } else {
+                    plateImage
+                }
+                    
                 Button("Start Training") {
                     precondition(Training.fetchCurrentTraining(context: self.trainingsDataStore.context) == nil)
                     // create a new training
@@ -38,8 +47,14 @@ struct StartTrainingView: View {
 #if DEBUG
 struct StartTrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        StartTrainingView()
-            .environmentObject(mockTrainingsDataStore)
+        Group {
+            StartTrainingView()
+            
+            StartTrainingView()
+                .environment(\.colorScheme, .dark)
+                
+        }
+        .environmentObject(mockTrainingsDataStore)
     }
 }
 #endif
