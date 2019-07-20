@@ -98,6 +98,7 @@ struct TrainingSetEditor : View {
                     .padding()
             }
         }
+        .drawingGroup() // fixes visual bug with show/hide animation of this view
     }
 }
 
