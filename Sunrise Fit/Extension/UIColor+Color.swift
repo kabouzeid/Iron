@@ -1,5 +1,5 @@
 //
-//  UIColorExtension.swift
+//  UIColor+Color.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 08.04.18.

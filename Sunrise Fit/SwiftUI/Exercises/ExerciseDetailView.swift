@@ -21,7 +21,8 @@ struct ExerciseDetailView : View {
         for png in exercise.png {
             let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
             if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                images.append(image)
+                // TODO: tinting is pretty expensive (16ms), create separate assets for dark and light?
+                images.append(image.withTintColorApplied(color: .label))
             }
         }
         return images

@@ -60,7 +60,6 @@ struct TrainingView: View {
                         }
                         
                         Button(action: {
-                            // TODO
                             self.trainig.addToTrainingExercises(TrainingExercise(context: self.trainingsDataStore.context))
                         }) {
                             HStack {
