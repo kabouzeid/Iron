@@ -21,8 +21,8 @@ struct TrainingDetailBannerView : View {
         var entries = [BannerViewEntry]()
 
         entries.append(BannerViewEntry(id: 0, title: Text("Duration"), text: Text(Training.durationFormatter.string(from: training.duration) ?? "")))
-        entries.append(BannerViewEntry(id: 1, title: Text("Sets"), text: Text(String(training.numberOfCompletedSets))))
-        entries.append(BannerViewEntry(id: 2, title: Text("Weight"), text: Text("\(TrainingSet.weightStringFor(weightInKg: training.totalCompletedWeight, unit: settingsStore.weightUnit))")))
+        entries.append(BannerViewEntry(id: 1, title: Text("Sets"), text: Text(String(training.numberOfCompletedSets ?? 0))))
+        entries.append(BannerViewEntry(id: 2, title: Text("Weight"), text: Text("\(TrainingSet.weightStringFor(weightInKg: training.totalCompletedWeight ?? 0, unit: settingsStore.weightUnit))")))
         return entries
     }
 }

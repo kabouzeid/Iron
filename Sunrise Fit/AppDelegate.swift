@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         // remind the user 15 mins after closing the app if the training ist still unfinished
-        if Training.fetchCurrentTraining(context: persistentContainer.viewContext) != nil {
+        if Training.currentTraining(context: trainingsDataStore.context) != nil {
             let center = UNUserNotificationCenter.current()
             
             let content = UNMutableNotificationContent()

@@ -40,7 +40,7 @@ struct ContentView : View {
                     Text("History")
                 }
                 .tag(1)
-            trainingView(training: Training.fetchCurrentTraining(context: trainingsDataStore.context))
+            trainingView(training: Training.currentTraining(context: trainingsDataStore.context))
                 .tabItem {
                     Image("training")
                     Text("Training")

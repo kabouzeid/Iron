@@ -120,13 +120,13 @@ class TrainingExerciseChartDataGenerator {
         case .totalWeight:
             return  {
                 WeightUnit.convert(weight:
-                    Double($0.totalCompletedWeight)
+                    Double($0.totalCompletedWeight ?? 0)
                     , from: .metric, to: weightUnit)
             }
         case .totalSets:
             return { Double($0.numberOfCompletedSets ?? 0) }
         case .totalRepetitions:
-            return  { Double($0.numberOfCompletedRepetitions) }
+            return  { Double($0.numberOfCompletedRepetitions ?? 0) }
         }
     }
 

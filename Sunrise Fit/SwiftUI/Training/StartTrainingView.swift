@@ -29,7 +29,7 @@ struct StartTrainingView: View {
                 }
                     
                 Button("Start Training") {
-                    precondition(Training.fetchCurrentTraining(context: self.trainingsDataStore.context) == nil)
+                    precondition(Training.currentTraining(context: self.trainingsDataStore.context) == nil)
                     // create a new training
                     let training = Training(context: self.trainingsDataStore.context)
                     training.isCurrentTraining = true

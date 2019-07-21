@@ -10,38 +10,26 @@ import CoreData
 
 class TrainingExercise: NSManagedObject {
     var numberOfCompletedSets: Int? {
-        get {
-            let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND isCompleted == %@", self, NSNumber(booleanLiteral: true))
-            if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
-                return count
-            }
-            return nil
+        let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND isCompleted == %@", self, NSNumber(booleanLiteral: true))
+        if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
+            return count
         }
+        return nil
     }
     
     var isCompleted: Bool? {
-        get {
-            if let completedCount = numberOfCompletedSets {
-                return completedCount == trainingSets!.count
-            }
-            return nil
-        }
+        guard let completedCount = numberOfCompletedSets, let totalCount = trainingSets?.count else { return nil }
+        return completedCount == totalCount
     }
     
     var exercise: Exercise? {
-        get {
-            return EverkineticDataProvider.findExercise(id: Int(exerciseId))
-        }
+        EverkineticDataProvider.findExercise(id: Int(exerciseId))
     }
     
     var history: [TrainingExercise]? {
-        get {
-            if let context = managedObjectContext {
-                return TrainingExercise.fetchHistory(of: Int(exerciseId), until: (training!.start ?? Date()), context: context)
-            }
-            return nil
-        }
+        guard let context = managedObjectContext else { return nil }
+        return TrainingExercise.fetchHistory(of: Int(exerciseId), until: (training?.start ?? Date()), context: context)
     }
 
     static func fetchHistory(of exerciseId: Int, until: Date, context: NSManagedObjectContext) -> [TrainingExercise]? {
@@ -51,19 +39,21 @@ class TrainingExercise: NSManagedObject {
         return try? context.fetch(request)
     }
 
-    var numberOfCompletedRepetitions: Int {
+    var numberOfCompletedRepetitions: Int? {
         // TODO: do this with a predicate
-        return trainingSets!.reduce(0, { (count, trainingSet) -> Int in
-            let trainingSet = trainingSet as! TrainingSet
-            return count + (trainingSet.isCompleted ? Int(trainingSet.repetitions) : 0)
-        })
+        trainingSets?
+            .map { $0 as! TrainingSet }
+            .reduce(0, { (count, trainingSet) -> Int in
+                count + (trainingSet.isCompleted ? Int(trainingSet.repetitions) : 0)
+            })
     }
 
-    var totalCompletedWeight: Double {
+    var totalCompletedWeight: Double? {
         // TODO: do this with a predicate
-        return trainingSets!.reduce(0, { (weight, trainingSet) -> Double in
-            let trainingSet = trainingSet as! TrainingSet
-            return weight + (trainingSet.isCompleted ? trainingSet.weight * Double(trainingSet.repetitions) : 0)
-        })
+        trainingSets?
+            .map { $0 as! TrainingSet }
+            .reduce(0, { (weight, trainingSet) -> Double in
+                weight + (trainingSet.isCompleted ? trainingSet.weight * Double(trainingSet.repetitions) : 0)
+            })
     }
 }

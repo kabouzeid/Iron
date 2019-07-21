@@ -499,8 +499,8 @@
 			children = (
 				8A59283122BE575300BFD57E /* TrainingsDataStore.swift */,
 				8AB8A5942034C097004366F2 /* Training.swift */,
-				8AB8A5982034C0BA004366F2 /* TrainingSet.swift */,
 				8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */,
+				8AB8A5982034C0BA004366F2 /* TrainingSet.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

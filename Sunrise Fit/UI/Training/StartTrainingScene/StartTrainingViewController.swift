@@ -19,7 +19,7 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
         button.layer.cornerRadius = 8
         tabBarController?.delegate = self
         
-        if Training.fetchCurrentTraining(context: persistentContainer.viewContext) != nil {
+        if Training.currentTraining(context: persistentContainer.viewContext) != nil {
             performSegue(withIdentifier: "continue last training", sender: self)
         }
     }
@@ -36,13 +36,11 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
             switch (id) {
             case "continue last training":
                 if let trainingViewController = segue.destination as? CurrentTrainingViewController,
-                    let training = Training.fetchCurrentTraining(context: persistentContainer.viewContext) {
+                    let training = Training.currentTraining(context: persistentContainer.viewContext) {
                     trainingViewController.training = training
                 }
             case "start new training":
                 if let trainingViewController = segue.destination as? CurrentTrainingViewController {
-                    Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
-
                     let training = Training(context: persistentContainer.viewContext)
                     training.isCurrentTraining = true
 
@@ -50,8 +48,6 @@ class StartTrainingViewController: UIViewController, UITabBarControllerDelegate 
                 }
             case "continue with plan":
                 if let trainingViewController = segue.destination.wrappedViewController() as? CurrentTrainingViewController {
-                    Training.deleteCurrentTraining(context: persistentContainer.viewContext) // just to be sure
-
                     // TODO actually get the training from the current plan
                     let training = Training(context: persistentContainer.viewContext)
                     training.isCurrentTraining = true

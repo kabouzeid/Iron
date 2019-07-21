@@ -235,10 +235,10 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
 
         // compute the values
         let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
+            return (result.0 + training.duration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
         }
         let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.duration, result.1 + training.numberOfCompletedSets, result.2 + training.totalCompletedWeight)
+            return (result.0 + training.duration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
         }
 
         // set the values

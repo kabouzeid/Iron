@@ -47,7 +47,7 @@ class TrainingDetailTableViewController: UITableViewController {
             }
             string = Training.dateFormatter.string(from: training.start ?? Date())
                 .appending("\n\(Training.durationFormatter.string(from: training.duration)!) total duration")
-                .appending("\n\(training.totalCompletedWeight) kg total weight")
+                .appending("\n\(training.totalCompletedWeight ?? 0) kg total weight")
                 .appending("\n\n")
                 .appending(trainingExercises.map { (trainingExercise) -> String in
                     let trainingExercise = (trainingExercise as! TrainingExercise)
