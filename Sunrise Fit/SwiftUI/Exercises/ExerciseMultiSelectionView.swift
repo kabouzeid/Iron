@@ -8,26 +8,12 @@
 
 import SwiftUI
 
-struct ExerciseMultiSelectionView: View {
+struct ExerciseMultiSelectionView<Selection>: View where Selection: SelectionManager, Selection.SelectionValue == Exercise {
     var exerciseMuscleGroups: [[Exercise]]
-    var selectionLabel: Text
-    var onSelection: ([Exercise]) -> Void
-    
-    @State private var selection: Set<Exercise> = Set()
+    @Binding var selection: Selection
     
     var body: some View {
         VStack {
-            HStack {
-                Button("Cancel") {
-                    self.select(selection: [])
-                }
-                Spacer()
-                Button(action: {
-                    self.select(selection: Array(self.selection))
-                }) {
-                    selectionLabel
-                }
-            }.padding()
             List(selection: $selection) {
                 ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
                     Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
@@ -40,17 +26,12 @@ struct ExerciseMultiSelectionView: View {
             .environment(\.editMode, .constant(.active))
         }
     }
-    
-    private func select(selection: [Exercise]) {
-        onSelection(selection)
-        self.selection = Set() // reset selection
-    }
 }
 
 #if DEBUG
 struct ExerciseMultiSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selectionLabel: Text("Select")) { _ in }
+        ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: .constant(Set()))
     }
 }
 #endif

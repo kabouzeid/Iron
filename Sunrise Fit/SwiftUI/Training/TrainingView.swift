@@ -14,7 +14,8 @@ struct TrainingView: View {
     var trainig: Training
     
     @State private var showingCancelSheet = false
-    @State private var showingExercisePickerSheet = false
+    @State private var showingExerciseSelectorSheet = false
+    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     private var trainingExercises: [TrainingExercise] {
         trainig.trainingExercises?.array as! [TrainingExercise]? ?? []
@@ -82,7 +83,7 @@ struct TrainingView: View {
                         }
                         
                         Button(action: {
-                            self.showingExercisePickerSheet = true
+                            self.showingExerciseSelectorSheet = true
                         }) {
                             HStack {
                                 Image(systemName: "plus")
@@ -111,15 +112,26 @@ struct TrainingView: View {
                 trailing:
                 EditButton()
             )
-            .sheet(isPresented: $showingExercisePickerSheet) {
-                ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selectionLabel: Text("Add")) { selection in
-                    for exercise in selection {
-                        let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
-                        self.trainig.addToTrainingExercises(trainingExercise)
-                        trainingExercise.exerciseId = Int16(exercise.id)
-                        trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
-                    }
-                    self.showingExercisePickerSheet = false
+            .sheet(isPresented: $showingExerciseSelectorSheet) {
+                VStack {
+                    HStack {
+                        Button("Cancel") {
+                            self.showingExerciseSelectorSheet = false
+                            self.exerciseSelectorSelection.removeAll()
+                        }
+                        Spacer()
+                        Button("Add") {
+                            for exercise in self.exerciseSelectorSelection {
+                                let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
+                                self.trainig.addToTrainingExercises(trainingExercise)
+                                trainingExercise.exerciseId = Int16(exercise.id)
+                                trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                            }
+                            self.showingExerciseSelectorSheet = false
+                            self.exerciseSelectorSelection.removeAll()
+                        }
+                    }.padding()
+                    ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
                 }
             }
         }

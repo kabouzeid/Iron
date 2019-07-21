@@ -10,13 +10,10 @@ import SwiftUI
 
 struct ExerciseSingleSelectionView: View {
     var exerciseMuscleGroups: [[Exercise]]
-    var onSelection: (Exercise?) -> Void
+    var onSelection: (Exercise) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
-            Button("Cancel") {
-                self.onSelection(nil)
-            }.padding()
             List {
                 ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
                     Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {

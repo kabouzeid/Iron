@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 extension UserDefaults {
     enum PinnedChartsKeys: String {
@@ -23,51 +22,24 @@ extension UserDefaults {
         }
     }
     
-    struct PinnedChart: Identifiable {
-        var id: String { "\(exerciseId) measurementType.title" }
-        
-        let exerciseId: Int
-        let measurementType: TrainingExerciseChartDataGenerator.MeasurementType
-    }
-    
-    func pinnedCharts() -> [PinnedChart] {
-        if let data = self.data(forKey: PinnedChartsKeys.pinnedChartsKey.rawValue),
-            let pinnedCharts = try? JSONDecoder().decode([PinnedChartRaw].self, from: data) {
-            let pinnedCharts = pinnedCharts.filter { TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue) != nil }
-            return pinnedCharts.map {
+    var pinnedCharts: [PinnedChart] {
+        get {
+            guard let data = self.data(forKey: PinnedChartsKeys.pinnedChartsKey.rawValue), let pinnedCharts = try? JSONDecoder().decode([PinnedChartRaw].self, from: data) else { return [] }
+            return pinnedCharts.filter {
+                    TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue) != nil
+            }.map {
                 PinnedChart(
                     exerciseId: $0.exerciseId,
                     measurementType: TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue)!)
             }
         }
-        return []
-    }
-    
-    func setPinnedCharts(pinnedCharts: [PinnedChart]) {
-        let data = try? JSONEncoder().encode(pinnedCharts.map {
-            PinnedChartRaw(
-                exerciseId: $0.exerciseId,
-                measurementTypeRawValue: $0.measurementType.rawValue)
-        })
-        self.set(data, forKey: PinnedChartsKeys.pinnedChartsKey.rawValue)
-    }
-    
-    func addPinnedChart(exerciseId: Int, measurmentType: TrainingExerciseChartDataGenerator.MeasurementType) {
-        var values = pinnedCharts()
-        if (values.contains { $0.exerciseId == exerciseId && $0.measurementType == measurmentType }) {
-            return
+        set {
+            let data = try? JSONEncoder().encode(newValue.uniq().map {
+                PinnedChartRaw(
+                    exerciseId: $0.exerciseId,
+                    measurementTypeRawValue: $0.measurementType.rawValue)
+            })
+            self.set(data, forKey: PinnedChartsKeys.pinnedChartsKey.rawValue)
         }
-        values.append(PinnedChart(exerciseId: exerciseId, measurementType: measurmentType))
-        setPinnedCharts(pinnedCharts: values)
-    }
-
-    func removePinnedChart(exerciseId: Int, measurmentType: TrainingExerciseChartDataGenerator.MeasurementType) {
-        var values = pinnedCharts()
-        values.removeAll { $0.exerciseId == exerciseId && $0.measurementType == measurmentType }
-        setPinnedCharts(pinnedCharts: values)
-    }
-    
-    func hasPinnedChart(exerciseId: Int, measurmentType: TrainingExerciseChartDataGenerator.MeasurementType) -> Bool {
-        return pinnedCharts().contains { $0.exerciseId == exerciseId && $0.measurementType == measurmentType }
     }
 }

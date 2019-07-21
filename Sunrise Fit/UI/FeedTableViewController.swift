@@ -17,7 +17,7 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
     private var trainingsPerWeekChartInfo: TrainingsPerWeekChartInfo?
     private var trainingsPerWeekChartDataCache: BarChartData?
     
-    private var pinnedCharts = [UserDefaults.PinnedChart]()
+    private var pinnedCharts = [PinnedChart]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
         super.viewWillAppear(animated)
         updateSummary()
         
-        pinnedCharts = UserDefaults.standard.pinnedCharts()
+        pinnedCharts = UserDefaults.standard.pinnedCharts
         trainingsPerWeekChartInfo = nil
         trainingsPerWeekChartDataCache = nil
         tableView.reloadData()
@@ -121,8 +121,8 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let pinnedChart = pinnedCharts[indexPath.row]
-            UserDefaults.standard.removePinnedChart(exerciseId: pinnedChart.exerciseId, measurmentType: pinnedChart.measurementType)
-            pinnedCharts = UserDefaults.standard.pinnedCharts()
+            UserDefaults.standard.pinnedCharts.removeAll { $0 == pinnedChart }
+            pinnedCharts = UserDefaults.standard.pinnedCharts
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -140,7 +140,7 @@ class FeedTableViewController: UITableViewController, UIGestureRecognizerDelegat
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         pinnedCharts.insert(pinnedCharts.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
-        UserDefaults.standard.setPinnedCharts(pinnedCharts: pinnedCharts)
+        UserDefaults.standard.pinnedCharts = pinnedCharts
     }
 
     private var tappedExercise: Exercise?
@@ -308,13 +308,13 @@ extension FeedTableViewController: ExerciseSelectionHandler {
         let alert = UIAlertController(title: nil, message: exercise.title, preferredStyle: .actionSheet)
         for measurementType in TrainingExerciseChartDataGenerator.MeasurementType.allCases {
             let action = UIAlertAction(title: measurementType.title, style: .default) { [weak self] _ in
-                UserDefaults.standard.addPinnedChart(exerciseId: exercise.id, measurmentType: measurementType)
-                self?.pinnedCharts = UserDefaults.standard.pinnedCharts()
+                UserDefaults.standard.pinnedCharts.append(PinnedChart(exerciseId: exercise.id, measurementType: measurementType))
+                self?.pinnedCharts = UserDefaults.standard.pinnedCharts
                 guard let lastRowIndex = self?.pinnedCharts.count else { return }
                 self?.tableView.insertRows(at: [IndexPath(row: lastRowIndex - 1, section: 1)], with: .automatic)
                 self?.tableView.scrollToRow(at: IndexPath(row: lastRowIndex, section: 1), at: .middle, animated: true)
             }
-            action.isEnabled = !UserDefaults.standard.hasPinnedChart(exerciseId: exercise.id, measurmentType: measurementType)
+            action.isEnabled = !UserDefaults.standard.pinnedCharts.contains(PinnedChart(exerciseId: exercise.id, measurementType: measurementType))
             alert.addAction(action)
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
