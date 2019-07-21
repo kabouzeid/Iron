@@ -20,7 +20,9 @@ struct Exercise: Hashable {
     let tips: [String]
     let references: [String]
     let png: [String]
-    
+}
+ 
+extension Exercise {
     var primaryMuscleCommonName: [String] {
         get {
             return primaryMuscle.map({ (muscle) -> String in
@@ -124,4 +126,10 @@ struct Exercise: Hashable {
             return "other"
         }
     }
+}
+
+extension Exercise {
+    static var empty: Exercise = {
+        Exercise(id: 0, title: "", description: "", type: "", primaryMuscle: [], secondaryMuscle: [], equipment: [], steps: [], tips: [], references: [], png: [])
+    }()
 }

@@ -43,23 +43,30 @@ struct TrainingView: View {
     }
     
     private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
-        let completedSets = trainingExercise.numberOfCompletedSets!
-        let totalSets = trainingExercise.trainingSets!.count
+        let completedSets = trainingExercise.numberOfCompletedSets ?? 0
+        let totalSets = trainingExercise.trainingSets?.count ?? 0
         let done = completedSets == totalSets
         
         return HStack {
-            VStack(alignment: .leading) {
-                Text(trainingExercise.exercise?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
-                    .foregroundColor(done ? .secondary : .primary)
-                Text("\(completedSets) of \(totalSets)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            if done {
-                Spacer()
-                Image(systemName: "checkmark")
-                    .imageScale(.small)
-                    .foregroundColor(.secondary)
+            NavigationLink(destination:
+                    TrainingExerciseDetailView(trainingExercise: trainingExercise)
+                        .environmentObject(trainingsDataStore)
+                        .environmentObject(settingsStore)
+                ) {
+                VStack(alignment: .leading) {
+                    Text(trainingExercise.exercise?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
+                        .foregroundColor(done ? .secondary : .primary)
+                    Text("\(completedSets) of \(totalSets)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                if done {
+                    Spacer()
+                    Image(systemName: "checkmark")
+                        .imageScale(.small)
+                        .foregroundColor(.secondary)
+                        .padding(.trailing, 8)
+                }
             }
         }
     }
@@ -125,6 +132,7 @@ struct TrainingView: View {
                                 let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
                                 self.trainig.addToTrainingExercises(trainingExercise)
                                 trainingExercise.exerciseId = Int16(exercise.id)
+                                precondition(self.trainig.isCurrentTraining == true)
                                 trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
                             }
                             self.showingExerciseSelectorSheet = false
@@ -141,7 +149,7 @@ struct TrainingView: View {
 #if DEBUG
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingView(trainig: mockTraining)
+        TrainingView(trainig: mockCurrentTraining)
             .environmentObject(mockTrainingsDataStore)
     }
 }

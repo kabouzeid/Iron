@@ -18,7 +18,7 @@ struct TrainingExerciseDetailView : View {
     @State private var selectedTrainingSet: TrainingSet? = nil
     
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
-        trainingExercise.trainingSets?.array as! [TrainingSet]
+        trainingExercise.trainingSets?.array as? [TrainingSet] ?? []
     }
     
     private func indexedTrainingSets(for trainingExercise: TrainingExercise) -> [(Int, TrainingSet)] {
@@ -222,13 +222,16 @@ struct TrainingExerciseDetailView : View {
         }
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing: HStack{
-            NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise!)
+            NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise ?? Exercise.empty)
                 .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore)) {
                     Image(systemName: "info.circle")
             }
             EditButton()
         })
+        .onAppear {
+            self.selectAndInit(set: self.firstUncompletedSet)
+        }
     }
 }
 

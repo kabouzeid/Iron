@@ -60,6 +60,12 @@ let mockTrainingsDataStore: TrainingsDataStore = {
     return TrainingsDataStore(context: persistenContainer.viewContext)
 }()
 
+let mockCurrentTraining: Training = {
+    let currentTraining = mockTraining
+    currentTraining.isCurrentTraining = true
+    return currentTraining
+}()
+
 let mockTraining: Training = {
     do {
         return try mockTrainingsDataStore.context.fetch(Training.fetchRequest()).first as! Training
