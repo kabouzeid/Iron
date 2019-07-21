@@ -33,6 +33,7 @@ struct TrainingDetailSummaryView_Previews : PreviewProvider {
         TrainingDetailBannerView(training: mockTraining)
             .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

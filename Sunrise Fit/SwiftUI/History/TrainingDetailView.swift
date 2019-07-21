@@ -51,6 +51,8 @@ struct TrainingDetailView : View {
     @ObjectBinding private var trainingViewModel: TrainingViewModel
     
 //    @Environment(\.editMode) var editMode
+    @State private var showingExerciseSelectorSheet = false
+    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     init(training: Training) {
         trainingViewModel = TrainingViewModel(training: training)
@@ -128,10 +130,11 @@ struct TrainingDetailView : View {
                 
                 Button(action: {
                     // TODO: add exercise
+                    self.showingExerciseSelectorSheet = true
                 }) {
                     HStack {
                         Image(systemName: "plus")
-                        Text("Add Exercise")
+                        Text("Add Exercises")
                     }
                 }
             }
@@ -148,6 +151,27 @@ struct TrainingDetailView : View {
                 EditButton()
             }
         )
+        .sheet(isPresented: $showingExerciseSelectorSheet) {
+            VStack {
+                HStack {
+                    Button("Cancel") {
+                        self.showingExerciseSelectorSheet = false
+                        self.exerciseSelectorSelection.removeAll()
+                    }
+                    Spacer()
+                    Button("Add") {
+                        for exercise in self.exerciseSelectorSelection {
+                            let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
+                            self.trainingViewModel.training.addToTrainingExercises(trainingExercise)
+                            trainingExercise.exerciseId = Int16(exercise.id)
+                        }
+                        self.showingExerciseSelectorSheet = false
+                        self.exerciseSelectorSelection.removeAll()
+                    }
+                }.padding()
+                ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
+            }
+        }
     }
 }
 
