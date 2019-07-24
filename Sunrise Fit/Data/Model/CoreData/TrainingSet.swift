@@ -25,4 +25,7 @@ class TrainingSet: NSManagedObject {
         formatter.minimumFractionDigits = 1
         return formatter
     }
+    
+    static var MAX_REPETITIONS: Int16 = 9999
+    static var MAX_WEIGHT: Double = 99999
 }

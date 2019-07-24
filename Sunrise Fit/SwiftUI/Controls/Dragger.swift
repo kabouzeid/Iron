@@ -16,6 +16,7 @@ struct Dragger : View {
     var stepSize: Double = 1 // e.g. if barbell based exercise, set to 2.5
     var minValue: Double? = nil
     var maxValue: Double? = nil
+    var onDragStep: ((Double) -> Void)?
     
     // private
     @State private var tmpValue: Double? = nil
@@ -87,9 +88,10 @@ struct Dragger : View {
                 }
                 
                 if self.tmpValue != newValue {
-                    if self.tmpValue != nil { // no feedback on init
+                    if let tmpValue = self.tmpValue { // no feedback on init
                         self.selectionFeedbackGenerator?.selectionChanged()
                         self.selectionFeedbackGenerator?.prepare()
+                        self.onDragStep?(tmpValue)
                     }
                     self.tmpValue = newValue
                 }

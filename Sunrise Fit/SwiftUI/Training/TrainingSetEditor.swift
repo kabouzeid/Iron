@@ -16,7 +16,7 @@ private class TrainingSetViewModel : BindableObject {
     var weightUnit: WeightUnit
     var weightInput: Double {
         set {
-            trainingSet.weight = WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric)
+            trainingSet.weight = min(WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric), TrainingSet.MAX_WEIGHT)
         }
         get {
             WeightUnit.convert(weight: trainingSet.weight, from: .metric, to: weightUnit)
@@ -24,7 +24,7 @@ private class TrainingSetViewModel : BindableObject {
     }
     var repetitionsInput: Double {
         set {
-            trainingSet.repetitions = Int16(newValue)
+            trainingSet.repetitions = Int16(min(newValue, Double(TrainingSet.MAX_REPETITIONS)))
         }
         get {
             Double(trainingSet.repetitions)
@@ -40,6 +40,9 @@ private class TrainingSetViewModel : BindableObject {
 struct TrainingSetEditor : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObjectBinding private var trainingSetViewModel: TrainingSetViewModel
+    @State private var alwaysShowDecimalSeparator = false
+    @State private var minimumFractionDigits = 0
+    private var maximumFractionDigits = 3
     
     var onComment: () -> Void
     var onComplete: () -> Void
@@ -47,8 +50,9 @@ struct TrainingSetEditor : View {
     var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.allowsFloats = true
-        formatter.maximumFractionDigits = 3
-        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = maximumFractionDigits
+        formatter.minimumFractionDigits = minimumFractionDigits
+        formatter.alwaysShowsDecimalSeparator = alwaysShowDecimalSeparator
         return formatter
     }
     
@@ -61,8 +65,11 @@ struct TrainingSetEditor : View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text(trainingSetViewModel.weightUnit.abbrev), stepSize: trainingSetViewModel.weightUnit.barbellIncrement, minValue: 0)
-                Dragger(value: $trainingSetViewModel.repetitionsInput, unit: Text("reps"), minValue: 1)
+                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text(trainingSetViewModel.weightUnit.abbrev), stepSize: trainingSetViewModel.weightUnit.barbellIncrement, minValue: 0, maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: trainingSetViewModel.weightUnit)) { _ in
+                    self.alwaysShowDecimalSeparator = false
+                    self.minimumFractionDigits = self.trainingSetViewModel.weightUnit.defaultFractionDigits
+                }
+                Dragger(value: $trainingSetViewModel.repetitionsInput, unit: Text("reps"), minValue: 1, maxValue: Double(TrainingSet.MAX_REPETITIONS))
                 }
                 .padding([.top])
             HStack(spacing: 0) {
@@ -77,9 +84,10 @@ struct TrainingSetEditor : View {
                         Spacer()
                     }
                     }
-                    .background(Rectangle()
-                        .foregroundColor(UIColor.systemGray4.swiftUIColor)
-                        .cornerRadius(4))
+                    .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .foregroundColor(UIColor.systemGray4.swiftUIColor)
+                    )
                     .padding()
                 Button(action: {
                     self.onComplete()
@@ -92,11 +100,14 @@ struct TrainingSetEditor : View {
                         Spacer()
                     }
                     }
-                    .background(Rectangle()
-                        .foregroundColor(.accentColor)
-                        .cornerRadius(4))
+                    .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .foregroundColor(.accentColor)
+                    )
                     .padding()
             }
+//            NumericKeyboard(value: $trainingSetViewModel.weightInput, alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator, minimumFractionDigits: $minimumFractionDigits, maximumFractionDigits: maximumFractionDigits)
+//            NumericKeyboard(value: $trainingSetViewModel.repetitionsInput, alwaysShowDecimalSeparator: .constant(false), minimumFractionDigits: .constant(0), maximumFractionDigits: 0)
         }
         .drawingGroup() // fixes visual bug with show/hide animation of this view
     }
@@ -108,13 +119,13 @@ struct TrainingSetEditor_Previews : PreviewProvider {
         return Group {
             TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .metric)
                 .environmentObject(mockTrainingsDataStore)
-                .previewLayout(.sizeThatFits)
                 .previewDisplayName("Metric")
+                .previewLayout(.sizeThatFits)
             
             TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .imperial)
                 .environmentObject(mockTrainingsDataStore)
-                .previewLayout(.sizeThatFits)
                 .previewDisplayName("Imperial")
+                .previewLayout(.sizeThatFits)
         }
     }
 }

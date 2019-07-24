@@ -48,6 +48,15 @@ enum WeightUnit: String, CaseIterable, Hashable {
         }
     }
     
+    var defaultFractionDigits: Int {
+        switch self {
+        case .metric:
+            return 1
+        case .imperial:
+            return 0
+        }
+    }
+    
     static func convert(weight: Double, from: WeightUnit, to: WeightUnit) -> Double {
         weight * (from.ratioToKg / to.ratioToKg)
     }
