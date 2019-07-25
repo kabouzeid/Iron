@@ -34,6 +34,10 @@ struct Dragger : View {
     private static let DRAGGER_MOVEMENT: Double = 3
     private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
     
+    private var valueString: String {
+        numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? ""
+    }
+    
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { state in
@@ -94,9 +98,9 @@ struct Dragger : View {
                     if self.tmpValue != nil { // no feedback on init
                         self.selectionFeedbackGenerator?.selectionChanged()
                         self.selectionFeedbackGenerator?.prepare()
-                        self.onDragStep(newValue)
                     }
                     self.tmpValue = newValue
+                    self.onDragStep(newValue)
                 }
             }
             .onEnded { state in
@@ -117,7 +121,7 @@ struct Dragger : View {
     var body: some View {
         HStack {
             HStack(spacing: 0) {
-                Text(numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? "")
+                Text(valueString)
                     .font(Font.body.monospacedDigit())
                     .padding(.leading)
                     .tapAction {
