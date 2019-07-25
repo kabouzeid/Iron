@@ -27,31 +27,36 @@ struct NumericKeyboard: View {
         return formatter
     }
     
-    private func nonZeroFractionDigits(of: Double, upToPlace: Int) -> Int {
-        // TODO: use upToPlace instead of hardcoded 3
-        if of.truncatingRemainder(dividingBy: 1) == 0{
-            return 0
-        } else if (of * 10).truncatingRemainder(dividingBy: 1) == 0 {
-            return 1
-        } else if (of * 100).truncatingRemainder(dividingBy: 1) == 0 {
-            return 2
-        } else if (of * 1000).truncatingRemainder(dividingBy: 1) == 0 {
-            return 3
+    // computes the maximal value of minimumFractionDigits, that produces the same result as the current value of minimumFractionDigits
+    private func computeMinimumFractionDigits() -> Int {
+        let numberFormatter = self.numberFormatter
+        let originalMinimumFractionDigits = numberFormatter.minimumFractionDigits
+        if originalMinimumFractionDigits < maximumFractionDigits {
+            let originalValueString = numberFormatter.string(from: value as NSNumber)
+            for fractionDigits in ((originalMinimumFractionDigits + 1)...maximumFractionDigits).reversed() {
+                numberFormatter.minimumFractionDigits = fractionDigits
+                if numberFormatter.string(from: value as NSNumber) == originalValueString {
+                    return fractionDigits
+                }
+            }
         }
-        print("warning non zero 4")
-        return 4
+        return originalMinimumFractionDigits
     }
     
+    // needed because minimumFractionDigits can be out of sync if value has been edited from another view
     private func prepareNumberFormatter() {
-        let actualFractionDigits = nonZeroFractionDigits(of: value, upToPlace: maximumFractionDigits)
-        minimumFractionDigits = min(max(minimumFractionDigits, actualFractionDigits), maximumFractionDigits)
+        minimumFractionDigits = computeMinimumFractionDigits()
         if minimumFractionDigits > 0 {
             alwaysShowDecimalSeparator = true
         }
     }
     
     private func isFractionString(string: String) -> Bool {
-        return string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil
+        if let decimalSeparator = numberFormatter.locale.decimalSeparator {
+            return string.contains(decimalSeparator)
+        } else {
+            return string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil
+        }
     }
     
     private func setValue(string: String?) {
@@ -130,7 +135,7 @@ struct NumericKeyboard: View {
                 .buttonStyle(.plain)
                 
                 HStack(spacing: 0) {
-                    self.textActionKeyboardButton(label: Text("."), width: geometry.size.width / 3) {
+                    self.textActionKeyboardButton(label: Text(Locale.current.decimalSeparator ?? "."), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
                         self.alwaysShowDecimalSeparator = true
                     }.environment(\.isEnabled, self.allowsFloats)
