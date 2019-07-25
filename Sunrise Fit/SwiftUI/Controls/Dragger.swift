@@ -16,7 +16,10 @@ struct Dragger : View {
     var stepSize: Double = 1 // e.g. if barbell based exercise, set to 2.5
     var minValue: Double? = nil
     var maxValue: Double? = nil
-    var onDragStep: ((Double) -> Void)?
+    var showCursor: Bool = false
+    var onDragStep: (Double) -> Void = { _ in }
+    var onDragCompleted: () -> Void = {}
+    var onTextTapped: () -> Void = {}
     
     // private
     @State private var tmpValue: Double? = nil
@@ -88,33 +91,45 @@ struct Dragger : View {
                 }
                 
                 if self.tmpValue != newValue {
-                    if let tmpValue = self.tmpValue { // no feedback on init
+                    if self.tmpValue != nil { // no feedback on init
                         self.selectionFeedbackGenerator?.selectionChanged()
                         self.selectionFeedbackGenerator?.prepare()
-                        self.onDragStep?(tmpValue)
+                        self.onDragStep(newValue)
                     }
                     self.tmpValue = newValue
                 }
             }
             .onEnded { state in
                 self.isDragging = false
+                self.draggerOffset = 0
                 self.selectionFeedbackGenerator = nil
                 self.minMaxFeedbackGenerator = nil
                 self.feedbackOnMin = true
                 self.feedbackOnMax = true
-                self.value = self.tmpValue ?? self.value
-                self.tmpValue = nil
-                self.draggerOffset = 0
+                if let tmpValue = self.tmpValue {
+                    self.value = tmpValue
+                    self.tmpValue = nil
+                    self.onDragCompleted()
+                }
         }
     }
     
     var body: some View {
         HStack {
-//            TextField($value, formatter: numberFormatter)
-            Text(numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? "")
-                .font(Font.body.monospacedDigit())
-                .padding([.leading])
-            Spacer() // Spacer not needed when using TextField!
+            HStack(spacing: 0) {
+                Text(numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? "")
+                    .font(Font.body.monospacedDigit())
+                    .padding(.leading)
+                    .tapAction {
+                        self.onTextTapped()
+                    }
+                if showCursor {
+                    RoundedRectangle(cornerRadius: 2, style: .circular)
+                        .frame(width: 2, height: 20)
+                        .foregroundColor(.accentColor)
+                }
+            }
+            Spacer()
 
             HStack {
                 unit
@@ -142,7 +157,7 @@ struct Dragger : View {
 struct Dragger_Previews : PreviewProvider {
     static var value: Double = 50
     static var previews: some View {
-        Dragger(value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"))
+        Dragger(value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"), showCursor: true)
                 .previewLayout(.sizeThatFits)
     }
 }

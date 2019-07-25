@@ -92,7 +92,7 @@ struct NumericKeyboard: View {
                 Text("0") // only used so this button is the same height as the other buttons
                     .padding()
                     .foregroundColor(.clear)
-                Image(systemName: "delete.left")
+                label
                     .padding()
                     .foregroundColor(.white)
                     .frame(width: width)
@@ -130,7 +130,7 @@ struct NumericKeyboard: View {
                 .buttonStyle(.plain)
                 
                 HStack(spacing: 0) {
-                    self.textActionKeyboardButton(label: self.allowsFloats ? Text(".") : Text(""), width: geometry.size.width / 3) {
+                    self.textActionKeyboardButton(label: Text("."), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
                         self.alwaysShowDecimalSeparator = true
                     }.environment(\.isEnabled, self.allowsFloats)

@@ -37,15 +37,28 @@ private class TrainingSetViewModel : BindableObject {
     }
 }
 
+private enum KeyboardType {
+    case weight
+    case repetitions
+    case none
+}
+
 struct TrainingSetEditor : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObjectBinding private var trainingSetViewModel: TrainingSetViewModel
+    @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
-    @State private var minimumFractionDigits = 0
+    @State private var minimumFractionDigits = 0 // will be set in onAppear()
     private var maximumFractionDigits = 3
     
-    var onComment: () -> Void
+    var onMore: () -> Void
     var onComplete: () -> Void
+    
+    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
+        trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
+        self.onMore = onComment
+        self.onComplete = onComplete
+    }
 
     var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -56,39 +69,89 @@ struct TrainingSetEditor : View {
         return formatter
     }
     
-    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
-        trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
-        self.onComment = onComment
-        self.onComplete = onComplete
-    }
-    
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Dragger(value: $trainingSetViewModel.weightInput, numberFormatter: weightNumberFormatter, unit: Text(trainingSetViewModel.weightUnit.abbrev), stepSize: trainingSetViewModel.weightUnit.barbellIncrement, minValue: 0, maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: trainingSetViewModel.weightUnit)) { _ in
-                    self.alwaysShowDecimalSeparator = false
-                    self.minimumFractionDigits = self.trainingSetViewModel.weightUnit.defaultFractionDigits
-                }
-                Dragger(value: $trainingSetViewModel.repetitionsInput, unit: Text("reps"), minValue: 1, maxValue: Double(TrainingSet.MAX_REPETITIONS))
-                }
-                .padding([.top])
+                Dragger(
+                    value: $trainingSetViewModel.weightInput,
+                    numberFormatter: weightNumberFormatter,
+                    unit: Text(trainingSetViewModel.weightUnit.abbrev),
+                    stepSize: trainingSetViewModel.weightUnit.barbellIncrement,
+                    minValue: 0,
+                    maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: trainingSetViewModel.weightUnit),
+                    showCursor: showKeyboard == .weight,
+                    onDragStep: { _ in
+                        self.alwaysShowDecimalSeparator = false
+                        self.minimumFractionDigits = self.trainingSetViewModel.weightUnit.defaultFractionDigits
+                    },
+                    onDragCompleted: {
+                        self.alwaysShowDecimalSeparator = false
+                        self.minimumFractionDigits = 0
+                    },
+                    onTextTapped: {
+                        withAnimation {
+                            self.showKeyboard = .weight
+                        }
+                    })
+                Dragger(
+                    value: $trainingSetViewModel.repetitionsInput,
+                    unit: Text("reps"),
+                    minValue: 0,
+                    maxValue: Double(TrainingSet.MAX_REPETITIONS),
+                    showCursor: showKeyboard == .repetitions,
+                    onTextTapped: {
+                        withAnimation {
+                            self.showKeyboard = .repetitions
+                        }
+                    })
+            }
+            .padding([.top])
             HStack(spacing: 0) {
-                Button(action: {
-                    self.onComment()
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Comment")
-                            .foregroundColor(.secondary)
-                            .padding(6)
-                        Spacer()
-                    }
+                if self.showKeyboard == .none {
+                    Button(action: {
+                        self.onMore()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("More")
+                                .foregroundColor(.secondary)
+                                .padding(6)
+                            Spacer()
+                        }
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
                             .foregroundColor(UIColor.systemGray4.swiftUIColor)
                     )
                     .padding()
+                } else {
+                    Button(action: {
+                        withAnimation {
+                            self.showKeyboard = .none
+                        }
+                    }) {
+                        HStack {
+                            Spacer()
+                            ZStack {
+                                Text("More") // placeholder for button size
+                                    .foregroundColor(.clear)
+                                    .padding(6)
+                                HStack {
+                                    Image(systemName: "keyboard")
+                                        .foregroundColor(.secondary)
+                                    Image(systemName: "chevron.compact.down")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .foregroundColor(UIColor.systemGray4.swiftUIColor)
+                    )
+                    .padding()
+                }
                 Button(action: {
                     self.onComplete()
                 }) {
@@ -106,10 +169,32 @@ struct TrainingSetEditor : View {
                     )
                     .padding()
             }
-//            NumericKeyboard(value: $trainingSetViewModel.weightInput, alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator, minimumFractionDigits: $minimumFractionDigits, maximumFractionDigits: maximumFractionDigits)
-//            NumericKeyboard(value: $trainingSetViewModel.repetitionsInput, alwaysShowDecimalSeparator: .constant(false), minimumFractionDigits: .constant(0), maximumFractionDigits: 0)
+            if showKeyboard == .weight {
+                NumericKeyboard(
+                    value: $trainingSetViewModel.weightInput,
+                    alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator,
+                    minimumFractionDigits: $minimumFractionDigits,
+                    maximumFractionDigits: maximumFractionDigits
+                )
+            } else if showKeyboard == .repetitions {
+                NumericKeyboard(
+                    value: $trainingSetViewModel.repetitionsInput,
+                    alwaysShowDecimalSeparator: .constant(false),
+                    minimumFractionDigits: .constant(0),
+                    maximumFractionDigits: 0
+                )
+            }
         }
         .drawingGroup() // fixes visual bug with show/hide animation of this view
+        .gesture(DragGesture()
+            .onEnded({ drag in
+                if drag.predictedEndTranslation.height > 100 {
+                    withAnimation {
+                        self.showKeyboard = .none
+                    }
+                }
+            })
+        )
     }
 }
 
