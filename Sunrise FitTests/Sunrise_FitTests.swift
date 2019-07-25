@@ -83,7 +83,31 @@ class Sunrise_FitTests: XCTestCase {
     }
     
     func testWeightUnitConversion() {
-        // TODO:
+        XCTAssertEqual(WeightUnit.convert(weight: 20, from: .metric, to: .imperial).rounded(), 44)
+        XCTAssertEqual(WeightUnit.convert(weight: 45, from: .imperial, to: .metric).rounded(), 20)
+    }
+    
+    func testSignificantFractionDigits() {
+        XCTAssertEqual(Double(1.23456).significantFractionDigits(precision: 0), 0)
+        XCTAssertEqual(Double(1.23456).significantFractionDigits(precision: 1), 1)
+        XCTAssertEqual(Double(1.23456).significantFractionDigits(precision: 3), 3)
+        XCTAssertEqual(Double(1.23456).significantFractionDigits(precision: 5), 5)
+        XCTAssertEqual(Double(1.23456).significantFractionDigits(precision: 6), 5)
+
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 0), 0)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 1), 1)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 2), 1)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 3), 3)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 4), 4)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 5), 5)
+        XCTAssertEqual(Double(1.20456).significantFractionDigits(precision: 6), 5)
+
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 0), 0)
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 1), 1)
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 2), 1)
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 3), 3)
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 4), 4)
+        XCTAssertEqual(Double(1.20999).significantFractionDigits(precision: 5), 5)
     }
     
 }
