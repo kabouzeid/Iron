@@ -51,12 +51,12 @@ struct TrainingSetEditor : View {
     @State private var minimumFractionDigits = 0 // will be set in onAppear()
     private var maximumFractionDigits = 3
     
-    var onMore: () -> Void
-    var onComplete: () -> Void
+    var onMore: () -> Void = {}
+    var onComplete: () -> Void = {}
     
-    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onComment: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
+    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onMore: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
         trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
-        self.onMore = onComment
+        self.onMore = onMore
         self.onComplete = onComplete
     }
 
