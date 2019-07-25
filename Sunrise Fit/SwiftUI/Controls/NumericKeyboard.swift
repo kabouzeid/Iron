@@ -157,7 +157,7 @@ struct NumericKeyboard: View {
             .background(UIColor.gray.swiftUIColor)
             .fixedSize()
         }
-        .frame(height: 210) // TODO only temporary (this wont support dynamic type)
+        .frame(height: 210) // TODO: only temporary because this doesn't support dynamic type size
     }
 }
 
