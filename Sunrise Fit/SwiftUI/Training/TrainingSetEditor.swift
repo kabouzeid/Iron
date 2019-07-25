@@ -52,21 +52,107 @@ struct TrainingSetEditor : View {
     private var maximumFractionDigits = 3
     
     var onMore: () -> Void = {}
-    var onComplete: () -> Void = {}
+    var onDone: () -> Void = {}
     
-    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onMore: @escaping () -> Void = {}, onComplete: @escaping () -> Void = {}) {
+    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onMore: @escaping () -> Void = {}, onDone: @escaping () -> Void = {}) {
         trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
         self.onMore = onMore
-        self.onComplete = onComplete
+        self.onDone = onDone
     }
 
-    var weightNumberFormatter: NumberFormatter {
+    private var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.allowsFloats = true
         formatter.maximumFractionDigits = maximumFractionDigits
         formatter.minimumFractionDigits = minimumFractionDigits
         formatter.alwaysShowsDecimalSeparator = alwaysShowDecimalSeparator
         return formatter
+    }
+    
+    private func textButton(label: Text, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Spacer()
+                label
+                    .padding(6)
+                    .transition(.opacity)
+                Spacer()
+            }
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .foregroundColor(color)
+        )
+    }
+    
+    private var moreButton: some View {
+        textButton(label: Text("More").foregroundColor(.secondary), color: UIColor.systemGray4.swiftUIColor, action: { self.onMore() })
+    }
+    
+    private var doneButton: some View {
+        textButton(label: Text(trainingSetViewModel.trainingSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
+            self.onDone()
+            if self.showKeyboard == .repetitions {
+                self.showKeyboard = .weight
+            }
+        })
+    }
+    
+    private var nextButton: some View {
+        textButton(label: Text("Next").foregroundColor(.white), color: .accentColor, action: { self.showKeyboard = .repetitions })
+    }
+        
+    private var hideKeyboardButton: some View {
+        Button(action: {
+            withAnimation {
+                self.showKeyboard = .none
+            }
+        }) {
+            HStack {
+                Spacer()
+                ZStack {
+                    Text("More") // placeholder for button size
+                        .foregroundColor(.clear)
+                        .padding(6)
+                    HStack {
+                        Image(systemName: "keyboard")
+                            .foregroundColor(.secondary)
+                        Image(systemName: "chevron.compact.down")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                Spacer()
+            }
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .foregroundColor(UIColor.systemGray4.swiftUIColor)
+        )
+    }
+    
+    private var buttons: some View {
+        HStack(spacing: 0) {
+            moreButton
+                .padding()
+            
+            doneButton
+                .padding()
+        }
+    }
+    
+    private var keyboardButtons: some View {
+        HStack(spacing: 0) {
+            hideKeyboardButton
+                .padding()
+            
+            if showKeyboard == .weight {
+                nextButton
+                    .padding()
+            } else {
+                doneButton
+                    .padding()
+            }
+        }
     }
     
     var body: some View {
@@ -106,69 +192,13 @@ struct TrainingSetEditor : View {
                     })
             }
             .padding([.top])
-            HStack(spacing: 0) {
-                if self.showKeyboard == .none {
-                    Button(action: {
-                        self.onMore()
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("More")
-                                .foregroundColor(.secondary)
-                                .padding(6)
-                            Spacer()
-                        }
-                    }
-                    .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .foregroundColor(UIColor.systemGray4.swiftUIColor)
-                    )
-                    .padding()
-                } else {
-                    Button(action: {
-                        withAnimation {
-                            self.showKeyboard = .none
-                        }
-                    }) {
-                        HStack {
-                            Spacer()
-                            ZStack {
-                                Text("More") // placeholder for button size
-                                    .foregroundColor(.clear)
-                                    .padding(6)
-                                HStack {
-                                    Image(systemName: "keyboard")
-                                        .foregroundColor(.secondary)
-                                    Image(systemName: "chevron.compact.down")
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            Spacer()
-                        }
-                    }
-                    .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .foregroundColor(UIColor.systemGray4.swiftUIColor)
-                    )
-                    .padding()
-                }
-                Button(action: {
-                    self.onComplete()
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Complete Set")
-                            .foregroundColor(.white)
-                            .padding(6)
-                        Spacer()
-                    }
-                    }
-                    .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .foregroundColor(.accentColor)
-                    )
-                    .padding()
+            
+            if showKeyboard == .none {
+                buttons
+            } else {
+                keyboardButtons
             }
+            
             if showKeyboard == .weight {
                 NumericKeyboard(
                     value: $trainingSetViewModel.weightInput,

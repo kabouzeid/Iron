@@ -175,7 +175,7 @@ struct TrainingExerciseDetailView : View {
             Divider()
             TrainingSetEditor(trainingSet: self.selectedTrainingSet!, weightUnit: self.settingsStore.weightUnit, onMore: {
                 // TODO
-            }, onComplete: {
+            }, onDone: {
                 guard let set = self.selectedTrainingSet else { return }
                 
                 if !set.isCompleted {
