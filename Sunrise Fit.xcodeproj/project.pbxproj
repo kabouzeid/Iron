@@ -8,79 +8,59 @@
 
 /* Begin PBXBuildFile section */
 		8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A12D7A922C4FB38006B29AA /* Charts */; };
-		8A13FB7C22E4733D006975DB /* Exercise+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */; };
-		8A16BBD722E33703002150F0 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */; };
-		8A16BBD922E337A0002150F0 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD822E337A0002150F0 /* Benchmark.swift */; };
-		8A16BBDB22E37D8F002150F0 /* ExerciseMultiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDA22E37D8F002150F0 /* ExerciseMultiSelectionView.swift */; };
-		8A16BBDD22E39095002150F0 /* ExerciseSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDC22E39095002150F0 /* ExerciseSingleSelectionView.swift */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
-		8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265D21610D9800087448 /* FeedTableViewController.swift */; };
 		8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */; };
 		8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */; };
 		8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E335222C5570B00B1E04B /* Dragger.swift */; };
 		8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */; };
 		8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */; };
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
-		8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */; };
-		8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */; };
-		8A36D64C20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */; };
-		8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */; };
 		8A3C5F95218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */; };
 		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
 		8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */; };
 		8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* DateExtension.swift */; };
 		8A442AD9207A58F500A2BDBD /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColor+Color.swift */; };
-		8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */; };
 		8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* DoubleExtension.swift */; };
-		8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */; };
-		8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */; };
-		8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */; };
 		8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A47E22D7C93B0076E99A /* SettingsView.swift */; };
 		8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */; };
 		8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59282F22BD8B5C00BFD57E /* HistoryView.swift */; };
 		8A59283222BE575300BFD57E /* TrainingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59283122BE575300BFD57E /* TrainingsDataStore.swift */; };
 		8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */; };
-		8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */; };
 		8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
 		8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8A652C4222D0F6D300DBE10E /* AnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */; };
 		8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */; };
 		8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* LineChartView.swift */; };
 		8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* BarChartView.swift */; };
-		8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */; };
 		8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */; };
 		8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */; };
-		8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70888B20A85C6400EF9ADE /* SummaryView.swift */; };
 		8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
-		8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */; };
 		8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
 		8A7D6EB0200BF92E00AA0FA7 /* Sunrise_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */; };
-		8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */; };
 		8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
-		8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */; };
-		8A81570522E21E5400B4D27D /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570422E21E5400B4D27D /* StartTrainingView.swift */; };
-		8A81570722E2279000B4D27D /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570622E2279000B4D27D /* TrainingView.swift */; };
 		8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81CFB022E3B1CF00B11394 /* PinnedChart.swift */; };
 		8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */; };
 		8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
-		8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
+		8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */; };
+		8A9EAC5722EB33A200A11C65 /* Exercise+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */; };
+		8A9EAC5822EB33A200A11C65 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570422E21E5400B4D27D /* StartTrainingView.swift */; };
+		8A9EAC5922EB33A200A11C65 /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570622E2279000B4D27D /* TrainingView.swift */; };
+		8A9EAC5A22EB33A200A11C65 /* ExerciseMultiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDA22E37D8F002150F0 /* ExerciseMultiSelectionView.swift */; };
+		8A9EAC5B22EB33A200A11C65 /* ExerciseSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDC22E39095002150F0 /* ExerciseSingleSelectionView.swift */; };
 		8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */; };
 		8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */; };
 		8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */; };
 		8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */; };
 		8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2A820168462009C047D /* EverkineticDataProvider.swift */; };
-		8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */; };
-		8AAF768D21CE71D7001C9D6B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768C21CE71D7001C9D6B /* TimerView.swift */; };
-		8AAF769021CFB80D001C9D6B /* TimerViewTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */; };
 		8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA522C4FD250025D835 /* TrainingExerciseDetailBannerView.swift */; };
 		8AB14BA822C500070025D835 /* TrainingExercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */; };
 		8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */; };
@@ -89,7 +69,6 @@
 		8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8A5982034C0BA004366F2 /* TrainingSet.swift */; };
 		8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* CoreDataHelper.swift */; };
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
-		8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
@@ -98,24 +77,15 @@
 		8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063E22BACCC900086032 /* ActivityChartView.swift */; };
 		8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064022BACECE00086032 /* FeedBannerView.swift */; };
 		8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */; };
-		8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */; };
 		8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */; };
 		8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE0707C22D1F76B0038B7E3 /* Lottie */; };
 		8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */; };
 		8AE0708122D1FABD0038B7E3 /* lottie in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0708022D1FABD0038B7E3 /* lottie */; };
-		8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */; };
 		8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */; };
 		8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A36D64E20A5BE0C003D59E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
-			remoteInfo = "Rhino Fit";
-		};
 		8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
@@ -136,55 +106,40 @@
 		8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Exercise+Identifiable.swift"; path = "../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Extension/Exercise+Identifiable.swift"; sourceTree = "<group>"; };
 		8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Tinting.swift"; path = "../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Extension/UIImage+Tinting.swift"; sourceTree = "<group>"; };
 		8A16BBD822E337A0002150F0 /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Benchmark.swift; path = "../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Benchmark.swift"; sourceTree = "<group>"; };
-		8A16BBDA22E37D8F002150F0 /* ExerciseMultiSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseMultiSelectionView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Exercises/ExerciseMultiSelectionView.swift"; sourceTree = "<group>"; };
-		8A16BBDC22E39095002150F0 /* ExerciseSingleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseSingleSelectionView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Exercises/ExerciseSingleSelectionView.swift"; sourceTree = "<group>"; };
+		8A16BBDA22E37D8F002150F0 /* ExerciseMultiSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseMultiSelectionView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/UI/Exercises/ExerciseMultiSelectionView.swift"; sourceTree = "<group>"; };
+		8A16BBDC22E39095002150F0 /* ExerciseSingleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseSingleSelectionView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/UI/Exercises/ExerciseSingleSelectionView.swift"; sourceTree = "<group>"; };
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
-		8A1C265D21610D9800087448 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		8A1C265F2161186300087448 /* TrainingsPerWeekChartInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerWeekChartInfo.swift; sourceTree = "<group>"; };
 		8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetEditor.swift; sourceTree = "<group>"; };
 		8A1E335222C5570B00B1E04B /* Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragger.swift; sourceTree = "<group>"; };
 		8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
 		8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
-		8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingViewController.swift; sourceTree = "<group>"; };
-		8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitFastlaneSnapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitFastlaneSnapshot.swift; sourceTree = "<group>"; };
-		8A36D64D20A5BE0C003D59E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		8A3C5F94218E29AC00467DA6 /* BarLineChartViewBaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLineChartViewBaseExtension.swift; sourceTree = "<group>"; };
 		8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBarChartView.swift; sourceTree = "<group>"; };
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
 		8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableArrayExtension.swift; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8A442AD8207A58F500A2BDBD /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
-		8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingExerciseViewController.swift; sourceTree = "<group>"; };
 		8A4FAAFC206BAF8C004A2806 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
-		8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
-		8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseImageTableViewCell.swift; sourceTree = "<group>"; };
-		8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatisticsTableViewController.swift; sourceTree = "<group>"; };
 		8A56A47E22D7C93B0076E99A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Settings.swift"; sourceTree = "<group>"; };
 		8A59282F22BD8B5C00BFD57E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		8A59283122BE575300BFD57E /* TrainingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsDataStore.swift; sourceTree = "<group>"; };
 		8A5989AA20D0212C00DB9104 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
-		8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailTableViewController.swift; sourceTree = "<group>"; };
 		8A643E132147B8430044C3A1 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledLineChartView.swift; sourceTree = "<group>"; };
 		8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageView.swift; sourceTree = "<group>"; };
 		8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatisticsView.swift; sourceTree = "<group>"; };
 		8A652C4522D1055600DBE10E /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		8A652C4722D10C4900DBE10E /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
-		8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepWeightPickerView.swift; sourceTree = "<group>"; };
 		8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TextSizeDemo.swift; sourceTree = "<group>"; };
 		8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailView.swift; sourceTree = "<group>"; };
 		8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailBannerView.swift; sourceTree = "<group>"; };
-		8A70888B20A85C6400EF9ADE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A7D6E9C200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrainingsData.xcdatamodel; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A7D6EA4200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -192,15 +147,12 @@
 		8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitTests.swift; sourceTree = "<group>"; };
 		8A7D6EB1200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		8A7D6EBC200C156500AA0FA7 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
-		8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
-		8A81570422E21E5400B4D27D /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StartTrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Training/StartTrainingView.swift"; sourceTree = "<group>"; };
-		8A81570622E2279000B4D27D /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/SwiftUI/Training/TrainingView.swift"; sourceTree = "<group>"; };
+		8A81570422E21E5400B4D27D /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StartTrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/UI/Training/StartTrainingView.swift"; sourceTree = "<group>"; };
+		8A81570622E2279000B4D27D /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrainingView.swift; path = "../../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/UI/Training/TrainingView.swift"; sourceTree = "<group>"; };
 		8A81CFB022E3B1CF00B11394 /* PinnedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedChart.swift; sourceTree = "<group>"; };
 		8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		8A82AB9322DDE582007C0293 /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
-		8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartView.swift; sourceTree = "<group>"; };
 		8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartViewCell.swift; sourceTree = "<group>"; };
 		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,9 +163,6 @@
 		8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupSectionedExercisesView.swift; sourceTree = "<group>"; };
 		8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		8AABF2A820168462009C047D /* EverkineticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticDataProvider.swift; sourceTree = "<group>"; };
-		8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupsTableViewController.swift; sourceTree = "<group>"; };
-		8AAF768C21CE71D7001C9D6B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewTrainingController.swift; sourceTree = "<group>"; };
 		8AB14BA522C4FD250025D835 /* TrainingExerciseDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailBannerView.swift; sourceTree = "<group>"; };
 		8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainingExercise+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -222,7 +171,6 @@
 		8AB8A5982034C0BA004366F2 /* TrainingSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSet.swift; sourceTree = "<group>"; };
 		8AB972F6203583E40099507B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
-		8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsTableViewController.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,22 +179,13 @@
 		8AC8063E22BACCC900086032 /* ActivityChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartView.swift; sourceTree = "<group>"; };
 		8AC8064022BACECE00086032 /* FeedBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBannerView.swift; sourceTree = "<group>"; };
 		8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartViewCell.swift; sourceTree = "<group>"; };
-		8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTrainingViewController.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableArrayExtension.swift; sourceTree = "<group>"; };
 		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
 		8AE0708022D1FABD0038B7E3 /* lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lottie; sourceTree = "<group>"; };
-		8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryTableViewController.swift; sourceTree = "<group>"; };
 		8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8A36D64620A5BE0C003D59E6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8A7D6E91200BF92E00AA0FA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,66 +232,12 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */ = {
-			isa = PBXGroup;
-			children = (
-				8A36D65320A5BE9C003D59E6 /* SnapshotHelper.swift */,
-				8A36D64B20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift */,
-				8A36D64D20A5BE0C003D59E6 /* Info.plist */,
-			);
-			path = "Sunrise FitFastlaneSnapshot";
-			sourceTree = "<group>";
-		};
-		8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */ = {
-			isa = PBXGroup;
-			children = (
-				8A53AF9820191B86007AE0B3 /* ExerciseDetailViewController.swift */,
-				8A53AF9A20191C67007AE0B3 /* ExerciseImageTableViewCell.swift */,
-			);
-			path = ExerciseDetailScene;
-			sourceTree = "<group>";
-		};
 		8A56A47D22D7C91B0076E99A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				8A56A47E22D7C93B0076E99A /* SettingsView.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		8A5809412049E2300070D794 /* Training */ = {
-			isa = PBXGroup;
-			children = (
-				8AD4082D202FA7F700A73E05 /* StartTrainingScene */,
-				8AD4082E202FA81200A73E05 /* CurrentTrainingScene */,
-				8AA947F2203B8864005D1758 /* CurrentTrainingExerciseScene */,
-			);
-			path = Training;
-			sourceTree = "<group>";
-		};
-		8A5809432049E2590070D794 /* Exercises */ = {
-			isa = PBXGroup;
-			children = (
-				8AABF2AE2016898A009C047D /* ExerciseGroupsScene */,
-				8AABF2AD20168906009C047D /* ExercisesScene */,
-				8A53AF9720191B5C007AE0B3 /* ExerciseDetailScene */,
-				8A568EAC214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift */,
-				8AE0905A2260987A0000CF79 /* ExerciseHistoryTableViewController.swift */,
-			);
-			path = Exercises;
-			sourceTree = "<group>";
-		};
-		8A68F6122083969B0038CEB7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8A68F613208396D50038CEB7 /* RepWeightPickerView.swift */,
-				8A70888B20A85C6400EF9ADE /* SummaryView.swift */,
-				8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */,
-				8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */,
-				8A643E132147B8430044C3A1 /* BalloonMarker.swift */,
-				8AAF768C21CE71D7001C9D6B /* TimerView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8A799F6222BFD30E00DD5E1B /* General */ = {
@@ -374,7 +259,6 @@
 			children = (
 				8A7D6E96200BF92E00AA0FA7 /* Sunrise Fit */,
 				8A7D6EAE200BF92E00AA0FA7 /* Sunrise FitTests */,
-				8A36D64A20A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */,
 				8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 			);
@@ -385,7 +269,6 @@
 			children = (
 				8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */,
 				8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */,
-				8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */,
 				8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */,
 			);
 			name = Products;
@@ -396,11 +279,9 @@
 			children = (
 				8AD40826202F96CB00A73E05 /* Extension */,
 				8AABF2A6201683C8009C047D /* Data */,
-				8AABF2AC20168900009C047D /* UI */,
-				8AC8063722BAB93000086032 /* SwiftUI */,
+				8AC8063722BAB93000086032 /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8AC8063822BABC8C00086032 /* SceneDelegate.swift */,
-				8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
 				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
@@ -432,14 +313,6 @@
 			path = "Sunrise FitUITests";
 			sourceTree = "<group>";
 		};
-		8AA947F2203B8864005D1758 /* CurrentTrainingExerciseScene */ = {
-			isa = PBXGroup;
-			children = (
-				8A4863052035A48D004B1067 /* CurrentTrainingExerciseViewController.swift */,
-			);
-			path = CurrentTrainingExerciseScene;
-			sourceTree = "<group>";
-		};
 		8AABF2A6201683C8009C047D /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,41 +333,14 @@
 			path = Everkinetic;
 			sourceTree = "<group>";
 		};
-		8AABF2AC20168900009C047D /* UI */ = {
+		8AABF2AC20168900009C047D /* UIKitViews */ = {
 			isa = PBXGroup;
 			children = (
-				8A68F6122083969B0038CEB7 /* View */,
-				8ABE62C5204B0DDB0035DB1B /* Profile */,
-				8AAF768E21CFB7E2001C9D6B /* Controller */,
-				8A5809412049E2300070D794 /* Training */,
-				8A5809432049E2590070D794 /* Exercises */,
-				8A1C265D21610D9800087448 /* FeedTableViewController.swift */,
+				8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */,
+				8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */,
+				8A643E132147B8430044C3A1 /* BalloonMarker.swift */,
 			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		8AABF2AD20168906009C047D /* ExercisesScene */ = {
-			isa = PBXGroup;
-			children = (
-				8A7D6EBA200C092300AA0FA7 /* ExercisesTableViewController.swift */,
-			);
-			path = ExercisesScene;
-			sourceTree = "<group>";
-		};
-		8AABF2AE2016898A009C047D /* ExerciseGroupsScene */ = {
-			isa = PBXGroup;
-			children = (
-				8AABF2AA201688E3009C047D /* ExerciseGroupsTableViewController.swift */,
-			);
-			path = ExerciseGroupsScene;
-			sourceTree = "<group>";
-		};
-		8AAF768E21CFB7E2001C9D6B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				8AAF768F21CFB80D001C9D6B /* TimerViewTrainingController.swift */,
-			);
-			path = Controller;
+			path = UIKitViews;
 			sourceTree = "<group>";
 		};
 		8AB8A5932034C072004366F2 /* CoreData */ = {
@@ -523,21 +369,11 @@
 			path = Exercises;
 			sourceTree = "<group>";
 		};
-		8ABE62C5204B0DDB0035DB1B /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				8ABE62C6204B0E140035DB1B /* TrainingsTableViewController.swift */,
-				8A5C08C7205D969900E78BE7 /* TrainingDetailTableViewController.swift */,
-				8A91AE0F209A75F7004A18B2 /* DatePickerTableViewCell.swift */,
-				8A7FDA1020B0CE6300692BA7 /* TitleTableViewCell.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		8AC8063722BAB93000086032 /* SwiftUI */ = {
+		8AC8063722BAB93000086032 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				8AC8063A22BABCAA00086032 /* ContentView.swift */,
+				8AABF2AC20168900009C047D /* UIKitViews */,
 				8A1E335122C556DC00B1E04B /* Controls */,
 				8A799F6222BFD30E00DD5E1B /* General */,
 				8AC8064222BADBD300086032 /* Feed */,
@@ -546,7 +382,7 @@
 				8ABB4C6422CE059E0075CCE6 /* Exercises */,
 				8A56A47D22D7C91B0076E99A /* Settings */,
 			);
-			path = SwiftUI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		8AC8064222BADBD300086032 /* Feed */ = {
@@ -565,7 +401,6 @@
 		8AD40826202F96CB00A73E05 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				8A2F6BC8202E22EA00CB241A /* UIViewControllerExtension.swift */,
 				8AD40833202FC71B00A73E05 /* EquatableArrayExtension.swift */,
 				8A3EB421204AFCF000E3A08B /* HashableArrayExtension.swift */,
 				8A4FAAFC206BAF8C004A2806 /* DoubleExtension.swift */,
@@ -582,22 +417,6 @@
 				8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		8AD4082D202FA7F700A73E05 /* StartTrainingScene */ = {
-			isa = PBXGroup;
-			children = (
-				8A2ED8C5201D680100E160F1 /* StartTrainingViewController.swift */,
-			);
-			path = StartTrainingScene;
-			sourceTree = "<group>";
-		};
-		8AD4082E202FA81200A73E05 /* CurrentTrainingScene */ = {
-			isa = PBXGroup;
-			children = (
-				8AD4082F202FA82300A73E05 /* CurrentTrainingViewController.swift */,
-			);
-			path = CurrentTrainingScene;
 			sourceTree = "<group>";
 		};
 		8AD40835202FC7C200A73E05 /* Model */ = {
@@ -627,24 +446,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A36D64820A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Sunrise FitFastlaneSnapshot" */;
-			buildPhases = (
-				8A36D64520A5BE0C003D59E6 /* Sources */,
-				8A36D64620A5BE0C003D59E6 /* Frameworks */,
-				8A36D64720A5BE0C003D59E6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */,
-			);
-			name = "Sunrise FitFastlaneSnapshot";
-			productName = "Rhino FitFastlaneSnapshot";
-			productReference = 8A36D64920A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A7D6EB4200BF92E00AA0FA7 /* Build configuration list for PBXNativeTarget "Sunrise Fit" */;
@@ -713,12 +514,6 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
-					8A36D64820A5BE0C003D59E6 = {
-						CreatedOnToolsVersion = 9.3.1;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
-					};
 					8A7D6E93200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
@@ -758,20 +553,12 @@
 			targets = (
 				8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */,
 				8A7D6EAA200BF92E00AA0FA7 /* Sunrise FitTests */,
-				8A36D64820A5BE0C003D59E6 /* Sunrise FitFastlaneSnapshot */,
 				8A9C5A6D20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8A36D64720A5BE0C003D59E6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8A7D6E92200BF92E00AA0FA7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -780,7 +567,6 @@
 				8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,
-				8A7D6E9D200BF92E00AA0FA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,30 +587,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8A36D64520A5BE0C003D59E6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A36D64C20A5BE0C003D59E6 /* Sunrise_FitFastlaneSnapshot.swift in Sources */,
-				8A36D65420A5BE9C003D59E6 /* SnapshotHelper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8A7D6E90200BF92E00AA0FA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A16BBD722E33703002150F0 /* UIImage+Tinting.swift in Sources */,
+				8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */,
+				8A9EAC5722EB33A200A11C65 /* Exercise+Identifiable.swift in Sources */,
+				8A9EAC5822EB33A200A11C65 /* StartTrainingView.swift in Sources */,
+				8A9EAC5922EB33A200A11C65 /* TrainingView.swift in Sources */,
+				8A9EAC5A22EB33A200A11C65 /* ExerciseMultiSelectionView.swift in Sources */,
+				8A9EAC5B22EB33A200A11C65 /* ExerciseSingleSelectionView.swift in Sources */,
 				8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */,
 				8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */,
-				8A16BBDD22E39095002150F0 /* ExerciseSingleSelectionView.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
-				8ABE62C7204B0E140035DB1B /* TrainingsTableViewController.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,
 				8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */,
-				8A4863062035A48D004B1067 /* CurrentTrainingExerciseViewController.swift in Sources */,
 				8A4FAAFD206BAF8C004A2806 /* DoubleExtension.swift in Sources */,
 				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,
@@ -832,38 +611,24 @@
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */,
 				8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */,
-				8AABF2AB201688E3009C047D /* ExerciseGroupsTableViewController.swift in Sources */,
-				8A53AF9B20191C67007AE0B3 /* ExerciseImageTableViewCell.swift in Sources */,
 				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
-				8A13FB7C22E4733D006975DB /* Exercise+Identifiable.swift in Sources */,
-				8A68F614208396D50038CEB7 /* RepWeightPickerView.swift in Sources */,
-				8A16BBD922E337A0002150F0 /* Benchmark.swift in Sources */,
 				8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */,
 				8A59283222BE575300BFD57E /* TrainingsDataStore.swift in Sources */,
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
 				8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */,
-				8AAF768D21CE71D7001C9D6B /* TimerView.swift in Sources */,
 				8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */,
 				8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */,
 				8AB8A5992034C0BA004366F2 /* TrainingSet.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
-				8A7FDA1120B0CE6300692BA7 /* TitleTableViewCell.swift in Sources */,
-				8A53AF9920191B86007AE0B3 /* ExerciseDetailViewController.swift in Sources */,
 				8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */,
-				8A16BBDB22E37D8F002150F0 /* ExerciseMultiSelectionView.swift in Sources */,
-				8A81570722E2279000B4D27D /* TrainingView.swift in Sources */,
 				8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */,
 				8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */,
-				8A70888C20A85C6400EF9ADE /* SummaryView.swift in Sources */,
 				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* DateExtension.swift in Sources */,
-				8A1C265E21610D9800087448 /* FeedTableViewController.swift in Sources */,
 				8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */,
 				8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */,
-				8AD40830202FA82300A73E05 /* CurrentTrainingViewController.swift in Sources */,
-				8A568EAD214439A6006B2F36 /* ExerciseStatisticsTableViewController.swift in Sources */,
 				8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */,
 				8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
@@ -874,10 +639,7 @@
 				8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,
 				8AC8063D22BAC54200086032 /* FeedView.swift in Sources */,
-				8A91AE10209A75F7004A18B2 /* DatePickerTableViewCell.swift in Sources */,
 				8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */,
-				8AAF769021CFB80D001C9D6B /* TimerViewTrainingController.swift in Sources */,
-				8A7D6EBB200C092300AA0FA7 /* ExercisesTableViewController.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A442AD9207A58F500A2BDBD /* UIColor+Color.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* HashableArrayExtension.swift in Sources */,
@@ -885,19 +647,14 @@
 				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,
 				8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */,
 				8A5989AB20D0212C00DB9104 /* UIFontExtension.swift in Sources */,
-				8A5C08C8205D969900E78BE7 /* TrainingDetailTableViewController.swift in Sources */,
 				8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
-				8A81570522E21E5400B4D27D /* StartTrainingView.swift in Sources */,
 				8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */,
 				8A1C26602161186300087448 /* TrainingsPerWeekChartInfo.swift in Sources */,
 				8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */,
 				8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */,
-				8AE0905B2260987A0000CF79 /* ExerciseHistoryTableViewController.swift in Sources */,
 				8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */,
-				8A2F6BC9202E22EA00CB241A /* UIViewControllerExtension.swift in Sources */,
 				8A652C4222D0F6D300DBE10E /* AnimatedImageView.swift in Sources */,
-				8A2ED8C6201D680100E160F1 /* StartTrainingViewController.swift in Sources */,
 				8AD40834202FC71B00A73E05 /* EquatableArrayExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,11 +680,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8A36D64F20A5BE0C003D59E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
-			targetProxy = 8A36D64E20A5BE0C003D59E6 /* PBXContainerItemProxy */;
-		};
 		8A7D6EAD200BF92E00AA0FA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
@@ -941,14 +693,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8A7D6E9B200BF92E00AA0FA7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A7D6E9C200BF92E00AA0FA7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -960,46 +704,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8A36D65020A5BE0C003D59E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Sunrise FitFastlaneSnapshot/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitFastlaneSnapshot";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Sunrise Fit";
-			};
-			name = Debug;
-		};
-		8A36D65120A5BE0C003D59E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Sunrise FitFastlaneSnapshot/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitFastlaneSnapshot";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Sunrise Fit";
-			};
-			name = Release;
-		};
 		8A7D6EB2200BF92E00AA0FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1239,15 +943,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A36D65220A5BE0C003D59E6 /* Build configuration list for PBXNativeTarget "Sunrise FitFastlaneSnapshot" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8A36D65020A5BE0C003D59E6 /* Debug */,
-				8A36D65120A5BE0C003D59E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Sunrise Fit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
