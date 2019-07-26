@@ -17,12 +17,11 @@ class TrainingsDataStore : BindableObject {
     private var cancellable: Cancellable?
     
     init(context: NSManagedObjectContext) {
-        print("init trainings data store")
         self.context = context
         cancellable = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
             .map { notification in
                 #if DEBUG
-                print("data store changed")
+                print("trainings data changed")
 //                print("notification: \(notification)")
 //                guard let userInfo = notification.userInfo else { return }
 //
@@ -44,7 +43,6 @@ class TrainingsDataStore : BindableObject {
     }
     
     deinit {
-        // TODO: is this necessary?
         cancellable?.cancel()
     }
 }

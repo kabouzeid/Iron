@@ -56,6 +56,7 @@
 		8A9EAC5922EB33A200A11C65 /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570622E2279000B4D27D /* TrainingView.swift */; };
 		8A9EAC5A22EB33A200A11C65 /* ExerciseMultiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDA22E37D8F002150F0 /* ExerciseMultiSelectionView.swift */; };
 		8A9EAC5B22EB33A200A11C65 /* ExerciseSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBDC22E39095002150F0 /* ExerciseSingleSelectionView.swift */; };
+		8A9EAC5D22EB526A00A11C65 /* NSManagedObjectContext+save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */; };
 		8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */; };
 		8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */; };
 		8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */; };
@@ -158,6 +159,7 @@
 		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+save.swift"; path = "../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Extension/NSManagedObjectContext+save.swift"; sourceTree = "<group>"; };
 		8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Training+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupSectionedExercisesView.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */,
 				8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */,
 				8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */,
+				8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */,
+				8A9EAC5D22EB526A00A11C65 /* NSManagedObjectContext+save.swift in Sources */,
 				8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */,
 				8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,

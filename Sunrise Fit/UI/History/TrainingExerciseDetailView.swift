@@ -34,6 +34,7 @@ struct TrainingExerciseDetailView : View {
     }
     
     private func select(set: TrainingSet?) {
+        self.trainingsDataStore.context.safeSave()
         withAnimation {
             if let set = set, !set.isCompleted && set.repetitions == 0 && set.weight == 0 { // treat as uninitialized
                 initRepsAndWeight(for: set)
@@ -188,13 +189,12 @@ struct TrainingExerciseDetailView : View {
                     let training = set.trainingExercise!.training!
                     training.start = training.start ?? Date()
                     self.moveTrainingExerciseBehindLastBegun()
-                    // we don't want to lose any sets the user has done when something crashes
-                    // TODO: save the context here
+                    
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.prepare()
                     feedbackGenerator.notificationOccurred(.success)
                 }
-                self.select(set: self.firstUncompletedSet)
+                self.select(set: self.firstUncompletedSet) // also saves the context
             })
                 // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
                 .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
