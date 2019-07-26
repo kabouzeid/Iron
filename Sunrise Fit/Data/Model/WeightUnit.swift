@@ -39,6 +39,12 @@ enum WeightUnit: String, CaseIterable, Hashable {
         }
     }
     
+    static func convert(weight: Double, from: WeightUnit, to: WeightUnit) -> Double {
+        weight * (from.ratioToKg / to.ratioToKg)
+    }
+}
+
+extension WeightUnit {
     var barbellIncrement: Double {
         switch self {
         case .metric:
@@ -64,9 +70,5 @@ enum WeightUnit: String, CaseIterable, Hashable {
         case .imperial:
             return 0
         }
-    }
-    
-    static func convert(weight: Double, from: WeightUnit, to: WeightUnit) -> Double {
-        weight * (from.ratioToKg / to.ratioToKg)
     }
 }
