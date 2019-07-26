@@ -16,7 +16,7 @@ private class TrainingSetViewModel : BindableObject {
     var weightUnit: WeightUnit
     var weightInput: Double {
         set {
-            trainingSet.weight = min(WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric), TrainingSet.MAX_WEIGHT)
+            trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)
         }
         get {
             WeightUnit.convert(weight: trainingSet.weight, from: .metric, to: weightUnit)
@@ -24,7 +24,7 @@ private class TrainingSetViewModel : BindableObject {
     }
     var repetitionsInput: Double {
         set {
-            trainingSet.repetitions = Int16(min(newValue, Double(TrainingSet.MAX_REPETITIONS)))
+            trainingSet.repetitions = Int16(max(min(newValue, Double(TrainingSet.MAX_REPETITIONS)), 0))
         }
         get {
             Double(trainingSet.repetitions)

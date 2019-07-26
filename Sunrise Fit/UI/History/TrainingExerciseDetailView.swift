@@ -33,10 +33,10 @@ struct TrainingExerciseDetailView : View {
         trainingExercise.trainingSets?.first(where: { !($0 as! TrainingSet).isCompleted }) as? TrainingSet
     }
     
-    private func selectAndInit(set: TrainingSet?) {
+    private func select(set: TrainingSet?) {
         withAnimation {
-            if set?.repetitions == 0 { // uninitialized
-                initRepsAndWeight(for: set!)
+            if let set = set, !set.isCompleted && set.repetitions == 0 && set.weight == 0 { // treat as uninitialized
+                initRepsAndWeight(for: set)
             }
             selectedTrainingSet = set
         }
@@ -54,7 +54,8 @@ struct TrainingExerciseDetailView : View {
             set.repetitions = previousSet.repetitions
             set.weight = previousSet.weight
         } else {
-            set.repetitions = 1
+            // TODO: if barbell exercise, set default weight to WeightUnit.defaultBarbellWeight
+            set.repetitions = 5
         }
     }
     
@@ -103,9 +104,9 @@ struct TrainingExerciseDetailView : View {
                 .tapAction { // TODO: currently tap on Spacer() is not recognized
                     guard self.editMode?.value != .active else { return }
                     if self.selectedTrainingSet == trainingSet {
-                        self.selectAndInit(set: nil)
+                        self.select(set: nil)
                     } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
-                        self.selectAndInit(set: trainingSet)
+                        self.select(set: trainingSet)
                     }
             }
         }
@@ -113,7 +114,7 @@ struct TrainingExerciseDetailView : View {
             //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
             self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
             if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
-                self.selectAndInit(set: self.firstUncompletedSet)
+                self.select(set: self.firstUncompletedSet)
             }
         }
         // TODO: move is yet too buggy
@@ -138,10 +139,9 @@ struct TrainingExerciseDetailView : View {
         Button(action: {
             let trainingSet = TrainingSet(context: self.trainingExercise.managedObjectContext!)
             self.trainingExercise.addToTrainingSets(trainingSet)
-            self.selectAndInit(set: self.firstUncompletedSet)
+            self.select(set: self.firstUncompletedSet)
             if !self.isCurrentTraining {
                 // don't allow uncompleted sets if not in current training
-                precondition(trainingSet.repetitions > 0, "Tried to complete set with 0 repetitions.")
                 trainingSet.isCompleted = true
             }
         }) {
@@ -177,7 +177,9 @@ struct TrainingExerciseDetailView : View {
                 guard let set = self.selectedTrainingSet else { return }
                 
                 if !set.isCompleted {
-                    precondition(set.repetitions > 0, "Tried to complete set with 0 repetitions.")
+                    // these preconditions should never ever happen, but just to be sure
+                    precondition(set.weight >= 0, "Tried to complete set with negative weight.")
+                    precondition(set.repetitions >= 0, "Tried to complete set with negative repetitions.")
                     set.isCompleted = true
                     let training = set.trainingExercise!.training!
                     training.start = training.start ?? Date()
@@ -188,7 +190,7 @@ struct TrainingExerciseDetailView : View {
                     feedbackGenerator.prepare()
                     feedbackGenerator.notificationOccurred(.success)
                 }
-                self.selectAndInit(set: self.firstUncompletedSet)
+                self.select(set: self.firstUncompletedSet)
             })
                 // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
                 .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
@@ -228,7 +230,7 @@ struct TrainingExerciseDetailView : View {
             EditButton()
         })
         .onAppear {
-            self.selectAndInit(set: self.firstUncompletedSet)
+            self.select(set: self.firstUncompletedSet)
         }
     }
 }
