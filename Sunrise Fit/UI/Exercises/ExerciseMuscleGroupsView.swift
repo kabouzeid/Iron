@@ -13,6 +13,26 @@ struct ExerciseMuscleGroupsView : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exerciseMuscleGroups: [[Exercise]]
     
+    func exerciseGroupCell(exercises: [Exercise]) -> some View {
+        let muscleGroup = exercises.first?.muscleGroup ?? ""
+        return NavigationLink(destination:
+            ExercisesView(exercises: exercises)
+                .listStyle(.plain)
+                .environmentObject(self.trainingsDataStore)
+                .environmentObject(self.settingsStore)
+                .navigationBarTitle(Text(muscleGroup.capitalized), displayMode: .inline)
+        ) {
+            HStack {
+                Text(muscleGroup.capitalized)
+                Spacer()
+                Text("(\(exercises.count))")
+                    .foregroundColor(.secondary)
+                Exercise.imageFor(muscleGroup: muscleGroup)
+                    .foregroundColor(Exercise.colorFor(muscleGroup: muscleGroup))
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -32,19 +52,7 @@ struct ExerciseMuscleGroupsView : View {
                 }
                 Section {
                     ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exerciseGroup in
-                        NavigationLink(destination:
-                            ExercisesView(exercises: exerciseGroup)
-                                .listStyle(.plain)
-                                .environmentObject(self.trainingsDataStore)
-                                .environmentObject(self.settingsStore)
-                                .navigationBarTitle(Text(exerciseGroup.first?.muscleGroup.capitalized ?? ""), displayMode: .inline)) {
-                            HStack {
-                                Text(exerciseGroup.first?.muscleGroup.capitalized ?? "")
-                                Spacer()
-                                Text("(\(exerciseGroup.count))")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
+                       self.exerciseGroupCell(exercises: exerciseGroup)
                     }
                 }
             }
