@@ -105,7 +105,12 @@ struct TrainingView: View {
             .navigationBarItems(
                 leading:
                 Button("Cancel") {
-                    self.showingCancelSheet = true
+                    if (self.trainig.trainingExercises?.count ?? 0) == 0 && self.trainig.start == nil {
+                        // the training is empty, do not need confirm to cancel
+                        self.trainingsDataStore.context.delete(self.trainig)
+                    } else {
+                        self.showingCancelSheet = true
+                    }
                 }
                 .actionSheet(isPresented: $showingCancelSheet, content: {
                     ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
