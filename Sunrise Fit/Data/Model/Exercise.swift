@@ -23,26 +23,20 @@ struct Exercise: Hashable {
 }
  
 extension Exercise {
+    var isBarbellBased: Bool {
+        equipment.contains("barbell")
+    }
+    
     var primaryMuscleCommonName: [String] {
-        get {
-            return primaryMuscle.map({ (muscle) -> String in
-                return Exercise.commonName(muscle: muscle)
-            }).uniq()
-        }
+        primaryMuscle.map { Exercise.commonName(muscle: $0) }.uniq()
     }
     
     var secondaryMuscleCommonName: [String] {
-        get {
-            return secondaryMuscle.map({ (muscle) -> String in
-                return Exercise.commonName(muscle: muscle)
-            }).uniq()
-        }
+        secondaryMuscle.map { Exercise.commonName(muscle: $0) }.uniq()
     }
     
     var muscleGroup: String {
-        get {
-            return sectionName(muscle: primaryMuscle[0])
-        }
+        sectionName(muscle: primaryMuscle[0])
     }
     
     static func commonName(muscle: String) -> String {

@@ -48,6 +48,15 @@ enum WeightUnit: String, CaseIterable, Hashable {
         }
     }
     
+    var barbellWeight: Double {
+        switch self {
+        case .metric:
+            return 20
+        case .imperial:
+            return 45
+        }
+    }
+    
     var defaultFractionDigits: Int {
         switch self {
         case .metric:

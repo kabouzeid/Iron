@@ -54,8 +54,12 @@ struct TrainingExerciseDetailView : View {
             set.repetitions = previousSet.repetitions
             set.weight = previousSet.weight
         } else {
-            // TODO: if barbell exercise, set default weight to WeightUnit.defaultBarbellWeight
+            // TODO: let the user configure default repetitions and weight
             set.repetitions = 5
+            if trainingExercise.exercise?.isBarbellBased ?? false {
+                let weightUnit = self.settingsStore.weightUnit
+                set.weight = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
+            }
         }
     }
     
