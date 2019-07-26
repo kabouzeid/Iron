@@ -29,7 +29,9 @@ struct ExerciseDetailView : View {
     }
     
     private func imageHeight(geometry: GeometryProxy) -> Length {
-        min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
+        // accessing geometry.safeAreaInsets.top crashes for Deadlift: Barbell on beta4
+//        min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
+        min(geometry.size.width, (geometry.size.height) * 0.5)
     }
     
     var body: some View {
