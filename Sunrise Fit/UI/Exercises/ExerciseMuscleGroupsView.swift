@@ -34,6 +34,7 @@ struct ExerciseMuscleGroupsView : View {
                     ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exerciseGroup in
                         NavigationLink(destination:
                             ExercisesView(exercises: exerciseGroup)
+                                .listStyle(.plain)
                                 .environmentObject(self.trainingsDataStore)
                                 .environmentObject(self.settingsStore)
                                 .navigationBarTitle(Text(exerciseGroup.first?.muscleGroup.capitalized ?? ""), displayMode: .inline)) {
