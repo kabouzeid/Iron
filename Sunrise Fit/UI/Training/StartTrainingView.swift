@@ -33,6 +33,7 @@ struct StartTrainingView: View {
                     // create a new training
                     let training = Training(context: self.trainingsDataStore.context)
                     training.isCurrentTraining = true
+                    self.trainingsDataStore.context.safeSave()
                 }
                 .padding()
                 .foregroundColor(Color.white)

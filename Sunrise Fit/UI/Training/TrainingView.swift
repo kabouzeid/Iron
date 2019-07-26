@@ -108,6 +108,7 @@ struct TrainingView: View {
                     if (self.trainig.trainingExercises?.count ?? 0) == 0 && self.trainig.start == nil {
                         // the training is empty, do not need confirm to cancel
                         self.trainingsDataStore.context.delete(self.trainig)
+                        self.trainingsDataStore.context.safeSave()
                     } else {
                         self.showingCancelSheet = true
                     }
@@ -116,6 +117,7 @@ struct TrainingView: View {
                     ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
                         .destructive(Text("Delete Training"), onTrigger: {
                             self.trainingsDataStore.context.delete(self.trainig)
+                            self.trainingsDataStore.context.safeSave()
                         }),
                         .cancel()
                     ])
@@ -142,6 +144,7 @@ struct TrainingView: View {
                             }
                             self.showingExerciseSelectorSheet = false
                             self.exerciseSelectorSelection.removeAll()
+                            self.trainingsDataStore.context.safeSave()
                         }
                     }.padding()
                     ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
