@@ -18,6 +18,19 @@ struct FeedBannerView : View {
         BannerView(entries: bannerViewEntries)
             .lineLimit(nil)
     }
+    
+    private static var percentNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.maximumFractionDigits = 1
+        formatter.minimumFractionDigits = 0
+        formatter.numberStyle = .percent
+        return formatter
+    }()
+    
+    private func percentString(of: Double) -> String {
+        FeedBannerView.percentNumberFormatter.string(from: of as NSNumber) ?? "\(String(format: "%.1f", of * 100)) %"
+    }
 
     private var bannerViewEntries: [BannerViewEntry] {
         var entries = [BannerViewEntry]()
@@ -52,8 +65,8 @@ struct FeedBannerView : View {
         // Duration
         var durationDetailText: String
         var durationDetailColor: Color
-        var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1) * 100)
-        durationPercent = abs(durationPercent) < 0.1 ? 0 : durationPercent
+        var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1
+        durationPercent = abs(durationPercent) < 0.001 ? 0 : durationPercent
         if durationPercent > 0 {
             durationDetailColor = Color.green
             durationDetailText = "+"
@@ -64,7 +77,7 @@ struct FeedBannerView : View {
             durationDetailColor = UIColor.tertiaryLabel.swiftUIColor
             durationDetailText = "+"
         }
-        durationDetailText += String(format: "%.1f", durationPercent) + "%"
+        durationDetailText += percentString(of: durationPercent)
 
         entries.append(
             BannerViewEntry(id: 0,
@@ -76,8 +89,8 @@ struct FeedBannerView : View {
         // Sets
         var setsDetailText: String
         var setsDetailColor: Color
-        var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1) * 100)
-        setsPercent = abs(setsPercent) < 0.1 ? 0 : setsPercent
+        var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1
+        setsPercent = abs(setsPercent) < 0.001 ? 0 : setsPercent
         if setsPercent > 0 {
             setsDetailColor = Color.green
             setsDetailText = "+"
@@ -88,7 +101,7 @@ struct FeedBannerView : View {
             setsDetailColor = UIColor.tertiaryLabel.swiftUIColor
             setsDetailText = "+"
         }
-        setsDetailText += String(format: "%.1f", setsPercent) + "%"
+        setsDetailText += percentString(of: Double(setsPercent))
         entries.append(
             BannerViewEntry(id: 1,
                             title: Text("Sets\nLast 7 Days"),
@@ -99,8 +112,8 @@ struct FeedBannerView : View {
         // Weight
         var weightDetailText: String
         var weightDetailColor: Color
-        var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (((valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1) * 100)
-        weightPercent = abs(weightPercent) < 0.1 ? 0 : weightPercent
+        var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1
+        weightPercent = abs(weightPercent) < 0.001 ? 0 : weightPercent
         if weightPercent > 0 {
             weightDetailColor = Color.green
             weightDetailText = "+"
@@ -111,11 +124,11 @@ struct FeedBannerView : View {
             weightDetailColor = UIColor.tertiaryLabel.swiftUIColor
             weightDetailText = "+"
         }
-        weightDetailText += String(format: "%.1f", weightPercent) + "%"
+        weightDetailText += percentString(of: weightPercent)
         entries.append(
             BannerViewEntry(id: 2,
                             title: Text("Weight\nLast 7 Days"),
-                            text: Text(TrainingSet.weightStringFor(weightInKg: valuesSevenDaysAgo.2, unit: settingsStore.weightUnit)),
+                            text: Text(WeightUnit.format(weight: valuesSevenDaysAgo.2, from: .metric, to: settingsStore.weightUnit)),
                             detail: Text(weightDetailText),
                             detailColor: weightDetailColor))
         

@@ -21,7 +21,7 @@ struct TrainingExerciseDetailBannerView : View {
         var entries = [BannerViewEntry]()
         
         entries.append(BannerViewEntry(id: 0, title: Text("Repetitions"), text: Text("\(trainingExercise.numberOfCompletedRepetitions ?? 0)")))
-        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\(TrainingSet.weightStringFor(weightInKg: trainingExercise.totalCompletedWeight ?? 0, unit: settingsStore.weightUnit))")))
+        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\(WeightUnit.format(weight: trainingExercise.totalCompletedWeight ?? 0, from: .metric, to: settingsStore.weightUnit))")))
         
         return entries
     }

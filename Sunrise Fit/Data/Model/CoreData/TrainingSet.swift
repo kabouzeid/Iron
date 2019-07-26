@@ -10,20 +10,10 @@ import CoreData
 
 class TrainingSet: NSManagedObject {
     func displayTitle(unit: WeightUnit) -> String {
-        "\(TrainingSet.weightStringFor(weightInKg: weight, unit: unit)) × \(repetitions)"
-    }
-    
-    static func weightStringFor(weightInKg: Double, unit: WeightUnit) -> String {
-        let weightInUnit = WeightUnit.convert(weight: weightInKg, from: .metric, to: unit)
-        return "\(weightNumberFormatter.string(from: weightInUnit as NSNumber) ?? String(weightInUnit)) \(unit.abbrev)"
-    }
-    
-    static var weightNumberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.allowsFloats = true
-        formatter.maximumFractionDigits = 3
-        formatter.minimumFractionDigits = 1
-        return formatter
+        let numberFormatter = unit.numberFormatter
+        numberFormatter.minimumFractionDigits = unit.defaultFractionDigits
+        let weightInUnit = WeightUnit.convert(weight: weight, from: .metric, to: unit)
+        return "\(numberFormatter.string(from: weightInUnit as NSNumber) ?? String(format: "%\(unit.maximumFractionDigits).f")) \(unit.abbrev) × \(repetitions)"
     }
     
     static var MAX_REPETITIONS: Int16 = 9999

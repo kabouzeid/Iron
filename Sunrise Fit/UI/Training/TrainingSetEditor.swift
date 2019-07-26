@@ -49,8 +49,7 @@ struct TrainingSetEditor : View {
     @State private var showMoreSheet = false
     @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
-    @State private var minimumFractionDigits = 0 // will be set in onAppear()
-    private var maximumFractionDigits = 3
+    @State private var minimumFractionDigits = 0
 
     var onDone: () -> Void = {}
     
@@ -62,7 +61,7 @@ struct TrainingSetEditor : View {
     private var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.allowsFloats = true
-        formatter.maximumFractionDigits = maximumFractionDigits
+        formatter.maximumFractionDigits = trainingSetViewModel.weightUnit.maximumFractionDigits
         formatter.minimumFractionDigits = minimumFractionDigits
         formatter.alwaysShowsDecimalSeparator = alwaysShowDecimalSeparator
         return formatter
@@ -211,7 +210,7 @@ struct TrainingSetEditor : View {
                     value: $trainingSetViewModel.weightInput,
                     alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator,
                     minimumFractionDigits: $minimumFractionDigits,
-                    maximumFractionDigits: maximumFractionDigits
+                    maximumFractionDigits: trainingSetViewModel.weightUnit.maximumFractionDigits
                 )
             } else if showKeyboard == .repetitions {
                 NumericKeyboard(

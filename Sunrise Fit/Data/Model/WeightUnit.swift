@@ -71,4 +71,22 @@ extension WeightUnit {
             return 0
         }
     }
+    
+    var maximumFractionDigits: Int { 3 }
+    
+    var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = maximumFractionDigits
+        return formatter
+    }
+    
+    func format(weight: Double) -> String {
+        "\(numberFormatter.string(from: weight as NSNumber) ?? String(format: "%.\(maximumFractionDigits)f", weight) ) \(abbrev)"
+    }
+    
+    static func format(weight: Double, from: WeightUnit, to: WeightUnit) -> String {
+        to.format(weight: WeightUnit.convert(weight: weight, from: from, to: to))
+    }
 }
