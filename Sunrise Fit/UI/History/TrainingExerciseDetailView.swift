@@ -222,7 +222,7 @@ struct TrainingExerciseDetailView : View {
                 (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) &&
                 editMode?.value != .active {
                 trainingSetEditor
-            }
+            } // TODO: else if trainingExercise is finished, show next exercise / finish training button
         }
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing: HStack{
