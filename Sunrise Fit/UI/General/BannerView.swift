@@ -16,7 +16,7 @@ struct BannerView : View {
         HStack {
             ForEach(entries) { entry in
                 Spacer()
-                entry
+                entry.layoutPriority(1)
             }
             if !entries.isEmpty {
                 Spacer()

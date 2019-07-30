@@ -60,6 +60,7 @@ struct TrainingView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
+                .layoutPriority(1)
                 if done {
                     Spacer()
                     Image(systemName: "checkmark")

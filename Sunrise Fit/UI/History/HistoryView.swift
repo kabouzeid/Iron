@@ -40,6 +40,7 @@ struct HistoryView : View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
+                            .layoutPriority(1)
                             Spacer()
                             training.muscleGroupImage
                         }
