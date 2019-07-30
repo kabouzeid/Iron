@@ -12,6 +12,7 @@ import Combine
 private class TrainingSetViewModel: ObservableObject {
     var trainingSet: TrainingSet
     var weightUnit: WeightUnit
+    
     var weightInput: Double {
         set {
             trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)

@@ -11,6 +11,8 @@ import SwiftUI
 import Combine
 
 class SettingsStore: ObservableObject {
+    let objectWillChange = PassthroughSubject<Void, Never>()
+    
     private var userDefaults: UserDefaults
     
     fileprivate init(userDefaults: UserDefaults) {

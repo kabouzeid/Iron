@@ -10,7 +10,9 @@ import SwiftUI
 import Combine
 
 private class TrainingViewModel: ObservableObject {
+    let objectWillChange = PassthroughSubject<Void, Never>()
     var training: Training
+    
     var startInput: Date {
         set {
             precondition(newValue <= training.end!)

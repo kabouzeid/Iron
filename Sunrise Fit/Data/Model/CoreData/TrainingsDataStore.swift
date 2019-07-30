@@ -11,6 +11,7 @@ import Combine
 import SwiftUI
 
 class TrainingsDataStore: ObservableObject {
+    let objectWillChange = PassthroughSubject<Void, Never>()
     let context: NSManagedObjectContext
     private var cancellable: Cancellable?
     
@@ -37,9 +38,7 @@ class TrainingsDataStore: ObservableObject {
                 #endif
                 return () // Notification -> Void
             }
-            .sink {
-                self.objectWillChange.send() // it's a little to late here, but there is no willChange for CoreData
-            }
+            .subscribe(objectWillChange) // it's a little to late here, but there is no willChange for CoreData
     }
     
     deinit {
