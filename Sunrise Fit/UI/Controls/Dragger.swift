@@ -23,7 +23,7 @@ struct Dragger : View {
     
     // private
     @State private var tmpValue: Double? = nil
-    @State private var draggerOffset: Length = 0
+    @State private var draggerOffset: CGFloat = 0
     @State private var isDragging: Bool = false
     @State private var feedbackOnMin: Bool = true
     @State private var feedbackOnMax: Bool = true
@@ -124,7 +124,7 @@ struct Dragger : View {
                 Text(valueString)
                     .font(Font.body.monospacedDigit())
                     .padding(.leading)
-                    .tapAction {
+                    .onTapGesture {
                         self.onTextTapped()
                     }
                 if showCursor {
@@ -161,7 +161,7 @@ struct Dragger : View {
 struct Dragger_Previews : PreviewProvider {
     static var value: Double = 50
     static var previews: some View {
-        Dragger(value: Binding(getValue: { value }, setValue: { value = $0}), unit: Text("reps"), showCursor: true)
+        Dragger(value: Binding(get: { value }, set: { value = $0}), unit: Text("reps"), showCursor: true)
                 .previewLayout(.sizeThatFits)
     }
 }

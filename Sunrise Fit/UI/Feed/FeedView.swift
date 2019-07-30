@@ -10,22 +10,20 @@ import SwiftUI
 import CoreData
 import Combine
 
-private class PinnedChartsStore: BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
-    
+private class PinnedChartsStore: ObservableObject {
     var pinnedCharts: [PinnedChart] {
         get {
             UserDefaults.standard.pinnedCharts
         }
         set {
-            willChange.send()
+            self.objectWillChange.send()
             UserDefaults.standard.pinnedCharts = newValue
         }
     }
 }
 
 struct FeedView : View {
-    @ObjectBinding private var pinnedChartsStore = PinnedChartsStore()
+    @ObservedObject private var pinnedChartsStore = PinnedChartsStore()
     
     @State private var showingPinnedChartSelector = false
 
@@ -57,7 +55,7 @@ struct FeedView : View {
                     }
                 }
             }
-            .listStyle(.grouped)
+            .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: EditButton())
             .sheet(isPresented: $showingPinnedChartSelector) {
@@ -76,7 +74,7 @@ struct FeedView : View {
 }
 
 private struct PinnedChartSelectorView: View {
-    @ObjectBinding var pinnedChartsStore: PinnedChartsStore
+    @ObservedObject var pinnedChartsStore: PinnedChartsStore
     
     var exerciseMuscleGroups: [[Exercise]]
     var onSelection: (PinnedChart) -> Void
@@ -121,7 +119,7 @@ struct FeedView_Previews : PreviewProvider {
                 .environmentObject(mockSettingsStoreMetric)
                 
                 // TODO: remove in future, somehow necessary (beta 4)
-                .listStyle(.grouped)
+                .listStyle(GroupedListStyle())
         }
     }
 }

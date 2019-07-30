@@ -9,9 +9,7 @@
 import SwiftUI
 import Combine
 
-private class TrainingViewModel: BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
-
+private class TrainingViewModel: ObservableObject {
     var training: Training
     var startInput: Date {
         set {
@@ -32,7 +30,7 @@ private class TrainingViewModel: BindableObject {
         }
     }
     // we don't want to immediately write the title to core data
-    var titleInput: String { willSet { willChange.send() } }
+    var titleInput: String { willSet { self.objectWillChange.send() } }
     // instead when the user is done typing we adjust and set the title here
     func adjustAndSaveTitleInput() {
         titleInput = titleInput.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -48,7 +46,7 @@ private class TrainingViewModel: BindableObject {
 struct TrainingDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    @ObjectBinding private var trainingViewModel: TrainingViewModel
+    @ObservedObject private var trainingViewModel: TrainingViewModel
     
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
@@ -139,7 +137,7 @@ struct TrainingDetailView : View {
                 }
             }
         }
-        .listStyle(.grouped)
+        .listStyle(GroupedListStyle())
         .navigationBarTitle(Text(trainingViewModel.training.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack {

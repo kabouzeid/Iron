@@ -28,7 +28,7 @@ struct ExerciseDetailView : View {
         return images
     }
     
-    private func imageHeight(geometry: GeometryProxy) -> Length {
+    private func imageHeight(geometry: GeometryProxy) -> CGFloat {
         // accessing geometry.safeAreaInsets.top crashes for Deadlift: Barbell on beta4
 //        min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
         min(geometry.size.width, (geometry.size.height) * 0.5)
@@ -102,7 +102,7 @@ struct ExerciseDetailView : View {
                     }
                 }
             }
-            .listStyle(.grouped)
+            .listStyle(GroupedListStyle())
         }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:

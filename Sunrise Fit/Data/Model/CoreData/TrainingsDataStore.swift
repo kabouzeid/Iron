@@ -10,9 +10,7 @@ import CoreData
 import Combine
 import SwiftUI
 
-class TrainingsDataStore : BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
-    
+class TrainingsDataStore: ObservableObject {
     let context: NSManagedObjectContext
     private var cancellable: Cancellable?
     
@@ -39,7 +37,9 @@ class TrainingsDataStore : BindableObject {
                 #endif
                 return () // Notification -> Void
             }
-            .subscribe(willChange) // it's a little to late here, but there is no willChange for CoreData
+            .sink {
+                self.objectWillChange.send() // it's a little to late here, but there is no willChange for CoreData
+            }
     }
     
     deinit {

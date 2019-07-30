@@ -10,9 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class SettingsStore: BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
-    
+class SettingsStore: ObservableObject {
     private var userDefaults: UserDefaults
     
     fileprivate init(userDefaults: UserDefaults) {
@@ -28,7 +26,7 @@ class SettingsStore: BindableObject {
             userDefaults.weightUnit
         }
         set {
-            willChange.send()
+            self.objectWillChange.send()
             userDefaults.weightUnit = newValue
         }
     }

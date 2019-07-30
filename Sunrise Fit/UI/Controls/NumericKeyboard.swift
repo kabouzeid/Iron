@@ -69,7 +69,7 @@ struct NumericKeyboard: View {
         numberFormatter.string(from: value as NSNumber)
     }
     
-    private func textKeyboardButton(label: Text, value: String, width: Length) -> some View {
+    private func textKeyboardButton(label: Text, value: String, width: CGFloat) -> some View {
         textActionKeyboardButton(label: label, width: width) {
             self.prepareNumberFormatter()
             guard !self.allowsFloats || self.minimumFractionDigits < self.maximumFractionDigits else { return } // otherwise we might get a bug with rounding
@@ -81,7 +81,7 @@ struct NumericKeyboard: View {
         }
     }
     
-    private func textActionKeyboardButton(label: Text, width: Length, action: @escaping () -> Void) -> some View {
+    private func textActionKeyboardButton(label: Text, width: CGFloat, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             label
                 .padding()
@@ -91,7 +91,7 @@ struct NumericKeyboard: View {
         }
     }
     
-    private func imageActionKeyboardButton(label: Image, width: Length, action: @escaping () -> Void) -> some View {
+    private func imageActionKeyboardButton(label: Image, width: CGFloat, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             ZStack {
                 Text("0") // only used so this button is the same height as the other buttons
@@ -118,21 +118,21 @@ struct NumericKeyboard: View {
                     self.textKeyboardButton(label: Text("2"), value: "2", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("3"), value: "3", width: geometry.size.width / 3)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("4"), value: "4", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("5"), value: "5", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("6"), value: "6", width: geometry.size.width / 3)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("7"), value: "7", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("8"), value: "8", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("9"), value: "9", width: geometry.size.width / 3)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
                     self.textActionKeyboardButton(label: Text(Locale.current.decimalSeparator ?? "."), width: geometry.size.width / 3) {
@@ -152,7 +152,7 @@ struct NumericKeyboard: View {
                         self.setValue(string: String(string.dropLast()))
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
             }
             .background(UIColor.gray.swiftUIColor)
             .fixedSize()

@@ -17,7 +17,7 @@ struct ExerciseMuscleGroupsView : View {
         let muscleGroup = exercises.first?.muscleGroup ?? ""
         return NavigationLink(destination:
             ExercisesView(exercises: exercises)
-                .listStyle(.plain)
+                .listStyle(PlainListStyle())
                 .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore)
                 .navigationBarTitle(Text(muscleGroup.capitalized), displayMode: .inline)
@@ -56,7 +56,7 @@ struct ExerciseMuscleGroupsView : View {
                     }
                 }
             }
-            .listStyle(.grouped)
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Exercises")
         }
     }

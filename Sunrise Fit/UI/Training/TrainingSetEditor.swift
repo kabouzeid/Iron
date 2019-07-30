@@ -9,9 +9,7 @@
 import SwiftUI
 import Combine
 
-private class TrainingSetViewModel : BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
-    
+private class TrainingSetViewModel: ObservableObject {
     var trainingSet: TrainingSet
     var weightUnit: WeightUnit
     var weightInput: Double {
@@ -45,7 +43,7 @@ private enum KeyboardType {
 
 struct TrainingSetEditor : View {
     @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    @ObjectBinding private var trainingSetViewModel: TrainingSetViewModel
+    @ObservedObject private var trainingSetViewModel: TrainingSetViewModel
     @State private var showMoreSheet = false
     @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
@@ -302,7 +300,7 @@ private struct MoreView: View {
                 }
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PlainButtonStyle())
     }
     
     private func RPEButton(RPE: Double) -> some View {
@@ -325,7 +323,7 @@ private struct MoreView: View {
                 }
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PlainButtonStyle())
     }
     
     var body: some View {
@@ -346,7 +344,7 @@ private struct MoreView: View {
                 }
             }
         }
-        .listStyle(.grouped)
+        .listStyle(GroupedListStyle())
     }
 }
 
@@ -366,7 +364,7 @@ struct TrainingSetEditor_Previews : PreviewProvider {
             
             MoreView(trainingSet: mockTrainingSet)
                 .previewLayout(.sizeThatFits)
-                .listStyle(.grouped)
+                .listStyle(GroupedListStyle())
         }
     }
 }

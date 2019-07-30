@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct ExerciseMultiSelectionView<Selection>: View where Selection: SelectionManager, Selection.SelectionValue == Exercise {
+struct ExerciseMultiSelectionView: View {
     var exerciseMuscleGroups: [[Exercise]]
-    @Binding var selection: Selection
+    @Binding var selection: Set<Exercise>
     
     var body: some View {
         VStack {

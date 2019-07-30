@@ -106,7 +106,7 @@ struct TrainingExerciseDetailView : View {
             }
                 // TODO: use selection feature of List when it is released
                 .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
-                .tapAction { // TODO: currently tap on Spacer() is not recognized
+                .onTapGesture { // TODO: currently tap on Spacer() is not recognized
                     guard self.editMode?.value != .active else { return }
                     if self.selectedTrainingSet == trainingSet {
                         self.select(set: nil)
@@ -216,7 +216,7 @@ struct TrainingExerciseDetailView : View {
                 
                 historyTrainingSets
             }
-            .listStyle(.grouped)
+            .listStyle(GroupedListStyle())
             
             if selectedTrainingSet != nil &&
                 (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) &&

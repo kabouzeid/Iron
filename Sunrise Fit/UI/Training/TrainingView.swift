@@ -99,7 +99,7 @@ struct TrainingView: View {
                         }
                     }
                 }
-                .listStyle(.grouped)
+                .listStyle(GroupedListStyle())
             }
             .navigationBarTitle(Text(trainig.displayTitle), displayMode: .inline)
             .navigationBarItems(
@@ -115,7 +115,7 @@ struct TrainingView: View {
                 }
                 .actionSheet(isPresented: $showingCancelSheet, content: {
                     ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
-                        .destructive(Text("Delete Training"), onTrigger: {
+                        .destructive(Text("Delete Training"), action: {
                             self.trainingsDataStore.context.delete(self.trainig)
                             self.trainingsDataStore.context.safeSave()
                         }),

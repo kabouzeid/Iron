@@ -27,7 +27,7 @@ struct ContentView : View {
     }
     
     var body: some View {
-        TabbedView {
+        TabView {
             FeedView()
                 .tabItem {
                     Image("today_apps")
