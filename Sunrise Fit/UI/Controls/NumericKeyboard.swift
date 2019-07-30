@@ -87,7 +87,7 @@ struct NumericKeyboard: View {
                 .padding()
                 .foregroundColor(Color.white)
                 .frame(width: width)
-                .background(UIColor.darkGray.swiftUIColor)
+                .background(Color(UIColor.darkGray))
         }
     }
     
@@ -102,7 +102,7 @@ struct NumericKeyboard: View {
                     .foregroundColor(.white)
                     .frame(width: width)
             }
-            .background(UIColor.darkGray.swiftUIColor)
+            .background(Color(UIColor.darkGray))
         }
     }
     
@@ -154,7 +154,7 @@ struct NumericKeyboard: View {
                 }
                 .buttonStyle(PlainButtonStyle())
             }
-            .background(UIColor.gray.swiftUIColor)
+            .background(Color(UIColor.gray))
             .fixedSize()
         }
         .frame(height: 210) // TODO: only temporary because this doesn't support dynamic type size

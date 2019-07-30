@@ -142,7 +142,7 @@ struct Dragger : View {
                     .offset(y: draggerOffset)
                     .animation(.interactiveSpring())
             }
-            .foregroundColor(isDragging ? UIColor.tertiaryLabel.swiftUIColor : Color.secondary)
+            .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
             .padding([.trailing])
             .padding([.top, .bottom], 6)
             .gesture(dragGesture)

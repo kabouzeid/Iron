@@ -20,7 +20,6 @@
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
 		8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* Array+sorted.swift */; };
 		8A442AD7207A428500A2BDBD /* Date+Days.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* Date+Days.swift */; };
-		8A442AD9207A58F500A2BDBD /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD8207A58F500A2BDBD /* UIColor+Color.swift */; };
 		8A4FAAFD206BAF8C004A2806 /* Double+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FAAFC206BAF8C004A2806 /* Double+Formatting.swift */; };
 		8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A47E22D7C93B0076E99A /* SettingsView.swift */; };
 		8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */; };
@@ -121,7 +120,6 @@
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
 		8A3EB421204AFCF000E3A08B /* Array+sorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sorted.swift"; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* Date+Days.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Days.swift"; sourceTree = "<group>"; };
-		8A442AD8207A58F500A2BDBD /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
 		8A4FAAFC206BAF8C004A2806 /* Double+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatting.swift"; sourceTree = "<group>"; };
 		8A56A47E22D7C93B0076E99A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Settings.swift"; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 				8A3EB421204AFCF000E3A08B /* Array+sorted.swift */,
 				8A4FAAFC206BAF8C004A2806 /* Double+Formatting.swift */,
 				8A442AD6207A428500A2BDBD /* Date+Days.swift */,
-				8A442AD8207A58F500A2BDBD /* UIColor+Color.swift */,
 				8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */,
 				8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */,
 				8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */,
@@ -645,7 +642,6 @@
 				8AC8063D22BAC54200086032 /* FeedView.swift in Sources */,
 				8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
-				8A442AD9207A58F500A2BDBD /* UIColor+Color.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */,
 				8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */,
 				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,

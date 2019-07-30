@@ -105,7 +105,7 @@ struct TrainingExerciseDetailView : View {
                     .foregroundColor(.secondary)
             }
                 // TODO: use selection feature of List when it is released
-                .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? UIColor.systemGray4.swiftUIColor : nil) // TODO: trainingSet cast shouldn't be necessary
+                .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? Color(UIColor.systemGray4) : nil) // TODO: trainingSet cast shouldn't be necessary
                 .onTapGesture { // TODO: currently tap on Spacer() is not recognized
                     guard self.editMode?.value != .active else { return }
                     if self.selectedTrainingSet == trainingSet {

@@ -74,7 +74,7 @@ struct FeedBannerView : View {
             durationDetailColor = Color.red
             durationDetailText = ""
         } else {
-            durationDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            durationDetailColor = Color(UIColor.tertiaryLabel)
             durationDetailText = "+"
         }
         durationDetailText += percentString(of: durationPercent)
@@ -98,7 +98,7 @@ struct FeedBannerView : View {
             setsDetailColor = Color.red
             setsDetailText = ""
         } else {
-            setsDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            setsDetailColor = Color(UIColor.tertiaryLabel)
             setsDetailText = "+"
         }
         setsDetailText += percentString(of: Double(setsPercent))
@@ -121,7 +121,7 @@ struct FeedBannerView : View {
             weightDetailColor = Color.red
             weightDetailText = ""
         } else {
-            weightDetailColor = UIColor.tertiaryLabel.swiftUIColor
+            weightDetailColor = Color(UIColor.tertiaryLabel)
             weightDetailText = "+"
         }
         weightDetailText += percentString(of: weightPercent)

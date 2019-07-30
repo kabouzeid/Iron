@@ -42,7 +42,7 @@ struct BannerViewEntry : View, Identifiable {
             if detail != nil {
                 detail!
                     .font(.body)
-                    .foregroundColor(detailColor ?? UIColor.tertiaryLabel.swiftUIColor) // TODO: wait for .tertiaryLabel
+                    .foregroundColor(detailColor ?? Color(UIColor.tertiaryLabel)) // TODO: wait for .tertiaryLabel
             }
             title
                 .font(.subheadline)

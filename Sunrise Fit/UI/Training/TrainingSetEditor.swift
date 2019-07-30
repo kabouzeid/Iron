@@ -82,7 +82,7 @@ struct TrainingSetEditor : View {
     }
     
     private var moreButton: some View {
-        textButton(label: Text("More").foregroundColor(.secondary), color: UIColor.systemGray4.swiftUIColor, action: { self.showMoreSheet = true })
+        textButton(label: Text("More").foregroundColor(.secondary), color: Color(UIColor.systemGray4), action: { self.showMoreSheet = true })
     }
     
     private var doneButton: some View {
@@ -122,7 +122,7 @@ struct TrainingSetEditor : View {
         }
         .background(
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .foregroundColor(UIColor.systemGray4.swiftUIColor)
+                .foregroundColor(Color(UIColor.systemGray4))
         )
     }
     
