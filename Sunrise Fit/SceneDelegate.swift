@@ -10,9 +10,8 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -52,14 +51,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        let center = UNUserNotificationCenter.current()
+        center.removeDeliveredNotifications(withIdentifiers: [unfinishedTrainingNotificationID])
+        center.removePendingNotificationRequests(withIdentifiers: [unfinishedTrainingNotificationID])
     }
 
+    let unfinishedTrainingNotificationID = "unfinished_training"
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+        // Save changes in the application's managed object context when the application transitions to the background.
+        AppDelegate.instance.persistentContainer.viewContext.safeSave()
+        
+        // remind the user 15 mins after closing the app if the training ist still unfinished
+        if (try? AppDelegate.instance.persistentContainer.viewContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 > 0 {
+            let center = UNUserNotificationCenter.current()
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Unfinished training"
+            content.body = "Your current training is unfinished. Do you want to finish it?"
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15 * 60, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: unfinishedTrainingNotificationID, content: content, trigger: trigger)
+            
+            center.add(request) { (error) in
+                if let error = error {
+                    print("error \(String(describing: error))")
+                }
+            }
+        }
     }
-
-
 }
-
