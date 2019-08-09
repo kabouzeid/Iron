@@ -1,60 +1,18 @@
 //
-//  TrainingsDataStore.swift
+//  MockTrainingsData.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 22.06.19.
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
 //
 
-import CoreData
-import Combine
-import SwiftUI
-
-class TrainingsDataStore: ObservableObject {
-    let objectWillChange = PassthroughSubject<Void, Never>()
-    let context: NSManagedObjectContext
-    private var cancellable: Cancellable?
-    
-    init(context: NSManagedObjectContext) {
-        self.context = context
-        cancellable = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
-            .map { notification in
-                #if DEBUG
-                print("trainings data changed")
-//                print("notification: \(notification)")
-//                guard let userInfo = notification.userInfo else { return }
-//
-//                if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
-//                    print("insertions: \(inserts)")
-//                }
-//
-//                if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
-//                    print("updates \(updates)")
-//                }
-//
-//                if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
-//                    print("deletes \(deletes)")
-//                }
-                #endif
-                return () // Notification -> Void
-            }
-            .subscribe(objectWillChange) // it's a little to late here, but there is no willChange for CoreData
-    }
-    
-    deinit {
-        cancellable?.cancel()
-    }
-}
-
-let trainingsDataStore = TrainingsDataStore(context: AppDelegate.instance.persistentContainer.viewContext)
-
-#if DEBUG
 // for testing in the canvas
-// TODO: add trainings etc
-let mockTrainingsDataStore: TrainingsDataStore = {
+#if DEBUG
+import CoreData
+let mockManagedObjectContext: NSManagedObjectContext = {
     let persistenContainer = setUpInMemoryNSPersistentContainer()
     createMockTrainingsData(context: persistenContainer.viewContext)
-    return TrainingsDataStore(context: persistenContainer.viewContext)
+    return persistenContainer.viewContext
 }()
 
 let mockCurrentTraining: Training = {
@@ -65,7 +23,7 @@ let mockCurrentTraining: Training = {
 
 let mockTraining: Training = {
     do {
-        return try mockTrainingsDataStore.context.fetch(Training.fetchRequest()).first as! Training
+        return try mockManagedObjectContext.fetch(Training.fetchRequest()).first as! Training
     } catch {
         fatalError("Fetch mock training failed")
     }

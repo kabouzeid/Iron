@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercise: Exercise
     
     @State private var showingStatistics = false
@@ -110,15 +109,14 @@ struct ExerciseDetailView : View {
                 }
                 .sheet(isPresented: $showingHistory) {
                             ExerciseHistoryView(exercise: self.exercise)
-                                .environmentObject(self.trainingsDataStore)
                                 .environmentObject(self.settingsStore)
+                                .environment(\.managedObjectContext, AppDelegate.instance.persistentContainer.viewContext)
                         }
                 Button(action: { self.showingStatistics = true }) {
                     Image(systemName: "waveform.path.ecg")
                 }
                 .sheet(isPresented: $showingStatistics) {
                             ExerciseStatisticsView(exercise: self.exercise)
-                                .environmentObject(self.trainingsDataStore)
                                 .environmentObject(self.settingsStore)
                         }
             }
@@ -132,8 +130,8 @@ struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
-                .environmentObject(mockTrainingsDataStore)
                 .environmentObject(mockSettingsStoreMetric)
+                .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }
 }

@@ -10,26 +10,12 @@ import SwiftUI
 import Charts
 
 struct ActivityChartView : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
-    private var trainingsPerWeekChartInfo: TrainingsPerWeekChartInfo {
-        TrainingsPerWeekChartInfo(context: trainingsDataStore.context)
-    }
-    
-    private var chartData: ChartData {
-        trainingsPerWeekChartInfo.chartData()
-    }
-    
-    private var xAxisFormatter: IAxisValueFormatter {
-        trainingsPerWeekChartInfo.xAxisValueFormatter
-    }
-    
-    private var yAxisFormatter: IAxisValueFormatter {
-        trainingsPerWeekChartInfo.yAxisValueFormatter
-    }
+    @Environment(\.managedObjectContext) var managedObjectContext
+    // TODO: update on context changes
     
     var body: some View {
-        _BarChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter) { chartView, chartData in
+        let chartInfo = TrainingsPerWeekChartInfo(context: managedObjectContext)
+        return _BarChartView(chartData: chartInfo.chartData(), xAxisValueFormatter: chartInfo.xAxisValueFormatter, yAxisValueFormatter: chartInfo.yAxisValueFormatter) { chartView, chartData in
             chartView.xAxis.labelCount = chartData.entryCount
             chartView.leftAxis.axisMinimum = 0
             chartView.dragXEnabled = false
@@ -45,7 +31,7 @@ struct ActivityChartView : View {
 struct ActivityChartView_Previews : PreviewProvider {
     static var previews: some View {
         ActivityChartView()
-            .environmentObject(mockTrainingsDataStore)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

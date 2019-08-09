@@ -24,8 +24,9 @@
 		8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A47E22D7C93B0076E99A /* SettingsView.swift */; };
 		8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */; };
 		8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59282F22BD8B5C00BFD57E /* HistoryView.swift */; };
-		8A59283222BE575300BFD57E /* TrainingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59283122BE575300BFD57E /* TrainingsDataStore.swift */; };
+		8A59283222BE575300BFD57E /* MockTrainingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59283122BE575300BFD57E /* MockTrainingsData.swift */; };
 		8A5989AB20D0212C00DB9104 /* UIFont+MonospacedDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */; };
+		8A5C437822F4CE5F007A7061 /* ObservableFetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C437722F4CE5F007A7061 /* ObservableFetchRequest.swift */; };
 		8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
 		8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8A652C4222D0F6D300DBE10E /* AnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */; };
@@ -35,6 +36,7 @@
 		8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */; };
 		8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */; };
+		8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */; };
 		8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
@@ -124,8 +126,9 @@
 		8A56A47E22D7C93B0076E99A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Settings.swift"; sourceTree = "<group>"; };
 		8A59282F22BD8B5C00BFD57E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		8A59283122BE575300BFD57E /* TrainingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsDataStore.swift; sourceTree = "<group>"; };
+		8A59283122BE575300BFD57E /* MockTrainingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTrainingsData.swift; sourceTree = "<group>"; };
 		8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+MonospacedDigit.swift"; sourceTree = "<group>"; };
+		8A5C437722F4CE5F007A7061 /* ObservableFetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableFetchRequest.swift; sourceTree = "<group>"; };
 		8A643E132147B8430044C3A1 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledLineChartView.swift; sourceTree = "<group>"; };
 		8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageView.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TextSizeDemo.swift; sourceTree = "<group>"; };
 		8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailView.swift; sourceTree = "<group>"; };
 		8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailBannerView.swift; sourceTree = "<group>"; };
+		8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Publisher.swift"; sourceTree = "<group>"; };
 		8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -346,10 +350,11 @@
 		8AB8A5932034C072004366F2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				8A59283122BE575300BFD57E /* TrainingsDataStore.swift */,
 				8AB8A5942034C097004366F2 /* Training.swift */,
 				8AB8A5962034C0AF004366F2 /* TrainingExercise.swift */,
 				8AB8A5982034C0BA004366F2 /* TrainingSet.swift */,
+				8A5C437722F4CE5F007A7061 /* ObservableFetchRequest.swift */,
+				8A59283122BE575300BFD57E /* MockTrainingsData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */,
 				8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */,
 				8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */,
+				8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -613,7 +619,7 @@
 				8AC8063F22BACCC900086032 /* ActivityChartView.swift in Sources */,
 				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
 				8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */,
-				8A59283222BE575300BFD57E /* TrainingsDataStore.swift in Sources */,
+				8A59283222BE575300BFD57E /* MockTrainingsData.swift in Sources */,
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
@@ -636,10 +642,12 @@
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */,
 				8A9EAC5D22EB526A00A11C65 /* NSManagedObjectContext+save.swift in Sources */,
+				8A5C437822F4CE5F007A7061 /* ObservableFetchRequest.swift in Sources */,
 				8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */,
 				8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,
 				8AC8063D22BAC54200086032 /* FeedView.swift in Sources */,
+				8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */,
 				8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */,

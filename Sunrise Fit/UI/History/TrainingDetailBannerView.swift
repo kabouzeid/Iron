@@ -10,8 +10,7 @@ import SwiftUI
 
 struct TrainingDetailBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    let training: Training
+    @ObservedObject var training: Training
     
     var body: some View {
         BannerView(entries: bannerViewEntries)
@@ -31,8 +30,8 @@ struct TrainingDetailBannerView : View {
 struct TrainingDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
         TrainingDetailBannerView(training: mockTraining)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -10,7 +10,6 @@ import SwiftUI
 import Charts
 
 struct ExerciseStatisticsView : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     var exercise: Exercise
     
     var body: some View {
@@ -24,8 +23,8 @@ struct ExerciseStatisticsView : View {
 struct ExerciseStatisticsView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseStatisticsView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

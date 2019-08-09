@@ -11,17 +11,20 @@ import CoreData
 
 struct HistoryView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-    private var fetchRequest: NSFetchRequest<Training> {
+    // TODO: as of beta5, @FetchRequest is only updated on the first change of a value (e.g. title) but deleting a training updates it all the time
+    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var fetchedResults
+
+    static var fetchRequest: NSFetchRequest<Training> {
         let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "isCurrentTraining != %@", NSNumber(booleanLiteral: true))
-        request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
+        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
         return request
     }
     
     private var trainings: [Training] {
-        return (try? trainingsDataStore.context.fetch(fetchRequest)) ?? []
+        fetchedResults.map { $0 }
     }
     
     var body: some View {
@@ -29,7 +32,6 @@ struct HistoryView : View {
             List {
                 ForEach(trainings, id: \.objectID) { training in
                     NavigationLink(destination: TrainingDetailView(training: training)
-                        .environmentObject(self.trainingsDataStore)
                         .environmentObject(self.settingsStore)
                     ) {
                         HStack {
@@ -49,8 +51,8 @@ struct HistoryView : View {
                 .onDelete { offsets in
                     // TODO: confirm delete
                     let trainings = self.trainings
-                    for index in offsets {
-                        self.trainingsDataStore.context.delete(trainings[index])
+                    for i in offsets.sorted().reversed() {
+                        self.managedObjectContext.delete(trainings[i])
                     }
                 }
             }
@@ -64,8 +66,8 @@ struct HistoryView : View {
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
         HistoryView()
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

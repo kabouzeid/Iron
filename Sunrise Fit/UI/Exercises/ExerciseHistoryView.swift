@@ -7,15 +7,21 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ExerciseHistoryView : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     
     var exercise: Exercise
+    @ObservedObject private var observableFetchRequest = ObservableFetchRequest<TrainingExercise>()
     
-    var history: [TrainingExercise] {
-        TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: trainingsDataStore.context) ?? []
+    private func fetch() {
+        observableFetchRequest.fetch(fetchRequest: TrainingExercise.historyFetchRequest(of: exercise.id, until: nil), managedObjectContext: managedObjectContext)
+    }
+
+    private var history: [TrainingExercise] {
+        observableFetchRequest.fetchedResults
     }
     
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
@@ -27,7 +33,8 @@ struct ExerciseHistoryView : View {
     }
     
     var body: some View {
-        List {
+        fetch() // TODO: should be called in onAppear, but as of beta5 this crashes
+        return List {
             ForEach(history, id: \.objectID) { trainingExercise in
                 Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
                     ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { index, trainingSet in
@@ -52,8 +59,8 @@ struct ExerciseHistoryView : View {
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseHistoryView(exercise: EverkineticDataProvider.findExercise(id: 42)!)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

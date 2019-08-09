@@ -10,13 +10,23 @@ import SwiftUI
 import CoreData
 
 struct TrainingExerciseDetailView : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var editMode
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    let trainingExercise: TrainingExercise
     
+    @ObservedObject var trainingExercise: TrainingExercise
+    @ObservedObject var observableFetchRequest = ObservableFetchRequest<TrainingExercise>()
+
     @State private var selectedTrainingSet: TrainingSet? = nil
     
+    private func fetchTrainingExerciseHistory() {
+        observableFetchRequest.fetch(fetchRequest: trainingExercise.historyFetchRequest, managedObjectContext: managedObjectContext)
+    }
+    
+    private var trainingExerciseHistory: [TrainingExercise] {
+        observableFetchRequest.fetchedResults
+    }
+
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
         trainingExercise.trainingSets?.array as? [TrainingSet] ?? []
     }
@@ -34,7 +44,7 @@ struct TrainingExerciseDetailView : View {
     }
     
     private func select(set: TrainingSet?) {
-        self.trainingsDataStore.context.safeSave()
+        managedObjectContext.safeSave()
         withAnimation {
             if let set = set, !set.isCompleted && set.repetitions == 0 && set.weight == 0 { // treat as uninitialized
                 initRepsAndWeight(for: set)
@@ -49,7 +59,7 @@ struct TrainingExerciseDetailView : View {
         if index > 0 { // not the first set
             previousSet = trainingExercise.trainingSets![index - 1] as? TrainingSet
         } else { // first set
-            previousSet = (trainingExercise.history ?? []).first?.trainingSets?.firstObject as? TrainingSet
+            previousSet = trainingExerciseHistory.first?.trainingSets?.firstObject as? TrainingSet
         }
         if let previousSet = previousSet {
             set.repetitions = previousSet.repetitions
@@ -116,8 +126,10 @@ struct TrainingExerciseDetailView : View {
             }
         }
         .onDelete { offsets in
-            //                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
-            self.trainingExercise.removeFromTrainingSets(at: offsets as NSIndexSet)
+            for i in offsets.sorted().reversed() {
+                guard let trainingSet = self.trainingExercise.trainingSets?[i] as? TrainingSet else { return }
+                self.managedObjectContext.delete(trainingSet)
+            }
             if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
                 self.select(set: self.firstUncompletedSet)
             }
@@ -158,7 +170,7 @@ struct TrainingExerciseDetailView : View {
     }
     
     private var historyTrainingSets: some View {
-        ForEach((trainingExercise.history ?? []), id: \.objectID) { trainingExercise in
+        ForEach(trainingExerciseHistory, id: \.objectID) { trainingExercise in
             Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
                 ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
                     HStack {
@@ -203,7 +215,8 @@ struct TrainingExerciseDetailView : View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        fetchTrainingExerciseHistory() // TODO: should be in onAppear, but as of beta5 this crashes
+        return VStack(spacing: 0) {
             List {
                 Section {
                     banner
@@ -227,7 +240,6 @@ struct TrainingExerciseDetailView : View {
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing: HStack{
             NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise ?? Exercise.empty)
-                .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore)) {
                     Image(systemName: "info.circle")
             }
@@ -244,8 +256,8 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
         TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }
 }

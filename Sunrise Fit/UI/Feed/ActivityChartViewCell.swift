@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ActivityChartViewCell : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
     var body: some View {
         return VStack(alignment: .leading) {
             Text("Activity")
@@ -28,7 +26,7 @@ struct ActivityChartViewCell : View {
 struct ActivityChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ActivityChartViewCell()
-            .environmentObject(mockTrainingsDataStore)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

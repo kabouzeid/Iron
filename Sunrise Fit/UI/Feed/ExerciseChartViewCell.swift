@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ExerciseChartViewCell : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     var exercise: Exercise
     var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
     
@@ -30,8 +29,8 @@ struct ExerciseChartViewCell : View {
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

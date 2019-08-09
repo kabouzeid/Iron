@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct StartTrainingView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
+
     private var plateImage: some View {
         Image("plate")
             .resizable()
@@ -29,11 +29,11 @@ struct StartTrainingView: View {
                 }
                     
                 Button("Start Training") {
-                    precondition(Training.currentTraining(context: self.trainingsDataStore.context) == nil)
+                    precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
                     // create a new training
-                    let training = Training(context: self.trainingsDataStore.context)
+                    let training = Training(context: self.managedObjectContext)
                     training.isCurrentTraining = true
-                    self.trainingsDataStore.context.safeSave()
+                    self.managedObjectContext.safeSave()
                 }
                 .padding()
                 .foregroundColor(Color.white)
@@ -53,9 +53,8 @@ struct StartTrainingView_Previews: PreviewProvider {
             
             StartTrainingView()
                 .environment(\.colorScheme, .dark)
-                
         }
-        .environmentObject(mockTrainingsDataStore)
+        .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

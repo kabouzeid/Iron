@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         // remind the user 15 mins after closing the app if the training ist still unfinished
-        if Training.currentTraining(context: trainingsDataStore.context) != nil {
+        if (try? persistentContainer.viewContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 > 0 {
             let center = UNUserNotificationCenter.current()
             
             let content = UNMutableNotificationContent()
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        trainingsDataStore.context.safeSave()
+        persistentContainer.viewContext.safeSave()
     }
     
     // MARK: UISceneSession Lifecycle

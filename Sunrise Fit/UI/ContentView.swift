@@ -9,20 +9,18 @@
 import SwiftUI
 
 struct ContentView : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
+    @FetchRequest(fetchRequest: Training.currentTrainingFetchRequest) var fetchedResults
+
+    var currentTraining: Training? {
+        assert(fetchedResults.count <= 1)
+        return fetchedResults.first
+    }
+
     private func trainingView(training: Training?) -> some View {
-        ZStack {
-            if training != nil {
-                TrainingView(trainig: training!)
-                    .animation(.default)
-                    .transition(.scale)
-                
-            } else {
-                StartTrainingView()
-                    .animation(.default)
-                    .transition(.scale)
-            }
+        if training != nil {
+            return AnyView(TrainingView(trainig: training!))
+        } else {
+            return AnyView(StartTrainingView())
         }
     }
     
@@ -40,7 +38,7 @@ struct ContentView : View {
                     Text("History")
                 }
                 .tag(1)
-            trainingView(training: Training.currentTraining(context: trainingsDataStore.context))
+            trainingView(training: currentTraining)
                 .tabItem {
                     Image("training")
                     Text("Training")
@@ -67,8 +65,8 @@ struct ContentView : View {
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

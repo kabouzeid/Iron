@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ExerciseMuscleGroupsView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exerciseMuscleGroups: [[Exercise]]
     
     func exerciseGroupCell(exercises: [Exercise]) -> some View {
@@ -18,7 +17,6 @@ struct ExerciseMuscleGroupsView : View {
         return NavigationLink(destination:
             ExercisesView(exercises: exercises)
                 .listStyle(PlainListStyle())
-                .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore)
                 .navigationBarTitle(Text(muscleGroup.capitalized), displayMode: .inline)
         ) {
@@ -39,7 +37,6 @@ struct ExerciseMuscleGroupsView : View {
                 Section {
                     NavigationLink(destination:
                         MuscleGroupSectionedExercisesView(exerciseMuscleGroups: exerciseMuscleGroups)
-                            .environmentObject(trainingsDataStore)
                             .environmentObject(settingsStore)
                             .navigationBarTitle(Text("All Exercises"), displayMode: .inline)) {
                         HStack {
@@ -66,8 +63,8 @@ struct ExerciseMuscleGroupsView : View {
 struct ExerciseCategoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseMuscleGroupsView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

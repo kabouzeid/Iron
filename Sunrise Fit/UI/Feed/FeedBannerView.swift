@@ -12,7 +12,39 @@ import Combine
 
 struct FeedBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    
+    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var sevenDaysFetchedResults
+    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var fourteenDaysFetchedResults
+    
+    private static var sevenDaysAgo: Date {
+       Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+    }
+    
+    private static var fourteenDaysAgo: Date {
+        Calendar.current.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
+    }
+    
+    private static var sevenDaysFetchRequest: NSFetchRequest<Training> {
+        let request: NSFetchRequest<Training> = Training.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@ AND \(#keyPath(Training.start)) >= %@", NSNumber(booleanLiteral: true), sevenDaysAgo as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+        return request
+    }
+    
+    private static var fourteenDaysFetchRequest: NSFetchRequest<Training> {
+        let request: NSFetchRequest<Training> = Training.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@ AND \(#keyPath(Training.start)) >= %@ AND \(#keyPath(Training.start)) < %@", NSNumber(booleanLiteral: true), fourteenDaysAgo as NSDate, sevenDaysAgo as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+        return request
+    }
+    
+    private var trainingsFromSevenDaysAgo: [Training] {
+        sevenDaysFetchedResults.map { $0 }
+    }
+    
+    private var trainingsFromFourteenDaysAgo: [Training] {
+        fourteenDaysFetchedResults.map { $0 }
+    }
 
     var body: some View {
         BannerView(entries: bannerViewEntries)
@@ -34,23 +66,6 @@ struct FeedBannerView : View {
 
     private var bannerViewEntries: [BannerViewEntry] {
         var entries = [BannerViewEntry]()
-        // create the fetch requests
-        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-        let sevenDaysRequest: NSFetchRequest<Training> = Training.fetchRequest()
-        sevenDaysRequest.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@",
-                                                 NSNumber(booleanLiteral: true),
-                                                 sevenDaysAgo as NSDate)
-
-        let fourteenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
-        let fourteenDaysRequest: NSFetchRequest<Training> = Training.fetchRequest()
-        fourteenDaysRequest.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@ AND start < %@",
-                                                    NSNumber(booleanLiteral: true),
-                                                    fourteenDaysAgo as NSDate,
-                                                    sevenDaysAgo as NSDate)
-
-        // fetch the objects
-        let trainingsFromSevenDaysAgo = (try? trainingsDataStore.context.fetch(sevenDaysRequest)) ?? []
-        let trainingsFromFourteenDaysAgo = (try? trainingsDataStore.context.fetch(fourteenDaysRequest)) ?? []
 
         // compute the values
         let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
@@ -140,8 +155,8 @@ struct FeedBannerView : View {
 struct SUISummaryView_Previews : PreviewProvider {
     static var previews: some View {
         FeedBannerView()
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

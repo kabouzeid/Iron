@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 private class TrainingSetViewModel: ObservableObject {
+    var objectWillChange = PassthroughSubject<Void, Never>()
+    private var cancellable: AnyCancellable?
     var trainingSet: TrainingSet
     var weightUnit: WeightUnit
     
@@ -33,6 +35,7 @@ private class TrainingSetViewModel: ObservableObject {
     init(trainingSet: TrainingSet, weightUnit: WeightUnit) {
         self.trainingSet = trainingSet
         self.weightUnit = weightUnit
+        cancellable = trainingSet.objectWillChange.subscribe(objectWillChange)
     }
 }
 
@@ -43,7 +46,6 @@ private enum KeyboardType {
 }
 
 struct TrainingSetEditor : View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObservedObject private var trainingSetViewModel: TrainingSetViewModel
     @State private var showMoreSheet = false
     @State private var showKeyboard: KeyboardType = .none
@@ -354,16 +356,17 @@ struct TrainingSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
             TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .metric)
-                .environmentObject(mockTrainingsDataStore)
+                .environment(\.managedObjectContext, mockManagedObjectContext)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
             TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .imperial)
-                .environmentObject(mockTrainingsDataStore)
+                .environment(\.managedObjectContext, mockManagedObjectContext)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             
             MoreView(trainingSet: mockTrainingSet)
+                .environment(\.managedObjectContext, mockManagedObjectContext)
                 .previewLayout(.sizeThatFits)
                 .listStyle(GroupedListStyle())
         }

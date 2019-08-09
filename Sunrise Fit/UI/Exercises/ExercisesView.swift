@@ -10,13 +10,11 @@ import SwiftUI
 
 struct ExercisesView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore // TODO: (bug in beta3?) remove in future, only needed for the presentation of the statistics view
     var exercises: [Exercise]
     
     var body: some View {
         List(exercises, id: \.id) { exercise in
             NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
-                .environmentObject(self.trainingsDataStore)
                 .environmentObject(self.settingsStore))
         }
     }
@@ -26,8 +24,8 @@ struct ExercisesView : View {
 struct ExercisesView_Previews : PreviewProvider {
     static var previews: some View {
         ExercisesView(exercises: EverkineticDataProvider.exercises)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

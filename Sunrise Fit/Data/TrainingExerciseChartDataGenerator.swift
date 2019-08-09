@@ -14,7 +14,7 @@ class TrainingExerciseChartDataGenerator {
     var exercise: Exercise? {
         didSet {
             if let exercise = exercise {
-                trainingExerciseHistory = TrainingExercise.fetchHistory(of: exercise.id, until: Date(), context: context) ?? []
+                trainingExerciseHistory = (try? context.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
             } else {
                 trainingExerciseHistory = []
             }
@@ -81,16 +81,24 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    let countBalloonValueFormatter = DateBalloonValueFormatter(append: "×")
-    let xAxisValueFormatter = DateAxisFormatter()
-    let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
+    private let countBalloonValueFormatter = DateBalloonValueFormatter(append: "×")
+    private let xAxisValueFormatter = DateAxisFormatter()
+    private let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
 
-    func formatters(for measurementType: MeasurementType, weightUnit: WeightUnit) -> (IAxisValueFormatter, IAxisValueFormatter, BalloonValueFormatter) {
+    func xAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> IAxisValueFormatter {
+        xAxisValueFormatter
+    }
+    
+    func yAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> IAxisValueFormatter {
+        yAxisValueFormatter
+    }
+    
+    func ballonValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> BalloonValueFormatter {
         switch measurementType {
         case .oneRM, .totalWeight:
-            return (xAxisValueFormatter, yAxisValueFormatter, DateBalloonValueFormatter(append: weightUnit.abbrev))
+            return DateBalloonValueFormatter(append: weightUnit.abbrev)
         case .totalSets, .totalRepetitions:
-            return (xAxisValueFormatter, yAxisValueFormatter, countBalloonValueFormatter)
+            return countBalloonValueFormatter
         }
     }
 

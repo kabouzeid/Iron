@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct TrainingView: View {
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
-    
-    var trainig: Training
+    @Environment(\.managedObjectContext) var managedObjectContext
+
+    @ObservedObject var trainig: Training
     
     @State private var showingCancelSheet = false
     @State private var showingExerciseSelectorSheet = false
@@ -24,7 +24,7 @@ struct TrainingView: View {
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
         var numberOfSets = 3
         // try to guess the number of sets
-        if let history = trainingExercise.history, history.count > 2 {
+        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count > 2 {
             // one month since last training and at least three trainings
             let cutoff = min(history[2].training!.start!, Calendar.current.date(byAdding: .month, value: -1, to: history.first!.training!.start!)!)
             let filteredAndSortedHistory = history
@@ -36,7 +36,7 @@ struct TrainingView: View {
         }
         var trainingSets = [TrainingSet]()
         for _ in 0..<numberOfSets {
-            let trainingSet = TrainingSet(context: trainingsDataStore.context)
+            let trainingSet = TrainingSet(context: managedObjectContext)
             trainingSets.append(trainingSet)
         }
         return NSOrderedSet(array: trainingSets)
@@ -50,7 +50,6 @@ struct TrainingView: View {
         return HStack {
             NavigationLink(destination:
                     TrainingExerciseDetailView(trainingExercise: trainingExercise)
-                        .environmentObject(trainingsDataStore)
                         .environmentObject(settingsStore)
                 ) {
                 VStack(alignment: .leading) {
@@ -108,8 +107,8 @@ struct TrainingView: View {
                 Button("Cancel") {
                     if (self.trainig.trainingExercises?.count ?? 0) == 0 && self.trainig.start == nil {
                         // the training is empty, do not need confirm to cancel
-                        self.trainingsDataStore.context.delete(self.trainig)
-                        self.trainingsDataStore.context.safeSave()
+                        self.managedObjectContext.delete(self.trainig)
+                        self.managedObjectContext.safeSave()
                     } else {
                         self.showingCancelSheet = true
                     }
@@ -117,8 +116,8 @@ struct TrainingView: View {
                 .actionSheet(isPresented: $showingCancelSheet, content: {
                     ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
                         .destructive(Text("Delete Training"), action: {
-                            self.trainingsDataStore.context.delete(self.trainig)
-                            self.trainingsDataStore.context.safeSave()
+                            self.managedObjectContext.delete(self.trainig)
+                            self.managedObjectContext.safeSave()
                         }),
                         .cancel()
                     ])
@@ -137,7 +136,7 @@ struct TrainingView: View {
                         Spacer()
                         Button("Add") {
                             for exercise in self.exerciseSelectorSelection {
-                                let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
+                                let trainingExercise = TrainingExercise(context: self.managedObjectContext)
                                 self.trainig.addToTrainingExercises(trainingExercise)
                                 trainingExercise.exerciseId = Int16(exercise.id)
                                 precondition(self.trainig.isCurrentTraining == true)
@@ -145,7 +144,7 @@ struct TrainingView: View {
                             }
                             self.showingExerciseSelectorSheet = false
                             self.exerciseSelectorSelection.removeAll()
-                            self.trainingsDataStore.context.safeSave()
+                            self.managedObjectContext.safeSave()
                         }
                     }.padding()
                     ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
@@ -159,7 +158,7 @@ struct TrainingView: View {
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
         TrainingView(trainig: mockCurrentTraining)
-            .environmentObject(mockTrainingsDataStore)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

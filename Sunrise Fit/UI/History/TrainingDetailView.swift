@@ -11,6 +11,7 @@ import Combine
 
 private class TrainingViewModel: ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
+    private var cancellable: AnyCancellable?
     var training: Training
     
     var startInput: Date {
@@ -42,14 +43,15 @@ private class TrainingViewModel: ObservableObject {
     init(training: Training) {
         self.training = training
         titleInput = training.title ?? ""
+        cancellable = training.objectWillChange.subscribe(objectWillChange)
     }
 }
 
 struct TrainingDetailView : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
     @ObservedObject private var trainingViewModel: TrainingViewModel
-    
+
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
@@ -76,13 +78,9 @@ struct TrainingDetailView : View {
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
             }
             
-            // editMode makes problems in beta2
+            // editMode makes problems in beta5
 //            if editMode?.value == .active {
                 Section {
-                    // onCommit() does not seem to be called in beta2
-//                    TextField($trainingTitle, placeholder: Text("Title")) {
-//                        print("set \(self.trainingTitle) as title")
-//                    }
                     // TODO: add clear button
                     TextField("Title", text: $trainingViewModel.titleInput, onEditingChanged: { isEditingTextField in
                         if !isEditingTextField {
@@ -105,9 +103,7 @@ struct TrainingDetailView : View {
             
             Section {
                 ForEach(trainingExercises, id: \.objectID) { trainingExercise in
-                    // TODO: navigation button -> Set Editor
                     NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
-                        .environmentObject(self.trainingsDataStore)
                         .environmentObject(self.settingsStore)) {
                         VStack(alignment: .leading) {
                             Text(trainingExercise.exercise?.title ?? "")
@@ -120,7 +116,10 @@ struct TrainingDetailView : View {
                     }
                 }
                 .onDelete { offsets in
-                    self.trainingViewModel.training.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                    for i in offsets.sorted().reversed() {
+                        guard let trainingExercise = self.trainingViewModel.training.trainingExercises?[i] as? TrainingExercise else { return }
+                        self.managedObjectContext.delete(trainingExercise)
+                    }
                 }
                 .onMove { source, destination in
                     guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as! [TrainingExercise]? else { return }
@@ -161,7 +160,7 @@ struct TrainingDetailView : View {
                     Spacer()
                     Button("Add") {
                         for exercise in self.exerciseSelectorSelection {
-                            let trainingExercise = TrainingExercise(context: self.trainingsDataStore.context)
+                            let trainingExercise = TrainingExercise(context: self.managedObjectContext)
                             self.trainingViewModel.training.addToTrainingExercises(trainingExercise)
                             trainingExercise.exerciseId = Int16(exercise.id)
                         }
@@ -179,8 +178,8 @@ struct TrainingDetailView : View {
 struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
         return TrainingDetailView(training: mockTraining)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
 #endif

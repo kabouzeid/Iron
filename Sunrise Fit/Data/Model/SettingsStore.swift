@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class SettingsStore: ObservableObject {
+final class SettingsStore: ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
     private var userDefaults: UserDefaults
@@ -19,7 +19,7 @@ class SettingsStore: ObservableObject {
         self.userDefaults = userDefaults
     }
     
-    convenience init() {
+    fileprivate convenience init() {
         self.init(userDefaults: UserDefaults.standard)
     }
 
@@ -34,7 +34,7 @@ class SettingsStore: ObservableObject {
     }
 }
 
-let settingsStore = SettingsStore()
+let settingsStore = SettingsStore() // singleton
 
 #if DEBUG
 let mockSettingsStoreMetric: SettingsStore = {

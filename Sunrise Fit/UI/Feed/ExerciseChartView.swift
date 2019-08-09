@@ -11,32 +11,35 @@ import Charts
 
 struct ExerciseChartView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var trainingsDataStore: TrainingsDataStore
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var exercise: Exercise
     var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
 
-    private var chartDataGenerator: TrainingExerciseChartDataGenerator {
-        TrainingExerciseChartDataGenerator(context: trainingsDataStore.context, exercise: exercise)
-    }
-    
-    private var chartData: ChartData {
+    private func chartData(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> ChartData {
         chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit)
     }
     
-    private var xAxisFormatter: IAxisValueFormatter {
-        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).0
+    private func xAxisFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> IAxisValueFormatter {
+        chartDataGenerator.xAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
-    private var yAxisFormatter: IAxisValueFormatter {
-        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).1
+    private func yAxisFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> IAxisValueFormatter {
+        chartDataGenerator.yAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
-    private var balloonFormatter: BalloonValueFormatter {
-        chartDataGenerator.formatters(for: measurementType, weightUnit: settingsStore.weightUnit).2
+    private func balloonFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> BalloonValueFormatter {
+        chartDataGenerator.ballonValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
     var body: some View {
-        _LineChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter)
+        let chartDataGenerator = TrainingExerciseChartDataGenerator(context: managedObjectContext, exercise: exercise)
+        return _LineChartView(
+            chartData: chartData(chartDataGenerator),
+            xAxisValueFormatter: xAxisFormatter(chartDataGenerator),
+            yAxisValueFormatter: yAxisFormatter(chartDataGenerator),
+            balloonValueFormatter: balloonFormatter(chartDataGenerator)
+        )
     }
 }
 
@@ -44,8 +47,8 @@ struct ExerciseChartView : View {
 struct ExerciseChartView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseChartView(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
-            .environmentObject(mockTrainingsDataStore)
             .environmentObject(mockSettingsStoreMetric)
+            .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
 }

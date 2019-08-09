@@ -117,11 +117,8 @@ struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             FeedView()
-                .environmentObject(mockTrainingsDataStore)
                 .environmentObject(mockSettingsStoreMetric)
-                
-                // TODO: remove in future, somehow necessary (beta 4)
-                .listStyle(GroupedListStyle())
+                .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }
 }

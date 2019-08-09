@@ -7,16 +7,14 @@
 //
 
 import CoreData
+import Combine
 
 class Training: NSManagedObject {
-    static func currentTraining(context: NSManagedObjectContext) -> Training? {
+    static var currentTrainingFetchRequest: NSFetchRequest<Training> {
         let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "isCurrentTraining == %@", NSNumber(booleanLiteral: true))
-        if let res = try? context.fetch(request), let training = res.first {
-            assert(res.count == 1, "More than one training marked as current training.")
-            return training
-        }
-        return nil
+        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) == %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+        return request
     }
 
     static let dateFormatter: DateFormatter = {
@@ -98,5 +96,35 @@ class Training: NSManagedObject {
             .reduce(0, { (weight, trainingExercise) -> Double in
                 weight + (trainingExercise.totalCompletedWeight ?? 0)
             })
+    }
+    
+    private var cancellable: AnyCancellable?
+}
+
+extension Training {
+    override func awakeFromFetch() {
+        super.awakeFromFetch() // important
+        initChangeObserver()
+    }
+    
+    override func awakeFromInsert() {
+        super.awakeFromInsert() // important
+        initChangeObserver()
+    }
+    
+    private func initChangeObserver() {
+        cancellable = managedObjectContext?.publisher
+            .filter { changed in
+                changed.contains { managedObject in
+                    if let trainingExercise = managedObject as? TrainingExercise {
+                        return trainingExercise.training?.objectID == self.objectID
+                    }
+                    if let trainingSet = managedObject as? TrainingSet {
+                        return trainingSet.trainingExercise?.training?.objectID == self.objectID
+                    }
+                    return managedObject.objectID == self.objectID
+                }
+        }
+        .sink { _ in self.objectWillChange.send() }
     }
 }
