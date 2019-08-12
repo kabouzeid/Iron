@@ -11,7 +11,7 @@ import CoreData
 import Combine
 
 private class PinnedChartsStore: ObservableObject {
-    let objectWillChange = PassthroughSubject<Void, Never>()
+    let objectWillChange = ObservableObjectPublisher()
     
     var pinnedCharts: [PinnedChart] {
         get {

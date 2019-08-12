@@ -13,6 +13,7 @@ struct TrainingExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var editMode
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var restTimerStore: RestTimerStore
     
     @ObservedObject var trainingExercise: TrainingExercise
     @ObservedObject var observableFetchRequest = ObservableFetchRequest<TrainingExercise>()
@@ -207,6 +208,12 @@ struct TrainingExerciseDetailView : View {
                     feedbackGenerator.notificationOccurred(.success)
                 }
                 self.select(set: self.firstUncompletedSet) // also saves the context
+                
+                if self.isCurrentTraining {
+                    // start rest timer
+                    // TODO: customizable rest timer time
+                    self.restTimerStore.restTimerEnd = Date().addingTimeInterval(90)
+                }
             })
                 // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
                 .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))

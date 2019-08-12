@@ -122,7 +122,7 @@ struct TrainingDetailView : View {
                     }
                 }
                 .onMove { source, destination in
-                    guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as! [TrainingExercise]? else { return }
+                    guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] else { return }
                     trainingExercises.move(fromOffsets: source, toOffset: destination)
                     self.trainingViewModel.training.trainingExercises = NSOrderedSet(array: trainingExercises)
                 }

@@ -15,6 +15,9 @@
 		8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */; };
 		8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */; };
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
+		8A3815482301803A008ACDAD /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3815472301803A008ACDAD /* Refresher.swift */; };
+		8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */; };
+		8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154D23019A3F008ACDAD /* RestTimerStore.swift */; };
 		8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */; };
 		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
@@ -117,6 +120,9 @@
 		8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
 		8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
+		8A3815472301803A008ACDAD /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
+		8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+RestTimer.swift"; sourceTree = "<group>"; };
+		8A38154D23019A3F008ACDAD /* RestTimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerStore.swift; sourceTree = "<group>"; };
 		8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Style.swift"; sourceTree = "<group>"; };
 		8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBarChartView.swift; sourceTree = "<group>"; };
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 				8A652C4722D10C4900DBE10E /* BarChartView.swift */,
 				8A652C4522D1055600DBE10E /* LineChartView.swift */,
 				8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */,
+				8A3815472301803A008ACDAD /* Refresher.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -414,6 +421,7 @@
 				8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */,
 				8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */,
 				8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */,
+				8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */,
 				8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */,
 				8AB14BA722C500070025D835 /* TrainingExercise+SwiftUI.swift */,
 				8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */,
@@ -433,6 +441,7 @@
 				8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */,
 				8A82AB9322DDE582007C0293 /* WeightUnit.swift */,
 				8A81CFB022E3B1CF00B11394 /* PinnedChart.swift */,
+				8A38154D23019A3F008ACDAD /* RestTimerStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -600,6 +609,7 @@
 				8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */,
 				8A9EAC5722EB33A200A11C65 /* Exercise+Identifiable.swift in Sources */,
 				8A9EAC5822EB33A200A11C65 /* StartTrainingView.swift in Sources */,
+				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
 				8A9EAC5922EB33A200A11C65 /* TrainingView.swift in Sources */,
 				8A9EAC5A22EB33A200A11C65 /* ExerciseMultiSelectionView.swift in Sources */,
 				8A9EAC5B22EB33A200A11C65 /* ExerciseSingleSelectionView.swift in Sources */,
@@ -609,6 +619,7 @@
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,
+				8A3815482301803A008ACDAD /* Refresher.swift in Sources */,
 				8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */,
 				8A4FAAFD206BAF8C004A2806 /* Double+Formatting.swift in Sources */,
 				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */,
@@ -650,6 +661,7 @@
 				8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */,
 				8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
+				8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */,
 				8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */,
 				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,

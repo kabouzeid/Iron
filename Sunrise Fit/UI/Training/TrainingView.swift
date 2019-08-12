@@ -11,14 +11,14 @@ import SwiftUI
 struct TrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    @ObservedObject var trainig: Training
+    @ObservedObject var training: Training
     
     @State private var showingCancelSheet = false
     @State private var showingExerciseSelectorSheet = false
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     private var trainingExercises: [TrainingExercise] {
-        trainig.trainingExercises?.array as! [TrainingExercise]? ?? []
+        training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
     
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
@@ -42,6 +42,15 @@ struct TrainingView: View {
         return NSOrderedSet(array: trainingSets)
     }
     
+    private func currentTrainingExerciseDetailView(trainingExercise: TrainingExercise) -> some View {
+        VStack(spacing: 0) {
+            TimerBannerView(training: training)
+            TrainingExerciseDetailView(trainingExercise: trainingExercise)
+                .layoutPriority(1)
+                .environmentObject(settingsStore)
+        }
+    }
+
     private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
         let completedSets = trainingExercise.numberOfCompletedSets ?? 0
         let totalSets = trainingExercise.trainingSets?.count ?? 0
@@ -49,8 +58,7 @@ struct TrainingView: View {
         
         return HStack {
             NavigationLink(destination:
-                    TrainingExerciseDetailView(trainingExercise: trainingExercise)
-                        .environmentObject(settingsStore)
+                    currentTrainingExerciseDetailView(trainingExercise: trainingExercise)
                 ) {
                 VStack(alignment: .leading) {
                     Text(trainingExercise.exercise?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
@@ -74,19 +82,29 @@ struct TrainingView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Rectangle().frame(height: 48).foregroundColor(.accentColor) // Placeholder for timer
+                TimerBannerView(training: training)
                 List {
                     Section {
+                        // TODO: actually edit training title
+                        TextField("Title", text: .constant(""), onEditingChanged: { _ in }, onCommit: {})
+                        // TODO: actually edit training comment
+                        TextField("Comment", text: .constant(""), onEditingChanged: { _ in }, onCommit: {})
+//                        DatePicker("Start", selection: .constant(Date()), in: ...Date())
+                    }
+                    Section(header: Text("Exercises".uppercased())) {
                         ForEach(trainingExercises, id: \.objectID) { trainingExercise in
                             self.trainingExerciseCell(trainingExercise: trainingExercise)
                         }
                         .onDelete { offsets in
-                            self.trainig.removeFromTrainingExercises(at: offsets as NSIndexSet)
+                            for i in offsets.sorted().reversed() {
+                                guard let trainingExercise = self.training.trainingExercises?[i] as? TrainingExercise else { return }
+                                self.managedObjectContext.delete(trainingExercise)
+                            }
                         }
                         .onMove { source, destination in
                             var trainingExercises = self.trainingExercises
                             trainingExercises.move(fromOffsets: source, toOffset: destination)
-                            self.trainig.trainingExercises = NSOrderedSet(array: trainingExercises)
+                            self.training.trainingExercises = NSOrderedSet(array: trainingExercises)
                         }
                         
                         Button(action: {
@@ -98,16 +116,26 @@ struct TrainingView: View {
                             }
                         }
                     }
+                    Section {
+                        Button(action: {
+                            // TODO: finish
+                        }) {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                Text("Finish Workout")
+                            }
+                        }
+                    }
                 }
                 .listStyle(GroupedListStyle())
             }
-            .navigationBarTitle(Text(trainig.displayTitle), displayMode: .inline)
+            .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
             .navigationBarItems(
                 leading:
                 Button("Cancel") {
-                    if (self.trainig.trainingExercises?.count ?? 0) == 0 && self.trainig.start == nil {
+                    if (self.training.trainingExercises?.count ?? 0) == 0 && self.training.start == nil {
                         // the training is empty, do not need confirm to cancel
-                        self.managedObjectContext.delete(self.trainig)
+                        self.managedObjectContext.delete(self.training)
                         self.managedObjectContext.safeSave()
                     } else {
                         self.showingCancelSheet = true
@@ -115,8 +143,8 @@ struct TrainingView: View {
                 }
                 .actionSheet(isPresented: $showingCancelSheet, content: {
                     ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
-                        .destructive(Text("Delete Training"), action: {
-                            self.managedObjectContext.delete(self.trainig)
+                        .destructive(Text("Delete Workout"), action: {
+                            self.managedObjectContext.delete(self.training)
                             self.managedObjectContext.safeSave()
                         }),
                         .cancel()
@@ -124,7 +152,14 @@ struct TrainingView: View {
                 })
                 ,
                 trailing:
-                EditButton()
+                HStack {
+                    Button(action: {
+                        // TODO: show log, similar to the TrainingDetailView cells + allow sharing from there
+                    }) {
+                        Image(systemName: "doc.plaintext")
+                    }
+                    EditButton()
+                }
             )
             .sheet(isPresented: $showingExerciseSelectorSheet) {
                 VStack {
@@ -137,9 +172,9 @@ struct TrainingView: View {
                         Button("Add") {
                             for exercise in self.exerciseSelectorSelection {
                                 let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                                self.trainig.addToTrainingExercises(trainingExercise)
+                                self.training.addToTrainingExercises(trainingExercise)
                                 trainingExercise.exerciseId = Int16(exercise.id)
-                                precondition(self.trainig.isCurrentTraining == true)
+                                precondition(self.training.isCurrentTraining == true)
                                 trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
                             }
                             self.showingExerciseSelectorSheet = false
@@ -154,11 +189,75 @@ struct TrainingView: View {
     }
 }
 
+private struct TimerBannerView: View {
+    @EnvironmentObject var restTimerStore: RestTimerStore
+    
+    @ObservedObject var training: Training
+
+    @ObservedObject private var refresher = Refresher()
+    
+    private let trainingTimerDurationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    private let restTimerDurationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Button(action: {
+                    // TODO: open start/end time editor
+                }) {
+                    HStack {
+                        Image(systemName: "clock")
+                        Text(trainingTimerDurationFormatter.string(from: training.duration) ?? "")
+                            .font(Font.body.monospacedDigit())
+                    }
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    // TODO: open big rest timer view
+                }) {
+                    HStack {
+                        Image(systemName: "timer")
+                        restTimerStore.restTimerEnd.map({
+                            Text(restTimerDurationFormatter.string(from: Date(), to: $0) ?? "")
+                                .font(Font.body.monospacedDigit())
+                        })
+                    }
+                }
+            }
+            .padding()
+            Divider()
+        }
+        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            self.refresher.refresh()
+        }
+    }
+}
+
 #if DEBUG
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingView(trainig: mockCurrentTraining)
+        if UserDefaults.standard.restTimerEnd == nil {
+            UserDefaults.standard.restTimerEnd = Date().addingTimeInterval(90)
+        }
+        return TrainingView(training: mockCurrentTraining)
             .environment(\.managedObjectContext, mockManagedObjectContext)
+            .environmentObject(restTimerStore)
     }
 }
 #endif

@@ -16,9 +16,36 @@ let mockManagedObjectContext: NSManagedObjectContext = {
 }()
 
 let mockCurrentTraining: Training = {
-    let currentTraining = mockTraining
-    currentTraining.isCurrentTraining = true
-    return currentTraining
+    let training = Training(context: mockManagedObjectContext)
+    training.start = Calendar.current.date(byAdding: .minute, value: -71, to: Date())!
+    training.isCurrentTraining = true
+    
+    for j in [42, 48, 206] { // bench press, cable crossover, triceps pushdown
+        let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
+        trainingExercise.exerciseId = Int16(j)
+        trainingExercise.training = training
+        
+        let numberOfSets = 5 + Int.random(in: 0...4)
+        for _ in 1...numberOfSets {
+            let trainingSet = TrainingSet(context: training.managedObjectContext!)
+            trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
+            trainingSet.repetitions = Int16.random(in: 1...10)
+            trainingSet.isCompleted = true
+            trainingSet.trainingExercise = trainingExercise
+        }
+    }
+    for j in [291, 289] { // crunches, cross-body crunches
+          let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
+          trainingExercise.exerciseId = Int16(j)
+          trainingExercise.training = training
+          
+          let numberOfSets = 5 + Int.random(in: 0...4)
+          for _ in 1...numberOfSets {
+              let trainingSet = TrainingSet(context: training.managedObjectContext!)
+              trainingSet.trainingExercise = trainingExercise
+          }
+      }
+    return training
 }()
 
 let mockTraining: Training = {
@@ -58,33 +85,37 @@ private func setUpInMemoryNSPersistentContainer() -> NSPersistentContainer {
     return container
 }
 
-func createMockTrainingsData(context: NSManagedObjectContext) {
+private func createMockTrainingsData(context: NSManagedObjectContext) {
     for i in 1...20 {
         let training = Training(context: context)
         training.start = Calendar.current.date(byAdding: .day, value: -Int.random(in: 1...4) * i, to: Date())!
         training.end = Calendar.current.date(byAdding: .minute, value: Int.random(in: 80...120), to: training.start!)!
         
-        let exerciseIds = [
-            [42, 48, 206], // bench press, cable crossover, triceps pushdown
-            [122], // squat
-            [9001], // overhead press
-            [291, 289], // crunches, cross-body crunches
-            [99], // deadlift
-            [211, 206], // biceps curls, triceps pushdown
-        ]
-        for j in exerciseIds[Int.random(in: 0..<exerciseIds.count)] { // bench, dead, squat
-            let trainingExercise = TrainingExercise(context: context)
-            trainingExercise.exerciseId = Int16(j)
-            trainingExercise.training = training
-            
-            let numberOfSets = 5 + Int.random(in: 0...4)
-            for _ in 1...numberOfSets {
-                let trainingSet = TrainingSet(context: context)
-                trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
-                trainingSet.repetitions = Int16.random(in: 1...10)
-                trainingSet.isCompleted = true
-                trainingSet.trainingExercise = trainingExercise
-            }
+        createMockTrainingExercises(training: training)
+    }
+}
+
+private func createMockTrainingExercises(training: Training) {
+    let exerciseIds = [
+        [42, 48, 206], // bench press, cable crossover, triceps pushdown
+        [122], // squat
+        [9001], // overhead press
+        [291, 289], // crunches, cross-body crunches
+        [99], // deadlift
+        [211, 206], // biceps curls, triceps pushdown
+    ]
+    for j in exerciseIds[Int.random(in: 0..<exerciseIds.count)] {
+        let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
+        trainingExercise.exerciseId = Int16(j)
+        trainingExercise.training = training
+        
+        let numberOfSets = 5 + Int.random(in: 0...4)
+        for _ in 1...numberOfSets {
+            let trainingSet = TrainingSet(context: training.managedObjectContext!)
+            trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
+            trainingSet.repetitions = Int16.random(in: 1...10)
+            trainingSet.isCompleted = true
+            trainingSet.trainingExercise = trainingExercise
         }
     }
 }

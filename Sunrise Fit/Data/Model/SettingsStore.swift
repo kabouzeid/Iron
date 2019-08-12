@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 final class SettingsStore: ObservableObject {
-    let objectWillChange = PassthroughSubject<Void, Never>()
+    let objectWillChange = ObservableObjectPublisher()
     
     private var userDefaults: UserDefaults
     

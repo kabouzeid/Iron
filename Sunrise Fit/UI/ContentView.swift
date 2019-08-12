@@ -18,7 +18,7 @@ struct ContentView : View {
 
     private func trainingView(training: Training?) -> some View {
         if training != nil {
-            return AnyView(TrainingView(trainig: training!))
+            return AnyView(TrainingView(training: training!))
         } else {
             return AnyView(StartTrainingView())
         }
@@ -41,7 +41,7 @@ struct ContentView : View {
             trainingView(training: currentTraining)
                 .tabItem {
                     Image("training")
-                    Text("Training")
+                    Text("Workout")
                 }
                 .tag(2)
             ExerciseMuscleGroupsView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped)

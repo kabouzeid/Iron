@@ -28,7 +28,7 @@ struct StartTrainingView: View {
                     plateImage
                 }
                     
-                Button("Start Training") {
+                Button("Start Workout") {
                     precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
                     // create a new training
                     let training = Training(context: self.managedObjectContext)
@@ -40,7 +40,7 @@ struct StartTrainingView: View {
                 .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 .padding()
             }
-            .navigationBarTitle("Training")
+            .navigationBarTitle("Workout")
         }
     }
 }
