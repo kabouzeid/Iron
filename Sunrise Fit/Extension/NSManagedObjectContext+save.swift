@@ -11,9 +11,7 @@ import CoreData
 
 extension NSManagedObjectContext {
     func safeSave () {
-        print("check trainings data save")
         if hasChanges {
-            print("saving trainings data")
             do {
                 try save()
             } catch {
