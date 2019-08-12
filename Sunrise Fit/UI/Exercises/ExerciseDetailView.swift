@@ -110,7 +110,6 @@ struct ExerciseDetailView : View {
                 .sheet(isPresented: $showingHistory) {
                             ExerciseHistoryView(exercise: self.exercise)
                                 .environmentObject(self.settingsStore)
-                                .environment(\.managedObjectContext, AppDelegate.instance.persistentContainer.viewContext)
                         }
                 Button(action: { self.showingStatistics = true }) {
                     Image(systemName: "waveform.path.ecg")
