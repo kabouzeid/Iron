@@ -45,7 +45,6 @@ struct TrainingExerciseDetailView : View {
     }
     
     private func select(set: TrainingSet?) {
-        managedObjectContext.safeSave()
         withAnimation {
             if let set = set, !set.isCompleted && set.repetitions == 0 && set.weight == 0 { // treat as uninitialized
                 initRepsAndWeight(for: set)
@@ -119,6 +118,9 @@ struct TrainingExerciseDetailView : View {
                 .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? Color(UIColor.systemGray4) : nil) // TODO: trainingSet cast shouldn't be necessary
                 .onTapGesture { // TODO: currently tap on Spacer() is not recognized
                     guard self.editMode?.value != .active else { return }
+                    if self.selectedTrainingSet?.hasChanges ?? false {
+                        self.managedObjectContext.safeSave()
+                    }
                     if self.selectedTrainingSet == trainingSet {
                         self.select(set: nil)
                     } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
@@ -141,6 +143,7 @@ struct TrainingExerciseDetailView : View {
             if deletedSelectedSet {
                 self.select(set: self.firstUncompletedSet)
             }
+            self.managedObjectContext.safeSave()
         }
         // TODO: move is yet too buggy
         //                        .onMove { source, destination in
@@ -169,6 +172,7 @@ struct TrainingExerciseDetailView : View {
                 // don't allow uncompleted sets if not in current training
                 trainingSet.isCompleted = true
             }
+            self.managedObjectContext.safeSave()
         }) {
             HStack {
                 Image(systemName: "plus")
@@ -214,7 +218,9 @@ struct TrainingExerciseDetailView : View {
                     feedbackGenerator.prepare()
                     feedbackGenerator.notificationOccurred(.success)
                 }
-                self.select(set: self.firstUncompletedSet) // also saves the context
+                self.select(set: self.firstUncompletedSet)
+                
+                self.managedObjectContext.safeSave()
                 
                 if self.isCurrentTraining {
                     // start rest timer
@@ -261,6 +267,9 @@ struct TrainingExerciseDetailView : View {
         })
         .onAppear {
             self.select(set: self.firstUncompletedSet)
+        }
+        .onDisappear {
+            self.managedObjectContext.safeSave()
         }
     }
 }
