@@ -10,14 +10,17 @@ import Foundation
 
 extension Array where Element : Hashable {
     public func sortedByFrequency() -> [Element] {
-        var arrayCopy = self
-        arrayCopy.sortByFrequency()
-        return arrayCopy
+        let frequencies = self.frequencies(from: self)
+        return self.sorted { frequencies[$0]! < frequencies[$1]! }
     }
     
     mutating public func sortByFrequency() {
+        let frequencies = self.frequencies(from: self)
+        self.sort { frequencies[$0]! < frequencies[$1]! }
+    }
+    
+    private func frequencies(from array: Self) -> [Element: Int] {
         var frequencies = [Element: Int]()
-        
         // count the frequency of each element
         for e in self {
             if frequencies[e] == nil {
@@ -26,7 +29,6 @@ extension Array where Element : Hashable {
                 frequencies[e] = frequencies[e]! + 1
             }
         }
-
-        self = frequencies.sorted { $0.value > $1.value }.map { $0.key }
+        return frequencies
     }
 }

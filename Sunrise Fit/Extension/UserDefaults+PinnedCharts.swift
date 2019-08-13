@@ -34,7 +34,7 @@ extension UserDefaults {
             }
         }
         set {
-            let data = try? JSONEncoder().encode(newValue.uniq().map {
+            let data = try? JSONEncoder().encode(newValue.uniqed().map {
                 PinnedChartRaw(
                     exerciseId: $0.exerciseId,
                     measurementTypeRawValue: $0.measurementType.rawValue)

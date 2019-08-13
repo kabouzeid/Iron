@@ -122,11 +122,13 @@ struct TrainingDetailView : View {
                         self.managedObjectContext.delete(trainingExercise)
                         trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
                     }
+                    self.managedObjectContext.safeSave()
                 }
                 .onMove { source, destination in
                     guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] else { return }
                     trainingExercises.move(fromOffsets: source, toOffset: destination)
                     self.trainingViewModel.training.trainingExercises = NSOrderedSet(array: trainingExercises)
+                    self.managedObjectContext.safeSave()
                 }
                 
                 Button(action: {

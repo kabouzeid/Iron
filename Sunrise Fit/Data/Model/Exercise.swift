@@ -28,11 +28,11 @@ extension Exercise {
     }
     
     var primaryMuscleCommonName: [String] {
-        primaryMuscle.map { Exercise.commonName(muscle: $0) }.uniq()
+        primaryMuscle.map { Exercise.commonName(muscle: $0) }.uniqed()
     }
     
     var secondaryMuscleCommonName: [String] {
-        secondaryMuscle.map { Exercise.commonName(muscle: $0) }.uniq()
+        secondaryMuscle.map { Exercise.commonName(muscle: $0) }.uniqed()
     }
     
     var muscleGroup: String {

@@ -67,13 +67,23 @@ class Sunrise_FitTests: XCTestCase {
     }
 
     func testUniq() {
-        let array = ["Hello","Me","That","Me","Hello","Me","as","the"]
-        XCTAssertEqual(array.uniq(), ["Hello","Me","That","as","the"])
+        var array = ["Hello","Me","That","Me","Hello","Me","as","the"]
+        
+        let arrayUniqed = array.uniqed()
+        XCTAssertEqual(arrayUniqed, ["Hello","Me","That","as","the"])
+        
+        array.uniq()
+        XCTAssertEqual(array, arrayUniqed)
     }
     
     func testSortByFrequency() {
-        let array = ["Hello","Me","That","Me","Hello","Me"]
-        XCTAssertEqual(array.sortedByFrequency(), ["Me","Hello","That"])
+        var array = ["Hello","Me","That","Me","Hello","Me"]
+        
+        let arraySorted = array.sortedByFrequency()
+        XCTAssertEqual(arraySorted, ["That", "Hello", "Hello", "Me", "Me", "Me"])
+        
+        array.sortByFrequency()
+        XCTAssertEqual(array, arraySorted)
     }
 
     func testDoubleShortStringValue() {

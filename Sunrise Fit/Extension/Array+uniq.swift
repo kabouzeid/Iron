@@ -10,13 +10,13 @@ import Foundation
 
 extension Array where Element: Equatable {
     
-    public func uniq() -> [Element] {
+    public func uniqed() -> [Element] {
         var arrayCopy = self
-        arrayCopy.uniqInPlace()
+        arrayCopy.uniq()
         return arrayCopy
     }
     
-    mutating public func uniqInPlace() {
+    mutating public func uniq() {
         var seen = [Element]()
         var index = 0
         while self.count > index {

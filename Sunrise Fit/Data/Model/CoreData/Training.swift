@@ -72,16 +72,16 @@ class Training: NSManagedObject {
     // no duplicate entries, sorted descending by frequency
     var muscleGroups: [String] {
         var muscleGroups = [String]()
-        for case let trainingExercise as TrainingExercise in trainingExercises ?? [] {
+        
+        let trainingExercises = self.trainingExercises?.array as? [TrainingExercise] ?? []
+        for trainingExercise in trainingExercises {
             if let exercise = trainingExercise.exercise {
                 // even if there are no sets, add the muscle group at least once
-                for _ in 0..<(max(trainingExercise.trainingSets?.count ?? 1, 1)) {
-                    muscleGroups.append(exercise.muscleGroup)
-                }
+                let factor = max(trainingExercise.trainingSets?.count ?? 1, 1)
+                muscleGroups.append(contentsOf: Array(repeating: exercise.muscleGroup, count: factor))
             }
         }
-        muscleGroups.sortByFrequency()
-        return muscleGroups
+        return muscleGroups.sortedByFrequency().uniqed().reversed()
     }
     
     var duration: TimeInterval {
