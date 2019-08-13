@@ -15,6 +15,8 @@ struct TrainingView: View {
     
     @State private var showingCancelSheet = false
     @State private var showingExerciseSelectorSheet = false
+    @State private var showingTrainingsLogSheet = false
+    @State private var showingFinishWorkoutSheet = false
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     private var trainingExercises: [TrainingExercise] {
@@ -79,6 +81,110 @@ struct TrainingView: View {
         }
     }
     
+    private var trainingsLogSheet: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Log")
+                    .font(.headline)
+                HStack {
+                    Button("Close") {
+                        self.showingTrainingsLogSheet = false
+                    }
+                    Spacer()
+                    Button(action: {
+                        // TODO: share
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
+            .padding()
+            Divider()
+            TrainingsLog(training: self.training)
+                .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
+        }
+    }
+    
+    private var finishWorkoutSheet: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Summary")
+                    .font(.headline)
+                HStack {
+                    Button("Cancel") {
+                        self.showingFinishWorkoutSheet = false
+                    }
+                    Spacer()
+                    Button("Finish") {
+                        self.managedObjectContext.safeSave() // just in case the precondition below fires
+                        
+                        self.training.deleteAndRemoveUncompletedSets()
+                        self.training.isCurrentTraining = false
+                        self.training.start = self.training.start ?? self.training.end ?? Date()
+                        self.training.end = self.training.end ?? Date()
+                        
+                        precondition(self.training.start! <= self.training.end!)
+                        self.managedObjectContext.safeSave()
+                        
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.prepare()
+                        feedbackGenerator.notificationOccurred(.success)
+                    }
+                }
+            }
+            .padding()
+            Divider()
+            TrainingsLog(training: self.training)
+                .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
+        }
+    }
+    
+    private var exerciseSelectorSheet: some View {
+        VStack {
+            HStack {
+                Button("Cancel") {
+                    self.showingExerciseSelectorSheet = false
+                    self.exerciseSelectorSelection.removeAll()
+                }
+                Spacer()
+                Button("Add") {
+                    for exercise in self.exerciseSelectorSelection {
+                        let trainingExercise = TrainingExercise(context: self.managedObjectContext)
+                        self.training.addToTrainingExercises(trainingExercise)
+                        trainingExercise.exerciseId = Int16(exercise.id)
+                        precondition(self.training.isCurrentTraining == true)
+                        trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                    }
+                    self.showingExerciseSelectorSheet = false
+                    self.exerciseSelectorSelection.removeAll()
+                    self.managedObjectContext.safeSave()
+                }
+            }.padding()
+            ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
+        }
+    }
+    
+    private var cancelButton: some View {
+        Button("Cancel") {
+            if (self.training.trainingExercises?.count ?? 0) == 0 && self.training.start == nil {
+                // the training is empty, do not need confirm to cancel
+                self.managedObjectContext.delete(self.training)
+                self.managedObjectContext.safeSave()
+            } else {
+                self.showingCancelSheet = true
+            }
+        }
+        .actionSheet(isPresented: $showingCancelSheet, content: {
+            ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
+                .destructive(Text("Delete Workout"), action: {
+                    self.managedObjectContext.delete(self.training)
+                    self.managedObjectContext.safeSave()
+                }),
+                .cancel()
+            ])
+        })
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -96,9 +202,11 @@ struct TrainingView: View {
                             self.trainingExerciseCell(trainingExercise: trainingExercise)
                         }
                         .onDelete { offsets in
-                            for i in offsets.sorted().reversed() {
-                                guard let trainingExercise = self.training.trainingExercises?[i] as? TrainingExercise else { return }
+                            let trainingExercises = self.trainingExercises
+                            for i in offsets {
+                                let trainingExercise = trainingExercises[i]
                                 self.managedObjectContext.delete(trainingExercise)
+                                trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
                             }
                         }
                         .onMove { source, destination in
@@ -118,7 +226,7 @@ struct TrainingView: View {
                     }
                     Section {
                         Button(action: {
-                            // TODO: finish
+                            self.showingFinishWorkoutSheet = true
                         }) {
                             HStack {
                                 Image(systemName: "checkmark")
@@ -130,62 +238,23 @@ struct TrainingView: View {
                 .listStyle(GroupedListStyle())
             }
             .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
-            .navigationBarItems(
-                leading:
-                Button("Cancel") {
-                    if (self.training.trainingExercises?.count ?? 0) == 0 && self.training.start == nil {
-                        // the training is empty, do not need confirm to cancel
-                        self.managedObjectContext.delete(self.training)
-                        self.managedObjectContext.safeSave()
-                    } else {
-                        self.showingCancelSheet = true
-                    }
-                }
-                .actionSheet(isPresented: $showingCancelSheet, content: {
-                    ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
-                        .destructive(Text("Delete Workout"), action: {
-                            self.managedObjectContext.delete(self.training)
-                            self.managedObjectContext.safeSave()
-                        }),
-                        .cancel()
-                    ])
-                })
-                ,
+            .navigationBarItems(leading: cancelButton,
                 trailing:
                 HStack {
+                    // TODO: Replace with 3-dot button and more options
                     Button(action: {
-                        // TODO: show log, similar to the TrainingDetailView cells + allow sharing from there
+                        self.showingTrainingsLogSheet = true
                     }) {
                         Image(systemName: "doc.plaintext")
                     }
                     EditButton()
                 }
             )
-            .sheet(isPresented: $showingExerciseSelectorSheet) {
-                VStack {
-                    HStack {
-                        Button("Cancel") {
-                            self.showingExerciseSelectorSheet = false
-                            self.exerciseSelectorSelection.removeAll()
-                        }
-                        Spacer()
-                        Button("Add") {
-                            for exercise in self.exerciseSelectorSelection {
-                                let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                                self.training.addToTrainingExercises(trainingExercise)
-                                trainingExercise.exerciseId = Int16(exercise.id)
-                                precondition(self.training.isCurrentTraining == true)
-                                trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
-                            }
-                            self.showingExerciseSelectorSheet = false
-                            self.exerciseSelectorSelection.removeAll()
-                            self.managedObjectContext.safeSave()
-                        }
-                    }.padding()
-                    ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
-                }
-            }
+            .sheet(isPresented: $showingExerciseSelectorSheet) { self.exerciseSelectorSheet }
         }
+        // TODO: move sheet modifier to more appropiate place (as of beta5 only one sheet modifier per view)
+        .sheet(isPresented: $showingTrainingsLogSheet) { self.trainingsLogSheet } // currently overwritten by the sheet below (beta5)
+        .sheet(isPresented: $showingFinishWorkoutSheet) { self.finishWorkoutSheet }
     }
 }
 
@@ -258,6 +327,7 @@ struct TrainingView_Previews: PreviewProvider {
         return TrainingView(training: mockCurrentTraining)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .environmentObject(restTimerStore)
+            .environmentObject(settingsStore)
     }
 }
 #endif

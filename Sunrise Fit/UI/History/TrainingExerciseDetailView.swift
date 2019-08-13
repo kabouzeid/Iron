@@ -127,11 +127,18 @@ struct TrainingExerciseDetailView : View {
             }
         }
         .onDelete { offsets in
-            for i in offsets.sorted().reversed() {
-                guard let trainingSet = self.trainingExercise.trainingSets?[i] as? TrainingSet else { return }
+            var deletedSelectedSet = false
+            let trainingSets = self.trainingSets(for: self.trainingExercise)
+            for i in offsets {
+                let trainingSet = trainingSets[i]
                 self.managedObjectContext.delete(trainingSet)
+                trainingSet.trainingExercise?.removeFromTrainingSets(trainingSet)
+                
+                if trainingSet == self.selectedTrainingSet {
+                    deletedSelectedSet = true
+                }
             }
-            if self.selectedTrainingSet != nil && !(self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) {
+            if deletedSelectedSet {
                 self.select(set: self.firstUncompletedSet)
             }
         }

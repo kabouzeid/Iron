@@ -61,7 +61,7 @@ struct TrainingDetailView : View {
     }
     
     private var trainingExercises: [TrainingExercise] {
-        trainingViewModel.training.trainingExercises?.array as! [TrainingExercise]
+        trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
     
     private func trainingExerciseText(trainingExercise: TrainingExercise) -> String {
@@ -75,7 +75,7 @@ struct TrainingDetailView : View {
             Section {
                 TrainingDetailBannerView(training: trainingViewModel.training)
                     .listRowBackground(trainingViewModel.training.muscleGroupColor)
-                    .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
+                    .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             
             // editMode makes problems in beta5
@@ -116,9 +116,11 @@ struct TrainingDetailView : View {
                     }
                 }
                 .onDelete { offsets in
-                    for i in offsets.sorted().reversed() {
-                        guard let trainingExercise = self.trainingViewModel.training.trainingExercises?[i] as? TrainingExercise else { return }
+                    let trainingExercises = self.trainingExercises
+                    for i in offsets {
+                        let trainingExercise = trainingExercises[i]
                         self.managedObjectContext.delete(trainingExercise)
+                        trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
                     }
                 }
                 .onMove { source, destination in

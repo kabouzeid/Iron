@@ -18,6 +18,7 @@
 		8A3815482301803A008ACDAD /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3815472301803A008ACDAD /* Refresher.swift */; };
 		8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */; };
 		8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154D23019A3F008ACDAD /* RestTimerStore.swift */; };
+		8A3815502301B865008ACDAD /* TrainingsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154F2301B865008ACDAD /* TrainingsLog.swift */; };
 		8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */; };
 		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
@@ -88,6 +89,7 @@
 		8AE0708122D1FABD0038B7E3 /* lottie in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0708022D1FABD0038B7E3 /* lottie */; };
 		8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */; };
 		8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */; };
+		8AFF0D842302C60000F762A2 /* TrainingsDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,7 @@
 		8A3815472301803A008ACDAD /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
 		8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+RestTimer.swift"; sourceTree = "<group>"; };
 		8A38154D23019A3F008ACDAD /* RestTimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerStore.swift; sourceTree = "<group>"; };
+		8A38154F2301B865008ACDAD /* TrainingsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsLog.swift; sourceTree = "<group>"; };
 		8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Style.swift"; sourceTree = "<group>"; };
 		8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBarChartView.swift; sourceTree = "<group>"; };
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
 		8AE0708022D1FABD0038B7E3 /* lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lottie; sourceTree = "<group>"; };
 		8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryView.swift; sourceTree = "<group>"; };
+		8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +233,7 @@
 				8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */,
 				8A81570422E21E5400B4D27D /* StartTrainingView.swift */,
 				8A81570622E2279000B4D27D /* TrainingView.swift */,
+				8A38154F2301B865008ACDAD /* TrainingsLog.swift */,
 			);
 			path = Training;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */,
 				8A7D6EB1200BF92E00AA0FA7 /* Info.plist */,
 				8AB972F6203583E40099507B /* CoreDataHelper.swift */,
+				8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */,
 			);
 			path = "Sunrise FitTests";
 			sourceTree = "<group>";
@@ -634,6 +640,7 @@
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
+				8A3815502301B865008ACDAD /* TrainingsLog.swift in Sources */,
 				8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */,
 				8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */,
 				8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */,
@@ -684,6 +691,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */,
+				8AFF0D842302C60000F762A2 /* TrainingsDataHelper.swift in Sources */,
 				8A7D6EB0200BF92E00AA0FA7 /* Sunrise_FitTests.swift in Sources */,
 				8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */,
 			);

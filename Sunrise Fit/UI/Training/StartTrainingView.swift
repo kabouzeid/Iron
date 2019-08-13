@@ -33,6 +33,7 @@ struct StartTrainingView: View {
                     // create a new training
                     let training = Training(context: self.managedObjectContext)
                     training.isCurrentTraining = true
+                    training.start = Date() // TODO: allow user to configure whether trainings timer should auto start (i.e. whether start is set here)
                     self.managedObjectContext.safeSave()
                 }
                 .padding()

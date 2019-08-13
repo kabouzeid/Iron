@@ -11,35 +11,69 @@ import CoreData
 @testable import Sunrise_Fit
 
 class Sunrise_FitCoreDataTests: XCTestCase {
-    let persistenContainer = setUpInMemoryNSPersistentContainer()
+    var persistenContainer: NSPersistentContainer!
+    
+    var testTrainings: [Training]!
+    var testTrainingExercises: [TrainingExercise]!
+    var testTrainingSets: [TrainingSet]!
+    
+    var testCurrentTraining: Training!
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        initStubs()
+        persistenContainer = setUpInMemoryNSPersistentContainer()
+
+        createTestTrainingsData(context: persistenContainer.viewContext)
+        testCurrentTraining = createTestCurrentTraining(context: persistenContainer.viewContext)
+        
+        testTrainings = try? persistenContainer.viewContext.fetch(Training.fetchRequest()) as? [Training]
+        testTrainingExercises = try? persistenContainer.viewContext.fetch(TrainingExercise.fetchRequest()) as? [TrainingExercise]
+        testTrainingSets = try? persistenContainer.viewContext.fetch(TrainingSet.fetchRequest()) as? [TrainingSet]
+
+        XCTAssertNotNil(testTrainings)
+        XCTAssertTrue(testTrainings.count > 0)
+        XCTAssertTrue(testTrainings.count == 2) // might change in future
+        XCTAssertNotNil(testTrainingExercises)
+        XCTAssertTrue(testTrainingExercises.count > 0)
+        XCTAssertNotNil(testTrainingSets)
+        XCTAssertTrue(testTrainingSets.count > 0)
+        
+        XCTAssertNotNil(testCurrentTraining)
+        
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         persistenContainer.viewContext.reset()
+        persistenContainer = nil
+        
+        testTrainings = nil
+        testTrainingExercises = nil
+        testTrainingSets = nil
+        testCurrentTraining = nil
+        
         super.tearDown()
     }
     
     func testTrainingExerciseNumberOfCompletedSets() {
-        let trainingExercise = try! persistenContainer.viewContext.fetch(TrainingExercise.fetchRequest() as NSFetchRequest<TrainingExercise>)[0]
-        let count = trainingExercise.trainingSets?.filter({ (set) -> Bool in
-            (set as! TrainingSet).isCompleted == true
-        }).count
-        XCTAssertTrue(trainingExercise.numberOfCompletedSets == count)
+        for trainingExercise in testTrainingExercises {
+            let count = trainingExercise.trainingSets?.filter({ (set) -> Bool in
+                (set as! TrainingSet).isCompleted == true
+            }).count
+            XCTAssertTrue(trainingExercise.numberOfCompletedSets == count)
+        }
     }
     
     func testTrainingNumberOfCompletedExercises() {
-        let training = try! persistenContainer.viewContext.fetch(Training.fetchRequest() as NSFetchRequest<Training>)[0]
-        let count = training.trainingExercises?.filter({ (exercise) -> Bool in
-            let exercise = exercise as! TrainingExercise
-            return exercise.numberOfCompletedSets == exercise.trainingSets?.count
-        }).count
-        XCTAssertTrue(training.numberOfCompletedExercises == count)
+        for training in testTrainings {
+            let count = training.trainingExercises?.filter({ (exercise) -> Bool in
+                let exercise = exercise as! TrainingExercise
+                return exercise.numberOfCompletedSets == exercise.trainingSets?.count
+            }).count
+            XCTAssertTrue(training.numberOfCompletedExercises == count)
+        }
     }
     
     func testRelationshipDeleteRules() {
@@ -111,51 +145,60 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         let trainingExerciseEntity = NSEntityDescription.entity(forEntityName: "TrainingExercise", in: persistenContainer.viewContext)!
         let trainingExercise1 = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
         trainingSet1.trainingExercise = trainingExercise1
-        print(try! persistenContainer.viewContext.fetch(TrainingSet.fetchRequest() as NSFetchRequest<TrainingSet>))
         persistenContainer.viewContext.delete(trainingSet1)
-        print(try! persistenContainer.viewContext.fetch(TrainingSet.fetchRequest() as NSFetchRequest<TrainingSet>))
-        
+
         let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
         let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
         trainingExercise1.training = training
         
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
-
-    //////////////////////////////////////////////////////////
-    func initStubs() {
-        if try! persistenContainer.viewContext.count(for: Training.fetchRequest() as NSFetchRequest<Training>) == 0 {
-            let trainingSetEntity = NSEntityDescription.entity(forEntityName: "TrainingSet", in: persistenContainer.viewContext)!
-            let Set1 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set1.repetitions = 3
-            Set1.isCompleted = true
-            let Set2 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set2.repetitions = 2
-            Set2.isCompleted = true
-            let Set3 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set3.repetitions = 1
-            let Set4 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set4.repetitions = 0
-            let Set5 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set5.repetitions = 0
-            let Set6 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-            Set6.repetitions = 3
-            Set6.isCompleted = true
-
-            let trainingExerciseEntity = NSEntityDescription.entity(forEntityName: "TrainingExercise", in: persistenContainer.viewContext)!
-            let trainingExercise = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
-            trainingExercise.addToTrainingSets([Set1,Set2,Set3,Set4,Set5])
-            trainingExercise.exerciseId = 1
-            let trainingExercise2 = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
-            trainingExercise2.addToTrainingSets([Set6])
-            trainingExercise2.exerciseId = 2
-            
-            let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
-            let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
-            training.addToTrainingExercises([trainingExercise, trainingExercise2])
-            training.start = Date()
-            
-            XCTAssertNoThrow(try persistenContainer.viewContext.save())
+    
+    func uncompletedSetsSwift(training: Training) -> [TrainingSet]? {
+        return training.trainingExercises?
+            .compactMap { $0 as? TrainingExercise }
+            .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+            .flatMap { $0 }
+            .filter { !$0.isCompleted }
+    }
+    
+    func uncompletedSetsFetch(training: Training) -> [TrainingSet]? {
+        let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(TrainingSet.trainingExercise.training)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@", training, NSNumber(booleanLiteral: false))
+        return try? training.managedObjectContext?.fetch(fetchRequest)
+    }
+    
+    func testUncompletedSets() {
+        for training in testTrainings {
+            XCTAssertEqual(Set(uncompletedSetsSwift(training: training) ?? []), Set(uncompletedSetsFetch(training: training) ?? []))
         }
+    }
+    
+    func testUncompletedSetsSwift() {
+        self.measure {
+            for training in testTrainings {
+                _ = uncompletedSetsSwift(training: training)
+            }
+        }
+    }
+    
+    func testUncompletedSetsFetch() {
+        self.measure {
+            for training in testTrainings {
+                _ = uncompletedSetsFetch(training: training)
+            }
+        }
+    }
+    
+    func testDeleteUncompletedSets() {
+        testCurrentTraining.deleteAndRemoveUncompletedSets()
+        XCTAssertTrue(
+            testCurrentTraining.trainingExercises?
+                .compactMap { $0 as? TrainingExercise }
+                .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+                .flatMap { $0 }
+                .filter { !$0.isCompleted }
+                .isEmpty ?? true
+        )
     }
 }

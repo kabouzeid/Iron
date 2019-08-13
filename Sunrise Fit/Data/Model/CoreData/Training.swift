@@ -34,7 +34,7 @@ class Training: NSManagedObject {
     
     var numberOfCompletedExercises: Int? {
         let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "training == %@ AND NOT (ANY trainingSets.isCompleted == %@)", self, NSNumber(booleanLiteral: false)) // ALL is not supported
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training)) == %@ AND NOT (ANY trainingSets.isCompleted == %@)", self, NSNumber(booleanLiteral: false)) // ALL is not supported
         if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
             return count
         }
@@ -96,6 +96,18 @@ class Training: NSManagedObject {
             .reduce(0, { (weight, trainingExercise) -> Double in
                 weight + (trainingExercise.totalCompletedWeight ?? 0)
             })
+    }
+    
+    func deleteAndRemoveUncompletedSets() {
+        trainingExercises?
+            .compactMap { $0 as? TrainingExercise }
+            .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+            .flatMap { $0 }
+            .filter { !$0.isCompleted }
+            .forEach { trainingSet in
+                managedObjectContext?.delete(trainingSet)
+                trainingSet.trainingExercise?.removeFromTrainingSets(trainingSet)
+        }
     }
     
     private var cancellable: AnyCancellable?
