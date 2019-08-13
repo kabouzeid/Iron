@@ -36,12 +36,17 @@ class TrainingsPerWeekChartInfo {
     }
     
     private static func trainingsPerWeek(trainings: [Training], weeks: [Date]) -> [Int] {
-        var trainingsPerWeek = [Int]()
-        for (i, week) in weeks.enumerated() {
-            let upperDate = i+1 < weeks.count ? weeks[i+1] : Date()
-            trainingsPerWeek.append(trainings.filter { $0.start! >= week && $0.start! < upperDate }.count)
-        }
-        return trainingsPerWeek
+        assert(weeks == weeks.sorted())
+        
+        return weeks
+            .enumerated()
+            .map { i, week in
+                trainings.filter {
+                    guard let start = $0.start else { return false }
+                    let nextWeek = weeks.count > i + 1 ? weeks[i + 1] : Date()
+                    return start >= week && start < nextWeek
+                }.count
+            }
     }
 
     private static let fetchRequest: NSFetchRequest<Training> = {

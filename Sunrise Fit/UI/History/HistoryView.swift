@@ -38,7 +38,7 @@ struct HistoryView : View {
                             VStack(alignment: .leading) {
                                 Text(training.displayTitle)
                                     .font(.body)
-                                Text("\(Training.dateFormatter.string(from: training.start!)) for \(Training.durationFormatter.string(from: training.duration)!)")
+                                Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration)!)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -54,6 +54,7 @@ struct HistoryView : View {
                     for i in offsets.sorted().reversed() {
                         self.managedObjectContext.delete(trainings[i])
                     }
+                    self.managedObjectContext.safeSave()
                 }
             }
             .navigationBarTitle(Text("History"))

@@ -26,15 +26,23 @@ struct TrainingView: View {
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
         var numberOfSets = 3
         // try to guess the number of sets
-        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count > 2 {
+        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count >= 3 {
             // one month since last training and at least three trainings
-            let cutoff = min(history[2].training!.start!, Calendar.current.date(byAdding: .month, value: -1, to: history.first!.training!.start!)!)
-            let filteredAndSortedHistory = history
-                .filter({$0.training!.start != nil && $0.training!.start! >= cutoff})
-                .sorted(by: {($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)})
-            assert(filteredAndSortedHistory.count >= 3)
-            let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
-            numberOfSets = median.trainingSets?.count ?? numberOfSets
+            if let firstHistoryStart = history[0].training?.start, let thirdHistoryStart = history[2].training?.start {
+                let cutoff = min(thirdHistoryStart, Calendar.current.date(byAdding: .month, value: -1, to: firstHistoryStart)!)
+                let filteredAndSortedHistory = history
+                    .filter {
+                        guard let start = $0.training?.start else { return false }
+                        return start >= cutoff
+                    }
+                    .sorted {
+                        ($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)
+                    }
+                
+                assert(filteredAndSortedHistory.count >= 3)
+                let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
+                numberOfSets = median.trainingSets?.count ?? numberOfSets
+            }
         }
         var trainingSets = [TrainingSet]()
         for _ in 0..<numberOfSets {
@@ -120,8 +128,8 @@ struct TrainingView: View {
                         
                         self.training.deleteAndRemoveUncompletedSets()
                         self.training.isCurrentTraining = false
-                        self.training.start = self.training.start ?? self.training.end ?? Date()
-                        self.training.end = self.training.end ?? Date()
+                        self.training.start = self.training.safeStart // should already be set, but just to be safe
+                        self.training.end = self.training.safeEnd
                         
                         precondition(self.training.start! <= self.training.end!)
                         self.managedObjectContext.safeSave()

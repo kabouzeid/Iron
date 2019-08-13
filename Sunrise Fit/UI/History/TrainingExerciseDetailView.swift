@@ -183,7 +183,7 @@ struct TrainingExerciseDetailView : View {
     
     private var historyTrainingSets: some View {
         ForEach(trainingExerciseHistory, id: \.objectID) { trainingExercise in
-            Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
+            Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training?.start, fallback: "Unknown date"))) {
                 ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
                     HStack {
                         Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
@@ -207,8 +207,8 @@ struct TrainingExerciseDetailView : View {
                 
                 if !set.isCompleted {
                     // these preconditions should never ever happen, but just to be sure
-                    precondition(set.weight >= 0, "Tried to complete set with negative weight.")
-                    precondition(set.repetitions >= 0, "Tried to complete set with negative repetitions.")
+                    precondition(set.weight >= 0)
+                    precondition(set.repetitions >= 0)
                     set.isCompleted = true
                     let training = set.trainingExercise!.training!
                     training.start = training.start ?? Date()
@@ -280,6 +280,7 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
         NavigationView {
         TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(restTimerStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

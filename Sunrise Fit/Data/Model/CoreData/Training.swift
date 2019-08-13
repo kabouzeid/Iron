@@ -32,6 +32,14 @@ class Training: NSManagedObject {
         return formatter
     }()
     
+    var safeStart: Date {
+        start ?? min(end ?? Date(), Date())
+    }
+    
+    var safeEnd: Date {
+        end ?? max(start ?? Date(), Date())
+    }
+    
     var numberOfCompletedExercises: Int? {
         let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training)) == %@ AND NOT (ANY trainingSets.isCompleted == %@)", self, NSNumber(booleanLiteral: false)) // ALL is not supported
@@ -77,7 +85,7 @@ class Training: NSManagedObject {
     }
     
     var duration: TimeInterval {
-        (end ?? Date()).timeIntervalSince(start ?? Date())
+        safeEnd.timeIntervalSince(safeStart)
     }
     
     var numberOfCompletedSets: Int? {

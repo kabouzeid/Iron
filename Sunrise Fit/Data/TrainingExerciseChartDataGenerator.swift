@@ -70,13 +70,25 @@ class TrainingExerciseChartDataGenerator {
         var filter: (TrainingExercise) -> Bool {
             switch self {
             case .month:
-                return { $0.training!.start! >= Calendar.current.date(byAdding: .month, value: -1,  to: Date())! }
+                return {
+                    guard let start = $0.training?.start else { return false }
+                    return start >= Calendar.current.date(byAdding: .month, value: -1,  to: Date())!
+                }
             case .threeMonths:
-                return { $0.training!.start! >= Calendar.current.date(byAdding: .month, value: -3,  to: Date())! }
+                return {
+                    guard let start = $0.training?.start else { return false }
+                    return start >= Calendar.current.date(byAdding: .month, value: -3,  to: Date())!
+                }
             case .year:
-                return { $0.training!.start! >= Calendar.current.date(byAdding: .year, value: -1,   to: Date())! }
+                return {
+                    guard let start = $0.training?.start else { return false }
+                    return start >= Calendar.current.date(byAdding: .year, value: -1,   to: Date())!
+                }
             case .all:
-                return { _ -> Bool in return true }
+                return {
+                    guard let _ = $0.training?.start else { return false }
+                    return true
+                }
             }
         }
     }
@@ -142,14 +154,14 @@ class TrainingExerciseChartDataGenerator {
     private typealias TrainingExerciseToValue = (TrainingExercise) -> Double
     private func generateChartDataSet(trainingExercises: [TrainingExercise], trainingExerciseToValue: TrainingExerciseToValue, label: String?) -> LineChartDataSet {
         // Define chart entries
-        var entries = [ChartDataEntry]()
-        for trainingExercise in trainingExercises {
-            let xValue = dateToValue(date: trainingExercise.training!.start!)
-            let yValue = trainingExerciseToValue(trainingExercise)
-            let entry = ChartDataEntry(x: xValue, y: yValue)
-            entries.append(entry)
-        }
-        entries.reverse() // fixes a strange bug, where the chart line is not drawn
+        let entries: [ChartDataEntry] = trainingExercises
+            .reversed()  // fixes a strange bug, where the chart line is not drawn
+            .compactMap { trainingExercise in
+                guard let start = trainingExercise.training?.start else { return nil }
+                let xValue = dateToValue(date: start)
+                let yValue = trainingExerciseToValue(trainingExercise)
+                return ChartDataEntry(x: xValue, y: yValue)
+            }
 
         return LineChartDataSet(entries: entries, label: label)
     }

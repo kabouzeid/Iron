@@ -16,20 +16,20 @@ private class TrainingViewModel: ObservableObject {
     
     var startInput: Date {
         set {
-            precondition(newValue <= training.end!)
+            precondition(training.end == nil || newValue <= training.end!)
             training.start = newValue
         }
         get {
-            training.start!
+            training.safeStart
         }
     }
     var endInput: Date {
         set {
-            precondition(newValue >= training.start!)
+            precondition(training.start == nil || newValue >= training.start!)
             training.end = newValue
         }
         get {
-            training.end!
+            training.safeEnd
         }
     }
     // we don't want to immediately write the title to core data
@@ -90,11 +90,11 @@ struct TrainingDetailView : View {
                 }
                 
                 Section {
-                    DatePicker(selection: $trainingViewModel.startInput, in: ...min(self.trainingViewModel.training.end!, Date())) {
+                    DatePicker(selection: $trainingViewModel.startInput, in: ...min(self.trainingViewModel.training.safeEnd, Date())) {
                         Text("Start")
                     }
 
-                    DatePicker(selection: $trainingViewModel.endInput, in: self.trainingViewModel.training.start!...Date()) {
+                    DatePicker(selection: $trainingViewModel.endInput, in: self.trainingViewModel.training.safeStart...Date()) {
                         Text("End")
                     }
                 }

@@ -36,7 +36,7 @@ struct ExerciseHistoryView : View {
         fetch() // TODO: should be called in onAppear, but as of beta5 this crashes
         return List {
             ForEach(history, id: \.objectID) { trainingExercise in
-                Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training!.start!))) {
+                Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training?.start, fallback: "Unknown date"))) {
                     ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { index, trainingSet in
                         HStack {
                             Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
