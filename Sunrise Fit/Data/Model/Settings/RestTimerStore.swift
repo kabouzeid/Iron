@@ -22,14 +22,34 @@ final class RestTimerStore: ObservableObject {
         self.init(userDefaults: UserDefaults.standard)
     }
     
-    var restTimerEnd: Date? {
+    var restTimerStart: Date? {
         get {
-            userDefaults.restTimerEnd
+            userDefaults.restTimerStart
         }
         set {
             self.objectWillChange.send()
-            userDefaults.restTimerEnd = newValue
+            userDefaults.restTimerStart = newValue
         }
+    }
+    
+    var restTimerDuration: TimeInterval? {
+        get {
+            userDefaults.restTimerDuration
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.restTimerDuration = newValue
+        }
+    }
+}
+
+extension RestTimerStore {
+    var restTimerRemainingTime: TimeInterval? {
+        guard let duration = restTimerDuration else { return nil }
+        guard let restTimerEnd = restTimerStart?.addingTimeInterval(duration) else { return nil }
+        let remainingTime = restTimerEnd.timeIntervalSince(Date())
+        guard remainingTime >= 0 else { return nil }
+        return remainingTime
     }
 }
 

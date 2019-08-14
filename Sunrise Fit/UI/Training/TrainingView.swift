@@ -55,6 +55,7 @@ struct TrainingView: View {
     private func currentTrainingExerciseDetailView(trainingExercise: TrainingExercise) -> some View {
         VStack(spacing: 0) {
             TimerBannerView(training: training)
+            Divider()
             TrainingExerciseDetailView(trainingExercise: trainingExercise)
                 .layoutPriority(1)
                 .environmentObject(settingsStore)
@@ -198,6 +199,7 @@ struct TrainingView: View {
         NavigationView {
             VStack(spacing: 0) {
                 TimerBannerView(training: training)
+                Divider()
                 List {
                     Section {
                         // TODO: actually edit training title
@@ -267,71 +269,14 @@ struct TrainingView: View {
     }
 }
 
-private struct TimerBannerView: View {
-    @EnvironmentObject var restTimerStore: RestTimerStore
-    
-    @ObservedObject var training: Training
 
-    @ObservedObject private var refresher = Refresher()
-    
-    private let trainingTimerDurationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }()
-    
-    private let restTimerDurationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.minute, .second]
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }()
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Button(action: {
-                    // TODO: open start/end time editor
-                }) {
-                    HStack {
-                        Image(systemName: "clock")
-                        Text(trainingTimerDurationFormatter.string(from: training.duration) ?? "")
-                            .font(Font.body.monospacedDigit())
-                    }
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    // TODO: open big rest timer view
-                }) {
-                    HStack {
-                        Image(systemName: "timer")
-                        restTimerStore.restTimerEnd.map({
-                            Text(restTimerDurationFormatter.string(from: Date(), to: $0) ?? "")
-                                .font(Font.body.monospacedDigit())
-                        })
-                    }
-                }
-            }
-            .padding()
-            Divider()
-        }
-        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            self.refresher.refresh()
-        }
-    }
-}
 
 #if DEBUG
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        if UserDefaults.standard.restTimerEnd == nil {
-            UserDefaults.standard.restTimerEnd = Date().addingTimeInterval(90)
+        if restTimerStore.restTimerRemainingTime == nil {
+            restTimerStore.restTimerStart = Date()
+            restTimerStore.restTimerDuration = 10
         }
         return TrainingView(training: mockCurrentTraining)
             .environment(\.managedObjectContext, mockManagedObjectContext)

@@ -70,8 +70,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             requestUnfinishedTrainingNotification()
         }
         
-        if let restTimerEnd = restTimerStore.restTimerEnd {
-            requestRestTimerUpNotification(restTimerEnd: restTimerEnd)
+        if let remainingTime = restTimerStore.restTimerRemainingTime {
+            requestRestTimerUpNotification(remainingTime: remainingTime)
         }
     }
     
@@ -94,7 +94,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    private func requestRestTimerUpNotification(restTimerEnd: Date) {
+    private func requestRestTimerUpNotification(remainingTime: TimeInterval) {
+        guard remainingTime > 0 else { return}
+        
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -102,9 +104,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         content.body = "Back to work 💪"
         content.sound = UNNotificationSound.default
         
-        let timeInterval = restTimerEnd.timeIntervalSince(Date())
-        guard timeInterval > 0 else { return }
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
         
         let request = UNNotificationRequest(identifier: NotificationID.unfinishedTraining.rawValue, content: content, trigger: trigger)
         

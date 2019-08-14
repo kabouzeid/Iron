@@ -40,6 +40,8 @@
 		8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */; };
 		8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */; };
+		8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73623041542000A3C76 /* TimerBannerView.swift */; };
+		8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73823041637000A3C76 /* RestTimerView.swift */; };
 		8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */; };
 		8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
@@ -149,6 +151,8 @@
 		8A6B1A6622BE7FD10067DD41 /* _TextSizeDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TextSizeDemo.swift; sourceTree = "<group>"; };
 		8A6B1A6822BE8B210067DD41 /* TrainingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailView.swift; sourceTree = "<group>"; };
 		8A6B1A6A22BE8F9B0067DD41 /* TrainingDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailBannerView.swift; sourceTree = "<group>"; };
+		8A70A73623041542000A3C76 /* TimerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBannerView.swift; sourceTree = "<group>"; };
+		8A70A73823041637000A3C76 /* RestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerView.swift; sourceTree = "<group>"; };
 		8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Publisher.swift"; sourceTree = "<group>"; };
 		8A799F5E22BF868500DD5E1B /* TrainingExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				8A81570422E21E5400B4D27D /* StartTrainingView.swift */,
 				8A81570622E2279000B4D27D /* TrainingView.swift */,
 				8A38154F2301B865008ACDAD /* TrainingsLog.swift */,
+				8A70A73623041542000A3C76 /* TimerBannerView.swift */,
+				8A70A73823041637000A3C76 /* RestTimerView.swift */,
 			);
 			path = Training;
 			sourceTree = "<group>";
@@ -634,6 +640,7 @@
 				8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */,
 				8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */,
 				8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */,
+				8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
@@ -669,6 +676,7 @@
 				8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */,
 				8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */,
 				8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */,
+				8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,

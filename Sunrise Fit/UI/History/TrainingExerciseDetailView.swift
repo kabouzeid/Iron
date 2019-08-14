@@ -223,9 +223,10 @@ struct TrainingExerciseDetailView : View {
                 self.managedObjectContext.safeSave()
                 
                 if self.isCurrentTraining {
-                    // start rest timer
                     // TODO: customizable rest timer time
-                    self.restTimerStore.restTimerEnd = Date().addingTimeInterval(90)
+                    self.restTimerStore.restTimerDuration = 90
+                    // start rest timer
+                    self.restTimerStore.restTimerStart = Date()
                 }
             })
                 // TODO: currently the gesture doesn't work very well when a background is set (must be SwiftUI bug)
