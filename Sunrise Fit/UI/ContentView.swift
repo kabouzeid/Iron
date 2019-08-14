@@ -17,10 +17,12 @@ struct ContentView : View {
     }
 
     private func trainingView(training: Training?) -> some View {
-        if training != nil {
-            return AnyView(TrainingView(training: training!))
-        } else {
-            return AnyView(StartTrainingView())
+        Group { // is Group the appropiate choice here? (want to avoid AnyView)
+            if training != nil {
+                TrainingView(training: training!)
+            } else {
+                StartTrainingView()
+            }
         }
     }
     
