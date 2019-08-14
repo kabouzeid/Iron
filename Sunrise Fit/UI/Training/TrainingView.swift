@@ -148,7 +148,7 @@ struct TrainingView: View {
     }
     
     private var exerciseSelectorSheet: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Button("Cancel") {
                     self.showingExerciseSelectorSheet = false
@@ -167,6 +167,7 @@ struct TrainingView: View {
                     self.exerciseSelectorSelection.removeAll()
                     self.managedObjectContext.safeSave()
                 }
+                .environment(\.isEnabled, !self.exerciseSelectorSelection.isEmpty)
             }.padding()
             ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
         }
