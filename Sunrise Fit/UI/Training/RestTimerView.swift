@@ -43,17 +43,17 @@ struct RestTimerView: View {
                 .animation(.default)
         }
         .rotationEffect(.degrees(-90))
-        .shadow(color: .accentColor, radius: 4) // TODO: in future enable this only for the blue Circle (not working as of beta5)
+//        .shadow(radius: 4)
     }
     
     private var timerProgress: some View {
         ZStack {
             progressCircle
-                .frame(width: 200, height: 200)
+                .frame(width: 240, height: 240)
             VStack {
                 Text(timerText)
-                    .font(Font.largeTitle.monospacedDigit())
-                
+                    .font(Font.system(size: 48, weight: .light).monospacedDigit())
+
                 Text(timerDurationFormatter.string(from: restTimerStore.restTimerDuration ?? 0) ?? "")
                     .font(Font.subheadline.monospacedDigit())
                     .foregroundColor(.secondary)
@@ -171,7 +171,11 @@ private struct CircleButton<Label>: View where Label: View {
 #if DEBUG
 struct RestTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        RestTimerView()
+//        if restTimerStore.restTimerRemainingTime == nil {
+//            restTimerStore.restTimerStart = Date()
+//            restTimerStore.restTimerDuration = 90
+//        }
+        return RestTimerView()
             .environmentObject(restTimerStore)
 //            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
 //            .previewDevice(PreviewDevice(rawValue: "iPhone Xs Max"))
