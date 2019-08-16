@@ -35,11 +35,15 @@ struct TimerBannerView: View {
     
     private var restTimerSheet: some View {
         VStack(spacing: 0) {
-            HStack {
-                Button("Close") {
-                    self.showingRestTimerSheet = false
+            ZStack {
+                Text("Rest Timer")
+                    .font(.headline)
+                HStack {
+                    Button("Close") {
+                        self.showingRestTimerSheet = false
+                    }
+                    Spacer()
                 }
-                Spacer()
             }.padding()
             Spacer()
             RestTimerView().environmentObject(self.restTimerStore)
