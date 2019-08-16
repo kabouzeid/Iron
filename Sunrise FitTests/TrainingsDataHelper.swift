@@ -88,7 +88,7 @@ func createTestCurrentTraining(context: NSManagedObjectContext) -> Training {
             }
         }
     }
-    for j in [211, 206] { // crunches, cross-body crunches
+    for j in [211, 206] { // biceps curls, triceps pushdown
         let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
         trainingExercise.exerciseId = Int16(j)
         trainingExercise.training = training

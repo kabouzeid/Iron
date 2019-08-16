@@ -110,7 +110,26 @@ private func createMockCurrentTraining(context: NSManagedObjectContext) -> Train
             trainingSet.trainingExercise = trainingExercise
         }
     }
-    for j in [291, 289] { // crunches, cross-body crunches
+    for j in [291] { // crunches
+        let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
+        trainingExercise.exerciseId = Int16(j)
+        trainingExercise.training = training
+        
+        let numberOfSets = 5 + Int.random(in: 0...4)
+        for setNumber in 1...numberOfSets {
+            let trainingSet = TrainingSet(context: training.managedObjectContext!)
+            trainingSet.trainingExercise = trainingExercise
+            switch setNumber {
+            case 1:
+                trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
+                trainingSet.repetitions = Int16.random(in: 1...10)
+                trainingSet.isCompleted = true
+            default:
+                trainingSet.isCompleted = false
+            }
+        }
+    }
+    for j in [289] { // cross-body crunches
         let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
         trainingExercise.exerciseId = Int16(j)
         trainingExercise.training = training
@@ -119,6 +138,7 @@ private func createMockCurrentTraining(context: NSManagedObjectContext) -> Train
         for _ in 1...numberOfSets {
             let trainingSet = TrainingSet(context: training.managedObjectContext!)
             trainingSet.trainingExercise = trainingExercise
+            trainingSet.isCompleted = false
         }
     }
     return training
