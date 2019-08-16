@@ -233,7 +233,21 @@ struct TrainingSetEditor : View {
             })
         )
         .sheet(isPresented: $showMoreSheet) {
-            MoreView(trainingSet: self.trainingSetViewModel.trainingSet)
+            VStack(spacing: 0) {
+                ZStack {
+                    HStack {
+                        Button("Close") {
+                            self.showMoreSheet = false
+                        }
+                        Spacer()
+                    }
+                    Text(self.trainingSetViewModel.trainingSet.displayTitle(unit: self.trainingSetViewModel.weightUnit))
+                        .font(.headline)
+                }
+                .padding()
+                Divider()
+                MoreView(trainingSet: self.trainingSetViewModel.trainingSet)
+            }
         }
     }
 }
@@ -262,9 +276,9 @@ private struct MoreView: View {
         case 9:
             return "You could do 1 more repetitions."
         case 9.5:
-            return "You couldn't do more repetitions, but possibly you could've increased the weight."
+            return "You couldn't do any more repetitions, but possibly you could've increased the weight."
         case 10:
-            return "You couldn't do more repetitions."
+            return "You couldn't do any more repetitions."
         default:
             return nil
         }
@@ -331,7 +345,16 @@ private struct MoreView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Tag".uppercased())) {
+            Section(header:
+                HStack {
+                    Text("Tag".uppercased())
+                    Spacer()
+                    Button(action: {
+                        // TODO: show Tag help (in a Dialog)
+                    }) {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }) {
                 ForEach(tags, id: \.self) { tag in
                     self.tagButton(tag: tag)
                 }
@@ -341,7 +364,16 @@ private struct MoreView: View {
                 TextField("Comment", text: $trainingSetComment, onEditingChanged: { _ in }, onCommit: {})
             }
             
-            Section(header: Text("RPE (Rating of Perceived Exertion)")) {
+            Section(header:
+                HStack {
+                    Text("RPE (Rating of Perceived Exertion)")
+                    Spacer()
+                    Button(action: {
+                        // TODO: show RPE help (in a Dialog)
+                    }) {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }) {
                 ForEach(RPEs, id: \.self) { RPE in
                     self.RPEButton(RPE: RPE)
                 }
