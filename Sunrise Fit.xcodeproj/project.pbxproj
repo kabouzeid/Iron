@@ -1036,7 +1036,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kabouzeid/Charts";
 			requirement = {
-				branch = swiftpm;
+				branch = kabouzeid;
 				kind = branch;
 			};
 		};
