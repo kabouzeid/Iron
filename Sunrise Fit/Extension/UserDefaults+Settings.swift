@@ -18,7 +18,14 @@ extension UserDefaults {
             self.set(newValue.rawValue, forKey: SettingsKeys.weightUnit.rawValue)
         }
         get {
-            WeightUnit(rawValue: self.string(forKey: SettingsKeys.weightUnit.rawValue) ?? "") ?? .metric
+            let weightUnit = WeightUnit(rawValue: self.string(forKey: SettingsKeys.weightUnit.rawValue) ?? "")
+            if let weightUnit = weightUnit {
+                return weightUnit
+            } else {
+                let fallback = Locale.current.usesMetricSystem ? WeightUnit.metric : WeightUnit.imperial
+                self.weightUnit = fallback // safe the new weight unit
+                return fallback
+            }
         }
     }
 }
