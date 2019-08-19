@@ -15,7 +15,7 @@ extension TrainingExercise {
         return Exercise.imageFor(muscleGroup: muscleGroup).foregroundColor(Exercise.colorFor(muscleGroup: muscleGroup))
     }
     
-    var muscleGroupColor: some View {
+    var muscleGroupColor: Color {
         let muscleGroup = exercise?.muscleGroup ?? ""
         return Exercise.colorFor(muscleGroup: muscleGroup)
     }

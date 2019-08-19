@@ -17,7 +17,7 @@ struct ActivityChartViewCell : View {
                 .font(.caption)
                 .foregroundColor(.secondary)
             ActivityChartView()
-                .frame(height: 200)
+                .frame(height: 250)
         }
     }
 }
