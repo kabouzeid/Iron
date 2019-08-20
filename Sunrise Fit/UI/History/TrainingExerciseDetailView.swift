@@ -16,16 +16,17 @@ struct TrainingExerciseDetailView : View {
     @EnvironmentObject var restTimerStore: RestTimerStore
     
     @ObservedObject var trainingExercise: TrainingExercise
-    @ObservedObject var observableFetchRequest = ObservableFetchRequest<TrainingExercise>()
+//    @ObservedObject var observableFetchRequest = ObservableFetchRequest<TrainingExercise>() // TODO: not working as of beta6
 
     @State private var selectedTrainingSet: TrainingSet? = nil
     
-    private func fetchTrainingExerciseHistory() {
-        observableFetchRequest.fetch(fetchRequest: trainingExercise.historyFetchRequest, managedObjectContext: managedObjectContext)
-    }
+//    private func fetchTrainingExerciseHistory() {
+//        observableFetchRequest.fetch(fetchRequest: trainingExercise.historyFetchRequest, managedObjectContext: managedObjectContext)
+//    }
     
     private var trainingExerciseHistory: [TrainingExercise] {
-        observableFetchRequest.fetchedResults
+//        observableFetchRequest.fetchedResults
+        (try? managedObjectContext.fetch(trainingExercise.historyFetchRequest)) ?? []
     }
 
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
@@ -236,8 +237,7 @@ struct TrainingExerciseDetailView : View {
     }
 
     var body: some View {
-        fetchTrainingExerciseHistory() // TODO: should be in onAppear, but as of beta5 this crashes
-        return VStack(spacing: 0) {
+        VStack(spacing: 0) {
             List {
                 Section {
                     banner
@@ -268,6 +268,7 @@ struct TrainingExerciseDetailView : View {
         })
         .onAppear {
             self.select(set: self.firstUncompletedSet)
+//            self.fetchTrainingExerciseHistory()
         }
         .onDisappear {
             self.managedObjectContext.safeSave()

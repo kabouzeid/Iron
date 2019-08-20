@@ -10,11 +10,12 @@ import Foundation
 import Combine
 import CoreData
 
+// TODO: not working as of beta6, List crashes when using fetch() in onAppear()
 class ObservableFetchRequest<Result>: NSObject, ObservableObject, NSFetchedResultsControllerDelegate where Result: NSFetchRequestResult {
     var objectWillChange = ObservableObjectPublisher()
     
     @Published var fetchedResults = [Result]() {
-        // TODO: remove didSet in future, as of beta5 @Published doesn't seem to work
+        // TODO: remove didSet in future, as of beta6 @Published doesn't seem to work
         willSet {
             self.objectWillChange.send()
         }
