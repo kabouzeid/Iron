@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
+    @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
     @State private var showingStatistics = false
@@ -109,14 +110,18 @@ struct ExerciseDetailView : View {
                 }
                 .sheet(isPresented: $showingHistory) {
                             ExerciseHistoryView(exercise: self.exercise)
+                                // TODO: as of beta6 the environment is not shared with the sheets
                                 .environmentObject(self.settingsStore)
+                                .environment(\.managedObjectContext, self.managedObjectContext)
                         }
                 Button(action: { self.showingStatistics = true }) {
                     Image(systemName: "waveform.path.ecg")
                 }
                 .sheet(isPresented: $showingStatistics) {
                             ExerciseStatisticsView(exercise: self.exercise)
+                                // TODO: as of beta6 the environment is not shared with the sheets
                                 .environmentObject(self.settingsStore)
+                                .environment(\.managedObjectContext, self.managedObjectContext)
                         }
             }
         )
