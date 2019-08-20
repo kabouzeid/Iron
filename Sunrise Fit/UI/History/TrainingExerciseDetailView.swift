@@ -115,9 +115,9 @@ struct TrainingExerciseDetailView : View {
                     .foregroundColor(.secondary)
             }
                 // TODO: use selection feature of List when it is released
-                .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.value != .active ? Color(UIColor.systemGray4) : nil) // TODO: trainingSet cast shouldn't be necessary
+                .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil) // TODO: trainingSet cast shouldn't be necessary
                 .onTapGesture { // TODO: currently tap on Spacer() is not recognized
-                    guard self.editMode?.value != .active else { return }
+                    guard self.editMode?.wrappedValue != .active else { return }
                     if self.selectedTrainingSet?.hasChanges ?? false {
                         self.managedObjectContext.safeSave()
                     }
@@ -254,7 +254,7 @@ struct TrainingExerciseDetailView : View {
             
             if selectedTrainingSet != nil &&
                 (self.trainingExercise.trainingSets?.contains(self.selectedTrainingSet!) ?? false) &&
-                editMode?.value != .active {
+                editMode?.wrappedValue != .active {
                 trainingSetEditor
             } // TODO: else if trainingExercise is finished, show next exercise / finish training button
         }

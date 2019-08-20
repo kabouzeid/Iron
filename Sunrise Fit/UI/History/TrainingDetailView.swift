@@ -64,12 +64,10 @@ struct TrainingDetailView : View {
         trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
     
-    private func trainingExerciseText(trainingExercise: TrainingExercise) -> String {
-        trainingExercise.trainingSets!
-            .map { ($0 as! TrainingSet).displayTitle(unit: settingsStore.weightUnit) }
-            .joined(separator: "\n")
+    private func trainingSets(trainingExercise: TrainingExercise) -> [TrainingSet] {
+        trainingExercise.trainingSets?.array as? [TrainingSet] ?? []
     }
-    
+
     var body: some View {
         List {
             Section {
@@ -108,10 +106,12 @@ struct TrainingDetailView : View {
                         VStack(alignment: .leading) {
                             Text(trainingExercise.exercise?.title ?? "")
                                 .font(.body)
-                            Text(self.trainingExerciseText(trainingExercise: trainingExercise))
-                                .font(Font.body.monospacedDigit())
-                                .foregroundColor(.secondary)
-                                .lineLimit(nil)
+                            ForEach(self.trainingSets(trainingExercise: trainingExercise), id: \.objectID) { trainingSet in
+                                Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
+                                    .font(Font.body.monospacedDigit())
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(nil)
+                            }
                         }
                     }
                 }
