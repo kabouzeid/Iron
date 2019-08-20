@@ -176,7 +176,7 @@ struct TrainingView: View {
     
     private var cancelButton: some View {
         Button("Cancel") {
-            if (self.training.trainingExercises?.count ?? 0) == 0 && self.training.start == nil {
+            if (self.training.trainingExercises?.count ?? 0) == 0 {
                 // the training is empty, do not need confirm to cancel
                 self.managedObjectContext.delete(self.training)
                 self.managedObjectContext.safeSave()
@@ -184,15 +184,6 @@ struct TrainingView: View {
                 self.showingCancelSheet = true
             }
         }
-        .actionSheet(isPresented: $showingCancelSheet, content: {
-            ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
-                .destructive(Text("Delete Workout"), action: {
-                    self.managedObjectContext.delete(self.training)
-                    self.managedObjectContext.safeSave()
-                }),
-                .cancel()
-            ])
-        })
     }
     
     var body: some View {
@@ -265,6 +256,15 @@ struct TrainingView: View {
             .sheet(isPresented: $showingExerciseSelectorSheet) { self.exerciseSelectorSheet }
         }
         .sheet(isPresented: $showingFinishWorkoutSheet) { self.finishWorkoutSheet }
+        .actionSheet(isPresented: $showingCancelSheet, content: {
+            ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
+                .destructive(Text("Delete Workout"), action: {
+                    self.managedObjectContext.delete(self.training)
+                    self.managedObjectContext.safeSave()
+                }),
+                .cancel()
+            ])
+        })
     }
 }
 
