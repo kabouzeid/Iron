@@ -77,15 +77,18 @@ struct TrainingExerciseDetailView : View {
     
     private func moveTrainingExerciseBehindLastBegun() {
         assert(isCurrentTraining)
-        let training = trainingExercise.training!
+        guard let training = trainingExercise.training else { return }
+        
         training.removeFromTrainingExercises(trainingExercise) // remove before doing the other stuff!
-        if let firstUntouched = training.trainingExercises?.array.last(
-            where: { (($0 as! TrainingExercise).numberOfCompletedSets ?? 0) == 0 }) as? TrainingExercise {
-            let index = training.trainingExercises!.index(of: firstUntouched)
-            assert(index != NSNotFound)
-            training.insertIntoTrainingExercises(trainingExercise, at: index)
+        
+        let lastBegun = training.trainingExercises?
+            .compactMap { $0 as? TrainingExercise }
+            .last { $0.numberOfCompletedSets ?? 0 > 0 }
+        
+        if let lastBegun = lastBegun, let index = training.trainingExercises?.index(of: lastBegun), index != NSNotFound {
+            training.insertIntoTrainingExercises(trainingExercise, at: index + 1) // insert after last begun exercise
         } else {
-            training.addToTrainingExercises(trainingExercise) // append at the end
+            training.insertIntoTrainingExercises(trainingExercise, at: 0) // no training exercise begun
         }
     }
     

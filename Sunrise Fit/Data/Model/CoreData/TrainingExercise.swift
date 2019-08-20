@@ -11,12 +11,10 @@ import Combine
 
 class TrainingExercise: NSManagedObject {
     var numberOfCompletedSets: Int? {
-        let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "trainingExercise == %@ AND isCompleted == %@", self, NSNumber(booleanLiteral: true))
-        if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
-            return count
-        }
-        return nil
+        trainingSets?
+            .compactMap { $0 as? TrainingSet }
+            .filter { $0.isCompleted }
+            .count
     }
     
     var isCompleted: Bool? {
