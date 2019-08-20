@@ -258,13 +258,12 @@ struct TrainingView: View {
                     }) {
                         Image(systemName: "doc.plaintext")
                     }
+                    .sheet(isPresented: $showingTrainingsLogSheet) { self.trainingsLogSheet }
                     EditButton()
                 }
             )
             .sheet(isPresented: $showingExerciseSelectorSheet) { self.exerciseSelectorSheet }
         }
-        // TODO: move sheet modifier to more appropiate place (as of beta5 only one sheet modifier per view)
-        .sheet(isPresented: $showingTrainingsLogSheet) { self.trainingsLogSheet } // currently overwritten by the sheet below (beta5)
         .sheet(isPresented: $showingFinishWorkoutSheet) { self.finishWorkoutSheet }
     }
 }
