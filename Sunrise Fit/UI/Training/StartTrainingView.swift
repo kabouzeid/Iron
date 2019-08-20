@@ -22,12 +22,14 @@ struct StartTrainingView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if colorScheme == .dark {
-                    plateImage.colorInvert()
-                } else {
-                    plateImage
-                }
-                    
+                Group {
+                    if colorScheme == .dark {
+                        plateImage.colorInvert()
+                    } else {
+                        plateImage
+                    }
+                }.layoutPriority(1)
+                
                 Button("Start Workout") {
                     precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
                     // create a new training
