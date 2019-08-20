@@ -13,8 +13,8 @@ struct ExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
-    @State private var showingStatistics = false
-    @State private var showingHistory = false
+    @State private var showingStatisticsSheet = false
+    @State private var showingHistorySheet = false
     
     private var exerciseImages: [UIImage] {
         var images = [UIImage]()
@@ -30,6 +30,48 @@ struct ExerciseDetailView : View {
     
     private func imageHeight(geometry: GeometryProxy) -> CGFloat {
         min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
+    }
+    
+    private var exerciseHistorySheet: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("History")
+                    .font(.headline)
+                HStack {
+                    Button("Close") {
+                        self.showingHistorySheet = false
+                    }
+                    Spacer()
+                }
+            }
+            .padding()
+            Divider()
+            ExerciseHistoryView(exercise: self.exercise)
+                // TODO: as of beta6 the environment is not shared with the sheets
+                .environmentObject(self.settingsStore)
+                .environment(\.managedObjectContext, self.managedObjectContext)
+        }
+    }
+    
+    private var exerciseStatisticsSheet: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Statistics")
+                    .font(.headline)
+                HStack {
+                    Button("Close") {
+                        self.showingStatisticsSheet = false
+                    }
+                    Spacer()
+                }
+            }
+            .padding()
+            Divider()
+            ExerciseStatisticsView(exercise: self.exercise)
+                // TODO: as of beta6 the environment is not shared with the sheets
+                .environmentObject(self.settingsStore)
+                .environment(\.managedObjectContext, self.managedObjectContext)
+        }
     }
     
     var body: some View {
@@ -105,24 +147,14 @@ struct ExerciseDetailView : View {
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack {
-                Button(action: { self.showingHistory = true }) {
+                Button(action: { self.showingHistorySheet = true }) {
                     Image(systemName: "clock")
                 }
-                .sheet(isPresented: $showingHistory) {
-                            ExerciseHistoryView(exercise: self.exercise)
-                                // TODO: as of beta6 the environment is not shared with the sheets
-                                .environmentObject(self.settingsStore)
-                                .environment(\.managedObjectContext, self.managedObjectContext)
-                        }
-                Button(action: { self.showingStatistics = true }) {
+                .sheet(isPresented: $showingHistorySheet) { self.exerciseHistorySheet }
+                Button(action: { self.showingStatisticsSheet = true }) {
                     Image(systemName: "waveform.path.ecg")
                 }
-                .sheet(isPresented: $showingStatistics) {
-                            ExerciseStatisticsView(exercise: self.exercise)
-                                // TODO: as of beta6 the environment is not shared with the sheets
-                                .environmentObject(self.settingsStore)
-                                .environment(\.managedObjectContext, self.managedObjectContext)
-                        }
+                .sheet(isPresented: $showingStatisticsSheet) { self.exerciseStatisticsSheet }
             }
         )
     }
