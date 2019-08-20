@@ -48,7 +48,7 @@ struct FeedBannerView : View {
 
     var body: some View {
         BannerView(entries: bannerViewEntries)
-            .lineLimit(nil)
+            .lineLimit(2)
     }
     
     private static var percentNumberFormatter: NumberFormatter = {
