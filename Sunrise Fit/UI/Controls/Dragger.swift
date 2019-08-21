@@ -57,13 +57,23 @@ struct Dragger : View {
                 
                 let increment = (delta / Dragger.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * self.stepSize
                 var newValue = self.value + increment
+                
                 if increment != 0 {
                     let remainder = newValue.truncatingRemainder(dividingBy: self.stepSize)
-                    newValue -= remainder
-                    if increment < 0 {
-                        newValue += self.stepSize
+                    if remainder > 0 {
+                        newValue -= remainder
+                        if increment < 0 {
+                            newValue += self.stepSize
+                        }
+                    }
+                    if remainder < 0 {
+                        newValue -= remainder
+                        if increment > 0 {
+                            newValue -= self.stepSize
+                        }
                     }
                 }
+                
                 assert(self.minValue ?? -Double.greatestFiniteMagnitude <= self.maxValue ?? Double.greatestFiniteMagnitude)
                 if let minValue = self.minValue {
                     if newValue < minValue {
