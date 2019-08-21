@@ -32,7 +32,7 @@ struct Dragger : View {
     @State private var minMaxFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
     private static let DRAGGER_MOVEMENT: Double = 3 // higher => dragger moves more
-    private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
+    private static let DRAGGER_DELTA_DIVISOR: Double = 40 // higher => less sensible
     
     private var valueString: String {
         numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? ""
