@@ -133,16 +133,17 @@ struct Dragger : View {
             HStack(spacing: 0) {
                 Text(valueString)
                     .font(Font.body.monospacedDigit())
-                    .padding(.leading)
-                    .onTapGesture {
-                        self.onTextTapped()
-                    }
                 if showCursor {
                     RoundedRectangle(cornerRadius: 2, style: .circular)
                         .frame(width: 2, height: 20)
                         .foregroundColor(.accentColor)
                 }
             }
+            .padding(.leading)
+            .onTapGesture {
+                self.onTextTapped()
+            }
+            
             Spacer()
 
             HStack {
