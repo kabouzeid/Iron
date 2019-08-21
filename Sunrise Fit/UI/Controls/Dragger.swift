@@ -31,7 +31,7 @@ struct Dragger : View {
     @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
     @State private var minMaxFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
-    private static let DRAGGER_MOVEMENT: Double = 3
+    private static let DRAGGER_MOVEMENT: Double = 3 // higher => dragger moves more
     private static let DRAGGER_DELTA_DIVISOR: Double = 20 // higher => less sensible
     
     private var valueString: String {
@@ -143,7 +143,7 @@ struct Dragger : View {
                     .animation(.interactiveSpring())
             }
             .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
-            .padding([.trailing])
+            .padding([.leading, .trailing])
             .padding([.top, .bottom], 6)
             .gesture(dragGesture)
             .simultaneousGesture(TapGesture()
