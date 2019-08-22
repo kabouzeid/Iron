@@ -7,61 +7,63 @@
 //
 
 import SwiftUI
-import Combine
-
-private class TrainingViewModel: ObservableObject {
-    let objectWillChange = PassthroughSubject<Void, Never>()
-    private var cancellable: AnyCancellable?
-    var training: Training
-    
-    var startInput: Date {
-        set {
-            precondition(training.end == nil || newValue <= training.end!)
-            training.start = newValue
-        }
-        get {
-            training.safeStart
-        }
-    }
-    var endInput: Date {
-        set {
-            precondition(training.start == nil || newValue >= training.start!)
-            training.end = newValue
-        }
-        get {
-            training.safeEnd
-        }
-    }
-    // we don't want to immediately write the title to core data
-    var titleInput: String { willSet { self.objectWillChange.send() } }
-    // instead when the user is done typing we adjust and set the title here
-    func adjustAndSaveTitleInput() {
-        titleInput = titleInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        training.title = titleInput.isEmpty ? nil : titleInput
-    }
-
-    init(training: Training) {
-        self.training = training
-        titleInput = training.title ?? ""
-        cancellable = training.objectWillChange.subscribe(objectWillChange)
-    }
-}
 
 struct TrainingDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
-    @ObservedObject private var trainingViewModel: TrainingViewModel
+    @ObservedObject var training: Training
 
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
-    init(training: Training) {
-        trainingViewModel = TrainingViewModel(training: training)
+    private var trainingStart: Binding<Date> {
+        Binding(
+            get: {
+                self.training.safeStart
+            },
+            set: { newValue in
+                precondition(self.training.end == nil || newValue <= self.training.end!)
+                self.training.start = newValue
+            }
+        )
     }
     
+    private var trainingEnd: Binding<Date> {
+        Binding(
+            get: {
+                self.training.safeEnd
+            },
+            set: { newValue in
+                precondition(self.training.start == nil || newValue >= self.training.start!)
+                self.training.end = newValue
+            }
+        )
+    }
+    
+    // replaces @State in this case, since we don't want to trigger a view update from inside the Binding
+    private class StringHolder: ObservableObject {
+        var value: String?
+    }
+    @ObservedObject private var trainingTitleInput = StringHolder()
+    private var trainingTitle: Binding<String> {
+        Binding(
+            get: {
+                self.trainingTitleInput.value ?? self.training.title ?? ""
+            },
+            set: { newValue in
+                self.trainingTitleInput.value = newValue
+            }
+        )
+    }
+    private func adjustAndSaveTrainingTitleInput() {
+        guard let newValue = trainingTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingTitleInput.value = newValue
+        training.title = newValue.isEmpty ? nil : newValue
+    }
+
     private var trainingExercises: [TrainingExercise] {
-        trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] ?? []
+        training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
     
     private func trainingSets(trainingExercise: TrainingExercise) -> [TrainingSet] {
@@ -71,8 +73,8 @@ struct TrainingDetailView : View {
     var body: some View {
         List {
             Section {
-                TrainingDetailBannerView(training: trainingViewModel.training)
-                    .listRowBackground(trainingViewModel.training.muscleGroupColor)
+                TrainingDetailBannerView(training: training)
+                    .listRowBackground(training.muscleGroupColor)
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             
@@ -80,19 +82,19 @@ struct TrainingDetailView : View {
 //            if editMode?.value == .active {
                 Section {
                     // TODO: add clear button
-                    TextField("Title", text: $trainingViewModel.titleInput, onEditingChanged: { isEditingTextField in
+                    TextField("Title", text: trainingTitle, onEditingChanged: { isEditingTextField in
                         if !isEditingTextField {
-                            self.trainingViewModel.adjustAndSaveTitleInput()
+                            self.adjustAndSaveTrainingTitleInput()
                         }
                     })
                 }
                 
                 Section {
-                    DatePicker(selection: $trainingViewModel.startInput, in: ...min(self.trainingViewModel.training.safeEnd, Date())) {
+                    DatePicker(selection: trainingStart, in: ...min(self.training.safeEnd, Date())) {
                         Text("Start")
                     }
 
-                    DatePicker(selection: $trainingViewModel.endInput, in: self.trainingViewModel.training.safeStart...Date()) {
+                    DatePicker(selection: trainingEnd, in: self.training.safeStart...Date()) {
                         Text("End")
                     }
                 }
@@ -125,9 +127,9 @@ struct TrainingDetailView : View {
                     self.managedObjectContext.safeSave()
                 }
                 .onMove { source, destination in
-                    guard var trainingExercises = self.trainingViewModel.training.trainingExercises?.array as? [TrainingExercise] else { return }
+                    guard var trainingExercises = self.training.trainingExercises?.array as? [TrainingExercise] else { return }
                     trainingExercises.move(fromOffsets: source, toOffset: destination)
-                    self.trainingViewModel.training.trainingExercises = NSOrderedSet(array: trainingExercises)
+                    self.training.trainingExercises = NSOrderedSet(array: trainingExercises)
                     self.managedObjectContext.safeSave()
                 }
                 
@@ -143,7 +145,7 @@ struct TrainingDetailView : View {
             }
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle(Text(trainingViewModel.training.displayTitle), displayMode: .inline)
+        .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack {
                 Button(action: {
@@ -165,7 +167,7 @@ struct TrainingDetailView : View {
                     Button("Add") {
                         for exercise in self.exerciseSelectorSelection {
                             let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                            self.trainingViewModel.training.addToTrainingExercises(trainingExercise)
+                            self.training.addToTrainingExercises(trainingExercise)
                             trainingExercise.exerciseId = Int16(exercise.id)
                         }
                         self.showingExerciseSelectorSheet = false
