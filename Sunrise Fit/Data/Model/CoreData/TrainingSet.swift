@@ -27,6 +27,17 @@ class TrainingSet: NSManagedObject {
         }
     }
     
+    // use this instead of rpe
+    var displayRpe: Double? {
+        get {
+            RPE.allowedValues.contains(rpe) ? rpe : nil
+        }
+        set {
+            let newValue = newValue ?? 0
+            rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
+        }
+    }
+    
     private var cancellable: AnyCancellable?
 
     static var MAX_REPETITIONS: Int16 = 9999

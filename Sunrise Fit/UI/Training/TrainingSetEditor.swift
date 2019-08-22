@@ -257,31 +257,7 @@ private struct MoreView: View {
     
     // TODO: move these properties to TrainingSet in CoreData
     @State private var trainingSetComment: String = ""
-    @State private var trainingSetRPE: Double? = nil
-    
-    private let RPEs = stride(from: 7, through: 10, by: 0.5).reversed()
 
-    private func titleForRPE(_ RPE: Double) -> String? {
-        switch RPE {
-        case 7:
-            return "You could do 3 more repetitions."
-        case 7.5:
-            return "You could do 2-3 more repetitions."
-        case 8:
-            return "You could do 2 more repetitions."
-        case 8.5:
-            return "You could do 1-2 more repetitions."
-        case 9:
-            return "You could do 1 more repetitions."
-        case 9.5:
-            return "You couldn't do any more repetitions, but possibly you could've increased the weight."
-        case 10:
-            return "You couldn't do any more repetitions."
-        default:
-            return nil
-        }
-    }
-    
     private func tagButton(tag: WorkoutSetTag) -> some View {
         Button(action: {
             if self.trainingSet.displayTag == tag {
@@ -305,21 +281,21 @@ private struct MoreView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    private func RPEButton(RPE: Double) -> some View {
+    private func rpeButton(rpe: Double) -> some View {
         Button(action: {
-            if self.trainingSetRPE == RPE {
-                self.trainingSetRPE = nil
+            if self.trainingSet.displayRpe == rpe {
+                self.trainingSet.displayRpe = nil
             } else {
-                self.trainingSetRPE = RPE
+                self.trainingSet.displayRpe = rpe
             }
         }) {
             HStack {
-                Text(String(format: "%.1f", RPE))
-                Text(self.titleForRPE(RPE) ?? "")
+                Text(String(format: "%.1f", rpe))
+                Text(RPE.title(rpe) ?? "")
                     .lineLimit(nil)
                     .foregroundColor(.secondary)
                 Spacer()
-                if self.trainingSetRPE == RPE {
+                if self.trainingSet.displayRpe == rpe {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }
@@ -359,8 +335,8 @@ private struct MoreView: View {
                         Image(systemName: "questionmark.circle")
                     }
                 }) {
-                ForEach(RPEs, id: \.self) { RPE in
-                    self.RPEButton(RPE: RPE)
+                ForEach(RPE.allowedValues.reversed(), id: \.self) { rpe in
+                    self.rpeButton(rpe: rpe)
                 }
             }
         }

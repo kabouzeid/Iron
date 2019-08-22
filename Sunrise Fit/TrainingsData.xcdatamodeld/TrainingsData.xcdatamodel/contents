@@ -15,6 +15,7 @@
     <entity name="TrainingSet" representedClassName=".TrainingSet" syncable="YES" codeGenerationType="category">
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="repetitions" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rpe" optional="YES" attributeType="Double" minValueString="0" maxValueString="10" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tag" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="trainingExercise" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise"/>
@@ -22,6 +23,6 @@
     <elements>
         <element name="Training" positionX="189" positionY="-144" width="128" height="118"/>
         <element name="TrainingExercise" positionX="432" positionY="-126" width="128" height="90"/>
-        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="118"/>
+        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="133"/>
     </elements>
 </model>
