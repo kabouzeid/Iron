@@ -206,7 +206,7 @@ struct TrainingExerciseDetailView : View {
     private var trainingSetEditor: some View {
         VStack(spacing: 0) {
             Divider()
-            TrainingSetEditor(trainingSet: self.selectedTrainingSet!, weightUnit: self.settingsStore.weightUnit, onDone: {
+            TrainingSetEditor(trainingSet: self.selectedTrainingSet!, onDone: {
                 guard let set = self.selectedTrainingSet else { return }
                 
                 if !set.isCompleted {

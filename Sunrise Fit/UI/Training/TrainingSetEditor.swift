@@ -7,37 +7,6 @@
 //
 
 import SwiftUI
-import Combine
-
-private class TrainingSetViewModel: ObservableObject {
-    var objectWillChange = PassthroughSubject<Void, Never>()
-    private var cancellable: AnyCancellable?
-    var trainingSet: TrainingSet
-    var weightUnit: WeightUnit
-    
-    var weightInput: Double {
-        set {
-            trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)
-        }
-        get {
-            WeightUnit.convert(weight: trainingSet.weight, from: .metric, to: weightUnit)
-        }
-    }
-    var repetitionsInput: Double {
-        set {
-            trainingSet.repetitions = Int16(max(min(newValue, Double(TrainingSet.MAX_REPETITIONS)), 0))
-        }
-        get {
-            Double(trainingSet.repetitions)
-        }
-    }
-    
-    init(trainingSet: TrainingSet, weightUnit: WeightUnit) {
-        self.trainingSet = trainingSet
-        self.weightUnit = weightUnit
-        cancellable = trainingSet.objectWillChange.subscribe(objectWillChange)
-    }
-}
 
 private enum KeyboardType {
     case weight
@@ -46,23 +15,42 @@ private enum KeyboardType {
 }
 
 struct TrainingSetEditor : View {
-    @ObservedObject private var trainingSetViewModel: TrainingSetViewModel
+    @EnvironmentObject var settingsStore: SettingsStore
+    
+    @ObservedObject var trainingSet: TrainingSet
+    var onDone: () -> Void = {}
+    
     @State private var showMoreSheet = false
     @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
     @State private var minimumFractionDigits = 0
 
-    var onDone: () -> Void = {}
+    private var trainingSetWeight: Binding<Double> {
+        Binding(
+            get: {
+                WeightUnit.convert(weight: self.trainingSet.weight, from: .metric, to: self.settingsStore.weightUnit)
+            },
+            set: { newValue in
+                self.trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)
+            }
+        )
+    }
     
-    init(trainingSet: TrainingSet, weightUnit: WeightUnit, onDone: @escaping () -> Void = {}) {
-        trainingSetViewModel = TrainingSetViewModel(trainingSet: trainingSet, weightUnit: weightUnit)
-        self.onDone = onDone
+    private var trainingSetRepetitions: Binding<Double> {
+        Binding(
+            get: {
+                Double(self.trainingSet.repetitions)
+            },
+            set: { newValue in
+                self.trainingSet.repetitions = Int16(max(min(newValue, Double(TrainingSet.MAX_REPETITIONS)), 0))
+            }
+        )
     }
 
     private var weightNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.allowsFloats = true
-        formatter.maximumFractionDigits = trainingSetViewModel.weightUnit.maximumFractionDigits
+        formatter.maximumFractionDigits = settingsStore.weightUnit.maximumFractionDigits
         formatter.minimumFractionDigits = minimumFractionDigits
         formatter.alwaysShowsDecimalSeparator = alwaysShowDecimalSeparator
         return formatter
@@ -89,7 +77,7 @@ struct TrainingSetEditor : View {
     }
     
     private var doneButton: some View {
-        textButton(label: Text(trainingSetViewModel.trainingSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
+        textButton(label: Text(trainingSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
             self.onDone()
             if self.showKeyboard == .repetitions {
                 self.showKeyboard = .weight
@@ -156,16 +144,16 @@ struct TrainingSetEditor : View {
     
     private var weightDragger: some View {
         Dragger(
-            value: $trainingSetViewModel.weightInput,
+            value: trainingSetWeight,
             numberFormatter: weightNumberFormatter,
-            unit: Text(trainingSetViewModel.weightUnit.abbrev),
-            stepSize: trainingSetViewModel.weightUnit.barbellIncrement,
+            unit: Text(settingsStore.weightUnit.abbrev),
+            stepSize: settingsStore.weightUnit.barbellIncrement, // TODO: do this conditionally on exercise type
             minValue: 0,
-            maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: trainingSetViewModel.weightUnit),
+            maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
             showCursor: showKeyboard == .weight,
             onDragStep: { _ in
                 self.alwaysShowDecimalSeparator = false
-                self.minimumFractionDigits = self.trainingSetViewModel.weightUnit.defaultFractionDigits
+                self.minimumFractionDigits = self.settingsStore.weightUnit.defaultFractionDigits
             },
             onDragCompleted: {
                 self.alwaysShowDecimalSeparator = false
@@ -180,7 +168,7 @@ struct TrainingSetEditor : View {
     
     private var repetitionsDragger: some View {
         Dragger(
-            value: $trainingSetViewModel.repetitionsInput,
+            value: trainingSetRepetitions,
             unit: Text("reps"),
             minValue: 0,
             maxValue: Double(TrainingSet.MAX_REPETITIONS),
@@ -208,14 +196,14 @@ struct TrainingSetEditor : View {
             
             if showKeyboard == .weight {
                 NumericKeyboard(
-                    value: $trainingSetViewModel.weightInput,
+                    value: trainingSetWeight,
                     alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator,
                     minimumFractionDigits: $minimumFractionDigits,
-                    maximumFractionDigits: trainingSetViewModel.weightUnit.maximumFractionDigits
+                    maximumFractionDigits: settingsStore.weightUnit.maximumFractionDigits
                 )
             } else if showKeyboard == .repetitions {
                 NumericKeyboard(
-                    value: $trainingSetViewModel.repetitionsInput,
+                    value: trainingSetRepetitions,
                     alwaysShowDecimalSeparator: .constant(false),
                     minimumFractionDigits: .constant(0),
                     maximumFractionDigits: 0
@@ -241,12 +229,12 @@ struct TrainingSetEditor : View {
                         }
                         Spacer()
                     }
-                    Text(self.trainingSetViewModel.trainingSet.displayTitle(unit: self.trainingSetViewModel.weightUnit))
+                    Text(self.trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
                         .font(.headline)
                 }
                 .padding()
                 Divider()
-                MoreView(trainingSet: self.trainingSetViewModel.trainingSet)
+                MoreView(trainingSet: self.trainingSet)
             }
         }
     }
@@ -357,13 +345,15 @@ private struct MoreView: View {
 struct TrainingSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
-            TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .metric)
+            TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
+                .environmentObject(mockSettingsStoreMetric)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
-            TrainingSetEditor(trainingSet: mockTrainingSet, weightUnit: .imperial)
+            TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
+                .environmentObject(mockSettingsStoreImperial)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             
