@@ -255,8 +255,17 @@ struct TrainingSetEditor : View {
 private struct MoreView: View {
     @ObservedObject var trainingSet: TrainingSet
     
-    // TODO: move these properties to TrainingSet in CoreData
-    @State private var trainingSetComment: String = ""
+    // bridges empty and whitespace values to nil
+    private var trainingSetComment: Binding<String> {
+        Binding(
+            get: {
+                self.trainingSet.comment ?? ""
+            },
+            set: { newValue in
+                self.trainingSet.comment = newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : newValue
+            }
+        )
+    }
 
     private func tagButton(tag: WorkoutSetTag) -> some View {
         Button(action: {
@@ -322,7 +331,7 @@ private struct MoreView: View {
             }
             
             Section(header: Text("Comment".uppercased())) {
-                TextField("Comment", text: $trainingSetComment, onEditingChanged: { _ in }, onCommit: {})
+                TextField("Comment", text: trainingSetComment, onEditingChanged: { _ in }, onCommit: {})
             }
             
             Section(header:
