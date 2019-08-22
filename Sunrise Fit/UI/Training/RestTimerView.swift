@@ -21,14 +21,19 @@ struct RestTimerView: View {
         return formatter
     }()
     
+    // i.e. 8.1 and 8.9 should be displayed as 9
+    private var roundedRemainingTime: TimeInterval? {
+        restTimerStore.restTimerRemainingTime?.rounded(.up)
+    }
+    
     private var timerText: String {
-        guard let remainingTime = restTimerStore.restTimerRemainingTime?.rounded(.up) else { return "" }
+        guard let remainingTime = roundedRemainingTime else { return "" }
         return timerDurationFormatter.string(from: remainingTime) ?? ""
     }
     
     private var remainingTimeInPercent: CGFloat {
         guard let duration = restTimerStore.restTimerDuration else { return 0 }
-        guard let remainingTime = restTimerStore.restTimerRemainingTime else { return 0 }
+        guard let remainingTime = roundedRemainingTime else { return 0 }
         assert(duration > 0)
         return CGFloat(remainingTime / duration)
     }
@@ -95,7 +100,7 @@ struct RestTimerView: View {
     private var runningTimerView: some View {
         VStack {
             timerProgress
-                .onReceive(Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() }
+                .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() }
             runningTimerButtons
                 .padding()
         }

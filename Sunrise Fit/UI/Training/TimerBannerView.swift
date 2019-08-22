@@ -80,9 +80,7 @@ struct TimerBannerView: View {
         .padding()
         .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
         .sheet(isPresented: $showingRestTimerSheet) { self.restTimerSheet }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            self.refresher.refresh()
-        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() }
     }
 }
 
