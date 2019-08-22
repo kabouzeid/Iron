@@ -17,6 +17,16 @@ class TrainingSet: NSManagedObject {
         return "\(numberFormatter.string(from: weightInUnit as NSNumber) ?? String(format: "%\(unit.maximumFractionDigits).f")) \(unit.abbrev) × \(repetitions)"
     }
     
+    // use this instead of tag
+    var displayTag: WorkoutSetTag? {
+        get {
+            WorkoutSetTag(rawValue: tag ?? "")
+        }
+        set {
+            tag = newValue?.rawValue
+        }
+    }
+    
     private var cancellable: AnyCancellable?
 
     static var MAX_REPETITIONS: Int16 = 9999

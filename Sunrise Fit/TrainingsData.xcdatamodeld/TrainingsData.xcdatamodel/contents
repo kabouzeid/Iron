@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A389" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A536g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Training" representedClassName=".Training" syncable="YES" codeGenerationType="category">
-        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isCurrentTraining" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="trainingExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingExercise" inverseName="training" inverseEntity="TrainingExercise" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isCurrentTraining" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="trainingExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingExercise" inverseName="training" inverseEntity="TrainingExercise"/>
     </entity>
     <entity name="TrainingExercise" representedClassName=".TrainingExercise" syncable="YES" codeGenerationType="category">
-        <attribute name="exerciseId" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="training" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="trainingExercises" inverseEntity="Training" syncable="YES"/>
-        <relationship name="trainingSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingSet" inverseName="trainingExercise" inverseEntity="TrainingSet" syncable="YES"/>
+        <attribute name="exerciseId" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <relationship name="training" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="trainingExercises" inverseEntity="Training"/>
+        <relationship name="trainingSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrainingSet" inverseName="trainingExercise" inverseEntity="TrainingSet"/>
     </entity>
     <entity name="TrainingSet" representedClassName=".TrainingSet" syncable="YES" codeGenerationType="category">
-        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="repetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="trainingExercise" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise" syncable="YES"/>
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="repetitions" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="trainingExercise" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise"/>
     </entity>
     <elements>
         <element name="Training" positionX="189" positionY="-144" width="128" height="118"/>
         <element name="TrainingExercise" positionX="432" positionY="-126" width="128" height="90"/>
-        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="105"/>
+        <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="118"/>
     </elements>
 </model>

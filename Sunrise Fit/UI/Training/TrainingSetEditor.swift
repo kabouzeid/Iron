@@ -253,16 +253,14 @@ struct TrainingSetEditor : View {
 }
 
 private struct MoreView: View {
-    var trainingSet: TrainingSet
+    @ObservedObject var trainingSet: TrainingSet
     
     // TODO: move these properties to TrainingSet in CoreData
-    @State private var trainingSetTag: String? = nil
     @State private var trainingSetComment: String = ""
     @State private var trainingSetRPE: Double? = nil
     
     private let RPEs = stride(from: 7, through: 10, by: 0.5).reversed()
-    private let tags = ["Warm up", "Dropset", "Failure"]
-    
+
     private func titleForRPE(_ RPE: Double) -> String? {
         switch RPE {
         case 7:
@@ -284,34 +282,21 @@ private struct MoreView: View {
         }
     }
     
-    private func colorForTag(_ tag: String) -> Color? {
-        switch tag {
-        case "Warm up":
-            return .yellow
-        case "Dropset":
-            return .purple
-        case "Failure":
-            return .red
-        default:
-            return nil
-        }
-    }
-    
-    private func tagButton(tag: String) -> some View {
+    private func tagButton(tag: WorkoutSetTag) -> some View {
         Button(action: {
-            if self.trainingSetTag == tag {
-                self.trainingSetTag = nil
+            if self.trainingSet.displayTag == tag {
+                self.trainingSet.displayTag = nil
             } else {
-                self.trainingSetTag = tag
+                self.trainingSet.displayTag = tag
             }
         }) {
             HStack {
                 Image(systemName: "circle.fill")
                     .imageScale(.small)
-                    .foregroundColor(self.colorForTag(tag))
-                Text(tag)
+                    .foregroundColor(tag.color)
+                Text(tag.title.capitalized)
                 Spacer()
-                if self.trainingSetTag == tag {
+                if self.trainingSet.displayTag == tag {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }
@@ -355,7 +340,7 @@ private struct MoreView: View {
                         Image(systemName: "questionmark.circle")
                     }
                 }) {
-                ForEach(tags, id: \.self) { tag in
+                ForEach(WorkoutSetTag.allCases, id: \.self) { tag in
                     self.tagButton(tag: tag)
                 }
             }
