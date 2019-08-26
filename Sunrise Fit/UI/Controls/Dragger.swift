@@ -12,7 +12,7 @@ struct Dragger : View {
     // public
     @Binding var value: Double
     var numberFormatter: NumberFormatter = NumberFormatter()
-    var unit: Text? = nil
+    var unit: String
     var stepSize: Double = 1 // e.g. if barbell based exercise, set to 2.5
     var minValue: Double? = nil
     var maxValue: Double? = nil
@@ -130,40 +130,48 @@ struct Dragger : View {
     
     var body: some View {
         HStack {
-            HStack(spacing: 0) {
-                Text(valueString)
-                    .font(Font.body.monospacedDigit())
-                if showCursor {
-                    RoundedRectangle(cornerRadius: 2, style: .circular)
-                        .frame(width: 2, height: 20)
-                        .foregroundColor(.accentColor)
-                }
-            }
-            .padding(.leading)
-            .onTapGesture {
-                self.onTextTapped()
-            }
-            
-            Spacer()
-
             HStack {
-                unit
-                Image(systemName: "square.grid.4x3.fill")
-                    .rotationEffect(Angle(degrees: 90))
-                    .offset(y: draggerOffset)
-                    .animation(.interactiveSpring())
-            }
-            .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
-            .padding([.leading, .trailing])
-            .padding([.top, .bottom], 6)
-            .gesture(dragGesture)
-            .simultaneousGesture(TapGesture()
-                .onEnded {
-                    let feedbackGenerator = UINotificationFeedbackGenerator()
-                    feedbackGenerator.notificationOccurred(.warning)
-                    // TODO: wiggle the dragger
+                HStack(spacing: 0) {
+                    Text(valueString)
+                        .font(Font.body.monospacedDigit())
+                        .lineLimit(1)
+                    if showCursor {
+                        RoundedRectangle(cornerRadius: 2, style: .circular)
+                            .frame(width: 2, height: 20)
+                            .foregroundColor(.accentColor)
+                    }
                 }
+                
+                Text(unit)
+                    .lineLimit(1)
+                    .foregroundColor(Color.secondary)
+                
+                Spacer()
+            }
+            // This is a hack since tap gesture currently doesn't work on Space that hasn't a background (beta6)
+            .overlay(
+                // 0.0000001 for example would work too, Double.leastNonzeroMagnitude is treated as 0 though
+                Color.black.opacity(Double(Float.leastNonzeroMagnitude))
+                    .onTapGesture {
+                        self.onTextTapped()
+                    }
             )
+
+            Image(systemName: "square.grid.4x3.fill")
+                .rotationEffect(Angle(degrees: 90))
+                .offset(y: draggerOffset)
+                .animation(.interactiveSpring())
+                .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 8, style: .continuous).foregroundColor(Color(UIColor.systemFill)))
+                .gesture(dragGesture)
+                .simultaneousGesture(TapGesture()
+                    .onEnded {
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.notificationOccurred(.warning)
+                        // TODO: wiggle the dragger
+                    }
+                )
         }
     }
 }
@@ -172,8 +180,9 @@ struct Dragger : View {
 struct Dragger_Previews : PreviewProvider {
     static var value: Double = 50
     static var previews: some View {
-        Dragger(value: Binding(get: { value }, set: { value = $0}), unit: Text("reps"), showCursor: true)
-                .previewLayout(.sizeThatFits)
+        Dragger(value: Binding(get: { value }, set: { value = $0}), unit: "reps", showCursor: true)
+//            .frame(width: 123)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

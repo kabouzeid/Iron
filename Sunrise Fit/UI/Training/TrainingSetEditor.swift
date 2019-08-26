@@ -70,15 +70,15 @@ struct TrainingSetEditor : View {
                     .transition(.opacity)
                 Spacer()
             }
+            .background(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .foregroundColor(color)
+            )
         }
-        .background(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .foregroundColor(color)
-        )
     }
     
     private var moreButton: some View {
-        textButton(label: Text("More").foregroundColor(.secondary), color: Color(UIColor.systemGray4), action: { self.showMoreSheet = true })
+        textButton(label: Text("More").foregroundColor(.secondary), color: Color(UIColor.systemFill), action: { self.showMoreSheet = true })
     }
     
     private var doneButton: some View {
@@ -115,11 +115,11 @@ struct TrainingSetEditor : View {
                 }
                 Spacer()
             }
+            .background(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .foregroundColor(Color(UIColor.systemFill))
+            )
         }
-        .background(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .foregroundColor(Color(UIColor.systemGray4))
-        )
     }
     
     private var buttons: some View {
@@ -151,7 +151,7 @@ struct TrainingSetEditor : View {
         Dragger(
             value: trainingSetWeight,
             numberFormatter: weightNumberFormatter,
-            unit: Text(settingsStore.weightUnit.abbrev),
+            unit: settingsStore.weightUnit.abbrev,
             stepSize: settingsStore.weightUnit.barbellIncrement, // TODO: do this conditionally on exercise type
             minValue: 0,
             maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
@@ -165,7 +165,11 @@ struct TrainingSetEditor : View {
                 self.minimumFractionDigits = 0
             },
             onTextTapped: {
-                withAnimation {
+                if self.showKeyboard == .none {
+                    withAnimation {
+                        self.showKeyboard = .weight
+                    }
+                } else {
                     self.showKeyboard = .weight
                 }
             })
@@ -174,12 +178,16 @@ struct TrainingSetEditor : View {
     private var repetitionsDragger: some View {
         Dragger(
             value: trainingSetRepetitions,
-            unit: Text("reps"),
+            unit: "reps",
             minValue: 0,
             maxValue: Double(TrainingSet.MAX_REPETITIONS),
             showCursor: showKeyboard == .repetitions,
             onTextTapped: {
-                withAnimation {
+                if self.showKeyboard == .none {
+                    withAnimation {
+                        self.showKeyboard = .repetitions
+                    }
+                } else {
                     self.showKeyboard = .repetitions
                 }
         })
@@ -189,7 +197,9 @@ struct TrainingSetEditor : View {
         VStack {
             HStack(spacing: 0) {
                 weightDragger
+                    .padding([.leading, .trailing])
                 repetitionsDragger
+                    .padding([.leading, .trailing])
             }
             .padding([.top])
             
