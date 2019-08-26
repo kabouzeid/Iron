@@ -109,10 +109,17 @@ struct TrainingExerciseDetailView : View {
     private var currentTrainingSets: some View {
         ForEach(indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
             HStack {
-                //                            Text((trainingSet as TrainingSet).isCompleted || (trainingSet as TrainingSet) == self.firstUncompletedSet ? (trainingSet as TrainingSet).displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
-                Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
-                    .font(Font.body.monospacedDigit())
-                    .foregroundColor(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
+                VStack(alignment: .leading) {
+                    Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
+                        .font(Font.body.monospacedDigit())
+                        .foregroundColor(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
+                    trainingSet.comment.map {
+                        Text($0.enquoted)
+                            .lineLimit(1)
+                            .font(Font.caption.italic())
+                            .foregroundColor(.secondary)
+                    }
+                }
                 Spacer()
                 Text("\(index)")
                     .font(Font.body.monospacedDigit())

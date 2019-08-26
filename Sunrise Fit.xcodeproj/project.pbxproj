@@ -57,6 +57,7 @@
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
 		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
+		8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7D231436260038ACC5 /* String+Enquote.swift */; };
 		8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */; };
 		8A9EAC5722EB33A200A11C65 /* Exercise+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A13FB7B22E4733D006975DB /* Exercise+Identifiable.swift */; };
 		8A9EAC5822EB33A200A11C65 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81570422E21E5400B4D27D /* StartTrainingView.swift */; };
@@ -180,6 +181,7 @@
 		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
 		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SwiftUI.swift"; sourceTree = "<group>"; };
+		8A9E4F7D231436260038ACC5 /* String+Enquote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Enquote.swift"; sourceTree = "<group>"; };
 		8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+save.swift"; path = "../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Extension/NSManagedObjectContext+save.swift"; sourceTree = "<group>"; };
 		8AA02614230AF74C00324853 /* ActivityChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartView.swift; sourceTree = "<group>"; };
 		8AA57E5E22C3EE2E00B9AC79 /* Training+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Training+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 				8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */,
 				8AF4C537230EEE51003A84DC /* WorkoutSetTag+SwiftUI.swift */,
 				8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */,
+				8A9E4F7D231436260038ACC5 /* String+Enquote.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 			files = (
 				8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */,
 				8A9EAC5722EB33A200A11C65 /* Exercise+Identifiable.swift in Sources */,
+				8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */,
 				8A9EAC5822EB33A200A11C65 /* StartTrainingView.swift in Sources */,
 				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
 				8A9EAC5922EB33A200A11C65 /* TrainingView.swift in Sources */,
