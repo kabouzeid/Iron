@@ -150,8 +150,7 @@ struct Dragger : View {
             }
             // This is a hack since tap gesture currently doesn't work on Space that hasn't a background (beta6)
             .overlay(
-                // 0.0000001 for example would work too, Double.leastNonzeroMagnitude is treated as 0 though
-                Color.black.opacity(Double(Float.leastNonzeroMagnitude))
+                Color.fakeClear
                     .onTapGesture {
                         self.onTextTapped()
                     }

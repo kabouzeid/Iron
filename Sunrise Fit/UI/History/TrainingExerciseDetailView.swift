@@ -118,18 +118,18 @@ struct TrainingExerciseDetailView : View {
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
             }
-                // TODO: use selection feature of List when it is released
-                .listRowBackground(self.selectedTrainingSet == (trainingSet as TrainingSet) && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil) // TODO: trainingSet cast shouldn't be necessary
-                .onTapGesture { // TODO: currently tap on Spacer() is not recognized
-                    guard self.editMode?.wrappedValue != .active else { return }
-                    if self.selectedTrainingSet?.hasChanges ?? false {
-                        self.managedObjectContext.safeSave()
-                    }
-                    if self.selectedTrainingSet == trainingSet {
-                        self.select(set: nil)
-                    } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
-                        self.select(set: trainingSet)
-                    }
+            .listRowBackground(self.selectedTrainingSet == trainingSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
+            .background(Color.fakeClear)
+            .onTapGesture { // TODO: currently tap on Spacer() is not recognized
+                guard self.editMode?.wrappedValue != .active else { return }
+                if self.selectedTrainingSet?.hasChanges ?? false {
+                    self.managedObjectContext.safeSave()
+                }
+                if self.selectedTrainingSet == trainingSet {
+                    self.select(set: nil)
+                } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
+                    self.select(set: trainingSet)
+                }
             }
         }
         .onDelete { offsets in
