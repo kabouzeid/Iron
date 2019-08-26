@@ -85,6 +85,18 @@ private func createMockTrainingExercises(training: Training) {
             let trainingSet = TrainingSet(context: training.managedObjectContext!)
             trainingSet.weight = Double(Int.random(in: 20...50)) * 2.5
             trainingSet.repetitions = Int16.random(in: 1...10)
+            trainingSet.comment = Int.random(in: 1...5) == 1 ? "This is a comment" : nil
+            trainingSet.displayRpe = Int.random(in: 1...5) == 1 ? (Double(Int.random(in: 0..<7)) * 0.5 + 7) : nil
+            switch Int.random(in: 1...15) {
+            case 1:
+                trainingSet.displayTag = .warmUp
+            case 2:
+                trainingSet.displayTag = .dropSet
+            case 3:
+                trainingSet.displayTag = .failure
+            default:
+                break
+            }
             trainingSet.isCompleted = true
             trainingSet.trainingExercise = trainingExercise
         }
