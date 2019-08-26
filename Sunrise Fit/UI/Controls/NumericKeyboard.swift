@@ -163,9 +163,36 @@ struct NumericKeyboard: View {
 
 #if DEBUG
 struct NumericKeyboard_Previews: PreviewProvider {
+    private struct NumericKeyboardPreviewView: View {
+        @State private var value: Double = 15
+        @State private var minimumFractionDigits = 0
+        @State private var alwaysShowDecimalSeparator = false
+        
+        private let weightUnit = WeightUnit.metric
+        
+        private var numberFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.allowsFloats = true
+            formatter.maximumFractionDigits = weightUnit.maximumFractionDigits
+            formatter.minimumFractionDigits = minimumFractionDigits
+            formatter.alwaysShowsDecimalSeparator = alwaysShowDecimalSeparator
+            return formatter
+        }
+        
+        var body: some View {
+            VStack(spacing: 0) {
+                Text("value: \(value), formatted: \(numberFormatter.string(from: value as NSNumber) ?? "nil")")
+                Text("min fraction digits: \(minimumFractionDigits)")
+                Text("alwaysShowSeparator: \(alwaysShowDecimalSeparator ? "True" : "False")")
+                
+                NumericKeyboard(value: $value, alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator, minimumFractionDigits: $minimumFractionDigits, maximumFractionDigits: 3)
+            }
+        }
+    }
+    
     static var previews: some View {
-        NumericKeyboard(value: .constant(15), alwaysShowDecimalSeparator: .constant(false), minimumFractionDigits: .constant(0), maximumFractionDigits: 3)
-        .previewLayout(.sizeThatFits)
+        NumericKeyboardPreviewView()
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

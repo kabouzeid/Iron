@@ -13,6 +13,7 @@ import CoreData
 extension NSManagedObjectContext {
     var publisher: AnyPublisher<Set<NSManagedObject>, Never> {
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: self)
+            .receive(on: DispatchQueue.global(qos: .userInteractive))
             .compactMap { notification in
                 return notification.userInfo
             }

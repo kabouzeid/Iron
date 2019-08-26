@@ -24,7 +24,10 @@ struct TrainingSetEditor : View {
     @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
     @State private var minimumFractionDigits = 0
-
+    
+    // used to immediatelly update the weight & rep texts so the keyboard feels more smooth
+    @ObservedObject private var refresher = Refresher()
+    
     private var trainingSetWeight: Binding<Double> {
         Binding(
             get: {
@@ -32,6 +35,7 @@ struct TrainingSetEditor : View {
             },
             set: { newValue in
                 self.trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)
+                self.refresher.refresh()
             }
         )
     }
@@ -43,6 +47,7 @@ struct TrainingSetEditor : View {
             },
             set: { newValue in
                 self.trainingSet.repetitions = Int16(max(min(newValue, Double(TrainingSet.MAX_REPETITIONS)), 0))
+                self.refresher.refresh()
             }
         )
     }
