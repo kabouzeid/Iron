@@ -106,6 +106,17 @@ struct TrainingExerciseDetailView : View {
             .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
     }
     
+    private func rpe(rpe: Double) -> some View {
+        VStack {
+            Group {
+                Text(String(format: "%.1f", rpe))
+                Text("RPE")
+            }
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+    }
+    
     private var currentTrainingSets: some View {
         ForEach(indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
             HStack {
@@ -121,6 +132,9 @@ struct TrainingExerciseDetailView : View {
                     }
                 }
                 Spacer()
+                trainingSet.displayRpe.map {
+                    self.rpe(rpe: $0)
+                }
                 Text("\(index)")
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
