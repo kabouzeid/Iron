@@ -38,6 +38,18 @@ class TrainingSet: NSManagedObject {
         }
     }
     
+    var isPersonalRecord: Bool? {
+        guard let start = trainingExercise?.training?.start else { return nil }
+        guard let exerciseId = trainingExercise?.exerciseId else { return nil }
+        let request: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        request.predicate = NSPredicate(format:
+            "SELF != %@ AND \(#keyPath(TrainingSet.trainingExercise.exerciseId)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@ AND \(#keyPath(TrainingSet.trainingExercise.training.start)) <= %@ AND \(#keyPath(TrainingSet.weight)) >= %@ AND \(#keyPath(TrainingSet.repetitions)) >= %@",
+            self, exerciseId as NSNumber, true as NSNumber, start as NSDate, weight as NSNumber, repetitions as NSNumber
+        )
+        guard let count = try? managedObjectContext?.count(for: request) else { return nil }
+        return count == 0
+    }
+    
     private var cancellable: AnyCancellable?
 
     static var MAX_REPETITIONS: Int16 = 9999

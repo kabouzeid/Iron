@@ -135,6 +135,12 @@ struct TrainingExerciseDetailView : View {
                 trainingSet.displayRpe.map {
                     self.rpe(rpe: $0)
                 }
+                if trainingSet.isPersonalRecord ?? false {
+                    // TODO: try "rosette" when it becomes available (not working beta6)
+                    // or search for a trophy symbol
+                    Image(systemName: "star.circle.fill")
+                        .foregroundColor(.yellow)
+                }
                 Text("\(index)")
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
