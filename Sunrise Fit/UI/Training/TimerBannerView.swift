@@ -61,6 +61,7 @@ struct TimerBannerView: View {
                     Text(trainingTimerDurationFormatter.string(from: training.duration) ?? "")
                         .font(Font.body.monospacedDigit())
                 }
+                .padding()
             }
             
             Spacer()
@@ -75,9 +76,9 @@ struct TimerBannerView: View {
                             .font(Font.body.monospacedDigit())
                     })
                 }
+                .padding()
             }
         }
-        .padding()
         .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
         .sheet(isPresented: $showingRestTimerSheet) { self.restTimerSheet }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() }
