@@ -164,10 +164,9 @@ private struct CircleButton<Label>: View where Label: View {
     
     var body: some View {
         Button(action: action) {
-            Circle()
-                .foregroundColor(color ?? Color(UIColor.systemFill))
+            label
                 .frame(width: buttonSize, height: buttonSize)
-                .overlay(label)
+                .background(Circle().foregroundColor(color ?? Color(UIColor.systemFill)))
         }
         .padding(4)
     }
