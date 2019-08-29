@@ -119,45 +119,20 @@ struct TrainingExerciseDetailView : View {
     
     private var currentTrainingSets: some View {
         ForEach(indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(self.shouldShowTitle(for: trainingSet) ? trainingSet.displayTitle(unit: self.settingsStore.weightUnit) : "Set \(index)")
-                        .font(Font.body.monospacedDigit())
-                        .foregroundColor(self.shouldHighlightRow(for: trainingSet) ? .primary : .secondary)
-                    trainingSet.comment.map {
-                        Text($0.enquoted)
-                            .lineLimit(1)
-                            .font(Font.caption.italic())
-                            .foregroundColor(.secondary)
+            TrainingSetCell(trainingSet: trainingSet, index: index, colorMode: self.shouldHighlightRow(for: trainingSet) ? .activated : .deactivated, textMode: self.shouldShowTitle(for: trainingSet) ? .weightAndReps : .placeholder)
+                .listRowBackground(self.selectedTrainingSet == trainingSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
+                .background(Color.fakeClear)
+                .onTapGesture { // TODO: currently tap on Spacer() is not recognized
+                    guard self.editMode?.wrappedValue != .active else { return }
+                    if self.selectedTrainingSet?.hasChanges ?? false {
+                        self.managedObjectContext.safeSave()
+                    }
+                    if self.selectedTrainingSet == trainingSet {
+                        self.select(set: nil)
+                    } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
+                        self.select(set: trainingSet)
                     }
                 }
-                Spacer()
-                trainingSet.displayRpe.map {
-                    self.rpe(rpe: $0)
-                }
-                if trainingSet.isPersonalRecord ?? false {
-                    // TODO: try "rosette" when it becomes available (not working beta6)
-                    // or search for a trophy symbol
-                    Image(systemName: "star.circle.fill")
-                        .foregroundColor(.yellow)
-                }
-                Text("\(index)")
-                    .font(Font.body.monospacedDigit())
-                    .foregroundColor(.secondary)
-            }
-            .listRowBackground(self.selectedTrainingSet == trainingSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
-            .background(Color.fakeClear)
-            .onTapGesture { // TODO: currently tap on Spacer() is not recognized
-                guard self.editMode?.wrappedValue != .active else { return }
-                if self.selectedTrainingSet?.hasChanges ?? false {
-                    self.managedObjectContext.safeSave()
-                }
-                if self.selectedTrainingSet == trainingSet {
-                    self.select(set: nil)
-                } else if trainingSet.isCompleted || trainingSet == self.firstUncompletedSet {
-                    self.select(set: trainingSet)
-                }
-            }
         }
         .onDelete { offsets in
             var deletedSelectedSet = false
@@ -216,15 +191,7 @@ struct TrainingExerciseDetailView : View {
         ForEach(trainingExerciseHistory, id: \.objectID) { trainingExercise in
             Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training?.start, fallback: "Unknown date"))) {
                 ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
-                    HStack {
-                        Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
-                            .font(Font.body.monospacedDigit())
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        Text("\(index)")
-                            .font(Font.body.monospacedDigit())
-                            .foregroundColor(.secondary)
-                    }
+                    TrainingSetCell(trainingSet: trainingSet, index: index, colorMode: .disabled)
                 }
             }
         }

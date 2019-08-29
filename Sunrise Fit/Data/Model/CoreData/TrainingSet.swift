@@ -41,13 +41,36 @@ class TrainingSet: NSManagedObject {
     var isPersonalRecord: Bool? {
         guard let start = trainingExercise?.training?.start else { return nil }
         guard let exerciseId = trainingExercise?.exerciseId else { return nil }
-        let request: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
-        request.predicate = NSPredicate(format:
-            "SELF != %@ AND \(#keyPath(TrainingSet.trainingExercise.exerciseId)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@ AND \(#keyPath(TrainingSet.trainingExercise.training.start)) <= %@ AND \(#keyPath(TrainingSet.weight)) >= %@ AND \(#keyPath(TrainingSet.repetitions)) >= %@",
-            self, exerciseId as NSNumber, true as NSNumber, start as NSDate, weight as NSNumber, repetitions as NSNumber
+
+        let previousSetsRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        let previousSetsPredicate = NSPredicate(format:
+            "\(#keyPath(TrainingSet.trainingExercise.exerciseId)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@ AND \(#keyPath(TrainingSet.trainingExercise.training.start)) < %@",
+            exerciseId as NSNumber, true as NSNumber, start as NSDate
         )
-        guard let count = try? managedObjectContext?.count(for: request) else { return nil }
-        return count == 0
+        previousSetsRequest.predicate = previousSetsPredicate
+        guard let numberOfPreviousSets = try? managedObjectContext?.count(for: previousSetsRequest) else { return nil }
+        if numberOfPreviousSets == 0 { return false } // if there was no set for this exercise in a prior training, we consider no set as a PR
+
+        let betterOrEqualPreviousSetsRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        betterOrEqualPreviousSetsRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates:
+            [
+                previousSetsPredicate,
+                NSPredicate(format:
+                    "\(#keyPath(TrainingSet.weight)) >= %@ AND \(#keyPath(TrainingSet.repetitions)) >= %@",
+                    weight as NSNumber, repetitions as NSNumber
+                )
+            ]
+        )
+        guard let numberOfBetterOrEqualPreviousSets = try? managedObjectContext?.count(for: betterOrEqualPreviousSetsRequest) else { return nil }
+        if numberOfBetterOrEqualPreviousSets > 0 { return false } // there are better sets
+        
+        guard let index = trainingExercise?.trainingSets?.index(of: self), index != NSNotFound else { return nil }
+        guard let numberOfBetterOrEqualPreviousSetsInCurrentTraining = (trainingExercise?.trainingSets?.array[0..<index]
+            .compactMap { $0 as? TrainingSet }
+            .filter { $0.isCompleted && $0.weight >= weight && $0.repetitions >= repetitions } // check isCompleted only to be sure, but it should never be false here
+            .count)
+            else { return nil }
+        return numberOfBetterOrEqualPreviousSetsInCurrentTraining == 0
     }
     
     private var cancellable: AnyCancellable?
