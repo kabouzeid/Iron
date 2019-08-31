@@ -63,7 +63,17 @@ struct TrainingSetCell: View {
             }
             Text("\(index)")
                 .font(Font.body.monospacedDigit())
-                .foregroundColor(.secondary)
+                .foregroundColor(trainingSet.displayTag != nil ? .clear : .secondary)
+                .background(
+                    Group {
+                        trainingSet.displayTag.map {
+                            Text($0.title.first!.uppercased())
+                                .fontWeight(.semibold)
+                                .foregroundColor($0.color)
+                                .fixedSize()
+                        }
+                    }
+                )
         }
     }
 }
