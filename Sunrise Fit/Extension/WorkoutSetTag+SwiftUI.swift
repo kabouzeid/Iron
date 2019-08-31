@@ -12,8 +12,8 @@ import SwiftUI
 extension WorkoutSetTag {
     var color: Color {
         switch self {
-        case .warmUp:
-            return .yellow
+//        case .warmUp:
+//            return .yellow
         case .dropSet:
             return .purple
         case .failure:

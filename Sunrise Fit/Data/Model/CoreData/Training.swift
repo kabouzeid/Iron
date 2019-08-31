@@ -89,7 +89,6 @@ class Training: NSManagedObject {
     }
     
     var numberOfCompletedSets: Int? {
-        // TODO: do this with a predicate
         trainingExercises?
             .map { $0 as! TrainingExercise }
             .reduce(0, { (count, trainingExercise) -> Int in
@@ -98,7 +97,6 @@ class Training: NSManagedObject {
     }
     
     var totalCompletedWeight: Double? {
-        // TODO: do this with a predicate
         trainingExercises?
             .map { $0 as! TrainingExercise }
             .reduce(0, { (weight, trainingExercise) -> Double in

@@ -88,8 +88,8 @@ private func createMockTrainingExercises(training: Training) {
             trainingSet.comment = Int.random(in: 1...5) == 1 ? "This is a comment" : nil
             trainingSet.displayRpe = Int.random(in: 1...5) == 1 ? (Double(Int.random(in: 0..<7)) * 0.5 + 7) : nil
             switch Int.random(in: 1...15) {
-            case 1:
-                trainingSet.displayTag = .warmUp
+//            case 1:
+//                trainingSet.displayTag = .warmUp
             case 2:
                 trainingSet.displayTag = .dropSet
             case 3:
