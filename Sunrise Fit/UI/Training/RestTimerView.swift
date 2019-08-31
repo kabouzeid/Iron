@@ -12,15 +12,7 @@ struct RestTimerView: View {
     @EnvironmentObject var restTimerStore: RestTimerStore
     
     @ObservedObject private var refresher = Refresher()
-    
-    private let timerDurationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.minute, .second]
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }()
-    
+
     // i.e. 8.1 and 8.9 should be displayed as 9
     private var roundedRemainingTime: TimeInterval? {
         restTimerStore.restTimerRemainingTime?.rounded(.up)
@@ -28,7 +20,7 @@ struct RestTimerView: View {
     
     private var timerText: String {
         guard let remainingTime = roundedRemainingTime else { return "" }
-        return timerDurationFormatter.string(from: remainingTime) ?? ""
+        return restTimerDurationFormatter.string(from: remainingTime) ?? ""
     }
     
     private var remainingTimeInPercent: CGFloat {
@@ -59,7 +51,7 @@ struct RestTimerView: View {
                 Text(timerText)
                     .font(Font.system(size: 48, weight: .light).monospacedDigit())
 
-                Text(timerDurationFormatter.string(from: restTimerStore.restTimerDuration ?? 0) ?? "")
+                Text(restTimerDurationFormatter.string(from: restTimerStore.restTimerDuration ?? 0) ?? "")
                     .font(Font.subheadline.monospacedDigit())
                     .foregroundColor(.secondary)
             }
@@ -111,7 +103,7 @@ struct RestTimerView: View {
             self.restTimerStore.restTimerStart = Date()
             self.restTimerStore.restTimerDuration = duration
         }) {
-            Text(timerDurationFormatter.string(from: duration)!)
+            Text(restTimerDurationFormatter.string(from: duration)!)
         }
     }
     

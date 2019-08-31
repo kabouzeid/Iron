@@ -9,6 +9,19 @@
 import Foundation
 import Combine
 
+// to be used in other places
+let restTimerDurationFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.unitsStyle = .positional
+    formatter.allowedUnits = [.minute, .second]
+    formatter.zeroFormattingBehavior = .pad
+    return formatter
+}()
+
+let restTimerCustomTimes: [TimeInterval] = {
+    stride(from: 30 as TimeInterval, through: 10*60, by: 5).map { $0 }
+}()
+
 final class RestTimerStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
     

@@ -11,6 +11,8 @@ import Foundation
 extension UserDefaults {
     enum SettingsKeys: String {
         case weightUnit
+        case defaultRestTime
+        case defaultRestTimeBarbellBased
     }
 
     var weightUnit: WeightUnit {
@@ -26,6 +28,24 @@ extension UserDefaults {
                 self.weightUnit = fallback // safe the new weight unit
                 return fallback
             }
+        }
+    }
+    
+    var defaultRestTime: TimeInterval {
+        set {
+            self.set(newValue, forKey: SettingsKeys.defaultRestTime.rawValue)
+        }
+        get {
+            self.value(forKey: SettingsKeys.defaultRestTime.rawValue) as? TimeInterval ?? 90 // default 1:30
+        }
+    }
+    
+    var defaultRestTimeBarbellBased: TimeInterval {
+        set {
+            self.set(newValue, forKey: SettingsKeys.defaultRestTimeBarbellBased.rawValue)
+        }
+        get {
+            self.value(forKey: SettingsKeys.defaultRestTimeBarbellBased.rawValue) as? TimeInterval ?? 180 // default 3:00
         }
     }
 }

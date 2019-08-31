@@ -197,6 +197,15 @@ struct TrainingExerciseDetailView : View {
         }
     }
     
+    private var restTimerDuration: TimeInterval {
+        // TODO: allow customizable default rest timer for each exercise
+        if trainingExercise.exercise?.isBarbellBased ?? false {
+            return settingsStore.defaultRestTimeBarbellBased
+        } else {
+            return settingsStore.defaultRestTime
+        }
+    }
+    
     private var trainingSetEditor: some View {
         VStack(spacing: 0) {
             Divider()
@@ -222,7 +231,7 @@ struct TrainingExerciseDetailView : View {
                 
                 if self.isCurrentTraining {
                     // TODO: customizable rest timer time
-                    self.restTimerStore.restTimerDuration = 90
+                    self.restTimerStore.restTimerDuration = self.restTimerDuration
                     // start rest timer
                     self.restTimerStore.restTimerStart = Date()
                 }

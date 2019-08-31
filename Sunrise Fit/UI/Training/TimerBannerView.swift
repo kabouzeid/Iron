@@ -25,14 +25,6 @@ struct TimerBannerView: View {
         return formatter
     }()
     
-    private let restTimerDurationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.minute, .second]
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }()
-    
     private var restTimerSheet: some View {
         VStack(spacing: 0) {
             ZStack {

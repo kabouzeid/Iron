@@ -32,6 +32,26 @@ final class SettingsStore: ObservableObject {
             userDefaults.weightUnit = newValue
         }
     }
+    
+    var defaultRestTime: TimeInterval {
+        get {
+            userDefaults.defaultRestTime
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.defaultRestTime = newValue
+        }
+    }
+    
+    var defaultRestTimeBarbellBased: TimeInterval {
+        get {
+            userDefaults.defaultRestTimeBarbellBased
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.defaultRestTimeBarbellBased = newValue
+        }
+    }
 }
 
 let settingsStore = SettingsStore() // singleton

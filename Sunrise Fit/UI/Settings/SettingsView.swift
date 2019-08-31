@@ -20,6 +20,19 @@ struct SettingsView : View {
                         Text(weightUnit.title).tag(weightUnit)
                     }
                 }
+                
+                Section {
+                    Picker("Default Rest Time", selection: $settingsStore.defaultRestTime) {
+                        ForEach(restTimerCustomTimes, id: \.self) { time in
+                            Text(restTimerDurationFormatter.string(from: time) ?? "").tag(time)
+                        }
+                    }
+                    Picker("Default Rest Time (Barbell)", selection: $settingsStore.defaultRestTimeBarbellBased) {
+                        ForEach(restTimerCustomTimes, id: \.self) { time in
+                            Text(restTimerDurationFormatter.string(from: time) ?? "").tag(time)
+                        }
+                    }
+                }
             }
             .navigationBarTitle(Text("Settings"))
         }
