@@ -1,5 +1,5 @@
 //
-//  WorkoutSetTag+SwiftUI.swift
+//  TrainingSetTag+SwiftUI.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 22.08.19.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-extension WorkoutSetTag {
+extension TrainingSetTag {
     var color: Color {
         switch self {
 //        case .warmUp:

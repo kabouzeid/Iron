@@ -270,7 +270,7 @@ private struct MoreView: View {
         )
     }
 
-    private func tagButton(tag: WorkoutSetTag) -> some View {
+    private func tagButton(tag: TrainingSetTag) -> some View {
         Button(action: {
             if self.trainingSet.displayTag == tag {
                 self.trainingSet.displayTag = nil
@@ -328,7 +328,7 @@ private struct MoreView: View {
                         Image(systemName: "questionmark.circle")
                     }
                 }) {
-                ForEach(WorkoutSetTag.allCases, id: \.self) { tag in
+                ForEach(TrainingSetTag.allCases, id: \.self) { tag in
                     self.tagButton(tag: tag)
                 }
             }

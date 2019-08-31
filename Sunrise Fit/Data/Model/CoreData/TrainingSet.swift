@@ -18,9 +18,9 @@ class TrainingSet: NSManagedObject {
     }
     
     // use this instead of tag
-    var displayTag: WorkoutSetTag? {
+    var displayTag: TrainingSetTag? {
         get {
-            WorkoutSetTag(rawValue: tag ?? "")
+            TrainingSetTag(rawValue: tag ?? "")
         }
         set {
             tag = newValue?.rawValue
