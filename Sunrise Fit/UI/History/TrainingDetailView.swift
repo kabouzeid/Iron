@@ -41,11 +41,24 @@ struct TrainingDetailView : View {
         )
     }
     
-    // replaces @State in this case, since we don't want to trigger a view update from inside the Binding
-    private class StringHolder: ObservableObject {
-        var value: String?
+    @ObservedObject private var trainingCommentInput = ValueHolder<String?>(initial: nil)
+    private var trainingComment: Binding<String> {
+        Binding(
+            get: {
+                self.trainingCommentInput.value ?? self.training.comment ?? ""
+        },
+            set: { newValue in
+                self.trainingCommentInput.value = newValue
+        }
+        )
     }
-    @ObservedObject private var trainingTitleInput = StringHolder()
+    private func adjustAndSaveTrainingCommentInput() {
+        guard let newValue = trainingCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingCommentInput.value = newValue
+        training.comment = newValue.isEmpty ? nil : newValue
+    }
+    
+    @ObservedObject private var trainingTitleInput = ValueHolder<String?>(initial: nil)
     private var trainingTitle: Binding<String> {
         Binding(
             get: {
@@ -85,6 +98,11 @@ struct TrainingDetailView : View {
                     TextField("Title", text: trainingTitle, onEditingChanged: { isEditingTextField in
                         if !isEditingTextField {
                             self.adjustAndSaveTrainingTitleInput()
+                        }
+                    })
+                    TextField("Comment", text: trainingComment, onEditingChanged: { isEditingTextField in
+                        if !isEditingTextField {
+                            self.adjustAndSaveTrainingCommentInput()
                         }
                     })
                 }

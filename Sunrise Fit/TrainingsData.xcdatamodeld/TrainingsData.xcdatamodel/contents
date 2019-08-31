@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A536g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A546d" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Training" representedClassName=".Training" syncable="YES" codeGenerationType="category">
+        <attribute name="comment" optional="YES" attributeType="String"/>
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isCurrentTraining" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,7 +23,7 @@
         <relationship name="trainingExercise" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingExercise" inverseName="trainingSets" inverseEntity="TrainingExercise"/>
     </entity>
     <elements>
-        <element name="Training" positionX="189" positionY="-144" width="128" height="118"/>
+        <element name="Training" positionX="189" positionY="-144" width="128" height="133"/>
         <element name="TrainingExercise" positionX="432" positionY="-126" width="128" height="90"/>
         <element name="TrainingSet" positionX="655" positionY="-117" width="128" height="148"/>
     </elements>

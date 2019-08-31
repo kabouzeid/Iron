@@ -23,6 +23,40 @@ struct TrainingView: View {
         training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
     
+    @ObservedObject private var trainingCommentInput = ValueHolder<String?>(initial: nil)
+    private var trainingComment: Binding<String> {
+        Binding(
+            get: {
+                self.trainingCommentInput.value ?? self.training.comment ?? ""
+        },
+            set: { newValue in
+                self.trainingCommentInput.value = newValue
+        }
+        )
+    }
+    private func adjustAndSaveTrainingCommentInput() {
+        guard let newValue = trainingCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingCommentInput.value = newValue
+        training.comment = newValue.isEmpty ? nil : newValue
+    }
+    
+    @ObservedObject private var trainingTitleInput = ValueHolder<String?>(initial: nil)
+    private var trainingTitle: Binding<String> {
+        Binding(
+            get: {
+                self.trainingTitleInput.value ?? self.training.title ?? ""
+        },
+            set: { newValue in
+                self.trainingTitleInput.value = newValue
+        }
+        )
+    }
+    private func adjustAndSaveTrainingTitleInput() {
+        guard let newValue = trainingTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingTitleInput.value = newValue
+        training.title = newValue.isEmpty ? nil : newValue
+    }
+    
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
         var numberOfSets = 3
         // try to guess the number of sets
@@ -193,11 +227,17 @@ struct TrainingView: View {
                 Divider()
                 List {
                     Section {
-                        // TODO: actually edit training title
-                        TextField("Title", text: .constant(""), onEditingChanged: { _ in }, onCommit: {})
-                        // TODO: actually edit training comment
-                        TextField("Comment", text: .constant(""), onEditingChanged: { _ in }, onCommit: {})
-//                        DatePicker("Start", selection: .constant(Date()), in: ...Date())
+                        // TODO: add clear button
+                        TextField("Title", text: trainingTitle, onEditingChanged: { isEditingTextField in
+                            if !isEditingTextField {
+                                self.adjustAndSaveTrainingTitleInput()
+                            }
+                        })
+                        TextField("Comment", text: trainingComment, onEditingChanged: { isEditingTextField in
+                            if !isEditingTextField {
+                                self.adjustAndSaveTrainingCommentInput()
+                            }
+                        })
                     }
                     Section(header: Text("Exercises".uppercased())) {
                         ForEach(trainingExercises, id: \.objectID) { trainingExercise in

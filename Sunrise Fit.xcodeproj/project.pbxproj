@@ -87,6 +87,7 @@
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
 		8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064022BACECE00086032 /* FeedBannerView.swift */; };
 		8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */; };
+		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
 		8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE0707C22D1F76B0038B7E3 /* Lottie */; };
@@ -206,6 +207,7 @@
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		8AC8064022BACECE00086032 /* FeedBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBannerView.swift; sourceTree = "<group>"; };
 		8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartViewCell.swift; sourceTree = "<group>"; };
+		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
 		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */,
 				8A3815472301803A008ACDAD /* Refresher.swift */,
 				8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */,
+				8ACBE80C231A69940027D3A8 /* ValueHolder.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */,
 				8A9EAC5D22EB526A00A11C65 /* NSManagedObjectContext+save.swift in Sources */,
 				8A5C437822F4CE5F007A7061 /* ObservableFetchRequest.swift in Sources */,
+				8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */,
 				8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */,
 				8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,

@@ -257,7 +257,7 @@ struct TrainingSetEditor : View {
 
 private struct MoreView: View {
     @ObservedObject var trainingSet: TrainingSet
-    
+
     // bridges empty and whitespace values to nil
     private var trainingSetComment: Binding<String> {
         Binding(
@@ -334,7 +334,7 @@ private struct MoreView: View {
             }
             
             Section(header: Text("Comment".uppercased())) {
-                TextField("Comment", text: trainingSetComment, onEditingChanged: { _ in }, onCommit: {})
+                TextField("Comment", text: trainingSetComment)
             }
             
             Section(header:
