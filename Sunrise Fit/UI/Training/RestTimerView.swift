@@ -116,7 +116,7 @@ struct RestTimerView: View {
     }
     
     private var defaultTimerButtons: some View {
-        let defaultTimerDurations: (TimeInterval, TimeInterval, TimeInterval, TimeInterval) = (60, 90, 120, 180) // TODO: should be the most recently used durations
+        let defaultTimerDurations: (TimeInterval, TimeInterval, TimeInterval, TimeInterval, TimeInterval) = (60, 90, 120, 150, 180) // TODO: should be the most recently used durations
         return VStack {
             HStack {
                 defaultTimerButton(duration: defaultTimerDurations.0)
@@ -125,6 +125,14 @@ struct RestTimerView: View {
             HStack {
                 defaultTimerButton(duration: defaultTimerDurations.2)
                 defaultTimerButton(duration: defaultTimerDurations.3)
+            }
+            HStack {
+                defaultTimerButton(duration: defaultTimerDurations.4)
+                CircleButton(action: {
+                    // TODO: show custom timer selection view
+                }) {
+                    Text("Other")
+                }
             }
         }
     }
