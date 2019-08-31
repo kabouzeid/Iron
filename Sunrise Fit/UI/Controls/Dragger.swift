@@ -31,8 +31,8 @@ struct Dragger : View {
     @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
     @State private var minMaxFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
-    private static let DRAGGER_MOVEMENT: Double = 3 // higher => dragger moves more
-    private static let DRAGGER_DELTA_DIVISOR: Double = 40 // higher => less sensible
+    private static let DRAGGER_MOVEMENT: CGFloat = 3 // higher => dragger moves more
+    private static let DRAGGER_DELTA_DIVISOR: CGFloat = 40 // higher => less sensible
     
     private var valueString: String {
         numberFormatter.string(from: NSNumber(value: tmpValue ?? value)) ?? ""
@@ -46,17 +46,17 @@ struct Dragger : View {
                     self.selectionFeedbackGenerator = UISelectionFeedbackGenerator()
                     self.selectionFeedbackGenerator?.prepare()
                 }
-                let delta = Double(state.startLocation.y - state.location.y)
+                let delta = state.startLocation.y - state.location.y
                 if delta > 0 {
                     self.feedbackOnMin = true
                 }
                 if delta < 0 {
                     self.feedbackOnMax = true
                 }
-                self.draggerOffset = -CGFloat(delta > 0 ? min(delta, Dragger.DRAGGER_MOVEMENT) : max(delta, -Dragger.DRAGGER_MOVEMENT))
+                self.draggerOffset = -(delta > 0 ? min(delta, Self.DRAGGER_MOVEMENT) : max(delta, -Self.DRAGGER_MOVEMENT))
                 
-                let increment = (delta / Dragger.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * self.stepSize
-                var newValue = self.value + increment
+                let increment = (delta / Self.DRAGGER_DELTA_DIVISOR).rounded(.towardZero) * CGFloat(self.stepSize)
+                var newValue = self.value + Double(increment)
                 
                 if increment != 0 {
                     let remainder = newValue.truncatingRemainder(dividingBy: self.stepSize)
@@ -128,6 +128,9 @@ struct Dragger : View {
         }
     }
     
+    // toggle to wiggle the dragger, the toggling is kind of a hack
+    @State private var wiggleDraggerToggle: Bool = false
+    
     var body: some View {
         HStack {
             HStack {
@@ -159,6 +162,7 @@ struct Dragger : View {
             Image(systemName: "square.grid.4x3.fill")
                 .rotationEffect(Angle(degrees: 90))
                 .offset(y: draggerOffset)
+                .modifier(WiggleModifier(wiggleToggle: wiggleDraggerToggle, wiggleDistance: Self.DRAGGER_MOVEMENT).animation(.linear(duration: 1)))
                 .animation(.interactiveSpring())
                 .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
                 .padding()
@@ -168,10 +172,26 @@ struct Dragger : View {
                     .onEnded {
                         let feedbackGenerator = UINotificationFeedbackGenerator()
                         feedbackGenerator.notificationOccurred(.warning)
-                        // TODO: wiggle the dragger
+                        self.wiggleDraggerToggle.toggle()
                     }
                 )
         }
+    }
+}
+
+private struct WiggleModifier: AnimatableModifier {
+    var wiggleToggle: Bool // toggle this to animate
+    var wiggleDistance: CGFloat
+    
+    private(set) var progress: CGFloat = 0
+    
+    var animatableData: CGFloat {
+        get { wiggleToggle ? 1 : 0 }
+        set { wiggleToggle = newValue > 0.5; progress = newValue }
+    }
+    
+    func body(content: _ViewModifier_Content<WiggleModifier>) -> some View {
+        content.offset(y: max(min(2*sin(progress * 2 * .pi), 1), -1) * wiggleDistance)
     }
 }
 
@@ -180,7 +200,6 @@ struct Dragger_Previews : PreviewProvider {
     static var value: Double = 50
     static var previews: some View {
         Dragger(value: Binding(get: { value }, set: { value = $0}), unit: "reps", showCursor: true)
-//            .frame(width: 123)
             .previewLayout(.sizeThatFits)
     }
 }
