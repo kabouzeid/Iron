@@ -17,8 +17,7 @@ struct TrainingView: View {
     @State private var showingExerciseSelectorSheet = false
     @State private var showingTrainingsLogSheet = false
     @State private var showingFinishWorkoutSheet = false
-    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
-    
+
     private var trainingExercises: [TrainingExercise] {
         training.trainingExercises?.array as? [TrainingExercise] ?? []
     }
@@ -55,35 +54,6 @@ struct TrainingView: View {
         guard let newValue = trainingTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         trainingTitleInput.value = newValue
         training.title = newValue.isEmpty ? nil : newValue
-    }
-    
-    private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
-        var numberOfSets = 3
-        // try to guess the number of sets
-        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count >= 3 {
-            // one month since last training and at least three trainings
-            if let firstHistoryStart = history[0].training?.start, let thirdHistoryStart = history[2].training?.start {
-                let cutoff = min(thirdHistoryStart, Calendar.current.date(byAdding: .month, value: -1, to: firstHistoryStart)!)
-                let filteredAndSortedHistory = history
-                    .filter {
-                        guard let start = $0.training?.start else { return false }
-                        return start >= cutoff
-                    }
-                    .sorted {
-                        ($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)
-                    }
-                
-                assert(filteredAndSortedHistory.count >= 3)
-                let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
-                numberOfSets = median.trainingSets?.count ?? numberOfSets
-            }
-        }
-        var trainingSets = [TrainingSet]()
-        for _ in 0..<numberOfSets {
-            let trainingSet = TrainingSet(context: managedObjectContext)
-            trainingSets.append(trainingSet)
-        }
-        return NSOrderedSet(array: trainingSets)
     }
     
     private func currentTrainingExerciseDetailView(trainingExercise: TrainingExercise) -> some View {
@@ -182,32 +152,6 @@ struct TrainingView: View {
         }
     }
     
-    private var exerciseSelectorSheet: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Button("Cancel") {
-                    self.showingExerciseSelectorSheet = false
-                    self.exerciseSelectorSelection.removeAll()
-                }
-                Spacer()
-                Button("Add") {
-                    for exercise in self.exerciseSelectorSelection {
-                        let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                        self.training.addToTrainingExercises(trainingExercise)
-                        trainingExercise.exerciseId = Int16(exercise.id)
-                        precondition(self.training.isCurrentTraining == true)
-                        trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
-                    }
-                    self.showingExerciseSelectorSheet = false
-                    self.exerciseSelectorSelection.removeAll()
-                    self.managedObjectContext.safeSave()
-                }
-                .environment(\.isEnabled, !self.exerciseSelectorSelection.isEmpty)
-            }.padding()
-            ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
-        }
-    }
-    
     private var cancelButton: some View {
         Button("Cancel") {
             if (self.training.trainingExercises?.count ?? 0) == 0 {
@@ -293,7 +237,10 @@ struct TrainingView: View {
                     EditButton()
                 }
             )
-            .sheet(isPresented: $showingExerciseSelectorSheet) { self.exerciseSelectorSheet }
+            .sheet(isPresented: $showingExerciseSelectorSheet) {
+                ExerciseSelectorSheet(training: self.training)
+                    .environment(\.managedObjectContext, self.managedObjectContext)
+            }
         }
         .sheet(isPresented: $showingFinishWorkoutSheet) { self.finishWorkoutSheet }
         .actionSheet(isPresented: $showingCancelSheet, content: {
@@ -308,7 +255,81 @@ struct TrainingView: View {
     }
 }
 
-
+private struct ExerciseSelectorSheet: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var training: Training
+    
+    @State private var filter = ""
+    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
+    
+    private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
+        var numberOfSets = 3
+        // try to guess the number of sets
+        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count >= 3 {
+            // one month since last training and at least three trainings
+            if let firstHistoryStart = history[0].training?.start, let thirdHistoryStart = history[2].training?.start {
+                let cutoff = min(thirdHistoryStart, Calendar.current.date(byAdding: .month, value: -1, to: firstHistoryStart)!)
+                let filteredAndSortedHistory = history
+                    .filter {
+                        guard let start = $0.training?.start else { return false }
+                        return start >= cutoff
+                }
+                .sorted {
+                    ($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)
+                }
+                
+                assert(filteredAndSortedHistory.count >= 3)
+                let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
+                numberOfSets = median.trainingSets?.count ?? numberOfSets
+            }
+        }
+        var trainingSets = [TrainingSet]()
+        for _ in 0..<numberOfSets {
+            let trainingSet = TrainingSet(context: managedObjectContext)
+            trainingSets.append(trainingSet)
+        }
+        return NSOrderedSet(array: trainingSets)
+    }
+    
+    private var exercises: [[Exercise]] {
+        EverkineticDataProvider.filterExercises(exercises: EverkineticDataProvider.exercisesGrouped, using: filter)
+    }
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            VStack {
+                HStack {
+                    Button("Cancel") {
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.exerciseSelectorSelection.removeAll()
+                        self.filter = ""
+                    }
+                    Spacer()
+                    Button("Add") {
+                        for exercise in self.exerciseSelectorSelection {
+                            let trainingExercise = TrainingExercise(context: self.managedObjectContext)
+                            self.training.addToTrainingExercises(trainingExercise)
+                            trainingExercise.exerciseId = Int16(exercise.id)
+                            precondition(self.training.isCurrentTraining == true)
+                            trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                        }
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.exerciseSelectorSelection.removeAll()
+                        self.filter = ""
+                        self.managedObjectContext.safeSave()
+                    }
+                    .environment(\.isEnabled, !self.exerciseSelectorSelection.isEmpty)
+                }
+                TextField("Search", text: $filter)
+                    .textFieldStyle(SearchTextFieldStyle(text: $filter))
+            }
+            .padding()
+            ExerciseMultiSelectionView(exerciseMuscleGroups: exercises, selection: self.$exerciseSelectorSelection)
+        }
+    }
+}
 
 #if DEBUG
 struct TrainingView_Previews: PreviewProvider {

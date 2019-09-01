@@ -55,5 +55,24 @@ class EverkineticDataProvider {
         }
         return groups
     }
+
+    static func filterExercises(exercises: [Exercise], using filter: String) -> [Exercise] {
+        let filter = filter.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        guard !filter.isEmpty else { return exercises }
+        return exercises.filter { exercise in
+            let split = filter.split(separator: " ")
+            for s in split {
+                if !exercise.title.lowercased().contains(s) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
     
+    static func filterExercises(exercises: [[Exercise]], using filter: String) -> [[Exercise]] {
+        exercises
+            .map { Self.filterExercises(exercises: $0, using: filter) }
+            .filter { !$0.isEmpty }
+    }
 }
