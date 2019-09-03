@@ -16,6 +16,7 @@
 		8A239AE8203580A1006BB38B /* Sunrise_FitCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */; };
 		8A2F52A72316969B00194C54 /* TrainingSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F52A62316969B00194C54 /* TrainingSetCell.swift */; };
 		8A36F9E8231E932A0036E504 /* AddExercisesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */; };
+		8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36F9E9231EA62F0036E504 /* NotificationManager.swift */; };
 		8A3815482301803A008ACDAD /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3815472301803A008ACDAD /* Refresher.swift */; };
 		8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */; };
 		8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154D23019A3F008ACDAD /* RestTimerStore.swift */; };
@@ -136,6 +137,7 @@
 		8A239AE7203580A1006BB38B /* Sunrise_FitCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitCoreDataTests.swift; sourceTree = "<group>"; };
 		8A2F52A62316969B00194C54 /* TrainingSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetCell.swift; sourceTree = "<group>"; };
 		8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercisesSheet.swift; sourceTree = "<group>"; };
+		8A36F9E9231EA62F0036E504 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8A3815472301803A008ACDAD /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
 		8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+RestTimer.swift"; sourceTree = "<group>"; };
 		8A38154D23019A3F008ACDAD /* RestTimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerStore.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				8AC8063722BAB93000086032 /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8AC8063822BABC8C00086032 /* SceneDelegate.swift */,
+				8A36F9E9231EA62F0036E504 /* NotificationManager.swift */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
 				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
@@ -709,6 +712,7 @@
 				8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */,
 				8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */,
 				8AF4C538230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift in Sources */,
+				8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
 				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,

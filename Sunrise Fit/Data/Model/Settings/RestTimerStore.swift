@@ -42,6 +42,7 @@ final class RestTimerStore: ObservableObject {
         set {
             self.objectWillChange.send()
             userDefaults.restTimerStart = newValue
+            updateNotification()
         }
     }
     
@@ -52,7 +53,12 @@ final class RestTimerStore: ObservableObject {
         set {
             self.objectWillChange.send()
             userDefaults.restTimerDuration = newValue
+            updateNotification()
         }
+    }
+    
+    private func updateNotification() {
+        NotificationManager.shared.updateRestTimerUpNotificationRequest(remainingTime: self.restTimerRemainingTime)
     }
 }
 

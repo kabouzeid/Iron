@@ -52,9 +52,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        let center = UNUserNotificationCenter.current()
-        center.removeDeliveredNotifications(withIdentifiers: [NotificationID.unfinishedTraining.rawValue, NotificationID.restTimerUp.rawValue])
-        center.removePendingNotificationRequests(withIdentifiers: [NotificationID.unfinishedTraining.rawValue, NotificationID.restTimerUp.rawValue])
+        NotificationManager.shared.notificationCenter.removeAllDeliveredNotifications()
+        NotificationManager.shared.removePendingNotificationRequests(withIdentifiers: [.unfinishedTraining])
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -65,58 +64,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         AppDelegate.instance.persistentContainer.viewContext.safeSave()
         
-        // remind the user 15 mins after closing the app if the training ist still unfinished
         if (try? AppDelegate.instance.persistentContainer.viewContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 > 0 {
-            requestUnfinishedTrainingNotification()
+            // remind the user about his unfinished training
+            NotificationManager.shared.requestUnfinishedTrainingNotification()
         }
-        
-        if let remainingTime = restTimerStore.restTimerRemainingTime {
-            requestRestTimerUpNotification(remainingTime: remainingTime)
-        }
-    }
-    
-    private func requestUnfinishedTrainingNotification() {
-        let center = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Unfinished training"
-        content.body = "Your current training is unfinished. Do you want to finish it?"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15 * 60, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: NotificationID.unfinishedTraining.rawValue, content: content, trigger: trigger)
-        
-        center.add(request) { (error) in
-            if let error = error {
-                print("error \(String(describing: error))")
-            }
-        }
-    }
-    
-    private func requestRestTimerUpNotification(remainingTime: TimeInterval) {
-        guard remainingTime > 0 else { return}
-        
-        let center = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "You've rested enough!"
-        content.body = "Back to work 💪"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: NotificationID.unfinishedTraining.rawValue, content: content, trigger: trigger)
-        
-        center.add(request) { (error) in
-            if let error = error {
-                print("error \(String(describing: error))")
-            }
-        }
-    }
-    
-    enum NotificationID: String {
-        case unfinishedTraining
-        case restTimerUp
     }
 }
