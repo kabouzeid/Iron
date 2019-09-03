@@ -15,8 +15,7 @@ struct TrainingDetailView : View {
 
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
-    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
-    
+
     private var trainingStart: Binding<Date> {
         Binding(
             get: {
@@ -175,25 +174,14 @@ struct TrainingDetailView : View {
             }
         )
         .sheet(isPresented: $showingExerciseSelectorSheet) {
-            VStack {
-                HStack {
-                    Button("Cancel") {
-                        self.showingExerciseSelectorSheet = false
-                        self.exerciseSelectorSelection.removeAll()
-                    }
-                    Spacer()
-                    Button("Add") {
-                        for exercise in self.exerciseSelectorSelection {
-                            let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                            self.training.addToTrainingExercises(trainingExercise)
-                            trainingExercise.exerciseId = Int16(exercise.id)
-                        }
-                        self.showingExerciseSelectorSheet = false
-                        self.exerciseSelectorSelection.removeAll()
-                    }
-                }.padding()
-                ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: self.$exerciseSelectorSelection)
-            }
+            AddExercisesSheet(onAdd: { selection in
+                for exercise in selection {
+                    let trainingExercise = TrainingExercise(context: self.managedObjectContext)
+                    self.training.addToTrainingExercises(trainingExercise)
+                    trainingExercise.exerciseId = Int16(exercise.id)
+                }
+                self.managedObjectContext.safeSave()
+            })
         }
     }
 }
