@@ -41,6 +41,12 @@ struct HistoryView : View {
                                 Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration)!)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
+                                training.comment.map {
+                                    Text($0.enquoted)
+                                        .lineLimit(1)
+                                        .font(Font.caption.italic())
+                                        .foregroundColor(.secondary)
+                                }
                             }
                             .layoutPriority(1)
                             Spacer()
