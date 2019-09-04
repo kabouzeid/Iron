@@ -57,7 +57,6 @@
 		8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
-		8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
 		8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7D231436260038ACC5 /* String+Enquote.swift */; };
 		8A9EAC5622EB33A200A11C65 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD622E33703002150F0 /* UIImage+Tinting.swift */; };
@@ -107,13 +106,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
-			remoteInfo = "Rhino Fit";
-		};
-		8A9C5A7320A6F86A00DEBCC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
 			proxyType = 1;
@@ -183,9 +175,6 @@
 		8A82AB9322DDE582007C0293 /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
 		8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartView.swift; sourceTree = "<group>"; };
 		8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartViewCell.swift; sourceTree = "<group>"; };
-		8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunrise FitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunrise_FitUITests.swift; sourceTree = "<group>"; };
-		8A9C5A7220A6F86A00DEBCC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SwiftUI.swift"; sourceTree = "<group>"; };
 		8A9E4F7D231436260038ACC5 /* String+Enquote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Enquote.swift"; sourceTree = "<group>"; };
 		8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+save.swift"; path = "../../../../../../../System/Volumes/Data/Users/karim/Code/XcodeProjects/Sunrise-Fit/Sunrise Fit/Extension/NSManagedObjectContext+save.swift"; sourceTree = "<group>"; };
@@ -236,13 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8A7D6EA8200BF92E00AA0FA7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A9C5A6B20A6F86A00DEBCC5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,7 +287,6 @@
 			children = (
 				8A7D6E96200BF92E00AA0FA7 /* Sunrise Fit */,
 				8A7D6EAE200BF92E00AA0FA7 /* Sunrise FitTests */,
-				8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -315,7 +296,6 @@
 			children = (
 				8A7D6E94200BF92E00AA0FA7 /* Sunrise Fit.app */,
 				8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */,
-				8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,15 +330,6 @@
 				8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */,
 			);
 			path = "Sunrise FitTests";
-			sourceTree = "<group>";
-		};
-		8A9C5A6F20A6F86A00DEBCC5 /* Sunrise FitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8A9C5A7020A6F86A00DEBCC5 /* Sunrise_FitUITests.swift */,
-				8A9C5A7220A6F86A00DEBCC5 /* Info.plist */,
-			);
-			path = "Sunrise FitUITests";
 			sourceTree = "<group>";
 		};
 		8AABF2A6201683C8009C047D /* Data */ = {
@@ -552,24 +523,6 @@
 			productReference = 8A7D6EAB200BF92E00AA0FA7 /* Sunrise FitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8A9C5A6D20A6F86A00DEBCC5 /* Sunrise FitUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Sunrise FitUITests" */;
-			buildPhases = (
-				8A9C5A6A20A6F86A00DEBCC5 /* Sources */,
-				8A9C5A6B20A6F86A00DEBCC5 /* Frameworks */,
-				8A9C5A6C20A6F86A00DEBCC5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */,
-			);
-			name = "Sunrise FitUITests";
-			productName = "Rhino FitUITests";
-			productReference = 8A9C5A6E20A6F86A00DEBCC5 /* Sunrise FitUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -587,12 +540,6 @@
 					};
 					8A7D6EAA200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
-					};
-					8A9C5A6D20A6F86A00DEBCC5 = {
-						CreatedOnToolsVersion = 9.3.1;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
@@ -619,7 +566,6 @@
 			targets = (
 				8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */,
 				8A7D6EAA200BF92E00AA0FA7 /* Sunrise FitTests */,
-				8A9C5A6D20A6F86A00DEBCC5 /* Sunrise FitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -637,13 +583,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8A7D6EA9200BF92E00AA0FA7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A9C5A6C20A6F86A00DEBCC5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -755,14 +694,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A9C5A6A20A6F86A00DEBCC5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A9C5A7120A6F86A00DEBCC5 /* Sunrise_FitUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -770,11 +701,6 @@
 			isa = PBXTargetDependency;
 			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
 			targetProxy = 8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */;
-		};
-		8A9C5A7420A6F86A00DEBCC5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Sunrise Fit */;
-			targetProxy = 8A9C5A7320A6F86A00DEBCC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -986,46 +912,6 @@
 			};
 			name = Release;
 		};
-		8A9C5A7620A6F86A00DEBCC5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Sunrise FitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Sunrise Fit";
-			};
-			name = Debug;
-		};
-		8A9C5A7720A6F86A00DEBCC5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = "Sunrise FitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kabouzeid.Sunrise-FitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Sunrise Fit";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1052,15 +938,6 @@
 			buildConfigurations = (
 				8A7D6EB8200BF92E00AA0FA7 /* Debug */,
 				8A7D6EB9200BF92E00AA0FA7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8A9C5A7520A6F86A00DEBCC5 /* Build configuration list for PBXNativeTarget "Sunrise FitUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8A9C5A7620A6F86A00DEBCC5 /* Debug */,
-				8A9C5A7720A6F86A00DEBCC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
