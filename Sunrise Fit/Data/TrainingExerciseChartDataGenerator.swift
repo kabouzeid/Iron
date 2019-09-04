@@ -93,7 +93,6 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    private let countBalloonValueFormatter = DateBalloonValueFormatter(append: "×")
     private let xAxisValueFormatter = DateAxisFormatter()
     private let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
 
@@ -110,7 +109,7 @@ class TrainingExerciseChartDataGenerator {
         case .oneRM, .totalWeight:
             return DateBalloonValueFormatter(append: weightUnit.abbrev)
         case .totalSets, .totalRepetitions:
-            return countBalloonValueFormatter
+            return DateBalloonValueFormatter(append: "×")
         }
     }
 
@@ -192,7 +191,13 @@ class TrainingExerciseChartDataGenerator {
     }
 
     class DateBalloonValueFormatter: BalloonValueFormatter {
-        let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
+        let yAxisValueFormatter = DefaultAxisValueFormatter(formatter: {
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 1
+            formatter.usesGroupingSeparator = true
+            return formatter
+        }())
         let dateFormatter: DateFormatter
         let yearDateFormatter: DateFormatter
         let append: String?
