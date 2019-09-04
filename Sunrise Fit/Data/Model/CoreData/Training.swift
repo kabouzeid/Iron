@@ -120,6 +120,36 @@ class Training: NSManagedObject {
 }
 
 extension Training {
+    override func validateForUpdate() throws {
+        try super.validateForUpdate()
+        try validateConsistency()
+    }
+    
+    override func validateForInsert() throws {
+        try super.validateForInsert()
+        try validateConsistency()
+    }
+    
+    func validateConsistency() throws {
+        if start == nil && end != nil {
+            throw error(code: 1123, message: "start is nil but end is set")
+        }
+        
+        if let start = start, let end = end, start > end {
+            throw error(code: 1124, message: "start is greater than end")
+        }
+        
+        if isCurrentTraining, let count = try? managedObjectContext?.count(for: Self.currentTrainingFetchRequest), count > 1 {
+            throw error(code: 1125, message: "more than one current training")
+        }
+    }
+    
+    private func error(code: Int, message: String) -> NSError {
+        NSError(domain: "TRAINING_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
+    }
+}
+
+extension Training {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
         initChangeObserver()

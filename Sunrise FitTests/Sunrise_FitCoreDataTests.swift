@@ -201,4 +201,38 @@ class Sunrise_FitCoreDataTests: XCTestCase {
                 .isEmpty ?? true
         )
     }
+    
+    func testStartEndValidation() {
+        for training in testTrainings {
+            if let start = training.start, let end = training.end {
+                training.start = end
+                training.end = start
+                XCTAssertThrowsError(try persistenContainer.viewContext.save())
+                
+                training.start = nil
+                training.end = end
+                XCTAssertThrowsError(try persistenContainer.viewContext.save())
+                
+                training.start = start
+                training.end = nil
+                XCTAssertNoThrow(try persistenContainer.viewContext.save())
+            }
+        }
+    }
+    
+    func testCurrentTrainingValidation() {
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
+        let training = createTestCurrentTraining(context: persistenContainer.viewContext)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 2)
+        XCTAssertThrowsError(try persistenContainer.viewContext.save())
+        persistenContainer.viewContext.delete(training)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        persistenContainer.viewContext.delete(testCurrentTraining)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 0)
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        _ = createTestCurrentTraining(context: persistenContainer.viewContext)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+    }
 }
