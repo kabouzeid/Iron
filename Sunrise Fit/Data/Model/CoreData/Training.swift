@@ -132,15 +132,19 @@ extension Training {
     
     func validateConsistency() throws {
         if start == nil && end != nil {
-            throw error(code: 1123, message: "start is nil but end is set")
+            throw error(code: 1, message: "start is nil but end is set")
         }
         
         if let start = start, let end = end, start > end {
-            throw error(code: 1124, message: "start is greater than end")
+            throw error(code: 2, message: "start is greater than end")
         }
         
         if isCurrentTraining, let count = try? managedObjectContext?.count(for: Self.currentTrainingFetchRequest), count > 1 {
-            throw error(code: 1125, message: "more than one current training")
+            throw error(code: 3, message: "more than one current training")
+        }
+        
+        if !isCurrentTraining, let isCompleted = isCompleted, !isCompleted {
+            throw error(code: 4, message: "training that is not current training is uncompleted")
         }
     }
     

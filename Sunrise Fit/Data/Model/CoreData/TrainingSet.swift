@@ -80,6 +80,28 @@ class TrainingSet: NSManagedObject {
 }
 
 extension TrainingSet {
+    override func validateForUpdate() throws {
+        try super.validateForUpdate()
+        try validateConsistency()
+    }
+    
+    override func validateForInsert() throws {
+        try super.validateForInsert()
+        try validateConsistency()
+    }
+    
+    func validateConsistency() throws {
+        if !isCompleted, let training = trainingExercise?.training, !training.isCurrentTraining {
+            throw error(code: 1, message: "uncompleted set in training that is not current training")
+        }
+    }
+    
+    private func error(code: Int, message: String) -> NSError {
+        NSError(domain: "TRAINING_SET_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
+    }
+}
+
+extension TrainingSet {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
         initChangeObserver()

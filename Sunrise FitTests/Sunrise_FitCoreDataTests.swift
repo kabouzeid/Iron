@@ -235,4 +235,20 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
+    
+    func testTrainingIsCompletedValidation() {
+        testCurrentTraining.isCurrentTraining = false
+        XCTAssertThrowsError(try persistenContainer.viewContext.save())
+        testCurrentTraining.isCurrentTraining = true
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        
+        for trainingSet in testTrainingSets {
+            if let training = trainingSet.trainingExercise?.training, !training.isCurrentTraining {
+                trainingSet.isCompleted = false
+                XCTAssertThrowsError(try persistenContainer.viewContext.save())
+                trainingSet.isCompleted = true
+                XCTAssertNoThrow(try persistenContainer.viewContext.save())
+            }
+        }
+    }
 }
