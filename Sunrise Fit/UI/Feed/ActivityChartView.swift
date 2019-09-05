@@ -12,7 +12,7 @@ import CoreData
 struct ActivityChartView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(fetchRequest: Self.fetchRequest) var fetchedResults
+    @FetchRequest(fetchRequest: Self.fetchRequest) var trainingHistory
     
     private static let NUMBER_OF_WEEKS = 8
     
@@ -28,11 +28,7 @@ struct ActivityChartView: View {
         dateFormatter.setLocalizedDateFormatFromTemplate("Md")
         return dateFormatter
     }()
-    
-    private var trainingHistory: [Training] {
-        fetchedResults.map { $0 }
-    }
-    
+
     private var weeks: [Date] {
         var weeks = [Date]()
         var date = Date().startOfWeek! // this week
@@ -58,7 +54,7 @@ struct ActivityChartView: View {
     }
     
     private var activityData: [BarStack] {
-        trainingsPerWeek(trainings: trainingHistory, weeks: weeks).map { (arg) -> BarStack in
+        trainingsPerWeek(trainings: trainingHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
             let (trainings, week) = arg
             return BarStack(
                 entries: trainings.map { training in

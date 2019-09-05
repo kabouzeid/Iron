@@ -15,18 +15,14 @@ struct TrainingExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var restTimerStore: RestTimerStore
     
-    @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var fetchedResults // will be overwritten in init()
+    @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var trainingExerciseHistory // will be overwritten in init()
     @ObservedObject var trainingExercise: TrainingExercise
 
     @State private var selectedTrainingSet: TrainingSet? = nil
     
     init(trainingExercise: TrainingExercise) {
         self.trainingExercise = trainingExercise
-        _fetchedResults = FetchRequest(fetchRequest: trainingExercise.historyFetchRequest)
-    }
-    
-    private var trainingExerciseHistory: [TrainingExercise] {
-        fetchedResults.map { $0 }
+        _trainingExerciseHistory = FetchRequest(fetchRequest: trainingExercise.historyFetchRequest)
     }
 
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {

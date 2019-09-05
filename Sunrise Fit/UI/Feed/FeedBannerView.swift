@@ -13,8 +13,8 @@ import Combine
 struct FeedBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     
-    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var sevenDaysFetchedResults
-    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var fourteenDaysFetchedResults
+    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var trainingsFromSevenDaysAgo
+    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var trainingsFromFourteenDaysAgo
     
     private static var sevenDaysAgo: Date {
        Calendar.current.date(byAdding: .day, value: -7, to: Date())!
@@ -38,14 +38,6 @@ struct FeedBannerView : View {
         return request
     }
     
-    private var trainingsFromSevenDaysAgo: [Training] {
-        sevenDaysFetchedResults.map { $0 }
-    }
-    
-    private var trainingsFromFourteenDaysAgo: [Training] {
-        fourteenDaysFetchedResults.map { $0 }
-    }
-
     var body: some View {
         BannerView(entries: bannerViewEntries)
             .lineLimit(2)

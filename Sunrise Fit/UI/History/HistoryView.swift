@@ -14,7 +14,7 @@ struct HistoryView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     // TODO: as of beta5, @FetchRequest is only updated on the first change of a value (e.g. title) but deleting a training updates it all the time
-    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var fetchedResults
+    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var trainings
 
     static var fetchRequest: NSFetchRequest<Training> {
         let request: NSFetchRequest<Training> = Training.fetchRequest()
@@ -22,11 +22,7 @@ struct HistoryView : View {
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
         return request
     }
-    
-    private var trainings: [Training] {
-        fetchedResults.map { $0 }
-    }
-    
+
     var body: some View {
         NavigationView {
             List {

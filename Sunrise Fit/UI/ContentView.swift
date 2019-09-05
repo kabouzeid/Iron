@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct ContentView : View {
-    @FetchRequest(fetchRequest: Training.currentTrainingFetchRequest) var fetchedResults
+    @FetchRequest(fetchRequest: Training.currentTrainingFetchRequest) var currentTrainings
 
     var currentTraining: Training? {
-        assert(fetchedResults.count <= 1)
-        return fetchedResults.first
+        assert(currentTrainings.count <= 1)
+        return currentTrainings.first
     }
 
     private func trainingView(training: Training?) -> some View {
