@@ -98,6 +98,7 @@
 		8AF4C536230EEE0A003A84DC /* TrainingSetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C535230EEE0A003A84DC /* TrainingSetTag.swift */; };
 		8AF4C538230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C537230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift */; };
 		8AF4C53A230EFB5F003A84DC /* RPE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C539230EFB5F003A84DC /* RPE.swift */; };
+		8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919323212C290024B2EF /* Comparable+Clamped.swift */; };
 		8AFF0D842302C60000F762A2 /* TrainingsDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */; };
 		8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD822E337A0002150F0 /* Benchmark.swift */; };
 		8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */; };
@@ -207,6 +208,7 @@
 		8AF4C535230EEE0A003A84DC /* TrainingSetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetTag.swift; sourceTree = "<group>"; };
 		8AF4C537230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainingSetTag+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AF4C539230EFB5F003A84DC /* RPE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPE.swift; sourceTree = "<group>"; };
+		8AF8919323212C290024B2EF /* Comparable+Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Clamped.swift"; sourceTree = "<group>"; };
 		8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsDataHelper.swift; sourceTree = "<group>"; };
 		8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+OptionalDate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -437,6 +439,7 @@
 				8AF4C537230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift */,
 				8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */,
 				8A9E4F7D231436260038ACC5 /* String+Enquote.swift */,
+				8AF8919323212C290024B2EF /* Comparable+Clamped.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */,
 				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
 				8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */,
+				8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */,
 				8A59283222BE575300BFD57E /* MockTrainingsData.swift in Sources */,
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,

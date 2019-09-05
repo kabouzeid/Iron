@@ -17,7 +17,7 @@ struct ExerciseChartView : View {
     var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
 
     private func chartData(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> ChartData {
-        chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit)
+        chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit, maxRepetitionsFor1rm: settingsStore.maxRepetitionsOneRepMax)
     }
     
     private func xAxisFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> IAxisValueFormatter {

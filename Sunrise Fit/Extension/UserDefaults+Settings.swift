@@ -13,6 +13,7 @@ extension UserDefaults {
         case weightUnit
         case defaultRestTime
         case defaultRestTimeBarbellBased
+        case maxRepetitionsOneRepMax
     }
 
     var weightUnit: WeightUnit {
@@ -48,4 +49,15 @@ extension UserDefaults {
             self.value(forKey: SettingsKeys.defaultRestTimeBarbellBased.rawValue) as? TimeInterval ?? 180 // default 3:00
         }
     }
+    
+    var maxRepetitionsOneRepMax: Int {
+        set {
+            self.set(newValue, forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue)
+        }
+        get {
+            (self.value(forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue) as? Int)?.clamped(to: maxRepetitionsOneRepMaxValues) ?? 5
+        }
+    }
 }
+
+let maxRepetitionsOneRepMaxValues = 1...10

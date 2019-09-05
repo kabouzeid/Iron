@@ -52,6 +52,16 @@ final class SettingsStore: ObservableObject {
             userDefaults.defaultRestTimeBarbellBased = newValue
         }
     }
+    
+    var maxRepetitionsOneRepMax: Int {
+        get {
+            userDefaults.maxRepetitionsOneRepMax
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.maxRepetitionsOneRepMax = newValue
+        }
+    }
 }
 
 let settingsStore = SettingsStore() // singleton

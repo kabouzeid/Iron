@@ -33,6 +33,14 @@ struct SettingsView : View {
                         }
                     }
                 }
+                
+                Section(footer: Text("Maximum number of repetitions for a set to be considered in the one rep max (1RM) calculation. Keep in mind that higher values are less accurate.")) {
+                    Picker("Max Repetitions for 1RM", selection: $settingsStore.maxRepetitionsOneRepMax) {
+                        ForEach(maxRepetitionsOneRepMaxValues, id: \.self) { i in
+                            Text("\(i)").tag(i)
+                        }
+                    }
+                }
             }
             .navigationBarTitle(Text("Settings"))
         }

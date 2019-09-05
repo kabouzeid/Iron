@@ -9,23 +9,16 @@
 import CoreData
 import Charts
 
-class TrainingExerciseChartDataGenerator {
+struct TrainingExerciseChartDataGenerator {
 
-    var exercise: Exercise? {
-        didSet {
-            if let exercise = exercise {
-                trainingExerciseHistory = (try? context.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
-            } else {
-                trainingExerciseHistory = []
-            }
-        }
-    }
-    private var trainingExerciseHistory = [TrainingExercise]()
+    private var exercise: Exercise
+    private var trainingExerciseHistory: [TrainingExercise]
     private var context: NSManagedObjectContext
 
-    init(context: NSManagedObjectContext, exercise: Exercise? = nil) {
+    init(context: NSManagedObjectContext, exercise: Exercise) {
         self.context = context
-        defer { self.exercise = exercise } // without defer, didSet is not called
+        self.exercise = exercise
+        self.trainingExerciseHistory = (try? context.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
     }
 
     enum MeasurementType: String, CaseIterable {
@@ -113,25 +106,22 @@ class TrainingExerciseChartDataGenerator {
         }
     }
 
-    func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame, weightUnit: WeightUnit) -> LineChartData {
+    func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame, weightUnit: WeightUnit, maxRepetitionsFor1rm: Int) -> LineChartData {
         let dataSet = generateChartDataSet(
             trainingExercises: trainingExerciseHistory.filter(timeFrame.filter),
-            trainingExerciseToValue: trainingExerciseToValue(for: measurementType, weightUnit: weightUnit),
+            trainingExerciseToValue: trainingExerciseToValue(for: measurementType, weightUnit: weightUnit, maxRepetitionsFor1rm: maxRepetitionsFor1rm),
             label: measurementType.title)
         return LineChartData(dataSet: dataSet)
     }
 
-    private func trainingExerciseToValue(for measurementType: MeasurementType, weightUnit: WeightUnit) -> TrainingExerciseToValue {
+    private func trainingExerciseToValue(for measurementType: MeasurementType, weightUnit: WeightUnit, maxRepetitionsFor1rm: Int) -> TrainingExerciseToValue {
         switch measurementType {
         case .oneRM:
             return {
                 WeightUnit.convert(weight:
                     $0.trainingSets!.map({ (trainingSet) -> Double in
                         let trainingSet = trainingSet as! TrainingSet
-                        if trainingSet.repetitions > 5 { // TODO: let the user set the max repetitions that will be used here (must be < 37)
-                            // accuracy goes way down for more than 5 reps
-                            return 0
-                        }
+                        guard trainingSet.repetitions <= maxRepetitionsFor1rm else { return 0 }
                         assert(trainingSet.repetitions < 37) // we don't want to divide with 0 or get negative values
                         return Double(trainingSet.weight) * (36 / (37 - Double(trainingSet.repetitions))) // Brzycki 1RM formula
                     }).max() ?? 0
