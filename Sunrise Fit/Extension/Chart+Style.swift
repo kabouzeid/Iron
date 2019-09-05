@@ -69,21 +69,21 @@ extension BarLineChartViewBase {
         chartDataSet.setCircleColor(color)
         chartDataSet.drawCircleHoleEnabled = true
         chartDataSet.circleHoleRadius = 1.5
-        chartDataSet.mode = .horizontalBezier
+        chartDataSet.mode = .linear
         chartDataSet.cubicIntensity = 0.05
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
         chartDataSet.highlightColor = color
         chartDataSet.highlightLineWidth = 2
         
-        chartDataSet.drawFilledEnabled = fillEnabled
-        if fillEnabled {
-            let gradientColors = [color.withAlphaComponent(0).cgColor,
-                                  color.withAlphaComponent(0.8).cgColor]
-            let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
-            
-            chartDataSet.fillAlpha = 1 // TODO: could be replaced with 0.8?
-            chartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
-        }
+//        chartDataSet.drawFilledEnabled = fillEnabled
+//        if fillEnabled {
+//            let gradientColors = [color.withAlphaComponent(0).cgColor,
+//                                  color.withAlphaComponent(0.8).cgColor]
+//            let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+//
+//            chartDataSet.fillAlpha = 1 // TODO: could be replaced with 0.8?
+//            chartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
+//        }
     }
     
     // use this in the DataLoader funcs for optimal styling
