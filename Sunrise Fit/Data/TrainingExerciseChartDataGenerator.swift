@@ -118,37 +118,35 @@ struct TrainingExerciseChartDataGenerator {
         switch measurementType {
         case .oneRM:
             return {
-                WeightUnit.convert(weight:
-                    $0.trainingSets!.map({ (trainingSet) -> Double in
-                        let trainingSet = trainingSet as! TrainingSet
-                        guard trainingSet.repetitions <= maxRepetitionsFor1rm else { return 0 }
+                $0.trainingSets?
+                    .compactMap { $0 as? TrainingSet }
+                    .compactMap { trainingSet in
+                        guard trainingSet.repetitions > 0 else { return nil }
+                        guard trainingSet.repetitions <= maxRepetitionsFor1rm else { return nil }
                         assert(trainingSet.repetitions < 37) // we don't want to divide with 0 or get negative values
                         return Double(trainingSet.weight) * (36 / (37 - Double(trainingSet.repetitions))) // Brzycki 1RM formula
-                    }).max() ?? 0
-                    , from: .metric, to: weightUnit)
+                    }
+                    .max()
+                    .map { WeightUnit.convert(weight: $0, from: .metric, to: weightUnit)}
             }
         case .totalWeight:
-            return  {
-                WeightUnit.convert(weight:
-                    Double($0.totalCompletedWeight ?? 0)
-                    , from: .metric, to: weightUnit)
-            }
+            return  { $0.totalCompletedWeight.map { WeightUnit.convert(weight: Double($0), from: .metric, to: weightUnit) } }
         case .totalSets:
-            return { Double($0.numberOfCompletedSets ?? 0) }
+            return { $0.numberOfCompletedSets.map { Double($0) } }
         case .totalRepetitions:
-            return  { Double($0.numberOfCompletedRepetitions ?? 0) }
+            return  { $0.numberOfCompletedRepetitions.map { Double($0) } }
         }
     }
 
-    private typealias TrainingExerciseToValue = (TrainingExercise) -> Double
+    private typealias TrainingExerciseToValue = (TrainingExercise) -> Double?
     private func generateChartDataSet(trainingExercises: [TrainingExercise], trainingExerciseToValue: TrainingExerciseToValue, label: String?) -> LineChartDataSet {
         // Define chart entries
         let entries: [ChartDataEntry] = trainingExercises
             .reversed()  // fixes a strange bug, where the chart line is not drawn
             .compactMap { trainingExercise in
                 guard let start = trainingExercise.training?.start else { return nil }
+                guard let yValue = trainingExerciseToValue(trainingExercise) else { return nil }
                 let xValue = dateToValue(date: start)
-                let yValue = trainingExerciseToValue(trainingExercise)
                 return ChartDataEntry(x: xValue, y: yValue)
             }
 
