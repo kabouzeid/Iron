@@ -21,6 +21,8 @@ struct HistoryView : View {
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
         return request
     }
+    
+    @State private var offsetsToDelete: IndexSet?
 
     var body: some View {
         NavigationView {
@@ -50,16 +52,23 @@ struct HistoryView : View {
                     }
                 }
                 .onDelete { offsets in
-                    // TODO: confirm delete
-                    let trainings = self.trainings
-                    for i in offsets.sorted().reversed() {
-                        self.managedObjectContext.delete(trainings[i])
-                    }
-                    self.managedObjectContext.safeSave()
+                    self.offsetsToDelete = offsets
                 }
             }
             .navigationBarTitle(Text("History"))
             .navigationBarItems(trailing: EditButton())
+            .actionSheet(item: $offsetsToDelete) { offsets in
+                ActionSheet(title: Text("This cannot be undone."), buttons: [
+                    .destructive(Text("Delete Workout"), action: {
+                        let trainings = self.trainings
+                        for i in offsets.sorted().reversed() {
+                            self.managedObjectContext.delete(trainings[i])
+                        }
+                        self.managedObjectContext.safeSave()
+                    }),
+                    .cancel()
+                ])
+            }
         }
     }
 }
