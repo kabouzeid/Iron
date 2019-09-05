@@ -11,17 +11,13 @@ import CoreData
 
 struct ExerciseHistoryView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var history // will be overwritten in init()
 
     var exercise: Exercise
-//    @ObservedObject private var observableFetchRequest = ObservableFetchRequest<TrainingExercise>()
     
-//    private func fetch() {
-//        observableFetchRequest.fetch(fetchRequest: TrainingExercise.historyFetchRequest(of: exercise.id, until: nil), managedObjectContext: managedObjectContext)
-//    }
-
-    private var history: [TrainingExercise] {
-//        observableFetchRequest.fetchedResults
-        (try? managedObjectContext.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: nil))) ?? []
+    init(exercise: Exercise) {
+        self.exercise = exercise
+        _history = FetchRequest(fetchRequest: TrainingExercise.historyFetchRequest(of: exercise.id, until: nil))
     }
     
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
@@ -43,7 +39,6 @@ struct ExerciseHistoryView : View {
             }
         }
         .listStyle(GroupedListStyle())
-//        .onAppear(perform: fetch)
     }
 }
 

@@ -15,18 +15,18 @@ struct TrainingExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var restTimerStore: RestTimerStore
     
+    @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var fetchedResults // will be overwritten in init()
     @ObservedObject var trainingExercise: TrainingExercise
-//    @ObservedObject var observableFetchRequest = ObservableFetchRequest<TrainingExercise>() // TODO: not working as of beta6
 
     @State private var selectedTrainingSet: TrainingSet? = nil
     
-//    private func fetchTrainingExerciseHistory() {
-//        observableFetchRequest.fetch(fetchRequest: trainingExercise.historyFetchRequest, managedObjectContext: managedObjectContext)
-//    }
+    init(trainingExercise: TrainingExercise) {
+        self.trainingExercise = trainingExercise
+        _fetchedResults = FetchRequest(fetchRequest: trainingExercise.historyFetchRequest)
+    }
     
     private var trainingExerciseHistory: [TrainingExercise] {
-//        observableFetchRequest.fetchedResults
-        (try? managedObjectContext.fetch(trainingExercise.historyFetchRequest)) ?? []
+        fetchedResults.map { $0 }
     }
 
     private func trainingSets(for trainingExercise: TrainingExercise) -> [TrainingSet] {
