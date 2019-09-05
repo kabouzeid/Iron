@@ -9,27 +9,17 @@
 import Foundation
 
 class EverkineticDataProvider {
-    static let exercises = loadExercises()
-    static let exercisesGrouped = splitIntoMuscleGroups(exercises: loadExercises())
+    static let exercises = loadExercises() ?? []
+    static let exercisesGrouped = splitIntoMuscleGroups(exercises: loadExercises() ?? [])
     
-    // TODO: simplify code
     static func findExercise(id: Int) -> Exercise? {
-        if let foundExercise = exercises.first(where: { (exercise) -> Bool in
-            return exercise.id == id
-        }) {
-            return foundExercise
-        }
-        return nil
+        exercises.first { $0.id == id }
     }
     
-    private static func loadExercises() -> [Exercise] {
+    private static func loadExercises() -> [Exercise]? {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        if let jsonString = try? String(contentsOf: jsonUrl) {
-            return EverkineticParser.parse(jsonString: jsonString).sorted(by: { (a, b) -> Bool in
-                a.title < b.title
-            })
-        }
-        return []
+        guard let jsonString = try? String(contentsOf: jsonUrl) else { return nil }
+        return EverkineticParser.parse(jsonString: jsonString).sorted { $0.title < $1.title }
     }
 
     static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {

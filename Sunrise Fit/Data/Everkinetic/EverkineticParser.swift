@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 
 struct EverkineticParser {
-    
     static func parse(jsonString: String) -> [Exercise] {
         let json = JSON(parseJSON: jsonString)
         var exercises = [Exercise]()
@@ -31,11 +30,9 @@ struct EverkineticParser {
             let png = exerciseJson["png"].arrayValue.map { $0.stringValue }
             
             let exercise = Exercise(id: id, title: title, description: description, type: type, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: equipment, steps: steps, tips: tips, references: references, png: png)
-            
             exercises.append(exercise)
         }
         
         return exercises
     }
-    
 }
