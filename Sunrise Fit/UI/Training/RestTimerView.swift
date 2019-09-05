@@ -135,7 +135,7 @@ struct RestTimerView: View {
     }
     
     var body: some View {
-        ZStack { // somehow Group doesnt work here correctly (beta5)
+        Group {
             if restTimerStore.restTimerRemainingTime != nil {
                 runningTimerView.animation(.default)
             } else {

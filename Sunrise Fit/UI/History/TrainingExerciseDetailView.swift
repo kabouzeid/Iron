@@ -232,8 +232,7 @@ struct TrainingExerciseDetailView : View {
                     self.restTimerStore.restTimerStart = Date()
                 }
             })
-                // TODO: gestures not working on background as of beta6
-                .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+            .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
         }
         .transition(AnyTransition.move(edge: .bottom))
     }
