@@ -12,6 +12,7 @@ class EverkineticDataProvider {
     static let exercises = loadExercises()
     static let exercisesGrouped = splitIntoMuscleGroups(exercises: loadExercises())
     
+    // TODO: simplify code
     static func findExercise(id: Int) -> Exercise? {
         if let foundExercise = exercises.first(where: { (exercise) -> Bool in
             return exercise.id == id

@@ -147,12 +147,17 @@ struct TrainingSetEditor : View {
         }
     }
     
+    private var weightStepSize: Double {
+        // TODO: let the user configure this for barbell, dumbell and others
+        (trainingSet.trainingExercise?.exercise?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
+    }
+    
     private var weightDragger: some View {
         Dragger(
             value: trainingSetWeight,
             numberFormatter: weightNumberFormatter,
             unit: settingsStore.weightUnit.abbrev,
-            stepSize: settingsStore.weightUnit.barbellIncrement, // TODO: do this conditionally on exercise type
+            stepSize: weightStepSize,
             minValue: 0,
             maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
             showCursor: showKeyboard == .weight,
