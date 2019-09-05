@@ -13,7 +13,6 @@ struct HistoryView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    // TODO: as of beta5, @FetchRequest is only updated on the first change of a value (e.g. title) but deleting a training updates it all the time
     @FetchRequest(fetchRequest: HistoryView.fetchRequest) var trainings
 
     static var fetchRequest: NSFetchRequest<Training> {

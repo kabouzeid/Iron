@@ -81,7 +81,7 @@ struct TrainingDetailView : View {
     private func trainingSets(trainingExercise: TrainingExercise) -> [TrainingSet] {
         trainingExercise.trainingSets?.array as? [TrainingSet] ?? []
     }
-
+    
     var body: some View {
         List {
             Section {
@@ -90,8 +90,8 @@ struct TrainingDetailView : View {
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             
-            // editMode makes problems in beta5
-//            if editMode?.value == .active {
+            // editMode still doesn't work in 13.1 beta2
+//            if editMode?.wrappedValue == .active {
                 Section {
                     // TODO: add clear button
                     TextField("Title", text: trainingTitle, onEditingChanged: { isEditingTextField in
@@ -110,14 +110,13 @@ struct TrainingDetailView : View {
                     DatePicker(selection: trainingStart, in: ...min(self.training.safeEnd, Date())) {
                         Text("Start")
                     }
-
+                    
                     DatePicker(selection: trainingEnd, in: self.training.safeStart...Date()) {
                         Text("End")
                     }
                 }
 //            }
-            
-            
+
             Section {
                 ForEach(trainingExercises, id: \.objectID) { trainingExercise in
                     NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
