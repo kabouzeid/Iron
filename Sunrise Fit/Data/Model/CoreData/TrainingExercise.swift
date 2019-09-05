@@ -44,18 +44,16 @@ class TrainingExercise: NSManagedObject {
     }
 
     var numberOfCompletedRepetitions: Int? {
-        // TODO: do this with a predicate
         trainingSets?
-            .map { $0 as! TrainingSet }
+            .compactMap { $0 as? TrainingSet }
             .reduce(0, { (count, trainingSet) -> Int in
                 count + (trainingSet.isCompleted ? Int(trainingSet.repetitions) : 0)
             })
     }
 
     var totalCompletedWeight: Double? {
-        // TODO: do this with a predicate
         trainingSets?
-            .map { $0 as! TrainingSet }
+            .compactMap { $0 as? TrainingSet }
             .reduce(0, { (weight, trainingSet) -> Double in
                 weight + (trainingSet.isCompleted ? trainingSet.weight * Double(trainingSet.repetitions) : 0)
             })

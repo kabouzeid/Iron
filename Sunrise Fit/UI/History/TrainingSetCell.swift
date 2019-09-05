@@ -56,7 +56,7 @@ struct TrainingSetCell: View {
                 self.rpe(rpe: $0)
             }
             if trainingSet.isPersonalRecord ?? false {
-                // TODO: try replace with a trophy symbol
+                // TODO: replace with a trophy symbol
                 Image(systemName: "star.circle.fill")
                     .foregroundColor(colorMode == .disabled ? .secondary : .yellow)
             }

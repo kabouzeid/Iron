@@ -150,7 +150,6 @@ struct TrainingDetailView : View {
                 }
                 
                 Button(action: {
-                    // TODO: add exercise
                     self.showingExerciseSelectorSheet = true
                 }) {
                     HStack {

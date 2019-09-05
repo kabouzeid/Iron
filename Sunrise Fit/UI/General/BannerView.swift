@@ -38,11 +38,11 @@ struct BannerViewEntry : View, Identifiable {
     var body: some View {
         VStack {
             text
-                .font(.title) // TODO: wait for .title2
+                .font(.title)
             if detail != nil {
                 detail!
                     .font(.body)
-                    .foregroundColor(detailColor ?? Color(UIColor.tertiaryLabel)) // TODO: wait for .tertiaryLabel
+                    .foregroundColor(detailColor ?? Color(UIColor.tertiaryLabel))
             }
             title
                 .font(.subheadline)

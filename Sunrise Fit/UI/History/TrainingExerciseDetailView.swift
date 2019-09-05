@@ -99,7 +99,7 @@ struct TrainingExerciseDetailView : View {
     private var banner: some View {
         TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
             .listRowBackground(trainingExercise.muscleGroupColor)
-            .environment(\.colorScheme, .dark) // TODO: check whether accent color is actuall dark
+            .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
     }
     
     private func rpe(rpe: Double) -> some View {
@@ -117,8 +117,8 @@ struct TrainingExerciseDetailView : View {
         ForEach(indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
             TrainingSetCell(trainingSet: trainingSet, index: index, colorMode: self.shouldHighlightRow(for: trainingSet) ? .activated : .deactivated, textMode: self.shouldShowTitle(for: trainingSet) ? .weightAndReps : .placeholder)
                 .listRowBackground(self.selectedTrainingSet == trainingSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
-                .background(Color.fakeClear)
-                .onTapGesture { // TODO: currently tap on Spacer() is not recognized
+                .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
+                .onTapGesture {
                     guard self.editMode?.wrappedValue != .active else { return }
                     if self.selectedTrainingSet?.hasChanges ?? false {
                         self.managedObjectContext.safeSave()
@@ -226,10 +226,8 @@ struct TrainingExerciseDetailView : View {
                 self.managedObjectContext.safeSave()
                 
                 if self.isCurrentTraining {
-                    // TODO: customizable rest timer time
                     self.restTimerStore.restTimerDuration = self.restTimerDuration
-                    // start rest timer
-                    self.restTimerStore.restTimerStart = Date()
+                    self.restTimerStore.restTimerStart = Date() // start the rest timer
                 }
             })
             .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
