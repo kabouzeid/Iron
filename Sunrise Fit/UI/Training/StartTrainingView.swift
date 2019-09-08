@@ -30,17 +30,19 @@ struct StartTrainingView: View {
                     }
                 }.layoutPriority(1)
                 
-                Button("Start Workout") {
+                Button(action: {
                     precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
                     // create a new training
                     let training = Training(context: self.managedObjectContext)
                     training.isCurrentTraining = true
                     training.start = Date()
                     self.managedObjectContext.safeSave()
+                }) {
+                   Text("Start Workout")
+                        .padding()
+                        .foregroundColor(Color.white)
+                        .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 }
-                .padding()
-                .foregroundColor(Color.white)
-                .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 .padding()
             }
             .navigationBarTitle("Workout")
