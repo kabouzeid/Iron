@@ -17,8 +17,8 @@ struct StartTrainingView: View {
     private var plateImage: some View {
         Image("plate")
             .resizable()
-            .padding([.leading, .trailing])
             .aspectRatio(contentMode: ContentMode.fit)
+            .padding([.leading, .trailing])
     }
     
     var body: some View {
