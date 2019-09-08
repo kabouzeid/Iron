@@ -80,7 +80,6 @@
 		8AB972F7203583E40099507B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* CoreDataHelper.swift */; };
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
-		8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
@@ -195,7 +194,6 @@
 		8AB972F6203583E40099507B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AC4C9D123254A7E008E474A /* quotes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quotes; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -343,20 +341,11 @@
 			isa = PBXGroup;
 			children = (
 				8AD40835202FC7C200A73E05 /* Model */,
-				8AABF2A7201683E8009C047D /* Everkinetic */,
-				8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */,
+				8AABF2A820168462009C047D /* EverkineticDataProvider.swift */,
 				8AE07AAB2325453600FDB2A0 /* QuoteProvider.swift */,
+				8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		8AABF2A7201683E8009C047D /* Everkinetic */ = {
-			isa = PBXGroup;
-			children = (
-				8AC2B324200D2FC700DC68BE /* EverkineticParser.swift */,
-				8AABF2A820168462009C047D /* EverkineticDataProvider.swift */,
-			);
-			path = Everkinetic;
 			sourceTree = "<group>";
 		};
 		8AABF2AC20168900009C047D /* UIKitViews */ = {
@@ -660,7 +649,6 @@
 				8AF4C538230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift in Sources */,
 				8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Training.swift in Sources */,
-				8AC2B325200D2FC700DC68BE /* EverkineticParser.swift in Sources */,
 				8AABF2A920168462009C047D /* EverkineticDataProvider.swift in Sources */,
 				8A2F52A72316969B00194C54 /* TrainingSetCell.swift in Sources */,
 				8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */,
