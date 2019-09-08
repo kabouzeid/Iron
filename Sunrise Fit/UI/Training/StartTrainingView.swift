@@ -11,17 +11,19 @@ import SwiftUI
 struct StartTrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
+    @State private var quote = QuoteProvider.quotes.randomElement()
 
     private var plateImage: some View {
         Image("plate")
             .resizable()
-            .padding(48)
+            .padding([.leading, .trailing])
             .aspectRatio(contentMode: ContentMode.fit)
     }
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 32) {
                 Group {
                     if colorScheme == .dark {
                         plateImage.colorInvert()
@@ -29,6 +31,12 @@ struct StartTrainingView: View {
                         plateImage
                     }
                 }.layoutPriority(1)
+                
+                quote.map { // just to be safe, but should be never nil
+                    Text($0.displayText)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
+                }
                 
                 Button(action: {
                     precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
@@ -43,8 +51,8 @@ struct StartTrainingView: View {
                         .foregroundColor(Color.white)
                         .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 }
-                .padding()
             }
+            .padding([.leading, .trailing])
             .navigationBarTitle("Workout")
         }
     }
