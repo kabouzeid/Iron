@@ -65,10 +65,11 @@ extension BarLineChartViewBase {
         chartDataSet.drawValuesEnabled = false
         chartDataSet.lineWidth = 3
         chartDataSet.circleRadius = 4
-        chartDataSet.setColor(color)
+        chartDataSet.setColor(color.withAlphaComponent(0.5))
         chartDataSet.setCircleColor(color)
         chartDataSet.drawCircleHoleEnabled = true
         chartDataSet.circleHoleRadius = 1.5
+        chartDataSet.circleHoleColor = UIColor.systemBackground
         chartDataSet.mode = .linear
         chartDataSet.cubicIntensity = 0.05
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
