@@ -57,6 +57,16 @@ final class RestTimerStore: ObservableObject {
         }
     }
     
+    var recentRestTimes: [TimeInterval] {
+        get {
+            userDefaults.recentRestTimes
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.recentRestTimes = newValue
+        }
+    }
+    
     private func updateNotification() {
         NotificationManager.shared.updateRestTimerUpNotificationRequest(remainingTime: self.restTimerRemainingTime)
     }

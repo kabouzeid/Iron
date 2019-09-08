@@ -12,6 +12,7 @@ extension UserDefaults {
     enum RestTimerKeys: String {
         case restTimerStart
         case restTimerDuration
+        case recentRestTimes
     }
     
     var restTimerStart: Date? {
@@ -33,6 +34,16 @@ extension UserDefaults {
             guard let duration = self.object(forKey: RestTimerKeys.restTimerDuration.rawValue) as? TimeInterval else { return nil }
             guard duration > 0 else { return nil } // sanity check
             return duration
+        }
+    }
+    
+    var recentRestTimes: [TimeInterval] {
+        set {
+            assert(newValue.uniqed() == newValue)
+            self.set(Array(newValue.prefix(5)), forKey: RestTimerKeys.recentRestTimes.rawValue)
+        }
+        get {
+            self.object(forKey: RestTimerKeys.recentRestTimes.rawValue) as? [TimeInterval] ?? []
         }
     }
 }

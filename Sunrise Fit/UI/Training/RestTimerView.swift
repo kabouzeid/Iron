@@ -12,6 +12,8 @@ struct RestTimerView: View {
     @EnvironmentObject var restTimerStore: RestTimerStore
     
     @ObservedObject private var refresher = Refresher()
+    
+    @State private var showCustomTimerSelector = false
 
     // i.e. 8.1 and 8.9 should be displayed as 9
     private var roundedRemainingTime: TimeInterval? {
@@ -98,30 +100,45 @@ struct RestTimerView: View {
         }
     }
     
+    private func startTimer(duration: TimeInterval) {
+        restTimerStore.restTimerStart = Date()
+        restTimerStore.restTimerDuration = duration
+        
+        restTimerStore.recentRestTimes.removeAll { $0 == duration }
+        restTimerStore.recentRestTimes.insert(duration, at: 0)
+    }
+    
     private func defaultTimerButton(duration: TimeInterval) -> some View {
         CircleButton(action: {
-            self.restTimerStore.restTimerStart = Date()
-            self.restTimerStore.restTimerDuration = duration
+            self.startTimer(duration: duration)
         }) {
             Text(restTimerDurationFormatter.string(from: duration)!)
         }
     }
     
+    private static let defaultRestTimes: [TimeInterval] = [60, 90, 120, 150, 180]
+    
+    private var restTimes: [TimeInterval] {
+        let recentRestTimes = restTimerStore.recentRestTimes
+        if recentRestTimes.count >= Self.defaultRestTimes.count { return recentRestTimes }
+        return Array((recentRestTimes + Self.defaultRestTimes.filter { !recentRestTimes.contains($0) }).prefix(Self.defaultRestTimes.count))
+    }
+    
     private var defaultTimerButtons: some View {
-        let defaultTimerDurations: (TimeInterval, TimeInterval, TimeInterval, TimeInterval, TimeInterval) = (60, 90, 120, 150, 180) // TODO: should be the most recently used durations
+        let restTimes = self.restTimes
         return VStack {
             HStack {
-                defaultTimerButton(duration: defaultTimerDurations.0)
-                defaultTimerButton(duration: defaultTimerDurations.1)
+                defaultTimerButton(duration: restTimes[0])
+                defaultTimerButton(duration: restTimes[1])
             }
             HStack {
-                defaultTimerButton(duration: defaultTimerDurations.2)
-                defaultTimerButton(duration: defaultTimerDurations.3)
+                defaultTimerButton(duration: restTimes[2])
+                defaultTimerButton(duration: restTimes[3])
             }
             HStack {
-                defaultTimerButton(duration: defaultTimerDurations.4)
+                defaultTimerButton(duration: restTimes[4])
                 CircleButton(action: {
-                    // TODO: show custom timer selection view
+                    self.showCustomTimerSelector = true
                 }) {
                     Text("Other")
                 }
@@ -129,9 +146,28 @@ struct RestTimerView: View {
         }
     }
     
+    private var customTimerSelector: some View {
+        VStack {
+            List(restTimerCustomTimes, id: \.self) { time in
+                Button(restTimerDurationFormatter.string(from: time)!) {
+                    self.startTimer(duration: time)
+                    self.showCustomTimerSelector = false
+                }
+            }
+            Button("Back") {
+                self.showCustomTimerSelector = false
+            }
+        }
+    }
+
     private var stoppedTimerView: some View {
-        defaultTimerButtons
-        // TODO: add custom timers
+        Group {
+            if showCustomTimerSelector {
+                customTimerSelector
+            } else {
+                defaultTimerButtons
+            }
+        }
     }
     
     var body: some View {
