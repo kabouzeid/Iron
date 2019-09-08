@@ -129,3 +129,22 @@ extension TrainingSet {
         .sink { _ in self.objectWillChange.send() }
     }
 }
+
+extension TrainingSet: Encodable {
+    private enum CodingKeys: String, CodingKey {
+        case repetitions
+        case weight
+        case rpe
+        case tag
+        case comment
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(repetitions, forKey: .repetitions)
+        try container.encode(weight, forKey: .weight)
+        try container.encodeIfPresent(displayRpe, forKey: .rpe)
+        try container.encodeIfPresent(tag, forKey: .tag)
+        try container.encodeIfPresent(comment, forKey: .comment)
+    }
+}

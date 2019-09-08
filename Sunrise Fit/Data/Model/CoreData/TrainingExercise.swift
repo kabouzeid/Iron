@@ -90,3 +90,18 @@ extension TrainingExercise {
         .sink { _ in self.objectWillChange.send() }
     }
 }
+
+extension TrainingExercise: Encodable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case sets
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(exerciseId, forKey: .id)
+        try container.encodeIfPresent(exercise?.title, forKey: .name)
+        try container.encodeIfPresent(trainingSets?.array.compactMap { $0 as? TrainingSet }, forKey: .sets)
+    }
+}

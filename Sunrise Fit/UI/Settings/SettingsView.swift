@@ -8,8 +8,11 @@
 
 import SwiftUI
 import Combine
+import CoreData
+import UIKit
 
 struct SettingsView : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
 
     var body: some View {
@@ -40,6 +43,38 @@ struct SettingsView : View {
                             Text("\(i)").tag(i)
                         }
                     }
+                }
+                
+                Section {
+                    Button("Export workout data to JSON") {
+                        let request: NSFetchRequest<Training> = Training.fetchRequest()
+                        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@", NSNumber(booleanLiteral: true))
+                        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+                        guard let trainings = (try? self.managedObjectContext.fetch(request)) else { return }
+                        
+                        let encoder = JSONEncoder()
+                        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
+                        encoder.dateEncodingStrategy = .iso8601
+                        
+                        guard let data = try? encoder.encode(trainings) else { return }
+                        
+                        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return }
+                        let url = path.appendingPathComponent("workout_data.json")
+                        do {
+                            try data.write(to: url, options: .atomic)
+                        } catch {
+                            print(error)
+                            return
+                        }
+
+                        let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                        // TODO: replace this hack with a proper way to retreive the rootViewController
+                        guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+                        rootVC.present(ac, animated: true)
+                    }
+//                    Button("Import workout data from JSON") {
+//                        // TODO
+//                    }
                 }
             }
             .navigationBarTitle(Text("Settings"))

@@ -181,3 +181,22 @@ extension Training {
         .sink { _ in self.objectWillChange.send() }
     }
 }
+
+extension Training: Encodable {
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case comment
+        case start
+        case end
+        case exercises
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(title, forKey: .title)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(start, forKey: .start)
+        try container.encodeIfPresent(end, forKey: .end)
+        try container.encodeIfPresent(trainingExercises?.array.compactMap { $0 as? TrainingExercise }, forKey: .exercises)
+    }
+}
