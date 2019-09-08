@@ -81,6 +81,7 @@
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
+		8AC4C9D42325599A008E474A /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D32325599A008E474A /* EverkineticParser.swift */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
@@ -195,6 +196,7 @@
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC4C9D123254A7E008E474A /* quotes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quotes; sourceTree = "<group>"; };
+		8AC4C9D32325599A008E474A /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				8AABF2A820168462009C047D /* EverkineticDataProvider.swift */,
 				8AE07AAB2325453600FDB2A0 /* QuoteProvider.swift */,
 				8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */,
+				8AC4C9D32325599A008E474A /* EverkineticParser.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				8AB14BA822C500070025D835 /* TrainingExercise+SwiftUI.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */,
+				8AC4C9D42325599A008E474A /* EverkineticParser.swift in Sources */,
 				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
 				8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */,
 				8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */,
