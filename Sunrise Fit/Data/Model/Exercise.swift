@@ -11,7 +11,7 @@ import Foundation
 struct Exercise: Hashable {
     let id: Int
     let title: String
-    let description: String // primer
+    let description: String? // primer
     let type: String
     let primaryMuscle: [String] // primary
     let secondaryMuscle: [String] // secondary
@@ -126,4 +126,41 @@ extension Exercise {
     static var empty: Exercise = {
         Exercise(id: 0, title: "", description: "", type: "", primaryMuscle: [], secondaryMuscle: [], equipment: [], steps: [], tips: [], references: [], png: [])
     }()
+}
+
+extension Exercise: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+//        case name
+        case title
+        case primer
+        case type
+        case primary
+        case secondary
+        case equipment
+        case steps
+        case tips
+        case references
+//        case pdf
+        case png
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard let id = Int(try container.decode(String.self, forKey: .id)) else {
+            throw DecodingError.dataCorruptedError(forKey: CodingKeys.id, in: container, debugDescription: "id should be a string containing an int")
+        }
+        let title = try container.decode(String.self, forKey: .title)
+        let primer = try container.decodeIfPresent(String.self, forKey: .primer)
+        let type = try container.decode(String.self, forKey: .type)
+        let primary = try container.decode([String].self, forKey: .primary)
+        let secondary = try container.decode([String].self, forKey: .secondary)
+        let equipment = try container.decode([String].self, forKey: .equipment)
+        let steps = try container.decode([String].self, forKey: .steps)
+        let tips = try container.decode([String].self, forKey: .tips)
+        let references = try container.decode([String].self, forKey: .references)
+        let png = try container.decode([String].self, forKey: .png)
+        
+        self.init(id: id, title: title, description: primer, type: type, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, png: png)
+    }
 }

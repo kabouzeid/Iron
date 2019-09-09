@@ -18,8 +18,14 @@ enum EverkineticDataProvider {
     
     private static func loadExercises() -> [Exercise]? {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        guard let jsonString = try? String(contentsOf: jsonUrl) else { return nil }
-        return EverkineticParser.parse(jsonString: jsonString).sorted { $0.title < $1.title }
+        let decoder = JSONDecoder()
+        do {
+            return try decoder.decode([Exercise].self, from: Data(contentsOf: jsonUrl))
+        } catch {
+            print(error)
+            assertionFailure()
+            return nil
+        }
     }
 
     static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {

@@ -84,9 +84,9 @@ struct ExerciseDetailView : View {
                     }
                 }
                 
-                if !self.exercise.description.isEmpty {
+                if self.exercise.description != nil {
                     Section {
-                        Text(self.exercise.description)
+                        Text(self.exercise.description!)
                             .lineLimit(nil)
                     }
                 }

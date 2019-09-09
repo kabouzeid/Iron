@@ -21,27 +21,21 @@ class Sunrise_FitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testEverkineticParseSpeed() {
+    private func loadExercises() -> [Exercise] {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        let jsonString = try! String(contentsOf: jsonUrl)
-        self.measure {
-            _ = EverkineticParser.parse(jsonString: jsonString)
-        }
+        let data = try! Data(contentsOf: jsonUrl)
+        return try! JSONDecoder().decode([Exercise].self, from: data)
     }
     
     func testEverkineticGroupingSpeed() {
-        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        let jsonString = try! String(contentsOf: jsonUrl)
-        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        let exercises = loadExercises()
         self.measure {
             _ = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
         }
     }
     
     func testEverkineticGrouping() {
-        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        let jsonString = try! String(contentsOf: jsonUrl)
-        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        let exercises = loadExercises()
         let groups = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
         var totalCount = 0
         for group in groups {
@@ -55,9 +49,7 @@ class Sunrise_FitTests: XCTestCase {
     }
 
     func testEverkineticPNGsExist() {
-        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        let jsonString = try! String(contentsOf: jsonUrl)
-        let exercises = EverkineticParser.parse(jsonString: jsonString)
+        let exercises = loadExercises()
         for exercise in exercises {
             for png in exercise.png {
                 let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)

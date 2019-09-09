@@ -81,7 +81,6 @@
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
-		8AC4C9D42325599A008E474A /* EverkineticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D32325599A008E474A /* EverkineticParser.swift */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
@@ -96,7 +95,6 @@
 		8AE07AAC2325453600FDB2A0 /* QuoteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* QuoteProvider.swift */; };
 		8AE132D6231BED920061C600 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE132D5231BED920061C600 /* SearchField.swift */; };
 		8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */; };
-		8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */; };
 		8AF4C536230EEE0A003A84DC /* TrainingSetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C535230EEE0A003A84DC /* TrainingSetTag.swift */; };
 		8AF4C538230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C537230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift */; };
 		8AF4C53A230EFB5F003A84DC /* RPE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C539230EFB5F003A84DC /* RPE.swift */; };
@@ -196,7 +194,6 @@
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC4C9D123254A7E008E474A /* quotes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quotes; sourceTree = "<group>"; };
-		8AC4C9D32325599A008E474A /* EverkineticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverkineticParser.swift; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -224,7 +221,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AE5A81622C4E7FB0076C1A0 /* SwiftyJSON in Frameworks */,
 				8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */,
 				8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */,
 			);
@@ -346,7 +342,6 @@
 				8AABF2A820168462009C047D /* EverkineticDataProvider.swift */,
 				8AE07AAB2325453600FDB2A0 /* QuoteProvider.swift */,
 				8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */,
-				8AC4C9D32325599A008E474A /* EverkineticParser.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -498,7 +493,6 @@
 			);
 			name = "Sunrise Fit";
 			packageProductDependencies = (
-				8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */,
 				8A12D7A922C4FB38006B29AA /* Charts */,
 				8AE0707C22D1F76B0038B7E3 /* Lottie */,
 			);
@@ -557,7 +551,6 @@
 			);
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
-				8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */,
 				8AE0707B22D1F76B0038B7E3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
@@ -622,7 +615,6 @@
 				8AB14BA822C500070025D835 /* TrainingExercise+SwiftUI.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
 				8AA57E5F22C3EE2E00B9AC79 /* Training+SwiftUI.swift in Sources */,
-				8AC4C9D42325599A008E474A /* EverkineticParser.swift in Sources */,
 				8A6B1A6922BE8B210067DD41 /* TrainingDetailView.swift in Sources */,
 				8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */,
 				8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */,
@@ -965,14 +957,6 @@
 				minimumVersion = 3.1.1;
 			};
 		};
-		8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -985,11 +969,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8AE0707B22D1F76B0038B7E3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		8AE5A81522C4E7FB0076C1A0 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8AE5A81422C4E7FB0076C1A0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 

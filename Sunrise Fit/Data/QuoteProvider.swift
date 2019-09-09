@@ -7,12 +7,13 @@
 //
 
 import Foundation
-import SwiftyJSON
 
-struct Quote {
+struct Quote: Decodable {
     let text: String
     let person: String?
-    
+}
+
+extension Quote {
     var displayText: String {
         text.enquoted + (person.map { " – \($0)" } ?? "")
     }
@@ -23,15 +24,13 @@ enum QuoteProvider {
 
     private static func loadQuotes() -> [Quote]? {
         let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("quotes").appendingPathComponent("quotes.json")
-        guard let jsonString = try? String(contentsOf: jsonUrl) else { return nil }
-        return parse(jsonString: jsonString)
-    }
-    
-    private static func parse(jsonString: String) -> [Quote] {
-        JSON(parseJSON: jsonString).array?.compactMap { quoteJson -> Quote? in
-            guard let text = quoteJson["text"].string else { return nil }
-            let person = quoteJson["person"].string
-            return Quote(text: text, person: person)
-        } ?? []
+        guard let data = try? Data(contentsOf: jsonUrl) else { return nil }
+        do {
+            return try JSONDecoder().decode([Quote].self, from: data)
+        } catch {
+            print(error)
+            assertionFailure()
+            return nil
+        }
     }
 }
