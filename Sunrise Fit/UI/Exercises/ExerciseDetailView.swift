@@ -16,16 +16,34 @@ struct ExerciseDetailView : View {
     @State private var showingStatisticsSheet = false
     @State private var showingHistorySheet = false
     
-    private var exerciseImages: [UIImage] {
-        var images = [UIImage]()
-        for png in exercise.png {
-            let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
-            if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                // TODO: tinting is pretty expensive (16ms), create separate assets for dark and light?
-                images.append(image.withTintColorApplied(color: .label))
-            }
+    private func pdfToImage(url: URL, fit: CGSize) -> UIImage? {
+        guard let document = CGPDFDocument(url as CFURL) else { return nil }
+        guard let page = document.page(at: 1) else { return nil }
+        
+        let pageRect = page.getBoxRect(.mediaBox)
+        let scale = min(fit.width / pageRect.width, fit.height / pageRect.height)
+        
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: pageRect.width * scale, height: pageRect.height * scale))
+        let img = renderer.image { ctx in
+            // flip
+            ctx.cgContext.translateBy(x: 0, y: fit.height)
+            ctx.cgContext.scaleBy(x: 1, y: -1)
+            // aspect fit
+            ctx.cgContext.scaleBy(x: scale, y: scale)
+            // draw
+            ctx.cgContext.setFillColor(UIColor.red.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.green.cgColor)
+            ctx.cgContext.drawPDFPage(page)
         }
-        return images
+        
+        return img
+    }
+
+    private func exerciseImages(width: CGFloat, height: CGFloat) -> [UIImage] {
+        exercise.pdfPaths
+            .map { Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent($0) }
+            .compactMap { pdfToImage(url: $0, fit: CGSize(width: width, height: height)) }
+            .compactMap { $0.tinted(with: .label) }
     }
     
     private func imageHeight(geometry: GeometryProxy) -> CGFloat {
@@ -77,9 +95,9 @@ struct ExerciseDetailView : View {
     var body: some View {
         GeometryReader { geometry in
             List {
-                if !self.exercise.png.isEmpty {
+                if !self.exercise.pdfPaths.isEmpty {
                     Section {
-                        AnimatedImageView(uiImages: self.exerciseImages, duration: 2)
+                        AnimatedImageView(uiImages: self.exerciseImages(width: geometry.size.width, height: self.imageHeight(geometry: geometry)), duration: 2)
                             .frame(height: self.imageHeight(geometry: geometry))
                     }
                 }

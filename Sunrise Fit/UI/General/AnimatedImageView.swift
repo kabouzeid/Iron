@@ -47,8 +47,8 @@ struct ImageView_Previews : PreviewProvider {
     static var testImages: [UIImage] {
         guard let exercise = mockTrainingExercise.exercise else { return [] }
         var images = [UIImage]()
-        for png in exercise.png {
-            let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
+        for pdfPaths in exercise.pdfPaths {
+            let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(pdfPaths)
             if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
                 images.append(image)
             }

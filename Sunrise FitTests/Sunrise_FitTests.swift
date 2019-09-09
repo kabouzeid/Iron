@@ -48,11 +48,11 @@ class Sunrise_FitTests: XCTestCase {
         XCTAssert(totalCount == exercises.count)
     }
 
-    func testEverkineticPNGsExist() {
+    func testEverkineticPDFsExist() {
         let exercises = loadExercises()
         for exercise in exercises {
-            for png in exercise.png {
-                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(png)
+            for pdf in exercise.pdfPaths {
+                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(pdf)
                 XCTAssertNoThrow(try Data(contentsOf: url))
             }
         }

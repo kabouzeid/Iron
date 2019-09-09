@@ -19,7 +19,7 @@ struct Exercise: Hashable {
     let steps: [String]
     let tips: [String]
     let references: [String]
-    let png: [String]
+    let pdfPaths: [String]
 }
  
 extension Exercise {
@@ -124,7 +124,7 @@ extension Exercise {
 
 extension Exercise {
     static var empty: Exercise = {
-        Exercise(id: 0, title: "", description: "", type: "", primaryMuscle: [], secondaryMuscle: [], equipment: [], steps: [], tips: [], references: [], png: [])
+        Exercise(id: 0, title: "", description: "", type: "", primaryMuscle: [], secondaryMuscle: [], equipment: [], steps: [], tips: [], references: [], pdfPaths: [])
     }()
 }
 
@@ -141,8 +141,8 @@ extension Exercise: Decodable {
         case steps
         case tips
         case references
-//        case pdf
-        case png
+        case pdf
+//        case png
     }
     
     init(from decoder: Decoder) throws {
@@ -159,8 +159,8 @@ extension Exercise: Decodable {
         let steps = try container.decode([String].self, forKey: .steps)
         let tips = try container.decode([String].self, forKey: .tips)
         let references = try container.decode([String].self, forKey: .references)
-        let png = try container.decode([String].self, forKey: .png)
+        let pdf = try container.decode([String].self, forKey: .pdf)
         
-        self.init(id: id, title: title, description: primer, type: type, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, png: png)
+        self.init(id: id, title: title, description: primer, type: type, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
     }
 }
