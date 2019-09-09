@@ -13,17 +13,20 @@ struct StartTrainingView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @State private var quote = Quotes.quotes.randomElement()
+//    let quote: Quote? = Quotes.quotes[4] // for the preview
 
     private var plateImage: some View {
         Image("plate")
             .resizable()
             .aspectRatio(contentMode: ContentMode.fit)
-            .padding([.leading, .trailing])
+            .padding([.leading, .trailing], 40)
     }
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 32) {
+            VStack(spacing: 0) {
+                Spacer()
+                
                 Group {
                     if colorScheme == .dark {
                         plateImage.colorInvert()
@@ -32,11 +35,15 @@ struct StartTrainingView: View {
                     }
                 }.layoutPriority(1)
                 
+                Spacer()
+                
                 quote.map { // just to be safe, but should be never nil
                     Text($0.displayText)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.secondary)
                 }
+                
+                Spacer()
                 
                 Button(action: {
                     precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
@@ -51,6 +58,8 @@ struct StartTrainingView: View {
                         .foregroundColor(Color.white)
                         .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 }
+                
+                Spacer()
             }
             .padding([.leading, .trailing])
             .navigationBarTitle("Workout")
@@ -60,11 +69,29 @@ struct StartTrainingView: View {
 
 #if DEBUG
 struct StartTrainingView_Previews: PreviewProvider {
+    struct StartTrainingViewDemo: View {
+        var body: some View {
+            TabView {
+                StartTrainingView()
+            }
+        }
+    }
+
     static var previews: some View {
         Group {
-            StartTrainingView()
+            StartTrainingViewDemo()
+                .previewDevice(.init("iPhone SE"))
             
-            StartTrainingView()
+            StartTrainingViewDemo()
+                .previewDevice(.init("iPhone 8"))
+            
+            StartTrainingViewDemo()
+                .previewDevice(.init("iPhone Xs"))
+            
+            StartTrainingViewDemo()
+                .previewDevice(.init("iPhone Xs Max"))
+            
+            StartTrainingViewDemo()
                 .environment(\.colorScheme, .dark)
         }
         .environment(\.managedObjectContext, mockManagedObjectContext)
