@@ -23,7 +23,7 @@ class TrainingExercise: NSManagedObject {
     }
     
     var exercise: Exercise? {
-        EverkineticDataProvider.findExercise(id: Int(exerciseId))
+        Exercises.findExercise(id: Int(exerciseId))
     }
     
     var historyFetchRequest: NSFetchRequest<TrainingExercise> {

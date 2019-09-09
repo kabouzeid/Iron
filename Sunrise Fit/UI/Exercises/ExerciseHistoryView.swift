@@ -45,7 +45,7 @@ struct ExerciseHistoryView : View {
 #if DEBUG
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseHistoryView(exercise: EverkineticDataProvider.findExercise(id: 42)!)
+        ExerciseHistoryView(exercise: Exercises.findExercise(id: 42)!)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }

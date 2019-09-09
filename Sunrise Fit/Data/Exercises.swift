@@ -1,5 +1,5 @@
 //
-//  EverkineticDataProvider.swift
+//  Exercises.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 22.01.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum EverkineticDataProvider {
+enum Exercises {
     static let exercises = loadExercises() ?? []
     static let exercisesGrouped = splitIntoMuscleGroups(exercises: loadExercises() ?? [])
     

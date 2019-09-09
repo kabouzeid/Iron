@@ -28,7 +28,7 @@ struct ExerciseChartViewCell : View {
 #if DEBUG
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: 42)!, measurementType: .oneRM)
+        ExerciseChartViewCell(exercise: Exercises.findExercise(id: 42)!, measurementType: .oneRM)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)

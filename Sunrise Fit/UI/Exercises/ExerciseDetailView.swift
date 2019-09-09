@@ -164,7 +164,7 @@ struct ExerciseDetailView : View {
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ExerciseDetailView(exercise: EverkineticDataProvider.findExercise(id: 99)!)
+            ExerciseDetailView(exercise: Exercises.findExercise(id: 99)!)
                 .environmentObject(mockSettingsStoreMetric)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }

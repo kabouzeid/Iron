@@ -19,7 +19,7 @@ extension Quote {
     }
 }
 
-enum QuoteProvider {
+enum Quotes {
     static let quotes: [Quote] = loadQuotes() ?? []
 
     private static func loadQuotes() -> [Quote]? {

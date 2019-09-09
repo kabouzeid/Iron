@@ -12,7 +12,7 @@ struct StartTrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
-    @State private var quote = QuoteProvider.quotes.randomElement()
+    @State private var quote = Quotes.quotes.randomElement()
 
     private var plateImage: some View {
         Image("plate")

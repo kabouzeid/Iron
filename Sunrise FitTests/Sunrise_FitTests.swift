@@ -30,13 +30,13 @@ class Sunrise_FitTests: XCTestCase {
     func testEverkineticGroupingSpeed() {
         let exercises = loadExercises()
         self.measure {
-            _ = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
+            _ = Exercises.splitIntoMuscleGroups(exercises: exercises)
         }
     }
     
     func testEverkineticGrouping() {
         let exercises = loadExercises()
-        let groups = EverkineticDataProvider.splitIntoMuscleGroups(exercises: exercises)
+        let groups = Exercises.splitIntoMuscleGroups(exercises: exercises)
         var totalCount = 0
         for group in groups {
             totalCount += group.count

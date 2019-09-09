@@ -62,7 +62,7 @@ struct ExerciseMuscleGroupsView : View {
 #if DEBUG
 struct ExerciseCategoryView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseMuscleGroupsView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped)
+        ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }

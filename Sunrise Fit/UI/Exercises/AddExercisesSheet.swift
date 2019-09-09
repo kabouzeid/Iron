@@ -17,7 +17,7 @@ struct AddExercisesSheet: View {
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     private var exercises: [[Exercise]] {
-        EverkineticDataProvider.filterExercises(exercises: EverkineticDataProvider.exercisesGrouped, using: filter)
+        Exercises.filterExercises(exercises: Exercises.exercisesGrouped, using: filter)
     }
     
     private func resetAndDismiss() {

@@ -39,7 +39,7 @@ struct FeedView : View {
                 
                 Section {
                     ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
-                        ExerciseChartViewCell(exercise: EverkineticDataProvider.findExercise(id: chart.exerciseId)!, measurementType: chart.measurementType)
+                        ExerciseChartViewCell(exercise: Exercises.findExercise(id: chart.exerciseId)!, measurementType: chart.measurementType)
                     }
                     .onDelete { offsets in
                         self.pinnedChartsStore.pinnedCharts.remove(atOffsets: offsets)
@@ -65,7 +65,7 @@ struct FeedView : View {
                     Button("Cancel") {
                         self.showingPinnedChartSelector = false
                     }.padding()
-                    PinnedChartSelectorView(pinnedChartsStore: self.pinnedChartsStore, exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped) { pinnedChart in
+                    PinnedChartSelectorView(pinnedChartsStore: self.pinnedChartsStore, exerciseMuscleGroups: Exercises.exercisesGrouped) { pinnedChart in
                         self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
                         self.showingPinnedChartSelector = false
                     }

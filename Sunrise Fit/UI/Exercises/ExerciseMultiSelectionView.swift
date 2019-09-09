@@ -31,7 +31,7 @@ struct ExerciseMultiSelectionView: View {
 #if DEBUG
 struct ExerciseMultiSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseMultiSelectionView(exerciseMuscleGroups: EverkineticDataProvider.exercisesGrouped, selection: .constant(Set()))
+        ExerciseMultiSelectionView(exerciseMuscleGroups: Exercises.exercisesGrouped, selection: .constant(Set()))
     }
 }
 #endif
