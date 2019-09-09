@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ActivityChartViewCell : View {
     var body: some View {
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             Text("Activity")
                 .font(.body)
             Text("Workouts per week")

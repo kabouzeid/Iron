@@ -65,10 +65,21 @@ struct ActivityChartView: View {
             )
         }
     }
+    
+    private var hasData: Bool {
+        !activityData.flatMap { $0.entries }.isEmpty
+    }
 
     var body: some View {
         VStack {
-            BarStacksView(barStacks: activityData, spacing: 2)
+            if hasData {
+                BarStacksView(barStacks: activityData, spacing: 2)
+            } else {
+                Color.clear.overlay(
+                    Text("No data available")
+                        .foregroundColor(.secondary)
+                )
+            }
             BarLabelsView(barStacks: activityData, labelCount: activityData.count)
             LegendView(barStacks: activityData)
         }
