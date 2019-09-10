@@ -61,27 +61,32 @@ struct FeedView : View {
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: EditButton())
             .sheet(isPresented: $showingPinnedChartSelector) {
-                VStack(alignment: .leading) {
-                    Button("Cancel") {
-                        self.showingPinnedChartSelector = false
-                    }.padding()
-                    PinnedChartSelectorView(pinnedChartsStore: self.pinnedChartsStore, exerciseMuscleGroups: Exercises.exercisesGrouped) { pinnedChart in
-                        self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
-                        self.showingPinnedChartSelector = false
-                    }
+                PinnedChartSelectorSheet(pinnedChartsStore: self.pinnedChartsStore, exerciseMuscleGroups: Exercises.exercisesGrouped) { pinnedChart in
+                    self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
                 }
             }
         }
     }
 }
 
-private struct PinnedChartSelectorView: View {
+private struct PinnedChartSelectorSheet: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var pinnedChartsStore: PinnedChartsStore
     
     var exerciseMuscleGroups: [[Exercise]]
     var onSelection: (PinnedChart) -> Void
     
     @State private var selectedExercise: Exercise? = nil
+    @State private var filter = ""
+    
+    private var exercises: [[Exercise]] {
+        Exercises.filterExercises(exercises: Exercises.exercisesGrouped, using: filter)
+    }
+    
+    private func resetAndDismiss() {
+        self.presentationMode.wrappedValue.dismiss()
+        self.filter = ""
+    }
     
     private func actionButtons(exercise: Exercise) -> [ActionSheet.Button] {
         TrainingExerciseChartDataGenerator.MeasurementType.allCases.compactMap { measurementType in
@@ -89,21 +94,25 @@ private struct PinnedChartSelectorView: View {
             if self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                 return nil
             } else {
-                return .default(Text(measurementType.title)) { self.onSelection(pinnedChart) }
+                return .default(Text(measurementType.title)) {
+                    self.onSelection(pinnedChart)
+                    self.resetAndDismiss()
+                }
             }
         } + [.cancel()]
     }
     
     var body: some View {
-        List {
-            ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
-                Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
-                    ForEach(exercises, id: \.self) { exercise in
-                        Button(exercise.title) {
-                            self.selectedExercise = exercise
-                        }
-                    }
+        VStack(spacing: 0) {
+            VStack(alignment: .leading) {
+                Button("Cancel") {
+                    self.resetAndDismiss()
                 }
+                TextField("Search", text: $filter)
+                    .textFieldStyle(SearchTextFieldStyle(text: $filter))
+            }.padding()
+            ExerciseSingleSelectionView(exerciseMuscleGroups: exercises) { exercise in
+                self.selectedExercise = exercise
             }
         }
         .actionSheet(item: $selectedExercise) { exercise in

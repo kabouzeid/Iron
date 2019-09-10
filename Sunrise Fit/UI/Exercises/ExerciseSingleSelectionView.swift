@@ -13,14 +13,12 @@ struct ExerciseSingleSelectionView: View {
     var onSelection: (Exercise) -> Void
     
     var body: some View {
-        VStack(alignment: .leading) {
-            List {
-                ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
-                    Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
-                        ForEach(exercises, id: \.self) { exercise in
-                            Button(exercise.title) {
-                                self.onSelection(exercise)
-                            }
+        List {
+            ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
+                Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
+                    ForEach(exercises, id: \.self) { exercise in
+                        Button(exercise.title) {
+                            self.onSelection(exercise)
                         }
                     }
                 }

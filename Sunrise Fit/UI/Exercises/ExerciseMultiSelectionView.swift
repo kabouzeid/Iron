@@ -13,18 +13,16 @@ struct ExerciseMultiSelectionView: View {
     @Binding var selection: Set<Exercise>
     
     var body: some View {
-        VStack {
-            List(selection: $selection) {
-                ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
-                    Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
-                        ForEach(exercises, id: \.self) { exercise in
-                            Text(exercise.title)
-                        }
+        List(selection: $selection) {
+            ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
+                Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
+                    ForEach(exercises, id: \.self) { exercise in
+                        Text(exercise.title)
                     }
                 }
             }
-            .environment(\.editMode, .constant(.active))
         }
+        .environment(\.editMode, .constant(.active))
     }
 }
 
