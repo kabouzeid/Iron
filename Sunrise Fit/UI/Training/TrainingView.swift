@@ -10,13 +10,19 @@ import SwiftUI
 
 struct TrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-
+    @EnvironmentObject var restTimerStore: RestTimerStore
+    
     @ObservedObject var training: Training
     
     @State private var showingCancelSheet = false
     @State private var showingExerciseSelectorSheet = false
     @State private var showingTrainingsLogSheet = false
     @State private var showingFinishWorkoutSheet = false
+    
+    private func cancelRestTimer() {
+        self.restTimerStore.restTimerStart = nil
+        self.restTimerStore.restTimerDuration = nil
+    }
     
     private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
         var numberOfSets = 3
@@ -160,6 +166,7 @@ struct TrainingView: View {
                     Button("Finish") {
                         self.managedObjectContext.safeSave() // just in case the precondition below fires
                         
+                        // save the training
                         self.training.deleteAndRemoveUncompletedSets()
                         self.training.isCurrentTraining = false
                         self.training.start = self.training.safeStart // should already be set, but just to be safe
@@ -168,6 +175,9 @@ struct TrainingView: View {
                         precondition(self.training.start! <= self.training.end!)
                         self.managedObjectContext.safeSave()
                         
+                        self.cancelRestTimer()
+
+                        // haptic feedback
                         let feedbackGenerator = UINotificationFeedbackGenerator()
                         feedbackGenerator.prepare()
                         feedbackGenerator.notificationOccurred(.success)
@@ -187,6 +197,7 @@ struct TrainingView: View {
                 // the training is empty, do not need confirm to cancel
                 self.managedObjectContext.delete(self.training)
                 self.managedObjectContext.safeSave()
+                self.cancelRestTimer()
             } else {
                 self.showingCancelSheet = true
             }
@@ -285,6 +296,7 @@ struct TrainingView: View {
                 .destructive(Text("Delete Workout"), action: {
                     self.managedObjectContext.delete(self.training)
                     self.managedObjectContext.safeSave()
+                    self.cancelRestTimer()
                 }),
                 .cancel()
             ])
