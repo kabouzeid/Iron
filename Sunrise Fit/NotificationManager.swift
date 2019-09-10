@@ -52,7 +52,7 @@ class NotificationManager: NSObject {
         }
     }
     
-    func updateRestTimerUpNotificationRequest(remainingTime: TimeInterval?) {
+    func updateRestTimerUpNotificationRequest(remainingTime: TimeInterval?, totalTime: TimeInterval? = nil) {
         guard let remainingTime = remainingTime, remainingTime > 0 else {
             removePendingNotificationRequests(withIdentifiers: [.restTimerUp])
             return
@@ -60,6 +60,9 @@ class NotificationManager: NSObject {
         
         let content = UNMutableNotificationContent()
         content.title = "You've rested enough!"
+        if let totalTime = totalTime, let totalTimeString = restTimerDurationFormatter.string(from: totalTime) {
+            content.title += " (\(totalTimeString))"
+        }
         content.body = "Back to work 💪"
         content.sound = UNNotificationSound.default
         

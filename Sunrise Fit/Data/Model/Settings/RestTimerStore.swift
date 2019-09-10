@@ -68,7 +68,7 @@ final class RestTimerStore: ObservableObject {
     }
     
     private func updateNotification() {
-        NotificationManager.shared.updateRestTimerUpNotificationRequest(remainingTime: self.restTimerRemainingTime)
+        NotificationManager.shared.updateRestTimerUpNotificationRequest(remainingTime: self.restTimerRemainingTime, totalTime: self.restTimerDuration)
     }
 }
 
