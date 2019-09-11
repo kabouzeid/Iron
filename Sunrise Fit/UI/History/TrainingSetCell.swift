@@ -77,6 +77,7 @@ struct TrainingSetCell: View {
     }
 }
 
+#if DEBUG
 struct TrainingSetCell_Previews: PreviewProvider {
     static var previews: some View {
         TrainingSetCell(trainingSet: mockTrainingSet, index: 1)
@@ -84,3 +85,4 @@ struct TrainingSetCell_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
+#endif
