@@ -9,57 +9,64 @@
 import SwiftUI
 
 struct ContentView : View {
-    @FetchRequest(fetchRequest: Training.currentTrainingFetchRequest) var currentTrainings
-
-    var currentTraining: Training? {
-        assert(currentTrainings.count <= 1)
-        return currentTrainings.first
-    }
-
-    private func trainingView(training: Training?) -> some View {
-        Group { // is Group the appropiate choice here? (want to avoid AnyView)
-            if training != nil {
-                TrainingView(training: training!)
-            } else {
-                StartTrainingView()
-            }
-        }
-    }
-    
     var body: some View {
-        TabView {
+//        TabView {
+//            FeedView()
+//                .tabItem {
+//                    Image("today_apps")
+//                    Text("Feed")
+//                }
+//                .tag(0)
+//            HistoryView()
+//                .tabItem {
+//                    Image("clock")
+//                    Text("History")
+//                }
+//                .tag(1)
+//            trainingView(training: currentTraining)
+//                .tabItem {
+//                    Image("training")
+//                    Text("Workout")
+//                }
+//                .tag(2)
+//            ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
+//                .tabItem {
+//                    Image("list")
+//                    Text("Exercises")
+//                }
+//                .tag(3)
+//            SettingsView()
+//                .tabItem {
+//                    Image("settings")
+//                    Text("Settings")
+//                }
+//                .tag(4)
+//        }
+        // TODO: replace with native SwiftUI TabView above
+        // -----------------------------------------------
+        UITabView(viewControllers: [
             FeedView()
-                .tabItem {
-                    Image("today_apps")
-                    Text("Feed")
-                }
-                .tag(0)
+                .hostingController()
+                .tabItem(title: "Feed", image: UIImage(named: "today_apps"), tag: 0),
+            
             HistoryView()
-                .tabItem {
-                    Image("clock")
-                    Text("History")
-                }
-                .tag(1)
-            trainingView(training: currentTraining)
-                .tabItem {
-                    Image("training")
-                    Text("Workout")
-                }
-                .tag(2)
+                .hostingController()
+                .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
+            
+            TrainingTab()
+                .hostingController()
+                .tabItem(title: "Workout", image: UIImage(named: "training"), tag: 2),
+            
             ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
-                .tabItem {
-                    Image("list")
-                    Text("Exercises")
-                }
-                .tag(3)
+                .hostingController()
+                .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
+            
             SettingsView()
-                .tabItem {
-                    Image("settings")
-                    Text("Settings")
-                }
-                .tag(4)
-        }
-        .edgesIgnoringSafeArea([.top])
+                .hostingController()
+                .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
+        ])
+        // -----------------------------------------------
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC3023294EAD00081F4B /* UITabView.swift */; };
+		8A0ADC33232964E700081F4B /* TrainingTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC32232964E700081F4B /* TrainingTab.swift */; };
 		8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A12D7A922C4FB38006B29AA /* Charts */; };
 		8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */; };
 		8A1D989822C7C6AC0071225D /* TrainingSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */; };
@@ -117,6 +119,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A0ADC3023294EAD00081F4B /* UITabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabView.swift; sourceTree = "<group>"; };
+		8A0ADC32232964E700081F4B /* TrainingTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTab.swift; sourceTree = "<group>"; };
 		8A16BBD822E337A0002150F0 /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		8A1916B8214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingExerciseChartDataGenerator.swift; sourceTree = "<group>"; };
 		8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetEditor.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		8A1D989422C7C6690071225D /* Training */ = {
 			isa = PBXGroup;
 			children = (
+				8A0ADC32232964E700081F4B /* TrainingTab.swift */,
 				8A63B3762329463A001BD7B5 /* StartTrainingView.swift */,
 				8A63B3752329463A001BD7B5 /* TrainingView.swift */,
 				8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */,
@@ -282,6 +287,7 @@
 				8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */,
 				8ACBE80C231A69940027D3A8 /* ValueHolder.swift */,
 				8AE132D5231BED920061C600 /* SearchField.swift */,
+				8A0ADC3023294EAD00081F4B /* UITabView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 				8AB14BA622C4FD250025D835 /* TrainingExerciseDetailBannerView.swift in Sources */,
 				8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */,
 				8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */,
+				8A0ADC33232964E700081F4B /* TrainingTab.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
@@ -623,6 +630,7 @@
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,
 				8AE132D6231BED920061C600 /* SearchField.swift in Sources */,
+				8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
 				8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */,
 				8A3815502301B865008ACDAD /* TrainingsLog.swift in Sources */,
