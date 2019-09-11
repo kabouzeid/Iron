@@ -10,34 +10,11 @@ import CoreData
 import Combine
 
 class TrainingSet: NSManagedObject {
-    func displayTitle(unit: WeightUnit) -> String {
-        let numberFormatter = unit.numberFormatter
-        numberFormatter.minimumFractionDigits = unit.defaultFractionDigits
-        let weightInUnit = WeightUnit.convert(weight: weight, from: .metric, to: unit)
-        return "\(numberFormatter.string(from: weightInUnit as NSNumber) ?? String(format: "%\(unit.maximumFractionDigits).f")) \(unit.abbrev) × \(repetitions)"
-    }
+    static var MAX_REPETITIONS: Int16 = 9999
+    static var MAX_WEIGHT: Double = 99999
     
-    // use this instead of tag
-    var displayTag: TrainingSetTag? {
-        get {
-            TrainingSetTag(rawValue: tag ?? "")
-        }
-        set {
-            tag = newValue?.rawValue
-        }
-    }
-    
-    // use this instead of rpe
-    var displayRpe: Double? {
-        get {
-            RPE.allowedValues.contains(rpe) ? rpe : nil
-        }
-        set {
-            let newValue = newValue ?? 0
-            rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
-        }
-    }
-    
+    // MARK: Derived properties
+
     var isPersonalRecord: Bool? {
         guard let start = trainingExercise?.training?.start else { return nil }
         guard let exerciseId = trainingExercise?.exerciseId else { return nil }
@@ -74,9 +51,37 @@ class TrainingSet: NSManagedObject {
     }
     
     private var cancellable: AnyCancellable?
+}
 
-    static var MAX_REPETITIONS: Int16 = 9999
-    static var MAX_WEIGHT: Double = 99999
+// MARK: Display
+extension TrainingSet {
+    func displayTitle(unit: WeightUnit) -> String {
+        let numberFormatter = unit.numberFormatter
+        numberFormatter.minimumFractionDigits = unit.defaultFractionDigits
+        let weightInUnit = WeightUnit.convert(weight: weight, from: .metric, to: unit)
+        return "\(numberFormatter.string(from: weightInUnit as NSNumber) ?? String(format: "%\(unit.maximumFractionDigits).f")) \(unit.abbrev) × \(repetitions)"
+    }
+    
+    // use this instead of tag
+    var displayTag: TrainingSetTag? {
+        get {
+            TrainingSetTag(rawValue: tag ?? "")
+        }
+        set {
+            tag = newValue?.rawValue
+        }
+    }
+    
+    // use this instead of rpe
+    var displayRpe: Double? {
+        get {
+            RPE.allowedValues.contains(rpe) ? rpe : nil
+        }
+        set {
+            let newValue = newValue ?? 0
+            rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
+        }
+    }
 }
 
 extension TrainingSet {
@@ -101,6 +106,7 @@ extension TrainingSet {
     }
 }
 
+// MARK: Observable
 extension TrainingSet {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
@@ -130,6 +136,7 @@ extension TrainingSet {
     }
 }
 
+// MARK: Encodable
 extension TrainingSet: Encodable {
     private enum CodingKeys: String, CodingKey {
         case repetitions

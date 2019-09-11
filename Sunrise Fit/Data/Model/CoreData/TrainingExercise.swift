@@ -10,28 +10,6 @@ import CoreData
 import Combine
 
 class TrainingExercise: NSManagedObject {
-    var numberOfCompletedSets: Int? {
-        trainingSets?
-            .compactMap { $0 as? TrainingSet }
-            .filter { $0.isCompleted }
-            .count
-    }
-    
-    var isCompleted: Bool? {
-        guard let trainingSets = trainingSets else { return nil }
-        return !trainingSets
-            .compactMap { $0 as? TrainingSet }
-            .contains { !$0.isCompleted }
-    }
-    
-    var exercise: Exercise? {
-        Exercises.findExercise(id: Int(exerciseId))
-    }
-    
-    var historyFetchRequest: NSFetchRequest<TrainingExercise> {
-        TrainingExercise.historyFetchRequest(of: Int(exerciseId), until: training?.start)
-    }
-
     static func historyFetchRequest(of exerciseId: Int, until: Date?) -> NSFetchRequest<TrainingExercise> {
         let request: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
         let basePredicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training.isCurrentTraining)) != %@ AND \(#keyPath(TrainingExercise.exerciseId)) == %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId))
@@ -43,6 +21,30 @@ class TrainingExercise: NSManagedObject {
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \TrainingExercise.training?.start, ascending: false)]
         return request
+    }
+    
+    var historyFetchRequest: NSFetchRequest<TrainingExercise> {
+        TrainingExercise.historyFetchRequest(of: Int(exerciseId), until: training?.start)
+    }
+    
+    // MARK: Derived properties
+    
+    var exercise: Exercise? {
+        Exercises.findExercise(id: Int(exerciseId))
+    }
+    
+    var isCompleted: Bool? {
+        guard let trainingSets = trainingSets else { return nil }
+        return !trainingSets
+            .compactMap { $0 as? TrainingSet }
+            .contains { !$0.isCompleted }
+    }
+
+    var numberOfCompletedSets: Int? {
+        trainingSets?
+            .compactMap { $0 as? TrainingSet }
+            .filter { $0.isCompleted }
+            .count
     }
 
     var numberOfCompletedRepetitions: Int? {
@@ -64,6 +66,7 @@ class TrainingExercise: NSManagedObject {
     private var cancellable: AnyCancellable?
 }
 
+// MARK: Observable
 extension TrainingExercise {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
@@ -93,6 +96,7 @@ extension TrainingExercise {
     }
 }
 
+// MARK: Encodable
 extension TrainingExercise: Encodable {
     private enum CodingKeys: String, CodingKey {
         case id
