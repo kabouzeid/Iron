@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Sunrise_Fit
+@testable import Iron
 
 class Sunrise_FitTests: XCTestCase {
     

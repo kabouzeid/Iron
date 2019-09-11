@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Sunrise_Fit
+@testable import Iron
 
 class Sunrise_FitCoreDataTests: XCTestCase {
     var persistenContainer: NSPersistentContainer!
