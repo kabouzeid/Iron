@@ -17,6 +17,18 @@ class NotificationManager: NSObject {
         self.notificationCenter = notificationCenter
         super.init()
         self.notificationCenter.delegate = self
+        
+        let restTimerAdd30Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd30.rawValue, title: "+30s")
+        let restTimerAdd60Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd60.rawValue, title: "+60s")
+        // Define the notification type
+        let restTimerUpCategory =
+            UNNotificationCategory(identifier: NotificationCategoryIdentifier.restTimerUp.rawValue,
+                                   actions: [restTimerAdd30Action, restTimerAdd60Action],
+                                   intentIdentifiers: [],
+                                   hiddenPreviewsBodyPlaceholder: "",
+                                   options: [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle, .allowAnnouncement])
+        // Register the notification type.
+        notificationCenter.setNotificationCategories([restTimerUpCategory])
     }
     
     func requestAuthorization() {
@@ -65,7 +77,8 @@ class NotificationManager: NSObject {
         }
         content.body = "Back to work 💪"
         content.sound = UNNotificationSound.default
-        
+        content.categoryIdentifier = NotificationCategoryIdentifier.restTimerUp.rawValue
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
         
         let request = UNNotificationRequest(identifier: NotificationIdentifier.restTimerUp.rawValue, content: content, trigger: trigger)
@@ -81,12 +94,36 @@ class NotificationManager: NSObject {
         case unfinishedTraining
         case restTimerUp
     }
+    
+    enum NotificationCategoryIdentifier: String {
+        case restTimerUp
+    }
+    
+    enum NotificationActionIdentifier: String {
+        case restTimerAdd30
+        case restTimerAdd60
+    }
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if notification.request.identifier == NotificationIdentifier.restTimerUp.rawValue {
             completionHandler([.alert, .sound])
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        defer { completionHandler() }
+        
+        guard let duration = restTimerStore.restTimerDuration else { return}
+        
+        switch response.actionIdentifier {
+        case NotificationActionIdentifier.restTimerAdd30.rawValue:
+            restTimerStore.restTimerDuration = duration + 30
+        case NotificationActionIdentifier.restTimerAdd60.rawValue:
+            restTimerStore.restTimerDuration = duration + 60
+        default:
+            break
         }
     }
 }
