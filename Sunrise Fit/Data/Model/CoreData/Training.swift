@@ -32,26 +32,13 @@ class Training: NSManagedObject {
         return formatter
     }()
     
-    var safeStart: Date {
-        start ?? min(end ?? Date(), Date())
-    }
-    
-    var safeEnd: Date {
-        end ?? max(start ?? Date(), Date())
-    }
-    
-    var numberOfCompletedExercises: Int? {
-        let fetchRequest: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training)) == %@ AND NOT (ANY trainingSets.isCompleted == %@)", self, NSNumber(booleanLiteral: false)) // ALL is not supported
-        if let count = ((try? managedObjectContext?.count(for: fetchRequest)) as Int??) {
-            return count
-        }
-        return nil
-    }
+    // MARK: Derived properties
     
     var isCompleted: Bool? {
-        guard let completedCount = numberOfCompletedExercises, let totalCount = trainingExercises?.count else { return nil }
-        return completedCount == totalCount
+        guard let trainingExercises = trainingExercises else { return nil }
+        return !trainingExercises
+            .compactMap { $0 as? TrainingExercise }
+            .contains { !($0.isCompleted ?? false) }
     }
     
     var displayTitle: String {
@@ -84,10 +71,11 @@ class Training: NSManagedObject {
         return muscleGroups.sortedByFrequency().uniqed().reversed()
     }
     
-    var duration: TimeInterval {
-        safeEnd.timeIntervalSince(safeStart)
+    var duration: TimeInterval? {
+        guard let start = start, let end = end else { return nil }
+        return end.timeIntervalSince(start)
     }
-    
+
     var numberOfCompletedSets: Int? {
         trainingExercises?
             .map { $0 as! TrainingExercise }
@@ -103,11 +91,53 @@ class Training: NSManagedObject {
                 weight + (trainingExercise.totalCompletedWeight ?? 0)
             })
     }
+
+    private var cancellable: AnyCancellable?
+}
+
+// MARK: Safe accessors
+extension Training {
+    var safeStart: Date {
+        start ?? min(end ?? Date(), Date())
+    }
     
-    func deleteAndRemoveUncompletedSets() {
+    var safeEnd: Date {
+        end ?? max(start ?? Date(), Date())
+    }
+    
+    var safeDuration: TimeInterval {
+        safeEnd.timeIntervalSince(safeStart)
+    }
+}
+
+// MARK: Prepare for finish
+extension Training {
+    func prepareForFinish() {
+        deleteExercisesWhereAllSetsAreUncompleted()
+        deleteUncompletedSets()
+        // should already be set, but just to be safe
+        start = safeStart
+        end = safeEnd
+    }
+    
+    // exercises with no sets won't be deleted
+    func deleteExercisesWhereAllSetsAreUncompleted() {
         trainingExercises?
             .compactMap { $0 as? TrainingExercise }
-            .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+            .filter {
+                guard let sets = $0.trainingSets?.compactMap({ $0 as? TrainingSet }) else { return false }
+                return !sets.isEmpty && !sets.contains { $0.isCompleted }
+        }
+        .forEach { trainingExercise in
+            managedObjectContext?.delete(trainingExercise)
+            trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
+        }
+    }
+    
+    func deleteUncompletedSets() {
+        trainingExercises?
+            .compactMap { $0 as? TrainingExercise }
+            .compactMap { $0.trainingSets?.compactMap { $0 as? TrainingSet } }
             .flatMap { $0 }
             .filter { !$0.isCompleted }
             .forEach { trainingSet in
@@ -115,10 +145,49 @@ class Training: NSManagedObject {
                 trainingSet.trainingExercise?.removeFromTrainingSets(trainingSet)
         }
     }
-    
-    private var cancellable: AnyCancellable?
 }
 
+// MARK: Trainings Log
+extension Training {
+    func logText(weightUnit: WeightUnit) -> String? {
+        guard let start = start else { return nil }
+        guard let duration = duration else { return nil }
+        guard let weight = totalCompletedWeight else { return nil }
+        let dateFormatter = DateFormatter() // we don't want relative formatting here
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        let dateString = "\(dateFormatter.string(from: start))"
+        let durationString = "Duration: \(Self.durationFormatter.string(from: duration)!)"
+        let weightString = "Total weight: \(weightUnit.format(weight: weight))"
+        
+        guard let exercises = trainingExercisesWhereNotAllSetsAreUncompleted else { return nil }
+        let exercisesDescription = exercises
+            .map { trainingExercise -> String in
+                let exerciseTitle = (trainingExercise.exercise?.title ?? "Unknown exercise")
+                guard let trainingSets = trainingExercise.trainingSets else { return exerciseTitle }
+                let setsDescription = trainingSets
+                    .compactMap { $0 as? TrainingSet }
+                    .filter { $0.isCompleted }
+                    .map { $0.displayTitle(unit: weightUnit) }
+                    .joined(separator: "\n")
+                guard !setsDescription.isEmpty else { return exerciseTitle }
+                return exerciseTitle + "\n" + setsDescription
+        }
+        .joined(separator: "\n\n")
+        return [dateString, durationString, weightString + "\n", exercisesDescription].joined(separator: "\n")
+    }
+    
+    var trainingExercisesWhereNotAllSetsAreUncompleted: [TrainingExercise]? {
+        trainingExercises?
+            .compactMap { $0 as? TrainingExercise }
+            .filter {
+                guard let sets = $0.trainingSets?.compactMap({ $0 as? TrainingSet }) else { return false }
+                return sets.isEmpty || sets.contains { $0.isCompleted }
+        }
+    }
+}
+
+// MARK: Validation
 extension Training {
     override func validateForUpdate() throws {
         try super.validateForUpdate()
@@ -131,20 +200,24 @@ extension Training {
     }
     
     func validateConsistency() throws {
-        if start == nil && end != nil {
-            throw error(code: 1, message: "start is nil but end is set")
+        if start == nil {
+            throw error(code: 1, message: "start not set")
+        }
+        
+        if !isCurrentTraining, end == nil {
+            throw error(code: 2, message: "end not set on finished training")
         }
         
         if let start = start, let end = end, start > end {
-            throw error(code: 2, message: "start is greater than end")
+            throw error(code: 3, message: "start is greater than end")
         }
         
         if isCurrentTraining, let count = try? managedObjectContext?.count(for: Self.currentTrainingFetchRequest), count > 1 {
-            throw error(code: 3, message: "more than one current training")
+            throw error(code: 4, message: "more than one current training")
         }
-        
+
         if !isCurrentTraining, let isCompleted = isCompleted, !isCompleted {
-            throw error(code: 4, message: "training that is not current training is uncompleted")
+            throw error(code: 5, message: "training that is not current training is uncompleted")
         }
     }
     
@@ -153,6 +226,7 @@ extension Training {
     }
 }
 
+// MARK: Observable
 extension Training {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
@@ -182,6 +256,7 @@ extension Training {
     }
 }
 
+// MARK: Encodable
 extension Training: Encodable {
     private enum CodingKeys: String, CodingKey {
         case title

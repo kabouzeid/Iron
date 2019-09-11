@@ -66,16 +66,6 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         }
     }
     
-    func testTrainingNumberOfCompletedExercises() {
-        for training in testTrainings {
-            let count = training.trainingExercises?.filter({ (exercise) -> Bool in
-                let exercise = exercise as! TrainingExercise
-                return exercise.numberOfCompletedSets == exercise.trainingSets?.count
-            }).count
-            XCTAssertTrue(training.numberOfCompletedExercises == count)
-        }
-    }
-    
     func testRelationshipDeleteRules() {
         for training in testTrainings {
             let trainingExercises = training.trainingExercises!.array.map { $0 as! TrainingExercise }
@@ -103,22 +93,6 @@ class Sunrise_FitCoreDataTests: XCTestCase {
             XCTAssertNil(training.managedObjectContext)
             XCTAssertTrue(trainingExercises.reduce(true, { $0 && $1.managedObjectContext == nil }))
         }
-    }
-    
-    func testSaveTrainingWithNoSets() {
-        let trainingSetEntity = NSEntityDescription.entity(forEntityName: "TrainingSet", in: persistenContainer.viewContext)!
-        let trainingSet1 = TrainingSet(entity: trainingSetEntity, insertInto: persistenContainer.viewContext)
-        
-        let trainingExerciseEntity = NSEntityDescription.entity(forEntityName: "TrainingExercise", in: persistenContainer.viewContext)!
-        let trainingExercise1 = TrainingExercise(entity: trainingExerciseEntity, insertInto: persistenContainer.viewContext)
-        trainingSet1.trainingExercise = trainingExercise1
-        persistenContainer.viewContext.delete(trainingSet1)
-
-        let trainingEntity = NSEntityDescription.entity(forEntityName: "Training", in: persistenContainer.viewContext)!
-        let training = Training(entity: trainingEntity, insertInto: persistenContainer.viewContext)
-        trainingExercise1.training = training
-        
-        XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
     
     func uncompletedSetsSwift(training: Training) -> [TrainingSet]? {
@@ -158,7 +132,7 @@ class Sunrise_FitCoreDataTests: XCTestCase {
     }
     
     func testDeleteUncompletedSets() {
-        testCurrentTraining.deleteAndRemoveUncompletedSets()
+        testCurrentTraining.deleteUncompletedSets()
         XCTAssertTrue(
             testCurrentTraining.trainingExercises?
                 .compactMap { $0 as? TrainingExercise }
@@ -182,7 +156,11 @@ class Sunrise_FitCoreDataTests: XCTestCase {
                 
                 training.start = start
                 training.end = nil
-                XCTAssertNoThrow(try persistenContainer.viewContext.save())
+                if training.isCurrentTraining {
+                    XCTAssertNoThrow(try persistenContainer.viewContext.save())
+                } else {
+                    XCTAssertThrowsError(try persistenContainer.viewContext.save())
+                }
             }
         }
     }

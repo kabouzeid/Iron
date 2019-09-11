@@ -88,6 +88,7 @@
 		8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */; };
 		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
+		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
 		8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE0707C22D1F76B0038B7E3 /* Lottie */; };
 		8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */; };
@@ -201,6 +202,7 @@
 		8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartViewCell.swift; sourceTree = "<group>"; };
 		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
+		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
 		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
 		8AE0708022D1FABD0038B7E3 /* lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lottie; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				8A9EAC5C22EB526A00A11C65 /* NSManagedObjectContext+save.swift */,
 				8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */,
 				8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */,
+				8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */,
 				8AF4C537230EEE51003A84DC /* TrainingSetTag+SwiftUI.swift */,
 				8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */,
 				8A9E4F7D231436260038ACC5 /* String+Enquote.swift */,
@@ -605,6 +608,7 @@
 				8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
+				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,
 				8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */,

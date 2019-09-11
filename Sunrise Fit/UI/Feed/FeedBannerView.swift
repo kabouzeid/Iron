@@ -61,10 +61,10 @@ struct FeedBannerView : View {
 
         // compute the values
         let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.duration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
+            return (result.0 + training.safeDuration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
         }
         let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.duration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
+            return (result.0 + training.safeDuration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
         }
 
         // set the values

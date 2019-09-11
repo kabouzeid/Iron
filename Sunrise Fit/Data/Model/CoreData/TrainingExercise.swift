@@ -18,8 +18,10 @@ class TrainingExercise: NSManagedObject {
     }
     
     var isCompleted: Bool? {
-        guard let completedCount = numberOfCompletedSets, let totalCount = trainingSets?.count else { return nil }
-        return completedCount == totalCount
+        guard let trainingSets = trainingSets else { return nil }
+        return !trainingSets
+            .compactMap { $0 as? TrainingSet }
+            .contains { !$0.isCompleted }
     }
     
     var exercise: Exercise? {

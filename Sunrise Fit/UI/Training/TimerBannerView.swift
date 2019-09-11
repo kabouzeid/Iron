@@ -50,7 +50,7 @@ struct TimerBannerView: View {
             }) {
                 HStack {
                     Image(systemName: "clock")
-                    Text(trainingTimerDurationFormatter.string(from: training.duration) ?? "")
+                    Text(trainingTimerDurationFormatter.string(from: training.safeDuration) ?? "")
                         .font(Font.body.monospacedDigit())
                 }
                 .padding()

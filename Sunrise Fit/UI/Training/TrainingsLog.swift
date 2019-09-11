@@ -13,16 +13,14 @@ struct TrainingsLog: View {
     
     @ObservedObject var training: Training
     
-    private var trainingExercises: [TrainingExercise] {
-        training.trainingExercises?.array as? [TrainingExercise] ?? []
-    }
-    
-    private func trainingExerciseText(trainingExercise: TrainingExercise) -> String {
-        trainingExercise.trainingSets!
-            .map { $0 as! TrainingSet }
+    private func trainingExerciseText(trainingExercise: TrainingExercise) -> String? {
+        guard let trainingSets = trainingExercise.trainingSets else { return nil }
+        let text = trainingSets
+            .compactMap { $0 as? TrainingSet }
             .filter { $0.isCompleted }
             .map { $0.displayTitle(unit: settingsStore.weightUnit) }
             .joined(separator: "\n")
+        return text.isEmpty ? nil : text
     }
     
     var body: some View {
@@ -33,14 +31,16 @@ struct TrainingsLog: View {
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             Section {
-                ForEach(trainingExercises, id: \.objectID) { trainingExercise in
+                ForEach(training.trainingExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) { trainingExercise in
                     VStack(alignment: .leading) {
                         Text(trainingExercise.exercise?.title ?? "")
                             .font(.body)
-                        Text(self.trainingExerciseText(trainingExercise: trainingExercise))
-                            .font(Font.body.monospacedDigit())
-                            .foregroundColor(.secondary)
-                            .lineLimit(nil)
+                        self.trainingExerciseText(trainingExercise: trainingExercise).map {
+                            Text($0)
+                                .font(Font.body.monospacedDigit())
+                                .foregroundColor(.secondary)
+                                .lineLimit(nil)
+                        }
                     }
                 }
             }

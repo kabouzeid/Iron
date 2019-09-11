@@ -164,7 +164,11 @@ struct TrainingDetailView : View {
         .navigationBarItems(trailing:
             HStack {
                 Button(action: {
-                    // TODO: share training
+                    guard let logText = self.training.logText(weightUnit: self.settingsStore.weightUnit) else { return }
+                    let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
+                    // TODO: replace this hack with a proper way to retreive the rootViewController
+                    guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+                    rootVC.present(ac, animated: true)
                 }) {
                     Image(systemName: "square.and.arrow.up")
                 }

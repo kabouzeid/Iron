@@ -141,6 +141,7 @@ struct TrainingView: View {
                     Spacer()
                     Button(action: {
                         // TODO: share
+                        // UIActivityViewController doesn't work in sheets as of 13.1 beta3
                     }) {
                         Image(systemName: "square.and.arrow.up")
                     }
@@ -167,12 +168,8 @@ struct TrainingView: View {
                         self.managedObjectContext.safeSave() // just in case the precondition below fires
                         
                         // save the training
-                        self.training.deleteAndRemoveUncompletedSets()
+                        self.training.prepareForFinish()
                         self.training.isCurrentTraining = false
-                        self.training.start = self.training.safeStart // should already be set, but just to be safe
-                        self.training.end = self.training.safeEnd
-                        
-                        precondition(self.training.start! <= self.training.end!)
                         self.managedObjectContext.safeSave()
                         
                         self.cancelRestTimer()

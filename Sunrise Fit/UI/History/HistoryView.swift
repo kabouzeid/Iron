@@ -35,7 +35,7 @@ struct HistoryView : View {
                             VStack(alignment: .leading) {
                                 Text(training.displayTitle)
                                     .font(.body)
-                                Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration)!)")
+                                Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration, fallback: "Unknown time")!)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 training.comment.map {
