@@ -147,9 +147,7 @@ extension Exercise: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard let id = Int(try container.decode(String.self, forKey: .id)) else {
-            throw DecodingError.dataCorruptedError(forKey: CodingKeys.id, in: container, debugDescription: "id should be a string containing an int")
-        }
+        let id = try container.decode(Int.self, forKey: .id)
         let title = try container.decode(String.self, forKey: .title)
         let primer = try container.decodeIfPresent(String.self, forKey: .primer)
         let type = try container.decode(String.self, forKey: .type)

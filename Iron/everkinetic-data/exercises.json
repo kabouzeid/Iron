@@ -1,6 +1,6 @@
 [
     {
-        "id": "0003",
+        "id": 3,
         "name": "seated-shoulder-press-machine",
         "title": "Overhead Press: Machine (Seated)",
         "primer": "This is an exercise for the shoulder strengthening.",
@@ -33,7 +33,7 @@
         ]
     },
     {
-        "id": "0004",
+        "id": 4,
         "name": "seated-overhead-press",
         "title": "Overhead Press: Barbell (Seated)",
         "primer": "An exercise for the shoulder and triceps strengthening.",
@@ -69,7 +69,7 @@
         ]
     },
     {
-        "id": "0005",
+        "id": 5,
         "name": "shoulder-shrugs",
         "title": "Shrugs: Dumbbell",
         "primer": "An exercise for trapezius strengthening.",
@@ -102,7 +102,7 @@
         ]
     },
     {
-        "id": "0006",
+        "id": 6,
         "name": "arnold-press",
         "title": "Arnold Press",
         "primer": "An exercise for shoulder and triceps strengthening.",
@@ -139,7 +139,7 @@
         ]
     },
     {
-        "id": "0007",
+        "id": 7,
         "name": "front-barbell-raises",
         "title": "Front Raises: Barbell",
         "primer": "An exercise for shoulder, chest and forearm strengthening.",
@@ -175,7 +175,7 @@
         ]
     },
     {
-        "id": "0008",
+        "id": 8,
         "name": "front-cable-raises",
         "title": "Front Raises: Cable",
         "primer": "An exercise for shoulders, chest and forearm strengthening.",
@@ -213,7 +213,7 @@
         ]
     },
     {
-        "id": "0009",
+        "id": 9,
         "name": "cable-shoulder-shrugs",
         "title": "Shrugs: Cable",
         "primer": "An exercise for trapezius strengthening.",
@@ -248,7 +248,7 @@
         ]
     },
     {
-        "id": "0012",
+        "id": 12,
         "name": "dumbbell-shoulder-press",
         "title": "Shoulder Press: Dumbbell",
         "primer": "An exercise for shoulder, chest and triceps strengthening.",
@@ -283,7 +283,7 @@
         ]
     },
     {
-        "id": "0017",
+        "id": 17,
         "name": "bent-over-lateral-cable-raises",
         "title": "Lateral Raise: Cable (Bent Over)",
         "primer": "This is an exercise for shoulder, trapezius and middle back strengthening.",
@@ -321,7 +321,7 @@
         ]
     },
     {
-        "id": "0018",
+        "id": 18,
         "name": "lateral-dumbbell-raises",
         "title": "Lateral Raise: Dumbbell",
         "primer": "This is an exercise for lateral deltoid, shoulder and forearm strengthening.",
@@ -357,7 +357,7 @@
         ]
     },
     {
-        "id": "0020",
+        "id": 20,
         "name": "reverse-flyes-cable",
         "title": "Reverse Flyes: Cable",
         "primer": "This is an exercise for shoulder, middle back and triceps strengthening.",
@@ -394,7 +394,7 @@
         ]
     },
     {
-        "id": "0021",
+        "id": 21,
         "name": "leg-raises",
         "title": "Leg Raises",
         "primer": "This is an exercise for lower abdominal strengthening.",
@@ -428,7 +428,7 @@
         ]
     },
     {
-        "id": "0022",
+        "id": 22,
         "name": "smith-machine-rear-deltoid-row",
         "title": "Rear Deltoid Row: Smith Machine",
         "primer": "A exercise for the rear deltoid",
@@ -466,7 +466,7 @@
         ]
     },
     {
-        "id": "0023",
+        "id": 23,
         "name": "lying-rear-lateral-raise",
         "title": "Rear Deltoid Raise (Lying)",
         "primer": "This is an exercise for shoulder strengthening.",
@@ -499,7 +499,7 @@
         ]
     },
     {
-        "id": "0024",
+        "id": 24,
         "name": "rear-deltoid-row-dumbbell",
         "title": "Row: Dumbbell (One Arm)",
         "primer": "This is an exercise for deltoid, biceps and trapezius strengthening.",
@@ -537,7 +537,7 @@
         ]
     },
     {
-        "id": "0025",
+        "id": 25,
         "name": "seated-cable-row",
         "title": "Row: Cable (Seated)",
         "primer": "This is an exercise for middle back, biceps and lower back strengthening.",
@@ -573,7 +573,7 @@
         ]
     },
     {
-        "id": "0026",
+        "id": 26,
         "name": "reverse-grips-bent-over-barbell-row",
         "title": "Row: Barbell (Bent Over, Reverse)",
         "primer": "This is an exercise for middle back and biceps strengthening.",
@@ -608,7 +608,7 @@
         ]
     },
     {
-        "id": "0028",
+        "id": 28,
         "name": "rear-deltoid-row-barbell",
         "title": "Rear Deltoid Row: Barbell",
         "primer": "This is an exercise for shoulder and biceps strengthening.",
@@ -642,7 +642,7 @@
         ]
     },
     {
-        "id": "0029",
+        "id": 29,
         "name": "t-bar-rows",
         "title": "Row: T-Bar",
         "primer": "This is an exercise for middle back, biceps and shoulder strengthening.",
@@ -679,7 +679,7 @@
         ]
     },
     {
-        "id": "0030",
+        "id": 30,
         "name": "barbell-shrugs",
         "title": "Shrugs: Barbell",
         "primer": "This is an exercise for trapezius strengthening.",
@@ -713,7 +713,7 @@
         ]
     },
     {
-        "id": "0032",
+        "id": 32,
         "name": "bent-over-rear-deltoid-raise-with-head-on-bench",
         "title": "Rear Deltoid Raise (Bent Over)",
         "primer": "This is an exercise for shoulder strengthening.",
@@ -746,7 +746,7 @@
         ]
     },
     {
-        "id": "0033",
+        "id": 33,
         "name": "front-dumbbell-raises",
         "title": "Front Raises: Dumbbell",
         "primer": "This is an exercise for shoulder strengthening.",
@@ -775,7 +775,7 @@
         ]
     },
     {
-        "id": "0034",
+        "id": 34,
         "name": "internal-cable-rotation",
         "title": "Internal Cable Rotation",
         "primer": "This is an exercise for shoulder and biceps strengthening.",
@@ -810,7 +810,7 @@
         ]
     },
     {
-        "id": "0041",
+        "id": 41,
         "name": "smith-machine-shoulder-shrugs",
         "title": "Shrugs: Smith Machine",
         "primer": "This is an exercise for shoulder strengthening.",
@@ -841,7 +841,7 @@
         ]
     },
     {
-        "id": "0042",
+        "id": 42,
         "name": "bench-press",
         "title": "Bench Press: Barbell",
         "primer": "This is one of the best exercises for the chest.",
@@ -879,7 +879,7 @@
         ]
     },
     {
-        "id": "0043",
+        "id": 43,
         "name": "incline-bench-press",
         "title": "Bench Press: Barbell (Incline)",
         "primer": "This is an exercise for chest and triceps strengthening.",
@@ -916,7 +916,7 @@
         ]
     },
     {
-        "id": "0047",
+        "id": 47,
         "name": "butterfly-machine",
         "title": "Butterfly Machine",
         "primer": "This is an exercise for chest strengthening.",
@@ -948,7 +948,7 @@
         ]
     },
     {
-        "id": "0048",
+        "id": 48,
         "name": "cable-crossover",
         "title": "Cable Crossover",
         "primer": "This is an exercise for chest and shoulder strengthening.",
@@ -981,7 +981,7 @@
         ]
     },
     {
-        "id": "0049",
+        "id": 49,
         "name": "close-grip-barbell-bench-press",
         "title": "Bench Press: Barbell (Close Grip)",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1016,7 +1016,7 @@
         ]
     },
     {
-        "id": "0051",
+        "id": 51,
         "name": "decline-barbell-bench-press",
         "title": "Bench Press: Barbell (Decline)",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1052,7 +1052,7 @@
         ]
     },
     {
-        "id": "0052",
+        "id": 52,
         "name": "decline-dumbbell-bench-press",
         "title": "Bench Press: Dumbbell (Decline)",
         "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
@@ -1086,7 +1086,7 @@
         ]
     },
     {
-        "id": "0053",
+        "id": 53,
         "name": "decline-dumbbell-flyes",
         "title": "Flyes: Dumbbell (Decline)",
         "primer": "This is an exercise for chest and shoulder strengthening.",
@@ -1120,7 +1120,7 @@
         ]
     },
     {
-        "id": "0054",
+        "id": 54,
         "name": "chest-dips",
         "title": "Dips (Chest)",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1157,7 +1157,7 @@
         ]
     },
     {
-        "id": "0055",
+        "id": 55,
         "name": "bench-press-dumbbell",
         "title": "Bench Press: Dumbbell",
         "primer": "This is  an exercise for chest,triceps and shoulder strengthening.",
@@ -1195,7 +1195,7 @@
         ]
     },
     {
-        "id": "0056",
+        "id": 56,
         "name": "dumbbell-flyes",
         "title": "Flyes: Dumbbell",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1232,7 +1232,7 @@
         ]
     },
     {
-        "id": "0057",
+        "id": 57,
         "name": "flat-bench-cable-flyes",
         "title": "Flyes: Cable (Lying)",
         "primer": "This is an exercise for chest and shoulder strengthening.",
@@ -1268,7 +1268,7 @@
         ]
     },
     {
-        "id": "0058",
+        "id": 58,
         "name": "barbell-front-raise-pullover",
         "title": "Front Raise and Pullover",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1302,7 +1302,7 @@
         ]
     },
     {
-        "id": "0059",
+        "id": 59,
         "name": "hammer-grip-incline-bench-press",
         "title": "Bench Press: Dumbbell (Incline, Hammer Grip)",
         "primer": "This is an advanced exercise for strengthening the chest, triceps and shoulders.",
@@ -1337,7 +1337,7 @@
         ]
     },
     {
-        "id": "0060",
+        "id": 60,
         "name": "incline-cable-flyes",
         "title": "Flyes: Cable (Incline)",
         "primer": "This exercise is an alternative to the Butterfly or Pec Deck, it defines the muscles of the chest.Place an incline bench set at a 45 degree angle between two cable towers.",
@@ -1372,7 +1372,7 @@
         ]
     },
     {
-        "id": "0061",
+        "id": 61,
         "name": "dumbbell-incline-bench-press",
         "title": "Bench Press: Dumbbell (Incline)",
         "primer": "This is an advanced exercise for building and sculpting the chest as well as your triceps and shoulders.",
@@ -1407,7 +1407,7 @@
         ]
     },
     {
-        "id": "0062",
+        "id": 62,
         "name": "incline-dumbbell-flyes",
         "title": "Flyes: Dumbbell (Incline)",
         "primer": "This is an exercise for chest sculpting and strengthening.",
@@ -1442,7 +1442,7 @@
         ]
     },
     {
-        "id": "0066",
+        "id": 66,
         "name": "machine-bench-press",
         "title": "Bench Press: Machine",
         "primer": "This is an exercise for chest, biceps and shoulder strengthening.",
@@ -1475,7 +1475,7 @@
         ]
     },
     {
-        "id": "0075",
+        "id": 75,
         "name": "push-up-feet-elevated",
         "title": "Push Up: Bench (Feet Elevated)",
         "primer": "This is the same general movement as with a Push Up except your feet are elevated allowing greater range of motions and targeting the pectorals differently than the regular Push Up.",
@@ -1510,7 +1510,7 @@
         ]
     },
     {
-        "id": "0077",
+        "id": 77,
         "name": "push-ups",
         "title": "Push Up",
         "primer": "This exercise is the main strengthening exercise when wanting to strengthen ones chest, biceps and triceps as well as core muscles.",
@@ -1546,7 +1546,7 @@
         ]
     },
     {
-        "id": "0078",
+        "id": 78,
         "name": "smith-machine-bench-press",
         "title": "Bench Press: Smith Machine",
         "primer": "With the use of a Smith Machine this exercise strengthens your chest shoulders and triceps.",
@@ -1583,7 +1583,7 @@
         ]
     },
     {
-        "id": "0081",
+        "id": 81,
         "name": "smith-machine-incline-bench-press",
         "title": "Bench Press: Smith Machine (Incline)",
         "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
@@ -1620,7 +1620,7 @@
         ]
     },
     {
-        "id": "0082",
+        "id": 82,
         "name": "wide-grip-bench-press",
         "title": "Bench Press: Barbell (Wide Grip)",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1658,7 +1658,7 @@
         ]
     },
     {
-        "id": "0083",
+        "id": 83,
         "name": "wide-grip-decline-bench-press",
         "title": "Bench Press: Barbell (Decline, Wide Grip)",
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
@@ -1694,7 +1694,7 @@
         ]
     },
     {
-        "id": "0084",
+        "id": 84,
         "name": "incline-machine-bench-press",
         "title": "Bench Press: Machine (Incline)",
         "primer": "This exercise is for strengthening the upper chest and is preferred among beginners as it provides support and control.",
@@ -1726,7 +1726,7 @@
         ]
     },
     {
-        "id": "0085",
+        "id": 85,
         "name": "decline-machine-bench-press",
         "title": "Bench Press: Machine (Decline)",
         "primer": "This is an exercise for the strengthening of the lower chest or pectoral muscles and is preferred by beginners as it provides support and stability.",
@@ -1758,7 +1758,7 @@
         ]
     },
     {
-        "id": "0086",
+        "id": 86,
         "name": "inverted-row",
         "title": "Inverted Row",
         "primer": "This is a good overall exercise which strengthens your chest, core and back muscles.",
@@ -1792,7 +1792,7 @@
         ]
     },
     {
-        "id": "0087",
+        "id": 87,
         "name": "pull-ups",
         "title": "Pull Up",
         "primer": "This is an exercise in lats, biceps and middle back strengthening.",
@@ -1827,7 +1827,7 @@
         ]
     },
     {
-        "id": "0089",
+        "id": 89,
         "name": "chin-ups",
         "title": "Chin Ups",
         "primer": "This is an extremely good exercise for upper arm and middle back strengthening.",
@@ -1861,7 +1861,7 @@
         ]
     },
     {
-        "id": "0090",
+        "id": 90,
         "name": "narrow-parallel-grip-chin-ups",
         "title": "Chin Ups (Narrow Parallel Grip)",
         "primer": "This is an exercise similar to the regular Chin Up but focuses more on shoulder strengthening.",
@@ -1898,7 +1898,7 @@
         ]
     },
     {
-        "id": "0092",
+        "id": 92,
         "name": "straight-arm-pull-down",
         "title": "Straight Arm Pulldown",
         "primer": "This exercise for strengthening the Lats and also works the Triceps.",
@@ -1930,7 +1930,7 @@
         ]
     },
     {
-        "id": "0093",
+        "id": 93,
         "name": "underhand-pull-down",
         "title": "Pulldown (Underhand)",
         "primer": "This is an exercise for lats and biceps strengthening.",
@@ -1962,7 +1962,7 @@
         ]
     },
     {
-        "id": "0095",
+        "id": 95,
         "name": "overhand-pull-down",
         "title": "Pulldown (Overhand)",
         "primer": "This is an exercise for lats and biceps strengthening.",
@@ -1994,7 +1994,7 @@
         ]
     },
     {
-        "id": "0096",
+        "id": 96,
         "name": "v-bar-pull-down",
         "title": "Pulldown: V Bar ",
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
@@ -2027,7 +2027,7 @@
         ]
     },
     {
-        "id": "0097",
+        "id": 97,
         "name": "wide-grip-lat-pull-down",
         "title": "Pulldown (Wide Grip)",
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
@@ -2064,7 +2064,7 @@
         ]
     },
     {
-        "id": "0099",
+        "id": 99,
         "name": "barbell-deadlift",
         "title": "Deadlift: Barbell",
         "primer": "The techniques is identical to that of the Smith Machine deadlift except for the fact that this exercise provides less support.",
@@ -2103,7 +2103,7 @@
         ]
     },
     {
-        "id": "0100",
+        "id": 100,
         "name": "smith-machine-deadlift",
         "title": "Deadlift: Smith Machine",
         "primer": "This is the same as a Deadlift but the Smith Machine allows for better control of the weight.",
@@ -2138,7 +2138,7 @@
         ]
     },
     {
-        "id": "0101",
+        "id": 101,
         "name": "barbell-good-mornings",
         "title": "Good Mornings: Barbell",
         "primer": "This is one of the oldest exercises in bodybuilding but it still is one of the best for working the lower back.",
@@ -2170,7 +2170,7 @@
         ]
     },
     {
-        "id": "0102",
+        "id": 102,
         "name": "smith-machine-good-mornings",
         "title": "Good Mornings: Smith Machine",
         "primer": "This exercise utilises the same technique of the standard Good Mornings yet the use of the Smith Machine provides more stability.",
@@ -2202,7 +2202,7 @@
         ]
     },
     {
-        "id": "0103",
+        "id": 103,
         "name": "hyperextensions",
         "title": "Hyperextensions",
         "primer": "This exercise not only adds strength but also flexibility to the back and core muscles.",
@@ -2235,7 +2235,7 @@
         ]
     },
     {
-        "id": "0105",
+        "id": 105,
         "name": "supermans",
         "title": "Supermans",
         "primer": "This is an excellent exercise and a stretch for the lower back and core muscles.",
@@ -2267,7 +2267,7 @@
         ]
     },
     {
-        "id": "0107",
+        "id": 107,
         "name": "dumbbell-deadlift",
         "title": "Deadlift: Dumbbell",
         "primer": "This is an exercise for lower back, hamstring and calves strengthening.",
@@ -2306,7 +2306,7 @@
         ]
     },
     {
-        "id": "0108",
+        "id": 108,
         "name": "plank",
         "title": "Plank",
         "primer": "This is an exercise for core strengthening.",
@@ -2333,7 +2333,7 @@
         ]
     },
     {
-        "id": "0109",
+        "id": 109,
         "name": "bridge",
         "title": "Bridge",
         "primer": "This is an excellent exercise for strengthening and maintaining the core muscles.",
@@ -2364,7 +2364,7 @@
         ]
     },
     {
-        "id": "0112",
+        "id": 112,
         "name": "cable-kickback",
         "title": "Cable Kickback",
         "primer": "This is an exercise for gluts and hamstring strengthening.",
@@ -2396,7 +2396,7 @@
         ]
     },
     {
-        "id": "0113",
+        "id": 113,
         "name": "side-plank",
         "title": "Side Plank",
         "primer": "This is an exercise for core strengthening.",
@@ -2424,7 +2424,7 @@
         ]
     },
     {
-        "id": "0114",
+        "id": 114,
         "name": "barbell-lunges",
         "title": "Lunges: Barbell",
         "primer": "This is a classic exercise used for strengthening the hamstrings, quadriceps, calves and gluts.",
@@ -2463,7 +2463,7 @@
         ]
     },
     {
-        "id": "0115",
+        "id": 115,
         "name": "dumbbell-lunges",
         "title": "Lunges: Dumbbell",
         "primer": "This is an exercise for whole leg but mainly hamstring strengthening.",
@@ -2502,7 +2502,7 @@
         ]
     },
     {
-        "id": "0116",
+        "id": 116,
         "name": "flutter-kicks",
         "title": "Flutter Kicks",
         "primer": "This is an exercise for quadriceps and hamstring strengthening.",
@@ -2535,7 +2535,7 @@
         ]
     },
     {
-        "id": "0117",
+        "id": 117,
         "name": "lying-leg-curl-machine",
         "title": "Leg Curl (Lying)",
         "primer": "This is an exercise for hamstring strengthening.",
@@ -2565,7 +2565,7 @@
         ]
     },
     {
-        "id": "0118",
+        "id": 118,
         "name": "romanian-deadlift",
         "title": "Romanian Deadlift",
         "primer": "This is an exercise similar to the regular deadlift and strengthens the hamstring, calves, quadriceps and gluts.",
@@ -2602,7 +2602,7 @@
         ]
     },
     {
-        "id": "0119",
+        "id": 119,
         "name": "seated-leg-curl",
         "title": "Leg Curl (Seated)",
         "primer": "This is an exercise for hamstring strengthening which is similar to the laying leg curls.",
@@ -2632,7 +2632,7 @@
         ]
     },
     {
-        "id": "0120",
+        "id": 120,
         "name": "standing-leg-curl",
         "title": "Leg Curl (Standing)",
         "primer": "This is an exercise for hamstring strengthening.",
@@ -2662,7 +2662,7 @@
         ]
     },
     {
-        "id": "0121",
+        "id": 121,
         "name": "walking-lunges",
         "title": "Lunges: Dumbbell (Walking)",
         "primer": "A walking lunge gives you the benefit of lunges plus core muscle training from the constant motion.",
@@ -2705,7 +2705,7 @@
         ]
     },
     {
-        "id": "0122",
+        "id": 122,
         "name": "barbell-squat",
         "title": "Squat: Barbell",
         "primer": "This is the most important exercise for overall strength.",
@@ -2738,7 +2738,7 @@
         ]
     },
     {
-        "id": "0123",
+        "id": 123,
         "name": "hack-squat-machine",
         "title": "Hack Squat: Machine",
         "primer": "This exercise is a variation of the Squat which uses a machine.",
@@ -2775,7 +2775,7 @@
         ]
     },
     {
-        "id": "0124",
+        "id": 124,
         "name": "smith-machine-squat",
         "title": "Squat: Smith Machine",
         "primer": "This exercise is a variation of a squat using the Smith Machine.",
@@ -2813,7 +2813,7 @@
         ]
     },
     {
-        "id": "0125",
+        "id": 125,
         "name": "hack-squat-with-barbell",
         "title": "Hack Squat: Barbell",
         "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps or thigh muscles.",
@@ -2847,7 +2847,7 @@
         ]
     },
     {
-        "id": "0126",
+        "id": 126,
         "name": "smith-machine-hack-squat",
         "title": "Hack Squat: Smith Machine",
         "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps, or thigh muscles, while using the Smith Machine.",
@@ -2884,7 +2884,7 @@
         ]
     },
     {
-        "id": "0127",
+        "id": 127,
         "name": "leg-press",
         "title": "Leg Press",
         "primer": "This exercise is crucial for building and strengthening the legs.",
@@ -2919,7 +2919,7 @@
         ]
     },
     {
-        "id": "0130",
+        "id": 130,
         "name": "squat-using-dumbbell",
         "title": "Squat: Dumbbell",
         "primer": "This is a great overall exercise for the lower body that uses dumbbells.",
@@ -2956,7 +2956,7 @@
         ]
     },
     {
-        "id": "0135",
+        "id": 135,
         "name": "hip-adduction",
         "title": "Hip Adduction",
         "primer": "This exercises strengthens hip flexors and muscles of the thighs.",
@@ -2988,7 +2988,7 @@
         ]
     },
     {
-        "id": "0138",
+        "id": 138,
         "name": "front-squat-with-barbell",
         "title": "Front Squat: Barbell",
         "primer": "The Front Squat works the same muscles as the rear squat without placing the weight of the bar on your shoulders.",
@@ -3024,7 +3024,7 @@
         ]
     },
     {
-        "id": "0142",
+        "id": 142,
         "name": "leg-extension",
         "title": "Leg Extension",
         "primer": "This exercise is a staple for building strong legs.",
@@ -3055,7 +3055,7 @@
         ]
     },
     {
-        "id": "0143",
+        "id": 143,
         "name": "narrow-stance-leg-press",
         "title": "Leg Press (Narrow Stance)",
         "primer": "This is a variation of the leg press which targets more of the external muscles of the legs.",
@@ -3091,7 +3091,7 @@
         ]
     },
     {
-        "id": "0145",
+        "id": 145,
         "name": "narrow-stance-hack-squat",
         "title": "Hack Squat: Machine (Narrow Stance)",
         "primer": "Like the Hack Squat, this exercise works the muscles of the leg.",
@@ -3128,7 +3128,7 @@
         ]
     },
     {
-        "id": "0146",
+        "id": 146,
         "name": "narrow-stance-squat-with-barbell",
         "title": "Squat: Barbell (Narrow Stance)",
         "primer": "This version of the Squat targets and defines more of the externals leg muscles.",
@@ -3166,7 +3166,7 @@
         ]
     },
     {
-        "id": "0156",
+        "id": 156,
         "name": "thigh-abductor",
         "title": "Thigh Abductor",
         "primer": "This exercise targets and works the muscles of the outer thigh.",
@@ -3198,7 +3198,7 @@
         ]
     },
     {
-        "id": "0157",
+        "id": 157,
         "name": "thigh-adductor",
         "title": "Thigh Adductor",
         "primer": "This exercise targets and works the muscles of the inner thigh.",
@@ -3230,7 +3230,7 @@
         ]
     },
     {
-        "id": "0160",
+        "id": 160,
         "name": "wide-stance-squat-with-barbell",
         "title": "Squat: Barbell (Wide Stance)",
         "primer": "This version of the squat uses a wider stance to isolate the inner thigh.",
@@ -3266,7 +3266,7 @@
         ]
     },
     {
-        "id": "0162",
+        "id": 162,
         "name": "bench-dips",
         "title": "Dips: Bench",
         "primer": "This exercise is one of the most basic and still one of the best for building the triceps.",
@@ -3301,7 +3301,7 @@
         ]
     },
     {
-        "id": "0163",
+        "id": 163,
         "name": "seated-pulldown-with-cable",
         "title": "Straight Arm Pulldown (Seated)",
         "primer": "This exercise uses cables to isolate and work the triceps.",
@@ -3336,7 +3336,7 @@
         ]
     },
     {
-        "id": "0164",
+        "id": 164,
         "name": "incline-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Incline)",
         "primer": "This exercise uses cables to isolate and work the triceps.",
@@ -3368,7 +3368,7 @@
         ]
     },
     {
-        "id": "0165",
+        "id": 165,
         "name": "lying-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Lying)",
         "primer": "This exercise uses cables to isolate and work the triceps.",
@@ -3401,7 +3401,7 @@
         ]
     },
     {
-        "id": "0168",
+        "id": 168,
         "name": "decline-close-grip-bench-to-skull-crusher",
         "title": "Skull Crusher (Decline, Close Grip)",
         "primer": "This exercise combines a close grip bench press with triceps extension.",
@@ -3435,7 +3435,7 @@
         ]
     },
     {
-        "id": "0169",
+        "id": 169,
         "name": "decline-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Decline)",
         "primer": "This exercise combines a decline bench and dumbbells to target the triceps.",
@@ -3464,7 +3464,7 @@
         ]
     },
     {
-        "id": "0170",
+        "id": 170,
         "name": "decline-ez-bar-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Decline)",
         "primer": "This exercise combines a decline bench and a curved bar to more efficiently work the triceps.",
@@ -3493,7 +3493,7 @@
         ]
     },
     {
-        "id": "0171",
+        "id": 171,
         "name": "tricep-dips",
         "title": "Dips: Machine",
         "primer": "This exercise uses a machine to work the triceps while in seated position.",
@@ -3524,7 +3524,7 @@
         ]
     },
     {
-        "id": "0172",
+        "id": 172,
         "name": "tricep-dips-using-body-weight",
         "title": "Dips (Triceps)",
         "primer": "This classic exercise uses the weight of your own body to work your triceps.",
@@ -3557,7 +3557,7 @@
         ]
     },
     {
-        "id": "0173",
+        "id": 173,
         "name": "one-arm-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (One Arm)",
         "primer": "This exercise uses a dumbbell to work each arm individually.",
@@ -3587,7 +3587,7 @@
         ]
     },
     {
-        "id": "0174",
+        "id": 174,
         "name": "incline-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Incline)",
         "primer": "This version of a triceps extension uses gravity to increase the resistance of the exercise.",
@@ -3617,7 +3617,7 @@
         ]
     },
     {
-        "id": "0177",
+        "id": 177,
         "name": "kneeling-triceps-extension-with-cable-2",
         "title": "Triceps Extension: Cable (Kneeling)",
         "primer": "Kneeling allows you to isolate your triceps more effectively.",
@@ -3648,7 +3648,7 @@
         ]
     },
     {
-        "id": "0178",
+        "id": 178,
         "name": "low-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Low)",
         "primer": "This exercise is done while lying on a seated row station.",
@@ -3679,7 +3679,7 @@
         ]
     },
     {
-        "id": "0179",
+        "id": 179,
         "name": "lying-close-grip-triceps-extension-behind-the-head-with-barbell",
         "title": "Triceps Extension: Barbell (Lying, Close Grip, Behind the Head)",
         "primer": "You can use a barbell or EZ bar to further concentrate the benefit to your triceps.",
@@ -3710,7 +3710,7 @@
         ]
     },
     {
-        "id": "0180",
+        "id": 180,
         "name": "lying-close-grip-triceps-press-to-chin-with-barbell",
         "title": "Skull Crusher (Close Grip)",
         "primer": "This exercise is a classic for building the triceps.",
@@ -3742,7 +3742,7 @@
         ]
     },
     {
-        "id": "0181",
+        "id": 181,
         "name": "lying-triceps-extension-with-dumbbells",
         "title": "Triceps Extension: Dumbbell (Lying)",
         "primer": "This exercise uses gravity to increase the resistance of the weight.",
@@ -3773,7 +3773,7 @@
         ]
     },
     {
-        "id": "0183",
+        "id": 183,
         "name": "lying-triceps-press-with-barbell",
         "title": "Skull Crusher",
         "primer": "This is another classic exercise for building the triceps.",
@@ -3807,7 +3807,7 @@
         ]
     },
     {
-        "id": "0188",
+        "id": 188,
         "name": "close-triceps-pushups",
         "title": "Push Up (Close)",
         "primer": "This version of the Pushup isolates the tricep muscles.",
@@ -3840,7 +3840,7 @@
         ]
     },
     {
-        "id": "0189",
+        "id": 189,
         "name": "reverse-grip-triceps-pushdown",
         "title": "Triceps Pushdown: Cable (Reverse)",
         "primer": "This exercise is the reverse version of the triceps pushdown.",
@@ -3871,7 +3871,7 @@
         ]
     },
     {
-        "id": "0190",
+        "id": 190,
         "name": "reverse-triceps-bench-press-with-barbell",
         "title": "Bench Press: Barbell (Reverse, Triceps)",
         "primer": "This exercise is a version of the Bench Press that specifically isolates the triceps.",
@@ -3903,7 +3903,7 @@
         ]
     },
     {
-        "id": "0193",
+        "id": 193,
         "name": "seated-overhead-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Seated, Overhead)",
         "primer": "This exercise uses a barbell behind your neck to isolate the triceps effectively.",
@@ -3933,7 +3933,7 @@
         ]
     },
     {
-        "id": "0195",
+        "id": 195,
         "name": "smith-machine-close-grip-bench-press",
         "title": "Bench Press: Smith Machine (Close Grip)",
         "primer": "This version of a Bench Press uses a close grip to isolate the triceps as well as working the chest.",
@@ -3964,7 +3964,7 @@
         ]
     },
     {
-        "id": "0198",
+        "id": 198,
         "name": "standing-triceps-extension",
         "title": "Triceps Extension: Dumbbell (Standing)",
         "primer": "This exercise works the triceps by reaching behind your neck.",
@@ -3996,7 +3996,7 @@
         ]
     },
     {
-        "id": "0199",
+        "id": 199,
         "name": "one-arm-low-pulley-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (One Arm, Low-Pulley)",
         "primer": "This exercise uses a cable machine to isolate the triceps.",
@@ -4028,7 +4028,7 @@
         ]
     },
     {
-        "id": "0200",
+        "id": 200,
         "name": "standing-one-arm-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Standing, One Arm)",
         "primer": "This is a single arm version of a behind the neck triceps exercise.",
@@ -4060,7 +4060,7 @@
         ]
     },
     {
-        "id": "0201",
+        "id": 201,
         "name": "standing-overhead-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Standing, Overhead)",
         "primer": "This is a double arm barbell version of a behind the neck triceps exercise.",
@@ -4091,7 +4091,7 @@
         ]
     },
     {
-        "id": "0204",
+        "id": 204,
         "name": "triceps-kickback-with-dumbbell",
         "title": "Triceps Kickback with Dumbbell",
         "primer": "This along with the Triceps Push Down is one of the most beneficial exercises for the arms.",
@@ -4123,7 +4123,7 @@
         ]
     },
     {
-        "id": "0205",
+        "id": 205,
         "name": "triceps-pushdown-with-cable",
         "title": "Triceps Pushdown: Cable",
         "primer": "This exercise is the original version of the triceps pushdown.",
@@ -4155,7 +4155,7 @@
         ]
     },
     {
-        "id": "0206",
+        "id": 206,
         "name": "triceps-pushdown-with-rope-and-cable",
         "title": "Triceps Pushdown: Cable (Rope)",
         "primer": "This version of the triceps pushdown uses a rope for better definition in the muscle.",
@@ -4187,7 +4187,7 @@
         ]
     },
     {
-        "id": "0207",
+        "id": 207,
         "name": "triceps-pushdown-with-v-bar-and-cable",
         "title": "Triceps Pushdown: Cable (V-Bar)",
         "primer": "This exercise is the triceps pushdown uses a V shaped bar.",
@@ -4222,7 +4222,7 @@
         ]
     },
     {
-        "id": "0209",
+        "id": 209,
         "name": "incline-triceps-extensions-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Incline)",
         "primer": "This version of the triceps extension uses an incline bench.",
@@ -4254,7 +4254,7 @@
         ]
     },
     {
-        "id": "0210",
+        "id": 210,
         "name": "triceps-extensions-using-machine",
         "title": "Triceps Extension: Machine",
         "primer": "This exercise uses a machine to insure proper range of motion for tricep extensions.",
@@ -4283,9 +4283,9 @@
         ]
     },
     {
-        "id": "0211",
-        "name": "biceps-curls-with-barbell",
-        "title": "Biceps Curl: Barbell",
+        "id": 218,
+        "name": "biceps-curls-ez-curl-bar",
+        "title": "Biceps Curl: EZ Curl Bar",
         "primer": "This is a basic exercise for the biceps.",
         "type": "isolation",
         "primary": [
@@ -4299,9 +4299,8 @@
             "barbell"
         ],
         "steps": [
-            "This is a basic exercise for the biceps (arms).",
             "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
-            "Grasp a barbell with palms facing up, approximately shoulder width apart.",
+            "Grasp an ez curl bar with your palms facing up, approximately shoulder width apart.",
             "Lower your arms fully to above your thighs and bending only your elbows, raise the bar to your upper chest.",
             "Pause for a moment and then return to the starting position.",
             "Note: Do not swing your hips or back during this exercise."
@@ -4309,16 +4308,16 @@
         "tips": [],
         "references": [],
         "pdf": [
-            "pdf/0211-relaxation.pdf",
-            "pdf/0211-tension.pdf"
+            "pdf/0218-relaxation.pdf",
+            "pdf/0218-tension.pdf"
         ],
         "png": [
-            "png/0211-relaxation.png",
-            "png/0211-tension.png"
+            "png/0218-relaxation.png",
+            "png/0218-tension.png"
         ]
     },
     {
-        "id": "0212",
+        "id": 212,
         "name": "standing-biceps-curl-with-cable",
         "title": "Biceps Curl: Cable",
         "primer": "This version of the biceps curl uses a cable instead of a barbell to work the muscles of the arms.",
@@ -4353,7 +4352,7 @@
         ]
     },
     {
-        "id": "0216",
+        "id": 216,
         "name": "hammer-curls-with-rope-and-cable",
         "title": "Biceps Curl: Cable (Rope)",
         "primer": "Using the rope with the cable machine allows you isolate the biceps with this version of the Hammer Curl.",
@@ -4382,7 +4381,7 @@
         ]
     },
     {
-        "id": "0217",
+        "id": 217,
         "name": "preacher-curl-with-cable",
         "title": "Preacher Curl: Cable",
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
@@ -4416,7 +4415,7 @@
         ]
     },
     {
-        "id": "0220",
+        "id": 220,
         "name": "concentration-curls-with-dumbbell",
         "title": "Concentration Curls: Dumbbell",
         "primer": "Concentration exercises limit your range of movement to increase the effectiveness of the movement.",
@@ -4450,7 +4449,7 @@
         ]
     },
     {
-        "id": "0222",
+        "id": 222,
         "name": "drag-curl-with-barbell",
         "title": "Drag Curl: Barbell",
         "primer": "This exercise works the biceps and forearms.",
@@ -4484,7 +4483,7 @@
         ]
     },
     {
-        "id": "0224",
+        "id": 224,
         "name": "biceps-curl-with-dumbbell",
         "title": "Biceps Curl: Dumbbell",
         "primer": "This version of a biceps curl uses both arms at the same time.",
@@ -4518,7 +4517,7 @@
         ]
     },
     {
-        "id": "0227",
+        "id": 227,
         "name": "biceps-hammer-curl-with-dumbbell",
         "title": "Biceps Curl: Dumbbell (Hammer)",
         "primer": "This exercise uses a hammering motion to isolate the biceps.",
@@ -4551,7 +4550,7 @@
         ]
     },
     {
-        "id": "0228",
+        "id": 228,
         "name": "flexor-incline-curls-with-dumbbell",
         "title": "Biceps Curl: Dumbbell (Incline)",
         "primer": "This exercise was designed to keep the stress on the biceps.",
@@ -4581,7 +4580,7 @@
         ]
     },
     {
-        "id": "0236",
+        "id": 236,
         "name": "preacher-curl-with-machine",
         "title": "Preacher Curl: Machine",
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
@@ -4612,7 +4611,7 @@
         ]
     },
     {
-        "id": "0237",
+        "id": 237,
         "name": "one-arm-preacher-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (One Arm)",
         "primer": "",
@@ -4648,7 +4647,7 @@
         ]
     },
     {
-        "id": "0238",
+        "id": 238,
         "name": "overhead-curl-with-cable",
         "title": "Biceps Curl: Cable (Overhead)",
         "primer": "By using cable, this exercise isolates and defines the biceps muscles.",
@@ -4681,7 +4680,7 @@
         ]
     },
     {
-        "id": "0239",
+        "id": 239,
         "name": "preacher-curl-with-barbell",
         "title": "Preacher Curl: Barbell",
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
@@ -4716,7 +4715,7 @@
         ]
     },
     {
-        "id": "0240",
+        "id": 240,
         "name": "preacher-hammer-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (Hammer)",
         "primer": "This exercise combines a Hammer Curl with a Preacher bench.",
@@ -4747,7 +4746,7 @@
         ]
     },
     {
-        "id": "0249",
+        "id": 249,
         "name": "two-arm-preacher-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (Two Arm)",
         "primer": "This version of a Preacher Curl uses a special bench and dumbbells.",
@@ -4782,7 +4781,7 @@
         ]
     },
     {
-        "id": "0252",
+        "id": 252,
         "name": "zottman-preacher-curl-with-dumbbells",
         "title": "Preacher Curl: Dumbbell (Zottman)",
         "primer": "This is an advanced exercise where you turn the dumbbells up and out using a Preacher Curl bench for support.",
@@ -4815,7 +4814,7 @@
         ]
     },
     {
-        "id": "0253",
+        "id": 253,
         "name": "biceps-curl-with-machine",
         "title": "Biceps Curl: Machine",
         "primer": "This exercise uses a machine to insure proper form.",
@@ -4847,7 +4846,7 @@
         ]
     },
     {
-        "id": "0257",
+        "id": 257,
         "name": "biceps-curl-reverse-with-dumbbells",
         "title": "Biceps Curl: Dumbbell (Reverse)",
         "primer": "This is a reverse curl exercise that works all of the muscles of the arms.",
@@ -4879,7 +4878,7 @@
         ]
     },
     {
-        "id": "0273",
+        "id": 273,
         "name": "calf-press-on-leg-machine",
         "title": "Calf Press: Leg Machine",
         "primer": "This exercise uses a Leg Press Machine to work your calves.",
@@ -4912,7 +4911,7 @@
         ]
     },
     {
-        "id": "0279",
+        "id": 279,
         "name": "seated-calf-raise-using-machine",
         "title": "Calf Raise: Machine (Seated)",
         "primer": "This is one of the simplest and most effective exercises for the calves.",
@@ -4945,7 +4944,7 @@
         ]
     },
     {
-        "id": "0281",
+        "id": 281,
         "name": "standing-barbell-calf-raise",
         "title": "Calf Raise: Barbell",
         "primer": "This is standing version of a Calf Raise.",
@@ -4976,7 +4975,7 @@
         ]
     },
     {
-        "id": "0282",
+        "id": 282,
         "name": "standing-calf-raises-using-machine",
         "title": "Calf Raise: Machine (Standing)",
         "primer": "This exercise uses a machine to allow for proper form.",
@@ -5007,7 +5006,7 @@
         ]
     },
     {
-        "id": "0283",
+        "id": 283,
         "name": "standing-calf-raise-with-dumbbell",
         "title": "Calf Raise: Dumbbell",
         "primer": "This version of a Calf Raise uses dumbbells.",
@@ -5037,7 +5036,7 @@
         ]
     },
     {
-        "id": "0284",
+        "id": 284,
         "name": "air-bike",
         "title": "Air Bike",
         "primer": "This exercise works your abs by raising your arms to meet your legs.",
@@ -5071,7 +5070,7 @@
         ]
     },
     {
-        "id": "0288",
+        "id": 288,
         "name": "crunch-with-cable",
         "title": "Crunch: Cable",
         "primer": "This exercise uses the weight of a cable machine to assist in a crunch.",
@@ -5103,7 +5102,7 @@
         ]
     },
     {
-        "id": "0289",
+        "id": 289,
         "name": "cross-body-crunch",
         "title": "Crunch (Cross Body)",
         "primer": "This version of the crunch works both the upper and lower portion of the abs.",
@@ -5134,7 +5133,7 @@
         ]
     },
     {
-        "id": "0291",
+        "id": 291,
         "name": "crunches",
         "title": "Crunch",
         "primer": "",
@@ -5166,7 +5165,7 @@
         ]
     },
     {
-        "id": "0292",
+        "id": 292,
         "name": "decline-crunch",
         "title": "Crunch (Decline)",
         "primer": "Using a decline crunch allows you keep your legs steady and isolate all of the abdominal muscles.",
@@ -5198,7 +5197,7 @@
         ]
     },
     {
-        "id": "0294",
+        "id": 294,
         "name": "side-bend-with-dumbbell",
         "title": "Side Bend: Dumbbell",
         "primer": "This exercise works the obliques, the muscles on the sides of your abs.",
@@ -5229,7 +5228,7 @@
         ]
     },
     {
-        "id": "0296",
+        "id": 296,
         "name": "exercise-ball-pull-in",
         "title": "Exercise Ball Pull In",
         "primer": "This exercise uses a ball to isolate and work the lower abdominal muscles.",
@@ -5260,7 +5259,7 @@
         ]
     },
     {
-        "id": "0298",
+        "id": 298,
         "name": "bent-over-row-with-barbell",
         "title": "Row: Barbell (Bent Over)",
         "primer": "This exercise focuses on the middle back.",
@@ -5295,7 +5294,7 @@
         ]
     },
     {
-        "id": "9001",
+        "id": 9001,
         "name": "overhead-press",
         "title": "Overhead Press: Barbell",
         "primer": "An exercise for the shoulder and triceps strengthening.",
@@ -5329,7 +5328,7 @@
         ]
     },
     {
-        "id": "9002",
+        "id": 9002,
         "name": "face-pulls",
         "title": "Face Pulls",
         "primer": "An excellent exercise for the rear shoulders.",
