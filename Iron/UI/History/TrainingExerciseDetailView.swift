@@ -259,9 +259,11 @@ struct TrainingExerciseDetailView : View {
         }
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing: HStack{
-            NavigationLink(destination: ExerciseDetailView(exercise: trainingExercise.exercise ?? Exercise.empty)
-                .environmentObject(self.settingsStore)) {
-                    Image(systemName: "info.circle")
+            trainingExercise.exercise.map {
+                NavigationLink(destination: ExerciseDetailView(exercise: $0)
+                    .environmentObject(self.settingsStore)) {
+                        Image(systemName: "info.circle")
+                }
             }
             EditButton()
         })

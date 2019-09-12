@@ -52,18 +52,27 @@ enum Exercises {
         }
         return groups
     }
+    
+    private static func titleMatchesFilter(title: String, filter: String) -> Bool {
+        for s in filter.split(separator: " ") {
+            if !title.lowercased().contains(s) {
+                return false
+            }
+        }
+        return true
+    }
 
     static func filterExercises(exercises: [Exercise], using filter: String) -> [Exercise] {
         let filter = filter.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         guard !filter.isEmpty else { return exercises }
+        
         return exercises.filter { exercise in
-            let split = filter.split(separator: " ")
-            for s in split {
-                if !exercise.title.lowercased().contains(s) {
-                    return false
+            for title in [exercise.title] + exercise.alias {
+                if titleMatchesFilter(title: title, filter: filter) {
+                    return true
                 }
             }
-            return true
+            return false
         }
     }
     

@@ -11,6 +11,7 @@ import Foundation
 struct Exercise: Hashable {
     let id: Int
     let title: String
+    let alias: [String]
     let description: String? // primer
     let type: String
     let primaryMuscle: [String] // primary
@@ -122,17 +123,12 @@ extension Exercise {
     }
 }
 
-extension Exercise {
-    static var empty: Exercise = {
-        Exercise(id: 0, title: "", description: "", type: "", primaryMuscle: [], secondaryMuscle: [], equipment: [], steps: [], tips: [], references: [], pdfPaths: [])
-    }()
-}
-
 extension Exercise: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id
 //        case name
         case title
+        case alias
         case primer
         case type
         case primary
@@ -149,6 +145,7 @@ extension Exercise: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let id = try container.decode(Int.self, forKey: .id)
         let title = try container.decode(String.self, forKey: .title)
+        let alias = try container.decode([String].self, forKey: .alias)
         let primer = try container.decodeIfPresent(String.self, forKey: .primer)
         let type = try container.decode(String.self, forKey: .type)
         let primary = try container.decode([String].self, forKey: .primary)
@@ -159,6 +156,6 @@ extension Exercise: Decodable {
         let references = try container.decode([String].self, forKey: .references)
         let pdf = try container.decode([String].self, forKey: .pdf)
         
-        self.init(id: id, title: title, description: primer, type: type, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
+        self.init(id: id, title: title, alias: alias, description: primer, type: type, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
     }
 }
