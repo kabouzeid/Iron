@@ -31,6 +31,7 @@ struct TrainingTab: View {
     }
 }
 
+#if DEBUG
 struct TrainingTab_Previews: PreviewProvider {
     static var previews: some View {
         TrainingTab()
@@ -39,3 +40,4 @@ struct TrainingTab_Previews: PreviewProvider {
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }
+#endif
