@@ -3,6 +3,7 @@
         "id": 3,
         "name": "seated-shoulder-press-machine",
         "title": "Overhead Press: Machine (Seated)",
+        "alias": [],
         "primer": "This is an exercise for the shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -36,6 +37,7 @@
         "id": 4,
         "name": "seated-overhead-press",
         "title": "Overhead Press: Barbell (Seated)",
+        "alias": [],
         "primer": "An exercise for the shoulder and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -72,6 +74,7 @@
         "id": 5,
         "name": "shoulder-shrugs",
         "title": "Shrugs: Dumbbell",
+        "alias": [],
         "primer": "An exercise for trapezius strengthening.",
         "type": "isolation",
         "primary": [
@@ -105,6 +108,7 @@
         "id": 6,
         "name": "arnold-press",
         "title": "Arnold Press",
+        "alias": [],
         "primer": "An exercise for shoulder and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -142,6 +146,7 @@
         "id": 7,
         "name": "front-barbell-raises",
         "title": "Front Raises: Barbell",
+        "alias": [],
         "primer": "An exercise for shoulder, chest and forearm strengthening.",
         "type": "isolation",
         "primary": [
@@ -178,6 +183,7 @@
         "id": 8,
         "name": "front-cable-raises",
         "title": "Front Raises: Cable",
+        "alias": [],
         "primer": "An exercise for shoulders, chest and forearm strengthening.",
         "type": "isolation",
         "primary": [
@@ -216,6 +222,7 @@
         "id": 9,
         "name": "cable-shoulder-shrugs",
         "title": "Shrugs: Cable",
+        "alias": [],
         "primer": "An exercise for trapezius strengthening.",
         "type": "isolation",
         "primary": [
@@ -251,6 +258,10 @@
         "id": 12,
         "name": "dumbbell-shoulder-press",
         "title": "Shoulder Press: Dumbbell",
+        "alias": [
+            "Overhead Press: Dumbbell",
+            "Military Press: Dumbbell"
+        ],
         "primer": "An exercise for shoulder, chest and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -286,6 +297,7 @@
         "id": 17,
         "name": "bent-over-lateral-cable-raises",
         "title": "Lateral Raise: Cable (Bent Over)",
+        "alias": [],
         "primer": "This is an exercise for shoulder, trapezius and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -324,6 +336,7 @@
         "id": 18,
         "name": "lateral-dumbbell-raises",
         "title": "Lateral Raise: Dumbbell",
+        "alias": [],
         "primer": "This is an exercise for lateral deltoid, shoulder and forearm strengthening.",
         "type": "isolation",
         "primary": [
@@ -360,6 +373,7 @@
         "id": 20,
         "name": "reverse-flyes-cable",
         "title": "Reverse Flyes: Cable",
+        "alias": [],
         "primer": "This is an exercise for shoulder, middle back and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -397,6 +411,7 @@
         "id": 21,
         "name": "leg-raises",
         "title": "Leg Raises",
+        "alias": [],
         "primer": "This is an exercise for lower abdominal strengthening.",
         "type": "isolation",
         "primary": [
@@ -431,6 +446,7 @@
         "id": 22,
         "name": "smith-machine-rear-deltoid-row",
         "title": "Rear Deltoid Row: Smith Machine",
+        "alias": [],
         "primer": "A exercise for the rear deltoid",
         "type": "isolation",
         "primary": [
@@ -469,6 +485,7 @@
         "id": 23,
         "name": "lying-rear-lateral-raise",
         "title": "Rear Deltoid Raise (Lying)",
+        "alias": [],
         "primer": "This is an exercise for shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -502,6 +519,7 @@
         "id": 24,
         "name": "rear-deltoid-row-dumbbell",
         "title": "Row: Dumbbell (One Arm)",
+        "alias": [],
         "primer": "This is an exercise for deltoid, biceps and trapezius strengthening.",
         "type": "isolation",
         "primary": [
@@ -540,6 +558,7 @@
         "id": 25,
         "name": "seated-cable-row",
         "title": "Row: Cable (Seated)",
+        "alias": [],
         "primer": "This is an exercise for middle back, biceps and lower back strengthening.",
         "type": "compound",
         "primary": [
@@ -576,6 +595,7 @@
         "id": 26,
         "name": "reverse-grips-bent-over-barbell-row",
         "title": "Row: Barbell (Bent Over, Reverse)",
+        "alias": [],
         "primer": "This is an exercise for middle back and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -611,6 +631,7 @@
         "id": 28,
         "name": "rear-deltoid-row-barbell",
         "title": "Rear Deltoid Row: Barbell",
+        "alias": [],
         "primer": "This is an exercise for shoulder and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -645,6 +666,7 @@
         "id": 29,
         "name": "t-bar-rows",
         "title": "Row: T-Bar",
+        "alias": [],
         "primer": "This is an exercise for middle back, biceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -682,6 +704,7 @@
         "id": 30,
         "name": "barbell-shrugs",
         "title": "Shrugs: Barbell",
+        "alias": [],
         "primer": "This is an exercise for trapezius strengthening.",
         "type": "isolation",
         "primary": [
@@ -716,6 +739,7 @@
         "id": 32,
         "name": "bent-over-rear-deltoid-raise-with-head-on-bench",
         "title": "Rear Deltoid Raise (Bent Over)",
+        "alias": [],
         "primer": "This is an exercise for shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -749,6 +773,7 @@
         "id": 33,
         "name": "front-dumbbell-raises",
         "title": "Front Raises: Dumbbell",
+        "alias": [],
         "primer": "This is an exercise for shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -778,6 +803,7 @@
         "id": 34,
         "name": "internal-cable-rotation",
         "title": "Internal Cable Rotation",
+        "alias": [],
         "primer": "This is an exercise for shoulder and biceps strengthening.",
         "type": "compound",
         "primary": [
@@ -813,6 +839,7 @@
         "id": 41,
         "name": "smith-machine-shoulder-shrugs",
         "title": "Shrugs: Smith Machine",
+        "alias": [],
         "primer": "This is an exercise for shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -844,6 +871,7 @@
         "id": 42,
         "name": "bench-press",
         "title": "Bench Press: Barbell",
+        "alias": [],
         "primer": "This is one of the best exercises for the chest.",
         "type": "compound",
         "primary": [
@@ -882,6 +910,7 @@
         "id": 43,
         "name": "incline-bench-press",
         "title": "Bench Press: Barbell (Incline)",
+        "alias": [],
         "primer": "This is an exercise for chest and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -919,6 +948,9 @@
         "id": 47,
         "name": "butterfly-machine",
         "title": "Butterfly Machine",
+        "alias": [
+            "Pec Deck Fly"
+        ],
         "primer": "This is an exercise for chest strengthening.",
         "type": "isolation",
         "primary": [
@@ -950,7 +982,10 @@
     {
         "id": 48,
         "name": "cable-crossover",
-        "title": "Cable Crossover",
+        "title": "Flyes: Cable",
+        "alias": [
+            "Cable Crossover"
+        ],
         "primer": "This is an exercise for chest and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -984,6 +1019,7 @@
         "id": 49,
         "name": "close-grip-barbell-bench-press",
         "title": "Bench Press: Barbell (Close Grip)",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1019,6 +1055,7 @@
         "id": 51,
         "name": "decline-barbell-bench-press",
         "title": "Bench Press: Barbell (Decline)",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1055,6 +1092,7 @@
         "id": 52,
         "name": "decline-dumbbell-bench-press",
         "title": "Bench Press: Dumbbell (Decline)",
+        "alias": [],
         "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1089,6 +1127,7 @@
         "id": 53,
         "name": "decline-dumbbell-flyes",
         "title": "Flyes: Dumbbell (Decline)",
+        "alias": [],
         "primer": "This is an exercise for chest and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1123,6 +1162,7 @@
         "id": 54,
         "name": "chest-dips",
         "title": "Dips (Chest)",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1160,6 +1200,7 @@
         "id": 55,
         "name": "bench-press-dumbbell",
         "title": "Bench Press: Dumbbell",
+        "alias": [],
         "primer": "This is  an exercise for chest,triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1198,6 +1239,7 @@
         "id": 56,
         "name": "dumbbell-flyes",
         "title": "Flyes: Dumbbell",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1235,6 +1277,7 @@
         "id": 57,
         "name": "flat-bench-cable-flyes",
         "title": "Flyes: Cable (Lying)",
+        "alias": [],
         "primer": "This is an exercise for chest and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1271,6 +1314,7 @@
         "id": 58,
         "name": "barbell-front-raise-pullover",
         "title": "Front Raise and Pullover",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1305,6 +1349,7 @@
         "id": 59,
         "name": "hammer-grip-incline-bench-press",
         "title": "Bench Press: Dumbbell (Incline, Hammer Grip)",
+        "alias": [],
         "primer": "This is an advanced exercise for strengthening the chest, triceps and shoulders.",
         "type": "isolation",
         "primary": [
@@ -1340,6 +1385,7 @@
         "id": 60,
         "name": "incline-cable-flyes",
         "title": "Flyes: Cable (Incline)",
+        "alias": [],
         "primer": "This exercise is an alternative to the Butterfly or Pec Deck, it defines the muscles of the chest.Place an incline bench set at a 45 degree angle between two cable towers.",
         "type": "isolation",
         "primary": [
@@ -1375,6 +1421,7 @@
         "id": 61,
         "name": "dumbbell-incline-bench-press",
         "title": "Bench Press: Dumbbell (Incline)",
+        "alias": [],
         "primer": "This is an advanced exercise for building and sculpting the chest as well as your triceps and shoulders.",
         "type": "isolation",
         "primary": [
@@ -1410,6 +1457,7 @@
         "id": 62,
         "name": "incline-dumbbell-flyes",
         "title": "Flyes: Dumbbell (Incline)",
+        "alias": [],
         "primer": "This is an exercise for chest sculpting and strengthening.",
         "type": "isolation",
         "primary": [
@@ -1445,6 +1493,7 @@
         "id": 66,
         "name": "machine-bench-press",
         "title": "Bench Press: Machine",
+        "alias": [],
         "primer": "This is an exercise for chest, biceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1478,6 +1527,7 @@
         "id": 75,
         "name": "push-up-feet-elevated",
         "title": "Push Up: Bench (Feet Elevated)",
+        "alias": [],
         "primer": "This is the same general movement as with a Push Up except your feet are elevated allowing greater range of motions and targeting the pectorals differently than the regular Push Up.",
         "type": "isolation",
         "primary": [
@@ -1513,6 +1563,7 @@
         "id": 77,
         "name": "push-ups",
         "title": "Push Up",
+        "alias": [],
         "primer": "This exercise is the main strengthening exercise when wanting to strengthen ones chest, biceps and triceps as well as core muscles.",
         "type": "isolation",
         "primary": [
@@ -1549,6 +1600,7 @@
         "id": 78,
         "name": "smith-machine-bench-press",
         "title": "Bench Press: Smith Machine",
+        "alias": [],
         "primer": "With the use of a Smith Machine this exercise strengthens your chest shoulders and triceps.",
         "type": "isolation",
         "primary": [
@@ -1586,6 +1638,7 @@
         "id": 81,
         "name": "smith-machine-incline-bench-press",
         "title": "Bench Press: Smith Machine (Incline)",
+        "alias": [],
         "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1623,6 +1676,7 @@
         "id": 82,
         "name": "wide-grip-bench-press",
         "title": "Bench Press: Barbell (Wide Grip)",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1661,6 +1715,7 @@
         "id": 83,
         "name": "wide-grip-decline-bench-press",
         "title": "Bench Press: Barbell (Decline, Wide Grip)",
+        "alias": [],
         "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1697,6 +1752,7 @@
         "id": 84,
         "name": "incline-machine-bench-press",
         "title": "Bench Press: Machine (Incline)",
+        "alias": [],
         "primer": "This exercise is for strengthening the upper chest and is preferred among beginners as it provides support and control.",
         "type": "isolation",
         "primary": [
@@ -1729,6 +1785,7 @@
         "id": 85,
         "name": "decline-machine-bench-press",
         "title": "Bench Press: Machine (Decline)",
+        "alias": [],
         "primer": "This is an exercise for the strengthening of the lower chest or pectoral muscles and is preferred by beginners as it provides support and stability.",
         "type": "isolation",
         "primary": [
@@ -1761,6 +1818,9 @@
         "id": 86,
         "name": "inverted-row",
         "title": "Inverted Row",
+        "alias": [
+            "Horizontal Barbell Pull Up"
+        ],
         "primer": "This is a good overall exercise which strengthens your chest, core and back muscles.",
         "type": "compound",
         "primary": [
@@ -1795,6 +1855,7 @@
         "id": 87,
         "name": "pull-ups",
         "title": "Pull Up",
+        "alias": [],
         "primer": "This is an exercise in lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -1830,6 +1891,7 @@
         "id": 89,
         "name": "chin-ups",
         "title": "Chin Ups",
+        "alias": [],
         "primer": "This is an extremely good exercise for upper arm and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -1864,6 +1926,7 @@
         "id": 90,
         "name": "narrow-parallel-grip-chin-ups",
         "title": "Chin Ups (Narrow Parallel Grip)",
+        "alias": [],
         "primer": "This is an exercise similar to the regular Chin Up but focuses more on shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1901,6 +1964,10 @@
         "id": 92,
         "name": "straight-arm-pull-down",
         "title": "Straight Arm Pulldown",
+        "alias": [
+            "Straight Arm Pushdown",
+            "Cable Pullover"
+        ],
         "primer": "This exercise for strengthening the Lats and also works the Triceps.",
         "type": "isolation",
         "primary": [
@@ -1933,6 +2000,9 @@
         "id": 93,
         "name": "underhand-pull-down",
         "title": "Pulldown (Underhand)",
+        "alias": [
+            "Lat Pulldown (Underhand)"
+        ],
         "primer": "This is an exercise for lats and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1965,6 +2035,9 @@
         "id": 95,
         "name": "overhand-pull-down",
         "title": "Pulldown (Overhand)",
+        "alias": [
+            "Lat Pulldown (Overhand)"
+        ],
         "primer": "This is an exercise for lats and biceps strengthening.",
         "type": "isolation",
         "primary": [
@@ -1997,6 +2070,9 @@
         "id": 96,
         "name": "v-bar-pull-down",
         "title": "Pulldown: V Bar ",
+        "alias": [
+             "Lat Pulldown: V Bar "
+        ],
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -2030,6 +2106,9 @@
         "id": 97,
         "name": "wide-grip-lat-pull-down",
         "title": "Pulldown (Wide Grip)",
+        "alias": [
+             "Lat Pulldown (Wide Grip)"
+        ],
         "primer": "This is an exercise for lats, biceps and middle back strengthening.",
         "type": "isolation",
         "primary": [
@@ -2067,6 +2146,7 @@
         "id": 99,
         "name": "barbell-deadlift",
         "title": "Deadlift: Barbell",
+        "alias": [],
         "primer": "The techniques is identical to that of the Smith Machine deadlift except for the fact that this exercise provides less support.",
         "type": "isolation",
         "primary": [
@@ -2106,6 +2186,7 @@
         "id": 100,
         "name": "smith-machine-deadlift",
         "title": "Deadlift: Smith Machine",
+        "alias": [],
         "primer": "This is the same as a Deadlift but the Smith Machine allows for better control of the weight.",
         "type": "isolation",
         "primary": [
@@ -2141,6 +2222,7 @@
         "id": 101,
         "name": "barbell-good-mornings",
         "title": "Good Mornings: Barbell",
+        "alias": [],
         "primer": "This is one of the oldest exercises in bodybuilding but it still is one of the best for working the lower back.",
         "type": "isolation",
         "primary": [
@@ -2173,6 +2255,7 @@
         "id": 102,
         "name": "smith-machine-good-mornings",
         "title": "Good Mornings: Smith Machine",
+        "alias": [],
         "primer": "This exercise utilises the same technique of the standard Good Mornings yet the use of the Smith Machine provides more stability.",
         "type": "isolation",
         "primary": [
@@ -2205,6 +2288,9 @@
         "id": 103,
         "name": "hyperextensions",
         "title": "Hyperextensions",
+        "alias": [
+            "Back Extensions"
+        ],
         "primer": "This exercise not only adds strength but also flexibility to the back and core muscles.",
         "type": "isolation",
         "primary": [
@@ -2238,6 +2324,7 @@
         "id": 105,
         "name": "supermans",
         "title": "Supermans",
+        "alias": [],
         "primer": "This is an excellent exercise and a stretch for the lower back and core muscles.",
         "type": "isolation",
         "primary": [
@@ -2270,6 +2357,7 @@
         "id": 107,
         "name": "dumbbell-deadlift",
         "title": "Deadlift: Dumbbell",
+        "alias": [],
         "primer": "This is an exercise for lower back, hamstring and calves strengthening.",
         "type": "isolation",
         "primary": [
@@ -2309,6 +2397,7 @@
         "id": 108,
         "name": "plank",
         "title": "Plank",
+        "alias": [],
         "primer": "This is an exercise for core strengthening.",
         "type": "compound",
         "primary": [
@@ -2336,6 +2425,7 @@
         "id": 109,
         "name": "bridge",
         "title": "Bridge",
+        "alias": [],
         "primer": "This is an excellent exercise for strengthening and maintaining the core muscles.",
         "type": "isolation",
         "primary": [
@@ -2367,6 +2457,9 @@
         "id": 112,
         "name": "cable-kickback",
         "title": "Cable Kickback",
+        "alias": [
+            "Cable Hip Extension"
+        ],
         "primer": "This is an exercise for gluts and hamstring strengthening.",
         "type": "isolation",
         "primary": [
@@ -2399,6 +2492,7 @@
         "id": 113,
         "name": "side-plank",
         "title": "Side Plank",
+        "alias": [],
         "primer": "This is an exercise for core strengthening.",
         "type": "isolation",
         "primary": [
@@ -2427,6 +2521,7 @@
         "id": 114,
         "name": "barbell-lunges",
         "title": "Lunges: Barbell",
+        "alias": [],
         "primer": "This is a classic exercise used for strengthening the hamstrings, quadriceps, calves and gluts.",
         "type": "isolation",
         "primary": [
@@ -2466,6 +2561,7 @@
         "id": 115,
         "name": "dumbbell-lunges",
         "title": "Lunges: Dumbbell",
+        "alias": [],
         "primer": "This is an exercise for whole leg but mainly hamstring strengthening.",
         "type": "isolation",
         "primary": [
@@ -2505,6 +2601,7 @@
         "id": 116,
         "name": "flutter-kicks",
         "title": "Flutter Kicks",
+        "alias": [],
         "primer": "This is an exercise for quadriceps and hamstring strengthening.",
         "type": "isolation",
         "primary": [
@@ -2538,6 +2635,7 @@
         "id": 117,
         "name": "lying-leg-curl-machine",
         "title": "Leg Curl (Lying)",
+        "alias": [],
         "primer": "This is an exercise for hamstring strengthening.",
         "type": "isolation",
         "primary": [
@@ -2568,6 +2666,7 @@
         "id": 118,
         "name": "romanian-deadlift",
         "title": "Romanian Deadlift",
+        "alias": [],
         "primer": "This is an exercise similar to the regular deadlift and strengthens the hamstring, calves, quadriceps and gluts.",
         "type": "isolation",
         "primary": [
@@ -2605,6 +2704,7 @@
         "id": 119,
         "name": "seated-leg-curl",
         "title": "Leg Curl (Seated)",
+        "alias": [],
         "primer": "This is an exercise for hamstring strengthening which is similar to the laying leg curls.",
         "type": "isolation",
         "primary": [
@@ -2635,6 +2735,7 @@
         "id": 120,
         "name": "standing-leg-curl",
         "title": "Leg Curl (Standing)",
+        "alias": [],
         "primer": "This is an exercise for hamstring strengthening.",
         "type": "isolation",
         "primary": [
@@ -2665,6 +2766,7 @@
         "id": 121,
         "name": "walking-lunges",
         "title": "Lunges: Dumbbell (Walking)",
+        "alias": [],
         "primer": "A walking lunge gives you the benefit of lunges plus core muscle training from the constant motion.",
         "type": "isolation",
         "primary": [
@@ -2708,6 +2810,7 @@
         "id": 122,
         "name": "barbell-squat",
         "title": "Squat: Barbell",
+        "alias": [],
         "primer": "This is the most important exercise for overall strength.",
         "type": "compound",
         "primary": [
@@ -2741,6 +2844,7 @@
         "id": 123,
         "name": "hack-squat-machine",
         "title": "Hack Squat: Machine",
+        "alias": [],
         "primer": "This exercise is a variation of the Squat which uses a machine.",
         "type": "compound",
         "primary": [
@@ -2778,6 +2882,7 @@
         "id": 124,
         "name": "smith-machine-squat",
         "title": "Squat: Smith Machine",
+        "alias": [],
         "primer": "This exercise is a variation of a squat using the Smith Machine.",
         "type": "compound",
         "primary": [
@@ -2816,6 +2921,7 @@
         "id": 125,
         "name": "hack-squat-with-barbell",
         "title": "Hack Squat: Barbell",
+        "alias": [],
         "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps or thigh muscles.",
         "type": "compound",
         "primary": [
@@ -2850,6 +2956,7 @@
         "id": 126,
         "name": "smith-machine-hack-squat",
         "title": "Hack Squat: Smith Machine",
+        "alias": [],
         "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps, or thigh muscles, while using the Smith Machine.",
         "type": "compound",
         "primary": [
@@ -2887,6 +2994,7 @@
         "id": 127,
         "name": "leg-press",
         "title": "Leg Press",
+        "alias": [],
         "primer": "This exercise is crucial for building and strengthening the legs.",
         "type": "compound",
         "primary": [
@@ -2922,6 +3030,7 @@
         "id": 130,
         "name": "squat-using-dumbbell",
         "title": "Squat: Dumbbell",
+        "alias": [],
         "primer": "This is a great overall exercise for the lower body that uses dumbbells.",
         "type": "compound",
         "primary": [
@@ -2958,14 +3067,15 @@
     {
         "id": 135,
         "name": "hip-adduction",
-        "title": "Hip Adduction",
+        "title": "Cable Hip Adduction",
+        "alias": [],
         "primer": "This exercises strengthens hip flexors and muscles of the thighs.",
         "type": "isolation",
         "primary": [
             "quadriceps"
         ],
         "secondary": [
-            "hip abductors"
+            "hip adductors"
         ],
         "equipment": [
             "cable"
@@ -2973,7 +3083,7 @@
         "steps": [
             "Stand alongside a cable pulley stack and attach a cuff to the pulley and your ankle.",
             "Step away from the stack, holding onto the stack for support.",
-            "Standing firm on the foot not attached to the cable and slowly abduct, or pull, your cuffed ankle in front of your stabilizing leg.",
+            "Standing firm on the foot not attached to the cable and slowly adduct, or pull, your cuffed ankle in front of your stabilizing leg.",
             "Repeat and switch ankles."
         ],
         "tips": [],
@@ -2991,6 +3101,7 @@
         "id": 138,
         "name": "front-squat-with-barbell",
         "title": "Front Squat: Barbell",
+        "alias": [],
         "primer": "The Front Squat works the same muscles as the rear squat without placing the weight of the bar on your shoulders.",
         "type": "compound",
         "primary": [
@@ -3027,6 +3138,7 @@
         "id": 142,
         "name": "leg-extension",
         "title": "Leg Extension",
+        "alias": [],
         "primer": "This exercise is a staple for building strong legs.",
         "type": "isolation",
         "primary": [
@@ -3058,6 +3170,7 @@
         "id": 143,
         "name": "narrow-stance-leg-press",
         "title": "Leg Press (Narrow Stance)",
+        "alias": [],
         "primer": "This is a variation of the leg press which targets more of the external muscles of the legs.",
         "type": "compound",
         "primary": [
@@ -3094,6 +3207,7 @@
         "id": 145,
         "name": "narrow-stance-hack-squat",
         "title": "Hack Squat: Machine (Narrow Stance)",
+        "alias": [],
         "primer": "Like the Hack Squat, this exercise works the muscles of the leg.",
         "type": "compound",
         "primary": [
@@ -3131,6 +3245,7 @@
         "id": 146,
         "name": "narrow-stance-squat-with-barbell",
         "title": "Squat: Barbell (Narrow Stance)",
+        "alias": [],
         "primer": "This version of the Squat targets and defines more of the externals leg muscles.",
         "type": "compound",
         "primary": [
@@ -3169,6 +3284,7 @@
         "id": 156,
         "name": "thigh-abductor",
         "title": "Thigh Abductor",
+        "alias": [],
         "primer": "This exercise targets and works the muscles of the outer thigh.",
         "type": "isolation",
         "primary": [
@@ -3201,6 +3317,7 @@
         "id": 157,
         "name": "thigh-adductor",
         "title": "Thigh Adductor",
+        "alias": [],
         "primer": "This exercise targets and works the muscles of the inner thigh.",
         "type": "isolation",
         "primary": [
@@ -3233,6 +3350,7 @@
         "id": 160,
         "name": "wide-stance-squat-with-barbell",
         "title": "Squat: Barbell (Wide Stance)",
+        "alias": [],
         "primer": "This version of the squat uses a wider stance to isolate the inner thigh.",
         "type": "compound",
         "primary": [
@@ -3269,6 +3387,7 @@
         "id": 162,
         "name": "bench-dips",
         "title": "Dips: Bench",
+        "alias": [],
         "primer": "This exercise is one of the most basic and still one of the best for building the triceps.",
         "type": "compound",
         "primary": [
@@ -3303,7 +3422,11 @@
     {
         "id": 163,
         "name": "seated-pulldown-with-cable",
-        "title": "Straight Arm Pulldown (Seated)",
+        "title": "Straight Arm Pulldown (Incline)",
+        "alias": [
+            "Straight Arm Pushdown (Incline)",
+            "Cable Pullover (Incline)"
+        ],
         "primer": "This exercise uses cables to isolate and work the triceps.",
         "type": "isolation",
         "primary": [
@@ -3339,6 +3462,7 @@
         "id": 164,
         "name": "incline-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Incline)",
+        "alias": [],
         "primer": "This exercise uses cables to isolate and work the triceps.",
         "type": "isolation",
         "primary": [
@@ -3371,6 +3495,7 @@
         "id": 165,
         "name": "lying-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Lying)",
+        "alias": [],
         "primer": "This exercise uses cables to isolate and work the triceps.",
         "type": "isolation",
         "primary": [
@@ -3404,6 +3529,10 @@
         "id": 168,
         "name": "decline-close-grip-bench-to-skull-crusher",
         "title": "Skull Crusher (Decline, Close Grip)",
+        "alias": [
+            "French Press (Decline, Close Grip)",
+            "Triceps Extension: EZ Curl Bar (Lying, Decline, Close Grip)"
+        ],
         "primer": "This exercise combines a close grip bench press with triceps extension.",
         "type": "isolation",
         "primary": [
@@ -3413,7 +3542,7 @@
             "pectoralis major"
         ],
         "equipment": [
-            "barbell"
+            "ez-curl-bar"
         ],
         "steps": [
             "Lay with your back on a flat bench.",
@@ -3438,6 +3567,7 @@
         "id": 169,
         "name": "decline-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Decline)",
+        "alias": [],
         "primer": "This exercise combines a decline bench and dumbbells to target the triceps.",
         "type": "isolation",
         "primary": [
@@ -3467,6 +3597,7 @@
         "id": 170,
         "name": "decline-ez-bar-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Decline)",
+        "alias": [],
         "primer": "This exercise combines a decline bench and a curved bar to more efficiently work the triceps.",
         "type": "isolation",
         "primary": [
@@ -3496,6 +3627,7 @@
         "id": 171,
         "name": "tricep-dips",
         "title": "Dips: Machine",
+        "alias": [],
         "primer": "This exercise uses a machine to work the triceps while in seated position.",
         "type": "compound",
         "primary": [
@@ -3527,6 +3659,7 @@
         "id": 172,
         "name": "tricep-dips-using-body-weight",
         "title": "Dips (Triceps)",
+        "alias": [],
         "primer": "This classic exercise uses the weight of your own body to work your triceps.",
         "type": "compound",
         "primary": [
@@ -3560,6 +3693,7 @@
         "id": 173,
         "name": "one-arm-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (One Arm)",
+        "alias": [],
         "primer": "This exercise uses a dumbbell to work each arm individually.",
         "type": "isolation",
         "primary": [
@@ -3590,6 +3724,7 @@
         "id": 174,
         "name": "incline-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Incline)",
+        "alias": [],
         "primer": "This version of a triceps extension uses gravity to increase the resistance of the exercise.",
         "type": "isolation",
         "primary": [
@@ -3620,6 +3755,7 @@
         "id": 177,
         "name": "kneeling-triceps-extension-with-cable-2",
         "title": "Triceps Extension: Cable (Kneeling)",
+        "alias": [],
         "primer": "Kneeling allows you to isolate your triceps more effectively.",
         "type": "isolation",
         "primary": [
@@ -3651,6 +3787,7 @@
         "id": 178,
         "name": "low-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (Low)",
+        "alias": [],
         "primer": "This exercise is done while lying on a seated row station.",
         "type": "isolation",
         "primary": [
@@ -3682,6 +3819,7 @@
         "id": 179,
         "name": "lying-close-grip-triceps-extension-behind-the-head-with-barbell",
         "title": "Triceps Extension: Barbell (Lying, Close Grip, Behind the Head)",
+        "alias": [],
         "primer": "You can use a barbell or EZ bar to further concentrate the benefit to your triceps.",
         "type": "isolation",
         "primary": [
@@ -3713,6 +3851,10 @@
         "id": 180,
         "name": "lying-close-grip-triceps-press-to-chin-with-barbell",
         "title": "Skull Crusher (Close Grip)",
+        "alias": [
+            "French Press (Close Grip)",
+            "Triceps Extension: EZ Curl Bar (Lying, Close Grip)"
+        ],
         "primer": "This exercise is a classic for building the triceps.",
         "type": "isolation",
         "primary": [
@@ -3720,7 +3862,7 @@
         ],
         "secondary": [],
         "equipment": [
-            "barbell"
+            "ez-curl-bar"
         ],
         "steps": [
             "Lie on a flat bench on your back, with your head at one end.",
@@ -3745,6 +3887,7 @@
         "id": 181,
         "name": "lying-triceps-extension-with-dumbbells",
         "title": "Triceps Extension: Dumbbell (Lying)",
+        "alias": [],
         "primer": "This exercise uses gravity to increase the resistance of the weight.",
         "type": "isolation",
         "primary": [
@@ -3776,6 +3919,10 @@
         "id": 183,
         "name": "lying-triceps-press-with-barbell",
         "title": "Skull Crusher",
+        "alias": [
+            "French Press",
+            "Triceps Extension: EZ Curl Bar (Lying)"
+        ],
         "primer": "This is another classic exercise for building the triceps.",
         "type": "isolation",
         "primary": [
@@ -3785,7 +3932,7 @@
             "pectoralis major"
         ],
         "equipment": [
-            "barbell"
+            "ez-curl-bar"
         ],
         "steps": [
             "Lie on a flat bench on your back, with your head at one end.",
@@ -3810,6 +3957,7 @@
         "id": 188,
         "name": "close-triceps-pushups",
         "title": "Push Up (Close)",
+        "alias": [],
         "primer": "This version of the Pushup isolates the tricep muscles.",
         "type": "compound",
         "primary": [
@@ -3843,6 +3991,7 @@
         "id": 189,
         "name": "reverse-grip-triceps-pushdown",
         "title": "Triceps Pushdown: Cable (Reverse)",
+        "alias": [],
         "primer": "This exercise is the reverse version of the triceps pushdown.",
         "type": "isolation",
         "primary": [
@@ -3874,6 +4023,7 @@
         "id": 190,
         "name": "reverse-triceps-bench-press-with-barbell",
         "title": "Bench Press: Barbell (Reverse, Triceps)",
+        "alias": [],
         "primer": "This exercise is a version of the Bench Press that specifically isolates the triceps.",
         "type": "compound",
         "primary": [
@@ -3906,6 +4056,7 @@
         "id": 193,
         "name": "seated-overhead-triceps-extension-with-barbell",
         "title": "Triceps Extension: Barbell (Seated, Overhead)",
+        "alias": [],
         "primer": "This exercise uses a barbell behind your neck to isolate the triceps effectively.",
         "type": "isolation",
         "primary": [
@@ -3936,6 +4087,7 @@
         "id": 195,
         "name": "smith-machine-close-grip-bench-press",
         "title": "Bench Press: Smith Machine (Close Grip)",
+        "alias": [],
         "primer": "This version of a Bench Press uses a close grip to isolate the triceps as well as working the chest.",
         "type": "compound",
         "primary": [
@@ -3967,6 +4119,7 @@
         "id": 198,
         "name": "standing-triceps-extension",
         "title": "Triceps Extension: Dumbbell (Standing)",
+        "alias": [],
         "primer": "This exercise works the triceps by reaching behind your neck.",
         "type": "isolation",
         "primary": [
@@ -3999,6 +4152,7 @@
         "id": 199,
         "name": "one-arm-low-pulley-triceps-extension-with-cable",
         "title": "Triceps Extension: Cable (One Arm, Low-Pulley)",
+        "alias": [],
         "primer": "This exercise uses a cable machine to isolate the triceps.",
         "type": "compound",
         "primary": [
@@ -4031,6 +4185,7 @@
         "id": 200,
         "name": "standing-one-arm-triceps-extension-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Standing, One Arm)",
+        "alias": [],
         "primer": "This is a single arm version of a behind the neck triceps exercise.",
         "type": "isolation",
         "primary": [
@@ -4062,7 +4217,8 @@
     {
         "id": 201,
         "name": "standing-overhead-triceps-extension-with-barbell",
-        "title": "Triceps Extension: Barbell (Standing, Overhead)",
+        "title": "Triceps Extension: EZ Curl Bar (Standing, Overhead)",
+        "alias": [],
         "primer": "This is a double arm barbell version of a behind the neck triceps exercise.",
         "type": "isolation",
         "primary": [
@@ -4070,7 +4226,7 @@
         ],
         "secondary": [],
         "equipment": [
-            "barbell"
+            "ez-curl-bar"
         ],
         "steps": [
             "Stand with your feet shoulder width apart, your back straight and your abs drawn in.",
@@ -4094,6 +4250,7 @@
         "id": 204,
         "name": "triceps-kickback-with-dumbbell",
         "title": "Triceps Kickback with Dumbbell",
+        "alias": [],
         "primer": "This along with the Triceps Push Down is one of the most beneficial exercises for the arms.",
         "type": "isolation",
         "primary": [
@@ -4126,6 +4283,7 @@
         "id": 205,
         "name": "triceps-pushdown-with-cable",
         "title": "Triceps Pushdown: Cable",
+        "alias": [],
         "primer": "This exercise is the original version of the triceps pushdown.",
         "type": "isolation",
         "primary": [
@@ -4158,6 +4316,7 @@
         "id": 206,
         "name": "triceps-pushdown-with-rope-and-cable",
         "title": "Triceps Pushdown: Cable (Rope)",
+        "alias": [],
         "primer": "This version of the triceps pushdown uses a rope for better definition in the muscle.",
         "type": "isolation",
         "primary": [
@@ -4190,6 +4349,7 @@
         "id": 207,
         "name": "triceps-pushdown-with-v-bar-and-cable",
         "title": "Triceps Pushdown: Cable (V-Bar)",
+        "alias": [],
         "primer": "This exercise is the triceps pushdown uses a V shaped bar.",
         "type": "isolation",
         "primary": [
@@ -4225,6 +4385,7 @@
         "id": 209,
         "name": "incline-triceps-extensions-with-dumbbell",
         "title": "Triceps Extension: Dumbbell (Incline)",
+        "alias": [],
         "primer": "This version of the triceps extension uses an incline bench.",
         "type": "isolation",
         "primary": [
@@ -4257,6 +4418,7 @@
         "id": 210,
         "name": "triceps-extensions-using-machine",
         "title": "Triceps Extension: Machine",
+        "alias": [],
         "primer": "This exercise uses a machine to insure proper range of motion for tricep extensions.",
         "type": "isolation",
         "primary": [
@@ -4286,6 +4448,7 @@
         "id": 218,
         "name": "biceps-curls-ez-curl-bar",
         "title": "Biceps Curl: EZ Curl Bar",
+        "alias": [],
         "primer": "This is a basic exercise for the biceps.",
         "type": "isolation",
         "primary": [
@@ -4296,11 +4459,11 @@
             "forearm"
         ],
         "equipment": [
-            "barbell"
+            "ez-curl-bar"
         ],
         "steps": [
             "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
-            "Grasp an ez curl bar with your palms facing up, approximately shoulder width apart.",
+            "Grasp an EZ curl bar with your palms facing up, approximately shoulder width apart.",
             "Lower your arms fully to above your thighs and bending only your elbows, raise the bar to your upper chest.",
             "Pause for a moment and then return to the starting position.",
             "Note: Do not swing your hips or back during this exercise."
@@ -4320,6 +4483,7 @@
         "id": 212,
         "name": "standing-biceps-curl-with-cable",
         "title": "Biceps Curl: Cable",
+        "alias": [],
         "primer": "This version of the biceps curl uses a cable instead of a barbell to work the muscles of the arms.",
         "type": "isolation",
         "primary": [
@@ -4355,6 +4519,7 @@
         "id": 216,
         "name": "hammer-curls-with-rope-and-cable",
         "title": "Biceps Curl: Cable (Rope)",
+        "alias": [],
         "primer": "Using the rope with the cable machine allows you isolate the biceps with this version of the Hammer Curl.",
         "type": "isolation",
         "primary": [
@@ -4384,6 +4549,9 @@
         "id": 217,
         "name": "preacher-curl-with-cable",
         "title": "Preacher Curl: Cable",
+        "alias": [
+             "Preacher Biceps Curl: Cable"
+        ],
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
         "type": "isolation",
         "primary": [
@@ -4417,7 +4585,10 @@
     {
         "id": 220,
         "name": "concentration-curls-with-dumbbell",
-        "title": "Concentration Curls: Dumbbell",
+        "title": "Concentration Curl: Dumbbell",
+        "alias": [
+            "Concentration Biceps Curl: Dumbbell"
+        ],
         "primer": "Concentration exercises limit your range of movement to increase the effectiveness of the movement.",
         "type": "isolation",
         "primary": [
@@ -4452,6 +4623,7 @@
         "id": 222,
         "name": "drag-curl-with-barbell",
         "title": "Drag Curl: Barbell",
+        "alias": [],
         "primer": "This exercise works the biceps and forearms.",
         "type": "isolation",
         "primary": [
@@ -4486,6 +4658,7 @@
         "id": 224,
         "name": "biceps-curl-with-dumbbell",
         "title": "Biceps Curl: Dumbbell",
+        "alias": [],
         "primer": "This version of a biceps curl uses both arms at the same time.",
         "type": "isolation",
         "primary": [
@@ -4520,6 +4693,7 @@
         "id": 227,
         "name": "biceps-hammer-curl-with-dumbbell",
         "title": "Biceps Curl: Dumbbell (Hammer)",
+        "alias": [],
         "primer": "This exercise uses a hammering motion to isolate the biceps.",
         "type": "isolation",
         "primary": [
@@ -4553,6 +4727,7 @@
         "id": 228,
         "name": "flexor-incline-curls-with-dumbbell",
         "title": "Biceps Curl: Dumbbell (Incline)",
+        "alias": [],
         "primer": "This exercise was designed to keep the stress on the biceps.",
         "type": "isolation",
         "primary": [
@@ -4583,6 +4758,9 @@
         "id": 236,
         "name": "preacher-curl-with-machine",
         "title": "Preacher Curl: Machine",
+        "alias": [
+             "Preacher Biceps Curl: Machine"
+        ],
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
         "type": "isolation",
         "primary": [
@@ -4614,6 +4792,9 @@
         "id": 237,
         "name": "one-arm-preacher-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (One Arm)",
+        "alias": [
+             "Preacher Biceps Curl: Dumbbell (One Arm)"
+        ],
         "primer": "",
         "type": "isolation",
         "primary": [
@@ -4650,6 +4831,7 @@
         "id": 238,
         "name": "overhead-curl-with-cable",
         "title": "Biceps Curl: Cable (Overhead)",
+        "alias": [],
         "primer": "By using cable, this exercise isolates and defines the biceps muscles.",
         "type": "isolation",
         "primary": [
@@ -4683,6 +4865,9 @@
         "id": 239,
         "name": "preacher-curl-with-barbell",
         "title": "Preacher Curl: Barbell",
+        "alias": [
+             "Preacher Biceps Curl: Barbell"
+        ],
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
         "type": "isolation",
         "primary": [
@@ -4718,6 +4903,9 @@
         "id": 240,
         "name": "preacher-hammer-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (Hammer)",
+        "alias": [
+             "Preacher Biceps Curl: Dumbbell (Hammer)"
+        ],
         "primer": "This exercise combines a Hammer Curl with a Preacher bench.",
         "type": "isolation",
         "primary": [
@@ -4749,6 +4937,9 @@
         "id": 249,
         "name": "two-arm-preacher-curl-with-dumbbell",
         "title": "Preacher Curl: Dumbbell (Two Arm)",
+        "alias": [
+             "Preacher Biceps Curl: Dumbbell (Two Arm)"
+        ],
         "primer": "This version of a Preacher Curl uses a special bench and dumbbells.",
         "type": "isolation",
         "primary": [
@@ -4784,6 +4975,9 @@
         "id": 252,
         "name": "zottman-preacher-curl-with-dumbbells",
         "title": "Preacher Curl: Dumbbell (Zottman)",
+        "alias": [
+             "Preacher Biceps Curl: Dumbbell (Zottman)"
+        ],
         "primer": "This is an advanced exercise where you turn the dumbbells up and out using a Preacher Curl bench for support.",
         "type": "isolation",
         "primary": [
@@ -4817,6 +5011,7 @@
         "id": 253,
         "name": "biceps-curl-with-machine",
         "title": "Biceps Curl: Machine",
+        "alias": [],
         "primer": "This exercise uses a machine to insure proper form.",
         "type": "isolation",
         "primary": [
@@ -4849,6 +5044,7 @@
         "id": 257,
         "name": "biceps-curl-reverse-with-dumbbells",
         "title": "Biceps Curl: Dumbbell (Reverse)",
+        "alias": [],
         "primer": "This is a reverse curl exercise that works all of the muscles of the arms.",
         "type": "isolation",
         "primary": [
@@ -4881,6 +5077,7 @@
         "id": 273,
         "name": "calf-press-on-leg-machine",
         "title": "Calf Press: Leg Machine",
+        "alias": [],
         "primer": "This exercise uses a Leg Press Machine to work your calves.",
         "type": "isolation",
         "primary": [
@@ -4914,6 +5111,7 @@
         "id": 279,
         "name": "seated-calf-raise-using-machine",
         "title": "Calf Raise: Machine (Seated)",
+        "alias": [],
         "primer": "This is one of the simplest and most effective exercises for the calves.",
         "type": "isolation",
         "primary": [
@@ -4947,6 +5145,7 @@
         "id": 281,
         "name": "standing-barbell-calf-raise",
         "title": "Calf Raise: Barbell",
+        "alias": [],
         "primer": "This is standing version of a Calf Raise.",
         "type": "isolation",
         "primary": [
@@ -4978,6 +5177,7 @@
         "id": 282,
         "name": "standing-calf-raises-using-machine",
         "title": "Calf Raise: Machine (Standing)",
+        "alias": [],
         "primer": "This exercise uses a machine to allow for proper form.",
         "type": "isolation",
         "primary": [
@@ -5009,6 +5209,7 @@
         "id": 283,
         "name": "standing-calf-raise-with-dumbbell",
         "title": "Calf Raise: Dumbbell",
+        "alias": [],
         "primer": "This version of a Calf Raise uses dumbbells.",
         "type": "isolation",
         "primary": [
@@ -5039,6 +5240,7 @@
         "id": 284,
         "name": "air-bike",
         "title": "Air Bike",
+        "alias": [],
         "primer": "This exercise works your abs by raising your arms to meet your legs.",
         "type": "compound",
         "primary": [
@@ -5073,6 +5275,9 @@
         "id": 288,
         "name": "crunch-with-cable",
         "title": "Crunch: Cable",
+        "alias": [
+            "Sit-Up: Cable"
+        ],
         "primer": "This exercise uses the weight of a cable machine to assist in a crunch.",
         "type": "isolation",
         "primary": [
@@ -5105,6 +5310,9 @@
         "id": 289,
         "name": "cross-body-crunch",
         "title": "Crunch (Cross Body)",
+        "alias": [
+            "Sit-Up (Cross Body)"
+        ],
         "primer": "This version of the crunch works both the upper and lower portion of the abs.",
         "type": "compound",
         "primary": [
@@ -5136,6 +5344,9 @@
         "id": 291,
         "name": "crunches",
         "title": "Crunch",
+        "alias": [
+            "Sit-Up"
+        ],
         "primer": "",
         "type": "isolation",
         "primary": [
@@ -5168,6 +5379,9 @@
         "id": 292,
         "name": "decline-crunch",
         "title": "Crunch (Decline)",
+        "alias": [
+            "Sit-Up (Decline)"
+        ],
         "primer": "Using a decline crunch allows you keep your legs steady and isolate all of the abdominal muscles.",
         "type": "isolation",
         "primary": [
@@ -5200,6 +5414,7 @@
         "id": 294,
         "name": "side-bend-with-dumbbell",
         "title": "Side Bend: Dumbbell",
+        "alias": [],
         "primer": "This exercise works the obliques, the muscles on the sides of your abs.",
         "type": "isolation",
         "primary": [
@@ -5231,6 +5446,7 @@
         "id": 296,
         "name": "exercise-ball-pull-in",
         "title": "Exercise Ball Pull In",
+        "alias": [],
         "primer": "This exercise uses a ball to isolate and work the lower abdominal muscles.",
         "type": "compound",
         "primary": [
@@ -5262,6 +5478,7 @@
         "id": 298,
         "name": "bent-over-row-with-barbell",
         "title": "Row: Barbell (Bent Over)",
+        "alias": [],
         "primer": "This exercise focuses on the middle back.",
         "type": "compound",
         "primary": [
@@ -5297,6 +5514,10 @@
         "id": 9001,
         "name": "overhead-press",
         "title": "Overhead Press: Barbell",
+        "alias": [
+            "Shoulder Press: Barbell",
+            "Military Press: Barbell"
+        ],
         "primer": "An exercise for the shoulder and triceps strengthening.",
         "type": "compound",
         "primary": [
@@ -5331,6 +5552,7 @@
         "id": 9002,
         "name": "face-pulls",
         "title": "Face Pulls",
+        "alias": [],
         "primer": "An excellent exercise for the rear shoulders.",
         "type": "isolation",
         "primary": [
