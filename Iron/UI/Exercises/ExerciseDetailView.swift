@@ -93,72 +93,108 @@ struct ExerciseDetailView : View {
         }
     }
     
+    private func imageSection(geometry: GeometryProxy) -> some View {
+        Section {
+            AnimatedImageView(uiImages: self.exerciseImages(width: geometry.size.width, height: self.imageHeight(geometry: geometry)), duration: 2)
+                .frame(height: self.imageHeight(geometry: geometry))
+        }
+    }
+    
+    private var descriptionSection: some View {
+        Section {
+            Text(self.exercise.description!)
+                .lineLimit(nil)
+        }
+    }
+    
+    private var muscleSection: some View {
+        Section(header: Text("Muscles".uppercased())) {
+            ForEach(self.exercise.primaryMuscleCommonName, id: \.hashValue) { primaryMuscle in
+                HStack {
+                    Text(primaryMuscle.capitalized as String)
+                    Spacer()
+                    Text("Primary")
+                        .foregroundColor(.secondary)
+                }
+            }
+            ForEach(self.exercise.secondaryMuscleCommonName, id: \.hashValue) { secondaryMuscle in
+                HStack {
+                    Text(secondaryMuscle.capitalized as String)
+                    Spacer()
+                    Text("Secondary")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+    
+    private var stepsSection: some View {
+        Section(header: Text("Steps".uppercased())) {
+            ForEach(self.exercise.steps, id: \.hashValue) { step in
+                Text(step as String)
+                    .lineLimit(nil)
+            }
+        }
+    }
+    
+    private var tipsSection: some View {
+        Section(header: Text("Tips".uppercased())) {
+            ForEach(self.exercise.tips, id: \.hashValue) { tip in
+                Text(tip as String)
+                    .lineLimit(nil)
+            }
+        }
+    }
+    
+    private var referencesSection: some View {
+        Section(header: Text("References".uppercased())) {
+            ForEach(self.exercise.references, id: \.hashValue) { reference in
+                Button(reference as String) {
+                    if let url = URL(string: reference) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var aliasSection: some View {
+        Section(header: Text("Also known as".uppercased())) {
+            ForEach(self.exercise.alias, id: \.hashValue) { alias in
+                Text(alias)
+            }
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             List {
                 if !self.exercise.pdfPaths.isEmpty {
-                    Section {
-                        AnimatedImageView(uiImages: self.exerciseImages(width: geometry.size.width, height: self.imageHeight(geometry: geometry)), duration: 2)
-                            .frame(height: self.imageHeight(geometry: geometry))
-                    }
+                    self.imageSection(geometry: geometry)
                 }
-                
+
                 if self.exercise.description != nil {
-                    Section {
-                        Text(self.exercise.description!)
-                            .lineLimit(nil)
-                    }
+                    self.descriptionSection
                 }
-                
+
                 if !(self.exercise.primaryMuscleCommonName.isEmpty && self.exercise.secondaryMuscleCommonName.isEmpty) {
-                    Section(header: Text("Muscles".uppercased())) {
-                        ForEach(self.exercise.primaryMuscleCommonName, id: \.hashValue) { primaryMuscle in
-                            HStack {
-                                Text(primaryMuscle.capitalized as String)
-                                Spacer()
-                                Text("Primary")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        ForEach(self.exercise.secondaryMuscleCommonName, id: \.hashValue) { secondaryMuscle in
-                            HStack {
-                                Text(secondaryMuscle.capitalized as String)
-                                Spacer()
-                                Text("Secondary")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
+                    self.muscleSection
                 }
-                
+
                 if !self.exercise.steps.isEmpty {
-                    Section(header: Text("Steps".uppercased())) {
-                        ForEach(self.exercise.steps, id: \.hashValue) { step in
-                            Text(step as String)
-                                .lineLimit(nil)
-                        }
-                    }
+                    self.stepsSection
                 }
-                
+
                 if !self.exercise.tips.isEmpty {
-                    Section(header: Text("Tips".uppercased())) {
-                        ForEach(self.exercise.tips, id: \.hashValue) { tip in
-                            Text(tip as String)
-                                .lineLimit(nil)
-                        }
-                    }
+                    self.tipsSection
+                }
+
+                if !self.exercise.references.isEmpty {
+                    self.referencesSection
                 }
                 
-                if !self.exercise.references.isEmpty {
-                    Section(header: Text("References".uppercased())) {
-                        ForEach(self.exercise.references, id: \.hashValue) { reference in
-                            Button(reference as String) {
-                                if let url = URL(string: reference) {
-                                    UIApplication.shared.open(url)
-                                }
-                            }
-                        }
-                    }
+                if !self.exercise.alias.isEmpty {
+                    self.aliasSection
                 }
             }
             .listStyle(GroupedListStyle())
