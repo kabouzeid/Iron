@@ -102,9 +102,13 @@ struct TrainingView: View {
     }
 
     private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
-        let completedSets = trainingExercise.numberOfCompletedSets ?? 0
-        let totalSets = trainingExercise.trainingSets?.count ?? 0
-        let done = completedSets == totalSets
+        let text: String?
+        if let totalSets = trainingExercise.trainingSets?.count, totalSets > 0, let completedSets = trainingExercise.numberOfCompletedSets{
+            text = "\(completedSets) of \(totalSets)"
+        } else {
+            text = nil
+        }
+        let isCompleted = trainingExercise.isCompleted ?? false
         
         return HStack {
             NavigationLink(destination:
@@ -112,13 +116,15 @@ struct TrainingView: View {
                 ) {
                 VStack(alignment: .leading) {
                     Text(trainingExercise.exercise?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
-                        .foregroundColor(done ? .secondary : .primary)
-                    Text("\(completedSets) of \(totalSets)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(isCompleted ? .secondary : .primary)
+                    text.map {
+                        Text($0)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 .layoutPriority(1)
-                if done {
+                if isCompleted {
                     Spacer()
                     Image(systemName: "checkmark")
                         .imageScale(.small)
