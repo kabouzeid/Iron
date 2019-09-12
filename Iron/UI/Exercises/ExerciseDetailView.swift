@@ -22,17 +22,18 @@ struct ExerciseDetailView : View {
         
         let pageRect = page.getBoxRect(.mediaBox)
         let scale = min(fit.width / pageRect.width, fit.height / pageRect.height)
+        let size = CGSize(width: pageRect.width * scale, height: pageRect.height * scale)
         
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: pageRect.width * scale, height: pageRect.height * scale))
+        let renderer = UIGraphicsImageRenderer(size: size)
         let img = renderer.image { ctx in
             // flip
-            ctx.cgContext.translateBy(x: 0, y: fit.height)
+            ctx.cgContext.translateBy(x: 0, y: size.height)
             ctx.cgContext.scaleBy(x: 1, y: -1)
+            
             // aspect fit
             ctx.cgContext.scaleBy(x: scale, y: scale)
+            
             // draw
-            ctx.cgContext.setFillColor(UIColor.red.cgColor)
-            ctx.cgContext.setStrokeColor(UIColor.green.cgColor)
             ctx.cgContext.drawPDFPage(page)
         }
         
