@@ -258,15 +258,17 @@ struct TrainingExerciseDetailView : View {
             } // TODO: else if trainingExercise is finished, show next exercise / finish training button
         }
         .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
-        .navigationBarItems(trailing: HStack{
-            trainingExercise.exercise.map {
-                NavigationLink(destination: ExerciseDetailView(exercise: $0)
-                    .environmentObject(self.settingsStore)) {
-                        Image(systemName: "info.circle")
+        .navigationBarItems(trailing:
+            HStack(spacing: NAVIGATION_BAR_SPACING) {
+                trainingExercise.exercise.map {
+                    NavigationLink(destination: ExerciseDetailView(exercise: $0)
+                        .environmentObject(self.settingsStore)) {
+                            Image(systemName: "info.circle")
+                    }
                 }
+                EditButton()
             }
-            EditButton()
-        })
+        )
         .onAppear {
             self.select(set: self.firstUncompletedSet)
 //            self.fetchTrainingExerciseHistory()

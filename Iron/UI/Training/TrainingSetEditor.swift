@@ -242,17 +242,13 @@ struct TrainingSetEditor : View {
         )
         .sheet(isPresented: $showMoreSheet) {
             VStack(spacing: 0) {
-                ZStack {
-                    HStack {
-                        Button("Close") {
-                            self.showMoreSheet = false
-                        }
-                        Spacer()
-                    }
-                    Text(self.trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
-                        .font(.headline)
-                }
-                .padding()
+                SheetBar(title: self.trainingSet.displayTitle(unit: self.settingsStore.weightUnit),
+                    leading:
+                    Button("Close") {
+                        self.showMoreSheet = false
+                    },
+                    trailing: EmptyView()
+                ).padding()
                 Divider()
                 MoreView(trainingSet: self.trainingSet)
             }

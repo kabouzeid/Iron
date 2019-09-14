@@ -138,7 +138,7 @@ struct TrainingDetailView : View {
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing:
-            HStack {
+            HStack(spacing: NAVIGATION_BAR_SPACING) {
                 Button(action: {
                     guard let logText = self.training.logText(weightUnit: self.settingsStore.weightUnit) else { return }
                     let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)

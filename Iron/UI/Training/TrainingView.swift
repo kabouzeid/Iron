@@ -161,59 +161,53 @@ struct TrainingView: View {
         }
     }
     
+    private var closeSheetButton: some View {
+        Button("Close") {
+            self.activeSheet = nil
+        }
+    }
+    
     private var trainingsLogSheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Log")
-                    .font(.headline)
-                HStack {
-                    Button("Close") {
-                        self.activeSheet = nil
-                    }
-                    Spacer()
-                    Button(action: {
-                        // TODO: share
-                        // UIActivityViewController doesn't work in sheets as of 13.1 beta3
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                    }
+            SheetBar(title: "Log", leading: closeSheetButton,
+                trailing:
+                Button(action: {
+                    // TODO: share
+                    // UIActivityViewController doesn't work in sheets as of 13.1 beta3
+                }) {
+                    Image(systemName: "square.and.arrow.up")
                 }
-            }
-            .padding()
+            ).padding()
             Divider()
             TrainingsLog(training: self.training)
                 .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
         }
     }
     
+    private func finishWorkout() {
+        self.managedObjectContext.safeSave() // just in case the precondition below fires
+        
+        // save the training
+        self.training.prepareForFinish()
+        self.training.isCurrentTraining = false
+        self.managedObjectContext.safeSave()
+        
+        self.cancelRestTimer()
+        
+        // haptic feedback
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.prepare()
+        feedbackGenerator.notificationOccurred(.success)
+    }
+    
     private var finishWorkoutSheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Summary")
-                    .font(.headline)
-                HStack {
-                    Button("Cancel") {
-                        self.activeSheet = nil
-                    }
-                    Spacer()
-                    Button("Finish") {
-                        self.managedObjectContext.safeSave() // just in case the precondition below fires
-                        
-                        // save the training
-                        self.training.prepareForFinish()
-                        self.training.isCurrentTraining = false
-                        self.managedObjectContext.safeSave()
-                        
-                        self.cancelRestTimer()
-
-                        // haptic feedback
-                        let feedbackGenerator = UINotificationFeedbackGenerator()
-                        feedbackGenerator.prepare()
-                        feedbackGenerator.notificationOccurred(.success)
-                    }
+            SheetBar(title: "Summary", leading: closeSheetButton,
+                trailing:
+                Button("Finish") {
+                    self.finishWorkout()
                 }
-            }
-            .padding()
+            ).padding()
             Divider()
             TrainingsLog(training: self.training)
                 .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
@@ -295,7 +289,7 @@ struct TrainingView: View {
             .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
             .navigationBarItems(leading: cancelButton,
                 trailing:
-                HStack {
+                HStack(spacing: NAVIGATION_BAR_SPACING) {
                     // TODO: Replace with 3-dot button and more options
                     Button(action: {
                         self.activeSheet = .log

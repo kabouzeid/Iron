@@ -32,18 +32,15 @@ struct TimerBannerView: View {
         return formatter
     }()
     
+    private var closeSheetButton: some View {
+        Button("Close") {
+            self.activeSheet = nil
+        }
+    }
+    
     private var editTimeSheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Workout Duration")
-                    .font(.headline)
-                HStack {
-                    Button("Close") {
-                        self.activeSheet = nil
-                    }
-                    Spacer()
-                }
-            }.padding()
+            SheetBar(title: "Workout Duration", leading: closeSheetButton, trailing: EmptyView()).padding()
             Divider()
             EditCurrentTrainingTimeView(training: training)
         }
@@ -51,16 +48,7 @@ struct TimerBannerView: View {
     
     private var restTimerSheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Rest Timer")
-                    .font(.headline)
-                HStack {
-                    Button("Close") {
-                        self.activeSheet = nil
-                    }
-                    Spacer()
-                }
-            }.padding()
+            SheetBar(title: "Rest Timer", leading: closeSheetButton, trailing: EmptyView()).padding()
             Spacer()
             RestTimerView().environmentObject(self.restTimerStore)
             Spacer()

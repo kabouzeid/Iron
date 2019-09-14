@@ -13,8 +13,14 @@ struct ExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
-    @State private var showingStatisticsSheet = false
-    @State private var showingHistorySheet = false
+    @State private var activeSheet: SheetType?
+    
+    private enum SheetType: Identifiable {
+        case statistics
+        case history
+        
+        var id: Self { self }
+    }
     
     private func pdfToImage(url: URL, fit: CGSize) -> UIImage? {
         guard let document = CGPDFDocument(url as CFURL) else { return nil }
@@ -51,19 +57,15 @@ struct ExerciseDetailView : View {
         min(geometry.size.width, (geometry.size.height - geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom) * 0.7)
     }
     
+    private var closeSheetButton: some View {
+        Button("Close") {
+            self.activeSheet = nil
+        }
+    }
+    
     private var exerciseHistorySheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("History")
-                    .font(.headline)
-                HStack {
-                    Button("Close") {
-                        self.showingHistorySheet = false
-                    }
-                    Spacer()
-                }
-            }
-            .padding()
+            SheetBar(title: "History", leading: closeSheetButton, trailing: EmptyView()).padding()
             Divider()
             ExerciseHistoryView(exercise: self.exercise)
                 // TODO: as of beta6 the environment is not shared with the sheets
@@ -74,17 +76,7 @@ struct ExerciseDetailView : View {
     
     private var exerciseStatisticsSheet: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Text("Statistics")
-                    .font(.headline)
-                HStack {
-                    Button("Close") {
-                        self.showingStatisticsSheet = false
-                    }
-                    Spacer()
-                }
-            }
-            .padding()
+            SheetBar(title: "Statistics", leading: closeSheetButton, trailing: EmptyView()).padding()
             Divider()
             ExerciseStatisticsView(exercise: self.exercise)
                 // TODO: as of beta6 the environment is not shared with the sheets
@@ -199,17 +191,22 @@ struct ExerciseDetailView : View {
             }
             .listStyle(GroupedListStyle())
         }
+        .sheet(item: $activeSheet) { type in
+            if type == .history {
+                self.exerciseHistorySheet
+            } else if type == .statistics {
+                self.exerciseStatisticsSheet
+            }
+        }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
-            HStack {
-                Button(action: { self.showingHistorySheet = true }) {
+            HStack(spacing: NAVIGATION_BAR_SPACING) {
+                Button(action: { self.activeSheet = .history }) {
                     Image(systemName: "clock")
                 }
-                .sheet(isPresented: $showingHistorySheet) { self.exerciseHistorySheet }
-                Button(action: { self.showingStatisticsSheet = true }) {
+                Button(action: { self.activeSheet = .statistics }) {
                     Image(systemName: "waveform.path.ecg")
                 }
-                .sheet(isPresented: $showingStatisticsSheet) { self.exerciseStatisticsSheet }
             }
         )
     }

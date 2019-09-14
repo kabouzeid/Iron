@@ -104,10 +104,8 @@ private struct PinnedChartSelectorSheet: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(alignment: .leading) {
-                Button("Cancel") {
-                    self.resetAndDismiss()
-                }
+            VStack {
+                SheetBar(title: nil, leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
                 TextField("Search", text: $filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter))
             }.padding()

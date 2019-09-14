@@ -29,21 +29,21 @@ struct AddExercisesSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack {
-                HStack {
+                SheetBar(title: nil,
+                    leading:
                     Button("Cancel") {
                         self.resetAndDismiss()
-                    }
-                    Spacer()
+                    },
+                    trailing:
                     Button("Add") {
                         self.onAdd(self.exerciseSelectorSelection)
                         self.resetAndDismiss()
                     }
                     .environment(\.isEnabled, !self.exerciseSelectorSelection.isEmpty)
-                }
+                )
                 TextField("Search", text: $filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter))
-            }
-            .padding()
+            }.padding()
             ExerciseMultiSelectionView(exerciseMuscleGroups: exercises, selection: self.$exerciseSelectorSelection)
         }
     }
