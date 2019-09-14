@@ -14,10 +14,36 @@ struct TrainingView: View {
     
     @ObservedObject var training: Training
     
-    @State private var showingCancelSheet = false
-    @State private var showingExerciseSelectorSheet = false
-    @State private var showingTrainingsLogSheet = false
-    @State private var showingFinishWorkoutSheet = false
+    @State private var showingCancelActionSheet = false
+    @State private var activeSheet: SheetType?
+    
+    private enum SheetType: Identifiable {
+        case log
+        case exerciseSelector
+        case finish
+        
+        var id: Self { self }
+    }
+    
+    private func sheetView(type: SheetType) -> AnyView {
+        switch type {
+        case .log:
+            return self.trainingsLogSheet.typeErased
+        case .exerciseSelector:
+            return AddExercisesSheet(onAdd: { selection in
+                for exercise in selection {
+                    let trainingExercise = TrainingExercise(context: self.managedObjectContext)
+                    self.training.addToTrainingExercises(trainingExercise)
+                    trainingExercise.exerciseId = Int16(exercise.id)
+                    precondition(self.training.isCurrentTraining == true)
+                    trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                }
+                self.managedObjectContext.safeSave()
+                }).typeErased
+        case .finish:
+            return self.finishWorkoutSheet.typeErased
+        }
+    }
     
     private func cancelRestTimer() {
         self.restTimerStore.restTimerStart = nil
@@ -142,7 +168,7 @@ struct TrainingView: View {
                     .font(.headline)
                 HStack {
                     Button("Close") {
-                        self.showingTrainingsLogSheet = false
+                        self.activeSheet = nil
                     }
                     Spacer()
                     Button(action: {
@@ -167,7 +193,7 @@ struct TrainingView: View {
                     .font(.headline)
                 HStack {
                     Button("Cancel") {
-                        self.showingFinishWorkoutSheet = false
+                        self.activeSheet = nil
                     }
                     Spacer()
                     Button("Finish") {
@@ -202,7 +228,7 @@ struct TrainingView: View {
                 self.managedObjectContext.safeSave()
                 self.cancelRestTimer()
             } else {
-                self.showingCancelSheet = true
+                self.showingCancelActionSheet = true
             }
         }
     }
@@ -245,7 +271,7 @@ struct TrainingView: View {
                         }
                         
                         Button(action: {
-                            self.showingExerciseSelectorSheet = true
+                            self.activeSheet = .exerciseSelector
                         }) {
                             HStack {
                                 Image(systemName: "plus")
@@ -255,7 +281,7 @@ struct TrainingView: View {
                     }
                     Section {
                         Button(action: {
-                            self.showingFinishWorkoutSheet = true
+                            self.activeSheet = .finish
                         }) {
                             HStack {
                                 Image(systemName: "checkmark")
@@ -272,29 +298,18 @@ struct TrainingView: View {
                 HStack {
                     // TODO: Replace with 3-dot button and more options
                     Button(action: {
-                        self.showingTrainingsLogSheet = true
+                        self.activeSheet = .log
                     }) {
                         Image(systemName: "doc.plaintext")
                     }
-                    .sheet(isPresented: $showingTrainingsLogSheet) { self.trainingsLogSheet }
                     EditButton()
                 }
             )
-            .sheet(isPresented: $showingExerciseSelectorSheet) {
-                AddExercisesSheet(onAdd: { selection in
-                    for exercise in selection {
-                        let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                        self.training.addToTrainingExercises(trainingExercise)
-                        trainingExercise.exerciseId = Int16(exercise.id)
-                        precondition(self.training.isCurrentTraining == true)
-                        trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
-                    }
-                    self.managedObjectContext.safeSave()
-                })
-            }
         }
-        .sheet(isPresented: $showingFinishWorkoutSheet) { self.finishWorkoutSheet }
-        .actionSheet(isPresented: $showingCancelSheet, content: {
+        .sheet(item: $activeSheet) { type in
+            self.sheetView(type: type)
+        }
+        .actionSheet(isPresented: $showingCancelActionSheet, content: {
             ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
                 .destructive(Text("Delete Workout"), action: {
                     self.managedObjectContext.delete(self.training)

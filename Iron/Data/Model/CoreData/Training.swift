@@ -48,7 +48,7 @@ class Training: NSManagedObject {
         let muscleGroups = self.muscleGroups
         switch muscleGroups.count {
         case 0:
-            return "Training"
+            return "Workout"
         case 1:
             return muscleGroups[0].capitalized
         default:
