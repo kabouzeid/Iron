@@ -103,6 +103,8 @@
 		8AF4C53A230EFB5F003A84DC /* RPE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C539230EFB5F003A84DC /* RPE.swift */; };
 		8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919323212C290024B2EF /* Comparable+Clamped.swift */; };
 		8AF8919623215FEE0024B2EF /* IndexSet+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */; };
+		8AFE11B0232CDDF6000E9393 /* EditCurrentTrainingTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE11AF232CDDF6000E9393 /* EditCurrentTrainingTimeView.swift */; };
+		8AFE11B2232CE7CF000E9393 /* View+TypeErased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */; };
 		8AFF0D842302C60000F762A2 /* TrainingsDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */; };
 		8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD822E337A0002150F0 /* Benchmark.swift */; };
 		8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */; };
@@ -218,6 +220,8 @@
 		8AF4C539230EFB5F003A84DC /* RPE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPE.swift; sourceTree = "<group>"; };
 		8AF8919323212C290024B2EF /* Comparable+Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Clamped.swift"; sourceTree = "<group>"; };
 		8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexSet+Identifiable.swift"; sourceTree = "<group>"; };
+		8AFE11AF232CDDF6000E9393 /* EditCurrentTrainingTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentTrainingTimeView.swift; sourceTree = "<group>"; };
+		8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+TypeErased.swift"; sourceTree = "<group>"; };
 		8AFF0D832302C60000F762A2 /* TrainingsDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsDataHelper.swift; sourceTree = "<group>"; };
 		8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+OptionalDate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -251,6 +255,7 @@
 				8A1D989722C7C6AC0071225D /* TrainingSetEditor.swift */,
 				8A38154F2301B865008ACDAD /* TrainingsLog.swift */,
 				8A70A73623041542000A3C76 /* TimerBannerView.swift */,
+				8AFE11AF232CDDF6000E9393 /* EditCurrentTrainingTimeView.swift */,
 				8A70A73823041637000A3C76 /* RestTimerView.swift */,
 			);
 			path = Training;
@@ -445,6 +450,7 @@
 				8A9E4F7D231436260038ACC5 /* String+Enquote.swift */,
 				8AF8919323212C290024B2EF /* Comparable+Clamped.swift */,
 				8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */,
+				8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -540,7 +546,6 @@
 					8A7D6E93200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
 					};
 					8A7D6EAA200BF92E00AA0FA7 = {
 						CreatedOnToolsVersion = 9.2;
@@ -629,6 +634,7 @@
 				8A59283222BE575300BFD57E /* MockTrainingsData.swift in Sources */,
 				8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */,
 				8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */,
+				8AFE11B0232CDDF6000E9393 /* EditCurrentTrainingTimeView.swift in Sources */,
 				8AE132D6231BED920061C600 /* SearchField.swift in Sources */,
 				8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */,
 				8A6B1A6722BE7FD10067DD41 /* _TextSizeDemo.swift in Sources */,
@@ -673,6 +679,7 @@
 				8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */,
 				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,
 				8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */,
+				8AFE11B2232CE7CF000E9393 /* View+TypeErased.swift in Sources */,
 				8A5989AB20D0212C00DB9104 /* UIFont+MonospacedDigit.swift in Sources */,
 				8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
@@ -840,7 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
@@ -861,7 +868,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;

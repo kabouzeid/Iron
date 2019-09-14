@@ -16,30 +16,6 @@ struct TrainingDetailView : View {
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
 
-    private var trainingStart: Binding<Date> {
-        Binding(
-            get: {
-                self.training.safeStart
-            },
-            set: { newValue in
-                precondition(self.training.end == nil || newValue <= self.training.end!)
-                self.training.start = newValue
-            }
-        )
-    }
-    
-    private var trainingEnd: Binding<Date> {
-        Binding(
-            get: {
-                self.training.safeEnd
-            },
-            set: { newValue in
-                precondition(self.training.start == nil || newValue >= self.training.start!)
-                self.training.end = newValue
-            }
-        )
-    }
-    
     @ObservedObject private var trainingCommentInput = ValueHolder<String?>(initial: nil)
     private var trainingComment: Binding<String> {
         Binding(
@@ -107,11 +83,11 @@ struct TrainingDetailView : View {
                 }
                 
                 Section {
-                    DatePicker(selection: trainingStart, in: ...min(self.training.safeEnd, Date())) {
+                    DatePicker(selection: $training.safeStart, in: ...min(training.safeEnd, Date())) {
                         Text("Start")
                     }
                     
-                    DatePicker(selection: trainingEnd, in: self.training.safeStart...Date()) {
+                    DatePicker(selection: $training.safeEnd, in: training.safeStart...Date()) {
                         Text("End")
                     }
                 }

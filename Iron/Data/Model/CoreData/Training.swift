@@ -98,11 +98,23 @@ class Training: NSManagedObject {
 // MARK: Safe accessors
 extension Training {
     var safeStart: Date {
-        start ?? min(end ?? Date(), Date())
+        get {
+            start ?? min(end ?? Date(), Date())
+        }
+        set {
+            precondition(end == nil || newValue <= end!)
+            start = newValue
+        }
     }
     
     var safeEnd: Date {
-        end ?? max(start ?? Date(), Date())
+        get {
+            end ?? max(start ?? Date(), Date())
+        }
+        set {
+            precondition(start == nil || newValue >= start!)
+            end = newValue
+        }
     }
     
     var safeDuration: TimeInterval {

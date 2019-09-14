@@ -12,11 +12,18 @@ struct TimerBannerView: View {
     @EnvironmentObject var restTimerStore: RestTimerStore
     
     @ObservedObject var training: Training
-    
-    @State private var showingRestTimerSheet = false
-    
+
     @ObservedObject private var refresher = Refresher()
     
+    @State private var activeSheet: SheetType?
+
+    private enum SheetType: Identifiable {
+        case restTimer
+        case editTime
+        
+        var id: Self { self }
+    }
+
     private let trainingTimerDurationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -25,6 +32,23 @@ struct TimerBannerView: View {
         return formatter
     }()
     
+    private var editTimeSheet: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Workout Duration")
+                    .font(.headline)
+                HStack {
+                    Button("Close") {
+                        self.activeSheet = nil
+                    }
+                    Spacer()
+                }
+            }.padding()
+            Divider()
+            EditCurrentTrainingTimeView(training: training)
+        }
+    }
+    
     private var restTimerSheet: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -32,7 +56,7 @@ struct TimerBannerView: View {
                     .font(.headline)
                 HStack {
                     Button("Close") {
-                        self.showingRestTimerSheet = false
+                        self.activeSheet = nil
                     }
                     Spacer()
                 }
@@ -46,7 +70,7 @@ struct TimerBannerView: View {
     var body: some View {
         HStack {
             Button(action: {
-                // TODO: open start/end time editor
+                self.activeSheet = .editTime
             }) {
                 HStack {
                     Image(systemName: "clock")
@@ -55,11 +79,11 @@ struct TimerBannerView: View {
                 }
                 .padding()
             }
-            
+
             Spacer()
-            
+
             Button(action: {
-                self.showingRestTimerSheet = true
+                self.activeSheet = .restTimer
             }) {
                 HStack {
                     Image(systemName: "timer")
@@ -72,7 +96,13 @@ struct TimerBannerView: View {
             }
         }
         .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
-        .sheet(isPresented: $showingRestTimerSheet) { self.restTimerSheet }
+        .sheet(item: $activeSheet) { sheet in
+            if sheet == .editTime {
+                self.editTimeSheet
+            } else if sheet == .restTimer {
+                self.restTimerSheet
+            }
+        }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() }
     }
 }
