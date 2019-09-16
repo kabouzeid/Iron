@@ -77,15 +77,12 @@ private struct PinnedChartSelectorSheet: View {
     var onSelection: (PinnedChart) -> Void
     
     @State private var selectedExercise: Exercise? = nil
-    @State private var filter = ""
-    
-    private var exercises: [[Exercise]] {
-        Exercises.filterExercises(exercises: Exercises.exercisesGrouped, using: filter)
-    }
+
+    @ObservedObject private var filter = ExerciseGroupFilter(exercises: Exercises.exercisesGrouped)
     
     private func resetAndDismiss() {
         self.presentationMode.wrappedValue.dismiss()
-        self.filter = ""
+        self.filter.filter = ""
     }
     
     private func actionButtons(exercise: Exercise) -> [ActionSheet.Button] {
@@ -106,10 +103,10 @@ private struct PinnedChartSelectorSheet: View {
         VStack(spacing: 0) {
             VStack {
                 SheetBar(title: nil, leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
-                TextField("Search", text: $filter)
-                    .textFieldStyle(SearchTextFieldStyle(text: $filter))
+                TextField("Search", text: $filter.filter)
+                    .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
             }.padding()
-            ExerciseSingleSelectionView(exerciseMuscleGroups: exercises) { exercise in
+            ExerciseSingleSelectionView(exerciseMuscleGroups: filter.exercises) { exercise in
                 self.selectedExercise = exercise
             }
         }

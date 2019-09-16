@@ -13,17 +13,14 @@ struct AddExercisesSheet: View {
     
     let onAdd: (Set<Exercise>) -> Void
     
-    @State private var filter = ""
-    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
+    @ObservedObject private var filter = ExerciseGroupFilter(exercises: Exercises.exercisesGrouped)
     
-    private var exercises: [[Exercise]] {
-        Exercises.filterExercises(exercises: Exercises.exercisesGrouped, using: filter)
-    }
+    @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
     private func resetAndDismiss() {
         self.presentationMode.wrappedValue.dismiss()
         self.exerciseSelectorSelection.removeAll()
-        self.filter = ""
+        self.filter.filter = ""
     }
     
     var body: some View {
@@ -41,10 +38,10 @@ struct AddExercisesSheet: View {
                     }
                     .environment(\.isEnabled, !self.exerciseSelectorSelection.isEmpty)
                 )
-                TextField("Search", text: $filter)
-                    .textFieldStyle(SearchTextFieldStyle(text: $filter))
+                TextField("Search", text: $filter.filter)
+                    .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
             }.padding()
-            ExerciseMultiSelectionView(exerciseMuscleGroups: exercises, selection: self.$exerciseSelectorSelection)
+            ExerciseMultiSelectionView(exerciseMuscleGroups: filter.exercises, selection: self.$exerciseSelectorSelection)
         }
     }
 }
