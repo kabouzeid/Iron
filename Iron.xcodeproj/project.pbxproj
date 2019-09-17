@@ -96,6 +96,7 @@
 		8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */; };
 		8AE0708122D1FABD0038B7E3 /* lottie in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0708022D1FABD0038B7E3 /* lottie */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
+		8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */; };
 		8AE132D6231BED920061C600 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE132D5231BED920061C600 /* SearchField.swift */; };
 		8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */; };
 		8AF4C536230EEE0A003A84DC /* TrainingSetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C535230EEE0A003A84DC /* TrainingSetTag.swift */; };
@@ -216,6 +217,7 @@
 		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
 		8AE0708022D1FABD0038B7E3 /* lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lottie; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
+		8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportSettingsView.swift; sourceTree = "<group>"; };
 		8AE132D5231BED920061C600 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryView.swift; sourceTree = "<group>"; };
 		8AF4C535230EEE0A003A84DC /* TrainingSetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSetTag.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				8A56A47E22D7C93B0076E99A /* SettingsView.swift */,
+				8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
+				8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,
 				8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */,
