@@ -209,6 +209,7 @@ struct TrainingExerciseDetailView : View {
                 guard let set = self.selectedTrainingSet else { return }
                 
                 if !set.isCompleted {
+                     assert(self.isCurrentTraining)
                     // these preconditions should never ever happen, but just to be sure
                     precondition(set.weight >= 0)
                     precondition(set.repetitions >= 0)
@@ -220,15 +221,13 @@ struct TrainingExerciseDetailView : View {
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.prepare()
                     feedbackGenerator.notificationOccurred(.success)
+                    
+                    self.restTimerStore.restTimerDuration = self.restTimerDuration
+                    self.restTimerStore.restTimerStart = Date() // start the rest timer
                 }
                 self.select(set: self.firstUncompletedSet)
                 
                 self.managedObjectContext.safeSave()
-                
-                if self.isCurrentTraining {
-                    self.restTimerStore.restTimerDuration = self.restTimerDuration
-                    self.restTimerStore.restTimerStart = Date() // start the rest timer
-                }
             })
             .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
         }
