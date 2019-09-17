@@ -11,12 +11,13 @@ import SwiftUI
 struct StartTrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @EnvironmentObject var settingsStore: SettingsStore
     
     @State private var quote = Quotes.quotes.randomElement()
 //    let quote: Quote? = Quotes.quotes[4] // for the preview
 
     private var plateImage: some View {
-        Image("plate")
+        Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
             .resizable()
             .aspectRatio(contentMode: ContentMode.fit)
             .padding([.leading, .trailing], 40)
