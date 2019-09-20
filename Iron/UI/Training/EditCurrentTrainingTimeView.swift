@@ -47,8 +47,10 @@ struct EditCurrentTrainingTimeView: View {
     }
 }
 
+#if DEBUG
 struct EditTrainingStartEndView_Previews: PreviewProvider {
     static var previews: some View {
         EditCurrentTrainingTimeView(training: mockCurrentTraining)
     }
 }
+#endif
