@@ -9,13 +9,11 @@
 import SwiftUI
 
 struct ExercisesView : View {
-    @EnvironmentObject var settingsStore: SettingsStore
     var exercises: [Exercise]
     
     var body: some View {
         List(exercises, id: \.id) { exercise in
-            NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
-                .environmentObject(self.settingsStore))
+            NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
         }
     }
 }
@@ -23,7 +21,7 @@ struct ExercisesView : View {
 #if DEBUG
 struct ExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        ExercisesView(exercises: Exercises.exercises)
+        ExercisesView(exercises: appExerciseStore.exercises)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }

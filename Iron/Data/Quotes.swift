@@ -8,17 +8,6 @@
 
 import Foundation
 
-struct Quote: Decodable {
-    let text: String
-    let person: String?
-}
-
-extension Quote {
-    var displayText: String {
-        text.enquoted + (person.map { " – \($0)" } ?? "")
-    }
-}
-
 enum Quotes {
     static let quotes: [Quote] = loadQuotes() ?? []
 

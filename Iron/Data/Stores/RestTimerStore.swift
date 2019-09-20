@@ -82,4 +82,4 @@ extension RestTimerStore {
     }
 }
 
-let restTimerStore = RestTimerStore() // singleton
+let appRestTimerStore = RestTimerStore() // singleton

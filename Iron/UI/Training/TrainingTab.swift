@@ -36,7 +36,7 @@ struct TrainingTab_Previews: PreviewProvider {
     static var previews: some View {
         TrainingTab()
             .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(restTimerStore)
+            .environmentObject(appRestTimerStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

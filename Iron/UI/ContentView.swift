@@ -59,7 +59,7 @@ struct ContentView : View {
                 .hostingController()
                 .tabItem(title: "Workout", image: UIImage(named: "training"), tag: 2),
             
-            ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
+            ExerciseMuscleGroupsView()
                 .hostingController()
                 .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
             
@@ -77,7 +77,8 @@ struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(restTimerStore)
+            .environmentObject(appRestTimerStore)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

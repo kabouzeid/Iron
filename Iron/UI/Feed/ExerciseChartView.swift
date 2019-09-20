@@ -46,7 +46,7 @@ struct ExerciseChartView : View {
 #if DEBUG
 struct ExerciseChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartView(exercise: Exercises.findExercise(id: 42)!, measurementType: .oneRM)
+        ExerciseChartView(exercise: appExerciseStore.find(with: 42)!, measurementType: .oneRM)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)

@@ -98,12 +98,12 @@ struct TimerBannerView: View {
 #if DEBUG
 struct TimerBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        if restTimerStore.restTimerRemainingTime == nil {
-            restTimerStore.restTimerStart = Date()
-            restTimerStore.restTimerDuration = 10
+        if appRestTimerStore.restTimerRemainingTime == nil {
+            appRestTimerStore.restTimerStart = Date()
+            appRestTimerStore.restTimerDuration = 10
         }
         return TimerBannerView(training: mockCurrentTraining)
-            .environmentObject(restTimerStore)
+            .environmentObject(appRestTimerStore)
     }
 }
 #endif

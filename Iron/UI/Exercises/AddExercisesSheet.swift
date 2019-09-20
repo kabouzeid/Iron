@@ -13,9 +13,14 @@ struct AddExercisesSheet: View {
     
     let onAdd: (Set<Exercise>) -> Void
     
-    @ObservedObject private var filter = ExerciseGroupFilter(exercises: Exercises.exercisesGrouped)
+    @ObservedObject private var filter: ExerciseGroupFilter
     
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
+    
+    init(exercises: [Exercise], onAdd: @escaping (Set<Exercise>) -> Void) {
+        self.filter = ExerciseGroupFilter(exercises: ExerciseStore.splitIntoMuscleGroups(exercises: exercises))
+        self.onAdd = onAdd
+    }
     
     private func resetAndDismiss() {
         self.presentationMode.wrappedValue.dismiss()
@@ -49,7 +54,7 @@ struct AddExercisesSheet: View {
 struct AddExercisesSheet_Previews: PreviewProvider {
     static var previews: some View {
 //        Color.clear.sheet(isPresented: .constant(true)) {
-            AddExercisesSheet(onAdd: { _ in })
+        AddExercisesSheet(exercises: appExerciseStore.exercises, onAdd: { _ in })
 //        }
     }
 }

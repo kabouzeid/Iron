@@ -103,7 +103,7 @@ struct ExerciseDetailView : View {
         Section(header: Text("Muscles".uppercased())) {
             ForEach(self.exercise.primaryMuscleCommonName, id: \.hashValue) { primaryMuscle in
                 HStack {
-                    Text(primaryMuscle.capitalized as String)
+                    Text(primaryMuscle.capitalized)
                     Spacer()
                     Text("Primary")
                         .foregroundColor(.secondary)
@@ -111,7 +111,7 @@ struct ExerciseDetailView : View {
             }
             ForEach(self.exercise.secondaryMuscleCommonName, id: \.hashValue) { secondaryMuscle in
                 HStack {
-                    Text(secondaryMuscle.capitalized as String)
+                    Text(secondaryMuscle.capitalized)
                     Spacer()
                     Text("Secondary")
                         .foregroundColor(.secondary)
@@ -216,7 +216,7 @@ struct ExerciseDetailView : View {
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ExerciseDetailView(exercise: Exercises.findExercise(id: 99)!)
+            ExerciseDetailView(exercise: appExerciseStore.find(with: 99)!)
                 .environmentObject(mockSettingsStoreMetric)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }

@@ -11,6 +11,7 @@ import CoreData
 
 struct HistoryView : View {
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(fetchRequest: HistoryView.fetchRequest) var trainings
@@ -33,7 +34,7 @@ struct HistoryView : View {
                     ) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(training.displayTitle)
+                                Text(training.displayTitle(in: self.exerciseStore.exercises))
                                     .font(.body)
                                 Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration, fallback: "Unknown time")!)")
                                     .font(.caption)
@@ -47,7 +48,7 @@ struct HistoryView : View {
                             }
                             .layoutPriority(1)
                             Spacer()
-                            training.muscleGroupImage
+                            training.muscleGroupImage(in: self.exerciseStore.exercises)
                         }
                     }
                 }
@@ -78,6 +79,7 @@ struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
         HistoryView()
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

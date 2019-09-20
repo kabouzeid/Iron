@@ -10,6 +10,7 @@ import SwiftUI
 import CoreData
 
 struct ActivityChartView: View {
+    @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(fetchRequest: Self.fetchRequest) var trainingHistory
@@ -58,7 +59,7 @@ struct ActivityChartView: View {
             let (trainings, week) = arg
             return BarStack(
                 entries: trainings.map { training in
-                    let muscleGroup = training.muscleGroups.first ?? "other"
+                    let muscleGroup = training.muscleGroups(in: exerciseStore.exercises).first ?? "other"
                     return BarStackEntry(color: Exercise.colorFor(muscleGroup: muscleGroup), label: muscleGroup.capitalized)
                 },
                 label: Self.dateFormatter.string(from: week)
@@ -91,6 +92,7 @@ struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityChartView()
             .environment(\.managedObjectContext, mockManagedObjectContext)
+            .environmentObject(appExerciseStore)
     }
 }
 #endif

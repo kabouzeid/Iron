@@ -10,22 +10,9 @@ import SwiftUI
 import CoreData
 import Combine
 
-private class PinnedChartsStore: ObservableObject {
-    let objectWillChange = ObservableObjectPublisher()
-    
-    var pinnedCharts: [PinnedChart] {
-        get {
-            UserDefaults.standard.pinnedCharts
-        }
-        set {
-            self.objectWillChange.send()
-            UserDefaults.standard.pinnedCharts = newValue
-        }
-    }
-}
-
 struct FeedView : View {
-    @ObservedObject private var pinnedChartsStore = PinnedChartsStore()
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    @ObservedObject private var pinnedChartsStore = appPinnedChartsStore
     
     @State private var showingPinnedChartSelector = false
 
@@ -39,7 +26,9 @@ struct FeedView : View {
                 
                 Section {
                     ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
-                        ExerciseChartViewCell(exercise: Exercises.findExercise(id: chart.exerciseId)!, measurementType: chart.measurementType)
+                        self.exerciseStore.find(with: chart.exerciseId).map {
+                            ExerciseChartViewCell(exercise: $0, measurementType: chart.measurementType)
+                        }
                     }
                     .onDelete { offsets in
                         self.pinnedChartsStore.pinnedCharts.remove(atOffsets: offsets)
@@ -61,24 +50,30 @@ struct FeedView : View {
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: EditButton())
             .sheet(isPresented: $showingPinnedChartSelector) {
-                PinnedChartSelectorSheet(pinnedChartsStore: self.pinnedChartsStore, exerciseMuscleGroups: Exercises.exercisesGrouped) { pinnedChart in
+                PinnedChartSelectorSheet(exercises: self.exerciseStore.exercises) { pinnedChart in
                     self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
                 }
+                .environmentObject(self.pinnedChartsStore)
             }
         }
     }
 }
 
 private struct PinnedChartSelectorSheet: View {
-    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var pinnedChartsStore: PinnedChartsStore
+    @EnvironmentObject var pinnedChartsStore: PinnedChartsStore
     
-    var exerciseMuscleGroups: [[Exercise]]
-    var onSelection: (PinnedChart) -> Void
+    @Environment(\.presentationMode) var presentationMode
+
+    let onSelection: (PinnedChart) -> Void
     
     @State private var selectedExercise: Exercise? = nil
 
-    @ObservedObject private var filter = ExerciseGroupFilter(exercises: Exercises.exercisesGrouped)
+    @ObservedObject private var filter: ExerciseGroupFilter
+    
+    init(exercises: [Exercise], onSelection: @escaping (PinnedChart) -> Void) {
+        filter = ExerciseGroupFilter(exercises: ExerciseStore.splitIntoMuscleGroups(exercises: exercises))
+        self.onSelection = onSelection
+    }
     
     private func resetAndDismiss() {
         self.presentationMode.wrappedValue.dismiss()
@@ -122,6 +117,7 @@ struct FeedView_Previews : PreviewProvider {
         Group {
             FeedView()
                 .environmentObject(mockSettingsStoreMetric)
+                .environmentObject(appExerciseStore)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

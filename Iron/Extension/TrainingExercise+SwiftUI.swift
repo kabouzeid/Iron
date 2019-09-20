@@ -10,13 +10,13 @@ import Foundation
 import SwiftUI
 
 extension TrainingExercise {
-    var muscleGroupImage: some View {
-        let muscleGroup = exercise?.muscleGroup ?? ""
+    func muscleGroupImage(in exercises: [Exercise]) -> some View {
+        let muscleGroup = exercise(in: exercises)?.muscleGroup ?? ""
         return Exercise.imageFor(muscleGroup: muscleGroup).foregroundColor(Exercise.colorFor(muscleGroup: muscleGroup))
     }
     
-    var muscleGroupColor: Color {
-        let muscleGroup = exercise?.muscleGroup ?? ""
+    func muscleGroupColor(in exercises: [Exercise]) -> Color {
+        let muscleGroup = exercise(in: exercises)?.muscleGroup ?? ""
         return Exercise.colorFor(muscleGroup: muscleGroup)
     }
 }

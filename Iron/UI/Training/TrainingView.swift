@@ -11,6 +11,8 @@ import SwiftUI
 struct TrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var restTimerStore: RestTimerStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    @EnvironmentObject var settingsStore: SettingsStore
     
     @ObservedObject var training: Training
     
@@ -30,7 +32,7 @@ struct TrainingView: View {
         case .log:
             return self.trainingsLogSheet.typeErased
         case .exerciseSelector:
-            return AddExercisesSheet(onAdd: { selection in
+            return AddExercisesSheet(exercises: exerciseStore.exercises, onAdd: { selection in
                 for exercise in selection {
                     let trainingExercise = TrainingExercise(context: self.managedObjectContext)
                     self.training.addToTrainingExercises(trainingExercise)
@@ -141,7 +143,7 @@ struct TrainingView: View {
                     currentTrainingExerciseDetailView(trainingExercise: trainingExercise)
                 ) {
                 VStack(alignment: .leading) {
-                    Text(trainingExercise.exercise?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
+                    Text(trainingExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
                         .foregroundColor(isCompleted ? .secondary : .primary)
                     text.map {
                         Text($0)
@@ -180,7 +182,8 @@ struct TrainingView: View {
             ).padding()
             Divider()
             TrainingsLog(training: self.training)
-                .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
+                .environmentObject(settingsStore)
+                .environmentObject(exerciseStore)
         }
     }
     
@@ -210,7 +213,8 @@ struct TrainingView: View {
             ).padding()
             Divider()
             TrainingsLog(training: self.training)
-                .environmentObject(settingsStore) // TODO: remove this (not working as of beta5)
+                .environmentObject(settingsStore)
+                .environmentObject(exerciseStore)
         }
     }
     
@@ -286,7 +290,7 @@ struct TrainingView: View {
                 }
                 .listStyle(GroupedListStyle())
             }
-            .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
+            .navigationBarTitle(Text(training.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
             .navigationBarItems(leading: cancelButton,
                 trailing:
                 HStack(spacing: NAVIGATION_BAR_SPACING) {
@@ -319,14 +323,15 @@ struct TrainingView: View {
 #if DEBUG
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        if restTimerStore.restTimerRemainingTime == nil {
-            restTimerStore.restTimerStart = Date()
-            restTimerStore.restTimerDuration = 10
+        if appRestTimerStore.restTimerRemainingTime == nil {
+            appRestTimerStore.restTimerStart = Date()
+            appRestTimerStore.restTimerDuration = 10
         }
         return TrainingView(training: mockCurrentTraining)
             .environment(\.managedObjectContext, mockManagedObjectContext)
-            .environmentObject(restTimerStore)
-            .environmentObject(settingsStore)
+            .environmentObject(appRestTimerStore)
+            .environmentObject(appSettingsStore)
+            .environmentObject(appExerciseStore)
     }
 }
 #endif

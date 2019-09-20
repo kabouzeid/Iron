@@ -14,6 +14,7 @@ struct TrainingExerciseDetailView : View {
     @Environment(\.editMode) var editMode
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var restTimerStore: RestTimerStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     
     @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var trainingExerciseHistory // will be overwritten in init()
     @ObservedObject var trainingExercise: TrainingExercise
@@ -64,7 +65,7 @@ struct TrainingExerciseDetailView : View {
         } else {
             // TODO: let the user configure default repetitions and weight
             set.repetitions = 5
-            if trainingExercise.exercise?.isBarbellBased ?? false {
+            if trainingExercise.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false {
                 let weightUnit = self.settingsStore.weightUnit
                 set.weight = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
             }
@@ -98,7 +99,7 @@ struct TrainingExerciseDetailView : View {
     
     private var banner: some View {
         TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
-            .listRowBackground(trainingExercise.muscleGroupColor)
+            .listRowBackground(trainingExercise.muscleGroupColor(in: exerciseStore.exercises))
             .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
     }
     
@@ -195,7 +196,7 @@ struct TrainingExerciseDetailView : View {
     
     private var restTimerDuration: TimeInterval {
         // TODO: allow customizable default rest timer for each exercise
-        if trainingExercise.exercise?.isBarbellBased ?? false {
+        if trainingExercise.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false {
             return settingsStore.defaultRestTimeBarbellBased
         } else {
             return settingsStore.defaultRestTime
@@ -256,10 +257,10 @@ struct TrainingExerciseDetailView : View {
                 trainingSetEditor
             } // TODO: else if trainingExercise is finished, show next exercise / finish training button
         }
-        .navigationBarTitle(Text(trainingExercise.exercise?.title ?? ""), displayMode: .inline)
+        .navigationBarTitle(Text(trainingExercise.exercise(in: exerciseStore.exercises)?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
-                trainingExercise.exercise.map {
+                trainingExercise.exercise(in: exerciseStore.exercises).map {
                     NavigationLink(destination: ExerciseDetailView(exercise: $0)
                         .environmentObject(self.settingsStore)) {
                             Image(systemName: "info.circle")
@@ -284,7 +285,8 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
         NavigationView {
         TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
             .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(restTimerStore)
+            .environmentObject(appRestTimerStore)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

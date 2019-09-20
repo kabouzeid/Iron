@@ -11,6 +11,7 @@ import SwiftUI
 struct TrainingDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     @ObservedObject var training: Training
 
 //    @Environment(\.editMode) var editMode
@@ -62,7 +63,7 @@ struct TrainingDetailView : View {
         List {
             Section {
                 TrainingDetailBannerView(training: training)
-                    .listRowBackground(training.muscleGroupColor)
+                    .listRowBackground(training.muscleGroupColor(in: self.exerciseStore.exercises))
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             
@@ -98,7 +99,7 @@ struct TrainingDetailView : View {
                     NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
                         .environmentObject(self.settingsStore)) {
                         VStack(alignment: .leading) {
-                            Text(trainingExercise.exercise?.title ?? "")
+                            Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
                                 .font(.body)
                             ForEach(self.trainingSets(trainingExercise: trainingExercise), id: \.objectID) { trainingSet in
                                 Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
@@ -136,11 +137,11 @@ struct TrainingDetailView : View {
             }
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle(Text(training.displayTitle), displayMode: .inline)
+        .navigationBarTitle(Text(training.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
                 Button(action: {
-                    guard let logText = self.training.logText(weightUnit: self.settingsStore.weightUnit) else { return }
+                    guard let logText = self.training.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
                     let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
                     // TODO: replace this hack with a proper way to retreive the rootViewController
                     guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
@@ -152,7 +153,7 @@ struct TrainingDetailView : View {
             }
         )
         .sheet(isPresented: $showingExerciseSelectorSheet) {
-            AddExercisesSheet(onAdd: { selection in
+            AddExercisesSheet(exercises: self.exerciseStore.exercises, onAdd: { selection in
                 for exercise in selection {
                     let trainingExercise = TrainingExercise(context: self.managedObjectContext)
                     self.training.addToTrainingExercises(trainingExercise)
@@ -169,6 +170,7 @@ struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
         return TrainingDetailView(training: mockTraining)
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

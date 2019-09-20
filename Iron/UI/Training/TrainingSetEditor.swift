@@ -16,6 +16,7 @@ private enum KeyboardType {
 
 struct TrainingSetEditor : View {
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     
     @ObservedObject var trainingSet: TrainingSet
     var onDone: () -> Void = {}
@@ -149,7 +150,7 @@ struct TrainingSetEditor : View {
     
     private var weightStepSize: Double {
         // TODO: let the user configure this for barbell, dumbell and others
-        (trainingSet.trainingExercise?.exercise?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
+        (trainingSet.trainingExercise?.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
     }
     
     private var weightDragger: some View {
@@ -364,12 +365,14 @@ struct TrainingSetEditor_Previews : PreviewProvider {
             TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
                 .environmentObject(mockSettingsStoreMetric)
+                .environmentObject(appExerciseStore)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
             TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
                 .environmentObject(mockSettingsStoreImperial)
+                .environmentObject(appExerciseStore)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct TrainingsLog: View {
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     
     @ObservedObject var training: Training
     
@@ -27,13 +28,13 @@ struct TrainingsLog: View {
         List {
             Section {
                 TrainingsLogBannerView(training: training)
-                    .listRowBackground(training.muscleGroupColor)
+                    .listRowBackground(training.muscleGroupColor(in: exerciseStore.exercises))
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             Section {
                 ForEach(training.trainingExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) { trainingExercise in
                     VStack(alignment: .leading) {
-                        Text(trainingExercise.exercise?.title ?? "")
+                        Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
                             .font(.body)
                         self.trainingExerciseText(trainingExercise: trainingExercise).map {
                             Text($0)
@@ -71,6 +72,7 @@ struct TrainingsLog_Previews: PreviewProvider {
     static var previews: some View {
         TrainingsLog(training: mockCurrentTraining)
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(appExerciseStore)
     }
 }
 #endif

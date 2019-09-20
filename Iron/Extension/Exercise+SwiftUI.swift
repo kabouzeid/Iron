@@ -48,3 +48,13 @@ extension Exercise {
         }
     }
 }
+
+extension Exercise {
+    var muscleGroupImage: some View {
+        Exercise.imageFor(muscleGroup: muscleGroup).foregroundColor(Exercise.colorFor(muscleGroup: muscleGroup))
+    }
+    
+    var muscleGroupColor: Color {
+        Exercise.colorFor(muscleGroup: muscleGroup)
+    }
+}

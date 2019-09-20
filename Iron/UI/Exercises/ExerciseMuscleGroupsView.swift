@@ -10,14 +10,13 @@ import SwiftUI
 
 struct ExerciseMuscleGroupsView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    var exerciseMuscleGroups: [[Exercise]]
+    @EnvironmentObject var exerciseStore: ExerciseStore
     
     func exerciseGroupCell(exercises: [Exercise]) -> some View {
         let muscleGroup = exercises.first?.muscleGroup ?? ""
         return NavigationLink(destination:
             ExercisesView(exercises: exercises)
                 .listStyle(PlainListStyle())
-                .environmentObject(self.settingsStore)
                 .navigationBarTitle(Text(muscleGroup.capitalized), displayMode: .inline)
         ) {
             HStack {
@@ -31,25 +30,44 @@ struct ExerciseMuscleGroupsView : View {
         }
     }
     
+    private var exercisesGrouped: [[Exercise]] {
+        ExerciseStore.splitIntoMuscleGroups(exercises: exerciseStore.exercises)
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 Section {
                     NavigationLink(destination:
-                        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: exerciseMuscleGroups)
+                        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: exercisesGrouped)
                             .environmentObject(settingsStore)
                             .navigationBarTitle(Text("All Exercises"), displayMode: .inline)) {
                         HStack {
                             Text("All")
                             Spacer()
-                            Text("(\(exerciseMuscleGroups.flatMap { $0 }.count))")
+                            Text("(\(exerciseStore.exercises.count))")
                                 .foregroundColor(.secondary)
                         }
                     }
                 }
+                
                 Section {
-                    ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exerciseGroup in
+                    ForEach(exercisesGrouped, id: \.first?.muscleGroup) { exerciseGroup in
                        self.exerciseGroupCell(exercises: exerciseGroup)
+                    }
+                }
+                
+                Section {
+                    NavigationLink(destination:
+                        CustomExercisesView(exercises: exerciseStore.customExercises)
+                            .navigationBarTitle(Text("Custom"), displayMode: .inline)
+                    ) {
+                        HStack {
+                            Text("Custom")
+                            Spacer()
+                            Text("(\(exerciseStore.customExercises.count))")
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
@@ -62,8 +80,9 @@ struct ExerciseMuscleGroupsView : View {
 #if DEBUG
 struct ExerciseCategoryView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
+        ExerciseMuscleGroupsView()
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

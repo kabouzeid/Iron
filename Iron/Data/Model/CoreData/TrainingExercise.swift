@@ -29,8 +29,8 @@ class TrainingExercise: NSManagedObject {
     
     // MARK: Derived properties
     
-    var exercise: Exercise? {
-        Exercises.findExercise(id: Int(exerciseId))
+    func exercise(in exercises: [Exercise]) -> Exercise? {
+        ExerciseStore.find(in: exercises, with: Int(exerciseId))
     }
     
     var isCompleted: Bool? {
@@ -107,7 +107,7 @@ extension TrainingExercise: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(exerciseId, forKey: .id)
-        try container.encodeIfPresent(exercise?.title, forKey: .name)
+        try container.encodeIfPresent(exercise(in: appExerciseStore.exercises)?.title, forKey: .name)
         try container.encodeIfPresent(trainingSets?.array.compactMap { $0 as? TrainingSet }, forKey: .sets)
     }
 }

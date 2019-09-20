@@ -33,7 +33,7 @@ class ExerciseGroupFilter: ObservableObject {
         cancellable = searchSubject
             .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global(qos: .userInteractive))
             .removeDuplicates()
-            .map { Exercises.filterExercises(exercises: exercises, using: $0) }
+            .map { ExerciseStore.filter(exercises: exercises, using: $0) }
             .receive(on: DispatchQueue.main)
             .assign(to: \.exercises, on: self)
     }

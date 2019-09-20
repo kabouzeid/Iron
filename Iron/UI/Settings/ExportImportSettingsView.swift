@@ -12,6 +12,7 @@ import CoreData
 struct ExportImportSettingsView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     
     var body: some View {
         Form {
@@ -33,7 +34,7 @@ struct ExportImportSettingsView: View {
                 Button("As Plain Text File") {
                     guard let trainings = self.fetchTrainings() else { return }
                     
-                    let text = trainings.compactMap { $0.logText(weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
+                    let text = trainings.compactMap { $0.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
                     
                     guard let data = text.data(using: .utf8) else { return }
                     guard let url = self.writeFile(data: data, name: "workout_data.txt") else { return }
@@ -60,7 +61,7 @@ struct ExportImportSettingsView: View {
     }
     
     private func writeFile(data: Data, name: String) -> URL? {
-        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        let path = FileManager.default.temporaryDirectory
         let url = path.appendingPathComponent(name)
         do {
             try data.write(to: url, options: .atomic)
@@ -84,6 +85,7 @@ struct ExportImportSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         ExportImportSettingsView()
             .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(appExerciseStore)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

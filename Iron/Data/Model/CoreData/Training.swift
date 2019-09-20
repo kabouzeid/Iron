@@ -41,11 +41,11 @@ class Training: NSManagedObject {
             .contains { !($0.isCompleted ?? false) }
     }
     
-    var displayTitle: String {
+    func displayTitle(in exercises: [Exercise]) -> String {
         if let title = title {
             return title
         }
-        let muscleGroups = self.muscleGroups
+        let muscleGroups = self.muscleGroups(in: exercises)
         switch muscleGroups.count {
         case 0:
             return "Workout"
@@ -57,12 +57,12 @@ class Training: NSManagedObject {
     }
     
     // no duplicate entries, sorted descending by frequency
-    var muscleGroups: [String] {
+    func muscleGroups(in exercises: [Exercise]) -> [String] {
         var muscleGroups = [String]()
         
         let trainingExercises = self.trainingExercises?.array as? [TrainingExercise] ?? []
         for trainingExercise in trainingExercises {
-            if let exercise = trainingExercise.exercise {
+            if let exercise = trainingExercise.exercise(in: exercises) {
                 // even if there are no sets, add the muscle group at least once
                 let factor = max(trainingExercise.trainingSets?.count ?? 1, 1)
                 muscleGroups.append(contentsOf: Array(repeating: exercise.muscleGroup, count: factor))
@@ -161,7 +161,7 @@ extension Training {
 
 // MARK: Trainings Log
 extension Training {
-    func logText(weightUnit: WeightUnit) -> String? {
+    func logText(in exercises: [Exercise], weightUnit: WeightUnit) -> String? {
         guard let start = start else { return nil }
         guard let duration = duration else { return nil }
         guard let weight = totalCompletedWeight else { return nil }
@@ -172,10 +172,10 @@ extension Training {
         let durationString = "Duration: \(Self.durationFormatter.string(from: duration)!)"
         let weightString = "Total weight: \(weightUnit.format(weight: weight))"
         
-        guard let exercises = trainingExercisesWhereNotAllSetsAreUncompleted else { return nil }
-        let exercisesDescription = exercises
+        guard let trainingExercises = trainingExercisesWhereNotAllSetsAreUncompleted else { return nil }
+        let exercisesDescription = trainingExercises
             .map { trainingExercise -> String in
-                let exerciseTitle = (trainingExercise.exercise?.title ?? "Unknown exercise")
+                let exerciseTitle = (trainingExercise.exercise(in: exercises)?.title ?? "Unknown exercise")
                 guard let trainingSets = trainingExercise.trainingSets else { return exerciseTitle }
                 let setsDescription = trainingSets
                     .compactMap { $0 as? TrainingSet }

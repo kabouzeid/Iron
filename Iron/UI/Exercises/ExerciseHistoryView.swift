@@ -10,7 +10,6 @@ import SwiftUI
 import CoreData
 
 struct ExerciseHistoryView : View {
-    @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TrainingExercise.fetchRequest()) var history // will be overwritten in init()
 
     var exercise: Exercise
@@ -45,7 +44,7 @@ struct ExerciseHistoryView : View {
 #if DEBUG
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseHistoryView(exercise: Exercises.findExercise(id: 42)!)
+        ExerciseHistoryView(exercise: appExerciseStore.find(with: 42)!)
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }

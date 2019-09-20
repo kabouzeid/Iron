@@ -64,7 +64,7 @@ final class SettingsStore: ObservableObject {
     }
 }
 
-let settingsStore = SettingsStore() // singleton
+let appSettingsStore = SettingsStore() // singleton
 
 #if DEBUG
 let mockSettingsStoreMetric: SettingsStore = {

@@ -115,13 +115,13 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         defer { completionHandler() }
         
-        guard let duration = restTimerStore.restTimerDuration else { return}
+        guard let duration = appRestTimerStore.restTimerDuration else { return}
         
         switch response.actionIdentifier {
         case NotificationActionIdentifier.restTimerAdd30.rawValue:
-            restTimerStore.restTimerDuration = duration + 30
+            appRestTimerStore.restTimerDuration = duration + 30
         case NotificationActionIdentifier.restTimerAdd60.rawValue:
-            restTimerStore.restTimerDuration = duration + 60
+            appRestTimerStore.restTimerDuration = duration + 60
         default:
             break
         }

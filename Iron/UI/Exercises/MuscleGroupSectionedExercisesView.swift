@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct MuscleGroupSectionedExercisesView : View {
-    @EnvironmentObject var settingsStore: SettingsStore
     var exerciseMuscleGroups: [[Exercise]]
     
     var body: some View {
@@ -17,8 +16,7 @@ struct MuscleGroupSectionedExercisesView : View {
             ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
                 Section(header: Text(exercises.first?.muscleGroup.uppercased() ?? "")) {
                     ForEach(exercises, id: \.id) { exercise in
-                        NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
-                            .environmentObject(self.settingsStore))
+                        NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
                     }
                 }
             }
@@ -29,7 +27,7 @@ struct MuscleGroupSectionedExercisesView : View {
 #if DEBUG
 struct MuscleGroupSectionedExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: Exercises.exercisesGrouped)
+        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: appExerciseStore.exercises))
             .environmentObject(mockSettingsStoreMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
