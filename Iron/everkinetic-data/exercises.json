@@ -1418,7 +1418,7 @@
         ]
     },
     {
-        "id": 61,
+        "id": 31,
         "name": "dumbbell-incline-bench-press",
         "title": "Bench Press: Dumbbell (Incline)",
         "alias": [],
@@ -1445,12 +1445,12 @@
         "tips": [],
         "references": [],
         "pdf": [
-            "pdf/0061-relaxation.pdf",
-            "pdf/0061-tension.pdf"
+            "pdf/0031-relaxation.pdf",
+            "pdf/0031-tension.pdf"
         ],
         "png": [
-            "png/0061-relaxation.png",
-            "png/0061-tension.png"
+            "png/0031-relaxation.png",
+            "png/0031-tension.png"
         ]
     },
     {
