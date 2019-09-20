@@ -55,7 +55,11 @@ struct TrainingExerciseDetailView : View {
         let index = trainingExercise.trainingSets!.index(of: set)
         let previousSet: TrainingSet?
         if index > 0 { // not the first set
-            previousSet = trainingExercise.trainingSets![index - 1] as? TrainingSet
+            if let set = previousSetFromEqualExercise(for: set, at: index) {
+                previousSet = set
+            } else {
+                previousSet = trainingExercise.trainingSets![index - 1] as? TrainingSet
+            }
         } else { // first set
             previousSet = trainingExerciseHistory.first?.trainingSets?.firstObject as? TrainingSet
         }
@@ -70,6 +74,22 @@ struct TrainingExerciseDetailView : View {
                 set.weight = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
             }
         }
+    }
+    
+    // looks for a previous exercise where the same sequence of sets was performed
+    private func previousSetFromEqualExercise(for set: TrainingSet, at index: Int) -> TrainingSet? {
+        let exercise = trainingExerciseHistory.first {
+            guard let count = $0.trainingSets?.count, index < count  else { return false }
+            for i in 0..<index {
+                guard let trainingSet1 = trainingExercise.trainingSets?[i] as? TrainingSet else { return false }
+                guard let trainingSet2 = $0.trainingSets?[i] as? TrainingSet else { return false }
+                if trainingSet1.weight != trainingSet2.weight || trainingSet1.repetitions != trainingSet2.repetitions {
+                    return false
+                }
+            }
+            return true
+        }
+        return exercise?.trainingSets?[index] as? TrainingSet
     }
     
     private func moveTrainingExerciseBehindLastBegun() {
