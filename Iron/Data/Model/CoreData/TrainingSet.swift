@@ -157,7 +157,7 @@ extension TrainingSet: Encodable {
         try container.encode(repetitions, forKey: .repetitions)
         try container.encode(weight, forKey: .weight)
         try container.encodeIfPresent(displayRpe, forKey: .rpe)
-        try container.encodeIfPresent(tag, forKey: .tag)
+        try container.encodeIfPresent(displayTag?.rawValue, forKey: .tag)
         try container.encodeIfPresent(comment, forKey: .comment)
     }
 }
