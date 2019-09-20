@@ -1890,7 +1890,7 @@
     {
         "id": 89,
         "name": "chin-ups",
-        "title": "Chin Ups",
+        "title": "Chin Up",
         "alias": [],
         "primer": "This is an extremely good exercise for upper arm and middle back strengthening.",
         "type": "isolation",
@@ -1925,7 +1925,7 @@
     {
         "id": 90,
         "name": "narrow-parallel-grip-chin-ups",
-        "title": "Chin Ups (Narrow Parallel Grip)",
+        "title": "Chin Up (Narrow Parallel Grip)",
         "alias": [],
         "primer": "This is an exercise similar to the regular Chin Up but focuses more on shoulder strengthening.",
         "type": "isolation",
