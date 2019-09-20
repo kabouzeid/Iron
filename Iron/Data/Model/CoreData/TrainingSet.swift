@@ -82,6 +82,12 @@ extension TrainingSet {
             rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
         }
     }
+    
+    func logTitle(unit: WeightUnit) -> String {
+        let title = displayTitle(unit: unit)
+        guard let tag = displayTag?.title.capitalized, !tag.isEmpty else { return title }
+        return title + " (\(tag))"
+    }
 }
 
 extension TrainingSet {

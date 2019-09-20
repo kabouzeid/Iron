@@ -180,7 +180,7 @@ extension Training {
                 let setsDescription = trainingSets
                     .compactMap { $0 as? TrainingSet }
                     .filter { $0.isCompleted }
-                    .map { $0.displayTitle(unit: weightUnit) }
+                    .map { $0.logTitle(unit: weightUnit) }
                     .joined(separator: "\n")
                 guard !setsDescription.isEmpty else { return exerciseTitle }
                 return exerciseTitle + "\n" + setsDescription

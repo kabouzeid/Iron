@@ -102,7 +102,7 @@ struct TrainingDetailView : View {
                             Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
                                 .font(.body)
                             ForEach(self.trainingSets(trainingExercise: trainingExercise), id: \.objectID) { trainingSet in
-                                Text(trainingSet.displayTitle(unit: self.settingsStore.weightUnit))
+                                Text(trainingSet.logTitle(unit: self.settingsStore.weightUnit))
                                     .font(Font.body.monospacedDigit())
                                     .foregroundColor(.secondary)
                                     .lineLimit(nil)

@@ -19,7 +19,7 @@ struct TrainingsLog: View {
         let text = trainingSets
             .compactMap { $0 as? TrainingSet }
             .filter { $0.isCompleted }
-            .map { $0.displayTitle(unit: settingsStore.weightUnit) }
+            .map { $0.logTitle(unit: settingsStore.weightUnit) }
             .joined(separator: "\n")
         return text.isEmpty ? nil : text
     }
