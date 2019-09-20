@@ -20,10 +20,11 @@ class NotificationManager: NSObject {
         
         let restTimerAdd30Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd30.rawValue, title: "+30s")
         let restTimerAdd60Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd60.rawValue, title: "+60s")
+        let restTimerAdd90Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd60.rawValue, title: "+90s")
         // Define the notification type
         let restTimerUpCategory =
             UNNotificationCategory(identifier: NotificationCategoryIdentifier.restTimerUp.rawValue,
-                                   actions: [restTimerAdd30Action, restTimerAdd60Action],
+                                   actions: [restTimerAdd30Action, restTimerAdd60Action, restTimerAdd90Action],
                                    intentIdentifiers: [],
                                    hiddenPreviewsBodyPlaceholder: "",
                                    options: [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle, .allowAnnouncement])
@@ -102,6 +103,7 @@ class NotificationManager: NSObject {
     enum NotificationActionIdentifier: String {
         case restTimerAdd30
         case restTimerAdd60
+        case restTimerAdd90
     }
 }
 
@@ -117,13 +119,15 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         
         guard let duration = appRestTimerStore.restTimerDuration else { return}
         
-        switch response.actionIdentifier {
-        case NotificationActionIdentifier.restTimerAdd30.rawValue:
+        guard let actionIdentifier = NotificationActionIdentifier(rawValue: response.actionIdentifier) else { return }
+        
+        switch actionIdentifier {
+        case .restTimerAdd30:
             appRestTimerStore.restTimerDuration = duration + 30
-        case NotificationActionIdentifier.restTimerAdd60.rawValue:
+        case .restTimerAdd60:
             appRestTimerStore.restTimerDuration = duration + 60
-        default:
-            break
+        case .restTimerAdd90:
+            appRestTimerStore.restTimerDuration = duration + 90
         }
     }
 }
