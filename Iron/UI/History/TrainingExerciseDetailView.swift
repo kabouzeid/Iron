@@ -21,6 +21,23 @@ struct TrainingExerciseDetailView : View {
 
     @State private var selectedTrainingSet: TrainingSet? = nil
     
+    @ObservedObject private var trainingExerciseCommentInput = ValueHolder<String?>(initial: nil)
+    private var trainingExerciseComment: Binding<String> {
+        Binding(
+            get: {
+                self.trainingExerciseCommentInput.value ?? self.trainingExercise.comment ?? ""
+        },
+            set: { newValue in
+                self.trainingExerciseCommentInput.value = newValue
+        }
+        )
+    }
+    private func adjustAndSaveTrainingExerciseCommentInput() {
+        guard let newValue = trainingExerciseCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingExerciseCommentInput.value = newValue
+        trainingExercise.comment = newValue.isEmpty ? nil : newValue
+    }
+    
     init(trainingExercise: TrainingExercise) {
         self.trainingExercise = trainingExercise
         _trainingExerciseHistory = FetchRequest(fetchRequest: trainingExercise.historyFetchRequest)
@@ -260,6 +277,14 @@ struct TrainingExerciseDetailView : View {
             List {
                 Section {
                     banner
+                }
+                
+                Section {
+                    TextField("Comment", text: trainingExerciseComment, onEditingChanged: { isEditingTextField in
+                        if !isEditingTextField {
+                            self.adjustAndSaveTrainingExerciseCommentInput()
+                        }
+                    })
                 }
                 
                 Section {
