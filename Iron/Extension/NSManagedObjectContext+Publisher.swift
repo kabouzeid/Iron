@@ -10,14 +10,14 @@ import Foundation
 import Combine
 import CoreData
 
+private var publishers = [NSManagedObjectContext : AnyPublisher<Set<NSManagedObject>, Never>]()
+
 extension NSManagedObjectContext {
     var publisher: AnyPublisher<Set<NSManagedObject>, Never> {
-        NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: self)
-            .receive(on: DispatchQueue.global(qos: .userInteractive))
-            .compactMap { notification in
-                return notification.userInfo
-            }
-            .map { (userInfo) -> Set<NSManagedObject> in
+        if let publisher = publishers[self] { return publisher }
+        let publisher = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: self)
+            .compactMap { $0.userInfo }
+            .map { userInfo -> Set<NSManagedObject> in
                 var changed = Set<NSManagedObject>()
 
                 if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
@@ -33,6 +33,9 @@ extension NSManagedObjectContext {
                 }
                 return changed
             }
+            .share()
             .eraseToAnyPublisher()
+        publishers[self] = publisher
+        return publisher
     }
 }

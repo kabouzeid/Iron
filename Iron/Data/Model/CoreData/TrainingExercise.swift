@@ -90,9 +90,8 @@ extension TrainingExercise {
                     }
                     return managedObject.objectID == self.objectID
                 }
-        }
-        .receive(on: DispatchQueue.main)
-        .sink { _ in self.objectWillChange.send() }
+            }
+            .sink { _ in self.objectWillChange.send() }
     }
 }
 
