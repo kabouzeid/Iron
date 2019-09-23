@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct NumericKeyboard: View {
     @Binding var value: Double
@@ -81,8 +82,12 @@ struct NumericKeyboard: View {
         }
     }
     
+    private func tockSound() {
+        AudioServicesPlaySystemSound(1104)
+    }
+    
     private func textActionKeyboardButton(label: Text, width: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button(action: { self.tockSound(); action() }) {
             label
                 .padding()
                 .foregroundColor(Color.white)
@@ -92,7 +97,7 @@ struct NumericKeyboard: View {
     }
     
     private func imageActionKeyboardButton(label: Image, width: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button(action: { self.tockSound(); action() }) {
             ZStack {
                 Text("0") // only used so this button is the same height as the other buttons
                     .padding()

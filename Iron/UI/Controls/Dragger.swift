@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct Dragger : View {
     // public
@@ -108,6 +109,7 @@ struct Dragger : View {
                     if self.tmpValue != nil { // no feedback on init
                         self.selectionFeedbackGenerator?.selectionChanged()
                         self.selectionFeedbackGenerator?.prepare()
+                        AudioServicesPlaySystemSound(1157) // picker sound
                     }
                     self.tmpValue = newValue
                     self.onDragStep(newValue)
