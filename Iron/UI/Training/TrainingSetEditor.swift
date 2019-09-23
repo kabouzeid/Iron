@@ -259,17 +259,22 @@ struct TrainingSetEditor : View {
 
 private struct MoreView: View {
     @ObservedObject var trainingSet: TrainingSet
-
-    // bridges empty and whitespace values to nil
+    
+    @State private var trainingSetCommentInput: String? // cannot use ValueHolder here, since it would be recreated on changes
     private var trainingSetComment: Binding<String> {
         Binding(
             get: {
-                self.trainingSet.comment ?? ""
+                self.trainingSetCommentInput ?? self.trainingSet.comment ?? ""
             },
             set: { newValue in
-                self.trainingSet.comment = newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : newValue
+                self.trainingSetCommentInput = newValue
             }
         )
+    }
+    private func adjustAndSaveTrainingSetCommentInput() {
+        guard let newValue = trainingSetCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        trainingSetCommentInput = newValue
+        trainingSet.comment = newValue.isEmpty ? nil : newValue
     }
 
     private func tagButton(tag: TrainingSetTag) -> some View {
@@ -336,7 +341,11 @@ private struct MoreView: View {
             }
             
             Section(header: Text("Comment".uppercased())) {
-                TextField("Comment", text: trainingSetComment)
+                TextField("Comment", text: trainingSetComment, onEditingChanged: { isEditingTextField in
+                    if !isEditingTextField {
+                        self.adjustAndSaveTrainingSetCommentInput()
+                    }
+                })
             }
             
             Section(header:
