@@ -59,6 +59,25 @@ struct TrainingDetailView : View {
         trainingExercise.trainingSets?.array as? [TrainingSet] ?? []
     }
     
+    private func trainingExerciseView(trainingExercise: TrainingExercise) -> some View {
+        VStack(alignment: .leading) {
+            Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
+                .font(.body)
+            trainingExercise.comment.map {
+                Text($0.enquoted)
+                    .lineLimit(1)
+                    .font(Font.caption.italic())
+                    .foregroundColor(.secondary)
+            }
+            ForEach(self.trainingSets(trainingExercise: trainingExercise), id: \.objectID) { trainingSet in
+                Text(trainingSet.logTitle(unit: self.settingsStore.weightUnit))
+                    .font(Font.body.monospacedDigit())
+                    .foregroundColor(.secondary)
+                    .lineLimit(nil)
+            }
+        }
+    }
+    
     var body: some View {
         List {
             Section {
@@ -96,18 +115,8 @@ struct TrainingDetailView : View {
 
             Section {
                 ForEach(trainingExercises, id: \.objectID) { trainingExercise in
-                    NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise)
-                        .environmentObject(self.settingsStore)) {
-                        VStack(alignment: .leading) {
-                            Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
-                                .font(.body)
-                            ForEach(self.trainingSets(trainingExercise: trainingExercise), id: \.objectID) { trainingSet in
-                                Text(trainingSet.logTitle(unit: self.settingsStore.weightUnit))
-                                    .font(Font.body.monospacedDigit())
-                                    .foregroundColor(.secondary)
-                                    .lineLimit(nil)
-                            }
-                        }
+                    NavigationLink(destination: TrainingExerciseDetailView(trainingExercise: trainingExercise).environmentObject(self.settingsStore)) {
+                        self.trainingExerciseView(trainingExercise: trainingExercise)
                     }
                 }
                 .onDelete { offsets in
