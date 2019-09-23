@@ -59,7 +59,7 @@ struct ExerciseMuscleGroupsView : View {
                 
                 Section {
                     NavigationLink(destination:
-                        CustomExercisesView(exercises: exerciseStore.customExercises)
+                        CustomExercisesView()
                             .navigationBarTitle(Text("Custom"), displayMode: .inline)
                     ) {
                         HStack {

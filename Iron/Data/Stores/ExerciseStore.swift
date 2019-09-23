@@ -58,6 +58,27 @@ extension ExerciseStore {
         self.customExercises = (try? Self.loadExercises(from: url)) ?? []
     }
     
+    func updateCustomExercise(with id: Int, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], barbellBased: Bool) {
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return }
+        
+        var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let d = description, d.isEmpty {
+            description = nil
+        }
+        
+        guard let url = customExercisesURL else { return }
+        var customExercises = (try? Self.loadExercises(from: url)) ?? []
+        
+        assert(id >= Exercise.customExerciseIdStart)
+        guard customExercises.contains(where: { $0.id == id }) else { return } // make sure the exercise exists
+        customExercises.removeAll { $0.id == id } // remove the old exercise
+        customExercises.append(Exercise(id: id, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: barbellBased ? ["barbell"] : [], steps: [], tips: [], references: [], pdfPaths: []))
+        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
+        
+        self.customExercises = ((try? Self.loadExercises(from: url)) ?? [])
+    }
+    
     func deleteCustomExercise(with id: Int) {
         guard let url = customExercisesURL else { return }
         guard var customExercises = try? Self.loadExercises(from: url) else { return }

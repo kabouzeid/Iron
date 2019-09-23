@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
@@ -18,8 +19,20 @@ struct ExerciseDetailView : View {
     private enum SheetType: Identifiable {
         case statistics
         case history
+        case editExercise
         
         var id: Self { self }
+    }
+    
+    private func sheetView(type: SheetType) -> AnyView {
+        switch type {
+        case .history:
+            return self.exerciseHistorySheet.typeErased
+        case .statistics:
+            return self.exerciseStatisticsSheet.typeErased
+        case .editExercise:
+            return EditCustomExerciseSheet(exercise: exercise).environmentObject(self.exerciseStore).typeErased
+        }
     }
     
     private func pdfToImage(url: URL, fit: CGSize) -> UIImage? {
@@ -192,11 +205,7 @@ struct ExerciseDetailView : View {
             .listStyle(GroupedListStyle())
         }
         .sheet(item: $activeSheet) { type in
-            if type == .history {
-                self.exerciseHistorySheet
-            } else if type == .statistics {
-                self.exerciseStatisticsSheet
-            }
+            self.sheetView(type: type)
         }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
@@ -206,6 +215,11 @@ struct ExerciseDetailView : View {
                 }
                 Button(action: { self.activeSheet = .statistics }) {
                     Image(systemName: "waveform.path.ecg")
+                }
+                if exercise.isCustom {
+                    Button("Edit") {
+                        self.activeSheet = .editExercise
+                    }
                 }
             }
         )
