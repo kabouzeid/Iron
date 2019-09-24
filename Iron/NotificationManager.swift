@@ -20,7 +20,7 @@ class NotificationManager: NSObject {
         
         let restTimerAdd30Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd30.rawValue, title: "+30s")
         let restTimerAdd60Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd60.rawValue, title: "+60s")
-        let restTimerAdd90Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd60.rawValue, title: "+90s")
+        let restTimerAdd90Action = UNNotificationAction(identifier: NotificationActionIdentifier.restTimerAdd90.rawValue, title: "+90s")
         // Define the notification type
         let restTimerUpCategory =
             UNNotificationCategory(identifier: NotificationCategoryIdentifier.restTimerUp.rawValue,
