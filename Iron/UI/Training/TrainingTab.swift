@@ -11,7 +11,7 @@ import SwiftUI
 struct TrainingTab: View {
     @FetchRequest(fetchRequest: Training.currentTrainingFetchRequest) var currentTrainings
     
-    var currentTraining: Training? {
+    private var currentTraining: Training? {
         assert(currentTrainings.count <= 1)
         return currentTrainings.first
     }
