@@ -100,6 +100,7 @@ extension TrainingExercise: Encodable {
     private enum CodingKeys: String, CodingKey {
         case id
         case name
+        case comment
         case sets
     }
     
@@ -107,6 +108,7 @@ extension TrainingExercise: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(exerciseId, forKey: .id)
         try container.encodeIfPresent(exercise(in: appExerciseStore.exercises)?.title, forKey: .name)
+        try container.encodeIfPresent(comment, forKey: .comment)
         try container.encodeIfPresent(trainingSets?.array.compactMap { $0 as? TrainingSet }, forKey: .sets)
     }
 }
