@@ -93,9 +93,6 @@
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
-		8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE0707C22D1F76B0038B7E3 /* Lottie */; };
-		8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */; };
-		8AE0708122D1FABD0038B7E3 /* lottie in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0708022D1FABD0038B7E3 /* lottie */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
 		8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */; };
 		8AE0A799233119C40021EE23 /* EditCustomExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */; };
@@ -220,8 +217,6 @@
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
-		8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LottieView.swift; sourceTree = "<group>"; };
-		8AE0708022D1FABD0038B7E3 /* lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lottie; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportSettingsView.swift; sourceTree = "<group>"; };
 		8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCustomExerciseView.swift; sourceTree = "<group>"; };
@@ -252,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */,
-				8AE0707D22D1F76B0038B7E3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +302,6 @@
 				8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */,
 				8A652C4722D10C4900DBE10E /* BarChartView.swift */,
 				8A652C4522D1055600DBE10E /* LineChartView.swift */,
-				8AE0707E22D1F79E0038B7E3 /* _LottieView.swift */,
 				8A3815472301803A008ACDAD /* Refresher.swift */,
 				8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */,
 				8ACBE80C231A69940027D3A8 /* ValueHolder.swift */,
@@ -353,7 +346,6 @@
 				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
 				8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */,
 				8AC4C9D123254A7E008E474A /* quotes */,
-				8AE0708022D1FABD0038B7E3 /* lottie */,
 				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
 				8A16BBD822E337A0002150F0 /* Benchmark.swift */,
 			);
@@ -539,7 +531,6 @@
 			name = Iron;
 			packageProductDependencies = (
 				8A12D7A922C4FB38006B29AA /* Charts */,
-				8AE0707C22D1F76B0038B7E3 /* Lottie */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Iron.app */;
@@ -596,7 +587,6 @@
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
 				8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */,
-				8AE0707B22D1F76B0038B7E3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -614,7 +604,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AC4C9D223254A7E008E474A /* quotes in Resources */,
-				8AE0708122D1FABD0038B7E3 /* lottie in Resources */,
 				8A7D6EBD200C156500AA0FA7 /* everkinetic-data in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,
@@ -706,7 +695,6 @@
 				8AFE11B4232CF2E2000E9393 /* SheetBar.swift in Sources */,
 				8AF92550232FD47A00C6977D /* ExerciseGroupFilter.swift in Sources */,
 				8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */,
-				8AE0707F22D1F79E0038B7E3 /* _LottieView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,
 				8AC8063D22BAC54200086032 /* FeedView.swift in Sources */,
 				8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */,
@@ -1010,14 +998,6 @@
 				kind = branch;
 			};
 		};
-		8AE0707B22D1F76B0038B7E3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1025,11 +1005,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
-		};
-		8AE0707C22D1F76B0038B7E3 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8AE0707B22D1F76B0038B7E3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 
