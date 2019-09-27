@@ -8,15 +8,20 @@
 
 import UIKit
 import CoreData
-import UserNotifications
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        SKPaymentQueue.default().add(StoreObserver.shared)
+        refreshEntitlements()
         NotificationManager.shared.requestAuthorization()
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(StoreObserver.shared)
     }
 
     // MARK: UISceneSession Lifecycle
@@ -31,6 +36,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    // MARK: - IAP
+    
+    private func refreshEntitlements() {
+        ReceiptFetcher.fetch { result in
+            switch result {
+            case .success(let data):
+                ReceiptVerifier.verify(receiptData: data) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let response):
+                            do { try ProStatusStore.shared.updateProExpirationDate(response: response) } catch { print(error) }
+                            ProStatusStore.shared.updateProLifetime(response: response)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     // MARK: - Core Data stack

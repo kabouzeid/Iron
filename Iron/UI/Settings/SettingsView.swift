@@ -46,6 +46,12 @@ struct SettingsView : View {
                         Text("Export / Import Workout Data")
                     }
                 }
+                
+                Section {
+                    NavigationLink(destination: PurchaseView()) {
+                        Text("Iron Pro")
+                    }
+                }
             }
             .navigationBarTitle(Text("Settings"))
         }
