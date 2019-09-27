@@ -10,25 +10,15 @@ import Foundation
 
 extension UserDefaults {
     enum IAPKeys: String {
-        case proExpirationDate
-        case purchasedProLifetime
+        case entitlements
     }
     
-    var proExpirationDate: Date? {
+    var entitlements: [String] {
         set {
-            self.set(newValue, forKey: IAPKeys.proExpirationDate.rawValue)
+            self.set(newValue, forKey: IAPKeys.entitlements.rawValue)
         }
         get {
-            self.object(forKey: IAPKeys.proExpirationDate.rawValue) as? Date
-        }
-    }
-    
-    var purchasedProLifetime: Bool {
-        set {
-            self.set(newValue, forKey: IAPKeys.purchasedProLifetime.rawValue)
-        }
-        get {
-            self.object(forKey: IAPKeys.purchasedProLifetime.rawValue) as? Bool ?? false
+            self.array(forKey: IAPKeys.entitlements.rawValue) as? [String] ?? []
         }
     }
 }

@@ -70,6 +70,7 @@ enum ReceiptVerifier {
         let dataTask = URLSession.shared.dataTask(with: request) { data, _, urlError in
             if let urlError = urlError {
                 completion(.failure(.network(urlError)))
+                return
             }
             
             guard let data = data else {

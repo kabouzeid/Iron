@@ -9,10 +9,11 @@
 import Foundation
 
 struct IAPIdentifiers {
+    static let pro = Self.proSubscriptions + [Self.proLifetime]
+    static let proSubscriptions = [Self.proMonthly, Self.proYearly]
+    
     static let proMonthly = "pro_monthly"
     static let proYearly = "pro_yearly"
     
     static let proLifetime = "pro_lifetime"
-    
-    static let proSubscriptions = [Self.proMonthly, Self.proYearly]
 }

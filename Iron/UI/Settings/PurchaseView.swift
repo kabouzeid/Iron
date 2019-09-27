@@ -12,7 +12,7 @@ import StoreKit
 
 struct PurchaseView: View {
     @ObservedObject private var storeManager = StoreManager.shared // should go in the environment later
-    @ObservedObject private var proStatusStore = ProStatusStore.shared // should go in the environment later
+    @ObservedObject private var proStatusStore = EntitlementsStore.shared // should go in the environment later
     
     private var proMonthlyProduct: SKProduct? {
         storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proMonthly }
@@ -29,8 +29,6 @@ struct PurchaseView: View {
         List {
             Section(header:
                 Text("is pro: \(proStatusStore.isPro ? "Yes" : "No")")
-                    + Text("\n")
-                    + Text("expires: \(proStatusStore.proSubscriptionExpirationDate.map { expirationDateFormatter.string(from: $0) } ?? "nil")")
             ) {
                 proMonthlyProduct.map {
                     ProductCell(product: $0)

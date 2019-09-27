@@ -48,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let response):
-                            do { try ProStatusStore.shared.updateProExpirationDate(response: response) } catch { print(error) }
-                            ProStatusStore.shared.updateProLifetime(response: response)
+                            do { try EntitlementsStore.shared.updateEntitlements(response: response) } catch { print(error) }
                         case .failure(let error):
                             print(error)
                         }

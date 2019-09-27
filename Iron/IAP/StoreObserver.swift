@@ -60,8 +60,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
                         switch result {
                         case .success(let response):
                             // TODO: replace with own server response
-                            do { try ProStatusStore.shared.updateProExpirationDate(response: response) } catch { print(error); return }
-                            ProStatusStore.shared.updateProLifetime(response: response)
+                            do { try EntitlementsStore.shared.updateEntitlements(response: response) } catch { print(error) }
                             
                             for transaction in transactions {
                                 // TODO: if transaction in server response mark as finished
