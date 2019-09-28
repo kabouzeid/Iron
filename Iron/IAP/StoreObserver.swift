@@ -55,12 +55,11 @@ extension StoreObserver: SKPaymentTransactionObserver {
         ReceiptFetcher.fetch { result in
             switch result {
             case .success(let data):
-                ReceiptVerifier.verify(receiptData: data) { result in
+                ReceiptVerifier.verify(receipt: data) { result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let response):
-                            // TODO: replace with own server response
-                            do { try EntitlementsStore.shared.updateEntitlements(response: response) } catch { print(error) }
+                            EntitlementsStore.shared.updateEntitlements(response: response)
                             
                             for transaction in transactions {
                                 // TODO: if transaction in server response mark as finished

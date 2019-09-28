@@ -19,15 +19,14 @@ enum ReceiptFetcher {
     
     /// verifies with the production server first, and then with the sandbox server if necessary
     static func fetch(completion: @escaping (Result<Data, FetchError>) -> Void) {
-        print("fetch receipt")
+        print("fetching receipt...")
         if let data = fetchLocalReceipt() {
             print("found local receipt")
             completion(.success(data))
         } else {
-            print("request receipt")
+            print("request receipt...")
             let receiptRequest = ReceiptRequest { receiptRequest, result in
                 receiptRequests.remove(receiptRequest)
-                print("#receiptRequests after \(receiptRequests.count)")
                 switch result {
                 case .success:
                     if let data = fetchLocalReceipt() {
@@ -41,7 +40,6 @@ enum ReceiptFetcher {
                 }
             }
             receiptRequests.insert(receiptRequest)
-            print("#receiptRequests \(receiptRequests.count)")
             receiptRequest.start()
         }
     }
