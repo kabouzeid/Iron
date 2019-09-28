@@ -12,32 +12,55 @@ import StoreKit
 
 struct PurchaseView: View {
     @ObservedObject private var storeManager = StoreManager.shared // should go in the environment later
-    @ObservedObject private var proStatusStore = EntitlementsStore.shared // should go in the environment later
+    @ObservedObject private var entitlementsStore = EntitlementsStore.shared // should go in the environment later
     
     private var proMonthlyProduct: SKProduct? {
         storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proMonthly }
     }
     
-    private var expirationDateFormatter: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
-        return dateFormatter
+    private var proYearlyProduct: SKProduct? {
+        storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proYearly }
+    }
+    
+    private var subscriptionInfo: String? {
+        "After the 1 week free trial your subscription automatically renews and your iTunes Account will be charged for the upcoming period unless you cancel the subscription at least 24 hours before the end of the trial period. You can cancel your subscription at any time."
     }
     
     var body: some View {
         List {
-            Section(header:
-                Text("is pro: \(proStatusStore.isPro ? "Yes" : "No")")
-            ) {
+            Section(footer: Text(subscriptionInfo ?? "")) {
                 proMonthlyProduct.map {
-                    ProductCell(product: $0)
+                    ProductCell(
+                        product: $0,
+                        purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
+                    )
+                }
+                
+                proYearlyProduct.map {
+                    ProductCell(
+                        product: $0,
+                        purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
+                    )
+                }
+                
+                Button("Manage Subscriptions") {
+                    // TODO
                 }
             }
             
             Section {
                 Button("Restore Purchases") {
                     StoreObserver.shared.restore()
+                }
+            }
+            
+            Section {
+                Button("Terms of Use") {
+                    // TODO
+                }
+                
+                Button("Privacy Policy") {
+                    // TODO
                 }
             }
         }
@@ -52,14 +75,39 @@ struct PurchaseView: View {
 private struct ProductCell: View {
     let product: SKProduct
     
+    let purchased: Bool
+    
+    private var buttonText: String {
+        if purchased {
+            if isSubscription {
+                return "Active"
+            } else {
+                return "Purchased"
+            }
+        } else {
+            guard let localPrice = product.localizedPrice else {
+                return isSubscription ? "Subscribe" : "Buy"
+            }
+            guard let subscriptionPeriod = product.subscriptionPeriod else {
+                return localPrice
+            }
+            return localPrice + " / " + subscriptionPeriod.text
+        }
+    }
+    
+    private var isSubscription: Bool {
+        product.subscriptionPeriod != nil
+    }
+    
     var body: some View {
         HStack {
             Text(product.localizedTitle)
             Spacer()
+            
             Button(action: {
                 StoreObserver.shared.buy(product: self.product)
             }) {
-                Text(product.localizedPrice ?? "Subscribe")
+                Text(buttonText)
                     .fontWeight(.semibold)
                     .padding([.leading, .trailing], 12)
                     .padding([.top, .bottom], 6)
@@ -69,6 +117,25 @@ private struct ProductCell: View {
                 )
             }
             .buttonStyle(BorderlessButtonStyle())
+            .disabled(purchased)
+        }
+        .padding([.top, .bottom], 8)
+    }
+}
+
+extension SKProductSubscriptionPeriod {
+    var text: String {
+        switch unit {
+        case .day:
+            return numberOfUnits > 1 ? "\(numberOfUnits) Days" : "Day"
+        case .month:
+            return numberOfUnits > 1 ? "\(numberOfUnits) Months" : "Month"
+        case .week:
+            return numberOfUnits > 1 ? "\(numberOfUnits) Weeks" : "Week"
+        case .year:
+            return numberOfUnits > 1 ? "\(numberOfUnits) Years" : "Year"
+        @unknown default:
+            fatalError()
         }
     }
 }

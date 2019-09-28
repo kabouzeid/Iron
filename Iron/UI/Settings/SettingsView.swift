@@ -14,6 +14,12 @@ struct SettingsView : View {
     var body: some View {
         NavigationView {
             Form {
+                Section {
+                    NavigationLink(destination: PurchaseView()) {
+                        Text("Iron Pro")
+                    }
+                }
+                
                 Picker("Weight Unit", selection: $settingsStore.weightUnit) {
                     ForEach(WeightUnit.allCases, id: \.self) { weightUnit in
                         Text(weightUnit.title).tag(weightUnit)
@@ -44,12 +50,6 @@ struct SettingsView : View {
                 Section {
                     NavigationLink(destination: ExportImportSettingsView()) {
                         Text("Export / Import Workout Data")
-                    }
-                }
-                
-                Section {
-                    NavigationLink(destination: PurchaseView()) {
-                        Text("Iron Pro")
                     }
                 }
             }
