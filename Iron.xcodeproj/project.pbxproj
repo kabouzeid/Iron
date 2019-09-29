@@ -101,7 +101,7 @@
 		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
-		8AD90A19233D1E2000328D96 /* EntitlementsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementsStore.swift */; };
+		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
 		8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */; };
@@ -235,7 +235,7 @@
 		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
-		8AD90A18233D1E2000328D96 /* EntitlementsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementsStore.swift; sourceTree = "<group>"; };
+		8AD90A18233D1E2000328D96 /* EntitlementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementStore.swift; sourceTree = "<group>"; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportSettingsView.swift; sourceTree = "<group>"; };
@@ -542,7 +542,7 @@
 				8A38154D23019A3F008ACDAD /* RestTimerStore.swift */,
 				8AE0A7A1233128DE0021EE23 /* ExerciseStore.swift */,
 				8A81E85523328D610094BAAF /* PinnedChartsStore.swift */,
-				8AD90A18233D1E2000328D96 /* EntitlementsStore.swift */,
+				8AD90A18233D1E2000328D96 /* EntitlementStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -766,7 +766,7 @@
 				8AB8A5972034C0AF004366F2 /* TrainingExercise.swift in Sources */,
 				8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */,
 				8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */,
-				8AD90A19233D1E2000328D96 /* EntitlementsStore.swift in Sources */,
+				8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */,
 				8AF8919623215FEE0024B2EF /* IndexSet+Identifiable.swift in Sources */,
 				8A1E335322C5570B00B1E04B /* Dragger.swift in Sources */,
 				8A799F5F22BF868500DD5E1B /* TrainingExerciseDetailView.swift in Sources */,

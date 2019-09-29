@@ -11,6 +11,7 @@ import SwiftUI
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
+    @EnvironmentObject var entitlementStore: EntitlementStore
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
@@ -219,7 +220,7 @@ struct ExerciseDetailView : View {
                 if exercise.isCustom {
                     Button("Edit") {
                         self.activeSheet = .editExercise
-                    }
+                    }.disabled(!self.entitlementStore.isPro)
                 }
             }
         )

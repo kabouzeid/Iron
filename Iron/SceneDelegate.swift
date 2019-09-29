@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .environmentObject(SettingsStore.shared)
                     .environmentObject(RestTimerStore.shared)
                     .environmentObject(ExerciseStore.shared)
-                    .environmentObject(EntitlementsStore.shared)
+                    .environmentObject(EntitlementStore.shared)
                     .environment(\.managedObjectContext, AppDelegate.instance.persistentContainer.viewContext)
             )
             self.window = window

@@ -59,7 +59,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let response):
-                            EntitlementsStore.shared.updateEntitlements(response: response)
+                            EntitlementStore.shared.updateEntitlements(response: response)
                             
                             for transaction in transactions {
                                 // TODO: if transaction in server response mark as finished

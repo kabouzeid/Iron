@@ -11,6 +11,7 @@ import CoreData
 
 struct CustomExercisesView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var entitlementStore: EntitlementStore
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
@@ -34,7 +35,7 @@ struct CustomExercisesView: View {
                     Image(systemName: "plus")
                     Text("Create Exercise")
                 }
-            }
+            }.disabled(!entitlementStore.isPro)
         }
         .listStyle(GroupedListStyle())
         .navigationBarItems(trailing: EditButton())
@@ -73,6 +74,7 @@ struct CustomExercisesView_Previews: PreviewProvider {
         CustomExercisesView()
             .environmentObject(SettingsStore.shared)
             .environmentObject(ExerciseStore.shared)
+            .environmentObject(EntitlementStore.mockPro)
     }
 }
 #endif

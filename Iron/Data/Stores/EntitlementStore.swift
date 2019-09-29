@@ -1,5 +1,5 @@
 //
-//  EntitlementsStore.swift
+//  EntitlementStore.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 26.09.19.
@@ -9,8 +9,8 @@
 import Foundation
 import Combine
 
-final class EntitlementsStore: ObservableObject {
-    static let shared = EntitlementsStore(userDefaults: UserDefaults.standard)
+final class EntitlementStore: ObservableObject {
+    static let shared = EntitlementStore(userDefaults: UserDefaults.standard)
     
     let objectWillChange = ObservableObjectPublisher()
     
@@ -32,16 +32,32 @@ final class EntitlementsStore: ObservableObject {
     }
 }
 
-extension EntitlementsStore {
+extension EntitlementStore {
     var isPro: Bool {
         IAPIdentifiers.pro.contains { entitlements.contains($0) }
     }
 }
 
-extension EntitlementsStore {
+extension EntitlementStore {
     func updateEntitlements(response: VerificationResponse) {
         assert(response.status == 0)
         entitlements = response.entitlements
         print("updated entitlements: \(entitlements)")
     }
 }
+
+#if DEBUG
+extension EntitlementStore {
+    static let mockPro: EntitlementStore = {
+        let store = EntitlementStore(userDefaults: UserDefaults(suiteName: "mock_pro")!)
+        store.entitlements = ["pro_monthly"]
+        return store
+    }()
+
+    static let mockNoPro: EntitlementStore = {
+        let store = EntitlementStore(userDefaults: UserDefaults(suiteName: "mock_no_pro")!)
+        store.entitlements = []
+        return store
+    }()
+}
+#endif
