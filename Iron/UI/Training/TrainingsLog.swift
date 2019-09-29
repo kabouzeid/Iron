@@ -71,8 +71,8 @@ private struct TrainingsLogBannerView : View {
 struct TrainingsLog_Previews: PreviewProvider {
     static var previews: some View {
         TrainingsLog(training: mockCurrentTraining)
-            .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(appExerciseStore)
+            .environmentObject(SettingsStore.mockMetric)
+            .environmentObject(ExerciseStore.shared)
     }
 }
 #endif

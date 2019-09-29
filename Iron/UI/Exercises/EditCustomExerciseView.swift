@@ -146,7 +146,7 @@ struct MuscleSelectionView: View {
 struct CreateCustomExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         EditCustomExerciseView(exerciseValues: .constant(.init(title: "", description: "", muscles: Set(), barbellBased: false)))
-            .environmentObject(appExerciseStore)
+            .environmentObject(ExerciseStore.shared)
     }
 }
 #endif

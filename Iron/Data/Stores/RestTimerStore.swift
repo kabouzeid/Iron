@@ -23,15 +23,17 @@ let restTimerCustomTimes: [TimeInterval] = {
 }()
 
 final class RestTimerStore: ObservableObject {
+    static let shared = RestTimerStore() // singleton
+
     let objectWillChange = ObservableObjectPublisher()
     
     private var userDefaults: UserDefaults
     
-    fileprivate init(userDefaults: UserDefaults) {
+    private init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     
-    fileprivate convenience init() {
+    private convenience init() {
         self.init(userDefaults: UserDefaults.standard)
     }
     
@@ -81,5 +83,3 @@ extension RestTimerStore {
         return remainingTime
     }
 }
-
-let appRestTimerStore = RestTimerStore() // singleton

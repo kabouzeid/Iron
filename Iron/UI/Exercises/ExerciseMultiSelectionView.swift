@@ -29,7 +29,7 @@ struct ExerciseMultiSelectionView: View {
 #if DEBUG
 struct ExerciseMultiSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseMultiSelectionView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: appExerciseStore.exercises), selection: .constant(Set()))
+        ExerciseMultiSelectionView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.exercises), selection: .constant(Set()))
     }
 }
 #endif

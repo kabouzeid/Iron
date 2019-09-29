@@ -92,7 +92,7 @@ struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityChartView()
             .environment(\.managedObjectContext, mockManagedObjectContext)
-            .environmentObject(appExerciseStore)
+            .environmentObject(ExerciseStore.shared)
     }
 }
 #endif

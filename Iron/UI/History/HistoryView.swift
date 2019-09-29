@@ -78,8 +78,8 @@ struct HistoryView : View {
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
         HistoryView()
-            .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(appExerciseStore)
+            .environmentObject(SettingsStore.mockMetric)
+            .environmentObject(ExerciseStore.shared)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

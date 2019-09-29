@@ -329,9 +329,9 @@ struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
         TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
-            .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(appRestTimerStore)
-            .environmentObject(appExerciseStore)
+            .environmentObject(SettingsStore.mockMetric)
+            .environmentObject(RestTimerStore.shared)
+            .environmentObject(ExerciseStore.shared)
             .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

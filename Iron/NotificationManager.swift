@@ -117,17 +117,17 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         defer { completionHandler() }
         
-        guard let duration = appRestTimerStore.restTimerDuration else { return}
+        guard let duration = RestTimerStore.shared.restTimerDuration else { return}
         
         guard let actionIdentifier = NotificationActionIdentifier(rawValue: response.actionIdentifier) else { return }
         
         switch actionIdentifier {
         case .restTimerAdd30:
-            appRestTimerStore.restTimerDuration = duration + 30
+            RestTimerStore.shared.restTimerDuration = duration + 30
         case .restTimerAdd60:
-            appRestTimerStore.restTimerDuration = duration + 60
+            RestTimerStore.shared.restTimerDuration = duration + 60
         case .restTimerAdd90:
-            appRestTimerStore.restTimerDuration = duration + 90
+            RestTimerStore.shared.restTimerDuration = duration + 90
         }
     }
 }

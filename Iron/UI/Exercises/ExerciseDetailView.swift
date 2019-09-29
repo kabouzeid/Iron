@@ -230,8 +230,8 @@ struct ExerciseDetailView : View {
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ExerciseDetailView(exercise: appExerciseStore.find(with: 99)!)
-                .environmentObject(mockSettingsStoreMetric)
+            ExerciseDetailView(exercise: ExerciseStore.shared.find(with: 99)!)
+                .environmentObject(SettingsStore.mockMetric)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

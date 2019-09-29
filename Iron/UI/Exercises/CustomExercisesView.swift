@@ -71,8 +71,8 @@ struct CustomExercisesView: View {
 struct CustomExercisesView_Previews: PreviewProvider {
     static var previews: some View {
         CustomExercisesView()
-            .environmentObject(appSettingsStore)
-            .environmentObject(appExerciseStore)
+            .environmentObject(SettingsStore.shared)
+            .environmentObject(ExerciseStore.shared)
     }
 }
 #endif

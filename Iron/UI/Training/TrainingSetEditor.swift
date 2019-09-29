@@ -373,15 +373,15 @@ struct TrainingSetEditor_Previews : PreviewProvider {
         return Group {
             TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
-                .environmentObject(mockSettingsStoreMetric)
-                .environmentObject(appExerciseStore)
+                .environmentObject(SettingsStore.mockMetric)
+                .environmentObject(ExerciseStore.shared)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
             TrainingSetEditor(trainingSet: mockTrainingSet)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
-                .environmentObject(mockSettingsStoreImperial)
-                .environmentObject(appExerciseStore)
+                .environmentObject(SettingsStore.mockImperial)
+                .environmentObject(ExerciseStore.shared)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             

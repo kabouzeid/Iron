@@ -30,7 +30,7 @@ struct TrainingDetailBannerView : View {
 struct TrainingDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
         TrainingDetailBannerView(training: mockTraining)
-            .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(SettingsStore.mockMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }

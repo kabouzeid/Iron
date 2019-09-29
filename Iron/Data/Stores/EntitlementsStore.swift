@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class EntitlementsStore: ObservableObject {
+final class EntitlementsStore: ObservableObject {
     static let shared = EntitlementsStore(userDefaults: UserDefaults.standard)
     
     let objectWillChange = ObservableObjectPublisher()

@@ -28,8 +28,8 @@ struct ExerciseChartViewCell : View {
 #if DEBUG
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartViewCell(exercise: appExerciseStore.find(with: 42)!, measurementType: .oneRM)
-            .environmentObject(mockSettingsStoreMetric)
+        ExerciseChartViewCell(exercise: ExerciseStore.shared.find(with: 42)!, measurementType: .oneRM)
+            .environmentObject(SettingsStore.mockMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }

@@ -23,9 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView:
                 ContentView()
-                    .environmentObject(appSettingsStore)
-                    .environmentObject(appRestTimerStore)
-                    .environmentObject(appExerciseStore)
+                    .environmentObject(SettingsStore.shared)
+                    .environmentObject(RestTimerStore.shared)
+                    .environmentObject(ExerciseStore.shared)
+                    .environmentObject(EntitlementsStore.shared)
                     .environment(\.managedObjectContext, AppDelegate.instance.persistentContainer.viewContext)
             )
             self.window = window

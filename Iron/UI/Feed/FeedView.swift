@@ -12,7 +12,7 @@ import Combine
 
 struct FeedView : View {
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @ObservedObject private var pinnedChartsStore = appPinnedChartsStore
+    @ObservedObject private var pinnedChartsStore = PinnedChartsStore.shared
     
     @State private var showingPinnedChartSelector = false
 
@@ -116,8 +116,8 @@ struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             FeedView()
-                .environmentObject(mockSettingsStoreMetric)
-                .environmentObject(appExerciseStore)
+                .environmentObject(SettingsStore.mockMetric)
+                .environmentObject(ExerciseStore.shared)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }

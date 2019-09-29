@@ -11,8 +11,8 @@ import Combine
 import StoreKit
 
 struct PurchaseView: View {
-    @ObservedObject private var storeManager = StoreManager.shared // should go in the environment later
-    @ObservedObject private var entitlementsStore = EntitlementsStore.shared // should go in the environment later
+    @EnvironmentObject private var entitlementsStore: EntitlementsStore
+    @ObservedObject private var storeManager = StoreManager.shared
     
     private var canMakePayments: Bool {
         StoreObserver.shared.canMakePayments
@@ -213,6 +213,7 @@ extension SKProductSubscriptionPeriod {
 struct PurchaseView_Previews: PreviewProvider {
     static var previews: some View {
         PurchaseView()
+            .environmentObject(EntitlementsStore.shared)
     }
 }
 #endif

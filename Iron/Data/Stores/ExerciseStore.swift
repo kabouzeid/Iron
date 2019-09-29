@@ -9,6 +9,11 @@
 import Foundation
 
 final class ExerciseStore: ObservableObject {
+    static let shared = ExerciseStore(
+        builtInExercisesURL: Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json"),
+        customExercisesURL: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent("custom_exercises.json")
+    )
+    
     let builtInExercises: [Exercise]
     @Published private(set) var customExercises: [Exercise]
     
@@ -164,9 +169,3 @@ extension ExerciseStore {
             .filter { !$0.isEmpty }
     }
 }
-
-// singleton
-let appExerciseStore = ExerciseStore(
-    builtInExercisesURL: Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json"),
-    customExercisesURL: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent("custom_exercises.json")
-)

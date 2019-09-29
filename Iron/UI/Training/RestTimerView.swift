@@ -216,7 +216,7 @@ struct RestTimerView_Previews: PreviewProvider {
 //            restTimerStore.restTimerDuration = 90
 //        }
         return RestTimerView()
-            .environmentObject(appRestTimerStore)
+            .environmentObject(RestTimerStore.shared)
 //            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
 //            .previewDevice(PreviewDevice(rawValue: "iPhone Xs Max"))
 //            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))

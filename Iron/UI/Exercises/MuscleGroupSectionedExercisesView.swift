@@ -27,8 +27,8 @@ struct MuscleGroupSectionedExercisesView : View {
 #if DEBUG
 struct MuscleGroupSectionedExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: appExerciseStore.exercises))
-            .environmentObject(mockSettingsStoreMetric)
+        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.exercises))
+            .environmentObject(SettingsStore.mockMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

@@ -81,7 +81,7 @@ struct TrainingSetCell: View {
 struct TrainingSetCell_Previews: PreviewProvider {
     static var previews: some View {
         TrainingSetCell(trainingSet: mockTrainingSet, index: 1)
-            .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(SettingsStore.mockMetric)
             .previewLayout(.sizeThatFits)
     }
 }

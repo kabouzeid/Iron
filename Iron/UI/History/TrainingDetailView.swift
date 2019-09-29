@@ -178,8 +178,8 @@ struct TrainingDetailView : View {
 struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
         return TrainingDetailView(training: mockTraining)
-            .environmentObject(mockSettingsStoreMetric)
-            .environmentObject(appExerciseStore)
+            .environmentObject(SettingsStore.mockMetric)
+            .environmentObject(ExerciseStore.shared)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

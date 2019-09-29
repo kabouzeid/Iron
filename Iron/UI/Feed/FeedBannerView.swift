@@ -147,7 +147,7 @@ struct FeedBannerView : View {
 struct SUISummaryView_Previews : PreviewProvider {
     static var previews: some View {
         FeedBannerView()
-            .environmentObject(mockSettingsStoreMetric)
+            .environmentObject(SettingsStore.mockMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }

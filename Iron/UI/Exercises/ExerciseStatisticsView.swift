@@ -22,8 +22,8 @@ struct ExerciseStatisticsView : View {
 #if DEBUG
 struct ExerciseStatisticsView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseStatisticsView(exercise: appExerciseStore.find(with: 99)!)
-            .environmentObject(mockSettingsStoreMetric)
+        ExerciseStatisticsView(exercise: ExerciseStore.shared.find(with: 99)!)
+            .environmentObject(SettingsStore.mockMetric)
             .environment(\.managedObjectContext, mockManagedObjectContext)
     }
 }

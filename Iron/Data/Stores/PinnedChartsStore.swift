@@ -9,7 +9,9 @@
 import Foundation
 import Combine
 
-class PinnedChartsStore: ObservableObject {
+final class PinnedChartsStore: ObservableObject {
+    static let shared = PinnedChartsStore()
+    
     let objectWillChange = ObservableObjectPublisher()
     
     fileprivate init() {}
@@ -24,5 +26,3 @@ class PinnedChartsStore: ObservableObject {
         }
     }
 }
-
-let appPinnedChartsStore = PinnedChartsStore()

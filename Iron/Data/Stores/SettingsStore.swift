@@ -11,15 +11,17 @@ import SwiftUI
 import Combine
 
 final class SettingsStore: ObservableObject {
+    static let shared = SettingsStore()
+    
     let objectWillChange = ObservableObjectPublisher()
     
     private var userDefaults: UserDefaults
     
-    fileprivate init(userDefaults: UserDefaults) {
+    private init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     
-    fileprivate convenience init() {
+    private convenience init() {
         self.init(userDefaults: UserDefaults.standard)
     }
 
@@ -64,18 +66,18 @@ final class SettingsStore: ObservableObject {
     }
 }
 
-let appSettingsStore = SettingsStore() // singleton
-
 #if DEBUG
-let mockSettingsStoreMetric: SettingsStore = {
-    let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_metric")!)
-    store.weightUnit = .metric
-    return store
-}()
+extension SettingsStore {
+    static let mockMetric: SettingsStore = {
+        let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_metric")!)
+        store.weightUnit = .metric
+        return store
+    }()
 
-let mockSettingsStoreImperial: SettingsStore = {
-    let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_imperial")!)
-    store.weightUnit = .imperial
-    return store
-}()
+    static let mockImperial: SettingsStore = {
+        let store = SettingsStore(userDefaults: UserDefaults(suiteName: "mock_imperial")!)
+        store.weightUnit = .imperial
+        return store
+    }()
+}
 #endif
