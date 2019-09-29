@@ -82,12 +82,16 @@ struct PurchaseView: View {
             }
             
             Section {
-                Button("Terms of Use") {
-                    // TODO
+                Button("Terms of Service") {
+                    if let url = URL(string: "https://kabouzeid.com/iron_tos.html") {
+                        UIApplication.shared.open(url)
+                    }
                 }
                 
                 Button("Privacy Policy") {
-                    // TODO
+                    if let url = URL(string: "https://kabouzeid.com/iron_privacy.html") {
+                        UIApplication.shared.open(url)
+                    }
                 }
             }
         }
