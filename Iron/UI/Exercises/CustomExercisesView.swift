@@ -15,7 +15,27 @@ struct CustomExercisesView: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
-    @State private var showCreateCustomExerciseSheet = false
+    @State private var activeSheet: SheetType?
+    
+    private enum SheetType: Identifiable {
+        case createCustomExercise
+        case buyPro
+        
+        var id: Self { self }
+    }
+    
+    private func sheetView(type: SheetType) -> AnyView {
+        switch type {
+        case .createCustomExercise:
+            return CreateCustomExerciseSheet()
+                .environmentObject(exerciseStore)
+                .typeErased
+        case .buyPro:
+            return PurchaseSheet()
+                .environmentObject(entitlementStore)
+                .typeErased
+        }
+    }
     
     @State private var offsetsToDelete: IndexSet?
     
@@ -29,20 +49,26 @@ struct CustomExercisesView: View {
                 self.offsetsToDelete = offsets
             }
             Button(action: {
-                self.showCreateCustomExerciseSheet = true
+                self.activeSheet = self.entitlementStore.isPro ? .createCustomExercise : .buyPro
             }) {
                 HStack {
                     Image(systemName: "plus")
                     Text("Create Exercise")
+                    if !entitlementStore.isPro {
+                        Spacer()
+                        Group {
+                            Text("Iron Pro")
+                            Image(systemName: "lock")
+                        }.foregroundColor(.secondary)
+                    }
                 }
-            }.disabled(!entitlementStore.isPro)
+            }
         }
         .listStyle(GroupedListStyle())
         .navigationBarItems(trailing: EditButton())
-        .sheet(isPresented: $showCreateCustomExerciseSheet) {
-            CreateCustomExerciseSheet()
-                .environmentObject(self.exerciseStore)
-        }
+        .sheet(item: $activeSheet, content: { type in
+            self.sheetView(type: type)
+        })
         .actionSheet(item: $offsetsToDelete) { offsets in
             // TODO: in future only show this warning when there are in fact sets that will be deleted
             ActionSheet(title: Text("This cannot be undone."), message: Text("Warning: Any set belonging to this exercise will be deleted too."), buttons: [
@@ -74,7 +100,7 @@ struct CustomExercisesView_Previews: PreviewProvider {
         CustomExercisesView()
             .environmentObject(SettingsStore.shared)
             .environmentObject(ExerciseStore.shared)
-            .environmentObject(EntitlementStore.mockPro)
+            .environmentObject(EntitlementStore.mockNoPro)
     }
 }
 #endif

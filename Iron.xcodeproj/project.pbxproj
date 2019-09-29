@@ -93,6 +93,7 @@
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
+		8AC503292340E732006D1BC6 /* PurchaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC503282340E732006D1BC6 /* PurchaseSheet.swift */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
@@ -227,6 +228,7 @@
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8AC4C9D123254A7E008E474A /* quotes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quotes; sourceTree = "<group>"; };
+		8AC503282340E732006D1BC6 /* PurchaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSheet.swift; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -309,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				8A56A47E22D7C93B0076E99A /* SettingsView.swift */,
-				8A6F1727233A6E5E0048A75B /* PurchaseView.swift */,
 				8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */,
 			);
 			path = Settings;
@@ -461,6 +462,15 @@
 			path = Exercises;
 			sourceTree = "<group>";
 		};
+		8AC503272340E712006D1BC6 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				8A6F1727233A6E5E0048A75B /* PurchaseView.swift */,
+				8AC503282340E732006D1BC6 /* PurchaseSheet.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		8AC8063722BAB93000086032 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +483,7 @@
 				8A1D989422C7C6690071225D /* Training */,
 				8ABB4C6422CE059E0075CCE6 /* Exercises */,
 				8A56A47D22D7C91B0076E99A /* Settings */,
+				8AC503272340E712006D1BC6 /* Purchase */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -690,6 +701,7 @@
 				8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */,
 				8AE0FC81233918F500B234F9 /* CreateCustomExerciseSheet.swift in Sources */,
 				8A3815482301803A008ACDAD /* Refresher.swift in Sources */,
+				8AC503292340E732006D1BC6 /* PurchaseSheet.swift in Sources */,
 				8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */,
 				8A6B1A6B22BE8F9B0067DD41 /* TrainingDetailBannerView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* TrainingExerciseChartDataGenerator.swift in Sources */,

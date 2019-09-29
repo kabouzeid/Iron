@@ -21,6 +21,7 @@ struct ExerciseDetailView : View {
         case statistics
         case history
         case editExercise
+        case buyPro
         
         var id: Self { self }
     }
@@ -28,11 +29,17 @@ struct ExerciseDetailView : View {
     private func sheetView(type: SheetType) -> AnyView {
         switch type {
         case .history:
-            return self.exerciseHistorySheet.typeErased
+            return exerciseHistorySheet.typeErased
         case .statistics:
-            return self.exerciseStatisticsSheet.typeErased
+            return exerciseStatisticsSheet.typeErased
         case .editExercise:
-            return EditCustomExerciseSheet(exercise: exercise).environmentObject(self.exerciseStore).typeErased
+            return EditCustomExerciseSheet(exercise: exercise)
+                .environmentObject(self.exerciseStore)
+                .typeErased
+        case .buyPro:
+            return PurchaseSheet()
+                .environmentObject(entitlementStore)
+                .typeErased
         }
     }
     
@@ -219,8 +226,8 @@ struct ExerciseDetailView : View {
                 }
                 if exercise.isCustom {
                     Button("Edit") {
-                        self.activeSheet = .editExercise
-                    }.disabled(!self.entitlementStore.isPro)
+                        self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
+                    }
                 }
             }
         )
@@ -233,6 +240,7 @@ struct ExerciseDetailView_Previews : PreviewProvider {
         NavigationView {
             ExerciseDetailView(exercise: ExerciseStore.shared.find(with: 99)!)
                 .environmentObject(SettingsStore.mockMetric)
+                .environmentObject(EntitlementStore.mockNoPro)
                 .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }
