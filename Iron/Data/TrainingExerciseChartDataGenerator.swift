@@ -13,10 +13,8 @@ struct TrainingExerciseChartDataGenerator {
 
     private var exercise: Exercise
     private var trainingExerciseHistory: [TrainingExercise]
-    private var context: NSManagedObjectContext
 
     init(context: NSManagedObjectContext, exercise: Exercise) {
-        self.context = context
         self.exercise = exercise
         self.trainingExerciseHistory = (try? context.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
     }

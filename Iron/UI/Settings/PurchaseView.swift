@@ -22,13 +22,40 @@ struct PurchaseView: View {
         storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proYearly }
     }
     
-    private var subscriptionInfo: String? {
+    private var subscriptionInfoText: String? {
         "After the 1 week free trial your subscription automatically renews and your iTunes Account will be charged for the upcoming period unless you cancel the subscription at least 24 hours before the end of the trial period. You can cancel your subscription at any time."
+    }
+    
+    private var subscriptionInfo: some View {
+        Text(subscriptionInfoText ?? "")
     }
     
     var body: some View {
         List {
-            Section(footer: Text(subscriptionInfo ?? "")) {
+            Section {
+                FeatureView(
+                    image: Image(systemName: "waveform.path.ecg"),
+                    imageColor: .blue,
+                    title: Text("Charts"),
+                    text: Text("View beautiful charts and analyze your progress over time.")
+                ) // TODO show chart here
+                
+                FeatureView(
+                    image: Image(systemName: "plus"),
+                    imageColor: .green,
+                    title: Text("Custom Exercises"),
+                    text: Text("Some of your exercises are missing in Iron? No problem, create as many custom exercises as you want.")
+                )
+                
+                FeatureView(
+                    image: Image(systemName: "heart.fill"),
+                    imageColor: .red,
+                    title: Text("Support the Development"),
+                    text: Text("This ensures that I can focus on making Iron better every day.")
+                )
+            }
+            
+            Section(footer: subscriptionInfo) {
                 proMonthlyProduct.map {
                     ProductCell(
                         product: $0,
@@ -69,6 +96,23 @@ struct PurchaseView: View {
             self.storeManager.fetchProducts(matchingIdentifiers: [IAPIdentifiers.proMonthly])
         }
         .navigationBarTitle("Iron Pro")
+    }
+}
+
+private struct FeatureView: View {
+    let image: Image
+    var imageColor: Color? = nil
+    let title: Text
+    let text: Text
+    
+    var body: some View {
+        HStack(alignment: .center) {
+            image.padding().foregroundColor(imageColor)
+            VStack(alignment: .leading) {
+                title.font(.headline)
+                text
+            }
+        }
     }
 }
 
