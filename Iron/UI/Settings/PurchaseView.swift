@@ -14,6 +14,18 @@ struct PurchaseView: View {
     @ObservedObject private var storeManager = StoreManager.shared // should go in the environment later
     @ObservedObject private var entitlementsStore = EntitlementsStore.shared // should go in the environment later
     
+    private var canMakePayments: Bool {
+        StoreObserver.shared.canMakePayments
+    }
+    
+    private var hasProLifetime: Bool {
+        entitlementsStore.entitlements.contains(IAPIdentifiers.proLifetime)
+    }
+    
+    private var proLifetimeProduct: SKProduct? {
+        storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proLifetime }
+    }
+    
     private var proMonthlyProduct: SKProduct? {
         storeManager.products?.first { $0.productIdentifier == IAPIdentifiers.proMonthly }
     }
@@ -55,31 +67,40 @@ struct PurchaseView: View {
                 )
             }
             
+            proLifetimeProduct.map {
+                ProductCell(
+                    product: $0,
+                    purchased: hasProLifetime
+                ).disabled(!canMakePayments)
+            }
+            
             Section(footer: subscriptionInfo) {
                 proMonthlyProduct.map {
                     ProductCell(
                         product: $0,
                         purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
-                    )
+                    ).disabled(hasProLifetime)
                 }
                 
                 proYearlyProduct.map {
                     ProductCell(
                         product: $0,
                         purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
-                    )
+                    ).disabled(hasProLifetime)
                 }
                 
                 Button("Manage Subscriptions") {
-                    // TODO
+                    if let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") {
+                        UIApplication.shared.open(url, options: [:])
+                    }
                 }
-            }
+            }.disabled(!canMakePayments)
             
             Section {
                 Button("Restore Purchases") {
                     StoreObserver.shared.restore()
                 }
-            }
+            }.disabled(!canMakePayments)
             
             Section {
                 Button("Terms of Service") {

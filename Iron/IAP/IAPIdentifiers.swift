@@ -15,5 +15,5 @@ struct IAPIdentifiers {
     static let proMonthly = "pro_monthly"
     static let proYearly = "pro_yearly"
     
-    static let proLifetime = "pro_lifetime"
+    static let proLifetime = "pro_life" // pro_lifetime deleted by accident
 }
