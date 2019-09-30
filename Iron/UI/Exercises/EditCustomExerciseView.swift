@@ -78,16 +78,14 @@ struct EditCustomExerciseView: View {
             }
         }
         .sheet(isPresented: $showingMuscleSelectionSheet) {
-            VStack(spacing: 0) {
-                SheetBar(title: "Select Muscles", leading: EmptyView(),
-                    trailing:
-                    Button("Done") {
-                        self.showingMuscleSelectionSheet = false
-                    }
-                    
-                ).padding()
-                Divider()
+            NavigationView {
                 MuscleSelectionView(muscles: Exercise.muscleNames, selection: self.$exerciseValues.muscles)
+                    .navigationBarTitle("Select Muscles", displayMode: .inline)
+                    .navigationBarItems(trailing:
+                        Button("Done") {
+                            self.showingMuscleSelectionSheet = false
+                        }
+                    )
             }
         }
     }

@@ -96,11 +96,13 @@ private struct PinnedChartSelectorSheet: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
-                SheetBar(title: nil, leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
+            VStack(spacing: 0) {
+                SheetBar(title: "Add Widget", leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
                 TextField("Search", text: $filter.filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
+                    .padding(.top)
             }.padding()
+            
             ExerciseSingleSelectionView(exerciseMuscleGroups: filter.exercises) { exercise in
                 self.selectedExercise = exercise
             }

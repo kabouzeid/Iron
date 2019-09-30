@@ -85,22 +85,20 @@ struct ExerciseDetailView : View {
     }
     
     private var exerciseHistorySheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "History", leading: closeSheetButton, trailing: EmptyView()).padding()
-            Divider()
+        NavigationView {
             ExerciseHistoryView(exercise: self.exercise)
-                // TODO: as of beta6 the environment is not shared with the sheets
+                .navigationBarTitle("History", displayMode: .inline)
+                .navigationBarItems(leading: closeSheetButton)
                 .environmentObject(self.settingsStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)
         }
     }
     
     private var exerciseStatisticsSheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Statistics", leading: closeSheetButton, trailing: EmptyView()).padding()
-            Divider()
+        NavigationView {
             ExerciseStatisticsView(exercise: self.exercise)
-                // TODO: as of beta6 the environment is not shared with the sheets
+                .navigationBarTitle("Statistics", displayMode: .inline)
+                .navigationBarItems(leading: closeSheetButton)
                 .environmentObject(self.settingsStore)
                 .environmentObject(self.entitlementStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)

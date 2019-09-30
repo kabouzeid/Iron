@@ -39,19 +39,18 @@ struct TimerBannerView: View {
     }
     
     private var editTimeSheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Workout Duration", leading: closeSheetButton, trailing: EmptyView()).padding()
-            Divider()
+        NavigationView {
             EditCurrentTrainingTimeView(training: training)
+                .navigationBarTitle("Workout Duration", displayMode: .inline)
+                .navigationBarItems(leading: closeSheetButton)
         }
     }
     
     private var restTimerSheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Rest Timer", leading: closeSheetButton, trailing: EmptyView()).padding()
-            Spacer()
+        NavigationView {
             RestTimerView().environmentObject(self.restTimerStore)
-            Spacer()
+                .navigationBarTitle("Rest Timer", displayMode: .inline)
+                .navigationBarItems(leading: closeSheetButton)
         }
     }
     

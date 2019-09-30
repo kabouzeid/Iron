@@ -30,8 +30,8 @@ struct AddExercisesSheet: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
-                SheetBar(title: nil,
+            VStack(spacing: 0) {
+                SheetBar(title: "Add Exercises",
                     leading:
                     Button("Cancel") {
                         self.resetAndDismiss()
@@ -45,7 +45,9 @@ struct AddExercisesSheet: View {
                 )
                 TextField("Search", text: $filter.filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
+                    .padding(.top)
             }.padding()
+            
             ExerciseMultiSelectionView(exerciseMuscleGroups: filter.exercises, selection: self.$exerciseSelectorSelection)
         }
     }

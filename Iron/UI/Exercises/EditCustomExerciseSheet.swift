@@ -46,15 +46,16 @@ struct EditCustomExerciseSheet: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Edit Exercise",
-                leading:
-                Button("Cancel") {
-                    self.presentationMode.wrappedValue.dismiss()
-                },
-                trailing: saveButton).padding()
-            Divider()
+        NavigationView {
             EditCustomExerciseView(exerciseValues: $exerciseValues)
+                .navigationBarTitle("Edit Exercise", displayMode: .inline)
+                .navigationBarItems(
+                    leading:
+                    Button("Cancel") {
+                        self.presentationMode.wrappedValue.dismiss()
+                    },
+                    trailing: saveButton
+                )
         }
     }
 }
