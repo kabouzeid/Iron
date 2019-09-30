@@ -177,7 +177,7 @@ struct TrainingDetailView : View {
 #if DEBUG
 struct TrainingDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        return TrainingDetailView(training: mockTraining)
+        TrainingDetailView(training: mockTraining)
             .environmentObject(SettingsStore.mockMetric)
             .environmentObject(ExerciseStore.shared)
             .environment(\.managedObjectContext, mockManagedObjectContext)
