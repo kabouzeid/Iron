@@ -56,7 +56,6 @@ struct HistoryView : View {
                     self.offsetsToDelete = offsets
                 }
             }
-            .navigationBarTitle(Text("History"))
             .navigationBarItems(trailing: EditButton())
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
@@ -70,6 +69,13 @@ struct HistoryView : View {
                     .cancel()
                 ])
             }
+            .placeholder(show: trainings.isEmpty,
+                         Text("Your finished workouts will appear here.")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.secondary)
+                            .padding()
+            )
+            .navigationBarTitle(Text("History"))
         }
     }
 }
