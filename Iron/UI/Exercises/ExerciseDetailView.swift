@@ -102,6 +102,7 @@ struct ExerciseDetailView : View {
             ExerciseStatisticsView(exercise: self.exercise)
                 // TODO: as of beta6 the environment is not shared with the sheets
                 .environmentObject(self.settingsStore)
+                .environmentObject(self.entitlementStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)
         }
     }
