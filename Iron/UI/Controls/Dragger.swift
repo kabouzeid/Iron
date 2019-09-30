@@ -141,9 +141,7 @@ struct Dragger : View {
                         .font(Font.body.monospacedDigit())
                         .lineLimit(1)
                     if showCursor {
-                        RoundedRectangle(cornerRadius: 2, style: .circular)
-                            .frame(width: 2, height: 20)
-                            .foregroundColor(.accentColor)
+                        Cursor()
                     }
                 }
                 
@@ -194,6 +192,17 @@ private struct WiggleModifier: AnimatableModifier {
     
     func body(content: _ViewModifier_Content<WiggleModifier>) -> some View {
         content.offset(y: max(min(2*sin(progress * 2 * .pi), 1), -1) * wiggleDistance)
+    }
+}
+
+private struct Cursor: View {
+    @State private var blink = false
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 2, style: .circular)
+            .frame(width: 2, height: 20)
+            .foregroundColor(blink ? .clear : .accentColor)
+            .onReceive(Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()) { _ in self.blink.toggle() }
     }
 }
 
