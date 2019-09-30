@@ -31,9 +31,9 @@ struct ExerciseDemoChartView : View {
     private var baseValue: Double {
         switch measurementType {
         case .oneRM:
-            return 80
+            return WeightUnit.convert(weight: 80, from: .metric, to: settingsStore.weightUnit)
         case .totalWeight:
-            return 1500
+            return WeightUnit.convert(weight: 1500, from: .metric, to: settingsStore.weightUnit)
         case .totalSets:
             return 5
         case .totalRepetitions:

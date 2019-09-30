@@ -199,6 +199,18 @@ struct TrainingSetEditor : View {
         })
     }
     
+    private var moreSheet: some View {
+        NavigationView {
+            MoreView(trainingSet: trainingSet)
+                .navigationBarTitle(Text(trainingSet.displayTitle(unit: settingsStore.weightUnit)), displayMode: .inline)
+                .navigationBarItems(leading:
+                    Button("Close") {
+                        self.showMoreSheet = false
+                    }
+            )
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -241,19 +253,7 @@ struct TrainingSetEditor : View {
                 }
             })
         )
-        .sheet(isPresented: $showMoreSheet) {
-            VStack(spacing: 0) {
-                SheetBar(title: self.trainingSet.displayTitle(unit: self.settingsStore.weightUnit),
-                    leading:
-                    Button("Close") {
-                        self.showMoreSheet = false
-                    },
-                    trailing: EmptyView()
-                ).padding()
-                Divider()
-                MoreView(trainingSet: self.trainingSet)
-            }
-        }
+        .sheet(isPresented: $showMoreSheet) { self.moreSheet }
     }
 }
 

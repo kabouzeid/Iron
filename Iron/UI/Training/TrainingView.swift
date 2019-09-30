@@ -170,18 +170,19 @@ struct TrainingView: View {
     }
     
     private var trainingsLogSheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Log", leading: closeSheetButton,
-                trailing:
-                Button(action: {
-                    // TODO: share
-                    // UIActivityViewController doesn't work in sheets as of 13.1 beta3
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                }
-            ).padding()
-            Divider()
+        NavigationView {
             TrainingsLog(training: self.training)
+                .navigationBarTitle("Log", displayMode: .inline)
+                .navigationBarItems(
+                    leading: closeSheetButton,
+                    trailing:
+                    Button(action: {
+                        // TODO: share
+                        // UIActivityViewController doesn't work in sheets as of 13.1 beta3
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                )
                 .environmentObject(settingsStore)
                 .environmentObject(exerciseStore)
         }
@@ -204,15 +205,16 @@ struct TrainingView: View {
     }
     
     private var finishWorkoutSheet: some View {
-        VStack(spacing: 0) {
-            SheetBar(title: "Summary", leading: closeSheetButton,
-                trailing:
-                Button("Finish") {
-                    self.finishWorkout()
-                }
-            ).padding()
-            Divider()
+        NavigationView {
             TrainingsLog(training: self.training)
+                .navigationBarTitle("Summary", displayMode: .inline)
+                .navigationBarItems(
+                    leading: closeSheetButton,
+                    trailing:
+                    Button("Finish") {
+                        self.finishWorkout()
+                    }
+                )
                 .environmentObject(settingsStore)
                 .environmentObject(exerciseStore)
         }
