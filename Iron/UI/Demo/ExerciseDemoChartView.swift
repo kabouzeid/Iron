@@ -28,7 +28,7 @@ struct ExerciseDemoChartView : View {
         return LineChartData(dataSet: LineChartDataSet(entries: entries, label: measurementType.title))
     }
     
-    private var baseValue: Int {
+    private var baseValue: Double {
         switch measurementType {
         case .oneRM:
             return 80
@@ -42,7 +42,7 @@ struct ExerciseDemoChartView : View {
     }
     
     private func newRandomDemoValue() -> Double {
-        (60 * Double.random(in: 1...1.2)).rounded()
+        (baseValue * Double.random(in: 1...1.2)).rounded()
     }
     
     private func dateToValue(date: Date) -> Double {
