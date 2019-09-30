@@ -260,6 +260,24 @@ struct TrainingSetEditor : View {
 private struct MoreView: View {
     @ObservedObject var trainingSet: TrainingSet
     
+    @State private var activeAlert: AlertType?
+    
+    private enum AlertType: Identifiable {
+        case tagInfo
+        case rpeInfo
+        
+        var id: Self { self }
+    }
+    
+    private func alertFor(type: AlertType) -> Alert {
+        switch type {
+        case .tagInfo:
+            return Alert(title: Text("Mark a set as Failure if you've tried to do more reps but failed."))
+        case .rpeInfo:
+            return Alert(title: Text("The rating of perceived exertion (RPE) is a way to determine and regulate your training intensity."))
+        }
+    }
+    
     @State private var trainingSetCommentInput: String? // cannot use ValueHolder here, since it would be recreated on changes
     private var trainingSetComment: Binding<String> {
         Binding(
@@ -330,7 +348,7 @@ private struct MoreView: View {
                     Text("Tag".uppercased())
                     Spacer()
                     Button(action: {
-                        // TODO: show Tag help (in a Dialog)
+                        self.activeAlert = .tagInfo
                     }) {
                         Image(systemName: "questionmark.circle")
                     }
@@ -353,7 +371,7 @@ private struct MoreView: View {
                     Text("RPE (Rating of Perceived Exertion)")
                     Spacer()
                     Button(action: {
-                        // TODO: show RPE help (in a Dialog)
+                        self.activeAlert = .rpeInfo
                     }) {
                         Image(systemName: "questionmark.circle")
                     }
@@ -364,6 +382,7 @@ private struct MoreView: View {
             }
         }
         .listStyle(GroupedListStyle())
+        .alert(item: $activeAlert) { self.alertFor(type: $0) }
     }
 }
 
