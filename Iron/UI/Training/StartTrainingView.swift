@@ -20,7 +20,7 @@ struct StartTrainingView: View {
         Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
             .resizable()
             .aspectRatio(contentMode: ContentMode.fit)
-            .frame(maxWidth: 500, maxHeight: 500)
+//            .frame(maxWidth: 500, maxHeight: 500)
             .padding([.leading, .trailing], 40)
     }
     
