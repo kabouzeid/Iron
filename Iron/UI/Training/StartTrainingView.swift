@@ -20,6 +20,7 @@ struct StartTrainingView: View {
         Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
             .resizable()
             .aspectRatio(contentMode: ContentMode.fit)
+            .frame(maxWidth: 500, maxHeight: 500)
             .padding([.leading, .trailing], 40)
     }
     
@@ -65,6 +66,7 @@ struct StartTrainingView: View {
             .padding([.leading, .trailing])
             .navigationBarTitle("Workout")
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -96,6 +98,7 @@ struct StartTrainingView_Previews: PreviewProvider {
                 .environment(\.colorScheme, .dark)
         }
         .environment(\.managedObjectContext, mockManagedObjectContext)
+        .environmentObject(SettingsStore.shared)
     }
 }
 #endif

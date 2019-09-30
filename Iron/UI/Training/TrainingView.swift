@@ -186,6 +186,7 @@ struct TrainingView: View {
                 .environmentObject(settingsStore)
                 .environmentObject(exerciseStore)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func finishWorkout() {
@@ -218,6 +219,7 @@ struct TrainingView: View {
                 .environmentObject(settingsStore)
                 .environmentObject(exerciseStore)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private var cancelButton: some View {
@@ -306,6 +308,7 @@ struct TrainingView: View {
                 }
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
         .sheet(item: $activeSheet) { type in
             self.sheetView(type: type)
         }

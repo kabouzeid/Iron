@@ -56,6 +56,7 @@ struct FeedView : View {
                 .environmentObject(self.pinnedChartsStore)
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

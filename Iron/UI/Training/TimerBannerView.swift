@@ -44,6 +44,7 @@ struct TimerBannerView: View {
                 .navigationBarTitle("Workout Duration", displayMode: .inline)
                 .navigationBarItems(leading: closeSheetButton)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private var restTimerSheet: some View {
@@ -52,6 +53,7 @@ struct TimerBannerView: View {
                 .navigationBarTitle("Rest Timer", displayMode: .inline)
                 .navigationBarItems(leading: closeSheetButton)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var body: some View {

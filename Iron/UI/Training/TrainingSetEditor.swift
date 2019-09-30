@@ -209,6 +209,7 @@ struct TrainingSetEditor : View {
                     }
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var body: some View {

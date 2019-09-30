@@ -55,6 +55,7 @@ struct SettingsView : View {
             }
             .navigationBarTitle(Text("Settings"))
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
     }
 }
 

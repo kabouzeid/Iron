@@ -54,5 +54,6 @@ struct CreateCustomExerciseSheet: View {
                     trailing: saveButton
                 )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

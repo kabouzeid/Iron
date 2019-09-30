@@ -92,6 +92,7 @@ struct ExerciseDetailView : View {
                 .environmentObject(self.settingsStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private var exerciseStatisticsSheet: some View {
@@ -103,6 +104,7 @@ struct ExerciseDetailView : View {
                 .environmentObject(self.entitlementStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func imageSection(geometry: GeometryProxy) -> some View {

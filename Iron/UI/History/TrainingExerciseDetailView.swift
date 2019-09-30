@@ -328,11 +328,11 @@ struct TrainingExerciseDetailView : View {
 struct TrainingExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-        TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
-            .environmentObject(SettingsStore.mockMetric)
-            .environmentObject(RestTimerStore.shared)
-            .environmentObject(ExerciseStore.shared)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            TrainingExerciseDetailView(trainingExercise: mockTrainingExercise)
+                .environmentObject(SettingsStore.mockMetric)
+                .environmentObject(RestTimerStore.shared)
+                .environmentObject(ExerciseStore.shared)
+                .environment(\.managedObjectContext, mockManagedObjectContext)
         }
     }
 }

@@ -77,6 +77,7 @@ struct HistoryView : View {
             )
             .navigationBarTitle(Text("History"))
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
     }
 }
 

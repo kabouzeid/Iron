@@ -20,6 +20,7 @@ struct PurchaseSheet: View {
                     self.presentationMode.wrappedValue.dismiss()
                 })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

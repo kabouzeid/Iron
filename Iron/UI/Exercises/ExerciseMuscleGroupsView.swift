@@ -74,6 +74,7 @@ struct ExerciseMuscleGroupsView : View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Exercises")
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
     }
 }
 

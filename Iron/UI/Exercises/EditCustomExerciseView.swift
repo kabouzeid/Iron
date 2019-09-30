@@ -87,6 +87,7 @@ struct EditCustomExerciseView: View {
                         }
                     )
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
