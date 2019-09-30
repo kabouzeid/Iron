@@ -37,7 +37,7 @@ extension Exercise {
     
     var muscleGroup: String {
         guard let muscle = primaryMuscle.first else { return "other" }
-        return Self.muscleGroupNames[muscle] ?? "other"
+        return Self.muscleGroup(for: muscle) ?? "other"
     }
     
     static var muscleNames: [String] {
@@ -46,6 +46,10 @@ extension Exercise {
     
     static func commonMuscleName(for muscle: String) -> String? {
         commonMuscleNames[muscle]
+    }
+    
+    static func muscleGroup(for muscle: String) -> String? {
+        muscleGroupNames[muscle]
     }
     
     private static var commonMuscleNames: [String : String] = [

@@ -9,14 +9,26 @@
 import SwiftUI
 
 struct ActivityChartViewCell : View {
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
+    private var chartView: some View {
+        Group {
+            if entitlementStore.isPro {
+                ActivityChartView()
+            } else {
+                ActivityDemoChartView().overlay(UnlockProOverlay())
+            }
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Activity")
                 .font(.body)
-            Text("Workouts per week")
+            Text("Workouts per week" + (entitlementStore.isPro ? "" : " (Demo data)"))
                 .font(.caption)
                 .foregroundColor(.secondary)
-            ActivityChartView()
+            chartView
                 .frame(height: 250)
         }
     }
@@ -27,6 +39,8 @@ struct ActivityChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ActivityChartViewCell()
             .environment(\.managedObjectContext, mockManagedObjectContext)
+            .environmentObject(ExerciseStore.shared)
+            .environmentObject(EntitlementStore.mockNoPro)
             .previewLayout(.sizeThatFits)
     }
 }

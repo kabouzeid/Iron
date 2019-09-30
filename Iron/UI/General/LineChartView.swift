@@ -10,10 +10,10 @@ import SwiftUI
 import Charts
 
 struct _LineChartView : UIViewRepresentable {
-    var chartData: ChartData
-    var xAxisValueFormatter: IAxisValueFormatter
-    var yAxisValueFormatter: IAxisValueFormatter
-    var balloonValueFormatter: BalloonValueFormatter
+    let chartData: ChartData
+    let xAxisValueFormatter: IAxisValueFormatter?
+    let yAxisValueFormatter: IAxisValueFormatter?
+    let balloonValueFormatter: BalloonValueFormatter?
     var customization: ((LineChartView, ChartData) -> ())?
 
     func makeUIView(context: UIViewRepresentableContext<_LineChartView>) -> StyledLineChartView {

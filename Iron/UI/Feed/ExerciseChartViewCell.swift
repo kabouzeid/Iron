@@ -9,17 +9,29 @@
 import SwiftUI
 
 struct ExerciseChartViewCell : View {
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
     var exercise: Exercise
     var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
+    
+    private var chartView: some View {
+        Group {
+            if entitlementStore.isPro {
+                ExerciseChartView(exercise: exercise, measurementType: measurementType)
+            } else {
+                ExerciseDemoChartView(exercise: exercise, measurementType: measurementType).overlay(UnlockProOverlay())
+            }
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             Text(exercise.title)
                 .font(.body)
-            Text(measurementType.title)
+            Text(measurementType.title + (entitlementStore.isPro ? "" : " (Demo data)"))
                 .font(.caption)
                 .foregroundColor(.secondary)
-            ExerciseChartView(exercise: exercise, measurementType: measurementType)
+            chartView
                 .frame(height: 200)
         }
     }
@@ -30,6 +42,7 @@ struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseChartViewCell(exercise: ExerciseStore.shared.find(with: 42)!, measurementType: .oneRM)
             .environmentObject(SettingsStore.mockMetric)
+            .environmentObject(EntitlementStore.mockNoPro)
             .environment(\.managedObjectContext, mockManagedObjectContext)
             .previewLayout(.sizeThatFits)
     }
