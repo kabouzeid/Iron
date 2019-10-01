@@ -45,8 +45,7 @@ struct ExerciseHistoryView : View {
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseHistoryView(exercise: ExerciseStore.shared.find(with: 42)!)
-            .environmentObject(SettingsStore.mockMetric)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

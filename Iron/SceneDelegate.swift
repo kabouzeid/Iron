@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView:
                 ContentView()
+                    .screenshotEnvironment(weightUnit: .imperial) // only enable for taking screenshots
                     .environmentObject(SettingsStore.shared)
                     .environmentObject(RestTimerStore.shared)
                     .environmentObject(ExerciseStore.shared)

@@ -145,7 +145,7 @@ struct MuscleSelectionView: View {
 struct CreateCustomExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         EditCustomExerciseView(exerciseValues: .constant(.init(title: "", description: "", muscles: Set(), barbellBased: false)))
-            .environmentObject(ExerciseStore.shared)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

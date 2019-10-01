@@ -64,8 +64,7 @@ struct ExerciseDemoChartView : View {
 struct ExerciseDemoChartView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseDemoChartView(exercise: ExerciseStore.shared.find(with: 42)!, measurementType: .oneRM)
-            .environmentObject(SettingsStore.mockMetric)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            .mockEnvironment(weightUnit: .metric, isPro: false)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -82,9 +82,7 @@ struct ExerciseMuscleGroupsView : View {
 struct ExerciseCategoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseMuscleGroupsView()
-            .environmentObject(SettingsStore.mockMetric)
-            .environmentObject(ExerciseStore.shared)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

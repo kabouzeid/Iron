@@ -84,9 +84,7 @@ struct ExportImportSettingsView: View {
 struct ExportImportSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         ExportImportSettingsView()
-            .environmentObject(SettingsStore.mockMetric)
-            .environmentObject(ExerciseStore.shared)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

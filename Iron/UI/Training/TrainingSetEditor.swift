@@ -391,22 +391,18 @@ private struct MoreView: View {
 struct TrainingSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
-            TrainingSetEditor(trainingSet: mockTrainingSet)
-                .environment(\.managedObjectContext, mockManagedObjectContext)
-                .environmentObject(SettingsStore.mockMetric)
-                .environmentObject(ExerciseStore.shared)
+            TrainingSetEditor(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
-            TrainingSetEditor(trainingSet: mockTrainingSet)
-                .environment(\.managedObjectContext, mockManagedObjectContext)
-                .environmentObject(SettingsStore.mockImperial)
-                .environmentObject(ExerciseStore.shared)
+            TrainingSetEditor(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+                .mockEnvironment(weightUnit: .imperial, isPro: true)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             
-            MoreView(trainingSet: mockTrainingSet)
-                .environment(\.managedObjectContext, mockManagedObjectContext)
+            MoreView(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewLayout(.sizeThatFits)
                 .listStyle(GroupedListStyle())
         }

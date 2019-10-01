@@ -97,8 +97,7 @@ struct StartTrainingView_Previews: PreviewProvider {
             StartTrainingViewDemo()
                 .environment(\.colorScheme, .dark)
         }
-        .environment(\.managedObjectContext, mockManagedObjectContext)
-        .environmentObject(SettingsStore.shared)
+        .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

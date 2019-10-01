@@ -76,10 +76,7 @@ struct ContentView : View {
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(SettingsStore.mockMetric)
-            .environmentObject(RestTimerStore.shared)
-            .environmentObject(ExerciseStore.shared)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

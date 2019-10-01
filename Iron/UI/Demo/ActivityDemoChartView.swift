@@ -72,7 +72,7 @@ struct ActivityDemoChartView: View {
 struct ActivityDemoChartView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityDemoChartView()
-            .environmentObject(ExerciseStore.shared)
+            .mockEnvironment(weightUnit: .metric, isPro: false)
     }
 }
 #endif

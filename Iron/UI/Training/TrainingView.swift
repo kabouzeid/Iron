@@ -332,11 +332,8 @@ struct TrainingView_Previews: PreviewProvider {
             RestTimerStore.shared.restTimerStart = Date()
             RestTimerStore.shared.restTimerDuration = 10
         }
-        return TrainingView(training: mockCurrentTraining)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
-            .environmentObject(RestTimerStore.shared)
-            .environmentObject(SettingsStore.shared)
-            .environmentObject(ExerciseStore.shared)
+        return TrainingView(training: MockTrainingsData.metricRandom.currentTraining)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

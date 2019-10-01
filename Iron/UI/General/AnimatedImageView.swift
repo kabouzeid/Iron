@@ -45,7 +45,7 @@ struct AnimatedImageView : UIViewRepresentable {
 #if DEBUG
 struct ImageView_Previews : PreviewProvider {
     static var testImages: [UIImage] {
-        guard let exercise = mockTrainingExercise.exercise(in: ExerciseStore.shared.exercises) else { return [] }
+        guard let exercise = MockTrainingsData.metricRandom.trainingExercise.exercise(in: ExerciseStore.shared.exercises) else { return [] }
         var images = [UIImage]()
         for pdfPaths in exercise.pdfPaths {
             let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(pdfPaths)

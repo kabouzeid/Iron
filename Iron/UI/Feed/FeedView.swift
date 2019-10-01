@@ -119,10 +119,7 @@ struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             FeedView()
-                .environmentObject(SettingsStore.mockMetric)
-                .environmentObject(ExerciseStore.shared)
-                .environmentObject(EntitlementStore.mockNoPro)
-                .environment(\.managedObjectContext, mockManagedObjectContext)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
         }
     }
 }

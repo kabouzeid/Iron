@@ -38,9 +38,7 @@ struct ActivityChartViewCell : View {
 struct ActivityChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         ActivityChartViewCell()
-            .environment(\.managedObjectContext, mockManagedObjectContext)
-            .environmentObject(ExerciseStore.shared)
-            .environmentObject(EntitlementStore.mockNoPro)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -29,9 +29,8 @@ struct TrainingDetailBannerView : View {
 #if DEBUG
 struct TrainingDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
-        TrainingDetailBannerView(training: mockTraining)
-            .environmentObject(SettingsStore.mockMetric)
-            .environment(\.managedObjectContext, mockManagedObjectContext)
+        TrainingDetailBannerView(training: MockTrainingsData.metricRandom.training)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }
 }

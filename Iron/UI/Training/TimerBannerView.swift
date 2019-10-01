@@ -103,8 +103,8 @@ struct TimerBannerView_Previews: PreviewProvider {
             RestTimerStore.shared.restTimerStart = Date()
             RestTimerStore.shared.restTimerDuration = 10
         }
-        return TimerBannerView(training: mockCurrentTraining)
-            .environmentObject(RestTimerStore.shared)
+        return TimerBannerView(training: MockTrainingsData.metricRandom.currentTraining)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

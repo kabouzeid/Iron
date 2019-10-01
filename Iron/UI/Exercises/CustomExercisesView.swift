@@ -98,9 +98,7 @@ struct CustomExercisesView: View {
 struct CustomExercisesView_Previews: PreviewProvider {
     static var previews: some View {
         CustomExercisesView()
-            .environmentObject(SettingsStore.shared)
-            .environmentObject(ExerciseStore.shared)
-            .environmentObject(EntitlementStore.mockNoPro)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

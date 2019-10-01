@@ -35,7 +35,7 @@ struct UnlockProOverlay: View {
 struct UnlockWithProOverlay_Previews: PreviewProvider {
     static var previews: some View {
         Color.gray.overlay(UnlockProOverlay())
-            .environmentObject(EntitlementStore.mockNoPro)
+            .mockEnvironment(weightUnit: .metric, isPro: false)
     }
 }
 #endif

@@ -240,9 +240,7 @@ struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExerciseDetailView(exercise: ExerciseStore.shared.find(with: 99)!)
-                .environmentObject(SettingsStore.mockMetric)
-                .environmentObject(EntitlementStore.mockNoPro)
-                .environment(\.managedObjectContext, mockManagedObjectContext)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
         }
     }
 }

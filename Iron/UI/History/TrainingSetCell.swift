@@ -80,8 +80,8 @@ struct TrainingSetCell: View {
 #if DEBUG
 struct TrainingSetCell_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingSetCell(trainingSet: mockTrainingSet, index: 1)
-            .environmentObject(SettingsStore.mockMetric)
+        TrainingSetCell(trainingSet: MockTrainingsData.metricRandom.trainingSet, index: 1)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }
 }

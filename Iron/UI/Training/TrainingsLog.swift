@@ -70,9 +70,8 @@ private struct TrainingsLogBannerView : View {
 #if DEBUG
 struct TrainingsLog_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingsLog(training: mockCurrentTraining)
-            .environmentObject(SettingsStore.mockMetric)
-            .environmentObject(ExerciseStore.shared)
+        TrainingsLog(training: MockTrainingsData.metricRandom.currentTraining)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

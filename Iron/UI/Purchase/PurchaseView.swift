@@ -213,7 +213,7 @@ extension SKProductSubscriptionPeriod {
 struct PurchaseView_Previews: PreviewProvider {
     static var previews: some View {
         PurchaseView()
-            .environmentObject(EntitlementStore.shared)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

@@ -28,7 +28,7 @@ struct PurchaseSheet: View {
 struct PurchaseSheet_Previews: PreviewProvider {
     static var previews: some View {
         PurchaseSheet()
-            .environmentObject(EntitlementStore.shared)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif
