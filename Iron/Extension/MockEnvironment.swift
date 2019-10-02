@@ -6,6 +6,7 @@
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
 //
 
+#if DEBUG
 import SwiftUI
 
 extension View {
@@ -24,3 +25,4 @@ extension View {
             .mockEnvironment(weightUnit: weightUnit, isPro: true)
     }
 }
+#endif
