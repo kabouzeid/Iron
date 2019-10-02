@@ -3598,7 +3598,7 @@
     {
         "id": 170,
         "name": "decline-ez-bar-triceps-extension-with-barbell",
-        "title": "Triceps Extension: Barbell (Decline)",
+        "title": "Triceps Extension: EZ Curl Bar (Decline)",
         "alias": [],
         "primer": "This exercise combines a decline bench and a curved bar to more efficiently work the triceps.",
         "type": "isolation",
@@ -3725,7 +3725,7 @@
     {
         "id": 174,
         "name": "incline-triceps-extension-with-barbell",
-        "title": "Triceps Extension: Barbell (Incline)",
+        "title": "Triceps Extension: EZ Curl Bar (Incline)",
         "alias": [],
         "primer": "This version of a triceps extension uses gravity to increase the resistance of the exercise.",
         "type": "isolation",
@@ -3820,7 +3820,7 @@
     {
         "id": 179,
         "name": "lying-close-grip-triceps-extension-behind-the-head-with-barbell",
-        "title": "Triceps Extension: Barbell (Lying, Close Grip, Behind the Head)",
+        "title": "Triceps Extension: EZ Curl Bar (Lying, Close Grip, Behind the Head)",
         "alias": [],
         "primer": "You can use a barbell or EZ bar to further concentrate the benefit to your triceps.",
         "type": "isolation",
@@ -4057,7 +4057,7 @@
     {
         "id": 193,
         "name": "seated-overhead-triceps-extension-with-barbell",
-        "title": "Triceps Extension: Barbell (Seated, Overhead)",
+        "title": "Triceps Extension: EZ Curl Bar (Seated, Overhead)",
         "alias": [],
         "primer": "This exercise uses a barbell behind your neck to isolate the triceps effectively.",
         "type": "isolation",
@@ -4624,7 +4624,7 @@
     {
         "id": 222,
         "name": "drag-curl-with-barbell",
-        "title": "Drag Curl: Barbell",
+        "title": "Drag Curl: EZ Curl Bar",
         "alias": [],
         "primer": "This exercise works the biceps and forearms.",
         "type": "isolation",
@@ -4866,9 +4866,9 @@
     {
         "id": 239,
         "name": "preacher-curl-with-barbell",
-        "title": "Preacher Curl: Barbell",
+        "title": "Preacher Curl: EZ Curl Bar",
         "alias": [
-             "Preacher Biceps Curl: Barbell"
+             "Preacher Biceps Curl: EZ Curl Bar"
         ],
         "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
         "type": "isolation",
