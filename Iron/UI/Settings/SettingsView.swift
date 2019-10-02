@@ -67,6 +67,12 @@ struct SettingsView : View {
         Section(footer: Text("If you like Iron, consider leaving a review, it helps a lot!")) {
             Button(action: {
                 SKStoreReviewController.requestReview()
+                
+                // TODO: replace with the below once app is in app store
+                // Note: Replace the XXXXXXXXXX below with the App Store ID for your app
+                //       You can find the App Store ID in your app's product URL
+//                guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/idXXXXXXXXXX?action=write-review") else { return }
+//                UIApplication.shared.open(writeReviewURL)
             }) {
                 HStack {
                     Text("Rate Iron")
