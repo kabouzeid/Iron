@@ -236,7 +236,7 @@ extension MockTrainingsData {
         training.start = Calendar.current.date(byAdding: .minute, value: -71, to: referenceDate)!
         training.isCurrentTraining = true
         
-        for j in [42, 48, 206] { // bench press, cable crossover, triceps pushdown
+        for j in [42, 48] { // bench press, cable crossover
             let trainingExercise = TrainingExercise(context: training.managedObjectContext!)
             trainingExercise.exerciseId = Int16(j)
             trainingExercise.training = training
@@ -261,11 +261,11 @@ extension MockTrainingsData {
                 trainingSet.trainingExercise = trainingExercise
                 switch setNumber {
                 case 1:
-                    trainingSet.weight = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
+                    trainingSet.weight = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
                     trainingSet.repetitions = Int16(3 + setNumber)
                     trainingSet.isCompleted = true
                 case 2:
-                    trainingSet.weight = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
+                    trainingSet.weight = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
                     trainingSet.repetitions = Int16(3 + setNumber)
                     trainingSet.isCompleted = false
                 default:

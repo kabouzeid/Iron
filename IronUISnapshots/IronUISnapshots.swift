@@ -36,25 +36,19 @@ class IronUISnapshots: XCTestCase {
         
         tabBarsQuery.buttons["History"].tap()
         snapshot("02_History")
-        
-        let tablesQuery = app.tables
-//        let firstWorkout = tablesQuery.buttons.firstMatch
-//        if firstWorkout.exists {
-//            snapshot("03_History_Item")
-//        }
+        app.tables.buttons.firstMatch.tap()
+        snapshot("03_History_Item")
         
         tabBarsQuery.buttons["Workout"].tap()
         snapshot("04_Workout")
+        app.tables.buttons["Biceps Curl: EZ Curl Bar\n1 of 6"].tap()
+        snapshot("05_Workout_Item")
         
         tabBarsQuery.buttons["Exercises"].tap()
-        snapshot("05_Exercises")
+        snapshot("06_Exercises")
         
-        tablesQuery.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Chest" as NSString)).firstMatch.tap()
-        tablesQuery.buttons["Bench Press: Barbell"].tap()
-        snapshot("06_BenchPress")
-        
-//        let rowCableSeatedNavigationBar = app.navigationBars["Bench Press: Barbell"]
-//        rowCableSeatedNavigationBar.buttons["waveform.path.ecg"].tap()
-//        snapshot("07_Stats")
+        app.tables.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Chest" as NSString)).firstMatch.tap()
+        app.tables.buttons["Bench Press: Barbell"].tap()
+        snapshot("07_BenchPress")
     }
 }
