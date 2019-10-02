@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct TrainingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -203,6 +204,12 @@ struct TrainingView: View {
         let feedbackGenerator = UINotificationFeedbackGenerator()
         feedbackGenerator.prepare()
         feedbackGenerator.notificationOccurred(.success)
+        
+        UserDefaults.standard.finishedTrainingCount += 1
+        if UserDefaults.standard.finishedTrainingCount == 3 {
+            // ask for review after the user finishes his third training
+            SKStoreReviewController.requestReview()
+        }
     }
     
     private var finishWorkoutSheet: some View {
