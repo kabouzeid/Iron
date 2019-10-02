@@ -50,7 +50,7 @@ struct PurchaseView: View {
                     imageColor: .blue,
                     title: Text("Charts"),
                     text: Text("View beautiful charts and analyze your progress over time.")
-                ) // TODO show chart here
+                )
                 
                 FeatureView(
                     image: Image(systemName: "plus"),
