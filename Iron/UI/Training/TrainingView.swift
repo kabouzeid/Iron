@@ -229,13 +229,21 @@ struct TrainingView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
+    private func cancelTraining() {
+        self.managedObjectContext.delete(self.training)
+        self.managedObjectContext.safeSave()
+        self.cancelRestTimer()
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(.success)
+    }
+    
     private var cancelButton: some View {
         Button("Cancel") {
             if (self.training.trainingExercises?.count ?? 0) == 0 {
                 // the training is empty, do not need confirm to cancel
-                self.managedObjectContext.delete(self.training)
-                self.managedObjectContext.safeSave()
-                self.cancelRestTimer()
+                self.cancelTraining()
             } else {
                 self.showingCancelActionSheet = true
             }
@@ -322,9 +330,7 @@ struct TrainingView: View {
         .actionSheet(isPresented: $showingCancelActionSheet, content: {
             ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
                 .destructive(Text("Delete Workout"), action: {
-                    self.managedObjectContext.delete(self.training)
-                    self.managedObjectContext.safeSave()
-                    self.cancelRestTimer()
+                    self.cancelTraining()
                 }),
                 .cancel()
             ])
