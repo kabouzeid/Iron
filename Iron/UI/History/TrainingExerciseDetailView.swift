@@ -134,12 +134,6 @@ struct TrainingExerciseDetailView : View {
         !self.isCurrentTraining || set == self.firstUncompletedSet
     }
     
-    private var banner: some View {
-        TrainingExerciseDetailBannerView(trainingExercise: trainingExercise)
-            .listRowBackground(trainingExercise.muscleGroupColor(in: exerciseStore.exercises))
-            .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
-    }
-    
     private func rpe(rpe: Double) -> some View {
         VStack {
             Group {
@@ -224,6 +218,12 @@ struct TrainingExerciseDetailView : View {
     private var historyTrainingSets: some View {
         ForEach(trainingExerciseHistory, id: \.objectID) { trainingExercise in
             Section(header: Text(Training.dateFormatter.string(from: trainingExercise.training?.start, fallback: "Unknown date"))) {
+                trainingExercise.comment.map {
+                    Text($0.enquoted)
+                        .lineLimit(1)
+                        .font(Font.body.italic())
+                        .foregroundColor(.secondary)
+                }
                 ForEach(self.indexedTrainingSets(for: trainingExercise), id: \.1.objectID) { (index, trainingSet) in
                     TrainingSetCell(trainingSet: trainingSet, index: index, colorMode: .disabled)
                 }
@@ -276,18 +276,12 @@ struct TrainingExerciseDetailView : View {
         VStack(spacing: 0) {
             List {
                 Section {
-                    banner
-                }
-                
-                Section {
                     TextField("Comment", text: trainingExerciseComment, onEditingChanged: { isEditingTextField in
                         if !isEditingTextField {
                             self.adjustAndSaveTrainingExerciseCommentInput()
                         }
                     })
-                }
-                
-                Section {
+
                     currentTrainingSets
                     addSetButton
                 }
