@@ -133,7 +133,7 @@ struct TrainingView: View {
     private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
         let text: String?
         if let totalSets = trainingExercise.trainingSets?.count, totalSets > 0, let completedSets = trainingExercise.numberOfCompletedSets{
-            text = "\(completedSets) of \(totalSets)"
+            text = "\(completedSets) / \(totalSets)"
         } else {
             text = nil
         }
