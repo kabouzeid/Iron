@@ -19,7 +19,7 @@ class Training: NSManagedObject {
 
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter

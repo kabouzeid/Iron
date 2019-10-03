@@ -32,24 +32,7 @@ struct HistoryView : View {
                     NavigationLink(destination: TrainingDetailView(training: training)
                         .environmentObject(self.settingsStore)
                     ) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(training.displayTitle(in: self.exerciseStore.exercises))
-                                    .font(.body)
-                                Text("\(Training.dateFormatter.string(from: training.start, fallback: "Unknown date")) for \(Training.durationFormatter.string(from: training.duration, fallback: "Unknown time")!)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                training.comment.map {
-                                    Text($0.enquoted)
-                                        .lineLimit(1)
-                                        .font(Font.caption.italic())
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            .layoutPriority(1)
-                            Spacer()
-                            training.muscleGroupImage(in: self.exerciseStore.exercises)
-                        }
+                        TrainingCell(training: training)
                     }
                 }
                 .onDelete { offsets in
@@ -78,6 +61,54 @@ struct HistoryView : View {
             .navigationBarTitle(Text("History"))
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+    }
+}
+
+private struct TrainingCell: View {
+    @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    @ObservedObject var training: Training
+
+    private var durationString: String? {
+        guard let duration = training.duration else { return nil }
+        return Training.durationFormatter.string(from: duration)
+    }
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(training.displayTitle(in: self.exerciseStore.exercises))
+                    .font(.body)
+                
+                Text(Training.dateFormatter.string(from: training.start, fallback: "Unknown date"))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                training.comment.map {
+                    Text($0.enquoted)
+                        .lineLimit(1)
+                        .font(Font.caption.italic())
+                        .foregroundColor(.secondary)
+                }
+            }
+            .layoutPriority(1)
+            
+            Spacer()
+            
+            durationString.map {
+                Text($0)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .foregroundColor(Color(.systemFill))
+                        
+                )
+            }
+            
+            training.muscleGroupImage(in: self.exerciseStore.exercises)
+        }
     }
 }
 
