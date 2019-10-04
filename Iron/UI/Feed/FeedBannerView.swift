@@ -13,8 +13,8 @@ import Combine
 struct FeedBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     
-    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var trainingsFromSevenDaysAgo
-    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var trainingsFromFourteenDaysAgo
+    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var workoutsFromSevenDaysAgo
+    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var workoutsFromFourteenDaysAgo
     
     private static var sevenDaysAgo: Date {
        Calendar.current.date(byAdding: .day, value: -7, to: Date())!
@@ -24,17 +24,17 @@ struct FeedBannerView : View {
         Calendar.current.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
     }
     
-    private static var sevenDaysFetchRequest: NSFetchRequest<Training> {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@ AND \(#keyPath(Training.start)) >= %@", NSNumber(booleanLiteral: true), sevenDaysAgo as NSDate)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+    private static var sevenDaysFetchRequest: NSFetchRequest<Workout> {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@ AND \(#keyPath(Workout.start)) >= %@", NSNumber(booleanLiteral: true), sevenDaysAgo as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
     
-    private static var fourteenDaysFetchRequest: NSFetchRequest<Training> {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@ AND \(#keyPath(Training.start)) >= %@ AND \(#keyPath(Training.start)) < %@", NSNumber(booleanLiteral: true), fourteenDaysAgo as NSDate, sevenDaysAgo as NSDate)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+    private static var fourteenDaysFetchRequest: NSFetchRequest<Workout> {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@ AND \(#keyPath(Workout.start)) >= %@ AND \(#keyPath(Workout.start)) < %@", NSNumber(booleanLiteral: true), fourteenDaysAgo as NSDate, sevenDaysAgo as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
     
@@ -60,11 +60,11 @@ struct FeedBannerView : View {
         var entries = [BannerViewEntry]()
 
         // compute the values
-        let valuesSevenDaysAgo = trainingsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.safeDuration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
+        let valuesSevenDaysAgo = workoutsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, workout) -> (TimeInterval, Int, Double) in
+            return (result.0 + workout.safeDuration, result.1 + (workout.numberOfCompletedSets ?? 0), result.2 + (workout.totalCompletedWeight ?? 0))
         }
-        let valuesFourTeenDaysAgo = trainingsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, training) -> (TimeInterval, Int, Double) in
-            return (result.0 + training.safeDuration, result.1 + (training.numberOfCompletedSets ?? 0), result.2 + (training.totalCompletedWeight ?? 0))
+        let valuesFourTeenDaysAgo = workoutsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, workout) -> (TimeInterval, Int, Double) in
+            return (result.0 + workout.safeDuration, result.1 + (workout.numberOfCompletedSets ?? 0), result.2 + (workout.totalCompletedWeight ?? 0))
         }
 
         // set the values
@@ -89,7 +89,7 @@ struct FeedBannerView : View {
         entries.append(
             BannerViewEntry(id: 0,
                             title: Text("Duration\nLast 7 Days"),
-                            text: Text(Training.durationFormatter.string(from: valuesSevenDaysAgo.0)!),
+                            text: Text(Workout.durationFormatter.string(from: valuesSevenDaysAgo.0)!),
                             detail: Text(durationDetailText),
                             detailColor: durationDetailColor))
 

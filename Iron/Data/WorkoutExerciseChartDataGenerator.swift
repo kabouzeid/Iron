@@ -1,5 +1,5 @@
 //
-//  TrainingExerciseChartDataGenerator.swift
+//  WorkoutExerciseChartDataGenerator.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 16.09.18.
@@ -9,14 +9,14 @@
 import CoreData
 import Charts
 
-struct TrainingExerciseChartDataGenerator {
+struct WorkoutExerciseChartDataGenerator {
 
     private var exercise: Exercise
-    private var trainingExerciseHistory: [TrainingExercise]
+    private var workoutExerciseHistory: [WorkoutExercise]
 
     init(context: NSManagedObjectContext, exercise: Exercise) {
         self.exercise = exercise
-        self.trainingExerciseHistory = (try? context.fetch(TrainingExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
+        self.workoutExerciseHistory = (try? context.fetch(WorkoutExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
     }
 
     enum MeasurementType: String, CaseIterable {
@@ -58,26 +58,26 @@ struct TrainingExerciseChartDataGenerator {
             }
         }
 
-        var filter: (TrainingExercise) -> Bool {
+        var filter: (WorkoutExercise) -> Bool {
             switch self {
             case .month:
                 return {
-                    guard let start = $0.training?.start else { return false }
+                    guard let start = $0.workout?.start else { return false }
                     return start >= Calendar.current.date(byAdding: .month, value: -1,  to: Date())!
                 }
             case .threeMonths:
                 return {
-                    guard let start = $0.training?.start else { return false }
+                    guard let start = $0.workout?.start else { return false }
                     return start >= Calendar.current.date(byAdding: .month, value: -3,  to: Date())!
                 }
             case .year:
                 return {
-                    guard let start = $0.training?.start else { return false }
+                    guard let start = $0.workout?.start else { return false }
                     return start >= Calendar.current.date(byAdding: .year, value: -1,   to: Date())!
                 }
             case .all:
                 return {
-                    guard let _ = $0.training?.start else { return false }
+                    guard let _ = $0.workout?.start else { return false }
                     return true
                 }
             }
@@ -106,23 +106,23 @@ struct TrainingExerciseChartDataGenerator {
 
     func chartData(for measurementType: MeasurementType, timeFrame: TimeFrame, weightUnit: WeightUnit, maxRepetitionsFor1rm: Int) -> LineChartData {
         let dataSet = generateChartDataSet(
-            trainingExercises: trainingExerciseHistory.filter(timeFrame.filter),
-            trainingExerciseToValue: trainingExerciseToValue(for: measurementType, weightUnit: weightUnit, maxRepetitionsFor1rm: maxRepetitionsFor1rm),
+            workoutExercises: workoutExerciseHistory.filter(timeFrame.filter),
+            workoutExerciseToValue: workoutExerciseToValue(for: measurementType, weightUnit: weightUnit, maxRepetitionsFor1rm: maxRepetitionsFor1rm),
             label: measurementType.title)
         return LineChartData(dataSet: dataSet)
     }
 
-    private func trainingExerciseToValue(for measurementType: MeasurementType, weightUnit: WeightUnit, maxRepetitionsFor1rm: Int) -> TrainingExerciseToValue {
+    private func workoutExerciseToValue(for measurementType: MeasurementType, weightUnit: WeightUnit, maxRepetitionsFor1rm: Int) -> WorkoutExerciseToValue {
         switch measurementType {
         case .oneRM:
             return {
-                $0.trainingSets?
-                    .compactMap { $0 as? TrainingSet }
-                    .compactMap { trainingSet in
-                        guard trainingSet.repetitions > 0 else { return nil }
-                        guard trainingSet.repetitions <= maxRepetitionsFor1rm else { return nil }
-                        assert(trainingSet.repetitions < 37) // we don't want to divide with 0 or get negative values
-                        return Double(trainingSet.weight) * (36 / (37 - Double(trainingSet.repetitions))) // Brzycki 1RM formula
+                $0.workoutSets?
+                    .compactMap { $0 as? WorkoutSet }
+                    .compactMap { workoutSet in
+                        guard workoutSet.repetitions > 0 else { return nil }
+                        guard workoutSet.repetitions <= maxRepetitionsFor1rm else { return nil }
+                        assert(workoutSet.repetitions < 37) // we don't want to divide with 0 or get negative values
+                        return Double(workoutSet.weight) * (36 / (37 - Double(workoutSet.repetitions))) // Brzycki 1RM formula
                     }
                     .max()
                     .map { WeightUnit.convert(weight: $0, from: .metric, to: weightUnit)}
@@ -136,14 +136,14 @@ struct TrainingExerciseChartDataGenerator {
         }
     }
 
-    private typealias TrainingExerciseToValue = (TrainingExercise) -> Double?
-    private func generateChartDataSet(trainingExercises: [TrainingExercise], trainingExerciseToValue: TrainingExerciseToValue, label: String?) -> LineChartDataSet {
+    private typealias WorkoutExerciseToValue = (WorkoutExercise) -> Double?
+    private func generateChartDataSet(workoutExercises: [WorkoutExercise], workoutExerciseToValue: WorkoutExerciseToValue, label: String?) -> LineChartDataSet {
         // Define chart entries
-        let entries: [ChartDataEntry] = trainingExercises
+        let entries: [ChartDataEntry] = workoutExercises
             .reversed()  // fixes a strange bug, where the chart line is not drawn
-            .compactMap { trainingExercise in
-                guard let start = trainingExercise.training?.start else { return nil }
-                guard let yValue = trainingExerciseToValue(trainingExercise) else { return nil }
+            .compactMap { workoutExercise in
+                guard let start = workoutExercise.workout?.start else { return nil }
+                guard let yValue = workoutExerciseToValue(workoutExercise) else { return nil }
                 let xValue = dateToValue(date: start)
                 return ChartDataEntry(x: xValue, y: yValue)
             }

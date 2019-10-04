@@ -25,9 +25,9 @@ struct ContentView : View {
 //                    Text("History")
 //                }
 //                .tag(1)
-//            trainingView(training: currentTraining)
+//            workoutView(workout: currentWorkout)
 //                .tabItem {
-//                    Image("training")
+//                    Image("workout")
 //                    Text("Workout")
 //                }
 //                .tag(2)
@@ -55,9 +55,9 @@ struct ContentView : View {
                 .hostingController()
                 .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
             
-            TrainingTab()
+            WorkoutTab()
                 .hostingController()
-                .tabItem(title: "Workout", image: UIImage(named: "training"), tag: 2),
+                .tabItem(title: "Workout", image: UIImage(named: "workout"), tag: 2),
             
             ExerciseMuscleGroupsView()
                 .hostingController()

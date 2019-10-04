@@ -14,26 +14,26 @@ struct ExerciseChartView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var exercise: Exercise
-    var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
+    var measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
 
-    private func chartData(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> ChartData {
+    private func chartData(_ chartDataGenerator: WorkoutExerciseChartDataGenerator) -> ChartData {
         chartDataGenerator.chartData(for: measurementType, timeFrame: .threeMonths, weightUnit: settingsStore.weightUnit, maxRepetitionsFor1rm: settingsStore.maxRepetitionsOneRepMax)
     }
     
-    private func xAxisFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> IAxisValueFormatter {
+    private func xAxisFormatter(_ chartDataGenerator: WorkoutExerciseChartDataGenerator) -> IAxisValueFormatter {
         chartDataGenerator.xAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
-    private func yAxisFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> IAxisValueFormatter {
+    private func yAxisFormatter(_ chartDataGenerator: WorkoutExerciseChartDataGenerator) -> IAxisValueFormatter {
         chartDataGenerator.yAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
-    private func balloonFormatter(_ chartDataGenerator: TrainingExerciseChartDataGenerator) -> BalloonValueFormatter {
+    private func balloonFormatter(_ chartDataGenerator: WorkoutExerciseChartDataGenerator) -> BalloonValueFormatter {
         chartDataGenerator.ballonValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
     var body: some View {
-        let chartDataGenerator = TrainingExerciseChartDataGenerator(context: managedObjectContext, exercise: exercise)
+        let chartDataGenerator = WorkoutExerciseChartDataGenerator(context: managedObjectContext, exercise: exercise)
         return _LineChartView(
             chartData: chartData(chartDataGenerator),
             xAxisValueFormatter: xAxisFormatter(chartDataGenerator),

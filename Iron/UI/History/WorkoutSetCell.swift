@@ -1,5 +1,5 @@
 //
-//  TrainingSetCell.swift
+//  WorkoutSetCell.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 28.08.19.
@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-struct TrainingSetCell: View {
+struct WorkoutSetCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
 
-    @ObservedObject var trainingSet: TrainingSet
+    @ObservedObject var workoutSet: WorkoutSet
     let index: Int
     var colorMode: ColorMode = .activated
     var textMode: TextMode = .weightAndReps
@@ -41,10 +41,10 @@ struct TrainingSetCell: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(textMode == .weightAndReps ? trainingSet.displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
+                Text(textMode == .weightAndReps ? workoutSet.displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(colorMode == .activated ? .primary : .secondary)
-                trainingSet.comment.map {
+                workoutSet.comment.map {
                     Text($0.enquoted)
                         .lineLimit(1)
                         .font(Font.caption.italic())
@@ -52,20 +52,20 @@ struct TrainingSetCell: View {
                 }
             }
             Spacer()
-            trainingSet.displayRpe.map {
+            workoutSet.displayRpe.map {
                 self.rpe(rpe: $0)
             }
-            if trainingSet.isPersonalRecord ?? false {
+            if workoutSet.isPersonalRecord ?? false {
                 // TODO: replace with a trophy symbol
                 Image(systemName: "star.circle.fill")
                     .foregroundColor(colorMode == .disabled ? .secondary : .yellow)
             }
             Text("\(index)")
                 .font(Font.body.monospacedDigit())
-                .foregroundColor(trainingSet.displayTag != nil ? .clear : .secondary)
+                .foregroundColor(workoutSet.displayTag != nil ? .clear : .secondary)
                 .background(
                     Group {
-                        trainingSet.displayTag.map {
+                        workoutSet.displayTag.map {
                             Text($0.title.first!.uppercased())
                                 .fontWeight(.semibold)
                                 .foregroundColor($0.color)
@@ -78,9 +78,9 @@ struct TrainingSetCell: View {
 }
 
 #if DEBUG
-struct TrainingSetCell_Previews: PreviewProvider {
+struct WorkoutSetCell_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingSetCell(trainingSet: MockTrainingsData.metricRandom.trainingSet, index: 1)
+        WorkoutSetCell(workoutSet: MockWorkoutData.metricRandom.workoutSet, index: 1)
             .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }

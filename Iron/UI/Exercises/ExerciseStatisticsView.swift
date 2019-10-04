@@ -13,7 +13,7 @@ struct ExerciseStatisticsView : View {
     var exercise: Exercise
     
     var body: some View {
-        List(TrainingExerciseChartDataGenerator.MeasurementType.allCases, id: \.self) { measurementType in
+        List(WorkoutExerciseChartDataGenerator.MeasurementType.allCases, id: \.self) { measurementType in
             ExerciseChartViewCell(exercise: self.exercise, measurementType: measurementType)
         }
     }

@@ -1,5 +1,5 @@
 //
-//  TrainingsLog.swift
+//  WorkoutLog.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 12.08.19.
@@ -8,16 +8,16 @@
 
 import SwiftUI
 
-struct TrainingsLog: View {
+struct WorkoutLog: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
-    @ObservedObject var training: Training
+    @ObservedObject var workout: Workout
     
-    private func trainingExerciseText(trainingExercise: TrainingExercise) -> String? {
-        guard let trainingSets = trainingExercise.trainingSets else { return nil }
-        let text = trainingSets
-            .compactMap { $0 as? TrainingSet }
+    private func workoutExerciseText(workoutExercise: WorkoutExercise) -> String? {
+        guard let workoutSets = workoutExercise.workoutSets else { return nil }
+        let text = workoutSets
+            .compactMap { $0 as? WorkoutSet }
             .filter { $0.isCompleted }
             .map { $0.logTitle(unit: settingsStore.weightUnit) }
             .joined(separator: "\n")
@@ -27,16 +27,16 @@ struct TrainingsLog: View {
     var body: some View {
         List {
             Section {
-                TrainingsLogBannerView(training: training)
-                    .listRowBackground(training.muscleGroupColor(in: exerciseStore.exercises))
+                WorkoutLogBannerView(workout: workout)
+                    .listRowBackground(workout.muscleGroupColor(in: exerciseStore.exercises))
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             Section {
-                ForEach(training.trainingExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) { trainingExercise in
+                ForEach(workout.workoutExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) { workoutExercise in
                     VStack(alignment: .leading) {
-                        Text(trainingExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
+                        Text(workoutExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
                             .font(.body)
-                        self.trainingExerciseText(trainingExercise: trainingExercise).map {
+                        self.workoutExerciseText(workoutExercise: workoutExercise).map {
                             Text($0)
                                 .font(Font.body.monospacedDigit())
                                 .foregroundColor(.secondary)
@@ -50,9 +50,9 @@ struct TrainingsLog: View {
     }
 }
 
-private struct TrainingsLogBannerView : View {
+private struct WorkoutLogBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    @ObservedObject var training: Training
+    @ObservedObject var workout: Workout
     
     var body: some View {
         BannerView(entries: bannerViewEntries)
@@ -61,16 +61,16 @@ private struct TrainingsLogBannerView : View {
     private var bannerViewEntries: [BannerViewEntry] {
         var entries = [BannerViewEntry]()
         
-        entries.append(BannerViewEntry(id: 0, title: Text("Sets"), text: Text(String(training.numberOfCompletedSets ?? 0))))
-        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\(WeightUnit.format(weight: training.totalCompletedWeight ?? 0, from: .metric, to: settingsStore.weightUnit))")))
+        entries.append(BannerViewEntry(id: 0, title: Text("Sets"), text: Text(String(workout.numberOfCompletedSets ?? 0))))
+        entries.append(BannerViewEntry(id: 1, title: Text("Weight"), text: Text("\(WeightUnit.format(weight: workout.totalCompletedWeight ?? 0, from: .metric, to: settingsStore.weightUnit))")))
         return entries
     }
 }
 
 #if DEBUG
-struct TrainingsLog_Previews: PreviewProvider {
+struct WorkoutLog_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingsLog(training: MockTrainingsData.metricRandom.currentTraining)
+        WorkoutLog(workout: MockWorkoutData.metricRandom.currentWorkout)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

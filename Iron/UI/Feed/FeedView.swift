@@ -82,7 +82,7 @@ private struct PinnedChartSelectorSheet: View {
     }
     
     private func actionButtons(exercise: Exercise) -> [ActionSheet.Button] {
-        TrainingExerciseChartDataGenerator.MeasurementType.allCases.compactMap { measurementType in
+        WorkoutExerciseChartDataGenerator.MeasurementType.allCases.compactMap { measurementType in
             let pinnedChart = PinnedChart(exerciseId: exercise.id, measurementType: measurementType)
             if self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                 return nil

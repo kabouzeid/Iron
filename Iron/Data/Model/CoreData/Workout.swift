@@ -1,5 +1,5 @@
 //
-//  Training.swift
+//  Workout.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 14.02.18.
@@ -9,11 +9,11 @@
 import CoreData
 import Combine
 
-class Training: NSManagedObject {
-    static var currentTrainingFetchRequest: NSFetchRequest<Training> {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) == %@", NSNumber(booleanLiteral: true))
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+class Workout: NSManagedObject {
+    static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) == %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
 
@@ -35,9 +35,9 @@ class Training: NSManagedObject {
     // MARK: Derived properties
     
     var isCompleted: Bool? {
-        guard let trainingExercises = trainingExercises else { return nil }
-        return !trainingExercises
-            .compactMap { $0 as? TrainingExercise }
+        guard let workoutExercises = workoutExercises else { return nil }
+        return !workoutExercises
+            .compactMap { $0 as? WorkoutExercise }
             .contains { !($0.isCompleted ?? false) }
     }
     
@@ -60,11 +60,11 @@ class Training: NSManagedObject {
     func muscleGroups(in exercises: [Exercise]) -> [String] {
         var muscleGroups = [String]()
         
-        let trainingExercises = self.trainingExercises?.array as? [TrainingExercise] ?? []
-        for trainingExercise in trainingExercises {
-            if let exercise = trainingExercise.exercise(in: exercises) {
+        let workoutExercises = self.workoutExercises?.array as? [WorkoutExercise] ?? []
+        for workoutExercise in workoutExercises {
+            if let exercise = workoutExercise.exercise(in: exercises) {
                 // even if there are no sets, add the muscle group at least once
-                let factor = max(trainingExercise.trainingSets?.count ?? 1, 1)
+                let factor = max(workoutExercise.workoutSets?.count ?? 1, 1)
                 muscleGroups.append(contentsOf: Array(repeating: exercise.muscleGroup, count: factor))
             }
         }
@@ -77,18 +77,18 @@ class Training: NSManagedObject {
     }
 
     var numberOfCompletedSets: Int? {
-        trainingExercises?
-            .map { $0 as! TrainingExercise }
-            .reduce(0, { (count, trainingExercise) -> Int in
-                count + (trainingExercise.numberOfCompletedSets ?? 0)
+        workoutExercises?
+            .map { $0 as! WorkoutExercise }
+            .reduce(0, { (count, workoutExercise) -> Int in
+                count + (workoutExercise.numberOfCompletedSets ?? 0)
             })
     }
     
     var totalCompletedWeight: Double? {
-        trainingExercises?
-            .map { $0 as! TrainingExercise }
-            .reduce(0, { (weight, trainingExercise) -> Double in
-                weight + (trainingExercise.totalCompletedWeight ?? 0)
+        workoutExercises?
+            .map { $0 as! WorkoutExercise }
+            .reduce(0, { (weight, workoutExercise) -> Double in
+                weight + (workoutExercise.totalCompletedWeight ?? 0)
             })
     }
 
@@ -96,7 +96,7 @@ class Training: NSManagedObject {
 }
 
 // MARK: Safe accessors
-extension Training {
+extension Workout {
     var safeStart: Date {
         get {
             start ?? min(end ?? Date(), Date())
@@ -123,7 +123,7 @@ extension Training {
 }
 
 // MARK: Prepare for finish
-extension Training {
+extension Workout {
     func prepareForFinish() {
         deleteExercisesWhereAllSetsAreUncompleted()
         deleteUncompletedSets()
@@ -134,33 +134,33 @@ extension Training {
     
     // exercises with no sets won't be deleted
     func deleteExercisesWhereAllSetsAreUncompleted() {
-        trainingExercises?
-            .compactMap { $0 as? TrainingExercise }
+        workoutExercises?
+            .compactMap { $0 as? WorkoutExercise }
             .filter {
-                guard let sets = $0.trainingSets?.compactMap({ $0 as? TrainingSet }) else { return false }
+                guard let sets = $0.workoutSets?.compactMap({ $0 as? WorkoutSet }) else { return false }
                 return !sets.isEmpty && !sets.contains { $0.isCompleted }
         }
-        .forEach { trainingExercise in
-            managedObjectContext?.delete(trainingExercise)
-            trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
+        .forEach { workoutExercise in
+            managedObjectContext?.delete(workoutExercise)
+            workoutExercise.workout?.removeFromWorkoutExercises(workoutExercise)
         }
     }
     
     func deleteUncompletedSets() {
-        trainingExercises?
-            .compactMap { $0 as? TrainingExercise }
-            .compactMap { $0.trainingSets?.compactMap { $0 as? TrainingSet } }
+        workoutExercises?
+            .compactMap { $0 as? WorkoutExercise }
+            .compactMap { $0.workoutSets?.compactMap { $0 as? WorkoutSet } }
             .flatMap { $0 }
             .filter { !$0.isCompleted }
-            .forEach { trainingSet in
-                managedObjectContext?.delete(trainingSet)
-                trainingSet.trainingExercise?.removeFromTrainingSets(trainingSet)
+            .forEach { workoutSet in
+                managedObjectContext?.delete(workoutSet)
+                workoutSet.workoutExercise?.removeFromWorkoutSets(workoutSet)
         }
     }
 }
 
-// MARK: Trainings Log
-extension Training {
+// MARK: Workout Log
+extension Workout {
     func logText(in exercises: [Exercise], weightUnit: WeightUnit) -> String? {
         guard let start = start else { return nil }
         guard let duration = duration else { return nil }
@@ -172,13 +172,13 @@ extension Training {
         let durationString = "Duration: \(Self.durationFormatter.string(from: duration)!)"
         let weightString = "Total weight: \(weightUnit.format(weight: weight))"
         
-        guard let trainingExercises = trainingExercisesWhereNotAllSetsAreUncompleted else { return nil }
-        let exercisesDescription = trainingExercises
-            .map { trainingExercise -> String in
-                let exerciseTitle = (trainingExercise.exercise(in: exercises)?.title ?? "Unknown exercise")
-                guard let trainingSets = trainingExercise.trainingSets else { return exerciseTitle }
-                let setsDescription = trainingSets
-                    .compactMap { $0 as? TrainingSet }
+        guard let workoutExercises = workoutExercisesWhereNotAllSetsAreUncompleted else { return nil }
+        let exercisesDescription = workoutExercises
+            .map { workoutExercise -> String in
+                let exerciseTitle = (workoutExercise.exercise(in: exercises)?.title ?? "Unknown exercise")
+                guard let workoutSets = workoutExercise.workoutSets else { return exerciseTitle }
+                let setsDescription = workoutSets
+                    .compactMap { $0 as? WorkoutSet }
                     .filter { $0.isCompleted }
                     .map { $0.logTitle(unit: weightUnit) }
                     .joined(separator: "\n")
@@ -189,18 +189,18 @@ extension Training {
         return [dateString, durationString, weightString + "\n", exercisesDescription].joined(separator: "\n")
     }
     
-    var trainingExercisesWhereNotAllSetsAreUncompleted: [TrainingExercise]? {
-        trainingExercises?
-            .compactMap { $0 as? TrainingExercise }
+    var workoutExercisesWhereNotAllSetsAreUncompleted: [WorkoutExercise]? {
+        workoutExercises?
+            .compactMap { $0 as? WorkoutExercise }
             .filter {
-                guard let sets = $0.trainingSets?.compactMap({ $0 as? TrainingSet }) else { return false }
+                guard let sets = $0.workoutSets?.compactMap({ $0 as? WorkoutSet }) else { return false }
                 return sets.isEmpty || sets.contains { $0.isCompleted }
         }
     }
 }
 
 // MARK: Validation
-extension Training {
+extension Workout {
     override func validateForUpdate() throws {
         try super.validateForUpdate()
         try validateConsistency()
@@ -216,30 +216,30 @@ extension Training {
             throw error(code: 1, message: "start not set")
         }
         
-        if !isCurrentTraining, end == nil {
-            throw error(code: 2, message: "end not set on finished training")
+        if !isCurrentWorkout, end == nil {
+            throw error(code: 2, message: "end not set on finished workout")
         }
         
         if let start = start, let end = end, start > end {
             throw error(code: 3, message: "start is greater than end")
         }
         
-        if isCurrentTraining, let count = try? managedObjectContext?.count(for: Self.currentTrainingFetchRequest), count > 1 {
-            throw error(code: 4, message: "more than one current training")
+        if isCurrentWorkout, let count = try? managedObjectContext?.count(for: Self.currentWorkoutFetchRequest), count > 1 {
+            throw error(code: 4, message: "more than one current workout")
         }
 
-        if !isCurrentTraining, let isCompleted = isCompleted, !isCompleted {
-            throw error(code: 5, message: "training that is not current training is uncompleted")
+        if !isCurrentWorkout, let isCompleted = isCompleted, !isCompleted {
+            throw error(code: 5, message: "workout that is not current workout is uncompleted")
         }
     }
     
     private func error(code: Int, message: String) -> NSError {
-        NSError(domain: "TRAINING_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
+        NSError(domain: "WORKOUT_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
     }
 }
 
 // MARK: Observable
-extension Training {
+extension Workout {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
         initChangeObserver()
@@ -254,11 +254,11 @@ extension Training {
         cancellable = managedObjectContext?.publisher
             .filter { changed in
                 changed.contains { managedObject in
-                    if let trainingExercise = managedObject as? TrainingExercise {
-                        return trainingExercise.training?.objectID == self.objectID
+                    if let workoutExercise = managedObject as? WorkoutExercise {
+                        return workoutExercise.workout?.objectID == self.objectID
                     }
-                    if let trainingSet = managedObject as? TrainingSet {
-                        return trainingSet.trainingExercise?.training?.objectID == self.objectID
+                    if let workoutSet = managedObject as? WorkoutSet {
+                        return workoutSet.workoutExercise?.workout?.objectID == self.objectID
                     }
                     return managedObject.objectID == self.objectID
                 }
@@ -268,7 +268,7 @@ extension Training {
 }
 
 // MARK: Encodable
-extension Training: Encodable {
+extension Workout: Encodable {
     private enum CodingKeys: String, CodingKey {
         case title
         case comment
@@ -283,6 +283,6 @@ extension Training: Encodable {
         try container.encodeIfPresent(comment, forKey: .comment)
         try container.encodeIfPresent(start, forKey: .start)
         try container.encodeIfPresent(end, forKey: .end)
-        try container.encodeIfPresent(trainingExercises?.array.compactMap { $0 as? TrainingExercise }, forKey: .exercises)
+        try container.encodeIfPresent(workoutExercises?.array.compactMap { $0 as? WorkoutExercise }, forKey: .exercises)
     }
 }

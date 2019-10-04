@@ -48,20 +48,20 @@ class NotificationManager: NSObject {
         notificationCenter.removeDeliveredNotifications(withIdentifiers: withIdentifiers.map { $0.rawValue })
     }
 
-    func requestUnfinishedTrainingNotification() {
+    func requestUnfinishedWorkoutNotification() {
         notificationCenter.getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
             
             let content = UNMutableNotificationContent()
-            content.title = "Unfinished training"
-            content.body = "Your current training is unfinished. Do you want to finish it?"
+            content.title = "Unfinished workout"
+            content.body = "Your current workout is unfinished. Do you want to finish it?"
             if settings.soundSetting == .enabled {
                 content.sound = UNNotificationSound.default
             }
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15*60, repeats: true)
             
-            let request = UNNotificationRequest(identifier: NotificationIdentifier.unfinishedTraining.rawValue, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: NotificationIdentifier.unfinishedWorkout.rawValue, content: content, trigger: trigger)
             
             self.notificationCenter.add(request) { (error) in
                 if let error = error {
@@ -104,7 +104,8 @@ class NotificationManager: NSObject {
     }
     
     enum NotificationIdentifier: String {
-        case unfinishedTraining
+        case unfinishedWorkout
+        case unfinishedTraining // TODO: remove unfinishedTraining in future version
         case restTimerUp
     }
     

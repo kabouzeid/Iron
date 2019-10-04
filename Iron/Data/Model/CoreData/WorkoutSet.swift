@@ -1,5 +1,5 @@
 //
-//  TrainingSet.swift
+//  WorkoutSet.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 14.02.18.
@@ -9,31 +9,31 @@
 import CoreData
 import Combine
 
-class TrainingSet: NSManagedObject {
+class WorkoutSet: NSManagedObject {
     static var MAX_REPETITIONS: Int16 = 9999
     static var MAX_WEIGHT: Double = 99999
     
     // MARK: Derived properties
 
     var isPersonalRecord: Bool? {
-        guard let start = trainingExercise?.training?.start else { return nil }
-        guard let exerciseId = trainingExercise?.exerciseId else { return nil }
+        guard let start = workoutExercise?.workout?.start else { return nil }
+        guard let exerciseId = workoutExercise?.exerciseId else { return nil }
 
-        let previousSetsRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        let previousSetsRequest: NSFetchRequest<WorkoutSet> = WorkoutSet.fetchRequest()
         let previousSetsPredicate = NSPredicate(format:
-            "\(#keyPath(TrainingSet.trainingExercise.exerciseId)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@ AND \(#keyPath(TrainingSet.trainingExercise.training.start)) < %@",
+            "\(#keyPath(WorkoutSet.workoutExercise.exerciseId)) == %@ AND \(#keyPath(WorkoutSet.isCompleted)) == %@ AND \(#keyPath(WorkoutSet.workoutExercise.workout.start)) < %@",
             exerciseId as NSNumber, true as NSNumber, start as NSDate
         )
         previousSetsRequest.predicate = previousSetsPredicate
         guard let numberOfPreviousSets = try? managedObjectContext?.count(for: previousSetsRequest) else { return nil }
-        if numberOfPreviousSets == 0 { return false } // if there was no set for this exercise in a prior training, we consider no set as a PR
+        if numberOfPreviousSets == 0 { return false } // if there was no set for this exercise in a prior workout, we consider no set as a PR
 
-        let betterOrEqualPreviousSetsRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
+        let betterOrEqualPreviousSetsRequest: NSFetchRequest<WorkoutSet> = WorkoutSet.fetchRequest()
         betterOrEqualPreviousSetsRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates:
             [
                 previousSetsPredicate,
                 NSPredicate(format:
-                    "\(#keyPath(TrainingSet.weight)) >= %@ AND \(#keyPath(TrainingSet.repetitions)) >= %@",
+                    "\(#keyPath(WorkoutSet.weight)) >= %@ AND \(#keyPath(WorkoutSet.repetitions)) >= %@",
                     weight as NSNumber, repetitions as NSNumber
                 )
             ]
@@ -41,20 +41,20 @@ class TrainingSet: NSManagedObject {
         guard let numberOfBetterOrEqualPreviousSets = try? managedObjectContext?.count(for: betterOrEqualPreviousSetsRequest) else { return nil }
         if numberOfBetterOrEqualPreviousSets > 0 { return false } // there are better sets
         
-        guard let index = trainingExercise?.trainingSets?.index(of: self), index != NSNotFound else { return nil }
-        guard let numberOfBetterOrEqualPreviousSetsInCurrentTraining = (trainingExercise?.trainingSets?.array[0..<index]
-            .compactMap { $0 as? TrainingSet }
+        guard let index = workoutExercise?.workoutSets?.index(of: self), index != NSNotFound else { return nil }
+        guard let numberOfBetterOrEqualPreviousSetsInCurrentWorkout = (workoutExercise?.workoutSets?.array[0..<index]
+            .compactMap { $0 as? WorkoutSet }
             .filter { $0.isCompleted && $0.weight >= weight && $0.repetitions >= repetitions } // check isCompleted only to be sure, but it should never be false here
             .count)
             else { return nil }
-        return numberOfBetterOrEqualPreviousSetsInCurrentTraining == 0
+        return numberOfBetterOrEqualPreviousSetsInCurrentWorkout == 0
     }
     
     private var cancellable: AnyCancellable?
 }
 
 // MARK: Display
-extension TrainingSet {
+extension WorkoutSet {
     func displayTitle(unit: WeightUnit) -> String {
         let numberFormatter = unit.numberFormatter
         numberFormatter.minimumFractionDigits = unit.defaultFractionDigits
@@ -63,9 +63,9 @@ extension TrainingSet {
     }
     
     // use this instead of tag
-    var displayTag: TrainingSetTag? {
+    var displayTag: WorkoutSetTag? {
         get {
-            TrainingSetTag(rawValue: tag ?? "")
+            WorkoutSetTag(rawValue: tag ?? "")
         }
         set {
             tag = newValue?.rawValue
@@ -90,7 +90,7 @@ extension TrainingSet {
     }
 }
 
-extension TrainingSet {
+extension WorkoutSet {
     override func validateForUpdate() throws {
         try super.validateForUpdate()
         try validateConsistency()
@@ -102,18 +102,18 @@ extension TrainingSet {
     }
     
     func validateConsistency() throws {
-        if !isCompleted, let training = trainingExercise?.training, !training.isCurrentTraining {
-            throw error(code: 1, message: "uncompleted set in training that is not current training")
+        if !isCompleted, let workout = workoutExercise?.workout, !workout.isCurrentWorkout {
+            throw error(code: 1, message: "uncompleted set in workout that is not current workout")
         }
     }
     
     private func error(code: Int, message: String) -> NSError {
-        NSError(domain: "TRAINING_SET_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
+        NSError(domain: "WORKOUT_SET_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
     }
 }
 
 // MARK: Observable
-extension TrainingSet {
+extension WorkoutSet {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
         initChangeObserver()
@@ -128,11 +128,11 @@ extension TrainingSet {
         cancellable = managedObjectContext?.publisher
             .filter { changed in
                 changed.contains { managedObject in
-                    if let training = managedObject as? Training {
-                        return training.objectID == self.trainingExercise?.training?.objectID
+                    if let workout = managedObject as? Workout {
+                        return workout.objectID == self.workoutExercise?.workout?.objectID
                     }
-                    if let trainingExercise = managedObject as? TrainingExercise {
-                        return trainingExercise.objectID == self.trainingExercise?.objectID
+                    if let workoutExercise = managedObject as? WorkoutExercise {
+                        return workoutExercise.objectID == self.workoutExercise?.objectID
                     }
                     return managedObject.objectID == self.objectID
                 }
@@ -142,7 +142,7 @@ extension TrainingSet {
 }
 
 // MARK: Encodable
-extension TrainingSet: Encodable {
+extension WorkoutSet: Encodable {
     private enum CodingKeys: String, CodingKey {
         case repetitions
         case weight

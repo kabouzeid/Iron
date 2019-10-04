@@ -1,5 +1,5 @@
 //
-//  TrainingSetTag.swift
+//  WorkoutSetTag.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 22.08.19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TrainingSetTag: String, CaseIterable {
+enum WorkoutSetTag: String, CaseIterable {
 //    case warmUp // disable for now, see if there is a need for this
     case dropSet
     case failure

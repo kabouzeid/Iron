@@ -76,7 +76,7 @@ struct CustomExercisesView: View {
                     for i in offsets {
                         assert(self.exerciseStore.customExercises[i].isCustom)
                         let id = self.exerciseStore.customExercises[i].id
-                        self.deleteTrainingExercises(with: id)
+                        self.deleteWorkoutExercises(with: id)
                         self.exerciseStore.deleteCustomExercise(with: id)
                     }
                     self.managedObjectContext.safeSave()
@@ -86,11 +86,11 @@ struct CustomExercisesView: View {
         }
     }
     
-    private func deleteTrainingExercises(with id: Int) {
-        let request: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(TrainingExercise.exerciseId)) == %@", NSNumber(value: id))
-        guard let trainingExercises = try? managedObjectContext.fetch(request) else { return }
-        trainingExercises.forEach { managedObjectContext.delete($0) }
+    private func deleteWorkoutExercises(with id: Int) {
+        let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.exerciseId)) == %@", NSNumber(value: id))
+        guard let workoutExercises = try? managedObjectContext.fetch(request) else { return }
+        workoutExercises.forEach { managedObjectContext.delete($0) }
     }
 }
 

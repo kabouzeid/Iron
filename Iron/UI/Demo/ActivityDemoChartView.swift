@@ -41,11 +41,11 @@ struct ActivityDemoChartView: View {
     }
     
     private var activityData: [BarStack] {
-//        trainingsPerWeek(trainings: trainingHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
-//            let (trainings, week) = arg
+//        workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
+//            let (workouts, week) = arg
 //            return BarStack(
-//                entries: trainings.map { training in
-//                    let muscleGroup = training.muscleGroups(in: exerciseStore.exercises).first ?? "other"
+//                entries: workouts.map { workout in
+//                    let muscleGroup = workout.muscleGroups(in: exerciseStore.exercises).first ?? "other"
 //                    return BarStackEntry(color: Exercise.colorFor(muscleGroup: muscleGroup), label: muscleGroup.capitalized)
 //                },
 //                label: Self.dateFormatter.string(from: week)

@@ -13,9 +13,9 @@ struct ExerciseDemoChartView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     
     var exercise: Exercise
-    var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
+    var measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
     
-    private let xAxisValueFormatter = TrainingExerciseChartDataGenerator.DateAxisFormatter()
+    private let xAxisValueFormatter = WorkoutExerciseChartDataGenerator.DateAxisFormatter()
     private let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
 
     private var chartData: LineChartData {

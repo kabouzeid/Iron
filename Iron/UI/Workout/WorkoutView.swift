@@ -1,5 +1,5 @@
 //
-//  TrainingView.swift
+//  WorkoutView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.07.19.
@@ -9,13 +9,13 @@
 import SwiftUI
 import StoreKit
 
-struct TrainingView: View {
+struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var restTimerStore: RestTimerStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     @EnvironmentObject var settingsStore: SettingsStore
     
-    @ObservedObject var training: Training
+    @ObservedObject var workout: Workout
     
     @State private var showingCancelActionSheet = false
     @State private var activeSheet: SheetType?
@@ -31,15 +31,15 @@ struct TrainingView: View {
     private func sheetView(type: SheetType) -> AnyView {
         switch type {
         case .log:
-            return self.trainingsLogSheet.typeErased
+            return self.workoutsLogSheet.typeErased
         case .exerciseSelector:
             return AddExercisesSheet(exercises: exerciseStore.exercises, onAdd: { selection in
                 for exercise in selection {
-                    let trainingExercise = TrainingExercise(context: self.managedObjectContext)
-                    self.training.addToTrainingExercises(trainingExercise)
-                    trainingExercise.exerciseId = Int16(exercise.id)
-                    precondition(self.training.isCurrentTraining == true)
-                    trainingExercise.addToTrainingSets(self.createDefaultTrainingSets(trainingExercise: trainingExercise))
+                    let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                    self.workout.addToWorkoutExercises(workoutExercise)
+                    workoutExercise.exerciseId = Int16(exercise.id)
+                    precondition(self.workout.isCurrentWorkout == true)
+                    workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
                 }
                 self.managedObjectContext.safeSave()
                 }).typeErased
@@ -53,98 +53,98 @@ struct TrainingView: View {
         self.restTimerStore.restTimerDuration = nil
     }
     
-    private func createDefaultTrainingSets(trainingExercise: TrainingExercise) -> NSOrderedSet {
+    private func createDefaultWorkoutSets(workoutExercise: WorkoutExercise) -> NSOrderedSet {
         var numberOfSets = 3
         // try to guess the number of sets
-        if let history = try? managedObjectContext.fetch(trainingExercise.historyFetchRequest), history.count >= 3 {
-            // one month since last training and at least three trainings
-            if let firstHistoryStart = history[0].training?.start, let thirdHistoryStart = history[2].training?.start {
+        if let history = try? managedObjectContext.fetch(workoutExercise.historyFetchRequest), history.count >= 3 {
+            // one month since last workout and at least three workouts
+            if let firstHistoryStart = history[0].workout?.start, let thirdHistoryStart = history[2].workout?.start {
                 let cutoff = min(thirdHistoryStart, Calendar.current.date(byAdding: .month, value: -1, to: firstHistoryStart)!)
                 let filteredAndSortedHistory = history
                     .filter {
-                        guard let start = $0.training?.start else { return false }
+                        guard let start = $0.workout?.start else { return false }
                         return start >= cutoff
                 }
                 .sorted {
-                    ($0.trainingSets?.count ?? 0) < ($1.trainingSets?.count ?? 0)
+                    ($0.workoutSets?.count ?? 0) < ($1.workoutSets?.count ?? 0)
                 }
                 
                 assert(filteredAndSortedHistory.count >= 3)
                 let median = filteredAndSortedHistory[filteredAndSortedHistory.count / 2]
-                numberOfSets = median.trainingSets?.count ?? numberOfSets
+                numberOfSets = median.workoutSets?.count ?? numberOfSets
             }
         }
-        var trainingSets = [TrainingSet]()
+        var workoutSets = [WorkoutSet]()
         for _ in 0..<numberOfSets {
-            let trainingSet = TrainingSet(context: managedObjectContext)
-            trainingSets.append(trainingSet)
+            let workoutSet = WorkoutSet(context: managedObjectContext)
+            workoutSets.append(workoutSet)
         }
-        return NSOrderedSet(array: trainingSets)
+        return NSOrderedSet(array: workoutSets)
     }
 
-    private var trainingExercises: [TrainingExercise] {
-        training.trainingExercises?.array as? [TrainingExercise] ?? []
+    private var workoutExercises: [WorkoutExercise] {
+        workout.workoutExercises?.array as? [WorkoutExercise] ?? []
     }
     
-    @ObservedObject private var trainingCommentInput = ValueHolder<String?>(initial: nil)
-    private var trainingComment: Binding<String> {
+    @ObservedObject private var workoutCommentInput = ValueHolder<String?>(initial: nil)
+    private var workoutComment: Binding<String> {
         Binding(
             get: {
-                self.trainingCommentInput.value ?? self.training.comment ?? ""
+                self.workoutCommentInput.value ?? self.workout.comment ?? ""
         },
             set: { newValue in
-                self.trainingCommentInput.value = newValue
+                self.workoutCommentInput.value = newValue
         }
         )
     }
-    private func adjustAndSaveTrainingCommentInput() {
-        guard let newValue = trainingCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        trainingCommentInput.value = newValue
-        training.comment = newValue.isEmpty ? nil : newValue
+    private func adjustAndSaveWorkoutCommentInput() {
+        guard let newValue = workoutCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutCommentInput.value = newValue
+        workout.comment = newValue.isEmpty ? nil : newValue
     }
     
-    @ObservedObject private var trainingTitleInput = ValueHolder<String?>(initial: nil)
-    private var trainingTitle: Binding<String> {
+    @ObservedObject private var workoutTitleInput = ValueHolder<String?>(initial: nil)
+    private var workoutTitle: Binding<String> {
         Binding(
             get: {
-                self.trainingTitleInput.value ?? self.training.title ?? ""
-        },
+                self.workoutTitleInput.value ?? self.workout.title ?? ""
+            },
             set: { newValue in
-                self.trainingTitleInput.value = newValue
-        }
+                self.workoutTitleInput.value = newValue
+            }
         )
     }
-    private func adjustAndSaveTrainingTitleInput() {
-        guard let newValue = trainingTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        trainingTitleInput.value = newValue
-        training.title = newValue.isEmpty ? nil : newValue
+    private func adjustAndSaveWorkoutTitleInput() {
+        guard let newValue = workoutTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutTitleInput.value = newValue
+        workout.title = newValue.isEmpty ? nil : newValue
     }
     
-    private func currentTrainingExerciseDetailView(trainingExercise: TrainingExercise) -> some View {
+    private func currentWorkoutExerciseDetailView(workoutExercise: WorkoutExercise) -> some View {
         VStack(spacing: 0) {
-            TimerBannerView(training: training)
+            TimerBannerView(workout: workout)
             Divider()
-            TrainingExerciseDetailView(trainingExercise: trainingExercise)
+            WorkoutExerciseDetailView(workoutExercise: workoutExercise)
                 .layoutPriority(1)
                 .environmentObject(settingsStore)
         }
     }
 
-    private func trainingExerciseCell(trainingExercise: TrainingExercise) -> some View {
+    private func workoutExerciseCell(workoutExercise: WorkoutExercise) -> some View {
         let text: String?
-        if let totalSets = trainingExercise.trainingSets?.count, totalSets > 0, let completedSets = trainingExercise.numberOfCompletedSets{
+        if let totalSets = workoutExercise.workoutSets?.count, totalSets > 0, let completedSets = workoutExercise.numberOfCompletedSets{
             text = "\(completedSets) / \(totalSets)"
         } else {
             text = nil
         }
-        let isCompleted = trainingExercise.isCompleted ?? false
+        let isCompleted = workoutExercise.isCompleted ?? false
         
         return HStack {
             NavigationLink(destination:
-                    currentTrainingExerciseDetailView(trainingExercise: trainingExercise)
+                    currentWorkoutExerciseDetailView(workoutExercise: workoutExercise)
                 ) {
                 VStack(alignment: .leading) {
-                    Text(trainingExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (\(trainingExercise.exerciseId))")
+                    Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (\(workoutExercise.exerciseId))")
                         .foregroundColor(isCompleted ? .secondary : .primary)
                     text.map {
                         Text($0)
@@ -170,9 +170,9 @@ struct TrainingView: View {
         }
     }
     
-    private var trainingsLogSheet: some View {
+    private var workoutsLogSheet: some View {
         NavigationView {
-            TrainingsLog(training: self.training)
+            WorkoutLog(workout: self.workout)
                 .navigationBarTitle("Log", displayMode: .inline)
                 .navigationBarItems(
                     leading: closeSheetButton,
@@ -193,9 +193,9 @@ struct TrainingView: View {
     private func finishWorkout() {
         self.managedObjectContext.safeSave() // just in case the precondition below fires
         
-        // save the training
-        self.training.prepareForFinish()
-        self.training.isCurrentTraining = false
+        // save the workout
+        self.workout.prepareForFinish()
+        self.workout.isCurrentWorkout = false
         self.managedObjectContext.safeSave()
         
         self.cancelRestTimer()
@@ -205,16 +205,16 @@ struct TrainingView: View {
         feedbackGenerator.prepare()
         feedbackGenerator.notificationOccurred(.success)
         
-        UserDefaults.standard.finishedTrainingCount += 1
-        if UserDefaults.standard.finishedTrainingCount == 3 {
-            // ask for review after the user finishes his third training
+        UserDefaults.standard.finishedWorkoutsCount += 1
+        if UserDefaults.standard.finishedWorkoutsCount == 3 {
+            // ask for review after the user finishes his third workout
             SKStoreReviewController.requestReview()
         }
     }
     
     private var finishWorkoutSheet: some View {
         NavigationView {
-            TrainingsLog(training: self.training)
+            WorkoutLog(workout: self.workout)
                 .navigationBarTitle("Summary", displayMode: .inline)
                 .navigationBarItems(
                     leading: closeSheetButton,
@@ -229,8 +229,8 @@ struct TrainingView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    private func cancelTraining() {
-        self.managedObjectContext.delete(self.training)
+    private func cancelWorkout() {
+        self.managedObjectContext.delete(self.workout)
         self.managedObjectContext.safeSave()
         self.cancelRestTimer()
         
@@ -241,9 +241,9 @@ struct TrainingView: View {
     
     private var cancelButton: some View {
         Button("Cancel") {
-            if (self.training.trainingExercises?.count ?? 0) == 0 {
-                // the training is empty, do not need confirm to cancel
-                self.cancelTraining()
+            if (self.workout.workoutExercises?.count ?? 0) == 0 {
+                // the workout is empty, do not need confirm to cancel
+                self.cancelWorkout()
             } else {
                 self.showingCancelActionSheet = true
             }
@@ -253,38 +253,38 @@ struct TrainingView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                TimerBannerView(training: training)
+                TimerBannerView(workout: workout)
                 Divider()
                 List {
                     Section {
                         // TODO: add clear button
-                        TextField("Title", text: trainingTitle, onEditingChanged: { isEditingTextField in
+                        TextField("Title", text: workoutTitle, onEditingChanged: { isEditingTextField in
                             if !isEditingTextField {
-                                self.adjustAndSaveTrainingTitleInput()
+                                self.adjustAndSaveWorkoutTitleInput()
                             }
                         })
-                        TextField("Comment", text: trainingComment, onEditingChanged: { isEditingTextField in
+                        TextField("Comment", text: workoutComment, onEditingChanged: { isEditingTextField in
                             if !isEditingTextField {
-                                self.adjustAndSaveTrainingCommentInput()
+                                self.adjustAndSaveWorkoutCommentInput()
                             }
                         })
                     }
                     Section(header: Text("Exercises".uppercased())) {
-                        ForEach(trainingExercises, id: \.objectID) { trainingExercise in
-                            self.trainingExerciseCell(trainingExercise: trainingExercise)
+                        ForEach(workoutExercises, id: \.objectID) { workoutExercise in
+                            self.workoutExerciseCell(workoutExercise: workoutExercise)
                         }
                         .onDelete { offsets in
-                            let trainingExercises = self.trainingExercises
+                            let workoutExercises = self.workoutExercises
                             for i in offsets {
-                                let trainingExercise = trainingExercises[i]
-                                self.managedObjectContext.delete(trainingExercise)
-                                trainingExercise.training?.removeFromTrainingExercises(trainingExercise)
+                                let workoutExercise = workoutExercises[i]
+                                self.managedObjectContext.delete(workoutExercise)
+                                workoutExercise.workout?.removeFromWorkoutExercises(workoutExercise)
                             }
                         }
                         .onMove { source, destination in
-                            var trainingExercises = self.trainingExercises
-                            trainingExercises.move(fromOffsets: source, toOffset: destination)
-                            self.training.trainingExercises = NSOrderedSet(array: trainingExercises)
+                            var workoutExercises = self.workoutExercises
+                            workoutExercises.move(fromOffsets: source, toOffset: destination)
+                            self.workout.workoutExercises = NSOrderedSet(array: workoutExercises)
                         }
                         
                         Button(action: {
@@ -309,7 +309,7 @@ struct TrainingView: View {
                 }
                 .listStyle(GroupedListStyle())
             }
-            .navigationBarTitle(Text(training.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
+            .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
             .navigationBarItems(leading: cancelButton,
                 trailing:
                 HStack(spacing: NAVIGATION_BAR_SPACING) {
@@ -330,7 +330,7 @@ struct TrainingView: View {
         .actionSheet(isPresented: $showingCancelActionSheet, content: {
             ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
                 .destructive(Text("Delete Workout"), action: {
-                    self.cancelTraining()
+                    self.cancelWorkout()
                 }),
                 .cancel()
             ])
@@ -339,13 +339,13 @@ struct TrainingView: View {
 }
 
 #if DEBUG
-struct TrainingView_Previews: PreviewProvider {
+struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         if RestTimerStore.shared.restTimerRemainingTime == nil {
             RestTimerStore.shared.restTimerStart = Date()
             RestTimerStore.shared.restTimerDuration = 10
         }
-        return TrainingView(training: MockTrainingsData.metricRandom.currentTraining)
+        return WorkoutView(workout: MockWorkoutData.metricRandom.currentWorkout)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

@@ -13,33 +13,33 @@ import CoreData
 class Sunrise_FitCoreDataTests: XCTestCase {
     var persistenContainer: NSPersistentContainer!
     
-    var testTrainings: [Training]!
-    var testTrainingExercises: [TrainingExercise]!
-    var testTrainingSets: [TrainingSet]!
+    var testWorkouts: [Workout]!
+    var testWorkoutExercises: [WorkoutExercise]!
+    var testWorkoutSets: [WorkoutSet]!
     
-    var testCurrentTraining: Training!
+    var testCurrentWorkout: Workout!
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         persistenContainer = setUpInMemoryNSPersistentContainer()
 
-        createTestTrainingsData(context: persistenContainer.viewContext)
-        testCurrentTraining = createTestCurrentTraining(context: persistenContainer.viewContext)
+        createTestWorkoutData(context: persistenContainer.viewContext)
+        testCurrentWorkout = createTestCurrentWorkout(context: persistenContainer.viewContext)
         
-        testTrainings = try? persistenContainer.viewContext.fetch(Training.fetchRequest()) as? [Training]
-        testTrainingExercises = try? persistenContainer.viewContext.fetch(TrainingExercise.fetchRequest()) as? [TrainingExercise]
-        testTrainingSets = try? persistenContainer.viewContext.fetch(TrainingSet.fetchRequest()) as? [TrainingSet]
+        testWorkouts = try? persistenContainer.viewContext.fetch(Workout.fetchRequest()) as? [Workout]
+        testWorkoutExercises = try? persistenContainer.viewContext.fetch(WorkoutExercise.fetchRequest()) as? [WorkoutExercise]
+        testWorkoutSets = try? persistenContainer.viewContext.fetch(WorkoutSet.fetchRequest()) as? [WorkoutSet]
 
-        XCTAssertNotNil(testTrainings)
-        XCTAssertTrue(testTrainings.count > 0)
-        XCTAssertTrue(testTrainings.count == 2) // might change in future
-        XCTAssertNotNil(testTrainingExercises)
-        XCTAssertTrue(testTrainingExercises.count > 0)
-        XCTAssertNotNil(testTrainingSets)
-        XCTAssertTrue(testTrainingSets.count > 0)
+        XCTAssertNotNil(testWorkouts)
+        XCTAssertTrue(testWorkouts.count > 0)
+        XCTAssertTrue(testWorkouts.count == 2) // might change in future
+        XCTAssertNotNil(testWorkoutExercises)
+        XCTAssertTrue(testWorkoutExercises.count > 0)
+        XCTAssertNotNil(testWorkoutSets)
+        XCTAssertTrue(testWorkoutSets.count > 0)
         
-        XCTAssertNotNil(testCurrentTraining)
+        XCTAssertNotNil(testCurrentWorkout)
         
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
@@ -49,94 +49,94 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         persistenContainer.viewContext.reset()
         persistenContainer = nil
         
-        testTrainings = nil
-        testTrainingExercises = nil
-        testTrainingSets = nil
-        testCurrentTraining = nil
+        testWorkouts = nil
+        testWorkoutExercises = nil
+        testWorkoutSets = nil
+        testCurrentWorkout = nil
         
         super.tearDown()
     }
     
-    func testTrainingExerciseNumberOfCompletedSets() {
-        for trainingExercise in testTrainingExercises {
-            let count = trainingExercise.trainingSets?.filter({ (set) -> Bool in
-                (set as! TrainingSet).isCompleted == true
+    func testWorkoutExerciseNumberOfCompletedSets() {
+        for workoutExercise in testWorkoutExercises {
+            let count = workoutExercise.workoutSets?.filter({ (set) -> Bool in
+                (set as! WorkoutSet).isCompleted == true
             }).count
-            XCTAssertTrue(trainingExercise.numberOfCompletedSets == count)
+            XCTAssertTrue(workoutExercise.numberOfCompletedSets == count)
         }
     }
     
     func testRelationshipDeleteRules() {
-        for training in testTrainings {
-            let trainingExercises = training.trainingExercises!.array.map { $0 as! TrainingExercise }
+        for workout in testWorkouts {
+            let workoutExercises = workout.workoutExercises!.array.map { $0 as! WorkoutExercise }
             
-            let trainingExercise = trainingExercises.first!
-            let trainingSets = trainingExercise.trainingSets!.array.map { $0 as! TrainingSet }
+            let workoutExercise = workoutExercises.first!
+            let workoutSets = workoutExercise.workoutSets!.array.map { $0 as! WorkoutSet }
             
             // set deletion doesn't delete exercise
-            let trainingSet = trainingSets.first!
-            persistenContainer.viewContext.delete(trainingSet)
+            let workoutSet = workoutSets.first!
+            persistenContainer.viewContext.delete(workoutSet)
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
-            XCTAssertNil(trainingSet.managedObjectContext)
-            XCTAssertNotNil(trainingExercise.managedObjectContext)
+            XCTAssertNil(workoutSet.managedObjectContext)
+            XCTAssertNotNil(workoutExercise.managedObjectContext)
             
-            // exercise deletion doesn't delete training, but deletes sets
-            persistenContainer.viewContext.delete(trainingExercise)
+            // exercise deletion doesn't delete workout, but deletes sets
+            persistenContainer.viewContext.delete(workoutExercise)
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
-            XCTAssertNil(trainingExercise.managedObjectContext)
-            XCTAssertTrue(trainingSets.reduce(true, { $0 && $1.managedObjectContext == nil }))
-            XCTAssertNotNil(training.managedObjectContext)
+            XCTAssertNil(workoutExercise.managedObjectContext)
+            XCTAssertTrue(workoutSets.reduce(true, { $0 && $1.managedObjectContext == nil }))
+            XCTAssertNotNil(workout.managedObjectContext)
 
-            // training deletion deletes exercises
-            persistenContainer.viewContext.delete(training)
+            // workout deletion deletes exercises
+            persistenContainer.viewContext.delete(workout)
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
-            XCTAssertNil(training.managedObjectContext)
-            XCTAssertTrue(trainingExercises.reduce(true, { $0 && $1.managedObjectContext == nil }))
+            XCTAssertNil(workout.managedObjectContext)
+            XCTAssertTrue(workoutExercises.reduce(true, { $0 && $1.managedObjectContext == nil }))
         }
     }
     
-    func uncompletedSetsSwift(training: Training) -> [TrainingSet]? {
-        return training.trainingExercises?
-            .compactMap { $0 as? TrainingExercise }
-            .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+    func uncompletedSetsSwift(workout: Workout) -> [WorkoutSet]? {
+        return workout.workoutExercises?
+            .compactMap { $0 as? WorkoutExercise }
+            .compactMap { $0.workoutSets?.array as? [WorkoutSet] }
             .flatMap { $0 }
             .filter { !$0.isCompleted }
     }
     
-    func uncompletedSetsFetch(training: Training) -> [TrainingSet]? {
-        let fetchRequest: NSFetchRequest<TrainingSet> = TrainingSet.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(TrainingSet.trainingExercise.training)) == %@ AND \(#keyPath(TrainingSet.isCompleted)) == %@", training, NSNumber(booleanLiteral: false))
-        return try? training.managedObjectContext?.fetch(fetchRequest)
+    func uncompletedSetsFetch(workout: Workout) -> [WorkoutSet]? {
+        let fetchRequest: NSFetchRequest<WorkoutSet> = WorkoutSet.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutSet.workoutExercise.workout)) == %@ AND \(#keyPath(WorkoutSet.isCompleted)) == %@", workout, NSNumber(booleanLiteral: false))
+        return try? workout.managedObjectContext?.fetch(fetchRequest)
     }
     
     func testUncompletedSets() {
-        for training in testTrainings {
-            XCTAssertEqual(Set(uncompletedSetsSwift(training: training) ?? []), Set(uncompletedSetsFetch(training: training) ?? []))
+        for workout in testWorkouts {
+            XCTAssertEqual(Set(uncompletedSetsSwift(workout: workout) ?? []), Set(uncompletedSetsFetch(workout: workout) ?? []))
         }
     }
     
     func testUncompletedSetsSwift() {
         self.measure {
-            for training in testTrainings {
-                _ = uncompletedSetsSwift(training: training)
+            for workout in testWorkouts {
+                _ = uncompletedSetsSwift(workout: workout)
             }
         }
     }
     
     func testUncompletedSetsFetch() {
         self.measure {
-            for training in testTrainings {
-                _ = uncompletedSetsFetch(training: training)
+            for workout in testWorkouts {
+                _ = uncompletedSetsFetch(workout: workout)
             }
         }
     }
     
     func testDeleteUncompletedSets() {
-        testCurrentTraining.deleteUncompletedSets()
+        testCurrentWorkout.deleteUncompletedSets()
         XCTAssertTrue(
-            testCurrentTraining.trainingExercises?
-                .compactMap { $0 as? TrainingExercise }
-                .compactMap { $0.trainingSets?.array as? [TrainingSet] }
+            testCurrentWorkout.workoutExercises?
+                .compactMap { $0 as? WorkoutExercise }
+                .compactMap { $0.workoutSets?.array as? [WorkoutSet] }
                 .flatMap { $0 }
                 .filter { !$0.isCompleted }
                 .isEmpty ?? true
@@ -144,19 +144,19 @@ class Sunrise_FitCoreDataTests: XCTestCase {
     }
     
     func testStartEndValidation() {
-        for training in testTrainings {
-            if let start = training.start, let end = training.end {
-                training.start = end
-                training.end = start
+        for workout in testWorkouts {
+            if let start = workout.start, let end = workout.end {
+                workout.start = end
+                workout.end = start
                 XCTAssertThrowsError(try persistenContainer.viewContext.save())
                 
-                training.start = nil
-                training.end = end
+                workout.start = nil
+                workout.end = end
                 XCTAssertThrowsError(try persistenContainer.viewContext.save())
                 
-                training.start = start
-                training.end = nil
-                if training.isCurrentTraining {
+                workout.start = start
+                workout.end = nil
+                if workout.isCurrentWorkout {
                     XCTAssertNoThrow(try persistenContainer.viewContext.save())
                 } else {
                     XCTAssertThrowsError(try persistenContainer.viewContext.save())
@@ -165,33 +165,33 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         }
     }
     
-    func testCurrentTrainingValidation() {
-        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
-        let training = createTestCurrentTraining(context: persistenContainer.viewContext)
-        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 2)
+    func testCurrentWorkoutValidation() {
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 1)
+        let workout = createTestCurrentWorkout(context: persistenContainer.viewContext)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 2)
         XCTAssertThrowsError(try persistenContainer.viewContext.save())
-        persistenContainer.viewContext.delete(training)
-        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
+        persistenContainer.viewContext.delete(workout)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 1)
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
-        persistenContainer.viewContext.delete(testCurrentTraining)
-        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 0)
+        persistenContainer.viewContext.delete(testCurrentWorkout)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 0)
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
-        _ = createTestCurrentTraining(context: persistenContainer.viewContext)
-        XCTAssertEqual(try persistenContainer.viewContext.count(for: Training.currentTrainingFetchRequest), 1)
+        _ = createTestCurrentWorkout(context: persistenContainer.viewContext)
+        XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 1)
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
     
-    func testTrainingIsCompletedValidation() {
-        testCurrentTraining.isCurrentTraining = false
+    func testWorkoutIsCompletedValidation() {
+        testCurrentWorkout.isCurrentWorkout = false
         XCTAssertThrowsError(try persistenContainer.viewContext.save())
-        testCurrentTraining.isCurrentTraining = true
+        testCurrentWorkout.isCurrentWorkout = true
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
         
-        for trainingSet in testTrainingSets {
-            if let training = trainingSet.trainingExercise?.training, !training.isCurrentTraining {
-                trainingSet.isCompleted = false
+        for workoutSet in testWorkoutSets {
+            if let workout = workoutSet.workoutExercise?.workout, !workout.isCurrentWorkout {
+                workoutSet.isCompleted = false
                 XCTAssertThrowsError(try persistenContainer.viewContext.save())
-                trainingSet.isCompleted = true
+                workoutSet.isCompleted = true
                 XCTAssertNoThrow(try persistenContainer.viewContext.save())
             }
         }

@@ -10,15 +10,15 @@ import Foundation
 
 extension UserDefaults {
     enum MiscKeys: String {
-        case finishedTrainingCount
+        case finishedWorkoutsCount
     }
     
-    var finishedTrainingCount: Int {
+    var finishedWorkoutsCount: Int {
         set {
-            self.set(newValue, forKey: MiscKeys.finishedTrainingCount.rawValue)
+            self.set(newValue, forKey: MiscKeys.finishedWorkoutsCount.rawValue)
         }
         get {
-            self.integer(forKey: MiscKeys.finishedTrainingCount.rawValue)
+            self.integer(forKey: MiscKeys.finishedWorkoutsCount.rawValue)
         }
     }
 }

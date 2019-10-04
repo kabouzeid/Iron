@@ -10,5 +10,5 @@ import Foundation
 
 struct PinnedChart: Hashable {
     let exerciseId: Int
-    let measurementType: TrainingExerciseChartDataGenerator.MeasurementType
+    let measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
 }

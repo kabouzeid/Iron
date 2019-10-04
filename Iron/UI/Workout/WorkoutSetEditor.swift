@@ -1,5 +1,5 @@
 //
-//  TrainingSetEditor.swift
+//  WorkoutSetEditor.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 29.06.19.
@@ -14,11 +14,11 @@ private enum KeyboardType {
     case none
 }
 
-struct TrainingSetEditor : View {
+struct WorkoutSetEditor : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
-    @ObservedObject var trainingSet: TrainingSet
+    @ObservedObject var workoutSet: WorkoutSet
     var onDone: () -> Void = {}
     
     @State private var showMoreSheet = false
@@ -29,25 +29,25 @@ struct TrainingSetEditor : View {
     // used to immediatelly update the weight & rep texts so the keyboard feels more smooth
     @ObservedObject private var refresher = Refresher()
     
-    private var trainingSetWeight: Binding<Double> {
+    private var workoutSetWeight: Binding<Double> {
         Binding(
             get: {
-                WeightUnit.convert(weight: self.trainingSet.weight, from: .metric, to: self.settingsStore.weightUnit)
+                WeightUnit.convert(weight: self.workoutSet.weight, from: .metric, to: self.settingsStore.weightUnit)
             },
             set: { newValue in
-                self.trainingSet.weight = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), TrainingSet.MAX_WEIGHT), 0)
+                self.workoutSet.weight = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), WorkoutSet.MAX_WEIGHT), 0)
                 self.refresher.refresh()
             }
         )
     }
     
-    private var trainingSetRepetitions: Binding<Double> {
+    private var workoutSetRepetitions: Binding<Double> {
         Binding(
             get: {
-                Double(self.trainingSet.repetitions)
+                Double(self.workoutSet.repetitions)
             },
             set: { newValue in
-                self.trainingSet.repetitions = Int16(max(min(newValue, Double(TrainingSet.MAX_REPETITIONS)), 0))
+                self.workoutSet.repetitions = Int16(max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0))
                 self.refresher.refresh()
             }
         )
@@ -83,7 +83,7 @@ struct TrainingSetEditor : View {
     }
     
     private var doneButton: some View {
-        textButton(label: Text(trainingSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
+        textButton(label: Text(workoutSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
             self.onDone()
             if self.showKeyboard == .repetitions {
                 self.showKeyboard = .weight
@@ -150,17 +150,17 @@ struct TrainingSetEditor : View {
     
     private var weightStepSize: Double {
         // TODO: let the user configure this for barbell, dumbell and others
-        (trainingSet.trainingExercise?.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
+        (workoutSet.workoutExercise?.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
     }
     
     private var weightDragger: some View {
         Dragger(
-            value: trainingSetWeight,
+            value: workoutSetWeight,
             numberFormatter: weightNumberFormatter,
             unit: settingsStore.weightUnit.abbrev,
             stepSize: weightStepSize,
             minValue: 0,
-            maxValue: WeightUnit.convert(weight: TrainingSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
+            maxValue: WeightUnit.convert(weight: WorkoutSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
             showCursor: showKeyboard == .weight,
             onDragStep: { _ in
                 self.alwaysShowDecimalSeparator = false
@@ -183,10 +183,10 @@ struct TrainingSetEditor : View {
     
     private var repetitionsDragger: some View {
         Dragger(
-            value: trainingSetRepetitions,
+            value: workoutSetRepetitions,
             unit: "reps",
             minValue: 0,
-            maxValue: Double(TrainingSet.MAX_REPETITIONS),
+            maxValue: Double(WorkoutSet.MAX_REPETITIONS),
             showCursor: showKeyboard == .repetitions,
             onTextTapped: {
                 if self.showKeyboard == .none {
@@ -201,8 +201,8 @@ struct TrainingSetEditor : View {
     
     private var moreSheet: some View {
         NavigationView {
-            MoreView(trainingSet: trainingSet)
-                .navigationBarTitle(Text(trainingSet.displayTitle(unit: settingsStore.weightUnit)), displayMode: .inline)
+            MoreView(workoutSet: workoutSet)
+                .navigationBarTitle(Text(workoutSet.displayTitle(unit: settingsStore.weightUnit)), displayMode: .inline)
                 .navigationBarItems(leading:
                     Button("Close") {
                         self.showMoreSheet = false
@@ -230,14 +230,14 @@ struct TrainingSetEditor : View {
             
             if showKeyboard == .weight {
                 NumericKeyboard(
-                    value: trainingSetWeight,
+                    value: workoutSetWeight,
                     alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator,
                     minimumFractionDigits: $minimumFractionDigits,
                     maximumFractionDigits: settingsStore.weightUnit.maximumFractionDigits
                 )
             } else if showKeyboard == .repetitions {
                 NumericKeyboard(
-                    value: trainingSetRepetitions,
+                    value: workoutSetRepetitions,
                     alwaysShowDecimalSeparator: .constant(false),
                     minimumFractionDigits: .constant(0),
                     maximumFractionDigits: 0
@@ -259,7 +259,7 @@ struct TrainingSetEditor : View {
 }
 
 private struct MoreView: View {
-    @ObservedObject var trainingSet: TrainingSet
+    @ObservedObject var workoutSet: WorkoutSet
     
     @State private var activeAlert: AlertType?
     
@@ -275,33 +275,33 @@ private struct MoreView: View {
         case .tagInfo:
             return Alert(title: Text("Mark a set as Failure if you've tried to do more reps but failed."))
         case .rpeInfo:
-            return Alert(title: Text("The rating of perceived exertion (RPE) is a way to determine and regulate your training intensity."))
+            return Alert(title: Text("The rating of perceived exertion (RPE) is a way to determine and regulate your workout intensity."))
         }
     }
     
-    @State private var trainingSetCommentInput: String? // cannot use ValueHolder here, since it would be recreated on changes
-    private var trainingSetComment: Binding<String> {
+    @State private var workoutSetCommentInput: String? // cannot use ValueHolder here, since it would be recreated on changes
+    private var workoutSetComment: Binding<String> {
         Binding(
             get: {
-                self.trainingSetCommentInput ?? self.trainingSet.comment ?? ""
+                self.workoutSetCommentInput ?? self.workoutSet.comment ?? ""
             },
             set: { newValue in
-                self.trainingSetCommentInput = newValue
+                self.workoutSetCommentInput = newValue
             }
         )
     }
-    private func adjustAndSaveTrainingSetCommentInput() {
-        guard let newValue = trainingSetCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        trainingSetCommentInput = newValue
-        trainingSet.comment = newValue.isEmpty ? nil : newValue
+    private func adjustAndSaveWorkoutSetCommentInput() {
+        guard let newValue = workoutSetCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutSetCommentInput = newValue
+        workoutSet.comment = newValue.isEmpty ? nil : newValue
     }
 
-    private func tagButton(tag: TrainingSetTag) -> some View {
+    private func tagButton(tag: WorkoutSetTag) -> some View {
         Button(action: {
-            if self.trainingSet.displayTag == tag {
-                self.trainingSet.displayTag = nil
+            if self.workoutSet.displayTag == tag {
+                self.workoutSet.displayTag = nil
             } else {
-                self.trainingSet.displayTag = tag
+                self.workoutSet.displayTag = tag
             }
         }) {
             HStack {
@@ -310,7 +310,7 @@ private struct MoreView: View {
                     .foregroundColor(tag.color)
                 Text(tag.title.capitalized)
                 Spacer()
-                if self.trainingSet.displayTag == tag {
+                if self.workoutSet.displayTag == tag {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }
@@ -321,10 +321,10 @@ private struct MoreView: View {
     
     private func rpeButton(rpe: Double) -> some View {
         Button(action: {
-            if self.trainingSet.displayRpe == rpe {
-                self.trainingSet.displayRpe = nil
+            if self.workoutSet.displayRpe == rpe {
+                self.workoutSet.displayRpe = nil
             } else {
-                self.trainingSet.displayRpe = rpe
+                self.workoutSet.displayRpe = rpe
             }
         }) {
             HStack {
@@ -333,7 +333,7 @@ private struct MoreView: View {
                     .lineLimit(nil)
                     .foregroundColor(.secondary)
                 Spacer()
-                if self.trainingSet.displayRpe == rpe {
+                if self.workoutSet.displayRpe == rpe {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }
@@ -354,15 +354,15 @@ private struct MoreView: View {
                         Image(systemName: "questionmark.circle")
                     }
                 }) {
-                ForEach(TrainingSetTag.allCases, id: \.self) { tag in
+                ForEach(WorkoutSetTag.allCases, id: \.self) { tag in
                     self.tagButton(tag: tag)
                 }
             }
             
             Section(header: Text("Comment".uppercased())) {
-                TextField("Comment", text: trainingSetComment, onEditingChanged: { isEditingTextField in
+                TextField("Comment", text: workoutSetComment, onEditingChanged: { isEditingTextField in
                     if !isEditingTextField {
-                        self.adjustAndSaveTrainingSetCommentInput()
+                        self.adjustAndSaveWorkoutSetCommentInput()
                     }
                 })
             }
@@ -388,20 +388,20 @@ private struct MoreView: View {
 }
 
 #if DEBUG
-struct TrainingSetEditor_Previews : PreviewProvider {
+struct WorkoutSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
-            TrainingSetEditor(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+            WorkoutSetEditor(workoutSet: MockWorkoutData.metricRandom.workoutSet)
                 .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
-            TrainingSetEditor(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+            WorkoutSetEditor(workoutSet: MockWorkoutData.metricRandom.workoutSet)
                 .mockEnvironment(weightUnit: .imperial, isPro: true)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             
-            MoreView(trainingSet: MockTrainingsData.metricRandom.trainingSet)
+            MoreView(workoutSet: MockWorkoutData.metricRandom.workoutSet)
                 .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewLayout(.sizeThatFits)
                 .listStyle(GroupedListStyle())

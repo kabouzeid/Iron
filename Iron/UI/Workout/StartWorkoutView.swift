@@ -1,5 +1,5 @@
 //
-//  StartTrainingView.swift
+//  StartWorkoutView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.07.19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct StartTrainingView: View {
+struct StartWorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject var settingsStore: SettingsStore
@@ -48,11 +48,11 @@ struct StartTrainingView: View {
                 Spacer()
                 
                 Button(action: {
-                    precondition((try? self.managedObjectContext.count(for: Training.currentTrainingFetchRequest)) ?? 0 == 0)
-                    // create a new training
-                    let training = Training(context: self.managedObjectContext)
-                    training.isCurrentTraining = true
-                    training.start = Date()
+                    precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
+                    // create a new workout
+                    let workout = Workout(context: self.managedObjectContext)
+                    workout.isCurrentWorkout = true
+                    workout.start = Date()
                     self.managedObjectContext.safeSave()
                 }) {
                    Text("Start Workout")
@@ -71,30 +71,30 @@ struct StartTrainingView: View {
 }
 
 #if DEBUG
-struct StartTrainingView_Previews: PreviewProvider {
-    struct StartTrainingViewDemo: View {
+struct StartWorkoutView_Previews: PreviewProvider {
+    struct StartWorkoutViewDemo: View {
         var body: some View {
             TabView {
-                StartTrainingView()
+                StartWorkoutView()
             }
         }
     }
 
     static var previews: some View {
         Group {
-            StartTrainingViewDemo()
+            StartWorkoutViewDemo()
                 .previewDevice(.init("iPhone SE"))
             
-            StartTrainingViewDemo()
+            StartWorkoutViewDemo()
                 .previewDevice(.init("iPhone 8"))
             
-            StartTrainingViewDemo()
+            StartWorkoutViewDemo()
                 .previewDevice(.init("iPhone Xs"))
             
-            StartTrainingViewDemo()
+            StartWorkoutViewDemo()
                 .previewDevice(.init("iPhone Xs Max"))
             
-            StartTrainingViewDemo()
+            StartWorkoutViewDemo()
                 .environment(\.colorScheme, .dark)
         }
         .mockEnvironment(weightUnit: .metric, isPro: true)

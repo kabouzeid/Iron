@@ -14,12 +14,12 @@ struct HistoryView : View {
     @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var trainings
+    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var workouts
 
-    static var fetchRequest: NSFetchRequest<Training> {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@", NSNumber(booleanLiteral: true))
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+    static var fetchRequest: NSFetchRequest<Workout> {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
     
@@ -28,11 +28,11 @@ struct HistoryView : View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(trainings, id: \.objectID) { training in
-                    NavigationLink(destination: TrainingDetailView(training: training)
+                ForEach(workouts, id: \.objectID) { workout in
+                    NavigationLink(destination: WorkoutDetailView(workout: workout)
                         .environmentObject(self.settingsStore)
                     ) {
-                        TrainingCell(training: training)
+                        WorkoutCell(workout: workout)
                     }
                 }
                 .onDelete { offsets in
@@ -43,16 +43,16 @@ struct HistoryView : View {
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
                     .destructive(Text("Delete Workout"), action: {
-                        let trainings = self.trainings
+                        let workouts = self.workouts
                         for i in offsets.sorted().reversed() {
-                            self.managedObjectContext.delete(trainings[i])
+                            self.managedObjectContext.delete(workouts[i])
                         }
                         self.managedObjectContext.safeSave()
                     }),
                     .cancel()
                 ])
             }
-            .placeholder(show: trainings.isEmpty,
+            .placeholder(show: workouts.isEmpty,
                          Text("Your finished workouts will appear here.")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.secondary)
@@ -64,27 +64,27 @@ struct HistoryView : View {
     }
 }
 
-private struct TrainingCell: View {
+private struct WorkoutCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @ObservedObject var training: Training
+    @ObservedObject var workout: Workout
 
     private var durationString: String? {
-        guard let duration = training.duration else { return nil }
-        return Training.durationFormatter.string(from: duration)
+        guard let duration = workout.duration else { return nil }
+        return Workout.durationFormatter.string(from: duration)
     }
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(training.displayTitle(in: self.exerciseStore.exercises))
+                Text(workout.displayTitle(in: self.exerciseStore.exercises))
                     .font(.body)
                 
-                Text(Training.dateFormatter.string(from: training.start, fallback: "Unknown date"))
+                Text(Workout.dateFormatter.string(from: workout.start, fallback: "Unknown date"))
                     .font(.caption)
                     .foregroundColor(.secondary)
                 
-                training.comment.map {
+                workout.comment.map {
                     Text($0.enquoted)
                         .lineLimit(1)
                         .font(Font.caption.italic())
@@ -107,7 +107,7 @@ private struct TrainingCell: View {
                 )
             }
             
-            training.muscleGroupImage(in: self.exerciseStore.exercises)
+            workout.muscleGroupImage(in: self.exerciseStore.exercises)
         }
     }
 }

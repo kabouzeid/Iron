@@ -26,11 +26,11 @@ extension UserDefaults {
         get {
             guard let data = self.data(forKey: PinnedChartsKeys.pinnedChartsKey.rawValue), let pinnedCharts = try? JSONDecoder().decode([PinnedChartRaw].self, from: data) else { return [] }
             return pinnedCharts.filter {
-                    TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue) != nil
+                    WorkoutExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue) != nil
             }.map {
                 PinnedChart(
                     exerciseId: $0.exerciseId,
-                    measurementType: TrainingExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue)!)
+                    measurementType: WorkoutExerciseChartDataGenerator.MeasurementType.init(rawValue: $0.measurementTypeRawValue)!)
             }
         }
         set {

@@ -11,7 +11,7 @@ import SwiftUI
 struct TimerBannerView: View {
     @EnvironmentObject var restTimerStore: RestTimerStore
     
-    @ObservedObject var training: Training
+    @ObservedObject var workout: Workout
 
     @ObservedObject private var refresher = Refresher()
     
@@ -24,7 +24,7 @@ struct TimerBannerView: View {
         var id: Self { self }
     }
 
-    private let trainingTimerDurationFormatter: DateComponentsFormatter = {
+    private let workoutTimerDurationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -40,7 +40,7 @@ struct TimerBannerView: View {
     
     private var editTimeSheet: some View {
         NavigationView {
-            EditCurrentTrainingTimeView(training: training)
+            EditCurrentWorkoutTimeView(workout: workout)
                 .navigationBarTitle("Workout Duration", displayMode: .inline)
                 .navigationBarItems(leading: closeSheetButton)
         }
@@ -63,7 +63,7 @@ struct TimerBannerView: View {
             }) {
                 HStack {
                     Image(systemName: "clock")
-                    Text(trainingTimerDurationFormatter.string(from: training.safeDuration) ?? "")
+                    Text(workoutTimerDurationFormatter.string(from: workout.safeDuration) ?? "")
                         .font(Font.body.monospacedDigit())
                 }
                 .padding()
@@ -103,7 +103,7 @@ struct TimerBannerView_Previews: PreviewProvider {
             RestTimerStore.shared.restTimerStart = Date()
             RestTimerStore.shared.restTimerDuration = 10
         }
-        return TimerBannerView(training: MockTrainingsData.metricRandom.currentTraining)
+        return TimerBannerView(workout: MockWorkoutData.metricRandom.currentWorkout)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

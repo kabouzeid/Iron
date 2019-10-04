@@ -1,5 +1,5 @@
 //
-//  TrainingExercise.swift
+//  WorkoutExercise.swift
 //  Rhino Fit
 //
 //  Created by Karim Abou Zeid on 14.02.18.
@@ -9,22 +9,22 @@
 import CoreData
 import Combine
 
-class TrainingExercise: NSManagedObject {
-    static func historyFetchRequest(of exerciseId: Int, until: Date?) -> NSFetchRequest<TrainingExercise> {
-        let request: NSFetchRequest<TrainingExercise> = TrainingExercise.fetchRequest()
-        let basePredicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training.isCurrentTraining)) != %@ AND \(#keyPath(TrainingExercise.exerciseId)) == %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId))
+class WorkoutExercise: NSManagedObject {
+    static func historyFetchRequest(of exerciseId: Int, until: Date?) -> NSFetchRequest<WorkoutExercise> {
+        let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
+        let basePredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseId)) == %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId))
         if let until = until {
-            let untilPredicate = NSPredicate(format: "\(#keyPath(TrainingExercise.training.start)) < %@", until as NSDate)
+            let untilPredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.start)) < %@", until as NSDate)
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate, untilPredicate])
         } else {
             request.predicate = basePredicate
         }
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \TrainingExercise.training?.start, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \WorkoutExercise.workout?.start, ascending: false)]
         return request
     }
     
-    var historyFetchRequest: NSFetchRequest<TrainingExercise> {
-        TrainingExercise.historyFetchRequest(of: Int(exerciseId), until: training?.start)
+    var historyFetchRequest: NSFetchRequest<WorkoutExercise> {
+        WorkoutExercise.historyFetchRequest(of: Int(exerciseId), until: workout?.start)
     }
     
     // MARK: Derived properties
@@ -34,32 +34,32 @@ class TrainingExercise: NSManagedObject {
     }
     
     var isCompleted: Bool? {
-        guard let trainingSets = trainingSets else { return nil }
-        return !trainingSets
-            .compactMap { $0 as? TrainingSet }
+        guard let workoutSets = workoutSets else { return nil }
+        return !workoutSets
+            .compactMap { $0 as? WorkoutSet }
             .contains { !$0.isCompleted }
     }
 
     var numberOfCompletedSets: Int? {
-        trainingSets?
-            .compactMap { $0 as? TrainingSet }
+        workoutSets?
+            .compactMap { $0 as? WorkoutSet }
             .filter { $0.isCompleted }
             .count
     }
 
     var numberOfCompletedRepetitions: Int? {
-        trainingSets?
-            .compactMap { $0 as? TrainingSet }
-            .reduce(0, { (count, trainingSet) -> Int in
-                count + (trainingSet.isCompleted ? Int(trainingSet.repetitions) : 0)
+        workoutSets?
+            .compactMap { $0 as? WorkoutSet }
+            .reduce(0, { (count, workoutSet) -> Int in
+                count + (workoutSet.isCompleted ? Int(workoutSet.repetitions) : 0)
             })
     }
 
     var totalCompletedWeight: Double? {
-        trainingSets?
-            .compactMap { $0 as? TrainingSet }
-            .reduce(0, { (weight, trainingSet) -> Double in
-                weight + (trainingSet.isCompleted ? trainingSet.weight * Double(trainingSet.repetitions) : 0)
+        workoutSets?
+            .compactMap { $0 as? WorkoutSet }
+            .reduce(0, { (weight, workoutSet) -> Double in
+                weight + (workoutSet.isCompleted ? workoutSet.weight * Double(workoutSet.repetitions) : 0)
             })
     }
 
@@ -67,7 +67,7 @@ class TrainingExercise: NSManagedObject {
 }
 
 // MARK: Observable
-extension TrainingExercise {
+extension WorkoutExercise {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
         initChangeObserver()
@@ -82,11 +82,11 @@ extension TrainingExercise {
         cancellable = managedObjectContext?.publisher
             .filter { changed in
                 changed.contains { managedObject in
-                    if let training = managedObject as? Training {
-                        return training.objectID == self.training?.objectID
+                    if let workout = managedObject as? Workout {
+                        return workout.objectID == self.workout?.objectID
                     }
-                    if let trainingSet = managedObject as? TrainingSet {
-                        return trainingSet.trainingExercise?.objectID == self.objectID
+                    if let workoutSet = managedObject as? WorkoutSet {
+                        return workoutSet.workoutExercise?.objectID == self.objectID
                     }
                     return managedObject.objectID == self.objectID
                 }
@@ -96,7 +96,7 @@ extension TrainingExercise {
 }
 
 // MARK: Encodable
-extension TrainingExercise: Encodable {
+extension WorkoutExercise: Encodable {
     private enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -109,6 +109,6 @@ extension TrainingExercise: Encodable {
         try container.encode(exerciseId, forKey: .id)
         try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .name)
         try container.encodeIfPresent(comment, forKey: .comment)
-        try container.encodeIfPresent(trainingSets?.array.compactMap { $0 as? TrainingSet }, forKey: .sets)
+        try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)
     }
 }

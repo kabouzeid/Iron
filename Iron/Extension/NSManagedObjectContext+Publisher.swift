@@ -1,6 +1,6 @@
 //
-//  TrainingsDataChangePublisher.swift
-//  Sunrise Fit
+//  NSManagedObjectContext+Publisher.swift
+//  Iron
 //
 //  Created by Karim Abou Zeid on 08.08.19.
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.

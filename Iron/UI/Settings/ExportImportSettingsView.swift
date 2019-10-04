@@ -18,13 +18,13 @@ struct ExportImportSettingsView: View {
         Form {
             Section(header: Text("Export Workout Data".uppercased())) {
                 Button("As JSON File") {
-                    guard let trainings = self.fetchTrainings() else { return }
+                    guard let workouts = self.fetchWorkouts() else { return }
                     
                     let encoder = JSONEncoder()
                     encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
                     encoder.dateEncodingStrategy = .iso8601
                     
-                    guard let data = try? encoder.encode(trainings) else { return }
+                    guard let data = try? encoder.encode(workouts) else { return }
                     guard let url = self.writeFile(data: data, name: "workout_data.json") else { return }
                     self.shareFile(url: url)
                 }
@@ -32,9 +32,9 @@ struct ExportImportSettingsView: View {
 //                    // TODO
 //                }
                 Button("As Plain Text File") {
-                    guard let trainings = self.fetchTrainings() else { return }
+                    guard let workouts = self.fetchWorkouts() else { return }
                     
-                    let text = trainings.compactMap { $0.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
+                    let text = workouts.compactMap { $0.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
                     
                     guard let data = text.data(using: .utf8) else { return }
                     guard let url = self.writeFile(data: data, name: "workout_data.txt") else { return }
@@ -53,10 +53,10 @@ struct ExportImportSettingsView: View {
         }
     }
     
-    private func fetchTrainings() -> [Training]? {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Training.isCurrentTraining)) != %@", NSNumber(booleanLiteral: true))
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Training.start, ascending: false)]
+    private func fetchWorkouts() -> [Workout]? {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return (try? self.managedObjectContext.fetch(request))
     }
     

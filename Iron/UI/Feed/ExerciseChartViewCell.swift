@@ -12,7 +12,7 @@ struct ExerciseChartViewCell : View {
     @EnvironmentObject var entitlementStore: EntitlementStore
     
     var exercise: Exercise
-    var measurementType: TrainingExerciseChartDataGenerator.MeasurementType
+    var measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
     
     private var chartView: some View {
         Group {

@@ -16,12 +16,12 @@ extension View {
             .environmentObject(RestTimerStore.shared)
             .environmentObject(ExerciseStore.shared)
             .environmentObject(isPro ? EntitlementStore.mockPro : EntitlementStore.mockNoPro)
-            .environment(\.managedObjectContext, weightUnit == .metric ? MockTrainingsData.metricRandom.context : MockTrainingsData.imperialRandom.context)
+            .environment(\.managedObjectContext, weightUnit == .metric ? MockWorkoutData.metricRandom.context : MockWorkoutData.imperialRandom.context)
     }
     
     func screenshotEnvironment(weightUnit: WeightUnit) -> some View {
         self
-            .environment(\.managedObjectContext, weightUnit == .metric ? MockTrainingsData.metric.context : MockTrainingsData.imperial.context)
+            .environment(\.managedObjectContext, weightUnit == .metric ? MockWorkoutData.metric.context : MockWorkoutData.imperial.context)
             .mockEnvironment(weightUnit: weightUnit, isPro: true)
     }
 }

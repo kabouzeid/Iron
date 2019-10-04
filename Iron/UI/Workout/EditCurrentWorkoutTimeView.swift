@@ -1,5 +1,5 @@
 //
-//  EditTrainingStartEndView.swift
+//  EditCurrentWorkoutTimeView.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 14.09.19.
@@ -8,20 +8,20 @@
 
 import SwiftUI
 
-struct EditCurrentTrainingTimeView: View {
-    @ObservedObject var training: Training
+struct EditCurrentWorkoutTimeView: View {
+    @ObservedObject var workout: Workout
     
     var automaticTimeTracking: Binding<Bool> {
         Binding(
             get: {
-                self.training.end == nil
+                self.workout.end == nil
             },
             set: { enabled in
                 if enabled {
-                    precondition(self.training.isCurrentTraining)
-                    self.training.end = nil
+                    precondition(self.workout.isCurrentWorkout)
+                    self.workout.end = nil
                 } else {
-                    self.training.end = self.training.safeEnd
+                    self.workout.end = self.workout.safeEnd
                 }
             }
         )
@@ -30,14 +30,14 @@ struct EditCurrentTrainingTimeView: View {
     var body: some View {
         List {
             Section {
-                DatePicker(selection: $training.safeStart, in: ...min(training.safeEnd, Date())) {
+                DatePicker(selection: $workout.safeStart, in: ...min(workout.safeEnd, Date())) {
                     Text("Start")
                 }
                 
                 Toggle("Automatic Time Tracking", isOn: automaticTimeTracking)
 
                 if !automaticTimeTracking.wrappedValue {
-                    DatePicker(selection: $training.safeEnd, in: training.safeStart...Date()) {
+                    DatePicker(selection: $workout.safeEnd, in: workout.safeStart...Date()) {
                         Text("End")
                     }
                 }
@@ -48,9 +48,9 @@ struct EditCurrentTrainingTimeView: View {
 }
 
 #if DEBUG
-struct EditTrainingStartEndView_Previews: PreviewProvider {
+struct EditCurrentWorkoutTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCurrentTrainingTimeView(training: MockTrainingsData.metricRandom.currentTraining)
+        EditCurrentWorkoutTimeView(workout: MockWorkoutData.metricRandom.currentWorkout)
     }
 }
 #endif

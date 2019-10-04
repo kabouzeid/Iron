@@ -13,13 +13,13 @@ struct ActivityChartView: View {
     @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(fetchRequest: Self.fetchRequest) var trainingHistory
+    @FetchRequest(fetchRequest: Self.fetchRequest) var workoutHistory
     
     private static let NUMBER_OF_WEEKS = 8
     
-    private static let fetchRequest: NSFetchRequest<Training> = {
-        let request: NSFetchRequest<Training> = Training.fetchRequest()
-        request.predicate = NSPredicate(format: "isCurrentTraining != %@ AND start >= %@", NSNumber(booleanLiteral: true), Calendar.current.date(byAdding: Calendar.Component.weekOfYear ,value: -(NUMBER_OF_WEEKS - 1), to: Date())!.startOfWeek! as NSDate)
+    private static let fetchRequest: NSFetchRequest<Workout> = {
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "isCurrentWorkout != %@ AND start >= %@", NSNumber(booleanLiteral: true), Calendar.current.date(byAdding: Calendar.Component.weekOfYear ,value: -(NUMBER_OF_WEEKS - 1), to: Date())!.startOfWeek! as NSDate)
         request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
         return request
     }()
@@ -41,12 +41,12 @@ struct ActivityChartView: View {
         return weeks.reversed()
     }
     
-    private func trainingsPerWeek(trainings: [Training], weeks: [Date]) -> [([Training], Date)] {
+    private func workoutsPerWeek(workouts: [Workout], weeks: [Date]) -> [([Workout], Date)] {
         assert(weeks == weeks.sorted())
         return weeks
             .enumerated()
             .map { i, week in
-                (trainings.filter {
+                (workouts.filter {
                     guard let start = $0.start else { return false }
                     let nextWeek = weeks.count > i + 1 ? weeks[i + 1] : Date()
                     return start >= week && start < nextWeek
@@ -55,11 +55,11 @@ struct ActivityChartView: View {
     }
     
     private var activityData: [BarStack] {
-        trainingsPerWeek(trainings: trainingHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
-            let (trainings, week) = arg
+        workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
+            let (workouts, week) = arg
             return BarStack(
-                entries: trainings.map { training in
-                    let muscleGroup = training.muscleGroups(in: exerciseStore.exercises).first ?? "other"
+                entries: workouts.map { workout in
+                    let muscleGroup = workout.muscleGroups(in: exerciseStore.exercises).first ?? "other"
                     return BarStackEntry(color: Exercise.colorFor(muscleGroup: muscleGroup), label: muscleGroup.capitalized)
                 },
                 label: Self.dateFormatter.string(from: week)
