@@ -49,44 +49,56 @@ class NotificationManager: NSObject {
     }
 
     func requestUnfinishedTrainingNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "Unfinished training"
-        content.body = "Your current training is unfinished. Do you want to finish it?"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15*60, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: NotificationIdentifier.unfinishedTraining.rawValue, content: content, trigger: trigger)
-        
-        notificationCenter.add(request) { (error) in
-            if let error = error {
-                print("error \(String(describing: error))")
+        notificationCenter.getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Unfinished training"
+            content.body = "Your current training is unfinished. Do you want to finish it?"
+            if settings.soundSetting == .enabled {
+                content.sound = UNNotificationSound.default
+            }
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15*60, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: NotificationIdentifier.unfinishedTraining.rawValue, content: content, trigger: trigger)
+            
+            self.notificationCenter.add(request) { (error) in
+                if let error = error {
+                    print("error \(String(describing: error))")
+                }
             }
         }
     }
     
     func updateRestTimerUpNotificationRequest(remainingTime: TimeInterval?, totalTime: TimeInterval? = nil) {
-        guard let remainingTime = remainingTime, remainingTime > 0 else {
-            removePendingNotificationRequests(withIdentifiers: [.restTimerUp])
-            return
-        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "You've rested enough!"
-        if let totalTime = totalTime, let totalTimeString = restTimerDurationFormatter.string(from: totalTime) {
-            content.title += " (\(totalTimeString))"
-        }
-        content.body = "Back to work 💪"
-        content.sound = UNNotificationSound.default
-        content.categoryIdentifier = NotificationCategoryIdentifier.restTimerUp.rawValue
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: NotificationIdentifier.restTimerUp.rawValue, content: content, trigger: trigger)
-        
-        notificationCenter.add(request) { (error) in
-            if let error = error {
-                print("error \(String(describing: error))")
+        notificationCenter.getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+            
+            guard let remainingTime = remainingTime, remainingTime > 0 else {
+                self.removePendingNotificationRequests(withIdentifiers: [.restTimerUp])
+                return
+            }
+            
+            let content = UNMutableNotificationContent()
+            content.title = "You've rested enough!"
+            if let totalTime = totalTime, let totalTimeString = restTimerDurationFormatter.string(from: totalTime) {
+                content.title += " (\(totalTimeString))"
+            }
+            content.body = "Back to work 💪"
+            if settings.soundSetting == .enabled {
+                content.sound = UNNotificationSound.default
+            }
+            content.categoryIdentifier = NotificationCategoryIdentifier.restTimerUp.rawValue
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: NotificationIdentifier.restTimerUp.rawValue, content: content, trigger: trigger)
+            
+            self.notificationCenter.add(request) { (error) in
+                if let error = error {
+                    print("error \(String(describing: error))")
+                }
             }
         }
     }
