@@ -24,6 +24,14 @@ struct HistoryView : View {
     }
     
     @State private var offsetsToDelete: IndexSet?
+    
+    private func deleteAtOffsets(offsets: IndexSet) {
+        let workouts = self.workouts
+        for i in offsets.sorted().reversed() {
+            self.managedObjectContext.delete(workouts[i])
+        }
+        self.managedObjectContext.safeSave()
+    }
 
     var body: some View {
         NavigationView {
@@ -36,6 +44,10 @@ struct HistoryView : View {
                     }
                 }
                 .onDelete { offsets in
+                    guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
+                        self.deleteAtOffsets(offsets: offsets)
+                        return
+                    }
                     self.offsetsToDelete = offsets
                 }
             }
@@ -43,11 +55,7 @@ struct HistoryView : View {
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
                     .destructive(Text("Delete Workout"), action: {
-                        let workouts = self.workouts
-                        for i in offsets.sorted().reversed() {
-                            self.managedObjectContext.delete(workouts[i])
-                        }
-                        self.managedObjectContext.safeSave()
+                        self.deleteAtOffsets(offsets: offsets)
                     }),
                     .cancel()
                 ])

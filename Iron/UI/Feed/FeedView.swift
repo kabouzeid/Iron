@@ -105,6 +105,18 @@ private struct PinnedChartSelectorSheet: View {
             }.padding()
             
             ExerciseSingleSelectionView(exerciseMuscleGroups: filter.exercises) { exercise in
+                guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
+                    // for now just add the first measuremnt type
+                    for measurementType in WorkoutExerciseChartDataGenerator.MeasurementType.allCases {
+                        let pinnedChart = PinnedChart(exerciseId: exercise.id, measurementType: measurementType)
+                        if !self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
+                            self.onSelection(pinnedChart)
+                            self.resetAndDismiss()
+                            return
+                        }
+                    }
+                    return
+                }
                 self.selectedExercise = exercise
             }
         }

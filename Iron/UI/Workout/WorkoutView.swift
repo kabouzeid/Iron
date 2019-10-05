@@ -245,6 +245,10 @@ struct WorkoutView: View {
                 // the workout is empty, do not need confirm to cancel
                 self.cancelWorkout()
             } else {
+                guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
+                    self.cancelWorkout()
+                    return
+                }
                 self.showingCancelActionSheet = true
             }
         }

@@ -39,6 +39,16 @@ struct CustomExercisesView: View {
     
     @State private var offsetsToDelete: IndexSet?
     
+    private func deleteAtOffsets(offsets: IndexSet) {
+        for i in offsets {
+            assert(self.exerciseStore.customExercises[i].isCustom)
+            let id = self.exerciseStore.customExercises[i].id
+            self.deleteWorkoutExercises(with: id)
+            self.exerciseStore.deleteCustomExercise(with: id)
+        }
+        self.managedObjectContext.safeSave()
+    }
+    
     var body: some View {
         List {
             ForEach(exerciseStore.customExercises, id: \.id) { exercise in
@@ -46,6 +56,10 @@ struct CustomExercisesView: View {
                     .environmentObject(self.settingsStore))
             }
             .onDelete { offsets in
+                guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
+                    self.deleteAtOffsets(offsets: offsets)
+                    return
+                }
                 self.offsetsToDelete = offsets
             }
             Button(action: {
@@ -73,13 +87,7 @@ struct CustomExercisesView: View {
             // TODO: in future only show this warning when there are in fact sets that will be deleted
             ActionSheet(title: Text("This cannot be undone."), message: Text("Warning: Any set belonging to this exercise will be deleted too."), buttons: [
                 .destructive(Text("Delete"), action: {
-                    for i in offsets {
-                        assert(self.exerciseStore.customExercises[i].isCustom)
-                        let id = self.exerciseStore.customExercises[i].id
-                        self.deleteWorkoutExercises(with: id)
-                        self.exerciseStore.deleteCustomExercise(with: id)
-                    }
-                    self.managedObjectContext.safeSave()
+                    self.deleteAtOffsets(offsets: offsets)
                 }),
                 .cancel()
             ])
