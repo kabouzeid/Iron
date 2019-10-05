@@ -196,4 +196,18 @@ class Sunrise_FitCoreDataTests: XCTestCase {
             }
         }
     }
+    
+    func testDetachedWorkoutExercise() {
+        let workoutExercise = WorkoutExercise(context: persistenContainer.viewContext)
+        XCTAssertThrowsError(try persistenContainer.viewContext.save())
+        workoutExercise.workout = testWorkouts.first
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+    }
+    
+    func testDetachedWorkoutSet() {
+        let workoutSet = WorkoutSet(context: persistenContainer.viewContext)
+        XCTAssertThrowsError(try persistenContainer.viewContext.save())
+        workoutSet.workoutExercise = testWorkoutExercises.first
+        XCTAssertNoThrow(try persistenContainer.viewContext.save())
+    }
 }
