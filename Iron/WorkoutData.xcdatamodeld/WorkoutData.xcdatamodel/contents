@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A573a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19A573a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Workout" representedClassName=".Workout" elementID="Training" syncable="YES" codeGenerationType="category">
         <attribute name="comment" optional="YES" attributeType="String"/>
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -24,8 +24,8 @@
         <relationship name="workoutExercise" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="workoutSets" inverseEntity="WorkoutExercise" elementID="trainingExercise"/>
     </entity>
     <elements>
-        <element name="Workout" positionX="189" positionY="-144" width="128" height="28"/>
-        <element name="WorkoutExercise" positionX="432" positionY="-126" width="128" height="28"/>
-        <element name="WorkoutSet" positionX="655" positionY="-117" width="128" height="28"/>
+        <element name="Workout" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="WorkoutExercise" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="WorkoutSet" positionX="-36" positionY="9" width="128" height="148"/>
     </elements>
 </model>

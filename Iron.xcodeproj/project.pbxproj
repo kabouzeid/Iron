@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A08D3D62349486800B09687 /* WorkoutData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */; };
 		8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC3023294EAD00081F4B /* UITabView.swift */; };
 		8A0ADC33232964E700081F4B /* WorkoutTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC32232964E700081F4B /* WorkoutTab.swift */; };
 		8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A12D7A922C4FB38006B29AA /* Charts */; };
@@ -64,7 +65,6 @@
 		8A799F5F22BF868500DD5E1B /* WorkoutExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
-		8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
 		8A7D6EB0200BF92E00AA0FA7 /* Sunrise_FitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6EAF200BF92E00AA0FA7 /* Sunrise_FitTests.swift */; };
@@ -153,6 +153,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutData.xcdatamodel; sourceTree = "<group>"; };
 		8A0ADC3023294EAD00081F4B /* UITabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabView.swift; sourceTree = "<group>"; };
 		8A0ADC32232964E700081F4B /* WorkoutTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTab.swift; sourceTree = "<group>"; };
 		8A16BBD822E337A0002150F0 /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
@@ -211,7 +212,6 @@
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Iron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrainingsData.xcdatamodel; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A7D6EA4200BF92E00AA0FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A7D6EA6200BF92E00AA0FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -422,7 +422,7 @@
 				8A36F9E9231EA62F0036E504 /* NotificationManager.swift */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
-				8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */,
+				8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */,
 				8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */,
 				8AC4C9D123254A7E008E474A /* quotes */,
 				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
@@ -809,7 +809,6 @@
 				8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */,
 				8AE0A7A2233128DE0021EE23 /* ExerciseStore.swift in Sources */,
 				8A3815502301B865008ACDAD /* WorkoutLog.swift in Sources */,
-				8A7D6EA0200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld in Sources */,
 				8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */,
 				8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */,
 				8A6F1728233A6E5E0048A75B /* PurchaseView.swift in Sources */,
@@ -819,6 +818,7 @@
 				8A81E85623328D610094BAAF /* PinnedChartsStore.swift in Sources */,
 				8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */,
 				8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */,
+				8A08D3D62349486800B09687 /* WorkoutData.xcdatamodeld in Sources */,
 				8A1D989822C7C6AC0071225D /* WorkoutSetEditor.swift in Sources */,
 				8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */,
 				8A442AD7207A428500A2BDBD /* Date+Days.swift in Sources */,
@@ -1235,13 +1235,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		8A7D6E9E200BF92E00AA0FA7 /* TrainingsData.xcdatamodeld */ = {
+		8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */,
+				8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */,
 			);
-			currentVersion = 8A7D6E9F200BF92E00AA0FA7 /* TrainingsData.xcdatamodel */;
-			path = TrainingsData.xcdatamodeld;
+			currentVersion = 8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */;
+			path = WorkoutData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
