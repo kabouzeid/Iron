@@ -1,5 +1,5 @@
 //
-//  MockEnvironment.swift
+//  View+MockEnvironment.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 01.10.19.

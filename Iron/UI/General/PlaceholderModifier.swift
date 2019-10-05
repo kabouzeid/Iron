@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PlaceholderModifier<Placeholder>: ViewModifier where Placeholder : View {
+struct PlaceholderModifier<Placeholder>: ViewModifier where Placeholder: View {
     let show: Bool
     let placeholder: Placeholder
     
