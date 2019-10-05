@@ -92,8 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Custom
     
     static var instance: AppDelegate {
-        get{
-            return UIApplication.shared.delegate as! AppDelegate
-        }
+        UIApplication.shared.delegate as! AppDelegate
     }
 }
