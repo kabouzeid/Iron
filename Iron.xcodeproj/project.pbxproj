@@ -85,6 +85,7 @@
 		8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */; };
 		8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */; };
 		8AAB1EBB2343C5A6005BE81B /* View+MockEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB1EBA2343C5A6005BE81B /* View+MockEnvironment.swift */; };
+		8AAD114C2349440500EA0B02 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAD114B2349440500EA0B02 /* CloudKit.framework */; };
 		8AB14BA822C500070025D835 /* WorkoutExercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA722C500070025D835 /* WorkoutExercise+SwiftUI.swift */; };
 		8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */; };
 		8AB4F7EF234217290074B88E /* ActivityDemoChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4F7EE2342166D0074B88E /* ActivityDemoChartView.swift */; };
@@ -234,6 +235,8 @@
 		8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupSectionedExercisesView.swift; sourceTree = "<group>"; };
 		8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		8AAB1EBA2343C5A6005BE81B /* View+MockEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+MockEnvironment.swift"; sourceTree = "<group>"; };
+		8AAD114A234943FF00EA0B02 /* Iron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Iron.entitlements; sourceTree = "<group>"; };
+		8AAD114B2349440500EA0B02 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8AB14BA722C500070025D835 /* WorkoutExercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutExercise+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AB4F7EE2342166D0074B88E /* ActivityDemoChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDemoChartView.swift; sourceTree = "<group>"; };
@@ -291,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAD114C2349440500EA0B02 /* CloudKit.framework in Frameworks */,
 				8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */,
 				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
 			);
@@ -362,6 +366,7 @@
 		8A6F1729233A809D0048A75B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AAD114B2349440500EA0B02 /* CloudKit.framework */,
 				8A6F172A233A809D0048A75B /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -413,6 +418,7 @@
 		8A7D6E96200BF92E00AA0FA7 /* Iron */ = {
 			isa = PBXGroup;
 			children = (
+				8AAD114A234943FF00EA0B02 /* Iron.entitlements */,
 				8AD40826202F96CB00A73E05 /* Extension */,
 				8A5F9A0F233B6B3600C2F32A /* IAP */,
 				8AABF2A6201683C8009C047D /* Data */,
@@ -1047,6 +1053,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
@@ -1069,6 +1076,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
