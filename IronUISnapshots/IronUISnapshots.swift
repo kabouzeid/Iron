@@ -41,7 +41,7 @@ class IronUISnapshots: XCTestCase {
         
         tabBarsQuery.buttons["Workout"].tap()
         snapshot("04_Workout")
-        app.tables.buttons["Biceps Curl: EZ Curl Bar\n1 of 6"].tap()
+        app.tables.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Biceps Curl" as NSString)).firstMatch.tap()
         snapshot("05_Workout_Item")
         
         tabBarsQuery.buttons["Exercises"].tap()
