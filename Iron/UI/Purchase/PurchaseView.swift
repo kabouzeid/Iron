@@ -118,7 +118,7 @@ struct PurchaseView: View {
         }
         .listStyle(GroupedListStyle())
         .onAppear {
-            self.storeManager.fetchProducts(matchingIdentifiers: [IAPIdentifiers.proMonthly])
+            self.storeManager.fetchProducts(matchingIdentifiers: IAPIdentifiers.pro)
         }
         .navigationBarTitle("Iron Pro")
     }
