@@ -104,13 +104,13 @@ struct PurchaseView: View {
             
             Section {
                 Button("Terms of Service") {
-                    if let url = URL(string: "https://kabouzeid.com/iron_tos.html") {
+                    if let url = URL(string: "https://ironapp.io/tos/") {
                         UIApplication.shared.open(url)
                     }
                 }
                 
                 Button("Privacy Policy") {
-                    if let url = URL(string: "https://kabouzeid.com/iron_privacy.html") {
+                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
                         UIApplication.shared.open(url)
                     }
                 }
