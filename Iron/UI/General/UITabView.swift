@@ -10,10 +10,12 @@ import SwiftUI
 
 struct UITabView: UIViewControllerRepresentable {
     let viewControllers: [UIViewController]
+    let initialSelection: Int
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<UITabView>) -> UITabBarController {
         let tabController = UITabBarController()
         updateUIViewController(tabController, context: context)
+        tabController.selectedIndex = initialSelection
         return tabController
     }
     
@@ -46,7 +48,7 @@ struct UITabView_Previews: PreviewProvider {
             Text("Tab B")
                 .hostingController()
                 .tabItem(title: "Tab B", image: UIImage(systemName: "b.circle"), tag: 1),
-        ])
+        ], initialSelection: 1)
         .edgesIgnoringSafeArea([.top])
     }
 }

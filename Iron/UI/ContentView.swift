@@ -66,7 +66,7 @@ struct ContentView : View {
             SettingsView()
                 .hostingController()
                 .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
-        ])
+        ], initialSelection: 2)
         // -----------------------------------------------
         .edgesIgnoringSafeArea([.top, .bottom])
     }

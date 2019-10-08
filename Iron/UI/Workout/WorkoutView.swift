@@ -8,6 +8,7 @@
 
 import SwiftUI
 import StoreKit
+import AVKit
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -204,6 +205,7 @@ struct WorkoutView: View {
         let feedbackGenerator = UINotificationFeedbackGenerator()
         feedbackGenerator.prepare()
         feedbackGenerator.notificationOccurred(.success)
+        AudioServicesPlaySystemSound(1103) // Tink sound
         
         UserDefaults.standard.finishedWorkoutsCount += 1
         if UserDefaults.standard.finishedWorkoutsCount == 3 {

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import AVKit
 
 struct WorkoutExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -259,6 +260,7 @@ struct WorkoutExerciseDetailView : View {
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.prepare()
                     feedbackGenerator.notificationOccurred(.success)
+                    AudioServicesPlaySystemSound(1103) // Tink sound
                     
                     self.restTimerStore.restTimerDuration = self.restTimerDuration
                     self.restTimerStore.restTimerStart = Date() // start the rest timer
