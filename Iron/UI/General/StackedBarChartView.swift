@@ -109,20 +109,20 @@ struct LegendView: View {
     }
 
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 0) {
             ForEach(barStackEntries, id: \.self) { barStackEntry in
-                ZStack {
-                    Spacer()
-                    VStack(alignment: .center) {
-                        Circle()
-                            .fill(barStackEntry.color)
-                            .frame(width: 16, height: 16)
-
-                        Text(barStackEntry.label)
-                            .lineLimit(1)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
+                VStack(alignment: .center) {
+                    Circle()
+                        .fill(barStackEntry.color)
+                        .frame(width: 16, height: 16)
+                    
+                    Text(barStackEntry.label)
+                        .lineLimit(1)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .layoutPriority(10)
+                    
+                    HStack { Spacer() } // hack for using the full width
                 }
             }
         }
