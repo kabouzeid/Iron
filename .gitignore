@@ -51,3 +51,5 @@ fastlane/screenshots/screenshots.html
 
 # scan temporary files
 fastlane/test_output
+
+fastlane/metadata
