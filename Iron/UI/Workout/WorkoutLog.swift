@@ -14,14 +14,29 @@ struct WorkoutLog: View {
     
     @ObservedObject var workout: Workout
     
-    private func workoutExerciseText(workoutExercise: WorkoutExercise) -> String? {
-        guard let workoutSets = workoutExercise.workoutSets else { return nil }
-        let text = workoutSets
+    private func workoutSets(workoutExercise: WorkoutExercise) -> [WorkoutSet] {
+        workoutExercise.workoutSets?
             .compactMap { $0 as? WorkoutSet }
-            .filter { $0.isCompleted }
-            .map { $0.logTitle(unit: settingsStore.weightUnit) }
-            .joined(separator: "\n")
-        return text.isEmpty ? nil : text
+            .filter { $0.isCompleted } ?? []
+    }
+    
+    private func workoutExerciseView(workoutExercise: WorkoutExercise) -> some View {
+        VStack(alignment: .leading) {
+            Text(workoutExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
+                .font(.body)
+            workoutExercise.comment.map {
+                Text($0.enquoted)
+                    .lineLimit(1)
+                    .font(Font.caption.italic())
+                    .foregroundColor(.secondary)
+            }
+            ForEach(self.workoutSets(workoutExercise: workoutExercise), id: \.objectID) { workoutSet in
+                Text(workoutSet.logTitle(unit: self.settingsStore.weightUnit))
+                    .font(Font.body.monospacedDigit())
+                    .foregroundColor(.secondary)
+                    .lineLimit(nil)
+            }
+        }
     }
     
     var body: some View {
@@ -32,17 +47,8 @@ struct WorkoutLog: View {
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             Section {
-                ForEach(workout.workoutExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) { workoutExercise in
-                    VStack(alignment: .leading) {
-                        Text(workoutExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "")
-                            .font(.body)
-                        self.workoutExerciseText(workoutExercise: workoutExercise).map {
-                            Text($0)
-                                .font(Font.body.monospacedDigit())
-                                .foregroundColor(.secondary)
-                                .lineLimit(nil)
-                        }
-                    }
+                ForEach(workout.workoutExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) {
+                    self.workoutExerciseView(workoutExercise: $0)
                 }
             }
         }
