@@ -24,6 +24,7 @@ class StoreObserver: NSObject {
     }
     
     func restore() {
+        print("restoring transactions...")
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 }
