@@ -13,7 +13,7 @@ struct EditCustomExerciseView: View {
         var title: String
         var description: String
         var muscles: Set<ExerciseMuscle>
-        var barbellBased: Bool
+        var type: Exercise.ExerciseType
         
         struct ExerciseMuscle: Hashable {
             enum MuscleType {
@@ -73,8 +73,10 @@ struct EditCustomExerciseView: View {
                 }
             }
             
-            Section(header: Text("Type".uppercased())) {
-                Toggle("Barbell Based", isOn: $exerciseValues.barbellBased)
+            Picker("Type", selection: $exerciseValues.type) {
+                ForEach(Exercise.ExerciseType.allCases, id: \.self) {
+                    Text($0.title.capitalized).tag($0)
+                }
             }
         }
         .sheet(isPresented: $showingMuscleSelectionSheet) {
@@ -144,7 +146,7 @@ struct MuscleSelectionView: View {
 #if DEBUG
 struct CreateCustomExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCustomExerciseView(exerciseValues: .constant(.init(title: "", description: "", muscles: Set(), barbellBased: false)))
+        EditCustomExerciseView(exerciseValues: .constant(.init(title: "", description: "", muscles: Set(), type: .other)))
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

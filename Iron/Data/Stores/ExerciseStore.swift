@@ -44,7 +44,7 @@ final class ExerciseStore: ObservableObject {
 }
 
 extension ExerciseStore {
-    func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], barbellBased: Bool) {
+    func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty else { return }
         guard !exercises.contains(where: { $0.title == title }) else { return }
@@ -58,13 +58,13 @@ extension ExerciseStore {
         var customExercises = (try? Self.loadExercises(from: url)) ?? []
         guard let newId = getNewId(in: customExercises) else { return }
         
-        customExercises.append(Exercise(id: newId, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: barbellBased ? ["barbell"] : [], steps: [], tips: [], references: [], pdfPaths: []))
+        customExercises.append(Exercise(id: newId, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
         do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
         
         self.customExercises = (try? Self.loadExercises(from: url)) ?? []
     }
     
-    func updateCustomExercise(with id: Int, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], barbellBased: Bool) {
+    func updateCustomExercise(with id: Int, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty else { return }
         guard !exercises.contains(where: { $0.title == title && $0.id != id }) else { return }
@@ -80,7 +80,7 @@ extension ExerciseStore {
         assert(id >= Exercise.customExerciseIdStart)
         guard customExercises.contains(where: { $0.id == id }) else { return } // make sure the exercise exists
         customExercises.removeAll { $0.id == id } // remove the old exercise
-        customExercises.append(Exercise(id: id, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: barbellBased ? ["barbell"] : [], steps: [], tips: [], references: [], pdfPaths: []))
+        customExercises.append(Exercise(id: id, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
         do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
         
         self.customExercises = ((try? Self.loadExercises(from: url)) ?? [])

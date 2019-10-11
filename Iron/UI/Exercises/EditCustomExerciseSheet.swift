@@ -18,7 +18,7 @@ struct EditCustomExerciseSheet: View {
         self.exercise = exercise
         let primaryMuscle = exercise.primaryMuscle.map { EditCustomExerciseView.ExerciseValues.ExerciseMuscle(type: .primary, muscle: $0) }
         let secondaryMuscle = exercise.secondaryMuscle.map { EditCustomExerciseView.ExerciseValues.ExerciseMuscle(type: .secondary, muscle: $0) }
-        _exerciseValues = State(initialValue: .init(title: exercise.title, description: exercise.description ?? "", muscles: Set(primaryMuscle + secondaryMuscle), barbellBased: exercise.isBarbellBased))
+        _exerciseValues = State(initialValue: .init(title: exercise.title, description: exercise.description ?? "", muscles: Set(primaryMuscle + secondaryMuscle), type: exercise.type))
     }
     
     private var canSave: Bool {
@@ -43,7 +43,7 @@ struct EditCustomExerciseSheet: View {
                 .filter { $0.type == .secondary }
                 .sorted { $0.shortDisplayTitle < $1.shortDisplayTitle }
                 .map { $0.muscle }
-            self.exerciseStore.updateCustomExercise(with: self.exercise.id, title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, barbellBased: self.exerciseValues.barbellBased)
+            self.exerciseStore.updateCustomExercise(with: self.exercise.id, title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, type: self.exerciseValues.type)
             self.presentationMode.wrappedValue.dismiss()
         }.disabled(!canSave)
     }

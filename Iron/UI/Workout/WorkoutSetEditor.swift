@@ -150,7 +150,7 @@ struct WorkoutSetEditor : View {
     
     private var weightStepSize: Double {
         // TODO: let the user configure this for barbell, dumbell and others
-        (workoutSet.workoutExercise?.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false) ? settingsStore.weightUnit.barbellIncrement : 1
+        (workoutSet.workoutExercise?.exercise(in: exerciseStore.exercises)?.type == .barbell) ? settingsStore.weightUnit.barbellIncrement : 1
     }
     
     private var weightDragger: some View {

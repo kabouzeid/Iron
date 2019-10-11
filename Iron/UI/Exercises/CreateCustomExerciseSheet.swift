@@ -11,7 +11,7 @@ import SwiftUI
 struct CreateCustomExerciseSheet: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @State private var exerciseValues = EditCustomExerciseView.ExerciseValues(title: "", description: "", muscles: Set(), barbellBased: false)
+    @State private var exerciseValues = EditCustomExerciseView.ExerciseValues(title: "", description: "", muscles: Set(), type: .other)
     
     private var canSave: Bool {
         let title = exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -35,7 +35,7 @@ struct CreateCustomExerciseSheet: View {
                 .filter { $0.type == .secondary }
                 .sorted { $0.shortDisplayTitle < $1.shortDisplayTitle }
                 .map { $0.muscle }
-            self.exerciseStore.createCustomExercise(title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, barbellBased: self.exerciseValues.barbellBased)
+            self.exerciseStore.createCustomExercise(title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, type: self.exerciseValues.type)
             self.presentationMode.wrappedValue.dismiss()
             
             // haptic feedback

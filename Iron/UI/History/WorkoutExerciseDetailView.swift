@@ -87,7 +87,7 @@ struct WorkoutExerciseDetailView : View {
         } else {
             // TODO: let the user configure default repetitions and weight
             set.repetitions = 5
-            if workoutExercise.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false {
+            if workoutExercise.exercise(in: exerciseStore.exercises)?.type == .barbell {
                 let weightUnit = self.settingsStore.weightUnit
                 set.weight = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
             }
@@ -234,9 +234,12 @@ struct WorkoutExerciseDetailView : View {
     
     private var restTimerDuration: TimeInterval {
         // TODO: allow customizable default rest timer for each exercise
-        if workoutExercise.exercise(in: exerciseStore.exercises)?.isBarbellBased ?? false {
+        switch workoutExercise.exercise(in: exerciseStore.exercises)?.type {
+        case .barbell:
             return settingsStore.defaultRestTimeBarbellBased
-        } else {
+        case .dumbbell:
+            return 0 // TODO
+        default:
             return settingsStore.defaultRestTime
         }
     }

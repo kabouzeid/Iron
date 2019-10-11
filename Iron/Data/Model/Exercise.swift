@@ -23,10 +23,6 @@ struct Exercise: Hashable {
 }
  
 extension Exercise {
-    var isBarbellBased: Bool {
-        equipment.contains("barbell")
-    }
-    
     var primaryMuscleCommonName: [String] {
         primaryMuscle.map { Self.commonMuscleName(for: $0) ?? $0 }.uniqed()
     }
@@ -91,6 +87,40 @@ extension Exercise {
         // chest
         "pectoralis major": "chest"
     ]
+}
+
+extension Exercise {
+    enum ExerciseType: CaseIterable {
+        case barbell
+        case dumbbell
+        case other
+        
+        var title: String {
+            switch self {
+            case .barbell:
+                return "barbell based"
+            case .dumbbell:
+                return "dumbbell based"
+            case .other:
+                return "other"
+            }
+        }
+        
+        var equipment: String? {
+            switch self {
+            case .barbell:
+                return "barbell"
+            case .dumbbell:
+                return "dumbbells"
+            case .other:
+                return nil
+            }
+        }
+    }
+    
+    var type: ExerciseType {
+        ExerciseType.allCases.first { $0.equipment.map { equipment.contains($0) } ?? false } ?? .other
+    }
 }
 
 extension Exercise {
