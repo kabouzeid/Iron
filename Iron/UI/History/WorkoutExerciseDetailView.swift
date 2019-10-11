@@ -238,7 +238,7 @@ struct WorkoutExerciseDetailView : View {
         case .barbell:
             return settingsStore.defaultRestTimeBarbellBased
         case .dumbbell:
-            return 0 // TODO
+            return settingsStore.defaultRestTimeDumbbellBased
         default:
             return settingsStore.defaultRestTime
         }

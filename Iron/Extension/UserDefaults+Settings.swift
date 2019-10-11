@@ -12,6 +12,7 @@ extension UserDefaults {
     enum SettingsKeys: String {
         case weightUnit
         case defaultRestTime
+        case defaultRestTimeDumbbellBased
         case defaultRestTimeBarbellBased
         case maxRepetitionsOneRepMax
     }
@@ -38,6 +39,15 @@ extension UserDefaults {
         }
         get {
             self.value(forKey: SettingsKeys.defaultRestTime.rawValue) as? TimeInterval ?? 90 // default 1:30
+        }
+    }
+    
+    var defaultRestTimeDumbbellBased: TimeInterval {
+        set {
+            self.set(newValue, forKey: SettingsKeys.defaultRestTimeDumbbellBased.rawValue)
+        }
+        get {
+            self.value(forKey: SettingsKeys.defaultRestTimeDumbbellBased.rawValue) as? TimeInterval ?? 150 // default 2:30
         }
     }
     

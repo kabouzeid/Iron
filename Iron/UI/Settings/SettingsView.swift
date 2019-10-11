@@ -47,6 +47,13 @@ struct SettingsView : View {
                     Text(restTimerDurationFormatter.string(from: time) ?? "").tag(time)
                 }
             }
+            
+            Picker("Default Rest Time (Dumbbell)", selection: $settingsStore.defaultRestTimeDumbbellBased) {
+                ForEach(restTimerCustomTimes, id: \.self) { time in
+                    Text(restTimerDurationFormatter.string(from: time) ?? "").tag(time)
+                }
+            }
+            
             Picker("Default Rest Time (Barbell)", selection: $settingsStore.defaultRestTimeBarbellBased) {
                 ForEach(restTimerCustomTimes, id: \.self) { time in
                     Text(restTimerDurationFormatter.string(from: time) ?? "").tag(time)

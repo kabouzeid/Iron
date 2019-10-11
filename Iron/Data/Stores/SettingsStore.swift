@@ -45,6 +45,16 @@ final class SettingsStore: ObservableObject {
         }
     }
     
+    var defaultRestTimeDumbbellBased: TimeInterval {
+        get {
+            userDefaults.defaultRestTimeDumbbellBased
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.defaultRestTimeDumbbellBased = newValue
+        }
+    }
+    
     var defaultRestTimeBarbellBased: TimeInterval {
         get {
             userDefaults.defaultRestTimeBarbellBased
