@@ -14,8 +14,11 @@ struct CreateCustomExerciseSheet: View {
     @State private var exerciseValues = EditCustomExerciseView.ExerciseValues(title: "", description: "", muscles: Set(), barbellBased: false)
     
     private var canSave: Bool {
+        let title = exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return false }
+        guard !exerciseStore.exercises.contains(where: { $0.title == title }) else { return false }
         // TODO: and at least one muscle
-        !exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        return true
     }
     
     private var saveButton: some View {

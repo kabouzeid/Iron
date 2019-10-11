@@ -22,8 +22,11 @@ struct EditCustomExerciseSheet: View {
     }
     
     private var canSave: Bool {
+        let title = exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return false }
+        guard !exerciseStore.exercises.contains(where: { $0.title == title && $0.id != exercise.id }) else { return false }
         // TODO: and at least one muscle
-        !exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        return true
     }
     
     private var saveButton: some View {

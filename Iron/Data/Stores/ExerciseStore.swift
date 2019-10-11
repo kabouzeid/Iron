@@ -47,6 +47,7 @@ extension ExerciseStore {
     func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], barbellBased: Bool) {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty else { return }
+        guard !exercises.contains(where: { $0.title == title }) else { return }
         
         var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let d = description, d.isEmpty {
@@ -66,6 +67,7 @@ extension ExerciseStore {
     func updateCustomExercise(with id: Int, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], barbellBased: Bool) {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty else { return }
+        guard !exercises.contains(where: { $0.title == title && $0.id != id }) else { return }
         
         var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let d = description, d.isEmpty {

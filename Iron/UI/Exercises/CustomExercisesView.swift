@@ -84,8 +84,7 @@ struct CustomExercisesView: View {
             self.sheetView(type: type)
         })
         .actionSheet(item: $offsetsToDelete) { offsets in
-            // TODO: in future only show this warning when there are in fact sets that will be deleted
-            ActionSheet(title: Text("This cannot be undone."), message: Text("Warning: Any set belonging to this exercise will be deleted too."), buttons: [
+            ActionSheet(title: Text("This cannot be undone."), message: Text("Warning: Any set belonging to this exercise will be deleted."), buttons: [
                 .destructive(Text("Delete"), action: {
                     self.deleteAtOffsets(offsets: offsets)
                 }),
