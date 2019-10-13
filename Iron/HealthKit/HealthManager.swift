@@ -25,7 +25,11 @@ extension HealthManager {
         
         let share: Set = [HKObjectType.workoutType()]
         
-        healthStore.requestAuthorization(toShare: share, read: nil) { (success, error) in
+        let read = Set([
+            HKObjectType.quantityType(forIdentifier: .bodyMass)
+        ].compactMap { $0 })
+        
+        healthStore.requestAuthorization(toShare: share, read: read) { (success, error) in
             guard success else {
                 if let error = error { print(error) }
                 return
