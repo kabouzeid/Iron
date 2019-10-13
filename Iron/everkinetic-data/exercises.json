@@ -1493,7 +1493,9 @@
         "id": 66,
         "name": "machine-bench-press",
         "title": "Bench Press: Machine",
-        "alias": [],
+        "alias": [
+            "Chest Press: Machine"
+        ],
         "primer": "This is an exercise for chest, biceps and shoulder strengthening.",
         "type": "isolation",
         "primary": [
@@ -1526,7 +1528,7 @@
     {
         "id": 75,
         "name": "push-up-feet-elevated",
-        "title": "Push Up: Bench (Feet Elevated)",
+        "title": "Push Up (Decline)",
         "alias": [],
         "primer": "This is the same general movement as with a Push Up except your feet are elevated allowing greater range of motions and targeting the pectorals differently than the regular Push Up.",
         "type": "isolation",
@@ -1752,7 +1754,9 @@
         "id": 84,
         "name": "incline-machine-bench-press",
         "title": "Bench Press: Machine (Incline)",
-        "alias": [],
+        "alias": [
+            "Chest Press: Machine (Incline)"
+        ],
         "primer": "This exercise is for strengthening the upper chest and is preferred among beginners as it provides support and control.",
         "type": "isolation",
         "primary": [
@@ -1785,7 +1789,9 @@
         "id": 85,
         "name": "decline-machine-bench-press",
         "title": "Bench Press: Machine (Decline)",
-        "alias": [],
+        "alias": [
+            "Chest Press: Machine (Decline)"
+        ],
         "primer": "This is an exercise for the strengthening of the lower chest or pectoral muscles and is preferred by beginners as it provides support and stability.",
         "type": "isolation",
         "primary": [
@@ -2767,7 +2773,7 @@
         "name": "walking-lunges",
         "title": "Lunges: Dumbbell (Walking)",
         "alias": [],
-        "primer": "A walking lunge gives you the benefit of lunges plus core muscle workout from the constant motion.",
+        "primer": "A walking lunge gives you the benefit of lunges plus core muscle training from the constant motion.",
         "type": "isolation",
         "primary": [
             "ischiocrural muscles"
