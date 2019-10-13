@@ -9,6 +9,7 @@
 import SwiftUI
 import StoreKit
 import AVKit
+import HealthKit
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -206,6 +207,14 @@ struct WorkoutView: View {
         feedbackGenerator.prepare()
         feedbackGenerator.notificationOccurred(.success)
         AudioServicesPlaySystemSound(1103) // Tink sound
+        
+        HealthManager.shared.requestPermissions {
+            if let start = self.workout.start, let end = self.workout.end, let duration = self.workout.duration { // should never fail
+                let title = self.workout.displayTitle(in: self.exerciseStore.exercises)
+                let hkWorkout = HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title])
+                HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
+            }
+        }
         
         UserDefaults.standard.finishedWorkoutsCount += 1
         if UserDefaults.standard.finishedWorkoutsCount == 3 {
