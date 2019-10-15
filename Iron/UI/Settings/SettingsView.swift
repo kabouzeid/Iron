@@ -8,6 +8,7 @@
 
 import SwiftUI
 import StoreKit
+import MessageUI
 
 struct SettingsView : View {
     @EnvironmentObject var settingsStore: SettingsStore
@@ -71,7 +72,7 @@ struct SettingsView : View {
     }
     
     private var ratingSection: some View {
-        Section(footer: Text("If you like Iron, consider leaving a review, it helps a lot!")) {
+        Section {
             Button(action: {
                 guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1479893244?action=write-review") else { return }
                 UIApplication.shared.open(writeReviewURL)
@@ -79,7 +80,25 @@ struct SettingsView : View {
                 HStack {
                     Text("Rate Iron")
                     Spacer()
-                    Image(systemName: "heart.fill").foregroundColor(.red)
+                    Image(systemName: "star")
+                }
+            }
+            
+            Button(action: {
+                guard MFMailComposeViewController.canSendMail() else { return }
+                
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = MailCloseDelegate.shared
+                mail.setToRecipients(["support@ironapp.io"])
+                
+                // TODO: replace this hack with a proper way to retreive the rootViewController
+                guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+                rootVC.present(mail, animated: true)
+            }) {
+                HStack {
+                    Text("Send Feedback")
+                    Spacer()
+                    Image(systemName: "paperplane")
                 }
             }
         }
@@ -103,6 +122,15 @@ struct SettingsView : View {
             .navigationBarTitle(Text("Settings"))
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+    }
+}
+
+// hack because we can't store it in the View
+private class MailCloseDelegate: NSObject, MFMailComposeViewControllerDelegate {
+    static let shared = MailCloseDelegate()
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
 
