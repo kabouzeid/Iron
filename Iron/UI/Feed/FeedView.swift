@@ -50,7 +50,7 @@ struct FeedView : View {
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: EditButton())
             .sheet(isPresented: $showingPinnedChartSelector) {
-                PinnedChartSelectorSheet(exercises: self.exerciseStore.exercises) { pinnedChart in
+                PinnedChartSelectorSheet(exercises: self.exerciseStore.shownExercises) { pinnedChart in
                     self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
                 }
                 .environmentObject(self.pinnedChartsStore)

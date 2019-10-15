@@ -56,7 +56,7 @@ struct AddExercisesSheet: View {
 struct AddExercisesSheet_Previews: PreviewProvider {
     static var previews: some View {
 //        Color.clear.sheet(isPresented: .constant(true)) {
-        AddExercisesSheet(exercises: ExerciseStore.shared.exercises, onAdd: { _ in })
+        AddExercisesSheet(exercises: ExerciseStore.shared.shownExercises, onAdd: { _ in })
 //        }
     }
 }

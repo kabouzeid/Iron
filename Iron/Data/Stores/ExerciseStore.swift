@@ -15,10 +15,19 @@ final class ExerciseStore: ObservableObject {
     )
     
     let builtInExercises: [Exercise]
+    
     @Published private(set) var customExercises: [Exercise]
     
     var exercises: [Exercise] {
         builtInExercises + customExercises
+    }
+    
+    var shownExercises: [Exercise] {
+        exercises.filter { !isHidden(exerciseId: $0.id) }
+    }
+    
+    var hiddenExercises: [Exercise] {
+        exercises.filter { isHidden(exerciseId: $0.id) }
     }
     
     private let customExercisesURL: URL?
@@ -43,6 +52,25 @@ final class ExerciseStore: ObservableObject {
     }
 }
 
+// MARK: - Hidden Exercises
+extension ExerciseStore {
+    func show(exerciseId: Int) {
+        self.objectWillChange.send()
+        UserDefaults.standard.hiddenExerciseIds.removeAll { $0 == exerciseId }
+    }
+    
+    func hide(exerciseId: Int) {
+        guard !isHidden(exerciseId: exerciseId) else { return }
+        self.objectWillChange.send()
+        UserDefaults.standard.hiddenExerciseIds.append(exerciseId)
+    }
+    
+    func isHidden(exerciseId: Int) -> Bool {
+        UserDefaults.standard.hiddenExerciseIds.contains(exerciseId)
+    }
+}
+
+// MARK: - Custom Exercises
 extension ExerciseStore {
     func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -104,6 +132,7 @@ extension ExerciseStore {
     }
 }
 
+// MARK: - Split
 extension ExerciseStore {
     static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {
         var groups = [[Exercise]]()
@@ -131,6 +160,7 @@ extension ExerciseStore {
     }
 }
 
+// MARK: - Find
 extension ExerciseStore {
     func find(with id: Int) -> Exercise? {
         Self.find(in: exercises, with: id)
@@ -141,6 +171,7 @@ extension ExerciseStore {
     }
 }
 
+// MARK: - Filter
 extension ExerciseStore {
     private static func titleMatchesFilter(title: String, filter: String) -> Bool {
         for s in filter.split(separator: " ") {

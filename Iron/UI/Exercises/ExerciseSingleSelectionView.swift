@@ -30,7 +30,7 @@ struct ExerciseSingleSelectionView: View {
 #if DEBUG
 struct ExerciseSingleSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseSingleSelectionView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.exercises)) { _ in }
+        ExerciseSingleSelectionView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises)) { _ in }
     }
 }
 #endif

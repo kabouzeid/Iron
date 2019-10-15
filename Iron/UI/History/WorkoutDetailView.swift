@@ -162,7 +162,7 @@ struct WorkoutDetailView : View {
             }
         )
         .sheet(isPresented: $showingExerciseSelectorSheet) {
-            AddExercisesSheet(exercises: self.exerciseStore.exercises, onAdd: { selection in
+            AddExercisesSheet(exercises: self.exerciseStore.shownExercises, onAdd: { selection in
                 for exercise in selection {
                     let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
                     self.workout.addToWorkoutExercises(workoutExercise)

@@ -35,7 +35,7 @@ struct WorkoutView: View {
         case .log:
             return self.workoutsLogSheet.typeErased
         case .exerciseSelector:
-            return AddExercisesSheet(exercises: exerciseStore.exercises, onAdd: { selection in
+            return AddExercisesSheet(exercises: exerciseStore.shownExercises, onAdd: { selection in
                 for exercise in selection {
                     let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
                     self.workout.addToWorkoutExercises(workoutExercise)

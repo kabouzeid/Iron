@@ -15,6 +15,8 @@ struct ExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
+    @State private var showOptionsMenu = false
+    
     @State private var activeSheet: SheetType?
     
     private enum SheetType: Identifiable {
@@ -180,6 +182,33 @@ struct ExerciseDetailView : View {
         }
     }
     
+    private var options: [ActionSheet.Button] {
+        var options: [ActionSheet.Button] = [
+            .default(Text("Show History"), action: {
+                self.activeSheet = .history
+            }),
+            .default(Text("Show Statistics"), action: {
+                self.activeSheet = .statistics
+            })
+        ]
+        if exerciseStore.isHidden(exerciseId: exercise.id) {
+            options.append(.default(Text("Unhide Exercise"), action: {
+                self.exerciseStore.show(exerciseId: self.exercise.id)
+            }))
+        } else {
+            options.append(.default(Text("Hide Exercise"), action: {
+                self.exerciseStore.hide(exerciseId: self.exercise.id)
+            }))
+        }
+        if exercise.isCustom {
+            options.append(.default(Text("Edit"), action: {
+                self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
+            }))
+        }
+        options.append(.cancel())
+        return options
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             List {
@@ -216,20 +245,16 @@ struct ExerciseDetailView : View {
         .sheet(item: $activeSheet) { type in
             self.sheetView(type: type)
         }
+        .actionSheet(isPresented: $showOptionsMenu) {
+            // TODO: remove title once this is possible with SwiftUI
+            ActionSheet(title: Text("Options"), message: nil, buttons: options)
+        }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
-            HStack(spacing: NAVIGATION_BAR_SPACING) {
-                Button(action: { self.activeSheet = .history }) {
-                    Image(systemName: "clock")
-                }
-                Button(action: { self.activeSheet = .statistics }) {
-                    Image(systemName: "waveform.path.ecg")
-                }
-                if exercise.isCustom {
-                    Button("Edit") {
-                        self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
-                    }
-                }
+            Button(action: {
+                self.showOptionsMenu = true
+            }) {
+                Image(systemName: "ellipsis")
             }
         )
     }

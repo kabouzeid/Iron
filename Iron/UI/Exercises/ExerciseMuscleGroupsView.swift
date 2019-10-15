@@ -31,7 +31,7 @@ struct ExerciseMuscleGroupsView : View {
     }
     
     private var exercisesGrouped: [[Exercise]] {
-        ExerciseStore.splitIntoMuscleGroups(exercises: exerciseStore.exercises)
+        ExerciseStore.splitIntoMuscleGroups(exercises: exerciseStore.shownExercises)
     }
     
     var body: some View {
@@ -45,7 +45,7 @@ struct ExerciseMuscleGroupsView : View {
                         HStack {
                             Text("All")
                             Spacer()
-                            Text("(\(exerciseStore.exercises.count))")
+                            Text("(\(exerciseStore.shownExercises.count))")
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -67,6 +67,21 @@ struct ExerciseMuscleGroupsView : View {
                             Spacer()
                             Text("(\(exerciseStore.customExercises.count))")
                                 .foregroundColor(.secondary)
+                        }
+                    }
+
+                    if !exerciseStore.hiddenExercises.isEmpty {
+                        NavigationLink(destination:
+                            ExercisesView(exercises: exerciseStore.hiddenExercises)
+                                .listStyle(PlainListStyle())
+                                .navigationBarTitle(Text("Hidden"), displayMode: .inline)
+                        ) {
+                            HStack {
+                                Text("Hidden")
+                                Spacer()
+                                Text("(\(exerciseStore.hiddenExercises.count))")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }
