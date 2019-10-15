@@ -127,7 +127,7 @@ extension Exercise {
     static let customExerciseIdStart = 10000
     
     var isCustom: Bool {
-        id >= 10000
+        id >= Exercise.customExerciseIdStart
     }
 }
 

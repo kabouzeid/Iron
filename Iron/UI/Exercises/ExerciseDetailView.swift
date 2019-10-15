@@ -195,7 +195,7 @@ struct ExerciseDetailView : View {
             options.append(.default(Text("Unhide Exercise"), action: {
                 self.exerciseStore.show(exerciseId: self.exercise.id)
             }))
-        } else {
+        } else if !exercise.isCustom {
             options.append(.default(Text("Hide Exercise"), action: {
                 self.exerciseStore.hide(exerciseId: self.exercise.id)
             }))

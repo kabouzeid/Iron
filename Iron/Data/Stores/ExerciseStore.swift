@@ -42,6 +42,7 @@ final class ExerciseStore: ObservableObject {
         self.customExercisesURL = customExercisesURL
         if let url = customExercisesURL {
             self.customExercises = (try? Self.loadExercises(from: url)) ?? []
+            assert(!customExercises.contains { !$0.isCustom }, "Decoded custom exercise that is not custom.")
         } else {
             self.customExercises = []
         }
@@ -55,11 +56,13 @@ final class ExerciseStore: ObservableObject {
 // MARK: - Hidden Exercises
 extension ExerciseStore {
     func show(exerciseId: Int) {
+        assert(exerciseId >= Exercise.customExerciseIdStart, "Makes no sense to show custom exercise.")
         self.objectWillChange.send()
         UserDefaults.standard.hiddenExerciseIds.removeAll { $0 == exerciseId }
     }
     
     func hide(exerciseId: Int) {
+        assert(exerciseId >= Exercise.customExerciseIdStart, "Makes no sense to hide custom exercise.")
         guard !isHidden(exerciseId: exerciseId) else { return }
         self.objectWillChange.send()
         UserDefaults.standard.hiddenExerciseIds.append(exerciseId)
