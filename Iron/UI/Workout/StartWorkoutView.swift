@@ -54,6 +54,8 @@ struct StartWorkoutView: View {
                     workout.isCurrentWorkout = true
                     workout.start = Date()
                     self.managedObjectContext.safeSave()
+                    
+                    NotificationManager.shared.requestAuthorization()
                 }) {
                    Text("Start Workout")
                         .padding()
