@@ -69,7 +69,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         AppDelegate.instance.persistentContainer.viewContext.safeSave()
         
-        if (try? AppDelegate.instance.persistentContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 > 0 {
+        if let currentWorkout = try? AppDelegate.instance.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
+            guard currentWorkout.hasCompletedSets ?? false else { return } // allows the user to prefill a workout without getting the notification
+            
             // remind the user about his unfinished workout
             NotificationManager.shared.requestUnfinishedWorkoutNotification()
         }

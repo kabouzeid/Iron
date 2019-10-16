@@ -210,4 +210,32 @@ class Sunrise_FitCoreDataTests: XCTestCase {
         workoutSet.workoutExercise = testWorkoutExercises.first
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
+    
+    func testWorkoutIsCompleted() {
+        for workout in testWorkouts {
+            if !workout.isCurrentWorkout {
+                XCTAssertTrue(workout.isCompleted!)
+            }
+        }
+    }
+    
+    func testWorkoutHasCompletedSets() {
+        let workout = Workout(context: persistenContainer.viewContext)
+        XCTAssertFalse(workout.hasCompletedSets!)
+        
+        let exercise = WorkoutExercise(context: persistenContainer.viewContext)
+        workout.addToWorkoutExercises(exercise)
+        XCTAssertFalse(workout.hasCompletedSets!)
+        
+        let set = WorkoutSet(context: persistenContainer.viewContext)
+        exercise.addToWorkoutSets(set)
+        XCTAssertFalse(workout.hasCompletedSets!)
+        
+        set.isCompleted = true
+        XCTAssertTrue(workout.hasCompletedSets!)
+        
+        for workout in testWorkouts {
+            XCTAssertTrue(workout.hasCompletedSets!)
+        }
+    }
 }

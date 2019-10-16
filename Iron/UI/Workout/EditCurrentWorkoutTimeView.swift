@@ -42,6 +42,16 @@ struct EditCurrentWorkoutTimeView: View {
                     }
                 }
             }
+            
+            Section {
+                Button("Reset Start Time") {
+                    let newStart = Date()
+                    if let end = self.workout.end, end < newStart {
+                        self.workout.end = newStart
+                    }
+                    self.workout.start = newStart
+                }
+            }
         }
         .listStyle(GroupedListStyle())
     }

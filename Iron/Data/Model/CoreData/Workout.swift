@@ -41,6 +41,16 @@ class Workout: NSManagedObject {
             .contains { !($0.isCompleted ?? false) }
     }
     
+    var hasCompletedSets: Bool? {
+        guard let workoutExercises = workoutExercises else { return nil }
+        return workoutExercises
+            .compactMap { $0 as? WorkoutExercise }
+            .contains {
+                guard let sets = $0.workoutSets?.compactMap({ $0 as? WorkoutSet }) else { return false }
+                return sets.contains { $0.isCompleted }
+            }
+    }
+    
     func displayTitle(in exercises: [Exercise]) -> String {
         if let title = title {
             return title
