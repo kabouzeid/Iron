@@ -41,6 +41,18 @@ struct HistoryView : View {
                         .environmentObject(self.settingsStore)
                     ) {
                         WorkoutCell(workout: workout)
+                            .contextMenu {
+                                // TODO add images when SwiftUI fixes the image size
+                                Button("Share") {
+                                    WorkoutDetailView.shareWorkout(workout: workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
+                                }
+                                Button("Repeat") {
+                                    WorkoutDetailView.repeatWorkout(workout: workout)
+                                }
+                                Button("Repeat (Blank)") {
+                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout)
+                                }
+                            }
                     }
                 }
                 .onDelete { offsets in

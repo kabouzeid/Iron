@@ -171,45 +171,62 @@ struct WorkoutDetailView : View {
         .actionSheet(isPresented: $showingOptionsMenu) {
             ActionSheet(title: Text("Workout"), buttons: [
                 .default(Text("Share"), action: {
-                    guard let logText = self.workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
-                    let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
-                    // TODO: replace this hack with a proper way to retreive the rootViewController
-                    guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
-                    rootVC.present(ac, animated: true)
+                    Self.shareWorkout(workout: self.workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
                 }),
                 .default(Text("Repeat"), action: {
-                    guard (try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
-                        let feedbackGenerator = UINotificationFeedbackGenerator()
-                        feedbackGenerator.prepare()
-                        feedbackGenerator.notificationOccurred(.error)
-                        return
-                    }
-                    guard let newWorkout = Workout.copyForRepeat(workout: self.workout, blank: false) else { return }
-                    newWorkout.isCurrentWorkout = true
-                    newWorkout.start = Date()
-                    self.managedObjectContext.safeSave()
-                    
-                    UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
-                    NotificationManager.shared.requestAuthorization()
+                    Self.repeatWorkout(workout: self.workout)
                 }),
                 .default(Text("Repeat (Blank)"), action: {
-                    guard (try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
-                        let feedbackGenerator = UINotificationFeedbackGenerator()
-                        feedbackGenerator.prepare()
-                        feedbackGenerator.notificationOccurred(.error)
-                        return
-                    }
-                    guard let newWorkout = Workout.copyForRepeat(workout: self.workout, blank: true) else { return }
-                    newWorkout.isCurrentWorkout = true
-                    newWorkout.start = Date()
-                    self.managedObjectContext.safeSave()
-                    
-                    UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
-                    NotificationManager.shared.requestAuthorization()
+                    Self.repeatWorkoutBlank(workout: self.workout)
                 }),
                 .cancel()
             ])
         }
+    }
+}
+
+// MARK: Actions
+extension WorkoutDetailView {
+    static func shareWorkout(workout: Workout, in exercises: [Exercise], weightUnit: WeightUnit) {
+        guard let logText = workout.logText(in: exercises, weightUnit: weightUnit) else { return }
+        let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
+        // TODO: replace this hack with a proper way to retreive the rootViewController
+        guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+        rootVC.present(ac, animated: true)
+    }
+    
+    static func repeatWorkout(workout: Workout) {
+        guard let context = workout.managedObjectContext else { return }
+        guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.prepare()
+            feedbackGenerator.notificationOccurred(.error)
+            return
+        }
+        guard let newWorkout = Workout.copyForRepeat(workout: workout, blank: false) else { return }
+        newWorkout.isCurrentWorkout = true
+        newWorkout.start = Date()
+        context.safeSave()
+        
+        UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+        NotificationManager.shared.requestAuthorization()
+    }
+    
+    static func repeatWorkoutBlank(workout: Workout) {
+        guard let context = workout.managedObjectContext else { return }
+        guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.prepare()
+            feedbackGenerator.notificationOccurred(.error)
+            return
+        }
+        guard let newWorkout = Workout.copyForRepeat(workout: workout, blank: true) else { return }
+        newWorkout.isCurrentWorkout = true
+        newWorkout.start = Date()
+        context.safeSave()
+        
+        UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+        NotificationManager.shared.requestAuthorization()
     }
 }
 
