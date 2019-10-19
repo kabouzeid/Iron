@@ -314,6 +314,7 @@ struct WorkoutExerciseDetailView : View {
                     NavigationLink(destination: ExerciseDetailView(exercise: $0)
                         .environmentObject(self.settingsStore)) {
                             Image(systemName: "info.circle")
+                                .padding([.leading, .top, .bottom])
                     }
                 }
                 EditButton()

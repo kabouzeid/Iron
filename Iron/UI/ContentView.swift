@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let NAVIGATION_BAR_SPACING: CGFloat = 12
+let NAVIGATION_BAR_SPACING: CGFloat = 16
 
 struct ContentView : View {
     var body: some View {

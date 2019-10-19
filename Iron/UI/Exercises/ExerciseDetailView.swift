@@ -250,6 +250,7 @@ struct ExerciseDetailView : View {
                     self.showOptionsMenu = true
                 }) {
                     Image(systemName: "ellipsis")
+                        .padding([.leading, .top, .bottom])
                 }
                 if exercise.isCustom {
                     Button("Edit") {

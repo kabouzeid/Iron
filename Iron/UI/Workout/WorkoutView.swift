@@ -325,18 +325,7 @@ struct WorkoutView: View {
                 .listStyle(GroupedListStyle())
             }
             .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
-            .navigationBarItems(leading: cancelButton,
-                trailing:
-                HStack(spacing: NAVIGATION_BAR_SPACING) {
-                    // TODO: Replace with 3-dot button and more options
-                    Button(action: {
-                        self.activeSheet = .log
-                    }) {
-                        Image(systemName: "doc.plaintext")
-                    }
-                    EditButton()
-                }
-            )
+            .navigationBarItems(leading: cancelButton, trailing: EditButton())
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
         .sheet(item: $activeSheet) { type in

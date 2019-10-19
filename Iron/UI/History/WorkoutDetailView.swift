@@ -154,6 +154,7 @@ struct WorkoutDetailView : View {
                     self.showingOptionsMenu = true
                 }) {
                     Image(systemName: "ellipsis")
+                        .padding([.leading, .top, .bottom])
                 }
                 EditButton()
             }
@@ -233,8 +234,10 @@ extension WorkoutDetailView {
 #if DEBUG
 struct WorkoutDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        WorkoutDetailView(workout: MockWorkoutData.metricRandom.workout)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+        NavigationView {
+            WorkoutDetailView(workout: MockWorkoutData.metricRandom.workout)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
+        }
     }
 }
 #endif
