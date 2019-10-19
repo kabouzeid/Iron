@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct UITabView: UIViewControllerRepresentable {
+    static var viewController: UITabBarController? // TODO: remove this hack, for now we need this to programatically switch tabs
+    
     let viewControllers: [UIViewController]
     let initialSelection: Int
     
@@ -16,6 +18,7 @@ struct UITabView: UIViewControllerRepresentable {
         let tabController = UITabBarController()
         updateUIViewController(tabController, context: context)
         tabController.selectedIndex = initialSelection
+        Self.viewController = tabController
         return tabController
     }
     

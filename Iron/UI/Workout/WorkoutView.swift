@@ -146,7 +146,7 @@ struct WorkoutView: View {
                     currentWorkoutExerciseDetailView(workoutExercise: workoutExercise)
                 ) {
                 VStack(alignment: .leading) {
-                    Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (\(workoutExercise.exerciseId))")
+                    Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (id: \(workoutExercise.exerciseId))")
                         .foregroundColor(isCompleted ? .secondary : .primary)
                     text.map {
                         Text($0)

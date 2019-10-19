@@ -105,7 +105,7 @@ class Workout: NSManagedObject {
     private var cancellable: AnyCancellable?
 }
 
-// MARK: Safe accessors
+// MARK: - Safe accessors
 extension Workout {
     var safeStart: Date {
         get {
@@ -132,7 +132,7 @@ extension Workout {
     }
 }
 
-// MARK: Prepare for finish
+// MARK: - Prepare for finish
 extension Workout {
     func prepareForFinish() {
         deleteExercisesWhereAllSetsAreUncompleted()
@@ -169,7 +169,7 @@ extension Workout {
     }
 }
 
-// MARK: Workout Log
+// MARK: - Workout Log
 extension Workout {
     func logText(in exercises: [Exercise], weightUnit: WeightUnit) -> String? {
         guard let start = start else { return nil }
@@ -185,7 +185,7 @@ extension Workout {
         guard let workoutExercises = workoutExercisesWhereNotAllSetsAreUncompleted else { return nil }
         let exercisesDescription = workoutExercises
             .map { workoutExercise -> String in
-                let exerciseTitle = (workoutExercise.exercise(in: exercises)?.title ?? "Unknown exercise")
+                let exerciseTitle = (workoutExercise.exercise(in: exercises)?.title ?? "Unknown Exercise (id: \(workoutExercise.exerciseId))")
                 guard let workoutSets = workoutExercise.workoutSets else { return exerciseTitle }
                 let setsDescription = workoutSets
                     .compactMap { $0 as? WorkoutSet }
@@ -209,7 +209,42 @@ extension Workout {
     }
 }
 
-// MARK: Validation
+// MARK: - Repeat
+extension Workout {
+    static func copyForRepeat(workout: Workout, blank: Bool) -> Workout? {
+        guard let context = workout.managedObjectContext else { return nil }
+        
+        // create the workout
+        let newWorkout = Workout(context: context)
+        
+        if let workoutExercises = workout.workoutExercises?.compactMap({ $0 as? WorkoutExercise }) {
+            // copy the exercises
+            for workoutExercise in workoutExercises {
+                let newWorkoutExercise = WorkoutExercise(context: context)
+                newWorkout.addToWorkoutExercises(newWorkoutExercise)
+                newWorkoutExercise.exerciseId = workoutExercise.exerciseId
+                
+                if let workoutSets = workoutExercise.workoutSets?.compactMap({ $0 as? WorkoutSet }) {
+                    // copy the sets
+                    for workoutSet in workoutSets {
+                        let newWorkoutSet = WorkoutSet(context: context)
+                        newWorkoutExercise.addToWorkoutSets(newWorkoutSet)
+                        newWorkoutSet.isCompleted = false
+                        if !blank {
+                            newWorkoutSet.weight = workoutSet.weight
+                            newWorkoutSet.repetitions = workoutSet.repetitions
+                            // don't copy RPE, tag, comment, etc.
+                        }
+                    }
+                }
+            }
+        }
+        
+        return newWorkout
+    }
+}
+
+// MARK: - Validation
 extension Workout {
     override func validateForUpdate() throws {
         try super.validateForUpdate()
@@ -248,7 +283,7 @@ extension Workout {
     }
 }
 
-// MARK: Observable
+// MARK: - Observable
 extension Workout {
     override func awakeFromFetch() {
         super.awakeFromFetch() // important
@@ -277,7 +312,7 @@ extension Workout {
     }
 }
 
-// MARK: Encodable
+// MARK: - Encodable
 extension Workout: Encodable {
     private enum CodingKeys: String, CodingKey {
         case title

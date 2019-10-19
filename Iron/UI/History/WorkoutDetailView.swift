@@ -16,6 +16,7 @@ struct WorkoutDetailView : View {
 
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
+    @State private var showingOptionsMenu = false
 
     @ObservedObject private var workoutCommentInput = ValueHolder<String?>(initial: nil)
     private var workoutComment: Binding<String> {
@@ -150,13 +151,9 @@ struct WorkoutDetailView : View {
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
                 Button(action: {
-                    guard let logText = self.workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
-                    let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
-                    // TODO: replace this hack with a proper way to retreive the rootViewController
-                    guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
-                    rootVC.present(ac, animated: true)
+                    self.showingOptionsMenu = true
                 }) {
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: "ellipsis")
                 }
                 EditButton()
             }
@@ -170,6 +167,48 @@ struct WorkoutDetailView : View {
                 }
                 self.managedObjectContext.safeSave()
             })
+        }
+        .actionSheet(isPresented: $showingOptionsMenu) {
+            ActionSheet(title: Text("Workout"), buttons: [
+                .default(Text("Share"), action: {
+                    guard let logText = self.workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+                    let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
+                    // TODO: replace this hack with a proper way to retreive the rootViewController
+                    guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+                    rootVC.present(ac, animated: true)
+                }),
+                .default(Text("Repeat"), action: {
+                    guard (try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.prepare()
+                        feedbackGenerator.notificationOccurred(.error)
+                        return
+                    }
+                    guard let newWorkout = Workout.copyForRepeat(workout: self.workout, blank: false) else { return }
+                    newWorkout.isCurrentWorkout = true
+                    newWorkout.start = Date()
+                    self.managedObjectContext.safeSave()
+                    
+                    UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+                    NotificationManager.shared.requestAuthorization()
+                }),
+                .default(Text("Repeat (Blank)"), action: {
+                    guard (try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.prepare()
+                        feedbackGenerator.notificationOccurred(.error)
+                        return
+                    }
+                    guard let newWorkout = Workout.copyForRepeat(workout: self.workout, blank: true) else { return }
+                    newWorkout.isCurrentWorkout = true
+                    newWorkout.start = Date()
+                    self.managedObjectContext.safeSave()
+                    
+                    UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+                    NotificationManager.shared.requestAuthorization()
+                }),
+                .cancel()
+            ])
         }
     }
 }

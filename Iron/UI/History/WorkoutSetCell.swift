@@ -14,7 +14,7 @@ struct WorkoutSetCell: View {
     @ObservedObject var workoutSet: WorkoutSet
     let index: Int
     var colorMode: ColorMode = .activated
-    var textMode: TextMode = .weightAndReps
+    var titleType: TitleType = .weightAndReps
     
     enum ColorMode {
         case activated
@@ -22,9 +22,21 @@ struct WorkoutSetCell: View {
         case disabled
     }
     
-    enum TextMode {
+    enum TitleType {
         case weightAndReps
         case placeholder
+        case placeholderWeightAndReps
+    }
+    
+    private func title(textMode: TitleType) -> String {
+        switch textMode {
+        case .weightAndReps:
+            return workoutSet.displayTitle(unit: settingsStore.weightUnit)
+        case .placeholder:
+            return "Set"
+        case .placeholderWeightAndReps:
+            return title(textMode: .placeholder) + " (\(title(textMode: .weightAndReps)))"
+        }
     }
     
     private func rpe(rpe: Double) -> some View {
@@ -41,7 +53,7 @@ struct WorkoutSetCell: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(textMode == .weightAndReps ? workoutSet.displayTitle(unit: settingsStore.weightUnit) : "Set \(index)")
+                Text(title(textMode: titleType))
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(colorMode == .activated ? .primary : .secondary)
                 workoutSet.comment.map {

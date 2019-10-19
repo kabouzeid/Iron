@@ -127,8 +127,14 @@ struct WorkoutExerciseDetailView : View {
         }
     }
     
-    private func shouldShowTitle(for set: WorkoutSet) -> Bool {
-        set.isCompleted || set == self.firstUncompletedSet
+    private func titleType(for set: WorkoutSet) -> WorkoutSetCell.TitleType {
+        if set.isCompleted || set == self.firstUncompletedSet {
+            return .weightAndReps
+        } else if set.weight == 0 && set.repetitions == 0 {
+            return .placeholder
+        } else {
+            return .placeholderWeightAndReps
+        }
     }
     
     private func shouldHighlightRow(for set: WorkoutSet) -> Bool {
@@ -148,7 +154,7 @@ struct WorkoutExerciseDetailView : View {
     
     private var currentWorkoutSets: some View {
         ForEach(indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { (index, workoutSet) in
-            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, textMode: self.shouldShowTitle(for: workoutSet) ? .weightAndReps : .placeholder)
+            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, titleType: self.titleType(for: workoutSet))
                 .listRowBackground(self.selectedWorkoutSet == workoutSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
                 .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
                 .onTapGesture {

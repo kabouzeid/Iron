@@ -184,25 +184,20 @@ struct ExerciseDetailView : View {
     
     private var options: [ActionSheet.Button] {
         var options: [ActionSheet.Button] = [
-            .default(Text("Show History"), action: {
+            .default(Text("History"), action: {
                 self.activeSheet = .history
             }),
-            .default(Text("Show Statistics"), action: {
+            .default(Text("Statistics"), action: {
                 self.activeSheet = .statistics
             })
         ]
         if exerciseStore.isHidden(exerciseId: exercise.id) {
-            options.append(.default(Text("Unhide Exercise"), action: {
+            options.append(.default(Text("Unhide"), action: {
                 self.exerciseStore.show(exerciseId: self.exercise.id)
             }))
         } else if !exercise.isCustom {
-            options.append(.default(Text("Hide Exercise"), action: {
+            options.append(.default(Text("Hide"), action: {
                 self.exerciseStore.hide(exerciseId: self.exercise.id)
-            }))
-        }
-        if exercise.isCustom {
-            options.append(.default(Text("Edit"), action: {
-                self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
             }))
         }
         options.append(.cancel())
@@ -246,15 +241,21 @@ struct ExerciseDetailView : View {
             self.sheetView(type: type)
         }
         .actionSheet(isPresented: $showOptionsMenu) {
-            // TODO: remove title once this is possible with SwiftUI
-            ActionSheet(title: Text("Options"), message: nil, buttons: options)
+            ActionSheet(title: Text("Exercise"), message: nil, buttons: options)
         }
         .navigationBarTitle(Text(exercise.title), displayMode: .inline)
         .navigationBarItems(trailing:
-            Button(action: {
-                self.showOptionsMenu = true
-            }) {
-                Image(systemName: "ellipsis")
+            HStack(spacing: NAVIGATION_BAR_SPACING) {
+                Button(action: {
+                    self.showOptionsMenu = true
+                }) {
+                    Image(systemName: "ellipsis")
+                }
+                if exercise.isCustom {
+                    Button("Edit") {
+                        self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
+                    }
+                }
             }
         )
     }
