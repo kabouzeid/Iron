@@ -110,6 +110,7 @@ private struct WorkoutCell: View {
                     .padding(4)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
+                            .strokeBorder()
                             .foregroundColor(Color(.systemFill))
                         
                 )
