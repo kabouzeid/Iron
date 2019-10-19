@@ -1080,7 +1080,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1088,7 +1088,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1104,7 +1104,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1112,7 +1112,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
