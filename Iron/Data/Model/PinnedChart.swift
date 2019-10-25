@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct PinnedChart: Hashable {
+struct PinnedChart: Hashable, Codable {
     let exerciseId: Int
     let measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
 }
+
+extension WorkoutExerciseChartDataGenerator.MeasurementType: Codable {}
