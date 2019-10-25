@@ -24,7 +24,7 @@ struct EditCustomExerciseSheet: View {
     private var canSave: Bool {
         let title = exerciseValues.title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty else { return false }
-        guard !exerciseStore.exercises.contains(where: { $0.title == title && $0.id != exercise.id }) else { return false }
+        guard !exerciseStore.exercises.contains(where: { $0.title == title && $0.uuid != exercise.uuid }) else { return false }
         // TODO: and at least one muscle
         return true
     }
@@ -43,7 +43,7 @@ struct EditCustomExerciseSheet: View {
                 .filter { $0.type == .secondary }
                 .sorted { $0.shortDisplayTitle < $1.shortDisplayTitle }
                 .map { $0.muscle }
-            self.exerciseStore.updateCustomExercise(with: self.exercise.id, title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, type: self.exerciseValues.type)
+            self.exerciseStore.updateCustomExercise(with: self.exercise.uuid, title: title, description: description.isEmpty ? nil : description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, type: self.exerciseValues.type)
             self.presentationMode.wrappedValue.dismiss()
         }.disabled(!canSave)
     }

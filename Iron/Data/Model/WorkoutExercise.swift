@@ -10,9 +10,9 @@ import CoreData
 import Combine
 
 class WorkoutExercise: NSManagedObject {
-    static func historyFetchRequest(of exerciseId: Int, until: Date?) -> NSFetchRequest<WorkoutExercise> {
+    static func historyFetchRequest(of exerciseUuid: UUID?, until: Date?) -> NSFetchRequest<WorkoutExercise> {
         let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
-        let basePredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseId)) == %@", NSNumber(booleanLiteral: true), NSNumber(value: exerciseId))
+        let basePredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseUuid)) == %@", NSNumber(booleanLiteral: true), (exerciseUuid ?? UUID()) as CVarArg)
         if let until = until {
             let untilPredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.start)) < %@", until as NSDate)
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate, untilPredicate])
@@ -24,13 +24,13 @@ class WorkoutExercise: NSManagedObject {
     }
     
     var historyFetchRequest: NSFetchRequest<WorkoutExercise> {
-        WorkoutExercise.historyFetchRequest(of: Int(exerciseId), until: workout?.start)
+        WorkoutExercise.historyFetchRequest(of: exerciseUuid, until: workout?.start)
     }
     
     // MARK: Derived properties
     
     func exercise(in exercises: [Exercise]) -> Exercise? {
-        ExerciseStore.find(in: exercises, with: Int(exerciseId))
+        ExerciseStore.find(in: exercises, with: exerciseUuid)
     }
     
     var isCompleted: Bool? {
@@ -98,16 +98,16 @@ extension WorkoutExercise {
 // MARK: Encodable
 extension WorkoutExercise: Encodable {
     private enum CodingKeys: String, CodingKey {
-        case id
-        case name
+        case exerciseUuid
+        case exerciseName
         case comment
         case sets
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(exerciseId, forKey: .id)
-        try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .name)
+        try container.encode(exerciseUuid, forKey: .exerciseUuid)
+        try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .exerciseName)
         try container.encodeIfPresent(comment, forKey: .comment)
         try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)
     }

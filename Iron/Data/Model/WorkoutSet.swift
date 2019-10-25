@@ -17,12 +17,12 @@ class WorkoutSet: NSManagedObject {
 
     var isPersonalRecord: Bool? {
         guard let start = workoutExercise?.workout?.start else { return nil }
-        guard let exerciseId = workoutExercise?.exerciseId else { return nil }
+        guard let exerciseUuid = workoutExercise?.exerciseUuid else { return nil }
 
         let previousSetsRequest: NSFetchRequest<WorkoutSet> = WorkoutSet.fetchRequest()
         let previousSetsPredicate = NSPredicate(format:
-            "\(#keyPath(WorkoutSet.workoutExercise.exerciseId)) == %@ AND \(#keyPath(WorkoutSet.isCompleted)) == %@ AND \(#keyPath(WorkoutSet.workoutExercise.workout.start)) < %@",
-            exerciseId as NSNumber, true as NSNumber, start as NSDate
+            "\(#keyPath(WorkoutSet.workoutExercise.exerciseUuid)) == %@ AND \(#keyPath(WorkoutSet.isCompleted)) == %@ AND \(#keyPath(WorkoutSet.workoutExercise.workout.start)) < %@",
+            exerciseUuid as CVarArg, true as NSNumber, start as NSDate
         )
         previousSetsRequest.predicate = previousSetsPredicate
         guard let numberOfPreviousSets = try? managedObjectContext?.count(for: previousSetsRequest) else { return nil }

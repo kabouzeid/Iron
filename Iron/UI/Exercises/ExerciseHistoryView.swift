@@ -16,7 +16,7 @@ struct ExerciseHistoryView : View {
     
     init(exercise: Exercise) {
         self.exercise = exercise
-        _history = FetchRequest(fetchRequest: WorkoutExercise.historyFetchRequest(of: exercise.id, until: nil))
+        _history = FetchRequest(fetchRequest: WorkoutExercise.historyFetchRequest(of: exercise.uuid, until: nil))
     }
     
     private func workoutSets(for workoutExercise: WorkoutExercise) -> [WorkoutSet] {
@@ -50,7 +50,7 @@ struct ExerciseHistoryView : View {
 #if DEBUG
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseHistoryView(exercise: ExerciseStore.shared.find(with: 42)!)
+        ExerciseHistoryView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

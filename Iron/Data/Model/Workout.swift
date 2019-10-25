@@ -185,7 +185,7 @@ extension Workout {
         guard let workoutExercises = workoutExercisesWhereNotAllSetsAreUncompleted else { return nil }
         let exercisesDescription = workoutExercises
             .map { workoutExercise -> String in
-                let exerciseTitle = (workoutExercise.exercise(in: exercises)?.title ?? "Unknown Exercise (id: \(workoutExercise.exerciseId))")
+                let exerciseTitle = (workoutExercise.exercise(in: exercises)?.title ?? "Unknown Exercise")
                 guard let workoutSets = workoutExercise.workoutSets else { return exerciseTitle }
                 let setsDescription = workoutSets
                     .compactMap { $0 as? WorkoutSet }
@@ -222,7 +222,7 @@ extension Workout {
             for workoutExercise in workoutExercises {
                 let newWorkoutExercise = WorkoutExercise(context: context)
                 newWorkout.addToWorkoutExercises(newWorkoutExercise)
-                newWorkoutExercise.exerciseId = workoutExercise.exerciseId
+                newWorkoutExercise.exerciseUuid = workoutExercise.exerciseUuid
                 
                 if let workoutSets = workoutExercise.workoutSets?.compactMap({ $0 as? WorkoutSet }) {
                     // copy the sets

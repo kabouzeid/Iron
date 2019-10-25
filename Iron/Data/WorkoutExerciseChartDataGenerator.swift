@@ -16,7 +16,7 @@ struct WorkoutExerciseChartDataGenerator {
 
     init(context: NSManagedObjectContext, exercise: Exercise) {
         self.exercise = exercise
-        self.workoutExerciseHistory = (try? context.fetch(WorkoutExercise.historyFetchRequest(of: exercise.id, until: Date()))) ?? []
+        self.workoutExerciseHistory = (try? context.fetch(WorkoutExercise.historyFetchRequest(of: exercise.uuid, until: Date()))) ?? []
     }
 
     enum MeasurementType: String, CaseIterable {

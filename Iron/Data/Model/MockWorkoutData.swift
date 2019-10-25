@@ -84,6 +84,18 @@ extension MockWorkoutData {
 // MARK: Data Generation
 
 extension MockWorkoutData {
+    private static func toUuid(_ id: Int) -> UUID? {
+        ExerciseStore.shared.exercises.first { $0.everkineticId == id }?.uuid
+    }
+    
+    private static func toUuid(_ ids: [Int]) -> [UUID] {
+        ids.compactMap { toUuid($0) }
+    }
+    
+    private static func toUuid(_ ids: [[Int]]) -> [[UUID]] {
+        ids.map { toUuid($0) }
+    }
+    
     private static func createRandomWorkoutData(context: NSManagedObjectContext, unit: WeightUnit) {
         for i in 1...20 {
             let workout = Workout(context: context)
@@ -95,17 +107,17 @@ extension MockWorkoutData {
     }
     
     private static func createRandomWorkoutExercises(workout: Workout, unit: WeightUnit) {
-        let exerciseIds = [
+        let exerciseUuids = toUuid([
             [42, 48, 206], // bench press, cable crossover, triceps pushdown
             [122], // squat
             [9001], // overhead press
             [291, 289], // crunches, cross-body crunches
             [99], // deadlift
             [218, 206], // biceps curls, triceps pushdown
-        ]
-        for j in exerciseIds[Int.random(in: 0..<exerciseIds.count)] {
+        ])
+        for uuid in exerciseUuids[Int.random(in: 0..<exerciseUuids.count)] {
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
@@ -136,9 +148,9 @@ extension MockWorkoutData {
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: Date())!
         workout.isCurrentWorkout = true
         
-        for j in [42, 48, 206] { // bench press, cable crossover, triceps pushdown
+        for uuid in toUuid([42, 48, 206]) { // bench press, cable crossover, triceps pushdown
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
@@ -150,9 +162,9 @@ extension MockWorkoutData {
                 workoutSet.workoutExercise = workoutExercise
             }
         }
-        for j in [291] { // crunches
+        for uuid in toUuid([291]) { // crunches
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
@@ -169,9 +181,9 @@ extension MockWorkoutData {
                 }
             }
         }
-        for j in [289] { // cross-body crunches
+        for uuid in toUuid([289]) { // cross-body crunches
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
@@ -187,20 +199,20 @@ extension MockWorkoutData {
 
 extension MockWorkoutData {
     private static func createWorkoutData(context: NSManagedObjectContext, unit: WeightUnit, referenceDate: Date = Date()) {
-        let exerciseIds = [
+        let exerciseUuids = toUuid([
             [42, 48, 206], // bench press, cable crossover, triceps pushdown
             [122], // squat
             [9001], // overhead press
             [291, 289], // crunches, cross-body crunches
             [99], // deadlift
             [218, 206], // biceps curls, triceps pushdown
-        ]
+        ])
         
         var dayOffset = 0
         var indexOffset = 0
         for i in 0..<20 {
-            for j in 0..<exerciseIds.count {
-                let number = i * exerciseIds.count + j
+            for j in 0..<exerciseUuids.count {
+                let number = i * exerciseUuids.count + j
                 if (sin(Double(number)) > 0.5) {
                     indexOffset += 1
                     dayOffset -= 2
@@ -209,15 +221,15 @@ extension MockWorkoutData {
                 let workout = Workout(context: context)
                 workout.start = Calendar.current.date(byAdding: .minute, value: Int(sin(Double(number)) * 60), to: Calendar.current.date(byAdding: .day, value: -number + dayOffset, to: referenceDate)!)!
                 workout.end = Calendar.current.date(byAdding: .minute, value: 70 + Int(sin(Double(number)) * 30) , to: workout.start!)!
-                createWorkoutExercises(workout: workout, exerciseIds: exerciseIds[(j + indexOffset) % exerciseIds.count], unit: unit)
+                createWorkoutExercises(workout: workout, exerciseUuids: exerciseUuids[(j + indexOffset) % exerciseUuids.count], unit: unit)
             }
         }
     }
 
-    private static func createWorkoutExercises(workout: Workout, exerciseIds: [Int], unit: WeightUnit) {
-        for j in exerciseIds {
+    private static func createWorkoutExercises(workout: Workout, exerciseUuids: [UUID], unit: WeightUnit) {
+        for uuid in exerciseUuids {
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
@@ -236,9 +248,9 @@ extension MockWorkoutData {
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: referenceDate)!
         workout.isCurrentWorkout = true
         
-        for j in [42, 48] { // bench press, cable crossover
+        for uuid in toUuid([42, 48]) { // bench press, cable crossover
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
@@ -250,9 +262,9 @@ extension MockWorkoutData {
                 workoutSet.workoutExercise = workoutExercise
             }
         }
-        for j in [218, 206] { // biceps curls, triceps pushdown
+        for uuid in toUuid([218, 206]) { // biceps curls, triceps pushdown
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 6
@@ -273,9 +285,9 @@ extension MockWorkoutData {
                 }
             }
         }
-        for j in [291] { // crunches
+        for uuid in toUuid([291]) { // crunches
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 3

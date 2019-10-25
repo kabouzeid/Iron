@@ -26,7 +26,7 @@ struct FeedView : View {
                 
                 Section {
                     ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
-                        self.exerciseStore.find(with: chart.exerciseId).map {
+                        self.exerciseStore.find(with: chart.exerciseUuid).map {
                             ExerciseChartViewCell(exercise: $0, measurementType: chart.measurementType)
                         }
                     }
@@ -83,7 +83,7 @@ private struct PinnedChartSelectorSheet: View {
     
     private func actionButtons(exercise: Exercise) -> [ActionSheet.Button] {
         WorkoutExerciseChartDataGenerator.MeasurementType.allCases.compactMap { measurementType in
-            let pinnedChart = PinnedChart(exerciseId: exercise.id, measurementType: measurementType)
+            let pinnedChart = PinnedChart(exerciseUuid: exercise.uuid, measurementType: measurementType)
             if self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                 return nil
             } else {
@@ -108,7 +108,7 @@ private struct PinnedChartSelectorSheet: View {
                 guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
                     // for now just add the first measuremnt type
                     for measurementType in WorkoutExerciseChartDataGenerator.MeasurementType.allCases {
-                        let pinnedChart = PinnedChart(exerciseId: exercise.id, measurementType: measurementType)
+                        let pinnedChart = PinnedChart(exerciseUuid: exercise.uuid, measurementType: measurementType)
                         if !self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                             self.onSelection(pinnedChart)
                             self.resetAndDismiss()

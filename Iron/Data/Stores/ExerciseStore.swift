@@ -23,115 +23,63 @@ final class ExerciseStore: ObservableObject {
     }
     
     var shownExercises: [Exercise] {
-        exercises.filter { !isHidden(exerciseId: $0.id) }
+        exercises.filter { !isHidden(exercise: $0) }
     }
     
     var hiddenExercises: [Exercise] {
-        exercises.filter { isHidden(exerciseId: $0.id) }
+        exercises.filter { isHidden(exercise: $0) }
     }
     
     private let customExercisesURL: URL?
     
     fileprivate init(builtInExercisesURL: URL, customExercisesURL: URL?) {
+        builtInExercises = Self.loadBuiltInExercises(builtInExercisesURL: builtInExercisesURL)
+        self.customExercisesURL = customExercisesURL
+        customExercises = Self.loadCustomExercises(customExercisesURL: customExercisesURL)
+        assert(!customExercises.contains { !$0.isCustom }, "Decoded custom exercise that is not custom.")
+    }
+    
+    private static func loadBuiltInExercises(builtInExercisesURL: URL?) -> [Exercise] {
+        guard let builtInExercisesURL = builtInExercisesURL else { fatalError("Built in exercises URL invalid") }
         do {
-            self.builtInExercises = try Self.loadExercises(from: builtInExercisesURL)
+            return try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: builtInExercisesURL))
         } catch {
             print(error)
-            fatalError("Could not load built in exercises")
-        }
-        self.customExercisesURL = customExercisesURL
-        if let url = customExercisesURL {
-            self.customExercises = (try? Self.loadExercises(from: url)) ?? []
-            assert(!customExercises.contains { !$0.isCustom }, "Decoded custom exercise that is not custom.")
-        } else {
-            self.customExercises = []
+            fatalError("Error decoding built in exercises")
         }
     }
     
-    private static func loadExercises(from url: URL) throws -> [Exercise] {
-        try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))
+    private static func loadCustomExercises(customExercisesURL: URL?) -> [Exercise] {
+        guard let url = customExercisesURL else { return [] }
+        do {
+            return try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))
+        } catch {
+            // try to migrate the exercises to the new UUID format
+            let success = Self.migrateCustomExercises(customExercisesURL: url)
+            guard success else { return [] }
+            print("Successfully migrated custom exercises")
+            return (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
+        }
     }
 }
 
 // MARK: - Hidden Exercises
 extension ExerciseStore {
-    func show(exerciseId: Int) {
-        assert(exerciseId >= Exercise.customExerciseIdStart, "Makes no sense to show custom exercise.")
+    func show(exercise: Exercise) {
+        assert(!exercise.isCustom, "Makes no sense to show custom exercise.")
         self.objectWillChange.send()
-        UserDefaults.standard.hiddenExerciseIds.removeAll { $0 == exerciseId }
+        UserDefaults.standard.hiddenExerciseUuids.removeAll { $0 == exercise.uuid }
     }
     
-    func hide(exerciseId: Int) {
-        assert(exerciseId >= Exercise.customExerciseIdStart, "Makes no sense to hide custom exercise.")
-        guard !isHidden(exerciseId: exerciseId) else { return }
+    func hide(exercise: Exercise) {
+        assert(!exercise.isCustom, "Makes no sense to hide custom exercise.")
+        guard !isHidden(exercise: exercise) else { return }
         self.objectWillChange.send()
-        UserDefaults.standard.hiddenExerciseIds.append(exerciseId)
+        UserDefaults.standard.hiddenExerciseUuids.append(exercise.uuid)
     }
     
-    func isHidden(exerciseId: Int) -> Bool {
-        UserDefaults.standard.hiddenExerciseIds.contains(exerciseId)
-    }
-}
-
-// MARK: - Custom Exercises
-extension ExerciseStore {
-    func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
-        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !title.isEmpty else { return }
-        guard !exercises.contains(where: { $0.title == title }) else { return }
-        
-        var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let d = description, d.isEmpty {
-            description = nil
-        }
-        
-        guard let url = customExercisesURL else { return }
-        var customExercises = (try? Self.loadExercises(from: url)) ?? []
-        guard let newId = getNewId(in: customExercises) else { return }
-        
-        customExercises.append(Exercise(id: newId, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
-        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
-        
-        self.customExercises = (try? Self.loadExercises(from: url)) ?? []
-    }
-    
-    func updateCustomExercise(with id: Int, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
-        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !title.isEmpty else { return }
-        guard !exercises.contains(where: { $0.title == title && $0.id != id }) else { return }
-        
-        var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let d = description, d.isEmpty {
-            description = nil
-        }
-        
-        guard let url = customExercisesURL else { return }
-        var customExercises = (try? Self.loadExercises(from: url)) ?? []
-        
-        assert(id >= Exercise.customExerciseIdStart)
-        guard customExercises.contains(where: { $0.id == id }) else { return } // make sure the exercise exists
-        customExercises.removeAll { $0.id == id } // remove the old exercise
-        customExercises.append(Exercise(id: id, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
-        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
-        
-        self.customExercises = ((try? Self.loadExercises(from: url)) ?? [])
-    }
-    
-    func deleteCustomExercise(with id: Int) {
-        guard let url = customExercisesURL else { return }
-        guard var customExercises = try? Self.loadExercises(from: url) else { return }
-        customExercises.removeAll { $0.id == id }
-        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
-        self.customExercises = (try? Self.loadExercises(from: url)) ?? []
-    }
-    
-    private func getNewId(in customExercises: [Exercise]) -> Int? {
-        guard !customExercises.isEmpty else { return Exercise.customExerciseIdStart }
-        guard let maxId = customExercises.map({ $0.id }).max() else { return nil }
-        let newId = maxId + 1
-        guard newId <= Int16.max else { return nil }
-        precondition(newId >= Exercise.customExerciseIdStart)
-        return newId
+    func isHidden(exercise: Exercise) -> Bool {
+        UserDefaults.standard.hiddenExerciseUuids.contains(exercise.uuid)
     }
 }
 
@@ -150,7 +98,7 @@ extension ExerciseStore {
             })
             
             nextIndex = exercises.firstIndex(where: { (exercise) -> Bool in
-                exercise.id == muscleGroup.last!.id
+                exercise.uuid == muscleGroup.last!.uuid
             })! + 1
             
             // do this after nextIndex is set
@@ -165,12 +113,13 @@ extension ExerciseStore {
 
 // MARK: - Find
 extension ExerciseStore {
-    func find(with id: Int) -> Exercise? {
-        Self.find(in: exercises, with: id)
+    func find(with uuid: UUID) -> Exercise? {
+        Self.find(in: exercises, with: uuid)
     }
     
-    static func find(in exercises: [Exercise], with id: Int) -> Exercise? {
-        exercises.first { $0.id == id }
+    static func find(in exercises: [Exercise], with uuid: UUID?) -> Exercise? {
+        guard let uuid = uuid else { return nil }
+        return exercises.first { $0.uuid == uuid }
     }
 }
 
@@ -203,5 +152,84 @@ extension ExerciseStore {
         exercises
             .map { Self.filter(exercises: $0, using: filter) }
             .filter { !$0.isEmpty }
+    }
+}
+
+// MARK: - Custom Exercises
+extension ExerciseStore {
+    func createCustomExercise(title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return }
+        guard !exercises.contains(where: { $0.title == title }) else { return }
+        
+        var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let d = description, d.isEmpty {
+            description = nil
+        }
+        
+        guard let url = customExercisesURL else { return }
+        var customExercises = (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
+        
+        customExercises.append(Exercise(uuid: UUID(), everkineticId: Exercise.customEverkineticId, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
+        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
+        
+        self.customExercises = (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
+    }
+    
+    func updateCustomExercise(with uuid: UUID, title: String, description: String?, primaryMuscle: [String], secondaryMuscle: [String], type: Exercise.ExerciseType) {
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return }
+        guard !exercises.contains(where: { $0.title == title && $0.uuid != uuid }) else { return }
+        
+        var description = description?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let d = description, d.isEmpty {
+            description = nil
+        }
+        
+        guard let url = customExercisesURL else { return }
+        var customExercises = (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
+        
+        guard customExercises.contains(where: { $0.uuid == uuid }) else { return } // make sure the exercise exists
+        customExercises.removeAll { $0.uuid == uuid } // remove the old exercise
+        customExercises.append(Exercise(uuid: uuid, everkineticId: Exercise.customEverkineticId, title: title, alias: [], description: description, primaryMuscle: primaryMuscle, secondaryMuscle: secondaryMuscle, equipment: type.equipment.map { [$0] } ?? [], steps: [], tips: [], references: [], pdfPaths: []))
+        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
+        
+        self.customExercises = ((try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? [])
+    }
+    
+    func deleteCustomExercise(with uuid: UUID) {
+        guard let url = customExercisesURL else { return }
+        guard var customExercises = try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url)) else { return }
+        customExercises.removeAll { $0.uuid == uuid }
+        do { try JSONEncoder().encode(customExercises).write(to: url, options: .atomic) } catch { return }
+        self.customExercises = (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
+    }
+}
+
+// MARK: - Custom Exercise Migration
+extension ExerciseStore {
+    private static func migrateCustomExercises(customExercisesURL: URL) -> Bool { // returns true if a migration was made successfully
+        do { _ = try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: customExercisesURL)) } catch {
+            let oldExercises: [ExerciseWithOldId]
+            do { oldExercises = try JSONDecoder().decode([ExerciseWithOldId].self, from: Data(contentsOf: customExercisesURL)) } catch { return false }
+            let newExercises = oldExercises
+                .map {
+                    // NOTE: don't overwrite id here, because we still need it in the Core Data migration
+                    Exercise(uuid: UUID(), everkineticId: $0.id, title: $0.title, alias: [], description: $0.primer, primaryMuscle: $0.primary, secondaryMuscle: $0.secondary, equipment: $0.equipment, steps: [], tips: [], references: [], pdfPaths: [])
+                }
+            do { try JSONEncoder().encode(newExercises).write(to: customExercisesURL, options: .atomic) } catch { return false }
+            return true
+        }
+        // no migration needed
+        return false
+    }
+    
+    struct ExerciseWithOldId: Codable {
+        let id: Int // the old id (before we switched to UUID)
+        let title: String
+        let primer: String?
+        let primary: [String]
+        let secondary: [String]
+        let equipment: [String]
     }
 }

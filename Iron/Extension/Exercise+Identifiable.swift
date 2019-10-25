@@ -9,4 +9,6 @@
 import Foundation
 import SwiftUI
 
-extension Exercise: Identifiable {}
+extension Exercise: Identifiable {
+    var id: UUID { uuid }
+}

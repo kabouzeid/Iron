@@ -9,7 +9,8 @@
 import Foundation
 
 struct Exercise: Hashable {
-    let id: Int
+    let uuid: UUID // we use this for actually identifying the exercise
+    let everkineticId: Int // this is the everkinetic exercise id or 10000 if it's a custom exercise
     let title: String
     let alias: [String]
     let description: String? // primer
@@ -21,7 +22,8 @@ struct Exercise: Hashable {
     let references: [String]
     let pdfPaths: [String]
 }
- 
+
+// MARK: - Muscle Names
 extension Exercise {
     var primaryMuscleCommonName: [String] {
         primaryMuscle.map { Self.commonMuscleName(for: $0) ?? $0 }.uniqed()
@@ -89,6 +91,7 @@ extension Exercise {
     ]
 }
 
+// MARK: - Exercise Type
 extension Exercise {
     enum ExerciseType: CaseIterable {
         case barbell
@@ -123,17 +126,23 @@ extension Exercise {
     }
 }
 
+// MARK: - Custom Exercise
 extension Exercise {
-    static let customExerciseIdStart = 10000
+    static let customEverkineticId = 10000
+    
+    private static func isCustom(everkineticId: Int) -> Bool {
+        everkineticId >= Exercise.customEverkineticId
+    }
     
     var isCustom: Bool {
-        id >= Exercise.customExerciseIdStart
+        Self.isCustom(everkineticId: everkineticId)
     }
 }
 
-// MARK: Codable
+// MARK: - Codable
 extension Exercise: Codable {
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case id
 //        case name
         case title
@@ -153,6 +162,7 @@ extension Exercise: Codable {
     // MARK: Decodable
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let uuid = try container.decode(UUID.self, forKey: .uuid)
         let id = try container.decode(Int.self, forKey: .id)
         let title = try container.decode(String.self, forKey: .title)
         let alias = try container.decode([String].self, forKey: .alias)
@@ -165,13 +175,14 @@ extension Exercise: Codable {
         let references = try container.decode([String].self, forKey: .references)
         let pdf = try container.decode([String].self, forKey: .pdf)
         
-        self.init(id: id, title: title, alias: alias, description: primer, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
+        self.init(uuid: uuid, everkineticId: id, title: title, alias: alias, description: primer, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
     }
     
     // MARK: Encodalbe
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(uuid, forKey: .uuid)
+        try container.encode(everkineticId, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(alias, forKey: .alias)
         try container.encodeIfPresent(description, forKey: .primer)

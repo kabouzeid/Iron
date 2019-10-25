@@ -46,7 +46,7 @@ struct ExerciseChartView : View {
 #if DEBUG
 struct ExerciseChartView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartView(exercise: ExerciseStore.shared.find(with: 42)!, measurementType: .oneRM)
+        ExerciseChartView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
             .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }

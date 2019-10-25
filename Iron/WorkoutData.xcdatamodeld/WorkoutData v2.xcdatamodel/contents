@@ -10,7 +10,7 @@
     </entity>
     <entity name="WorkoutExercise" representedClassName=".WorkoutExercise" elementID="TrainingExercise" syncable="YES" codeGenerationType="category">
         <attribute name="comment" optional="YES" attributeType="String"/>
-        <attribute name="exerciseId" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="exerciseUuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="workoutExercises" inverseEntity="Workout" elementID="training"/>
         <relationship name="workoutSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutSet" inverseName="workoutExercise" inverseEntity="WorkoutSet" elementID="trainingSets"/>
     </entity>

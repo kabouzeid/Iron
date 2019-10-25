@@ -164,7 +164,7 @@ struct WorkoutDetailView : View {
                 for exercise in selection {
                     let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
                     self.workout.addToWorkoutExercises(workoutExercise)
-                    workoutExercise.exerciseId = Int16(exercise.id)
+                    workoutExercise.exerciseUuid = exercise.uuid
                 }
                 self.managedObjectContext.safeSave()
             })

@@ -39,7 +39,7 @@ struct WorkoutView: View {
                 for exercise in selection {
                     let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
                     self.workout.addToWorkoutExercises(workoutExercise)
-                    workoutExercise.exerciseId = Int16(exercise.id)
+                    workoutExercise.exerciseUuid = exercise.uuid
                     precondition(self.workout.isCurrentWorkout == true)
                     workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
                 }
@@ -146,7 +146,7 @@ struct WorkoutView: View {
                     currentWorkoutExerciseDetailView(workoutExercise: workoutExercise)
                 ) {
                 VStack(alignment: .leading) {
-                    Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise (id: \(workoutExercise.exerciseId))")
+                    Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? "Unknown Exercise")
                         .foregroundColor(isCompleted ? .secondary : .primary)
                     text.map {
                         Text($0)

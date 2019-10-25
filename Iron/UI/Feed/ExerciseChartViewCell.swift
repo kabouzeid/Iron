@@ -40,7 +40,7 @@ struct ExerciseChartViewCell : View {
 #if DEBUG
 struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseChartViewCell(exercise: ExerciseStore.shared.find(with: 42)!, measurementType: .oneRM)
+        ExerciseChartViewCell(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
             .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }

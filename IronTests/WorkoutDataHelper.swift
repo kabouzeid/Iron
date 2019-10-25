@@ -11,6 +11,18 @@ import CoreData
 
 private let testDate = Date(timeIntervalSince1970: 1565692122) // approx 13. August 2019
 
+private func toUuid(_ id: Int) -> UUID? {
+    ExerciseStore.shared.exercises.first { $0.everkineticId == id }?.uuid
+}
+
+private func toUuid(_ ids: [Int]) -> [UUID] {
+    ids.compactMap { toUuid($0) }
+}
+
+private func toUuid(_ ids: [[Int]]) -> [[UUID]] {
+    ids.map { toUuid($0) }
+}
+
 func createTestWorkoutData(context: NSManagedObjectContext) {
     let workout = Workout(context: context)
     workout.start = Calendar.current.date(byAdding: .day, value: -2, to: testDate)!
@@ -20,18 +32,18 @@ func createTestWorkoutData(context: NSManagedObjectContext) {
 }
 
 private func createTestWorkoutExercises(workout: Workout) {
-    let exerciseIds = [
+    let exerciseUuids = toUuid([
         [42, 48, 206], // bench press, cable crossover, triceps pushdown
         [122], // squat
         [9001], // overhead press
         [291, 289], // crunches, cross-body crunches
         [99], // deadlift
         [211, 206], // biceps curls, triceps pushdown
-    ]
-    for ids in exerciseIds {
-        for j in ids {
+    ])
+    for uuids in exerciseUuids {
+        for uuid in uuids {
             let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-            workoutExercise.exerciseId = Int16(j)
+            workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
@@ -51,9 +63,9 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
     workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: testDate)!
     workout.isCurrentWorkout = true
     
-    for j in [42, 48, 206] { // bench press, cable crossover, triceps pushdown
+    for uuid in toUuid([42, 48, 206]) { // bench press, cable crossover, triceps pushdown
         let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-        workoutExercise.exerciseId = Int16(j)
+        workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 5
@@ -65,9 +77,9 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
             workoutSet.workoutExercise = workoutExercise
         }
     }
-    for j in [291, 289] { // crunches, cross-body crunches
+    for uuid in toUuid([291, 289]) { // crunches, cross-body crunches
         let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-        workoutExercise.exerciseId = Int16(j)
+        workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 6
@@ -88,9 +100,9 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
             }
         }
     }
-    for j in [211, 206] { // biceps curls, triceps pushdown
+    for uuid in toUuid([211, 206]) { // biceps curls, triceps pushdown
         let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
-        workoutExercise.exerciseId = Int16(j)
+        workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 3

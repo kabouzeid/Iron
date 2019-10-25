@@ -191,13 +191,13 @@ struct ExerciseDetailView : View {
                 self.activeSheet = .statistics
             })
         ]
-        if exerciseStore.isHidden(exerciseId: exercise.id) {
+        if exerciseStore.isHidden(exercise: exercise) {
             options.append(.default(Text("Unhide"), action: {
-                self.exerciseStore.show(exerciseId: self.exercise.id)
+                self.exerciseStore.show(exercise: self.exercise)
             }))
         } else if !exercise.isCustom {
             options.append(.default(Text("Hide"), action: {
-                self.exerciseStore.hide(exerciseId: self.exercise.id)
+                self.exerciseStore.hide(exercise: self.exercise)
             }))
         }
         options.append(.cancel())
@@ -266,7 +266,7 @@ struct ExerciseDetailView : View {
 struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ExerciseDetailView(exercise: ExerciseStore.shared.find(with: 99)!)
+            ExerciseDetailView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 99 })!)
                 .mockEnvironment(weightUnit: .metric, isPro: true)
         }
     }

@@ -22,7 +22,7 @@ struct ExerciseStatisticsView : View {
 #if DEBUG
 struct ExerciseStatisticsView_Previews : PreviewProvider {
     static var previews: some View {
-        ExerciseStatisticsView(exercise: ExerciseStore.shared.find(with: 99)!)
+        ExerciseStatisticsView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 99 })!)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
