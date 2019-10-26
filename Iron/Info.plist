@@ -6,6 +6,32 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Iron</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>iron_backup_file_images/iron_backup_file_29.png</string>
+				<string>iron_backup_file_images/iron_backup_file_58.png</string>
+				<string>iron_backup_file_images/iron_backup_file_64.png</string>
+				<string>iron_backup_file_images/iron_backup_file_320.png</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Iron Backup</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ironbackup</string>
+			</array>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kabouzeid.ironbackup</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -16,6 +42,8 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
@@ -61,6 +89,33 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Iron Backup</string>
+			<key>UTTypeIconFiles</key>
+			<array>
+				<string>iron_backup_file_images/iron_backup_file_29.png</string>
+				<string>iron_backup_file_images/iron_backup_file_58.png</string>
+				<string>iron_backup_file_images/iron_backup_file_64.png</string>
+				<string>iron_backup_file_images/iron_backup_file_320.png</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.kabouzeid.ironbackup</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>ironbackup</string>
+				<key>public.mime-type</key>
+				<string>application/x-ironbackup</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>
