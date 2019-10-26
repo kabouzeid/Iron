@@ -14,10 +14,35 @@ struct ExportImportSettingsView: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
+    @State private var showExportWorkoutDataSheet = false
+    
     var body: some View {
         Form {
-            Section(header: Text("Export Workout Data".uppercased())) {
-                Button("As JSON File") {
+            Section(header: Text("Export".uppercased())) {
+                Button("Workout Data") {
+                    self.showExportWorkoutDataSheet = true
+                }
+                Button("Backup") {
+                    guard let workouts = self.fetchWorkouts() else { return }
+                    let backup = WorkoutDataBackup(date: Date(), customExercises: self.exerciseStore.customExercises, workouts: workouts)
+                    
+                    let encoder = JSONEncoder()
+                    encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
+                    encoder.dateEncodingStrategy = .iso8601
+                    
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    let dateString = formatter.string(from: Date())
+                    
+                    guard let data = try? encoder.encode(backup) else { return }
+                    guard let url = self.writeFile(data: data, name: "iron-backup-\(dateString).ironbackup") else { return }
+                    self.shareFile(url: url)
+                }
+            }
+        }
+        .actionSheet(isPresented: $showExportWorkoutDataSheet) {
+            ActionSheet(title: Text("Workout Data"), buttons: [
+                .default(Text("JSON"), action: {
                     guard let workouts = self.fetchWorkouts() else { return }
                     
                     let encoder = JSONEncoder()
@@ -27,11 +52,8 @@ struct ExportImportSettingsView: View {
                     guard let data = try? encoder.encode(workouts) else { return }
                     guard let url = self.writeFile(data: data, name: "workout_data.json") else { return }
                     self.shareFile(url: url)
-                }
-//                Button("As XML File") {
-//                    // TODO
-//                }
-                Button("As Plain Text File") {
+                }),
+                .default(Text("TXT"), action: {
                     guard let workouts = self.fetchWorkouts() else { return }
                     
                     let text = workouts.compactMap { $0.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
@@ -39,17 +61,9 @@ struct ExportImportSettingsView: View {
                     guard let data = text.data(using: .utf8) else { return }
                     guard let url = self.writeFile(data: data, name: "workout_data.txt") else { return }
                     self.shareFile(url: url)
-                }
-            }
-            
-            Section(header: Text("Import Workout Data".uppercased())) {
-                Button("From JSON File") {
-                    // TODO
-                }.disabled(true)
-//                Button("From XML File") {
-//                    // TODO
-//                }
-            }
+                }),
+                .cancel()
+            ])
         }
     }
     

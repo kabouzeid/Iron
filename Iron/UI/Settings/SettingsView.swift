@@ -66,7 +66,7 @@ struct SettingsView : View {
     private var exportImportSection: some View {
         Section {
             NavigationLink(destination: ExportImportSettingsView()) {
-                Text("Export / Import Workout Data")
+                Text("Backup & Export Workout Data")
             }
         }
     }
