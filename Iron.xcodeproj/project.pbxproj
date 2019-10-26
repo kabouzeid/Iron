@@ -133,6 +133,7 @@
 		8AED58B12364883700BF06D3 /* workout_data_start_end_missing.json in Resources */ = {isa = PBXBuildFile; fileRef = 8AED58AF2364883700BF06D3 /* workout_data_start_end_missing.json */; };
 		8AED58B4236491B600BF06D3 /* WorkoutDataBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED58B3236491B600BF06D3 /* WorkoutDataBackup.swift */; };
 		8AED58C02364B79800BF06D3 /* iron_backup_file_images in Resources */ = {isa = PBXBuildFile; fileRef = 8AED58BF2364B79800BF06D3 /* iron_backup_file_images */; };
+		8AED58C22364C37000BF06D3 /* Notification.Name+RestoreFromBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED58C12364C37000BF06D3 /* Notification.Name+RestoreFromBackup.swift */; };
 		8AF4C536230EEE0A003A84DC /* WorkoutSetTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C535230EEE0A003A84DC /* WorkoutSetTag.swift */; };
 		8AF4C538230EEE51003A84DC /* WorkoutSetTag+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C537230EEE51003A84DC /* WorkoutSetTag+SwiftUI.swift */; };
 		8AF4C53A230EFB5F003A84DC /* RPE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF4C539230EFB5F003A84DC /* RPE.swift */; };
@@ -300,6 +301,7 @@
 		8AED58AF2364883700BF06D3 /* workout_data_start_end_missing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = workout_data_start_end_missing.json; sourceTree = "<group>"; };
 		8AED58B3236491B600BF06D3 /* WorkoutDataBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataBackup.swift; sourceTree = "<group>"; };
 		8AED58BF2364B79800BF06D3 /* iron_backup_file_images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iron_backup_file_images; sourceTree = "<group>"; };
+		8AED58C12364C37000BF06D3 /* Notification.Name+RestoreFromBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+RestoreFromBackup.swift"; sourceTree = "<group>"; };
 		8AF4C535230EEE0A003A84DC /* WorkoutSetTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSetTag.swift; sourceTree = "<group>"; };
 		8AF4C537230EEE51003A84DC /* WorkoutSetTag+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutSetTag+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AF4C539230EFB5F003A84DC /* RPE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPE.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */,
 				8AAB1EBA2343C5A6005BE81B /* View+MockEnvironment.swift */,
 				8AED58AD23647AA900BF06D3 /* Codable+NSManagedObjectContext.swift */,
+				8AED58C12364C37000BF06D3 /* Notification.Name+RestoreFromBackup.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */,
 				8A5F9A11233B6B6D00C2F32A /* StoreObserver.swift in Sources */,
 				8AC5032B2340FE8A006D1BC6 /* UnlockProOverlay.swift in Sources */,
+				8AED58C22364C37000BF06D3 /* Notification.Name+RestoreFromBackup.swift in Sources */,
 				8AB8A5952034C097004366F2 /* Workout.swift in Sources */,
 				8A63B381232946E0001BD7B5 /* ExerciseMultiSelectionView.swift in Sources */,
 				8A2F52A72316969B00194C54 /* WorkoutSetCell.swift in Sources */,

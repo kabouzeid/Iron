@@ -11,6 +11,13 @@ import SwiftUI
 let NAVIGATION_BAR_SPACING: CGFloat = 16
 
 struct ContentView : View {
+    
+    struct DataHolder: Identifiable {
+        let id = UUID()
+        let data: Data
+    }
+    @State private var restoreBackupData: DataHolder?
+    
     var body: some View {
 //        TabView {
 //            FeedView()
@@ -69,6 +76,18 @@ struct ContentView : View {
         ], initialSelection: 2)
         // -----------------------------------------------
         .edgesIgnoringSafeArea([.top, .bottom])
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
+            guard let backupData = output.userInfo?[restoreFromBackupUserInfoBackupDataKey] as? Data else { return }
+            self.restoreBackupData = DataHolder(data: backupData)
+        }
+        .alert(item: $restoreBackupData) { dataHolder in
+            Alert(
+                title: Text("Restore Backup"),
+                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected."),
+                primaryButton: .destructive(Text("Restore"), action: {
+                    // TODO restore backup from dataHolder.data
+                }), secondaryButton: .cancel())
+        }
     }
 }
 

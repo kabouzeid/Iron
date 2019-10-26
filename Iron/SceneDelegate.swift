@@ -12,6 +12,8 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    
+    var urlContexts: Set<UIOpenURLContext>?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -33,6 +35,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+        urlContexts = connectionOptions.urlContexts // handle later because the view is not ready to handle input yet
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let URLContext = URLContexts.first else { return } // for now we will only ever receive one URL
+        handleURLContext(URLContext: URLContext)
+    }
+    
+    private func handleURLContext(URLContext: UIOpenURLContext) {
+        guard URLContext.url.startAccessingSecurityScopedResource() else { return }
+        guard let backupData = try? Data(contentsOf: URLContext.url) else { return }
+        URLContext.url.stopAccessingSecurityScopedResource()
+        
+        NotificationCenter.default.post(name: .RestoreFromBackup, object: nil, userInfo: [restoreFromBackupUserInfoBackupDataKey : backupData])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,6 +62,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        // the urls come from scene will connect, but they are handled here
+        if let urlContexts = urlContexts {
+            self.urlContexts = nil // don't process them again
+            if let URLContext = urlContexts.first { // for now we will only ever receive one URL
+                self.handleURLContext(URLContext: URLContext)
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
