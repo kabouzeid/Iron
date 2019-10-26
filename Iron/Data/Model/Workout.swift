@@ -9,7 +9,7 @@
 import CoreData
 import Combine
 
-class Workout: NSManagedObject {
+class Workout: NSManagedObject, Codable {
     static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
         request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) == %@", NSNumber(booleanLiteral: true))
@@ -103,6 +103,42 @@ class Workout: NSManagedObject {
     }
 
     private var cancellable: AnyCancellable?
+    
+    // MARK: - Codable
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case comment
+        case start
+        case end
+        case exercises
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        guard let contextKey = CodingUserInfoKey.managedObjectContextKey,
+            let context = decoder.userInfo[contextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Workout", in: context)
+            else {
+            throw CodingUserInfoKey.DecodingError.managedObjectContextMissing
+        }
+        self.init(entity: entity, insertInto: context)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
+        comment = try container.decodeIfPresent(String.self, forKey: .comment)
+        start = try container.decode(Date.self, forKey: .start)
+        end = try container.decode(Date.self, forKey: .end)
+        workoutExercises = NSOrderedSet(array: try container.decodeIfPresent([WorkoutExercise].self, forKey: .exercises) ?? []) // TODO: check if this is correct
+        isCurrentWorkout = false // just to be sure
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(title, forKey: .title)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encode(safeStart, forKey: .start)
+        try container.encode(safeEnd, forKey: .end)
+        try container.encodeIfPresent(workoutExercises?.array.compactMap { $0 as? WorkoutExercise }, forKey: .exercises)
+    }
 }
 
 // MARK: - Safe accessors
@@ -309,25 +345,5 @@ extension Workout {
                 }
             }
             .sink { _ in self.objectWillChange.send() }
-    }
-}
-
-// MARK: - Encodable
-extension Workout: Encodable {
-    private enum CodingKeys: String, CodingKey {
-        case title
-        case comment
-        case start
-        case end
-        case exercises
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(title, forKey: .title)
-        try container.encodeIfPresent(comment, forKey: .comment)
-        try container.encodeIfPresent(start, forKey: .start)
-        try container.encodeIfPresent(end, forKey: .end)
-        try container.encodeIfPresent(workoutExercises?.array.compactMap { $0 as? WorkoutExercise }, forKey: .exercises)
     }
 }

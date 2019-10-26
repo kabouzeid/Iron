@@ -9,7 +9,7 @@
 import CoreData
 import Combine
 
-class WorkoutSet: NSManagedObject {
+class WorkoutSet: NSManagedObject, Codable {
     static var MAX_REPETITIONS: Int16 = 9999
     static var MAX_WEIGHT: Double = 99999
     
@@ -51,6 +51,42 @@ class WorkoutSet: NSManagedObject {
     }
     
     private var cancellable: AnyCancellable?
+    
+    // MARK: - Codable
+    private enum CodingKeys: String, CodingKey {
+        case repetitions
+        case weight
+        case rpe
+        case tag
+        case comment
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        guard let contextKey = CodingUserInfoKey.managedObjectContextKey,
+            let context = decoder.userInfo[contextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "WorkoutSet", in: context)
+            else {
+            throw CodingUserInfoKey.DecodingError.managedObjectContextMissing
+        }
+        self.init(entity: entity, insertInto: context)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        repetitions = try container.decode(Int16.self, forKey: .repetitions)
+        weight = try container.decode(Double.self, forKey: .weight)
+        displayRpe = try container.decodeIfPresent(Double.self, forKey: .rpe)
+        displayTag = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
+        comment = try container.decodeIfPresent(String.self, forKey: .comment)
+        isCompleted = true
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(repetitions, forKey: .repetitions)
+        try container.encode(weight, forKey: .weight)
+        try container.encodeIfPresent(displayRpe, forKey: .rpe)
+        try container.encodeIfPresent(displayTag?.rawValue, forKey: .tag)
+        try container.encodeIfPresent(comment, forKey: .comment)
+    }
 }
 
 // MARK: Display
@@ -138,25 +174,5 @@ extension WorkoutSet {
                 }
             }
             .sink { _ in self.objectWillChange.send() }
-    }
-}
-
-// MARK: Encodable
-extension WorkoutSet: Encodable {
-    private enum CodingKeys: String, CodingKey {
-        case repetitions
-        case weight
-        case rpe
-        case tag
-        case comment
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(repetitions, forKey: .repetitions)
-        try container.encode(weight, forKey: .weight)
-        try container.encodeIfPresent(displayRpe, forKey: .rpe)
-        try container.encodeIfPresent(displayTag?.rawValue, forKey: .tag)
-        try container.encodeIfPresent(comment, forKey: .comment)
     }
 }

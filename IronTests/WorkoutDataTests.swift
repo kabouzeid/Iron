@@ -1,6 +1,6 @@
 //
-//  Rhino_FitCoreDataTests.swift
-//  Rhino FitTests
+//  WorkoutDataTests.swift
+//  IronTests
 //
 //  Created by Karim Abou Zeid on 15.02.18.
 //  Copyright © 2018 Karim Abou Zeid Software. All rights reserved.
@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 @testable import Iron
 
-class Sunrise_FitCoreDataTests: XCTestCase {
+class WorkoutDataTests: XCTestCase {
     var persistenContainer: NSPersistentContainer!
     
     var testWorkouts: [Workout]!

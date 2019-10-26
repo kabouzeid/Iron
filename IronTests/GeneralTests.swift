@@ -1,6 +1,6 @@
 //
-//  Rhino_FitTests.swift
-//  Rhino FitTests
+//  GeneralTests.swift
+//  IronTests
 //
 //  Created by Karim Abou Zeid on 14.01.18.
 //  Copyright © 2018 Karim Abou Zeid Software. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Iron
 
-class Sunrise_FitTests: XCTestCase {
+class GeneralTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

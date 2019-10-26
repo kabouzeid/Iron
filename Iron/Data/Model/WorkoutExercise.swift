@@ -9,7 +9,7 @@
 import CoreData
 import Combine
 
-class WorkoutExercise: NSManagedObject {
+class WorkoutExercise: NSManagedObject, Codable {
     static func historyFetchRequest(of exerciseUuid: UUID?, until: Date?) -> NSFetchRequest<WorkoutExercise> {
         let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
         let basePredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseUuid)) == %@", NSNumber(booleanLiteral: true), (exerciseUuid ?? UUID()) as CVarArg)
@@ -64,6 +64,37 @@ class WorkoutExercise: NSManagedObject {
     }
 
     private var cancellable: AnyCancellable?
+    
+    // MARK: - Codable
+    private enum CodingKeys: String, CodingKey {
+        case exerciseUuid
+        case exerciseName
+        case comment
+        case sets
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        guard let contextKey = CodingUserInfoKey.managedObjectContextKey,
+            let context = decoder.userInfo[contextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "WorkoutExercise", in: context)
+            else {
+            throw CodingUserInfoKey.DecodingError.managedObjectContextMissing
+        }
+        self.init(entity: entity, insertInto: context)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        exerciseUuid = try container.decodeIfPresent(UUID.self, forKey: .exerciseUuid)
+        comment = try container.decodeIfPresent(String.self, forKey: .comment)
+        workoutSets = NSOrderedSet(array: try container.decodeIfPresent([WorkoutSet].self, forKey: .sets) ?? []) // TODO: check if this is correct
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(exerciseUuid, forKey: .exerciseUuid)
+        try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .exerciseName)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)
+    }
 }
 
 // MARK: Observable
@@ -92,23 +123,5 @@ extension WorkoutExercise {
                 }
             }
             .sink { _ in self.objectWillChange.send() }
-    }
-}
-
-// MARK: Encodable
-extension WorkoutExercise: Encodable {
-    private enum CodingKeys: String, CodingKey {
-        case exerciseUuid
-        case exerciseName
-        case comment
-        case sets
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(exerciseUuid, forKey: .exerciseUuid)
-        try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .exerciseName)
-        try container.encodeIfPresent(comment, forKey: .comment)
-        try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)
     }
 }

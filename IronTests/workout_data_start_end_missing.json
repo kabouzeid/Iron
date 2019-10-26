@@ -1,0 +1,84 @@
+[
+  {
+    "start" : "2019-10-22T16:30:40Z",
+    "end" : "2019-10-22T17:30:19Z",
+    "exercises" : [
+      {
+        "exerciseName" : "Row: Cable (Seated)",
+        "sets" : [
+          {
+            "weight" : 68,
+            "rpe" : 7,
+            "repetitions" : 12
+          },
+          {
+            "weight" : 75,
+            "rpe" : 8.5,
+            "repetitions" : 12
+          },
+          {
+            "weight" : 81.5,
+            "rpe" : 10,
+            "repetitions" : 10
+          },
+          {
+            "weight" : 75,
+            "repetitions" : 10
+          }
+        ],
+        "exerciseUuid" : "C30BC020-CD01-4DC6-BACD-BAB8C88D208F"
+      }
+    ]
+  },
+  {
+    "start" : "2019-10-18T06:24:13Z",
+    "exercises" : [
+      {
+        "exerciseName" : "Bench Press: Dumbbell (Incline)",
+        "sets" : [
+          {
+            "weight" : 30,
+            "repetitions" : 12
+          },
+          {
+            "weight" : 50,
+            "rpe" : 9,
+            "repetitions" : 12
+          },
+          {
+            "weight" : 60,
+            "repetitions" : 7
+          },
+          {
+            "weight" : 60,
+            "repetitions" : 6
+          }
+        ],
+        "exerciseUuid" : "C04B1262-EF69-449E-963F-282D34A0AA8D"
+      }
+    ]
+  },
+  {
+    "end" : "2019-10-17T11:05:00Z",
+    "exercises" : [
+      {
+        "exerciseName" : "Pull Up",
+        "sets" : [
+          {
+            "weight" : 0,
+            "repetitions" : 5
+          },
+          {
+            "weight" : 0,
+            "repetitions" : 5
+          },
+          {
+            "weight" : 0,
+            "repetitions" : 3
+          }
+        ],
+        "exerciseUuid" : "59185216-6167-4427-AC10-38A3FDA17572"
+      }
+    ]
+  }
+]

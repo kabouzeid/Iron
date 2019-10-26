@@ -1,6 +1,6 @@
 //
-//  WorkoutDataHelper.swift
-//  Sunrise FitTests
+//  MockWorkoutData.swift
+//  IronTests
 //
 //  Created by Karim Abou Zeid on 13.08.19.
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
