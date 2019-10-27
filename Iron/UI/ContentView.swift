@@ -117,7 +117,7 @@ struct ContentView : View {
         .actionSheet(item: $restoreBackupData) { dataHolder in
             ActionSheet(
                 title: Text("Restore Backup"),
-                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected. Restoring might take a few seconds, please don't close the app while restoring."),
+                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected."),
                 buttons: [
                     .destructive(Text("Restore"), action: {
                         do {

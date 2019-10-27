@@ -40,16 +40,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let URLContext = URLContexts.first else { return } // for now we will only ever receive one URL
-        handleURLContext(URLContext: URLContext)
+        guard let urlContext = URLContexts.first else { return } // for now we will only ever receive one URL
+        handleURLContext(urlContext: urlContext)
     }
     
-    private func handleURLContext(URLContext: UIOpenURLContext) {
-        guard URLContext.url.startAccessingSecurityScopedResource() else { return }
-        guard let backupData = try? Data(contentsOf: URLContext.url) else { return }
-        URLContext.url.stopAccessingSecurityScopedResource()
-        
+    private func handleURLContext(urlContext: UIOpenURLContext) {
+        guard let backupData = try? urlData(urlContext: urlContext) else { return }
         NotificationCenter.default.post(name: .RestoreFromBackup, object: nil, userInfo: [restoreFromBackupUserInfoBackupDataKey : backupData])
+    }
+    
+    private func urlData(urlContext: UIOpenURLContext) throws -> Data? {
+        let openInPlace = urlContext.options.openInPlace
+        if openInPlace {
+            guard urlContext.url.startAccessingSecurityScopedResource() else { return nil }
+        }
+        defer {
+            if openInPlace {
+                urlContext.url.stopAccessingSecurityScopedResource()
+            }
+        }
+        return try Data(contentsOf: urlContext.url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -66,8 +76,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // the urls come from scene will connect, but they are handled here
         if let urlContexts = urlContexts {
             self.urlContexts = nil // don't process them again
-            if let URLContext = urlContexts.first { // for now we will only ever receive one URL
-                self.handleURLContext(URLContext: URLContext)
+            if let urlContext = urlContexts.first { // for now we will only ever receive one URL
+                self.handleURLContext(urlContext: urlContext)
             }
         }
     }
