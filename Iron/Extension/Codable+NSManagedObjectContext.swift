@@ -13,5 +13,6 @@ extension CodingUserInfoKey {
     
     enum DecodingError: Error {
         case managedObjectContextMissing
+        case managedObjectContextKeyIsNil
     }
 }

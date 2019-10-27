@@ -233,3 +233,15 @@ extension ExerciseStore {
         let equipment: [String]
     }
 }
+
+// MARK: - Custom Exercise Restore
+extension ExerciseStore {
+    enum RestoreError: Error {
+        case customExerciseURLIsNil
+    }
+    func replaceCustomExercises(with customExercises: [Exercise]) throws {
+        guard let url = customExercisesURL else { throw RestoreError.customExerciseURLIsNil }
+        try JSONEncoder().encode(customExercises).write(to: url, options: .atomic)
+        self.customExercises = try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))
+    }
+}

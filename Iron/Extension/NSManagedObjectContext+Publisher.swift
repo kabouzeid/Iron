@@ -10,14 +10,14 @@ import Foundation
 import Combine
 import CoreData
 
-private var publishers = [NSManagedObjectContext : AnyPublisher<Set<NSManagedObject>, Never>]()
-
 extension NSManagedObjectContext {
-    var publisher: AnyPublisher<Set<NSManagedObject>, Never> {
-        if let publisher = publishers[self] { return publisher }
-        let publisher = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: self)
-            .compactMap { $0.userInfo }
-            .map { userInfo -> Set<NSManagedObject> in
+    private static let publisher: AnyPublisher<(Set<NSManagedObject>, NSManagedObjectContext), Never> = {
+        NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
+            .drop(while: { _ in restoringFromBackup }) // ignore the spam while we are restoring
+            .compactMap { notification -> (Set<NSManagedObject>, NSManagedObjectContext)? in
+                guard let userInfo = notification.userInfo else { return nil }
+                guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }
+                
                 var changed = Set<NSManagedObject>()
 
                 if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
@@ -31,11 +31,16 @@ extension NSManagedObjectContext {
                 if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
                     changed.formUnion(deletes)
                 }
-                return changed
+                return (changed, managedObjectContext)
             }
             .share()
             .eraseToAnyPublisher()
-        publishers[self] = publisher
-        return publisher
+    }()
+    
+    var publisher: AnyPublisher<Set<NSManagedObject>, Never> {
+        Self.publisher
+            .filter { $0.1 === self } // only publish changes belonging to this context
+            .map { $0.0 }
+            .eraseToAnyPublisher()
     }
 }

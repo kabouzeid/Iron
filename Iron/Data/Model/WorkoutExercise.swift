@@ -109,8 +109,16 @@ extension WorkoutExercise {
         initChangeObserver()
     }
     
+    override func didTurnIntoFault() {
+        super.didTurnIntoFault()
+        cancellable?.cancel()
+        cancellable = nil
+    }
+    
     private func initChangeObserver() {
+        cancellable?.cancel()
         cancellable = managedObjectContext?.publisher
+            .drop(while: { _ in self.isDeleted || self.isFault || !self.isInserted })
             .filter { changed in
                 changed.contains { managedObject in
                     if let workout = managedObject as? Workout {

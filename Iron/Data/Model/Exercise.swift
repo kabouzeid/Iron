@@ -165,15 +165,15 @@ extension Exercise: Codable {
         let uuid = try container.decode(UUID.self, forKey: .uuid)
         let id = try container.decode(Int.self, forKey: .id)
         let title = try container.decode(String.self, forKey: .title)
-        let alias = try container.decode([String].self, forKey: .alias)
+        let alias = try container.decodeIfPresent([String].self, forKey: .alias) ?? []
         let primer = try container.decodeIfPresent(String.self, forKey: .primer)
         let primary = try container.decode([String].self, forKey: .primary)
         let secondary = try container.decode([String].self, forKey: .secondary)
         let equipment = try container.decode([String].self, forKey: .equipment)
-        let steps = try container.decode([String].self, forKey: .steps)
-        let tips = try container.decode([String].self, forKey: .tips)
-        let references = try container.decode([String].self, forKey: .references)
-        let pdf = try container.decode([String].self, forKey: .pdf)
+        let steps = try container.decodeIfPresent([String].self, forKey: .steps) ?? []
+        let tips = try container.decodeIfPresent([String].self, forKey: .tips) ?? []
+        let references = try container.decodeIfPresent([String].self, forKey: .references) ?? []
+        let pdf = try container.decodeIfPresent([String].self, forKey: .pdf) ?? []
         
         self.init(uuid: uuid, everkineticId: id, title: title, alias: alias, description: primer, primaryMuscle: primary, secondaryMuscle: secondary, equipment: equipment, steps: steps, tips: tips, references: references, pdfPaths: pdf)
     }

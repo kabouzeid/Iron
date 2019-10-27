@@ -12,6 +12,40 @@ let NAVIGATION_BAR_SPACING: CGFloat = 16
 
 struct ContentView : View {
     
+    @State private var restoreResult: RestoreResult?
+    
+    private struct RestoreResult: Identifiable {
+        let id = UUID()
+        let success: Bool
+        let error: Error?
+    }
+    
+    private func alert(restoreResult: RestoreResult) -> Alert {
+        if restoreResult.success {
+            return Alert(title: Text("Restore Successful"))
+        } else {
+            let errorMessage: String?
+            if let decodingError = restoreResult.error as? DecodingError {
+                switch decodingError {
+                case let .dataCorrupted(context):
+                    errorMessage = "Data corrupted. \(context.debugDescription)"
+                case let .keyNotFound(_, context):
+                    errorMessage = "Key not found. \(context.debugDescription)"
+                case let .typeMismatch(_, context):
+                    errorMessage = "Type mismatch. \(context.debugDescription)"
+                case let .valueNotFound(_, context):
+                    errorMessage = "Value not found. \(context.debugDescription)"
+                @unknown default:
+                    errorMessage = "Decoding error."
+                }
+            } else {
+                errorMessage = restoreResult.error?.localizedDescription
+            }
+            let text = errorMessage.map { Text($0) }
+            return Alert(title: Text("Restore Failed"), message: text)
+        }
+    }
+    
     struct DataHolder: Identifiable {
         let id = UUID()
         let data: Data
@@ -80,13 +114,27 @@ struct ContentView : View {
             guard let backupData = output.userInfo?[restoreFromBackupUserInfoBackupDataKey] as? Data else { return }
             self.restoreBackupData = DataHolder(data: backupData)
         }
-        .alert(item: $restoreBackupData) { dataHolder in
-            Alert(
+        .actionSheet(item: $restoreBackupData) { dataHolder in
+            ActionSheet(
                 title: Text("Restore Backup"),
-                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected."),
-                primaryButton: .destructive(Text("Restore"), action: {
-                    // TODO restore backup from dataHolder.data
-                }), secondaryButton: .cancel())
+                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected. Restoring might take a few seconds, please don't close the app while restoring."),
+                buttons: [
+                    .destructive(Text("Restore"), action: {
+                        do {
+                            try restoreWorkoutDataFromBackup(backupData: dataHolder.data)
+                            print("Restore successful")
+                            self.restoreResult = RestoreResult(success: true, error: nil)
+                        } catch {
+                            print("Restore failed: \(error)")
+                            self.restoreResult = RestoreResult(success: false, error: error)
+                        }
+                    }),
+                    .cancel()
+                ]
+            )
+        }
+        .alert(item: $restoreResult) { restoreResult in
+            self.alert(restoreResult: restoreResult)
         }
     }
 }

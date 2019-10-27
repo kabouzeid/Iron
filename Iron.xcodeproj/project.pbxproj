@@ -119,7 +119,7 @@
 		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
-		8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */; };
+		8AE0A7972330FF100021EE23 /* BackupAndExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */; };
 		8AE0A799233119C40021EE23 /* EditCustomExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */; };
 		8AE0A79E233128280021EE23 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A79D233128280021EE23 /* Quote.swift */; };
 		8AE0A7A2233128DE0021EE23 /* ExerciseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7A1233128DE0021EE23 /* ExerciseStore.swift */; };
@@ -286,7 +286,7 @@
 		8AD90A18233D1E2000328D96 /* EntitlementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementStore.swift; sourceTree = "<group>"; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
-		8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportSettingsView.swift; sourceTree = "<group>"; };
+		8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAndExportView.swift; sourceTree = "<group>"; };
 		8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCustomExerciseView.swift; sourceTree = "<group>"; };
 		8AE0A79A233122AE0021EE23 /* CustomExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExercisesView.swift; sourceTree = "<group>"; };
 		8AE0A79D233128280021EE23 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				8A56A47E22D7C93B0076E99A /* SettingsView.swift */,
-				8AE0A7962330FF100021EE23 /* ExportImportSettingsView.swift */,
+				8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -854,7 +854,7 @@
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
-				8AE0A7972330FF100021EE23 /* ExportImportSettingsView.swift in Sources */,
+				8AE0A7972330FF100021EE23 /* BackupAndExportView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,
 				8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */,

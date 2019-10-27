@@ -1,5 +1,5 @@
 //
-//  ExportImportSettingsView.swift
+//  BackupAndExportView.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 17.09.19.
@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct ExportImportSettingsView: View {
+struct BackupAndExportView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
@@ -37,6 +37,16 @@ struct ExportImportSettingsView: View {
                     guard let data = try? encoder.encode(backup) else { return }
                     guard let url = self.writeFile(data: data, name: "iron-backup-\(dateString).ironbackup") else { return }
                     self.shareFile(url: url)
+                }
+            }
+            
+            Section(header: Text("Cloud Backup".uppercased()), footer: Text("Last backup: TODO")) { // TODO display last backup
+                NavigationLink(destination: Text("TODO")) {
+                    Text("Restore")
+                }
+                Toggle("Auto Backup", isOn: .constant(true)) // TODO
+                Button("Back Up Now") {
+                    // TODO
                 }
             }
         }
@@ -95,9 +105,9 @@ struct ExportImportSettingsView: View {
 }
 
 #if DEBUG
-struct ExportImportSettingsView_Previews: PreviewProvider {
+struct BackupAndExportView_Previews: PreviewProvider {
     static var previews: some View {
-        ExportImportSettingsView()
+        BackupAndExportView()
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
