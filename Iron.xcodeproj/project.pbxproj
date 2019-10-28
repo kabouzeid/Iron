@@ -18,6 +18,7 @@
 		8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */; };
 		8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */; };
 		8A1F80E82353648A00F0EFF0 /* WorkoutExerciseSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1F80E72353648A00F0EFF0 /* WorkoutExerciseSectionHeader.swift */; };
+		8A204B39236729AB00F40F79 /* UbiquityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A204B38236729AB00F40F79 /* UbiquityContainer.swift */; };
 		8A239AE8203580A1006BB38B /* WorkoutDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* WorkoutDataTests.swift */; };
 		8A2D21C123563FF60012A0A4 /* UserDefaults+HiddenExerciseUuids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D21C023563FF60012A0A4 /* UserDefaults+HiddenExerciseUuids.swift */; };
 		8A2F52A72316969B00194C54 /* WorkoutSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F52A62316969B00194C54 /* WorkoutSetCell.swift */; };
@@ -178,6 +179,7 @@
 		8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
 		8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		8A1F80E72353648A00F0EFF0 /* WorkoutExerciseSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseSectionHeader.swift; sourceTree = "<group>"; };
+		8A204B38236729AB00F40F79 /* UbiquityContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UbiquityContainer.swift; sourceTree = "<group>"; };
 		8A239AE7203580A1006BB38B /* WorkoutDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataTests.swift; sourceTree = "<group>"; };
 		8A2D21C023563FF60012A0A4 /* UserDefaults+HiddenExerciseUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+HiddenExerciseUuids.swift"; sourceTree = "<group>"; };
 		8A2F52A62316969B00194C54 /* WorkoutSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSetCell.swift; sourceTree = "<group>"; };
@@ -368,6 +370,14 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		8A204B372367298700F40F79 /* iCloud */ = {
+			isa = PBXGroup;
+			children = (
+				8A204B38236729AB00F40F79 /* UbiquityContainer.swift */,
+			);
+			path = iCloud;
+			sourceTree = "<group>";
+		};
 		8A56A47D22D7C91B0076E99A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +519,7 @@
 		8AABF2A6201683C8009C047D /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				8A204B372367298700F40F79 /* iCloud */,
 				8A68F7C823631C6B0089263B /* Core Data */,
 				8AE0A79C233127AD0021EE23 /* Stores */,
 				8AD40835202FC7C200A73E05 /* Model */,
@@ -869,6 +880,7 @@
 				8AE0FC832339190100B234F9 /* EditCustomExerciseSheet.swift in Sources */,
 				8AED58B4236491B600BF06D3 /* WorkoutDataBackup.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
+				8A204B39236729AB00F40F79 /* UbiquityContainer.swift in Sources */,
 				8A63B382232946E0001BD7B5 /* ExerciseSingleSelectionView.swift in Sources */,
 				8AA57E5F22C3EE2E00B9AC79 /* Workout+SwiftUI.swift in Sources */,
 				8A1F80E82353648A00F0EFF0 /* WorkoutExerciseSectionHeader.swift in Sources */,
@@ -1133,7 +1145,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1141,7 +1153,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1157,7 +1169,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1165,7 +1177,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

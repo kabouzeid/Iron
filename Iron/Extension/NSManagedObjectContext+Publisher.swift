@@ -13,7 +13,7 @@ import CoreData
 extension NSManagedObjectContext {
     private static let publisher: AnyPublisher<(Set<NSManagedObject>, NSManagedObjectContext), Never> = {
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-            .drop(while: { _ in restoringFromBackup }) // ignore the spam while we are restoring
+            .drop(while: { _ in IronBackup.restoringBackupData }) // ignore the spam while we are restoring
             .compactMap { notification -> (Set<NSManagedObject>, NSManagedObjectContext)? in
                 guard let userInfo = notification.userInfo else { return nil }
                 guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }

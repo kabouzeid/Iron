@@ -16,6 +16,18 @@ struct BackupAndExportView: View {
     
     @State private var showExportWorkoutDataSheet = false
     
+    @State private var backupError: BackupError?
+    private struct BackupError: Identifiable {
+         let id = UUID()
+         let error: Error?
+     }
+     
+    private func alert(backupError: BackupError) -> Alert {
+        let errorMessage = backupError.error?.localizedDescription
+        let text = errorMessage.map { Text($0) }
+        return Alert(title: Text("Could not Create Backup"), message: text)
+    }
+    
     var body: some View {
         Form {
             Section(header: Text("Export".uppercased())) {
@@ -23,20 +35,20 @@ struct BackupAndExportView: View {
                     self.showExportWorkoutDataSheet = true
                 }
                 Button("Backup") {
-                    guard let workouts = self.fetchWorkouts() else { return }
-                    let backup = WorkoutDataBackup(date: Date(), customExercises: self.exerciseStore.customExercises, workouts: workouts)
-                    
-                    let encoder = JSONEncoder()
-                    encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
-                    encoder.dateEncodingStrategy = .iso8601
-                    
-                    let formatter = DateFormatter()
-                    formatter.dateFormat = "yyyy-MM-dd"
-                    let dateString = formatter.string(from: Date())
-                    
-                    guard let data = try? encoder.encode(backup) else { return }
-                    guard let url = self.writeFile(data: data, name: "iron-backup-\(dateString).ironbackup") else { return }
-                    self.shareFile(url: url)
+                    do {
+                        let data = try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
+                        
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd"
+                        let dateString = formatter.string(from: Date())
+                        
+                        let url = try self.tempFile(data: data, name: "\(dateString).ironbackup")
+                        
+                        self.shareFile(url: url)
+                    } catch {
+                        print(error)
+                        self.backupError = BackupError(error: error)
+                    }
                 }
             }
             
@@ -46,7 +58,24 @@ struct BackupAndExportView: View {
                 }
                 Toggle("Auto Backup", isOn: .constant(true)) // TODO
                 Button("Back Up Now") {
-                    // TODO
+                    UbiquityContainer.backupsUrl { result in
+                        do {
+                            let url = try result.get()
+                            print(url)
+                            
+                            let data = try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
+                            
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yyyy-MM-dd"
+                            let dateString = formatter.string(from: Date())
+                            
+                            let fileUrl = url.appendingPathComponent(dateString).appendingPathExtension("ironbackup")
+                            try data.write(to: fileUrl, options: .atomic)
+                        } catch {
+                            print(error)
+                            self.backupError = BackupError(error: error)
+                        }
+                    }
                 }
             }
         }
@@ -60,7 +89,7 @@ struct BackupAndExportView: View {
                     encoder.dateEncodingStrategy = .iso8601
                     
                     guard let data = try? encoder.encode(workouts) else { return }
-                    guard let url = self.writeFile(data: data, name: "workout_data.json") else { return }
+                    guard let url = try? self.tempFile(data: data, name: "workout_data.json") else { return }
                     self.shareFile(url: url)
                 }),
                 .default(Text("TXT"), action: {
@@ -69,11 +98,14 @@ struct BackupAndExportView: View {
                     let text = workouts.compactMap { $0.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) }.joined(separator: "\n\n\n\n\n")
                     
                     guard let data = text.data(using: .utf8) else { return }
-                    guard let url = self.writeFile(data: data, name: "workout_data.txt") else { return }
+                    guard let url = try? self.tempFile(data: data, name: "workout_data.txt") else { return }
                     self.shareFile(url: url)
                 }),
                 .cancel()
             ])
+        }
+        .alert(item: $backupError) { backupError in
+            self.alert(backupError: backupError)
         }
     }
     
@@ -84,16 +116,11 @@ struct BackupAndExportView: View {
         return (try? self.managedObjectContext.fetch(request))
     }
     
-    private func writeFile(data: Data, name: String) -> URL? {
+    private func tempFile(data: Data, name: String) throws -> URL {
         let path = FileManager.default.temporaryDirectory
         let url = path.appendingPathComponent(name)
-        do {
-            try data.write(to: url, options: .atomic)
-            return url
-        } catch {
-            print(error)
-            return nil
-        }
+        try data.write(to: url, options: .atomic)
+        return url
     }
     
     private func shareFile(url: URL) {

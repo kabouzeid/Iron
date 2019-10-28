@@ -121,7 +121,8 @@ struct ContentView : View {
                 buttons: [
                     .destructive(Text("Restore"), action: {
                         do {
-                            try restoreWorkoutDataFromBackup(backupData: dataHolder.data)
+                            // For now statically use viewContext and ExerciseStore.shared because we don't want to observer their changes in this view
+                            try IronBackup.restoreBackupData(data: dataHolder.data, managedObjectContext: AppDelegate.instance.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared)
                             print("Restore successful")
                             self.restoreResult = RestoreResult(success: true, error: nil)
                         } catch {

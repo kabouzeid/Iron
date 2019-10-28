@@ -9,10 +9,10 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ironbackup</string>
+			</array>
 			<key>CFBundleTypeIconFiles</key>
 			<array>
 				<string>iron_backup_file_images/iron_backup_file_29.png</string>
@@ -22,10 +22,10 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Iron Backup</string>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ironbackup</string>
-			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.kabouzeid.ironbackup</string>
@@ -42,18 +42,30 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Iron displays your bodyweight next to a workout.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Iron saves your finished workouts.</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.kabouzeid.Iron</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>Iron</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
