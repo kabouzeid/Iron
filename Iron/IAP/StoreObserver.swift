@@ -89,9 +89,11 @@ extension StoreObserver: SKPaymentTransactionObserver {
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("restore complete")
+        NotificationCenter.default.post(name: .RestorePurchasesComplete, object: self, userInfo: [restorePurchasesSuccessUserInfoKey : true])
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         print("restore failed \(error)")
+        NotificationCenter.default.post(name: .RestorePurchasesComplete, object: self, userInfo: [restorePurchasesSuccessUserInfoKey : false, restorePurchasesErrorUserInfoKey : error])
     }
 }

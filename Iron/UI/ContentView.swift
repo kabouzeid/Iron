@@ -111,7 +111,7 @@ struct ContentView : View {
         // -----------------------------------------------
         .edgesIgnoringSafeArea([.top, .bottom])
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
-            guard let backupData = output.userInfo?[restoreFromBackupUserInfoBackupDataKey] as? Data else { return }
+            guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }
             self.restoreBackupData = DataHolder(data: backupData)
         }
         .actionSheet(item: $restoreBackupData) { dataHolder in

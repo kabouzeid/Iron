@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func handleURLContext(urlContext: UIOpenURLContext) {
         guard let backupData = try? urlData(urlContext: urlContext) else { return }
-        NotificationCenter.default.post(name: .RestoreFromBackup, object: nil, userInfo: [restoreFromBackupUserInfoBackupDataKey : backupData])
+        NotificationCenter.default.post(name: .RestoreFromBackup, object: self, userInfo: [restoreFromBackupDataUserInfoKey : backupData])
     }
     
     private func urlData(urlContext: UIOpenURLContext) throws -> Data? {

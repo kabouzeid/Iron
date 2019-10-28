@@ -8,8 +8,11 @@
 
 import Foundation
 
-let restoreFromBackupUserInfoBackupDataKey = "backupData"
+let restoreFromBackupDataUserInfoKey = "restoreFromBackupData"
+let restorePurchasesSuccessUserInfoKey = "restorePurchasesSuccess"
+let restorePurchasesErrorUserInfoKey = "restorePurchasesError"
 
 extension Notification.Name {
     static let RestoreFromBackup = Notification.Name("RestoreFromBackup")
+    static let RestorePurchasesComplete = Notification.Name("RestorePurchasesComplete")
 }

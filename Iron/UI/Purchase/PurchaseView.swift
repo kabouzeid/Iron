@@ -14,6 +14,23 @@ struct PurchaseView: View {
     @EnvironmentObject private var entitlementsStore: EntitlementStore
     @ObservedObject private var storeManager = StoreManager.shared
     
+    @State private var restoreResult: RestoreResult?
+    private struct RestoreResult: Identifiable {
+         let id = UUID()
+         let success: Bool
+         let error: Error?
+     }
+     
+     private func alert(restoreResult: RestoreResult) -> Alert {
+         if restoreResult.success {
+             return Alert(title: Text("Restore Successful"))
+         } else {
+            let errorMessage = restoreResult.error?.localizedDescription
+             let text = errorMessage.map { Text($0) }
+             return Alert(title: Text("Restore Failed"), message: text)
+         }
+     }
+    
     private var canMakePayments: Bool {
         StoreObserver.shared.canMakePayments
     }
@@ -119,6 +136,13 @@ struct PurchaseView: View {
         .listStyle(GroupedListStyle())
         .onAppear {
             self.storeManager.fetchProducts(matchingIdentifiers: IAPIdentifiers.pro)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .RestorePurchasesComplete)) { output in
+            guard let success = output.userInfo?[restorePurchasesSuccessUserInfoKey] as? Bool else { return }
+            self.restoreResult = RestoreResult(success: success, error: output.userInfo?[restorePurchasesErrorUserInfoKey] as? Error)
+        }
+        .alert(item: $restoreResult) { restoreResult in
+            self.alert(restoreResult: restoreResult)
         }
         .navigationBarTitle("Iron Pro")
     }
