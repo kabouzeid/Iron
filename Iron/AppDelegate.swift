@@ -21,6 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         SKPaymentQueue.default().remove(StoreObserver.shared)
+        
+        if SettingsStore.shared.autoBackup {
+            let dispatchGroup = DispatchGroup()
+            dispatchGroup.enter()
+            
+            BackupFileStore.create(data: { () -> Data in
+                try IronBackup.createBackupData(managedObjectContext: self.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared)
+            }) { result in
+                if case let .failure(error) = result {
+                    print("Auto backup failed: \(error)")
+                }
+                dispatchGroup.leave()
+            }
+            
+            // the app terminates after this function returns and the backup is written on another queue, therefore we have to wait() here
+            dispatchGroup.wait()
+        }
     }
 
     // MARK: UISceneSession Lifecycle

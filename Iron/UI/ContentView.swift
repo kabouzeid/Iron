@@ -12,45 +12,8 @@ let NAVIGATION_BAR_SPACING: CGFloat = 16
 
 struct ContentView : View {
     
-    @State private var restoreResult: RestoreResult?
-    
-    private struct RestoreResult: Identifiable {
-        let id = UUID()
-        let success: Bool
-        let error: Error?
-    }
-    
-    private func alert(restoreResult: RestoreResult) -> Alert {
-        if restoreResult.success {
-            return Alert(title: Text("Restore Successful"))
-        } else {
-            let errorMessage: String?
-            if let decodingError = restoreResult.error as? DecodingError {
-                switch decodingError {
-                case let .dataCorrupted(context):
-                    errorMessage = "Data corrupted. \(context.debugDescription)"
-                case let .keyNotFound(_, context):
-                    errorMessage = "Key not found. \(context.debugDescription)"
-                case let .typeMismatch(_, context):
-                    errorMessage = "Type mismatch. \(context.debugDescription)"
-                case let .valueNotFound(_, context):
-                    errorMessage = "Value not found. \(context.debugDescription)"
-                @unknown default:
-                    errorMessage = "Decoding error."
-                }
-            } else {
-                errorMessage = restoreResult.error?.localizedDescription
-            }
-            let text = errorMessage.map { Text($0) }
-            return Alert(title: Text("Restore Failed"), message: text)
-        }
-    }
-    
-    struct DataHolder: Identifiable {
-        let id = UUID()
-        let data: Data
-    }
-    @State private var restoreBackupData: DataHolder?
+    @State private var restoreResult: IdentifiableHolder<Result<Void, Error>>?
+    @State private var restoreBackupData: IdentifiableHolder<Data>?
     
     var body: some View {
 //        TabView {
@@ -112,30 +75,15 @@ struct ContentView : View {
         .edgesIgnoringSafeArea([.top, .bottom])
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
             guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }
-            self.restoreBackupData = DataHolder(data: backupData)
+            self.restoreBackupData = IdentifiableHolder(value: backupData)
         }
-        .actionSheet(item: $restoreBackupData) { dataHolder in
-            ActionSheet(
-                title: Text("Restore Backup"),
-                message: Text("This cannot be undone. All your workouts and custom exercises will be replaced with the ones from the backup. Your settings are not affected."),
-                buttons: [
-                    .destructive(Text("Restore"), action: {
-                        do {
-                            // For now statically use viewContext and ExerciseStore.shared because we don't want to observer their changes in this view
-                            try IronBackup.restoreBackupData(data: dataHolder.data, managedObjectContext: AppDelegate.instance.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared)
-                            print("Restore successful")
-                            self.restoreResult = RestoreResult(success: true, error: nil)
-                        } catch {
-                            print("Restore failed: \(error)")
-                            self.restoreResult = RestoreResult(success: false, error: error)
-                        }
-                    }),
-                    .cancel()
-                ]
-            )
+        .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
+            RestoreActionSheet.create(context: AppDelegate.instance.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
+                self.restoreResult = IdentifiableHolder(value: result)
+            }
         }
-        .alert(item: $restoreResult) { restoreResult in
-            self.alert(restoreResult: restoreResult)
+        .alert(item: $restoreResult) { restoreResultHolder in
+            RestoreActionSheet.restoreResultAlert(restoreResult: restoreResultHolder.value)
         }
     }
 }

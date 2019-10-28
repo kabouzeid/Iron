@@ -74,6 +74,16 @@ final class SettingsStore: ObservableObject {
             userDefaults.maxRepetitionsOneRepMax = newValue
         }
     }
+    
+    var autoBackup: Bool {
+        get {
+            userDefaults.autoBackup
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.autoBackup = newValue
+        }
+    }
 }
 
 #if DEBUG

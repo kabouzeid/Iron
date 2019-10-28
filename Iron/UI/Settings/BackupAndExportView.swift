@@ -14,6 +14,8 @@ struct BackupAndExportView: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
+    @ObservedObject var backupStore = BackupFileStore.shared
+    
     @State private var showExportWorkoutDataSheet = false
     
     @State private var backupError: BackupError?
@@ -28,6 +30,19 @@ struct BackupAndExportView: View {
         return Alert(title: Text("Could not Create Backup"), message: text)
     }
     
+    private var cloudBackupFooter: some View {
+        var strings = [String]()
+        if settingsStore.autoBackup {
+            strings.append("A backup is created automatically everytime you quit the app.")
+        }
+        strings.append("The backups are stored in your private iCloud Drive. Only the last backup of each day is kept. You can also access the backup files via the built in Files app.")
+        if let creationDate = backupStore.lastBackup?.creationDate {
+            strings.append("Last backup: " + BackupFileStore.BackupFile.dateFormatter.string(from: creationDate))
+        }
+        
+        return Text(strings.joined(separator: "\n"))
+    }
+    
     var body: some View {
         Form {
             Section(header: Text("Export".uppercased())) {
@@ -40,9 +55,7 @@ struct BackupAndExportView: View {
                         
                         let formatter = DateFormatter()
                         formatter.dateFormat = "yyyy-MM-dd"
-                        let dateString = formatter.string(from: Date())
-                        
-                        let url = try self.tempFile(data: data, name: "\(dateString).ironbackup")
+                        let url = try self.tempFile(data: data, name: "\(formatter.string(from: Date())).ironbackup")
                         
                         self.shareFile(url: url)
                     } catch {
@@ -52,33 +65,23 @@ struct BackupAndExportView: View {
                 }
             }
             
-            Section(header: Text("Cloud Backup".uppercased()), footer: Text("Last backup: TODO")) { // TODO display last backup
-                NavigationLink(destination: Text("TODO")) {
+            Section(header: Text("iCloud Backup".uppercased()), footer: cloudBackupFooter) {
+                NavigationLink(destination: RestoreBackupView(backupStore: backupStore)) {
                     Text("Restore")
                 }
-                Toggle("Auto Backup", isOn: .constant(true)) // TODO
+                Toggle("Auto Backup", isOn: $settingsStore.autoBackup)
                 Button("Back Up Now") {
-                    UbiquityContainer.backupsUrl { result in
-                        do {
-                            let url = try result.get()
-                            print(url)
-                            
-                            let data = try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
-                            
-                            let formatter = DateFormatter()
-                            formatter.dateFormat = "yyyy-MM-dd"
-                            let dateString = formatter.string(from: Date())
-                            
-                            let fileUrl = url.appendingPathComponent(dateString).appendingPathExtension("ironbackup")
-                            try data.write(to: fileUrl, options: .atomic)
-                        } catch {
-                            print(error)
-                            self.backupError = BackupError(error: error)
-                        }
-                    }
+                    self.backupStore.create(data: {
+                        try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
+                    }, onError: { error in
+                        print(error)
+                        self.backupError = BackupError(error: error)
+                    })
                 }
             }
         }
+        .onAppear(perform: backupStore.fetchBackups)
+        .navigationBarTitle("Backup & Export", displayMode: .inline)
         .actionSheet(isPresented: $showExportWorkoutDataSheet) {
             ActionSheet(title: Text("Workout Data"), buttons: [
                 .default(Text("JSON"), action: {

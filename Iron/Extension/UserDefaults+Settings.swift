@@ -15,6 +15,7 @@ extension UserDefaults {
         case defaultRestTimeDumbbellBased
         case defaultRestTimeBarbellBased
         case maxRepetitionsOneRepMax
+        case autoBackup
     }
 
     var weightUnit: WeightUnit {
@@ -66,6 +67,15 @@ extension UserDefaults {
         }
         get {
             (self.value(forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue) as? Int)?.clamped(to: maxRepetitionsOneRepMaxValues) ?? 5
+        }
+    }
+    
+    var autoBackup: Bool {
+        set {
+            self.set(newValue, forKey: SettingsKeys.autoBackup.rawValue)
+        }
+        get {
+            self.bool(forKey: SettingsKeys.autoBackup.rawValue)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  WorkoutDataBackup.swift
+//  IronBackup.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 26.10.19.
@@ -27,7 +27,6 @@ enum IronBackup {
         let backup = IronBackup(date: Date(), customExercises: exerciseStore.customExercises, workouts: workouts)
         
         let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
         encoder.dateEncodingStrategy = .iso8601
         return try encoder.encode(backup)
     }
