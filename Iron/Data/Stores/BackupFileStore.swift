@@ -34,6 +34,7 @@ class BackupFileStore: ObservableObject {
                 if uti == "com.apple.icloud-file-fault" {
                     do {
                          // if there are undownloaded files, download them and call fetchBackups() again after a short delay
+                        print("starting download of iCloud file \($0)")
                         try FileManager.default.startDownloadingUbiquitousItem(at: $0)
                         startedDownloads = true
                     } catch {
@@ -51,6 +52,7 @@ class BackupFileStore: ObservableObject {
             
             if startedDownloads {
                 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(1)) {
+                    print("reloading backups...")
                     self.fetchBackups()
                 }
             }
