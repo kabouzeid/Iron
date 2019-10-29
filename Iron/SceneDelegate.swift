@@ -45,21 +45,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func handleURLContext(urlContext: UIOpenURLContext) {
-        guard let backupData = try? urlData(urlContext: urlContext) else { return }
-        NotificationCenter.default.post(name: .RestoreFromBackup, object: self, userInfo: [restoreFromBackupDataUserInfoKey : backupData])
+        urlContext.url.downloadFile { result in
+            do {
+                switch result {
+                case .success():
+                    guard let backupData = try Self.urlData(url: urlContext.url, openInPlace: urlContext.options.openInPlace) else { return }
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .RestoreFromBackup, object: self, userInfo: [restoreFromBackupDataUserInfoKey : backupData])
+                    }
+                case .failure(let error):
+                    throw error
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
     
-    private func urlData(urlContext: UIOpenURLContext) throws -> Data? {
-        let openInPlace = urlContext.options.openInPlace
+    private static func urlData(url: URL, openInPlace: Bool) throws -> Data? {
         if openInPlace {
-            guard urlContext.url.startAccessingSecurityScopedResource() else { return nil }
+            guard url.startAccessingSecurityScopedResource() else {
+                print("openInPlace but startAccessingSecurityScopedResource() -> false")
+                return nil
+            }
         }
         defer {
             if openInPlace {
-                urlContext.url.stopAccessingSecurityScopedResource()
+                url.stopAccessingSecurityScopedResource()
             }
         }
-        return try Data(contentsOf: urlContext.url)
+        return try Data(contentsOf: url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -27,15 +27,32 @@ class BackupFileStore: ObservableObject {
         UbiquityContainer.backupsUrl { result in
             guard let url = try? result.get() else { return }
             guard let urls = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return }
+            var startedDownloads = false
             let backups: [BackupFile] = urls.compactMap {
                 guard let resourceValues = try? $0.resourceValues(forKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return nil }
-                guard let uti = resourceValues.typeIdentifier, uti == "com.kabouzeid.ironbackup" else { return nil }
+                guard let uti = resourceValues.typeIdentifier else { return nil }
+                if uti == "com.apple.icloud-file-fault" {
+                    do {
+                         // if there are undownloaded files, download them and call fetchBackups() again after a short delay
+                        try FileManager.default.startDownloadingUbiquitousItem(at: $0)
+                        startedDownloads = true
+                    } catch {
+                        print(error)
+                    }
+                }
+                guard uti == "com.kabouzeid.ironbackup" else { return nil }
                 guard let creationDate = resourceValues.creationDate else { return nil }
                 guard let totalFileSize = resourceValues.totalFileSize else { return nil }
                 return BackupFile(url: $0, creationDate: creationDate, fileSize: totalFileSize)
-            }
-            DispatchQueue.main.async {
+            }.sorted { $0.creationDate > $1.creationDate }
+            DispatchQueue.main.sync { // to be safe don't use async here so everything stays in order
                 self.backups = backups
+            }
+            
+            if startedDownloads {
+                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(1)) {
+                    self.fetchBackups()
+                }
             }
         }
     }
@@ -83,7 +100,7 @@ extension BackupFileStore {
 // MARK: - Misc
 extension BackupFileStore {
     var lastBackup: BackupFile? {
-        backups.max { $0.creationDate < $1.creationDate }
+        backups.first // assume backups are sorted
     }
 }
 
