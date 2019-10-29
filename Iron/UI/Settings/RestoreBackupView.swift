@@ -27,7 +27,7 @@ struct RestoreBackupView: View {
                         VStack(alignment: .leading) {
                             Text(BackupFileStore.BackupFile.dateFormatter.string(from: backup.creationDate))
                                 .foregroundColor(.primary)
-                            Text(BackupFileStore.BackupFile.byteCountFormatter.string(fromByteCount: Int64(backup.fileSize)))
+                            Text("\(backup.deviceName) • \(BackupFileStore.BackupFile.byteCountFormatter.string(fromByteCount: Int64(backup.fileSize)))")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }

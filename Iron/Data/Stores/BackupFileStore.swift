@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class BackupFileStore: ObservableObject {
     static let shared = BackupFileStore()
@@ -17,6 +18,7 @@ class BackupFileStore: ObservableObject {
         let url: URL
         let creationDate: Date
         let fileSize: Int
+        let deviceName: String
         
         var id: URL { url }
     }
@@ -26,28 +28,39 @@ class BackupFileStore: ObservableObject {
     func fetchBackups() {
         UbiquityContainer.backupsUrl { result in
             guard let url = try? result.get() else { return }
-            guard let urls = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return }
+            
+            guard let deviceDirectoryUrls = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey, .nameKey]) else { return }
             var startedDownloads = false
-            let backups: [BackupFile] = urls.compactMap {
-                guard let resourceValues = try? $0.resourceValues(forKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return nil }
-                guard let uti = resourceValues.typeIdentifier else { return nil }
-                if uti == "com.apple.icloud-file-fault" {
-                    do {
-                         // if there are undownloaded files, download them and call fetchBackups() again after a short delay
-                        print("starting download of iCloud file \($0)")
-                        try FileManager.default.startDownloadingUbiquitousItem(at: $0)
-                        startedDownloads = true
-                    } catch {
-                        print(error)
+            let backups: [[BackupFile]] = deviceDirectoryUrls.compactMap { deviceDirectoryUrl in
+                guard let resourceValues = try? deviceDirectoryUrl.resourceValues(forKeys: [.isDirectoryKey, .nameKey]) else { return nil }
+                guard resourceValues.isDirectory ?? false else { return nil }
+                guard let deviceName = resourceValues.name else { return nil }
+                
+                guard let backupUrls = try? FileManager.default.contentsOfDirectory(at: deviceDirectoryUrl, includingPropertiesForKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return nil }
+                return backupUrls.compactMap { backupUrl in
+                    guard let resourceValues = try? backupUrl.resourceValues(forKeys: [.typeIdentifierKey, .creationDateKey, .totalFileSizeKey]) else { return nil }
+                    guard let uti = resourceValues.typeIdentifier else { return nil }
+                    if uti == "com.apple.icloud-file-fault" {
+                        do {
+                            // if there are undownloaded files, download them and call fetchBackups() again after a short delay
+                            print("starting download of iCloud file \(backupUrl)")
+                            try FileManager.default.startDownloadingUbiquitousItem(at: backupUrl)
+                            startedDownloads = true
+                        } catch {
+                            print(error)
+                        }
                     }
+                    guard uti == "com.kabouzeid.ironbackup" else { return nil }
+                    guard let creationDate = resourceValues.creationDate else { return nil }
+                    guard let totalFileSize = resourceValues.totalFileSize else { return nil }
+                    return BackupFile(url: backupUrl, creationDate: creationDate, fileSize: totalFileSize, deviceName: deviceName)
                 }
-                guard uti == "com.kabouzeid.ironbackup" else { return nil }
-                guard let creationDate = resourceValues.creationDate else { return nil }
-                guard let totalFileSize = resourceValues.totalFileSize else { return nil }
-                return BackupFile(url: $0, creationDate: creationDate, fileSize: totalFileSize)
-            }.sorted { $0.creationDate > $1.creationDate }
+            }
+
             DispatchQueue.main.sync { // to be safe don't use async here so everything stays in order
                 self.backups = backups
+                    .flatMap { $0 }
+                    .sorted { $0.creationDate > $1.creationDate }
             }
             
             if startedDownloads {
@@ -83,11 +96,28 @@ extension BackupFileStore {
     static func create(data: @escaping () throws -> Data, completion: @escaping (Result<URL, Error>) -> Void) {
         UbiquityContainer.backupsUrl { result in
             do {
-                let url = try result.get()
+                let backupsUrl = try result.get()
+                let deviceName = UIDevice.current.name
+                    .components(separatedBy: CharacterSet(charactersIn: "\\/:*?\"<>|").union(.illegalCharacters))
+                    .joined(separator: "")
+                    .components(separatedBy: .whitespacesAndNewlines)
+                    .joined(separator: " ")
+                var deviceBackupUrl = backupsUrl.appendingPathComponent(deviceName)
+                
+                if !FileManager.default.fileExists(atPath: deviceBackupUrl.path) {
+                    do {
+                        try FileManager.default.createDirectory(at: deviceBackupUrl, withIntermediateDirectories: false)
+                    } catch {
+                        deviceBackupUrl = backupsUrl.appendingPathComponent("Unknown Device")
+                        if !FileManager.default.fileExists(atPath: deviceBackupUrl.path) {
+                            try FileManager.default.createDirectory(at: deviceBackupUrl, withIntermediateDirectories: false)
+                        }
+                    }
+                }
                 
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
-                let fileUrl = url.appendingPathComponent(formatter.string(from: Date())).appendingPathExtension("ironbackup")
+                let fileUrl = deviceBackupUrl.appendingPathComponent(formatter.string(from: Date())).appendingPathExtension("ironbackup")
                 
                 try data().write(to: fileUrl, options: .atomic)
                 
