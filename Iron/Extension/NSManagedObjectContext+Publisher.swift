@@ -44,3 +44,40 @@ extension NSManagedObjectContext {
             .eraseToAnyPublisher()
     }
 }
+
+// MARK: - Workout Data
+
+import os.signpost
+extension NSManagedObjectContext {
+    func observeWorkoutDataChanges() -> AnyCancellable {
+        publisher
+            .sink {
+                for changedObject in $0 {
+                    // instruments
+                    let signPostID = OSSignpostID(log: SignpostLog.workoutDataPublisher)
+                    let signPostName: StaticString = "process single workout data change"
+                    os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID, "%{public}s", changedObject.objectID.description)
+                    defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
+                    
+                    changedObject.objectWillChange.send()
+                    if let workout = changedObject as? Workout {
+                        workout.workoutExercises?.compactMap { $0 as? WorkoutExercise }
+                            .forEach { workoutExercise in
+                                workoutExercise.objectWillChange.send()
+                                workoutExercise.workoutSets?.compactMap { $0 as? WorkoutSet }
+                                    .forEach { $0.objectWillChange.send() }
+                            }
+                    } else if let workoutExercise = changedObject as? WorkoutExercise {
+                        workoutExercise.workout?.objectWillChange.send()
+                        workoutExercise.workoutSets?.compactMap { $0 as? WorkoutSet }
+                            .forEach { $0.objectWillChange.send() }
+                    } else if let workoutSet = changedObject as? WorkoutSet {
+                        workoutSet.workoutExercise?.objectWillChange.send()
+                        workoutSet.workoutExercise?.workout?.objectWillChange.send()
+                    } else {
+                        print("change in unknown NSManagedObject \(changedObject)")
+                    }
+                }
+            }
+    }
+}

@@ -62,8 +62,6 @@ class WorkoutExercise: NSManagedObject, Codable {
                 weight + (workoutSet.isCompleted ? workoutSet.weight * Double(workoutSet.repetitions) : 0)
             })
     }
-
-    private var cancellable: AnyCancellable?
     
     // MARK: - Codable
     private enum CodingKeys: String, CodingKey {
@@ -94,42 +92,5 @@ class WorkoutExercise: NSManagedObject, Codable {
         try container.encodeIfPresent(exercise(in: ExerciseStore.shared.exercises)?.title, forKey: .exerciseName)
         try container.encodeIfPresent(comment, forKey: .comment)
         try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)
-    }
-}
-
-// MARK: Observable
-extension WorkoutExercise {
-    override func awakeFromFetch() {
-        super.awakeFromFetch() // important
-        initChangeObserver()
-    }
-    
-    override func awakeFromInsert() {
-        super.awakeFromInsert() // important
-        initChangeObserver()
-    }
-    
-    override func didTurnIntoFault() {
-        super.didTurnIntoFault()
-        cancellable?.cancel()
-        cancellable = nil
-    }
-    
-    private func initChangeObserver() {
-        cancellable?.cancel()
-        cancellable = managedObjectContext?.publisher
-            .drop(while: { _ in self.isDeleted || self.isFault })
-            .filter { changed in
-                changed.contains { managedObject in
-                    if let workout = managedObject as? Workout {
-                        return workout.objectID == self.workout?.objectID
-                    }
-                    if let workoutSet = managedObject as? WorkoutSet {
-                        return workoutSet.workoutExercise?.objectID == self.objectID
-                    }
-                    return managedObject.objectID == self.objectID
-                }
-            }
-            .sink { _ in self.objectWillChange.send() }
     }
 }

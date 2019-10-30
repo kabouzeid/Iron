@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Combine
 import StoreKit
 
 @UIApplicationMain
@@ -78,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
+    private var workoutDataObserverCancellable: Cancellable?
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -102,6 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        
+        workoutDataObserverCancellable = container.viewContext.observeWorkoutDataChanges()
+        
         return container
     }()
     

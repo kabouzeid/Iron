@@ -101,8 +101,6 @@ class Workout: NSManagedObject, Codable {
                 weight + (workoutExercise.totalCompletedWeight ?? 0)
             })
     }
-
-    private var cancellable: AnyCancellable?
     
     // MARK: - Codable
     private enum CodingKeys: String, CodingKey {
@@ -316,42 +314,5 @@ extension Workout {
     
     private func error(code: Int, message: String) -> NSError {
         NSError(domain: "WORKOUT_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
-    }
-}
-
-// MARK: - Observable
-extension Workout {
-    override func awakeFromFetch() {
-        super.awakeFromFetch() // important
-        initChangeObserver()
-    }
-    
-    override func awakeFromInsert() {
-        super.awakeFromInsert() // important
-        initChangeObserver()
-    }
-    
-    override func didTurnIntoFault() {
-        super.didTurnIntoFault()
-        cancellable?.cancel()
-        cancellable = nil
-    }
-    
-    private func initChangeObserver() {
-        cancellable?.cancel()
-        cancellable = managedObjectContext?.publisher
-            .drop(while: { _ in self.isDeleted || self.isFault })
-            .filter { changed in
-                changed.contains { managedObject in
-                    if let workoutExercise = managedObject as? WorkoutExercise {
-                        return workoutExercise.workout?.objectID == self.objectID
-                    }
-                    if let workoutSet = managedObject as? WorkoutSet {
-                        return workoutSet.workoutExercise?.workout?.objectID == self.objectID
-                    }
-                    return managedObject.objectID == self.objectID
-                }
-            }
-            .sink { _ in self.objectWillChange.send() }
     }
 }

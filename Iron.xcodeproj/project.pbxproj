@@ -82,6 +82,7 @@
 		8A81E85623328D610094BAAF /* PinnedChartsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81E85523328D610094BAAF /* PinnedChartsStore.swift */; };
 		8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */; };
 		8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
+		8A8D51ED2369C6FF00FD896B /* SignpostLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
@@ -251,6 +252,7 @@
 		8A81E85523328D610094BAAF /* PinnedChartsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedChartsStore.swift; sourceTree = "<group>"; };
 		8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		8A82AB9322DDE582007C0293 /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
+		8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignpostLog.swift; sourceTree = "<group>"; };
 		8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartView.swift; sourceTree = "<group>"; };
 		8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartViewCell.swift; sourceTree = "<group>"; };
 		8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				8AC4C9D123254A7E008E474A /* quotes */,
 				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
 				8A16BBD822E337A0002150F0 /* Benchmark.swift */,
+				8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */,
 			);
 			path = Iron;
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				8AF92550232FD47A00C6977D /* ExerciseGroupFilter.swift in Sources */,
 				8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */,
 				8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */,
+				8A8D51ED2369C6FF00FD896B /* SignpostLog.swift in Sources */,
 				8AC8063D22BAC54200086032 /* FeedView.swift in Sources */,
 				8A74BEB822FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift in Sources */,
 				8A1C7F8B233DE54700B66E93 /* ReceiptFetcher.swift in Sources */,

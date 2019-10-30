@@ -8,6 +8,7 @@
 
 import XCTest
 import CoreData
+import Combine
 @testable import Iron
 
 class WorkoutDataTests: XCTestCase {
@@ -249,6 +250,76 @@ class WorkoutDataTests: XCTestCase {
         
         for workout in testWorkouts {
             XCTAssertTrue(workout.hasCompletedSets!)
+        }
+    }
+    
+    func testWorkoutDataObservation() {
+        let workout = Workout(context: persistenContainer.viewContext)
+        let workoutExercise1 = WorkoutExercise(context: persistenContainer.viewContext)
+        let workoutExercise2 = WorkoutExercise(context: persistenContainer.viewContext)
+        let workoutSet1_1 = WorkoutSet(context: persistenContainer.viewContext)
+        let workoutSet1_2 = WorkoutSet(context: persistenContainer.viewContext)
+        let workoutSet2_1 = WorkoutSet(context: persistenContainer.viewContext)
+        let workoutSet2_2 = WorkoutSet(context: persistenContainer.viewContext)
+        
+        workout.start = Date()
+        workout.end = Date()
+        workoutSet1_1.isCompleted = true
+        workoutSet1_2.isCompleted = true
+        workoutSet2_1.isCompleted = true
+        workoutSet2_2.isCompleted = true
+        
+        workoutExercise1.addToWorkoutSets([workoutSet1_1, workoutSet1_2])
+        workoutExercise2.addToWorkoutSets([workoutSet2_1, workoutSet2_2])
+        workout.addToWorkoutExercises([workoutExercise1, workoutExercise2])
+        
+        try! persistenContainer.viewContext.save()
+        
+        var cancellables = Set<AnyCancellable>()
+        persistenContainer.viewContext.observeWorkoutDataChanges().store(in: &cancellables)
+        
+        var expectations = changeExpectations(reason: "increment weight", objects: [
+            (workoutSet1_1.workoutExercise!.workout!, true),
+            (workoutSet1_1.workoutExercise!, true),
+            (workoutSet1_1, true),
+            (workoutSet1_2, false),
+            (workoutSet2_1, false),
+            (workoutSet2_2, false)
+        ], store: &cancellables)
+        workoutSet1_1.weight += 1
+        wait(for: expectations, timeout: 1)
+        
+        expectations = changeExpectations(reason: "set exercise uuid", objects: [
+            (workoutExercise1.workout!, true),
+            (workoutExercise1, true),
+            (workoutExercise2, false),
+            (workoutSet1_1, true),
+            (workoutSet1_2, true),
+            (workoutSet2_1, false),
+            (workoutSet2_2, false)
+        ], store: &cancellables)
+        workoutExercise1.exerciseUuid = UUID()
+        wait(for: expectations, timeout: 1)
+        
+        expectations = changeExpectations(reason: "set workout title", objects: [
+            (workout, true),
+            (workoutExercise1, true),
+            (workoutExercise2, true),
+            (workoutSet1_1, true),
+            (workoutSet1_2, true),
+            (workoutSet2_1, true),
+            (workoutSet2_2, true)
+        ], store: &cancellables)
+        workout.title = "Test"
+        wait(for: expectations, timeout: 1)
+    }
+    
+    private func changeExpectations(reason: String = "", objects: [(NSManagedObject, Bool)], store: inout Set<AnyCancellable>) -> [XCTestExpectation] {
+        objects.map {
+            let expectation = XCTestExpectation(description: "\($0.0.entity.name ?? "object") for \(reason)")
+            expectation.isInverted = !$0.1
+            $0.0.objectWillChange.sink { _ in expectation.fulfill() }.store(in: &store)
+            return expectation
         }
     }
 }
