@@ -13,7 +13,6 @@ import CoreData
 extension NSManagedObjectContext {
     private static let publisher: AnyPublisher<(Set<NSManagedObject>, NSManagedObjectContext), Never> = {
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-            .drop(while: { _ in IronBackup.restoringBackupData }) // ignore the spam while we are restoring
             .compactMap { notification -> (Set<NSManagedObject>, NSManagedObjectContext)? in
                 guard let userInfo = notification.userInfo else { return nil }
                 guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }
@@ -57,6 +56,7 @@ import os.signpost
 extension NSManagedObjectContext {
     func observeWorkoutDataChanges() -> AnyCancellable {
         publisher
+            .drop(while: { _ in IronBackup.restoringBackupData }) // better to ignore the spam while we are restoring
             .sink {
                 for changedObject in $0 {
                     // instruments
