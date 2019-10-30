@@ -118,7 +118,7 @@ extension WorkoutExercise {
     private func initChangeObserver() {
         cancellable?.cancel()
         cancellable = managedObjectContext?.publisher
-            .drop(while: { _ in self.isDeleted || self.isFault || !self.isInserted })
+            .drop(while: { _ in self.isDeleted || self.isFault })
             .filter { changed in
                 changed.contains { managedObject in
                     if let workout = managedObject as? Workout {
