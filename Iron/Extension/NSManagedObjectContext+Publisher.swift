@@ -18,6 +18,12 @@ extension NSManagedObjectContext {
                 guard let userInfo = notification.userInfo else { return nil }
                 guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }
                 
+                // instruments
+                let signPostID = OSSignpostID(log: SignpostLog.workoutDataPublisher)
+                let signPostName: StaticString = "process MOC change notification"
+                os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID, "%{public}s", managedObjectContext.description)
+                defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
+                
                 var changed = Set<NSManagedObject>()
 
                 if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
