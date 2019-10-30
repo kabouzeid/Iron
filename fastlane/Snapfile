@@ -29,5 +29,7 @@ clear_previous_screenshots(true)
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
 # launch_arguments(["-favColor red"])
 
+dark_mode(false)
+
 # For more information about all available options run
 # fastlane action snapshot
