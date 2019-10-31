@@ -147,6 +147,8 @@
 		8AF8919623215FEE0024B2EF /* IndexSet+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */; };
 		8AF92550232FD47A00C6977D /* ExerciseGroupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */; };
 		8AF92552232FD49600C6977D /* ExerciseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF92551232FD49600C6977D /* ExerciseFilter.swift */; };
+		8AFDEBC6236B421800ABE234 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDEBC5236B421800ABE234 /* GeneralSettingsView.swift */; };
+		8AFDEBC8236B422200ABE234 /* HealthSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDEBC7236B422200ABE234 /* HealthSettingsView.swift */; };
 		8AFE11B0232CDDF6000E9393 /* EditCurrentWorkoutTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE11AF232CDDF6000E9393 /* EditCurrentWorkoutTimeView.swift */; };
 		8AFE11B2232CE7CF000E9393 /* View+TypeErased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */; };
 		8AFE11B4232CF2E2000E9393 /* SheetBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE11B3232CF2E2000E9393 /* SheetBar.swift */; };
@@ -321,6 +323,8 @@
 		8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexSet+Identifiable.swift"; sourceTree = "<group>"; };
 		8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupFilter.swift; sourceTree = "<group>"; };
 		8AF92551232FD49600C6977D /* ExerciseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFilter.swift; sourceTree = "<group>"; };
+		8AFDEBC5236B421800ABE234 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		8AFDEBC7236B422200ABE234 /* HealthSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSettingsView.swift; sourceTree = "<group>"; };
 		8AFE11AF232CDDF6000E9393 /* EditCurrentWorkoutTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentWorkoutTimeView.swift; sourceTree = "<group>"; };
 		8AFE11B1232CE7CF000E9393 /* View+TypeErased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+TypeErased.swift"; sourceTree = "<group>"; };
 		8AFE11B3232CF2E2000E9393 /* SheetBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetBar.swift; sourceTree = "<group>"; };
@@ -392,6 +396,8 @@
 			isa = PBXGroup;
 			children = (
 				8A56A47E22D7C93B0076E99A /* SettingsView.swift */,
+				8AFDEBC5236B421800ABE234 /* GeneralSettingsView.swift */,
+				8AFDEBC7236B422200ABE234 /* HealthSettingsView.swift */,
 				8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */,
 				8A204B3A23673CF600F40F79 /* RestoreBackupView.swift */,
 			);
@@ -892,6 +898,7 @@
 				8A1916B9214E6BC000D96E9E /* WorkoutExerciseChartDataGenerator.swift in Sources */,
 				8AB14BA822C500070025D835 /* WorkoutExercise+SwiftUI.swift in Sources */,
 				8AB0C950234540660009F031 /* HealthManager.swift in Sources */,
+				8AFDEBC6236B421800ABE234 /* GeneralSettingsView.swift in Sources */,
 				8AE0FC832339190100B234F9 /* EditCustomExerciseSheet.swift in Sources */,
 				8AED58B4236491B600BF06D3 /* IronBackup.swift in Sources */,
 				8AC2B323200D2C8000DC68BE /* Exercise.swift in Sources */,
@@ -994,6 +1001,7 @@
 				8A5F9A15233B702600C2F32A /* IAPIdentifiers.swift in Sources */,
 				8A652C4222D0F6D300DBE10E /* AnimatedImageView.swift in Sources */,
 				8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */,
+				8AFDEBC8236B422200ABE234 /* HealthSettingsView.swift in Sources */,
 				8AAB1EBB2343C5A6005BE81B /* View+MockEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
