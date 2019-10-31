@@ -37,6 +37,7 @@ struct SettingsView : View {
         }
     }
     
+    @State private var showSupportMailAlert = false // if mail client is not configured
     private var ratingAndSupportSection: some View {
         Section {
             Button(action: {
@@ -51,7 +52,10 @@ struct SettingsView : View {
             }
             
             Button(action: {
-                guard MFMailComposeViewController.canSendMail() else { return }
+                guard MFMailComposeViewController.canSendMail() else {
+                    self.showSupportMailAlert = true // fallback
+                    return
+                }
                 
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = MailCloseDelegate.shared
@@ -66,6 +70,9 @@ struct SettingsView : View {
                     Spacer()
                     Image(systemName: "paperplane")
                 }
+            }
+            .alert(isPresented: $showSupportMailAlert) {
+                Alert(title: Text("Support E-Mail"), message: Text("support@ironapp.io"))
             }
         }
     }
