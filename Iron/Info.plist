@@ -51,9 +51,9 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Iron displays your bodyweight next to a workout.</string>
+	<string>Iron can display your bodyweight next to the sets of a previous workout.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Iron saves your finished workouts.</string>
+	<string>Iron can save your finished workouts to Apple Health.</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
 		<key>iCloud.com.kabouzeid.Iron</key>
