@@ -12,6 +12,7 @@ struct HealthSettingsView: View {
     @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @State private var updating = false
     @State private var updateResult: IdentifiableHolder<Result<Void, Error>>?
     
     func updateResultAlert(updateResult: Result<Void, Error>) -> Alert {
@@ -27,12 +28,15 @@ struct HealthSettingsView: View {
         Form {
             Section(footer: Text("Adds missing workouts to Apple Health and removes workouts from Apple Health that are no longer present in Iron.")) {
                 Button("Update Apple Health Workouts") {
+                    self.updating = true
                     HealthManager.shared.updateHealthWorkouts(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore) { result in
                         DispatchQueue.main.async {
                             self.updateResult = IdentifiableHolder(value: result)
+                            self.updating = false
                         }
                     }
                 }
+                .disabled(updating) // wait for updating to finish before allowing to tap again
             }
         }
         .navigationBarTitle("Apple Health", displayMode: .inline)
