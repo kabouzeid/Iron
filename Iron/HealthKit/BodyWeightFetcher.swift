@@ -21,7 +21,7 @@ class BodyWeightFetcher: ObservableObject {
     // gets the closest body weight +-1 day to date
     func fetchBodyWeight() {
         DispatchQueue.global(qos: .background).async {
-            HealthManager.shared.requestPermissions {
+            HealthManager.shared.requestReadBodyWeightPermission {
                 guard let date = self.date else { return }
                 
                 guard HKHealthStore.isHealthDataAvailable() else { return }

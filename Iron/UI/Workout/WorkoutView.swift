@@ -208,7 +208,7 @@ struct WorkoutView: View {
         feedbackGenerator.notificationOccurred(.success)
         AudioServicesPlaySystemSound(1103) // Tink sound
         
-        HealthManager.shared.requestPermissions {
+        HealthManager.shared.requestShareWorkoutPermission {
             if let start = self.workout.start, let end = self.workout.end, let duration = self.workout.duration { // should never fail
                 let title = self.workout.displayTitle(in: self.exerciseStore.exercises)
                 let hkWorkout = HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title])
