@@ -10,7 +10,6 @@
 		8A08D3D62349486800B09687 /* WorkoutData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */; };
 		8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC3023294EAD00081F4B /* UITabView.swift */; };
 		8A0ADC33232964E700081F4B /* WorkoutTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC32232964E700081F4B /* WorkoutTab.swift */; };
-		8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A12D7A922C4FB38006B29AA /* Charts */; };
 		8A1916B9214E6BC000D96E9E /* WorkoutExerciseChartDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1916B8214E6BC000D96E9E /* WorkoutExerciseChartDataGenerator.swift */; };
 		8A1C7F8B233DE54700B66E93 /* ReceiptFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1C7F8A233DE54700B66E93 /* ReceiptFetcher.swift */; };
 		8A1D989822C7C6AC0071225D /* WorkoutSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D989722C7C6AC0071225D /* WorkoutSetEditor.swift */; };
@@ -82,12 +81,26 @@
 		8A81E85623328D610094BAAF /* PinnedChartsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A81E85523328D610094BAAF /* PinnedChartsStore.swift */; };
 		8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */; };
 		8A82AB9422DDE582007C0293 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
+		8A861920236DAB6E00C1E96C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A86191E236DAB6E00C1E96C /* Interface.storyboard */; };
+		8A861922236DAB7000C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861921236DAB7000C1E96C /* Assets.xcassets */; };
+		8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A86192E236DAB7000C1E96C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192D236DAB7000C1E96C /* ContentView.swift */; };
+		8A861930236DAB7000C1E96C /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192F236DAB7000C1E96C /* HostingController.swift */; };
+		8A861932236DAB7000C1E96C /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861931236DAB7000C1E96C /* ExtensionDelegate.swift */; };
+		8A861934236DAB7100C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861933236DAB7100C1E96C /* Assets.xcassets */; };
+		8A861937236DAB7100C1E96C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861936236DAB7100C1E96C /* Preview Assets.xcassets */; };
+		8A86193B236DAB7100C1E96C /* WatchIron.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8A86191C236DAB6E00C1E96C /* WatchIron.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */; };
+		8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */; };
+		8A861951236DBC0100C1E96C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A861950236DBC0100C1E96C /* Charts */; };
+		8A861955236DC18100C1E96C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861954236DC18100C1E96C /* DebugView.swift */; };
 		8A8D51ED2369C6FF00FD896B /* SignpostLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
 		8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7D231436260038ACC5 /* String+Enquote.swift */; };
 		8AA02615230AF74C00324853 /* ActivityChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA02614230AF74C00324853 /* ActivityChartView.swift */; };
+		8AA0A214236E1AD600C6AF93 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9322DDE582007C0293 /* WeightUnit.swift */; };
 		8AA4500B2363872B0041E8CD /* WorkoutDataV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4500A2363872B0041E8CD /* WorkoutDataV1_V2.xcmappingmodel */; };
 		8AA57E5F22C3EE2E00B9AC79 /* Workout+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Workout+SwiftUI.swift */; };
 		8AA5D4942344C9D20092D20C /* UserDefaults+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5D4932344C9D20092D20C /* UserDefaults+Misc.swift */; };
@@ -100,6 +113,8 @@
 		8AB0C952234543F70009F031 /* BodyWeightFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0C951234543F70009F031 /* BodyWeightFetcher.swift */; };
 		8AB14BA822C500070025D835 /* WorkoutExercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA722C500070025D835 /* WorkoutExercise+SwiftUI.swift */; };
 		8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */; };
+		8AB365A9237085E500353D5A /* PayloadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB365A8237085E500353D5A /* PayloadKey.swift */; };
+		8AB365AA2370884400353D5A /* PayloadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB365A8237085E500353D5A /* PayloadKey.swift */; };
 		8AB4F7EF234217290074B88E /* ActivityDemoChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4F7EE2342166D0074B88E /* ActivityDemoChartView.swift */; };
 		8AB4F7F123421D960074B88E /* ExerciseDemoChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4F7F023421D960074B88E /* ExerciseDemoChartView.swift */; };
 		8AB4F7F5234244C50074B88E /* PlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4F7F4234244C50074B88E /* PlaceholderModifier.swift */; };
@@ -114,6 +129,7 @@
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
 		8AC503292340E732006D1BC6 /* PurchaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC503282340E732006D1BC6 /* PurchaseSheet.swift */; };
 		8AC5032B2340FE8A006D1BC6 /* UnlockProOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC5032A2340FE8A006D1BC6 /* UnlockProOverlay.swift */; };
+		8AC6821D2373227400A8CC62 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC6821C2373227400A8CC62 /* AppState.swift */; };
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
@@ -123,6 +139,8 @@
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
 		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
+		8ADC1B5E2371C9390019C01A /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */; };
+		8ADC1B61237221D90019C01A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ADC1B60237221D90019C01A /* HealthKit.framework */; };
 		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
 		8AE0A7972330FF100021EE23 /* BackupAndExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */; };
@@ -165,6 +183,20 @@
 			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
 			remoteInfo = "Rhino Fit";
 		};
+		8A86192A236DAB7000C1E96C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A861927236DAB7000C1E96C;
+			remoteInfo = "WatchIron Extension";
+		};
+		8A861939236DAB7100C1E96C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A86191B236DAB6E00C1E96C;
+			remoteInfo = WatchIron;
+		};
 		8AB5D3472342B3E600211F98 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
@@ -173,6 +205,31 @@
 			remoteInfo = Iron;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8A86193C236DAB7100C1E96C /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8A86193B236DAB7100C1E96C /* WatchIron.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A86193F236DAB7100C1E96C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutData.xcdatamodel; sourceTree = "<group>"; };
@@ -254,6 +311,20 @@
 		8A81E85523328D610094BAAF /* PinnedChartsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedChartsStore.swift; sourceTree = "<group>"; };
 		8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		8A82AB9322DDE582007C0293 /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
+		8A86191C236DAB6E00C1E96C /* WatchIron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchIron.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A86191F236DAB6E00C1E96C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		8A861921236DAB7000C1E96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8A861923236DAB7000C1E96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A861928236DAB7000C1E96C /* WatchIron Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchIron Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A86192D236DAB7000C1E96C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A86192F236DAB7000C1E96C /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		8A861931236DAB7000C1E96C /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		8A861933236DAB7100C1E96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8A861936236DAB7100C1E96C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8A861938236DAB7100C1E96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionManager.swift; sourceTree = "<group>"; };
+		8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionManager.swift; sourceTree = "<group>"; };
+		8A861954236DC18100C1E96C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignpostLog.swift; sourceTree = "<group>"; };
 		8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartView.swift; sourceTree = "<group>"; };
 		8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartViewCell.swift; sourceTree = "<group>"; };
@@ -273,6 +344,7 @@
 		8AB0C951234543F70009F031 /* BodyWeightFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyWeightFetcher.swift; sourceTree = "<group>"; };
 		8AB14BA722C500070025D835 /* WorkoutExercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutExercise+SwiftUI.swift"; sourceTree = "<group>"; };
 		8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+SwiftUI.swift"; sourceTree = "<group>"; };
+		8AB365A8237085E500353D5A /* PayloadKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayloadKey.swift; sourceTree = "<group>"; };
 		8AB4F7EE2342166D0074B88E /* ActivityDemoChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDemoChartView.swift; sourceTree = "<group>"; };
 		8AB4F7F023421D960074B88E /* ExerciseDemoChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDemoChartView.swift; sourceTree = "<group>"; };
 		8AB4F7F4234244C50074B88E /* PlaceholderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModifier.swift; sourceTree = "<group>"; };
@@ -289,6 +361,7 @@
 		8AC4C9D123254A7E008E474A /* quotes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quotes; sourceTree = "<group>"; };
 		8AC503282340E732006D1BC6 /* PurchaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSheet.swift; sourceTree = "<group>"; };
 		8AC5032A2340FE8A006D1BC6 /* UnlockProOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockProOverlay.swift; sourceTree = "<group>"; };
+		8AC6821C2373227400A8CC62 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -298,6 +371,9 @@
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
 		8AD90A18233D1E2000328D96 /* EntitlementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementStore.swift; sourceTree = "<group>"; };
+		8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionManager.swift; sourceTree = "<group>"; };
+		8ADC1B5F237221D90019C01A /* WatchIron Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchIron Extension.entitlements"; sourceTree = "<group>"; };
+		8ADC1B60237221D90019C01A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAndExportView.swift; sourceTree = "<group>"; };
@@ -338,7 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */,
-				8A12D7AA22C4FB38006B29AA /* Charts in Frameworks */,
+				8A861951236DBC0100C1E96C /* Charts in Frameworks */,
 				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +423,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A861925236DAB7000C1E96C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8ADC1B61237221D90019C01A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +484,7 @@
 				8AFDEBC7236B422200ABE234 /* HealthSettingsView.swift */,
 				8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */,
 				8A204B3A23673CF600F40F79 /* RestoreBackupView.swift */,
+				8A861954236DC18100C1E96C /* DebugView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -445,6 +530,7 @@
 		8A6F1729233A809D0048A75B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8ADC1B60237221D90019C01A /* HealthKit.framework */,
 				8AB0C94C23453F080009F031 /* HealthKit.framework */,
 				8A6F172A233A809D0048A75B /* StoreKit.framework */,
 			);
@@ -480,6 +566,8 @@
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
 				8A7D6EAE200BF92E00AA0FA7 /* IronTests */,
 				8AB5D3432342B3E600211F98 /* IronUISnapshots */,
+				8A86191D236DAB6E00C1E96C /* WatchIron */,
+				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				8A6F1729233A809D0048A75B /* Frameworks */,
 			);
@@ -491,6 +579,8 @@
 				8A7D6E94200BF92E00AA0FA7 /* Iron.app */,
 				8A7D6EAB200BF92E00AA0FA7 /* IronTests.xctest */,
 				8AB5D3422342B3E600211F98 /* IronUISnapshots.xctest */,
+				8A86191C236DAB6E00C1E96C /* WatchIron.app */,
+				8A861928236DAB7000C1E96C /* WatchIron Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,6 +592,7 @@
 				8AD40826202F96CB00A73E05 /* Extension */,
 				8A5F9A0F233B6B3600C2F32A /* IAP */,
 				8AB0C94E234540420009F031 /* HealthKit */,
+				8A861944236DABDC00C1E96C /* WatchKit */,
 				8AABF2A6201683C8009C047D /* Data */,
 				8AC8063722BAB93000086032 /* UI */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
@@ -535,6 +626,58 @@
 			path = IronTests;
 			sourceTree = "<group>";
 		};
+		8A86191D236DAB6E00C1E96C /* WatchIron */ = {
+			isa = PBXGroup;
+			children = (
+				8A86191E236DAB6E00C1E96C /* Interface.storyboard */,
+				8A861921236DAB7000C1E96C /* Assets.xcassets */,
+				8A861923236DAB7000C1E96C /* Info.plist */,
+			);
+			path = WatchIron;
+			sourceTree = "<group>";
+		};
+		8A86192C236DAB7000C1E96C /* WatchIron Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8ADC1B5F237221D90019C01A /* WatchIron Extension.entitlements */,
+				8A861931236DAB7000C1E96C /* ExtensionDelegate.swift */,
+				8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */,
+				8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */,
+				8AC6821C2373227400A8CC62 /* AppState.swift */,
+				8A86194C236DB65200C1E96C /* UI */,
+				8A861933236DAB7100C1E96C /* Assets.xcassets */,
+				8A861938236DAB7100C1E96C /* Info.plist */,
+				8A861935236DAB7100C1E96C /* Preview Content */,
+			);
+			path = "WatchIron Extension";
+			sourceTree = "<group>";
+		};
+		8A861935236DAB7100C1E96C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8A861936236DAB7100C1E96C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8A861944236DABDC00C1E96C /* WatchKit */ = {
+			isa = PBXGroup;
+			children = (
+				8AB365A42370839F00353D5A /* Shared */,
+				8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */,
+			);
+			path = WatchKit;
+			sourceTree = "<group>";
+		};
+		8A86194C236DB65200C1E96C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8A86192F236DAB7000C1E96C /* HostingController.swift */,
+				8A86192D236DAB7000C1E96C /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		8AABF2A6201683C8009C047D /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +708,14 @@
 				8AB0C951234543F70009F031 /* BodyWeightFetcher.swift */,
 			);
 			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		8AB365A42370839F00353D5A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8AB365A8237085E500353D5A /* PayloadKey.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		8AB4F7ED2342165B0074B88E /* Demo */ = {
@@ -738,14 +889,16 @@
 				8A7D6E90200BF92E00AA0FA7 /* Sources */,
 				8A7D6E91200BF92E00AA0FA7 /* Frameworks */,
 				8A7D6E92200BF92E00AA0FA7 /* Resources */,
+				8A86193C236DAB7100C1E96C /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8A86193A236DAB7100C1E96C /* PBXTargetDependency */,
 			);
 			name = Iron;
 			packageProductDependencies = (
-				8A12D7A922C4FB38006B29AA /* Charts */,
+				8A861950236DBC0100C1E96C /* Charts */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Iron.app */;
@@ -768,6 +921,40 @@
 			productName = "Rhino FitTests";
 			productReference = 8A7D6EAB200BF92E00AA0FA7 /* IronTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8A86191B236DAB6E00C1E96C /* WatchIron */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A861943236DAB7100C1E96C /* Build configuration list for PBXNativeTarget "WatchIron" */;
+			buildPhases = (
+				8A86191A236DAB6E00C1E96C /* Resources */,
+				8A86193F236DAB7100C1E96C /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A86192B236DAB7000C1E96C /* PBXTargetDependency */,
+			);
+			name = WatchIron;
+			productName = WatchIron;
+			productReference = 8A86191C236DAB6E00C1E96C /* WatchIron.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		8A861927236DAB7000C1E96C /* WatchIron Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A861942236DAB7100C1E96C /* Build configuration list for PBXNativeTarget "WatchIron Extension" */;
+			buildPhases = (
+				8A861924236DAB7000C1E96C /* Sources */,
+				8A861925236DAB7000C1E96C /* Frameworks */,
+				8A861926236DAB7000C1E96C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchIron Extension";
+			productName = "WatchIron Extension";
+			productReference = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		8AB5D3412342B3E600211F98 /* IronUISnapshots */ = {
 			isa = PBXNativeTarget;
@@ -793,7 +980,7 @@
 		8A7D6E8C200BF92E00AA0FA7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
@@ -806,6 +993,12 @@
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
+					};
+					8A86191B236DAB6E00C1E96C = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					8A861927236DAB7000C1E96C = {
+						CreatedOnToolsVersion = 11.2;
 					};
 					8AB5D3412342B3E600211F98 = {
 						CreatedOnToolsVersion = 11.1;
@@ -823,7 +1016,7 @@
 			);
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
-				8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */,
+				8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -832,6 +1025,8 @@
 				8A7D6E93200BF92E00AA0FA7 /* Iron */,
 				8A7D6EAA200BF92E00AA0FA7 /* IronTests */,
 				8AB5D3412342B3E600211F98 /* IronUISnapshots */,
+				8A86191B236DAB6E00C1E96C /* WatchIron */,
+				8A861927236DAB7000C1E96C /* WatchIron Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -858,6 +1053,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A86191A236DAB6E00C1E96C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A861922236DAB7000C1E96C /* Assets.xcassets in Resources */,
+				8A861920236DAB6E00C1E96C /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A861926236DAB7000C1E96C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A861937236DAB7100C1E96C /* Preview Assets.xcassets in Resources */,
+				8A861934236DAB7100C1E96C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AB5D3402342B3E600211F98 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -878,6 +1091,7 @@
 				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
 				8AA5D4942344C9D20092D20C /* UserDefaults+Misc.swift in Sources */,
 				8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */,
+				8AB365A9237085E500353D5A /* PayloadKey.swift in Sources */,
 				8A5F9A13233B6B7D00C2F32A /* StoreManager.swift in Sources */,
 				8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */,
 				8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */,
@@ -945,6 +1159,7 @@
 				8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */,
 				8A5F9A23233BDEEB00C2F32A /* VerificationResponse.swift in Sources */,
 				8A5F9A25233BF0F900C2F32A /* UserDefaults+IAP.swift in Sources */,
+				8A861955236DC18100C1E96C /* DebugView.swift in Sources */,
 				8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */,
 				8A5F9A1F233BA6B100C2F32A /* ReceiptVerifier.swift in Sources */,
 				8A2D21C123563FF60012A0A4 /* UserDefaults+HiddenExerciseUuids.swift in Sources */,
@@ -974,6 +1189,7 @@
 				8A204B3D23676E7200F40F79 /* BackupFileStore.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */,
+				8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */,
 				8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */,
 				8AE2844722D1196C006D3295 /* ExerciseHistoryView.swift in Sources */,
 				8AB14BAA22C500430025D835 /* Exercise+SwiftUI.swift in Sources */,
@@ -1018,6 +1234,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A861924236DAB7000C1E96C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AC6821D2373227400A8CC62 /* AppState.swift in Sources */,
+				8ADC1B5E2371C9390019C01A /* WorkoutSessionManager.swift in Sources */,
+				8A861930236DAB7000C1E96C /* HostingController.swift in Sources */,
+				8AB365AA2370884400353D5A /* PayloadKey.swift in Sources */,
+				8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */,
+				8AA0A214236E1AD600C6AF93 /* WeightUnit.swift in Sources */,
+				8A86192E236DAB7000C1E96C /* ContentView.swift in Sources */,
+				8A861932236DAB7000C1E96C /* ExtensionDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AB5D33E2342B3E600211F98 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1035,6 +1266,16 @@
 			target = 8A7D6E93200BF92E00AA0FA7 /* Iron */;
 			targetProxy = 8A7D6EAC200BF92E00AA0FA7 /* PBXContainerItemProxy */;
 		};
+		8A86192B236DAB7000C1E96C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A861927236DAB7000C1E96C /* WatchIron Extension */;
+			targetProxy = 8A86192A236DAB7000C1E96C /* PBXContainerItemProxy */;
+		};
+		8A86193A236DAB7100C1E96C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A86191B236DAB6E00C1E96C /* WatchIron */;
+			targetProxy = 8A861939236DAB7100C1E96C /* PBXContainerItemProxy */;
+		};
 		8AB5D3482342B3E600211F98 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A7D6E93200BF92E00AA0FA7 /* Iron */;
@@ -1049,6 +1290,14 @@
 				8A7D6EA4200BF92E00AA0FA7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8A86191E236DAB6E00C1E96C /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A86191F236DAB6E00C1E96C /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1256,6 +1505,114 @@
 			};
 			name = Release;
 		};
+		8A86193D236DAB7100C1E96C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				IBSC_MODULE = WatchIron_Extension;
+				INFOPLIST_FILE = WatchIron/Info.plist;
+				MARKETING_VERSION = 1.0.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		8A86193E236DAB7100C1E96C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				IBSC_MODULE = WatchIron_Extension;
+				INFOPLIST_FILE = WatchIron/Info.plist;
+				MARKETING_VERSION = 1.0.7;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
+		8A861940236DAB7100C1E96C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "WatchIron Extension/WatchIron Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchIron Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WatchIron Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		8A861941236DAB7100C1E96C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "WatchIron Extension/WatchIron Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchIron Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WatchIron Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
 		8AB5D34A2342B3E600211F98 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1331,6 +1688,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8A861942236DAB7100C1E96C /* Build configuration list for PBXNativeTarget "WatchIron Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A861940236DAB7100C1E96C /* Debug */,
+				8A861941236DAB7100C1E96C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A861943236DAB7100C1E96C /* Build configuration list for PBXNativeTarget "WatchIron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A86193D236DAB7100C1E96C /* Debug */,
+				8A86193E236DAB7100C1E96C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8AB5D3492342B3E600211F98 /* Build configuration list for PBXNativeTarget "IronUISnapshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1343,20 +1718,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */ = {
+		8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kabouzeid/Charts";
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
-				branch = kabouzeid;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8A12D7A922C4FB38006B29AA /* Charts */ = {
+		8A861950236DBC0100C1E96C /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A12D7A822C4FB38006B29AA /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */

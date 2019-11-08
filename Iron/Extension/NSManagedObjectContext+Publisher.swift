@@ -11,9 +11,15 @@ import Combine
 import CoreData
 
 extension NSManagedObjectContext {
-    private static let publisher: AnyPublisher<(Set<NSManagedObject>, NSManagedObjectContext), Never> = {
+    struct ObjectChanges {
+        let inserted: Set<NSManagedObject>
+        let updated: Set<NSManagedObject>
+        let deleted: Set<NSManagedObject>
+    }
+    
+    private static let publisher: AnyPublisher<(ObjectChanges, NSManagedObjectContext), Never> = {
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-            .compactMap { notification -> (Set<NSManagedObject>, NSManagedObjectContext)? in
+            .compactMap { notification -> (ObjectChanges, NSManagedObjectContext)? in
                 guard let userInfo = notification.userInfo else { return nil }
                 guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }
                 
@@ -22,27 +28,18 @@ extension NSManagedObjectContext {
                 let signPostName: StaticString = "process MOC change notification"
                 os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID, "%{public}s", managedObjectContext.description)
                 defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
+
+                let inserted = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> ?? Set()
+                let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> ?? Set()
+                let deleted = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> ?? Set()
                 
-                var changed = Set<NSManagedObject>()
-
-                if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-                    changed.formUnion(inserts)
-                }
-
-                if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
-                    changed.formUnion(updates)
-                }
-
-                if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
-                    changed.formUnion(deletes)
-                }
-                return (changed, managedObjectContext)
+                return (ObjectChanges(inserted: inserted, updated: updated, deleted: deleted), managedObjectContext)
             }
             .share()
             .eraseToAnyPublisher()
     }()
     
-    var publisher: AnyPublisher<Set<NSManagedObject>, Never> {
+    var publisher: AnyPublisher<ObjectChanges, Never> {
         Self.publisher
             .filter { $0.1 === self } // only publish changes belonging to this context
             .map { $0.0 }
@@ -58,7 +55,7 @@ extension NSManagedObjectContext {
         publisher
             .drop(while: { _ in IronBackup.restoringBackupData }) // better to ignore the spam while we are restoring
             .sink {
-                for changedObject in $0 {
+                for changedObject in $0.inserted.union($0.updated).union($0.deleted) {
                     // instruments
                     let signPostID = OSSignpostID(log: SignpostLog.workoutDataPublisher)
                     let signPostName: StaticString = "process single workout data change"
