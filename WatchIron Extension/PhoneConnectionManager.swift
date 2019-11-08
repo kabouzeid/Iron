@@ -11,10 +11,12 @@ import WatchConnectivity
 import Combine
 import HealthKit
 
-class PhoneConnectionManager: NSObject {
+class PhoneConnectionManager: NSObject, ObservableObject {
     static let shared = PhoneConnectionManager()
     
     private let session = WCSession.default
+    
+    var objectWillChange = ObservableObjectPublisher() // called when something with the connection changes
     
     func activateSession() {
         guard WCSession.isSupported() else { return }
@@ -29,25 +31,16 @@ class PhoneConnectionManager: NSObject {
     var isActivated: Bool {
         session.activationState == .activated
     }
-    
-    var isActivatedPublisher: AnyPublisher<Bool, Never> {
-        session
-            .publisher(for: \.activationState)
-            .map { $0 == .activated }
-            .eraseToAnyPublisher()
-    }
-    
-    var isReachablePublisher: AnyPublisher<Bool, Never> {
-        session
-            .publisher(for: \.isReachable)
-            .eraseToAnyPublisher()
-    }
 }
 
 // MARK: - Receiving
 extension PhoneConnectionManager: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print(#function + " \(activationState)")
+        
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
     }
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
@@ -76,6 +69,10 @@ extension PhoneConnectionManager: WCSessionDelegate {
     
     func sessionReachabilityDidChange(_ session: WCSession) {
         print(#function + " \(session.isReachable)")
+        
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
     }
 }
 
@@ -225,7 +222,11 @@ extension PhoneConnectionManager {
             // make sure the message means the current workout
             guard workoutSessionManager.uuid == uuid else {
                 // invalid
-                assertionFailure("attempt to update start time on workout with different UUID")
+                if workoutSessionManager.uuid == nil {
+                    assertionFailure("attempt to discard workout with no UUID")
+                } else {
+                    assertionFailure("attempt to discard workout with different UUID")
+                }
                 return
             }
             

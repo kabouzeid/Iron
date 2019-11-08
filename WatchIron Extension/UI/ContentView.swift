@@ -11,20 +11,20 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         _ContentView()
-            .environmentObject(AppState.shared)
             .environmentObject(WorkoutSessionManagerStore.shared)
+            .environmentObject(PhoneConnectionManager.shared)
     }
 }
 
 private struct _ContentView: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var phoneConnectionManager: PhoneConnectionManager
     @EnvironmentObject var workoutSessionManagerStore: WorkoutSessionManagerStore
     
     var body: some View {
         Group {
-            if appState.isActivated {
+            if phoneConnectionManager.isActivated {
                 VStack {
-                    Text("reachable: \(appState.isReachable.description)")
+                    Text("reachable: \(phoneConnectionManager.isReachable.description)")
                     Text("workout state: \(workoutSessionManagerStore.workoutSessionManager?.workoutSession.state.name ?? "nil")")
                     Text("uuid: \(workoutSessionManagerStore.workoutSessionManager?.uuid?.uuidString ?? "nil")")
                 }
