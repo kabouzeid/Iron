@@ -16,23 +16,24 @@ class WatchConnectionManager: NSObject {
     
     private let session = WCSession.default
     
-    @Published var isActivated = false
-    @Published var isReachable = false
-    
     func activateSession() {
         guard WCSession.isSupported() else { return }
         session.delegate = self
         session.activate()
     }
     
-//    private let watchConnectionQueue = DispatchQueue(label: "com.kabouzeid.watchconnection", qos: .userInitiated, target: .global(qos: .userInitiated))
+    var isReachable: Bool {
+        session.isReachable
+    }
+    
+    var isActivated: Bool {
+        session.activationState == .activated
+    }
 }
 
 extension WatchConnectionManager: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print(#function + " \(activationState)")
-        
-        self.isActivated = activationState == .activated
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
@@ -41,7 +42,7 @@ extension WatchConnectionManager: WCSessionDelegate {
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-       print(#function)
+        print(#function)
         // connect to the new Apple Watch
         activateSession()
     }
@@ -64,7 +65,5 @@ extension WatchConnectionManager: WCSessionDelegate {
     
     func sessionReachabilityDidChange(_ session: WCSession) {
         print(#function + " \(session.isReachable)")
-        
-        self.isReachable = session.isReachable
     }
 }
