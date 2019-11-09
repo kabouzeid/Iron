@@ -213,8 +213,8 @@ struct WorkoutView: View {
                 print("warning: currentWatchWorkoutUuid = \(watchWorkoutUuid.uuidString) but workout.uuid = \(workout.uuid?.uuidString ?? "nil"), saving HKWorkout on phone too to be safe")
                 HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
             }
-            if let end = workout.end, let uuid = workout.uuid {
-                WatchConnectionManager.shared.finishWatchWorkout(end: end, uuid: uuid)
+            if let start = workout.start, let end = workout.end, let uuid = workout.uuid {
+                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, uuid: uuid)
             }
         } else {
             HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)

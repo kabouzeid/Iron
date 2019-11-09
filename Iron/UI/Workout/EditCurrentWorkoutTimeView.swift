@@ -54,12 +54,6 @@ struct EditCurrentWorkoutTimeView: View {
             }
         }
         .listStyle(GroupedListStyle())
-        .onReceive(workout.objectWillChange.debounce(for: .seconds(1), scheduler: DispatchQueue.main)) { _ in // TODO: maybe KVO publisher for start and end works too?
-            if let start = self.workout.start, let uuid = self.workout.uuid {
-                WatchConnectionManager.shared.updateWatchWorkoutStart(start: start, uuid: uuid)
-            }
-            // TODO: update end time too
-        }
     }
 }
 

@@ -145,12 +145,24 @@ extension WatchConnectionManager {
         sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionStart : [PayloadKey.Arg.start : start, PayloadKey.Arg.uuid : uuid.uuidString]])
     }
     
-    func finishWatchWorkout(end: Date, uuid: UUID) {
+    func updateWatchWorkoutEnd(end: Date?, uuid: UUID) {
+        print(#function)
+        if currentWatchWorkoutUuid != uuid {
+            print("warning: sending update watch workout start for different uuid")
+        }
+        if let end = end {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionEnd : [PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
+        } else {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionEnd : [PayloadKey.Arg.uuid : uuid.uuidString]])
+        }
+    }
+    
+    func finishWatchWorkout(start: Date, end: Date, uuid: UUID) {
         print(#function)
         if currentWatchWorkoutUuid != uuid {
             print("warning: sending finish watch workout for different uuid")
         }
-        sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
+        sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
         currentWatchWorkoutUuid = nil
     }
     

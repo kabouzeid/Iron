@@ -20,7 +20,6 @@ class WorkoutSessionManagerStore: ObservableObject {
     private var _workoutSessionManager: WorkoutSessionManager? {
         didSet { // don't use willSet, somehow this is sometimes to early in this case
             workoutSessionManagerWillChangeCancellable = _workoutSessionManager?.objectWillChange
-                .print()
                 .receive(on: DispatchQueue.main)
                 .subscribe(objectWillChange)
             
@@ -52,10 +51,37 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
     }
     var startDate: Date? {
-        _startDate ?? workoutBuilder.startDate
+        get {
+            _startDate ?? workoutBuilder.startDate
+        }
+        set {
+            assert(newValue != nil)
+            if newValue != startDate {
+                print("overwriting startDate=\(startDate?.description ?? "nil") with \(newValue?.description ?? "nil")")
+                _startDate = newValue
+            } else {
+                print("keeping startDate=\(startDate?.description ?? "nil") new value would be \(newValue?.description ?? "nil")")
+            }
+        }
+    }
+    
+    private var _endDate: Date? {
+        willSet {
+            objectWillChange.send()
+        }
     }
     var endDate: Date? {
-        workoutBuilder.endDate
+        get {
+            _endDate ?? workoutBuilder.endDate
+        }
+        set {
+            if newValue != endDate {
+                print("overwriting endDate=\(endDate?.description ?? "nil") with \(newValue?.description ?? "nil")")
+                _endDate = newValue
+            } else {
+                print("keeping endDate=\(endDate?.description ?? "nil") new value would be \(newValue?.description ?? "nil")")
+            }
+        }
     }
     
     let workoutSession: HKWorkoutSession
@@ -122,7 +148,15 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
         // TODO safe the date in the workout meta data or shared prefs so it can be restored
-        self._startDate = startDate
+        self.startDate = startDate
+    }
+    
+    func updateEndDate(_ endDate: Date?) throws {
+        print(#function)
+        dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
+        
+        // TODO safe the date in the workout meta data or shared prefs so it can be restored
+        self.endDate = endDate
     }
     
     func prepare() throws {
@@ -219,19 +253,12 @@ class WorkoutSessionManager: NSObject, ObservableObject {
                 return
             }
 
-            if let startDate = self._startDate {
+            if let _startDate = self._startDate, _startDate != workout.startDate {
+                print("replacing saved workout because saved workout has startDate \(workout.startDate) but startDate has been updated to \(_startDate)")
                 // the start date was updated while the workout was already running
                 // replace the saved workout with a copy that has the correct start date
                 
-                do {
-                    try self.requestWorkoutPermissions().get()
-                } catch {
-                    self.discard()
-                    completion(.failure(error))
-                    return
-                }
-                
-                let updatedWorkout = HKWorkout(activityType: workout.workoutActivityType, start: startDate, end: workout.endDate, workoutEvents: workout.workoutEvents, totalEnergyBurned: workout.totalEnergyBurned, totalDistance: workout.totalDistance, device: workout.device, metadata: workout.metadata)
+                let updatedWorkout = HKWorkout(activityType: workout.workoutActivityType, start: _startDate, end: workout.endDate, workoutEvents: workout.workoutEvents, totalEnergyBurned: workout.totalEnergyBurned, totalDistance: workout.totalDistance, device: workout.device, metadata: workout.metadata)
 
                 Self.healthStore.save(updatedWorkout) { (success, error) in
                     guard success else {

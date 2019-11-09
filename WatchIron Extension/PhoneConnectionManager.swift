@@ -85,6 +85,8 @@ extension PhoneConnectionManager {
             handleEndWorkoutSessionMessage(message: endMessage)
         } else if let updateStartMessage = message[PayloadKey.updateWorkoutSessionStart] as? [String : Any] {
             handleUpdateWorkoutSessionStartMessage(message: updateStartMessage)
+        } else if let updateEndMessage = message[PayloadKey.updateWorkoutSessionEnd] as? [String : Any] {
+            handleUpdateWorkoutSessionEndMessage(message: updateEndMessage)
         } else if let discardMessage = message[PayloadKey.discardWorkoutSession] as? [String : Any] {
             handleDiscardWorkoutSessionMessage(message: discardMessage)
         } else if let unprepare = message[PayloadKey.unprepareWorkoutSession] as? Bool, unprepare {
@@ -98,8 +100,14 @@ extension PhoneConnectionManager {
      if there is a current workout session with a different uuid, it is discarded and a new workout session is started
      */
     private func handleStartWorkoutSessionMessage(message: [String : Any]) {
-        guard let start = message[PayloadKey.Arg.start] as? Date else { return }
-        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else { return }
+        guard let start = message[PayloadKey.Arg.start] as? Date else {
+            assertionFailure("start workout with no start parameter")
+            return
+        }
+        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
+            assertionFailure("start workout with no uuid parameter")
+            return
+        }
         
         WorkoutSessionManager.perform {
             var workoutSessionManager: WorkoutSessionManager
@@ -177,8 +185,18 @@ extension PhoneConnectionManager {
     private func handleEndWorkoutSessionMessage(message: [String : Any]) {
         // this message is only valid if the current workoutSession was started with the same UUID
         
-        guard let end = message[PayloadKey.Arg.end] as? Date else { return }
-        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else { return }
+        guard let start = message[PayloadKey.Arg.start] as? Date else {
+            assertionFailure("end workout with no start parameter")
+            return
+        }
+        guard let end = message[PayloadKey.Arg.end] as? Date else {
+            assertionFailure("end workout with no end parameter")
+            return
+        }
+        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
+            assertionFailure("end workout with no uuid parameter")
+            return
+        }
         
         WorkoutSessionManager.perform {
             guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
@@ -200,6 +218,12 @@ extension PhoneConnectionManager {
                 return
             }
             
+            do {
+                try workoutSessionManager.updateStartDate(start)
+            } catch {
+                print("could not update start date: \(error)")
+                // continue though
+            }
             workoutSessionManager.end(end: end) { result in
                 WorkoutSessionManager.perform {
                     switch result {
@@ -219,8 +243,14 @@ extension PhoneConnectionManager {
     private func handleUpdateWorkoutSessionStartMessage(message: [String : Any]) {
         // this message is only valid if the current workoutSession was started with the same UUID
         
-        guard let start = message[PayloadKey.Arg.start] as? Date else { return }
-        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else { return }
+        guard let start = message[PayloadKey.Arg.start] as? Date else {
+            assertionFailure("update workout start with no start parameter")
+            return
+        }
+        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
+            assertionFailure("update workout start with no uuid parameter")
+            return
+        }
         
         WorkoutSessionManager.perform {
             guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
@@ -233,9 +263,9 @@ extension PhoneConnectionManager {
             guard workoutSessionManager.uuid == uuid else {
                 // invalid
                 if workoutSessionManager.uuid == nil {
-                    assertionFailure("attempt to discard workout with no UUID")
+                    assertionFailure("attempt to update start for workout with no UUID")
                 } else {
-                    assertionFailure("attempt to discard workout with different UUID")
+                    assertionFailure("attempt to update start for workout with different UUID")
                 }
                 return
             }
@@ -250,10 +280,50 @@ extension PhoneConnectionManager {
         }
     }
     
+    private func handleUpdateWorkoutSessionEndMessage(message: [String : Any]) {
+        // this message is only valid if the current workoutSession was started with the same UUID
+        
+        let end = message[PayloadKey.Arg.end] as? Date // nil is allowed
+        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
+            assertionFailure("update workout end with no uuid parameter")
+            return
+        }
+        
+        WorkoutSessionManager.perform {
+            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
+                // invalid
+                assertionFailure("attempt to update end time on workout while no workout session manager is set")
+                return
+            }
+            
+            // make sure the message means the current workout
+            guard workoutSessionManager.uuid == uuid else {
+                // invalid
+                if workoutSessionManager.uuid == nil {
+                    assertionFailure("attempt to update end for workout with no UUID")
+                } else {
+                    assertionFailure("attempt to update end for workout with different UUID")
+                }
+                return
+            }
+            
+            do {
+                try workoutSessionManager.updateEndDate(end)
+            } catch {
+                print(error)
+                // TODO: should we discard() ?
+                return
+            }
+        }
+    }
+    
     private func handleDiscardWorkoutSessionMessage(message: [String : Any]) {
         // this message is only valid if the current workoutSession was started with the same UUID
         
-        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else { return }
+        guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
+            assertionFailure("discard workout with no uuid parameter")
+            return
+        }
         
         WorkoutSessionManager.perform {
             guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {

@@ -10,9 +10,51 @@ import CoreData
 import Combine
 
 class Workout: NSManagedObject, Codable {
+    private var cancellables = Set<AnyCancellable>()
+    
     override func awakeFromInsert() {
         super.awakeFromInsert()
         uuid = UUID()
+        initKVO()
+    }
+    
+    override func awakeFromFetch() {
+        super.awakeFromFetch()
+        initKVO()
+    }
+    
+    private func initKVO() {
+        publisher(for: \.start).didChange().debounce(for: .seconds(1), scheduler: DispatchQueue.main).sink { [weak self] in
+            guard let self = self else { return }
+            guard !self.isFault else { return }
+            
+            if let uuid = self.uuid {
+                if self.isCurrentWorkout {
+                    if uuid == WatchConnectionManager.shared.currentWatchWorkoutUuid, let start = self.start {
+                        WatchConnectionManager.shared.updateWatchWorkoutStart(start: start, uuid: uuid)
+                    }
+                } else {
+                    // TODO: update stored health workout
+                }
+            }
+        }
+        .store(in: &cancellables)
+        
+        publisher(for: \.end).didChange().debounce(for: .seconds(1), scheduler: DispatchQueue.main).sink { [weak self] in
+            guard let self = self else { return }
+            guard !self.isFault else { return }
+            
+            if let uuid = self.uuid {
+                if self.isCurrentWorkout {
+                    if uuid == WatchConnectionManager.shared.currentWatchWorkoutUuid {
+                        WatchConnectionManager.shared.updateWatchWorkoutEnd(end: self.end, uuid: uuid)
+                    }
+                } else {
+                    // TODO: update stored health workout
+                }
+            }
+        }
+        .store(in: &cancellables)
     }
     
     static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {

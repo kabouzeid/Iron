@@ -29,7 +29,11 @@ enum PayloadKey {
     static let updateWorkoutSessionStart = "updateWorkoutSessionStart"
     
     // phone --> watch
-    // Args: [end: Date, uuid: UUID]
+    // Args: [(optional) end: Date, uuid: UUID]
+    static let updateWorkoutSessionEnd = "updateWorkoutSessionEnd"
+    
+    // phone --> watch
+    // Args: [start: Date, end: Date, uuid: UUID]
     static let endWorkoutSession = "endWorkoutSession"
     
     // phone --> watch

@@ -70,8 +70,8 @@ extension HealthManager {
     }
     
     func updateHealthWorkouts(managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.global(qos: .background).async {
-            self.requestShareWorkoutPermission {
+        self.requestShareWorkoutPermission {
+            DispatchQueue.global(qos: .background).async {
                 let workoutPredicate = HKQuery.predicateForWorkouts(with: .traditionalStrengthTraining)
                 let sourcePredicate = HKQuery.predicateForObjects(from: .default())
                 let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredicate, sourcePredicate])
