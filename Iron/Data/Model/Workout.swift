@@ -10,6 +10,11 @@ import CoreData
 import Combine
 
 class Workout: NSManagedObject, Codable {
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        uuid = UUID()
+    }
+    
     static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
         request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) == %@", NSNumber(booleanLiteral: true))

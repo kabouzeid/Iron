@@ -135,6 +135,8 @@
 		8AC8064122BACECF00086032 /* FeedBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064022BACECE00086032 /* FeedBannerView.swift */; };
 		8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */; };
 		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
+		8AD329BA23760F5500515B3B /* WorkoutDataV2_V3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AD329B923760F5500515B3B /* WorkoutDataV2_V3.xcmappingmodel */; };
+		8AD329BC237610E300515B3B /* WorkoutMigrationPolicyV2_V3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD329BB237610E300515B3B /* WorkoutMigrationPolicyV2_V3.swift */; };
 		8AD40834202FC71B00A73E05 /* Array+uniq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD40833202FC71B00A73E05 /* Array+uniq.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
 		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
@@ -366,6 +368,9 @@
 		8AC8064022BACECE00086032 /* FeedBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBannerView.swift; sourceTree = "<group>"; };
 		8AC8064322BADC1B00086032 /* ActivityChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartViewCell.swift; sourceTree = "<group>"; };
 		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
+		8AD329B7237608A700515B3B /* WorkoutData v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkoutData v3.xcdatamodel"; sourceTree = "<group>"; };
+		8AD329B923760F5500515B3B /* WorkoutDataV2_V3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WorkoutDataV2_V3.xcmappingmodel; sourceTree = "<group>"; };
+		8AD329BB237610E300515B3B /* WorkoutMigrationPolicyV2_V3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutMigrationPolicyV2_V3.swift; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
 		8AD90A18233D1E2000328D96 /* EntitlementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementStore.swift; sourceTree = "<group>"; };
@@ -511,6 +516,7 @@
 		8A68F7C923631F6C0089263B /* Migration */ = {
 			isa = PBXGroup;
 			children = (
+				8AD329B823760F2700515B3B /* WorkoutDataV2_V3 */,
 				8A68F7CE2363293A0089263B /* WorkoutDataV1_V2 */,
 			);
 			path = Migration;
@@ -793,6 +799,15 @@
 				8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		8AD329B823760F2700515B3B /* WorkoutDataV2_V3 */ = {
+			isa = PBXGroup;
+			children = (
+				8AD329BB237610E300515B3B /* WorkoutMigrationPolicyV2_V3.swift */,
+				8AD329B923760F5500515B3B /* WorkoutDataV2_V3.xcmappingmodel */,
+			);
+			path = WorkoutDataV2_V3;
 			sourceTree = "<group>";
 		};
 		8AD40826202F96CB00A73E05 /* Extension */ = {
@@ -1096,6 +1111,7 @@
 				8AB0C952234543F70009F031 /* BodyWeightFetcher.swift in Sources */,
 				8AC8064422BADC1B00086032 /* ActivityChartViewCell.swift in Sources */,
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
+				8AD329BA23760F5500515B3B /* WorkoutDataV2_V3.xcmappingmodel in Sources */,
 				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
 				8AE0A7972330FF100021EE23 /* BackupAndExportView.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
@@ -1196,6 +1212,7 @@
 				8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */,
 				8AB8A5972034C0AF004366F2 /* WorkoutExercise.swift in Sources */,
 				8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */,
+				8AD329BC237610E300515B3B /* WorkoutMigrationPolicyV2_V3.swift in Sources */,
 				8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */,
 				8AA4500B2363872B0041E8CD /* WorkoutDataV1_V2.xcmappingmodel in Sources */,
 				8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */,
@@ -1736,10 +1753,11 @@
 		8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8AD329B7237608A700515B3B /* WorkoutData v3.xcdatamodel */,
 				8A68F7C7236319040089263B /* WorkoutData v2.xcdatamodel */,
 				8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */,
 			);
-			currentVersion = 8A68F7C7236319040089263B /* WorkoutData v2.xcdatamodel */;
+			currentVersion = 8AD329B7237608A700515B3B /* WorkoutData v3.xcdatamodel */;
 			path = WorkoutData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -45,6 +45,23 @@ extension HealthManager {
     }
 }
 
+extension HealthManager {
+    var workoutConfiguration: HKWorkoutConfiguration {
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .traditionalStrengthTraining
+        return configuration
+    }
+    
+    func saveWorkout(workout: Workout, exerciseStore: ExerciseStore) {
+        requestShareWorkoutPermission {
+            guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return }
+            let title = workout.displayTitle(in: exerciseStore.exercises)
+            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
+            HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
+        }
+    }
+}
+
 import CoreData
 extension HealthManager {
     enum UpdateError: Error {

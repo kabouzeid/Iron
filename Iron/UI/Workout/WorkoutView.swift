@@ -208,12 +208,16 @@ struct WorkoutView: View {
         feedbackGenerator.notificationOccurred(.success)
         AudioServicesPlaySystemSound(1103) // Tink sound
         
-        HealthManager.shared.requestShareWorkoutPermission {
-            if let start = self.workout.start, let end = self.workout.end, let duration = self.workout.duration { // should never fail
-                let title = self.workout.displayTitle(in: self.exerciseStore.exercises)
-                let hkWorkout = HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title])
-                HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
+        if let watchWorkoutUuid = WatchConnectionManager.shared.currentWatchWorkoutUuid {
+            if watchWorkoutUuid != workout.uuid {
+                print("warning: currentWatchWorkoutUuid = \(watchWorkoutUuid.uuidString) but workout.uuid = \(workout.uuid?.uuidString ?? "nil"), saving HKWorkout on phone too to be safe")
+                HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
             }
+            if let end = workout.end, let uuid = workout.uuid {
+                WatchConnectionManager.shared.finishWatchWorkout(end: end, uuid: uuid)
+            }
+        } else {
+            HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
         }
         
         UserDefaults.standard.finishedWorkoutsCount += 1
@@ -241,6 +245,8 @@ struct WorkoutView: View {
     }
     
     private func cancelWorkout() {
+        let uuid = workout.uuid // after delete, uuid will be nil
+        
         self.managedObjectContext.delete(self.workout)
         self.managedObjectContext.safeSave()
         self.cancelRestTimer()
@@ -248,6 +254,12 @@ struct WorkoutView: View {
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.success)
+        
+        if WatchConnectionManager.shared.currentWatchWorkoutUuid != nil {
+            if let uuid = uuid {
+                WatchConnectionManager.shared.discardWatchWorkout(uuid: uuid)
+            }
+        }
     }
     
     private var cancelButton: some View {

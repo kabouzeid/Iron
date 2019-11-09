@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Workout" representedClassName=".Workout" elementID="Training" syncable="YES" codeGenerationType="category">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isCurrentWorkout" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" elementID="isCurrentTraining"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="workoutExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutExercise" inverseName="workout" inverseEntity="WorkoutExercise" elementID="trainingExercises"/>
+    </entity>
+    <entity name="WorkoutExercise" representedClassName=".WorkoutExercise" elementID="TrainingExercise" syncable="YES" codeGenerationType="category">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="exerciseUuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="workoutExercises" inverseEntity="Workout" elementID="training"/>
+        <relationship name="workoutSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutSet" inverseName="workoutExercise" inverseEntity="WorkoutSet" elementID="trainingSets"/>
+    </entity>
+    <entity name="WorkoutSet" representedClassName=".WorkoutSet" elementID="TrainingSet" syncable="YES" codeGenerationType="category">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="repetitions" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rpe" optional="YES" attributeType="Double" minValueString="0" maxValueString="10" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="workoutExercise" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="workoutSets" inverseEntity="WorkoutExercise" elementID="trainingExercise"/>
+    </entity>
+    <elements>
+        <element name="Workout" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="WorkoutExercise" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="WorkoutSet" positionX="-36" positionY="9" width="128" height="148"/>
+    </elements>
+</model>

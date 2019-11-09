@@ -18,13 +18,14 @@ class WorkoutSessionManagerStore: ObservableObject {
     private var workoutSessionManagerWillChangeCancellable: Cancellable?
     
     private var _workoutSessionManager: WorkoutSessionManager? {
-        willSet {
+        didSet { // don't use willSet, somehow this is sometimes to early in this case
+            workoutSessionManagerWillChangeCancellable = _workoutSessionManager?.objectWillChange
+                .print()
+                .receive(on: DispatchQueue.main)
+                .subscribe(objectWillChange)
+            
             DispatchQueue.main.async {
                 self.objectWillChange.send()
-                self.workoutSessionManagerWillChangeCancellable?.cancel()
-                self.workoutSessionManagerWillChangeCancellable = self.workoutSessionManager?.objectWillChange
-                    .receive(on: DispatchQueue.main)
-                    .subscribe(self.objectWillChange)
             }
         }
     }

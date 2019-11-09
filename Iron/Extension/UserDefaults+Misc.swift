@@ -11,6 +11,7 @@ import Foundation
 extension UserDefaults {
     enum MiscKeys: String {
         case finishedWorkoutsCount
+        case watchWorkoutUuid
     }
     
     var finishedWorkoutsCount: Int {
@@ -19,6 +20,16 @@ extension UserDefaults {
         }
         get {
             self.integer(forKey: MiscKeys.finishedWorkoutsCount.rawValue)
+        }
+    }
+    
+    var watchWorkoutUuid: UUID? {
+        set {
+            self.set(newValue?.uuidString, forKey: MiscKeys.watchWorkoutUuid.rawValue)
+        }
+        get {
+            guard let uuidString = self.string(forKey: MiscKeys.watchWorkoutUuid.rawValue) else { return nil }
+            return UUID(uuidString: uuidString)
         }
     }
 }

@@ -13,8 +13,12 @@ enum PayloadKey {
     // calls healthStore.startWatchApp()
     
     // phone <-- watch
-    // Args: []
+    // Args: true
     static let preparedWorkoutSession = "preparedWorkoutSession" // sent to confirm that healthStore.startWatchApp() resulted in a prepare
+    
+    // phone --> watch
+    // Args: true
+    static let unprepareWorkoutSession = "unprepareWorkoutSession" // send if the prepare message came to late, i.e. after the workout was already canceled / finished
     
     // phone --> watch
     // Args: [start: Date, uuid: UUID]
