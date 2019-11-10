@@ -27,15 +27,21 @@ private struct _ContentView: View {
                 if workoutSessionManagerStore.workoutSessionManager != nil {
                     WorkoutSessionView(workoutSessionManager: workoutSessionManagerStore.workoutSessionManager!)
                         .contextMenu {
-                            Button("End Tracking") {
+                            Button(action: {
                                 guard let start = self.workoutSessionManagerStore.workoutSessionManager?.startDate else { return }
                                 guard let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid else { return }
                                 let end = self.workoutSessionManagerStore.workoutSessionManager?.endDate ?? Date()
                                 self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, uuid: uuid)
                                 
                                 self.showWorkoutOnPhoneNotAffectedAlert = true
+                            }) {
+                                VStack {
+                                    Image(systemName: "checkmark")
+                                    Text("End Tracking")
+                                }
                             }
-                            Button("Cancel Tracking") {
+                            
+                            Button(action: {
                                 if let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid {
                                     self.workoutSessionManagerStore.discardWorkoutSession(uuid: uuid)
                                 } else {
@@ -43,6 +49,11 @@ private struct _ContentView: View {
                                 }
                                 
                                 self.showWorkoutOnPhoneNotAffectedAlert = true
+                            }) {
+                                VStack {
+                                    Image(systemName: "xmark")
+                                    Text("Cancel Tracking")
+                                }
                             }
                         }
                     .alert(isPresented: $showWorkoutOnPhoneNotAffectedAlert) {
