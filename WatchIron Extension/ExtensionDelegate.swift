@@ -66,31 +66,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
         print(#function)
         
-        WorkoutSessionManager.perform {
-            // check if there already is a current workout session
-            if let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager {
-                let state = workoutSessionManager.state
-                // only create a new session if the current session is not running
-                guard state == .ended || state == .notStarted else {
-                    PhoneConnectionManager.shared.sendPreparedWorkoutSession()
-                    return
-                } // there already is a running workout session, startWorkout will take care of it
-            }
-            
-            print("create new workout session")
-            
-            do {
-                let workoutSession = try HKWorkoutSession(healthStore: WorkoutSessionManager.healthStore, configuration: workoutConfiguration)
-                WorkoutSessionManagerStore.shared.workoutSessionManager = WorkoutSessionManager(session: workoutSession)
-            } catch {
-                print("could not create workout session: \(error)")
-            }
-            
-            do {
-                guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else { return } // should never fail
-                try workoutSessionManager.prepare()
+        WorkoutSessionManagerStore.shared.ensurePreparedWorkoutSession(configuration: workoutConfiguration) { result in
+            switch result {
+            case .success:
                 PhoneConnectionManager.shared.sendPreparedWorkoutSession()
-            } catch {
+            case .failure(let error):
                 print("could not prepare workout session: \(error)")
             }
         }

@@ -10,36 +10,6 @@ import Foundation
 import HealthKit
 import Combine
 
-class WorkoutSessionManagerStore: ObservableObject {
-    static let shared = WorkoutSessionManagerStore()
-    
-    var objectWillChange = PassthroughSubject<Void, Never>()
-    
-    private var workoutSessionManagerWillChangeCancellable: Cancellable?
-    
-    private var _workoutSessionManager: WorkoutSessionManager? {
-        didSet { // don't use willSet, somehow this is sometimes to early in this case
-            workoutSessionManagerWillChangeCancellable = _workoutSessionManager?.objectWillChange
-                .receive(on: DispatchQueue.main)
-                .subscribe(objectWillChange)
-            
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
-        }
-    }
-    
-    var workoutSessionManager: WorkoutSessionManager? {
-        get {
-            return _workoutSessionManager
-        }
-        set {
-            dispatchPrecondition(condition: DispatchPredicate.onQueue(WorkoutSessionManager.accessQueue))
-            _workoutSessionManager = newValue
-        }
-    }
-}
-
 class WorkoutSessionManager: NSObject, ObservableObject {
     static let healthStore = HKHealthStore()
     
@@ -47,7 +17,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
     
     private var _startDate: Date? {
         willSet {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
     }
     var startDate: Date? {
@@ -67,7 +39,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
     
     private var _endDate: Date? {
         willSet {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
     }
     var endDate: Date? {
@@ -85,7 +59,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
     }
     
     let workoutSession: HKWorkoutSession
-    private let workoutBuilder: HKLiveWorkoutBuilder
+    let workoutBuilder: HKLiveWorkoutBuilder
     
     init(session: HKWorkoutSession) {
         self.workoutSession = session
@@ -126,7 +100,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
         defer {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
         
         let uuidSemaphore = DispatchSemaphore(value: 0)
@@ -184,7 +160,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
         
         defer {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
         
         workoutBuilder.dataSource = HKLiveWorkoutDataSource(healthStore: Self.healthStore, workoutConfiguration: workoutSession.workoutConfiguration)
@@ -206,7 +184,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
         defer {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
         
         workoutSession.end()
@@ -218,7 +198,9 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
         defer {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
         
         workoutSession.end()
@@ -286,21 +268,60 @@ extension WorkoutSessionManager: HKLiveWorkoutBuilderDelegate {
     }
     
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
-//        print(#function)
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+//        if let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) {
+//            if collectedTypes.contains(heartRate) {
+//
+//            }
+//        }
+//
+//        if let activeEnergyBurned = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) {
+//            if collectedTypes.contains(activeEnergyBurned) {
+//
+//            }
+//        }
     }
+}
+
+extension WorkoutSessionManager {
+    var burnedCalories: Double? {
+        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { return nil }
+        return workoutBuilder.statistics(for: heartRate)?.sumQuantity()?.doubleValue(for: .kilocalorie())
+    }
+    
+    var mostRecentHeartRate: Double? {
+        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
+        return workoutBuilder.statistics(for: heartRate)?.mostRecentQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
+    }
+    
+//    var averageHeartRate: Double? {
+//        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
+//        return workoutBuilder.statistics(for: heartRate)?.averageQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
+//    }
+//
+//    var maxHeartRate: Double? {
+//        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
+//        return workoutBuilder.statistics(for: heartRate)?.maximumQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
+//    }
 }
 
 extension WorkoutSessionManager: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
         print(#function + " \(toState.name)")
         
-        objectWillChange.send()
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
     }
     
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
         print(#function)
         
-        objectWillChange.send()
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
         // TODO: notify phone about this
     }
 }

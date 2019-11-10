@@ -17,16 +17,39 @@ struct ContentView: View {
 }
 
 private struct _ContentView: View {
+    @State private var showWorkoutOnPhoneNotAffectedAlert = false
     @EnvironmentObject var phoneConnectionManager: PhoneConnectionManager
     @EnvironmentObject var workoutSessionManagerStore: WorkoutSessionManagerStore
     
     var body: some View {
         Group {
             if phoneConnectionManager.isActivated {
-                VStack {
-                    Text("reachable: \(phoneConnectionManager.isReachable.description)")
-                    Text("workout state: \(workoutSessionManagerStore.workoutSessionManager?.workoutSession.state.name ?? "nil")")
-                    Text("uuid: \(workoutSessionManagerStore.workoutSessionManager?.uuid?.uuidString ?? "nil")")
+                if workoutSessionManagerStore.workoutSessionManager != nil {
+                    WorkoutSessionView(workoutSessionManager: workoutSessionManagerStore.workoutSessionManager!)
+                        .contextMenu {
+                            Button("End Tracking") {
+                                guard let start = self.workoutSessionManagerStore.workoutSessionManager?.startDate else { return }
+                                guard let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid else { return }
+                                let end = self.workoutSessionManagerStore.workoutSessionManager?.endDate ?? Date()
+                                self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, uuid: uuid)
+                                
+                                self.showWorkoutOnPhoneNotAffectedAlert = true
+                            }
+                            Button("Cancel Tracking") {
+                                if let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid {
+                                    self.workoutSessionManagerStore.discardWorkoutSession(uuid: uuid)
+                                } else {
+                                    self.workoutSessionManagerStore.unprepareWorkoutSession()
+                                }
+                                
+                                self.showWorkoutOnPhoneNotAffectedAlert = true
+                            }
+                        }
+                    .alert(isPresented: $showWorkoutOnPhoneNotAffectedAlert) {
+                        Alert(title: Text("Stopped Tracking"), message: Text("The workout on your phone is not affected."))
+                    }
+                } else {
+                    Text("Start a workout on your phone.")
                 }
             } else {
                 Text("Waiting for connection...")

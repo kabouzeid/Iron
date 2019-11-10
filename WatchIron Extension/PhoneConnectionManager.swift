@@ -109,77 +109,7 @@ extension PhoneConnectionManager {
             return
         }
         
-        WorkoutSessionManager.perform {
-            var workoutSessionManager: WorkoutSessionManager
-            if let manager = WorkoutSessionManagerStore.shared.workoutSessionManager {
-                workoutSessionManager = manager
-            } else {
-                print("warning: received start message but no workout session manager is set, creating new workout session")
-                let workoutConfiguration = HKWorkoutConfiguration()
-                workoutConfiguration.activityType = .traditionalStrengthTraining
-                do {
-                    let workoutSession = try HKWorkoutSession(healthStore: WorkoutSessionManager.healthStore, configuration: workoutConfiguration)
-                    workoutSessionManager = WorkoutSessionManager(session: workoutSession)
-                    WorkoutSessionManagerStore.shared.workoutSessionManager = workoutSessionManager
-                } catch {
-                    print("could not create new workout session: \(error)")
-                    return
-                }
-            }
-            
-            if let currentUuid = workoutSessionManager.uuid {
-                guard currentUuid != uuid else {
-                    // the workout session was already started
-                    if workoutSessionManager.state != .ended {
-                        do {
-                             try workoutSessionManager.updateStartDate(start)
-                         } catch {
-                             print("could not update start date: \(error)")
-                         }
-                    } else {
-                        print("warning: received start message for workout session that is already ended")
-                    }
-                    return
-                }
-                
-                if workoutSessionManager.state != .ended {
-                    print("warning: discarding workout session \(currentUuid) and starting workout session \(uuid)")
-                    workoutSessionManager.discard()
-                }
-                WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-                do {
-                    let workoutSession = try HKWorkoutSession(healthStore: WorkoutSessionManager.healthStore, configuration: workoutSessionManager.workoutSession.workoutConfiguration)
-                    workoutSessionManager = WorkoutSessionManager(session: workoutSession)
-                    WorkoutSessionManagerStore.shared.workoutSessionManager = workoutSessionManager
-                } catch {
-                    print("could not create new workout session: \(error)")
-                    return
-                }
-            }
-            
-            do {
-                try workoutSessionManager.setUuid(uuid)
-            } catch {
-                print(error)
-                workoutSessionManager.discard()
-                WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-                return
-            }
-            
-            workoutSessionManager.start(start: start) { result in
-                switch result {
-                case .success:
-                    // TODO send confirmation
-                    print("success: started workout session")
-                case .failure(let error):
-                    print(error)
-                    WorkoutSessionManager.perform {
-                        workoutSessionManager.discard()
-                        WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-                    }
-                }
-            }
-        }
+        WorkoutSessionManagerStore.shared.startWorkoutSession(start: start, uuid: uuid)
     }
     
     private func handleEndWorkoutSessionMessage(message: [String : Any]) {
@@ -198,46 +128,7 @@ extension PhoneConnectionManager {
             return
         }
         
-        WorkoutSessionManager.perform {
-            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
-                // invalid
-                // should not happen normally, but can happen
-                assertionFailure("attempt to end workout while no workout session manager is set")
-                return
-            }
-            
-            // make sure the message means the current workout
-            guard workoutSessionManager.uuid == uuid else {
-                // invalid
-                // should not happen normally, but can happen
-                if workoutSessionManager.uuid == nil {
-                    assertionFailure("attempt to end workout with no UUID")
-                } else {
-                    assertionFailure("attempt to end workout with different UUID")
-                }
-                return
-            }
-            
-            do {
-                try workoutSessionManager.updateStartDate(start)
-            } catch {
-                print("could not update start date: \(error)")
-                // continue though
-            }
-            workoutSessionManager.end(end: end) { result in
-                WorkoutSessionManager.perform {
-                    switch result {
-                    case .success:
-                        WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-                        print("success: ended workout session")
-                    case .failure(let error):
-                        print(error)
-                        workoutSessionManager.discard()
-                        WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-                    }
-                }
-            }
-        }
+        WorkoutSessionManagerStore.shared.endWorkoutSession(start: start, end: end, uuid: uuid)
     }
     
     private func handleUpdateWorkoutSessionStartMessage(message: [String : Any]) {
@@ -251,33 +142,8 @@ extension PhoneConnectionManager {
             assertionFailure("update workout start with no uuid parameter")
             return
         }
-        
-        WorkoutSessionManager.perform {
-            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
-                // invalid
-                assertionFailure("attempt to update start time on workout while no workout session manager is set")
-                return
-            }
-            
-            // make sure the message means the current workout
-            guard workoutSessionManager.uuid == uuid else {
-                // invalid
-                if workoutSessionManager.uuid == nil {
-                    assertionFailure("attempt to update start for workout with no UUID")
-                } else {
-                    assertionFailure("attempt to update start for workout with different UUID")
-                }
-                return
-            }
-            
-            do {
-                try workoutSessionManager.updateStartDate(start)
-            } catch {
-                print(error)
-                // TODO: should we discard() ?
-                return
-            }
-        }
+
+        WorkoutSessionManagerStore.shared.updateWorkoutSessionStart(start: start, uuid: uuid)
     }
     
     private func handleUpdateWorkoutSessionEndMessage(message: [String : Any]) {
@@ -289,32 +155,7 @@ extension PhoneConnectionManager {
             return
         }
         
-        WorkoutSessionManager.perform {
-            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
-                // invalid
-                assertionFailure("attempt to update end time on workout while no workout session manager is set")
-                return
-            }
-            
-            // make sure the message means the current workout
-            guard workoutSessionManager.uuid == uuid else {
-                // invalid
-                if workoutSessionManager.uuid == nil {
-                    assertionFailure("attempt to update end for workout with no UUID")
-                } else {
-                    assertionFailure("attempt to update end for workout with different UUID")
-                }
-                return
-            }
-            
-            do {
-                try workoutSessionManager.updateEndDate(end)
-            } catch {
-                print(error)
-                // TODO: should we discard() ?
-                return
-            }
-        }
+        WorkoutSessionManagerStore.shared.updateWorkoutSessionEnd(end: end, uuid: uuid)
     }
     
     private func handleDiscardWorkoutSessionMessage(message: [String : Any]) {
@@ -325,47 +166,11 @@ extension PhoneConnectionManager {
             return
         }
         
-        WorkoutSessionManager.perform {
-            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
-                // invalid
-                // should not happen normally, but can happen
-                print("warning: attempt to discard workout while no workout session manager is set")
-                return
-            }
-            
-            // make sure the message means the current workout
-            guard workoutSessionManager.uuid == uuid else {
-                // invalid
-                // should not happen normally, but can happen
-                print("warning: attempt to discard workout with different UUID")
-                return
-            }
-            
-            workoutSessionManager.discard()
-            WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-            print("success: discarded workout session")
-        }
+        WorkoutSessionManagerStore.shared.discardWorkoutSession(uuid: uuid)
     }
     
     private func handleUnprepareWorkoutSession() {
-        WorkoutSessionManager.perform {
-            guard let workoutSessionManager = WorkoutSessionManagerStore.shared.workoutSessionManager else {
-                // invalid
-                // should not happen normally, but can happen
-                assertionFailure("attempt to unprepare workout session while no workout session manager is set")
-                return
-            }
-            
-            guard workoutSessionManager.state == .prepared || workoutSessionManager.state == .notStarted else {
-                // can happen, but something probably went wrong before
-                print("warning: attempt to unprepare workout session that is not in .prepared or .notStarted state")
-                return
-            }
-            
-            workoutSessionManager.discard()
-            WorkoutSessionManagerStore.shared.workoutSessionManager = nil
-            print("success: unprepared workout session")
-        }
+        WorkoutSessionManagerStore.shared.unprepareWorkoutSession()
     }
 }
 
@@ -383,7 +188,7 @@ extension PhoneConnectionManager {
     }
     
     func sendPreparedWorkoutSession() {
-        print("send prepared workout session message")
+        print(#function)
         sendUserInfo(userInfo: [PayloadKey.preparedWorkoutSession : true])
     }
 }
