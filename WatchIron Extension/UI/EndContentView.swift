@@ -20,32 +20,35 @@ private struct _EndContentView: View {
     @EnvironmentObject var workoutSessionManagerStore: WorkoutSessionManagerStore
     
     var body: some View {
-        VStack {
-            Text("The workout on your phone is not affected.")
-            Button(action: {
-                guard let start = self.workoutSessionManagerStore.workoutSessionManager?.startDate else { return }
-                guard let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid else { return }
-                let end = self.workoutSessionManagerStore.workoutSessionManager?.endDate ?? Date()
-                self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, uuid: uuid)
-            }) {
-                HStack {
-                    Image(systemName: "checkmark")
-                    Text("End Tracking")
+        ScrollView {
+            VStack {
+                Text("This does not affect the workout on your phone and normally there is no need to do this.")
+                
+                Button(action: {
+                    guard let start = self.workoutSessionManagerStore.workoutSessionManager?.startDate else { return }
+                    guard let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid else { return }
+                    let end = self.workoutSessionManagerStore.workoutSessionManager?.endDate ?? Date()
+                    self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, uuid: uuid)
+                }) {
+                    HStack {
+                        Image(systemName: "checkmark")
+                        Text("End Tracking")
+                    }
                 }
-            }
-            
-            Button(action: {
-                if let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid {
-                    self.workoutSessionManagerStore.discardWorkoutSession(uuid: uuid)
-                } else {
-                    self.workoutSessionManagerStore.unprepareWorkoutSession()
+                
+                Button(action: {
+                    if let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid {
+                        self.workoutSessionManagerStore.discardWorkoutSession(uuid: uuid)
+                    } else {
+                        self.workoutSessionManagerStore.unprepareWorkoutSession()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "xmark")
+                        Text("Cancel Tracking")
+                    }
+                    .foregroundColor(.red)
                 }
-            }) {
-                HStack {
-                    Image(systemName: "xmark")
-                    Text("Cancel Tracking")
-                }
-                .foregroundColor(.red)
             }
         }
     }
