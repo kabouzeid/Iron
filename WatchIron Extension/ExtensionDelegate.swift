@@ -13,11 +13,14 @@ import Combine
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
+        print(#function)
         // Perform any final initialization of your application.
         reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
         cancellable = WorkoutSessionManagerStore.shared.objectWillChange.sink {
             self.reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
         }
+        handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?!
+        PhoneConnectionManager.shared.activateSession()
     }
     
     private var cancellable: AnyCancellable?
@@ -30,8 +33,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
     func applicationDidBecomeActive() {
+        print(#function)
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        PhoneConnectionManager.shared.activateSession()
     }
 
     func applicationWillResignActive() {
@@ -69,10 +72,19 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
 
-//    func handleActiveWorkoutRecovery() {
-//        print(#function)
-//        // TODO
-//    }
+    func handleActiveWorkoutRecovery() {
+        print(#function)
+        WorkoutSessionManager.healthStore.recoverActiveWorkoutSession { workoutSession, error in
+            guard let workoutSession = workoutSession else {
+                print("could not recover active workout session: \(error?.localizedDescription ?? "nil")")
+                return
+            }
+            
+            print("successfully recovered workout session")
+        
+            WorkoutSessionManagerStore.shared.recoverWorkoutSession(workoutSession: workoutSession)
+        }
+    }
     
     /**
      prepares the current workout session so that the startWorkout message can be received

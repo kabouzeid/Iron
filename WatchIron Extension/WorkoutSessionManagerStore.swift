@@ -35,6 +35,14 @@ class WorkoutSessionManagerStore: ObservableObject {
 }
 
 extension WorkoutSessionManagerStore {
+    func recoverWorkoutSession(workoutSession: HKWorkoutSession) {
+        WorkoutSessionManager.perform {
+            // TODO: also recover custom start / end dates
+            let workoutSessionManager = WorkoutSessionManager(session: workoutSession) // documentation says this must happen immediately
+            self.workoutSessionManager = workoutSessionManager
+        }
+    }
+    
     func ensurePreparedWorkoutSession(configuration: HKWorkoutConfiguration, completion: @escaping (Result<Void, Error>) -> Void) {
         WorkoutSessionManager.perform {
             // check if there already is a current workout session

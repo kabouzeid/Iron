@@ -6,7 +6,6 @@
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
 //
 
-import WatchKit
 import Foundation
 import SwiftUI
 
