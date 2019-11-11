@@ -74,7 +74,7 @@ struct WorkoutSessionView: View {
                 .foregroundColor(.red)
                 .font(.system(size: labelSize, weight: .bold, design: .rounded))
             }
-        }
+        }.lineLimit(1)
     }
 }
 
