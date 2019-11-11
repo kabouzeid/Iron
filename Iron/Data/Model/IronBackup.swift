@@ -33,7 +33,6 @@ enum IronBackup {
     
     static var restoringBackupData = false
     static func restoreBackupData(data: Data, managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore) throws {
-        restoringBackupData = true
         // save the current state before we touch anything
         let previousCustomExercises = ExerciseStore.shared.customExercises
         
@@ -45,6 +44,7 @@ enum IronBackup {
             }
             restoringBackupData = false
         }
+        restoringBackupData = true
         
         // use a child context so we don't lose the current data if anything goes wrong
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
