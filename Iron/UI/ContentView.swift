@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SessionContentView.swift
 //  SwiftUI Playground
 //
 //  Created by Karim Abou Zeid on 19.06.19.

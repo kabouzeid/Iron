@@ -8,11 +8,25 @@
 
 import WatchKit
 import HealthKit
+import Foundation
+import Combine
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
-
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+        reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
+        cancellable = WorkoutSessionManagerStore.shared.objectWillChange.sink {
+            self.reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
+        }
+    }
+    
+    private var cancellable: AnyCancellable?
+    private func reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore) {
+        if workoutSessionManagerStore.workoutSessionManager == nil {
+            WKInterfaceController.reloadRootPageControllers(withNames: ["workout"], contexts: nil, orientation: .horizontal, pageIndex: 0)
+        } else {
+            WKInterfaceController.reloadRootPageControllers(withNames: ["options", "workout", "music"], contexts: nil, orientation: .horizontal, pageIndex: 1)
+        }
     }
 
     func applicationDidBecomeActive() {

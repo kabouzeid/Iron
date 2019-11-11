@@ -1,5 +1,5 @@
 //
-//  HostingController.swift
+//  MainHostingController.swift
 //  WatchIron Extension
 //
 //  Created by Karim Abou Zeid on 02.11.19.
@@ -10,8 +10,8 @@ import WatchKit
 import Foundation
 import SwiftUI
 
-class HostingController: WKHostingController<ContentView> {
-    override var body: ContentView {
-        return ContentView()
+class MainHostingController: WKHostingController<MainContentView> {
+    override var body: MainContentView {
+        return MainContentView()
     }
 }

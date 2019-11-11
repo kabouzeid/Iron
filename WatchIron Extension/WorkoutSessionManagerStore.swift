@@ -13,7 +13,7 @@ import Combine
 class WorkoutSessionManagerStore: ObservableObject {
     static let shared = WorkoutSessionManagerStore()
     
-    let objectWillChange = ObjectWillChangePublisher()
+    let objectWillChange = PassthroughSubject<Void, Never>()
     
     private var _workoutSessionManager: WorkoutSessionManager? {
         didSet { // don't use willSet, somehow this is sometimes to early in this case

@@ -6,12 +6,30 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
-        <!--Hosting Controller-->
+        <!--options-->
+        <scene sceneID="2UU-Xl-1nQ">
+            <objects>
+                <hostingController identifier="options" id="iuN-tC-YPc" customClass="EndHostingController" customModule="WatchIron" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-345" y="33"/>
+        </scene>
+        <!--workout-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <hostingController id="3mp-fW-waa" customClass="HostingController" customModule="WatchIron" customModuleProvider="target"/>
+                <hostingController identifier="workout" id="3mp-fW-waa" customClass="MainHostingController" customModule="WatchIron" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="34" y="31"/>
+            <point key="canvasLocation" x="-3" y="33"/>
+        </scene>
+        <!--music-->
+        <scene sceneID="MrS-Uh-ba0">
+            <objects>
+                <controller identifier="music" id="yFf-xs-rn0">
+                    <items>
+                        <nowPlayingView alignment="left" id="MVa-jr-gPc"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="311" y="33"/>
         </scene>
     </scenes>
 </document>
