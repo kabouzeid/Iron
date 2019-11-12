@@ -105,12 +105,13 @@ extension HealthManager {
                                 var _success = true
                                 var _error: Error? = nil
                                 
+                                // delete HealthKit workout samples that are not in the database
                                 let workoutSamplesToDelete = workoutSamples.filter { workoutSample in
-                                    !workouts.contains(where: { workout in
-                                        self.datesApproximatelyEqual(date1: workout.safeStart, date2: workoutSample.startDate) &&
-                                            self.datesApproximatelyEqual(date1: workout.safeEnd, date2: workoutSample.endDate)
-                                    })
+                                    guard let externalUuid = workoutSample.externalUuid else { return true } // if the uuid is missing --> delete
+                                    // if there is no workout for this uuid --> delete
+                                    return !workouts.contains { $0.uuid == externalUuid }
                                 }
+                                print("deleting HKWorkouts: \(workoutSamplesToDelete)")
                                 if !workoutSamplesToDelete.isEmpty {
                                     group.enter()
                                     self.healthStore.delete(workoutSamplesToDelete) { success, error in
@@ -120,21 +121,57 @@ extension HealthManager {
                                     }
                                 }
                                 
+                                // save workouts that are missing from HealthKit
                                 let workoutSamplesToSave: [HKWorkout] = workouts.filter { workout in
-                                    !workoutSamples.contains(where: { workoutSample in
-                                        self.datesApproximatelyEqual(date1: workout.safeStart, date2: workoutSample.startDate) &&
-                                            self.datesApproximatelyEqual(date1: workout.safeEnd, date2: workoutSample.endDate)
-                                    })
+                                    guard let uuid = workout.uuid else { return false } // if the uuid is missing (should never happen) --> don't save
+                                    // if there is no workout sample for this uuid --> save
+                                    return !workoutSamples.contains { $0.externalUuid == uuid }
                                 }
                                 .compactMap { workout in
-                                    guard let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil } // should never fail
+                                    guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil } // should never fail
                                     let title = workout.displayTitle(in: exerciseStore.exercises)
-                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title])
+                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
                                 }
+                                print("saving HKWorkouts \(workoutSamplesToSave)")
                                 if !workoutSamplesToSave.isEmpty {
                                     group.enter()
                                     self.healthStore.save(workoutSamplesToSave) { success, error in
                                         _success = success
+                                        _error = error
+                                        group.leave()
+                                    }
+                                }
+                                
+                                // update start / end times
+                                let workoutSamplesToModify: [(HKWorkout, Workout)] = workouts.compactMap { workout in
+                                    guard let uuid = workout.uuid else { return nil }
+                                    guard let workoutSample = workoutSamples.first(where: { $0.externalUuid == uuid }) else { return nil }
+                                    return (workoutSample, workout)
+                                }
+                                .filter {
+                                    !self.approximatelyEqual(date1: $0.0.startDate, date2: $0.1.safeStart) || !self.approximatelyEqual(date1: $0.0.endDate, date2: $0.1.safeEnd)
+                                }
+                                print("modifying HKWorkouts \(workoutSamplesToModify)")
+                                if !workoutSamplesToModify.isEmpty {
+                                    group.enter()
+                                    self.healthStore.delete(workoutSamplesToModify.map { $0.0 }) { success, error in
+                                        _success = _success && success
+                                        _error = error
+                                        group.leave()
+                                    }
+                                    
+                                    let modifiedWorkoutSamples = workoutSamplesToModify.compactMap { workoutSample, workout -> HKWorkout? in
+                                        guard let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil }
+                                        let title = workout.displayTitle(in: exerciseStore.exercises)
+                                        var metadata = workoutSample.metadata
+                                        metadata?[HKMetadataKeyWorkoutBrandName] = title
+                                        
+                                        return HKWorkout(activityType: workoutSample.workoutActivityType, start: start, end: end, duration: duration, totalEnergyBurned: workoutSample.totalEnergyBurned, totalDistance: workoutSample.totalDistance, device: workoutSample.device, metadata: metadata)
+                                    }
+                                    
+                                    group.enter()
+                                    self.healthStore.save(modifiedWorkoutSamples) { success, error in
+                                        _success = _success && success
                                         _error = error
                                         group.leave()
                                     }
@@ -158,7 +195,14 @@ extension HealthManager {
         }
     }
     
-    private func datesApproximatelyEqual(date1: Date, date2: Date) -> Bool {
-        date1.timeIntervalSince(date2).magnitude < 1
+    private func approximatelyEqual(date1: Date, date2: Date) -> Bool {
+        abs(date1.timeIntervalSince(date2)) < 1
+    }
+}
+
+extension HKWorkout {
+    var externalUuid: UUID? {
+        guard let externalUuidString = metadata?[HKMetadataKeyExternalUUID] as? String else { return nil }
+        return UUID(uuidString: externalUuidString)
     }
 }
