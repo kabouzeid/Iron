@@ -25,6 +25,7 @@ private func toUuid(_ ids: [[Int]]) -> [[UUID]] {
 
 func createTestWorkoutData(context: NSManagedObjectContext) {
     let workout = Workout(context: context)
+    workout.uuid = UUID()
     workout.start = Calendar.current.date(byAdding: .day, value: -2, to: testDate)!
     workout.end = Calendar.current.date(byAdding: .minute, value: 110, to: workout.start!)!
     
@@ -60,6 +61,7 @@ private func createTestWorkoutExercises(workout: Workout) {
 
 func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
     let workout = Workout(context: context)
+    workout.uuid = UUID()
     workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: testDate)!
     workout.isCurrentWorkout = true
     

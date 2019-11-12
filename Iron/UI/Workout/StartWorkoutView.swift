@@ -51,6 +51,7 @@ struct StartWorkoutView: View {
                     precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
                     // create a new workout
                     let workout = Workout(context: self.managedObjectContext)
+                    workout.uuid = UUID()
                     workout.isCurrentWorkout = true
                     workout.start = Date()
                     self.managedObjectContext.safeSave()

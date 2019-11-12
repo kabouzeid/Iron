@@ -99,6 +99,7 @@ extension MockWorkoutData {
     private static func createRandomWorkoutData(context: NSManagedObjectContext, unit: WeightUnit) {
         for i in 1...20 {
             let workout = Workout(context: context)
+            workout.uuid = UUID()
             workout.start = Calendar.current.date(byAdding: .day, value: -Int.random(in: 1...4) * i, to: Date())!
             workout.end = Calendar.current.date(byAdding: .minute, value: Int.random(in: 80...120), to: workout.start!)!
             
@@ -145,6 +146,7 @@ extension MockWorkoutData {
     
     private static func createRandomCurrentWorkout(context: NSManagedObjectContext, unit: WeightUnit) -> Workout {
         let workout = Workout(context: context)
+        workout.uuid = UUID()
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: Date())!
         workout.isCurrentWorkout = true
         
@@ -219,6 +221,7 @@ extension MockWorkoutData {
                 }
                 
                 let workout = Workout(context: context)
+                workout.uuid = UUID()
                 workout.start = Calendar.current.date(byAdding: .minute, value: Int(sin(Double(number)) * 60), to: Calendar.current.date(byAdding: .day, value: -number + dayOffset, to: referenceDate)!)!
                 workout.end = Calendar.current.date(byAdding: .minute, value: 70 + Int(sin(Double(number)) * 30) , to: workout.start!)!
                 createWorkoutExercises(workout: workout, exerciseUuids: exerciseUuids[(j + indexOffset) % exerciseUuids.count], unit: unit)
@@ -245,6 +248,7 @@ extension MockWorkoutData {
 
     private static func createCurrentWorkout(context: NSManagedObjectContext, unit: WeightUnit, referenceDate: Date = Date()) -> Workout {
         let workout = Workout(context: context)
+        workout.uuid = UUID()
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: referenceDate)!
         workout.isCurrentWorkout = true
         

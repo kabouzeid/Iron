@@ -166,6 +166,15 @@ class WorkoutDataTests: XCTestCase {
         }
     }
     
+    func testUuidRequired() {
+        for workout in testWorkouts {
+            workout.uuid = nil
+            XCTAssertThrowsError(try persistenContainer.viewContext.save())
+            workout.uuid = UUID()
+            XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        }
+    }
+    
     func testCurrentWorkoutValidation() {
         XCTAssertEqual(try persistenContainer.viewContext.count(for: Workout.currentWorkoutFetchRequest), 1)
         let workout = createTestCurrentWorkout(context: persistenContainer.viewContext)
@@ -219,7 +228,7 @@ class WorkoutDataTests: XCTestCase {
         workoutSet.workoutExercise = testCurrentWorkout.workoutExercises?.firstObject as? WorkoutExercise
         XCTAssertNotNil(workoutSet.workoutExercise)
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
-        workoutSet.workoutExercise = testWorkoutExercises.first
+        workoutSet.workoutExercise = testWorkoutExercises.first { !$0.workout!.isCurrentWorkout }
         XCTAssertThrowsError(try persistenContainer.viewContext.save())
         workoutSet.isCompleted = true
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
@@ -262,6 +271,7 @@ class WorkoutDataTests: XCTestCase {
         let workoutSet2_1 = WorkoutSet(context: persistenContainer.viewContext)
         let workoutSet2_2 = WorkoutSet(context: persistenContainer.viewContext)
         
+        workout.uuid = UUID()
         workout.start = Date()
         workout.end = Date()
         workoutSet1_1.isCompleted = true

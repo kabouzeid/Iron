@@ -11,7 +11,14 @@ import CoreData
 
 enum IronBackup {
     private struct IronBackup: Codable {
-        let version: Int = 1
+        /*
+         Version History
+         ===============
+         
+         Version 1: initial
+         Version 2: workout UUIDs
+         */
+        var version: Int = 2 // var not let so it can be overwritten by decodable
         let date: Date
         let customExercises: [Exercise]
         let workouts: [Workout]

@@ -14,7 +14,6 @@ class Workout: NSManagedObject, Codable {
     
     override func awakeFromInsert() {
         super.awakeFromInsert()
-        uuid = UUID()
         initKVO()
     }
     
@@ -151,6 +150,7 @@ class Workout: NSManagedObject, Codable {
     
     // MARK: - Codable
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case title
         case comment
         case start
@@ -168,6 +168,7 @@ class Workout: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
         title = try container.decodeIfPresent(String.self, forKey: .title)
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
         start = try container.decode(Date.self, forKey: .start)
@@ -178,6 +179,7 @@ class Workout: NSManagedObject, Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid ?? UUID(), forKey: .uuid)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(comment, forKey: .comment)
         try container.encode(safeStart, forKey: .start)
@@ -292,7 +294,7 @@ extension Workout {
 
 // MARK: - Repeat
 extension Workout {
-    static func copyForRepeat(workout: Workout, blank: Bool) -> Workout? {
+    static func copyExercisesForRepeat(workout: Workout, blank: Bool) -> Workout? {
         guard let context = workout.managedObjectContext else { return nil }
         
         // create the workout

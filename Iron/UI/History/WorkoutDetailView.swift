@@ -204,7 +204,8 @@ extension WorkoutDetailView {
             feedbackGenerator.notificationOccurred(.error)
             return
         }
-        guard let newWorkout = Workout.copyForRepeat(workout: workout, blank: false) else { return }
+        guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: false) else { return }
+        newWorkout.uuid = UUID()
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
         context.safeSave()
@@ -221,7 +222,8 @@ extension WorkoutDetailView {
             feedbackGenerator.notificationOccurred(.error)
             return
         }
-        guard let newWorkout = Workout.copyForRepeat(workout: workout, blank: true) else { return }
+        guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: true) else { return }
+        newWorkout.uuid = UUID()
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
         context.safeSave()

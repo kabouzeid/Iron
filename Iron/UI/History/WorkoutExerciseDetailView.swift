@@ -262,8 +262,8 @@ struct WorkoutExerciseDetailView : View {
                     precondition(set.weight >= 0)
                     precondition(set.repetitions >= 0)
                     set.isCompleted = true
-                    let workout = set.workoutExercise!.workout!
-                    workout.start = workout.start ?? Date()
+                    let workout = set.workoutExercise?.workout
+                    workout?.start = workout?.start ?? Date()
                     self.moveWorkoutExerciseBehindLastBegun()
                     
                     let feedbackGenerator = UINotificationFeedbackGenerator()
