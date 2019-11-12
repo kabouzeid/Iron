@@ -56,23 +56,7 @@ struct StartWorkoutView: View {
                     workout.start = Date()
                     self.managedObjectContext.safeSave()
                     
-                    WatchConnectionManager.shared.prepareWatchWorkout {
-                        guard workout.isCurrentWorkout else {
-                            WatchConnectionManager.shared.unprepareWatchWorkout()
-                            return
-                        }
-                        guard let start = workout.start else {
-                            WatchConnectionManager.shared.unprepareWatchWorkout()
-                            assertionFailure("start should always be set at this point")
-                            return
-                        }
-                        guard let uuid = workout.uuid else {
-                            WatchConnectionManager.shared.unprepareWatchWorkout()
-                            assertionFailure("uuid is a required property")
-                            return
-                        }
-                        WatchConnectionManager.shared.startWatchWorkout(start: start, uuid: uuid)
-                    }
+                    WatchConnectionManager.shared.tryStartWatchWorkout(workout: workout)
                     
                     NotificationManager.shared.requestAuthorization()
                 }) {

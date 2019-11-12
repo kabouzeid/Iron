@@ -184,3 +184,27 @@ extension WatchConnectionManager {
         }
     }
 }
+
+extension WatchConnectionManager {
+    func tryStartWatchWorkout(workout: Workout) {
+        prepareWatchWorkout {
+            guard workout.isCurrentWorkout else {
+                self.unprepareWatchWorkout()
+                return
+            }
+            guard let start = workout.start else {
+                self.unprepareWatchWorkout()
+                assertionFailure("start should always be set at this point")
+                return
+            }
+            guard let uuid = workout.uuid else {
+                self.unprepareWatchWorkout()
+                assertionFailure("uuid is a required property")
+                return
+            }
+            self.startWatchWorkout(start: start, uuid: uuid)
+        }
+    }
+    
+    // TODO: add convenience functions for the other watch workout related actions
+}

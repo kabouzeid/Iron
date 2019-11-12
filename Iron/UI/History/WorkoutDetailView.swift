@@ -210,6 +210,8 @@ extension WorkoutDetailView {
         newWorkout.start = Date()
         context.safeSave()
         
+        WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
+        
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
         NotificationManager.shared.requestAuthorization()
     }
@@ -227,6 +229,8 @@ extension WorkoutDetailView {
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
         context.safeSave()
+        
+        WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
         
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
         NotificationManager.shared.requestAuthorization()
