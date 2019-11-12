@@ -310,13 +310,14 @@ struct WorkoutExerciseDetailView : View {
         .navigationBarTitle(Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
-                workoutExercise.exercise(in: exerciseStore.exercises).map {
-                    NavigationLink(destination: ExerciseDetailView(exercise: $0)
-                        .environmentObject(self.settingsStore)) {
-                            Image(systemName: "info.circle")
-                                .padding([.leading, .top, .bottom])
-                    }
-                }
+                // TODO: disable for now because it crashes when going back as of iOS 13.2.2
+//                workoutExercise.exercise(in: exerciseStore.exercises).map {
+//                    NavigationLink(destination: ExerciseDetailView(exercise: $0)
+//                        .environmentObject(self.settingsStore)) {
+//                            Image(systemName: "info.circle")
+//                                .padding([.leading, .top, .bottom])
+//                    }
+//                }
                 EditButton()
             }
         )
