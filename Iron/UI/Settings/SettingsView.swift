@@ -31,6 +31,10 @@ struct SettingsView : View {
                 Text("Apple Health")
             }
             
+            NavigationLink(destination: WatchSettingsView()) {
+                Text("Apple Watch")
+            }
+            
             NavigationLink(destination: BackupAndExportView()) {
                 Text("Backup & Export")
             }

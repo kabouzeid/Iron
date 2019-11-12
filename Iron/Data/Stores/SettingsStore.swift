@@ -84,6 +84,16 @@ final class SettingsStore: ObservableObject {
             userDefaults.autoBackup = newValue
         }
     }
+    
+    var watchCompanion: Bool {
+        get {
+            userDefaults.watchCompanion
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.watchCompanion = newValue
+        }
+    }
 }
 
 #if DEBUG

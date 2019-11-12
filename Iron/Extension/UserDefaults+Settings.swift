@@ -16,6 +16,7 @@ extension UserDefaults {
         case defaultRestTimeBarbellBased
         case maxRepetitionsOneRepMax
         case autoBackup
+        case watchCompanion
     }
 
     var weightUnit: WeightUnit {
@@ -76,6 +77,15 @@ extension UserDefaults {
         }
         get {
             self.bool(forKey: SettingsKeys.autoBackup.rawValue)
+        }
+    }
+    
+    var watchCompanion: Bool {
+        set {
+            self.set(newValue, forKey: SettingsKeys.watchCompanion.rawValue)
+        }
+        get {
+            self.value(forKey: SettingsKeys.watchCompanion.rawValue) as? Bool ?? true
         }
     }
 }

@@ -47,10 +47,10 @@ struct HistoryView : View {
                                     WorkoutDetailView.shareWorkout(workout: workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
                                 }
                                 Button("Repeat") {
-                                    WorkoutDetailView.repeatWorkout(workout: workout)
+                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore)
                                 }
                                 Button("Repeat (Blank)") {
-                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout)
+                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore)
                                 }
                             }
                     }

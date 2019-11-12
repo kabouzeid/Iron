@@ -56,7 +56,9 @@ struct StartWorkoutView: View {
                     workout.start = Date()
                     self.managedObjectContext.safeSave()
                     
-                    WatchConnectionManager.shared.tryStartWatchWorkout(workout: workout)
+                    if self.settingsStore.watchCompanion {
+                        WatchConnectionManager.shared.tryStartWatchWorkout(workout: workout)
+                    }
                     
                     NotificationManager.shared.requestAuthorization()
                 }) {

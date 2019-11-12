@@ -175,10 +175,10 @@ struct WorkoutDetailView : View {
                     Self.shareWorkout(workout: self.workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
                 }),
                 .default(Text("Repeat"), action: {
-                    Self.repeatWorkout(workout: self.workout)
+                    Self.repeatWorkout(workout: self.workout, settingsStore: self.settingsStore)
                 }),
                 .default(Text("Repeat (Blank)"), action: {
-                    Self.repeatWorkoutBlank(workout: self.workout)
+                    Self.repeatWorkoutBlank(workout: self.workout, settingsStore: self.settingsStore)
                 }),
                 .cancel()
             ])
@@ -196,7 +196,7 @@ extension WorkoutDetailView {
         rootVC.present(ac, animated: true)
     }
     
-    static func repeatWorkout(workout: Workout) {
+    static func repeatWorkout(workout: Workout, settingsStore: SettingsStore) {
         guard let context = workout.managedObjectContext else { return }
         guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
             let feedbackGenerator = UINotificationFeedbackGenerator()
@@ -210,13 +210,15 @@ extension WorkoutDetailView {
         newWorkout.start = Date()
         context.safeSave()
         
-        WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
+        if settingsStore.watchCompanion {
+            WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
+        }
         
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
         NotificationManager.shared.requestAuthorization()
     }
     
-    static func repeatWorkoutBlank(workout: Workout) {
+    static func repeatWorkoutBlank(workout: Workout, settingsStore: SettingsStore) {
         guard let context = workout.managedObjectContext else { return }
         guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
             let feedbackGenerator = UINotificationFeedbackGenerator()
@@ -230,7 +232,9 @@ extension WorkoutDetailView {
         newWorkout.start = Date()
         context.safeSave()
         
-        WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
+        if settingsStore.watchCompanion {
+            WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
+        }
         
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
         NotificationManager.shared.requestAuthorization()
