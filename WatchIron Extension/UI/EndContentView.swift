@@ -40,7 +40,7 @@ private struct _EndContentView: View {
                     if let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid {
                         self.workoutSessionManagerStore.discardWorkoutSession(uuid: uuid)
                     } else {
-                        self.workoutSessionManagerStore.unprepareWorkoutSession()
+                        self.workoutSessionManagerStore.unprepareWorkoutSession(force: true)
                     }
                 }) {
                     HStack {

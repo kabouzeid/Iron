@@ -143,7 +143,7 @@ extension WorkoutSessionManagerStore {
                     // TODO send confirmation
                     print("success: started workout session")
                 case .failure(let error):
-                    print(error)
+                    print("could not start workout session: \(error)")
                     WorkoutSessionManager.perform {
                         workoutSessionManager.discard()
                         self.workoutSessionManager = nil
@@ -277,7 +277,7 @@ extension WorkoutSessionManagerStore {
         }
     }
     
-    func unprepareWorkoutSession() {
+    func unprepareWorkoutSession(force: Bool = false) {
         WorkoutSessionManager.perform {
             guard let workoutSessionManager = self.workoutSessionManager else {
                 // invalid
@@ -286,7 +286,7 @@ extension WorkoutSessionManagerStore {
                 return
             }
             
-            guard workoutSessionManager.state == .prepared || workoutSessionManager.state == .notStarted else {
+            guard force || workoutSessionManager.state == .prepared || workoutSessionManager.state == .notStarted else {
                 // can happen, but something probably went wrong before
                 print("warning: attempt to unprepare workout session that is not in .prepared or .notStarted state")
                 return

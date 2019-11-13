@@ -154,7 +154,6 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         do {
             try requestWorkoutPermissions().get()
         } catch {
-            discard()
             completion(.failure(error))
             return
         }
@@ -169,7 +168,6 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         workoutSession.startActivity(with: start)
         workoutBuilder.beginCollection(withStart: start, completion: { (success, error) in
             guard success else {
-                self.discard()
                 completion(.failure(error ?? NSError()))
                 return
             }
@@ -224,7 +222,6 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         do {
             try self.requestWorkoutPermissions().get()
         } catch {
-            self.discard()
             completion(.failure(error))
             return
         }
