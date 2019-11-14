@@ -162,7 +162,8 @@ struct Dragger : View {
             Image(systemName: "square.grid.4x3.fill")
                 .rotationEffect(Angle(degrees: 90))
                 .offset(y: draggerOffset)
-                .modifier(WiggleModifier(wiggleToggle: wiggleDraggerToggle, wiggleDistance: Self.DRAGGER_MOVEMENT).animation(.linear(duration: 1)))
+                // disable for now, crashes on iOS 13.1.x production builds but not on iOS 13.2 (built with Xcode 11.2.1 GM)
+//                .modifier(WiggleModifier(wiggleToggle: wiggleDraggerToggle, wiggleDistance: Self.DRAGGER_MOVEMENT).animation(.linear(duration: 1)))
                 .animation(.interactiveSpring())
                 .foregroundColor(isDragging ? Color(UIColor.tertiaryLabel): Color.secondary)
                 .padding()
@@ -179,21 +180,22 @@ struct Dragger : View {
     }
 }
 
-private struct WiggleModifier: AnimatableModifier {
-    var wiggleToggle: Bool // toggle this to animate
-    var wiggleDistance: CGFloat
-    
-    private(set) var progress: CGFloat = 0
-    
-    var animatableData: CGFloat {
-        get { wiggleToggle ? 1 : 0 }
-        set { wiggleToggle = newValue > 0.5; progress = newValue }
-    }
-    
-    func body(content: _ViewModifier_Content<WiggleModifier>) -> some View {
-        content.offset(y: max(min(2*sin(progress * 2 * .pi), 1), -1) * wiggleDistance)
-    }
-}
+// disable for now, crashes on iOS 13.1.x production builds but not on iOS 13.2 (built with Xcode 11.2.1 GM)
+//private struct WiggleModifier: AnimatableModifier {
+//    var wiggleToggle: Bool // toggle this to animate
+//    var wiggleDistance: CGFloat
+//
+//    private(set) var progress: CGFloat = 0
+//
+//    var animatableData: CGFloat {
+//        get { wiggleToggle ? 1 : 0 }
+//        set { wiggleToggle = newValue > 0.5; progress = newValue }
+//    }
+//
+//    func body(content: _ViewModifier_Content<WiggleModifier>) -> some View {
+//        content.offset(y: max(min(2*sin(progress * 2 * .pi), 1), -1) * wiggleDistance)
+//    }
+//}
 
 private struct Cursor: View {
     @State private var blink = false
