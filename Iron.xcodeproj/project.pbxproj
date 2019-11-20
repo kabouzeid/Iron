@@ -39,6 +39,7 @@
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
 		8A3EB422204AFCF000E3A08B /* Array+sorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EB421204AFCF000E3A08B /* Array+sorted.swift */; };
 		8A442AD7207A428500A2BDBD /* Date+Days.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* Date+Days.swift */; };
+		8A4D3B7223858F6F007A3792 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4D3B7123858F6F007A3792 /* NotificationManager.swift */; };
 		8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A47E22D7C93B0076E99A /* SettingsView.swift */; };
 		8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */; };
 		8A58807823773432007F31A1 /* WorkoutSessionManagerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A58807723773432007F31A1 /* WorkoutSessionManagerStore.swift */; };
@@ -270,6 +271,7 @@
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
 		8A3EB421204AFCF000E3A08B /* Array+sorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sorted.swift"; sourceTree = "<group>"; };
 		8A442AD6207A428500A2BDBD /* Date+Days.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Days.swift"; sourceTree = "<group>"; };
+		8A4D3B7123858F6F007A3792 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8A56A47E22D7C93B0076E99A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Settings.swift"; sourceTree = "<group>"; };
 		8A58807723773432007F31A1 /* WorkoutSessionManagerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionManagerStore.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */,
 				8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */,
 				8A58807723773432007F31A1 /* WorkoutSessionManagerStore.swift */,
+				8A4D3B7123858F6F007A3792 /* NotificationManager.swift */,
 				8A86194C236DB65200C1E96C /* UI */,
 				8A861933236DAB7100C1E96C /* Assets.xcassets */,
 				8A861938236DAB7100C1E96C /* Info.plist */,
@@ -1271,6 +1274,7 @@
 				8A861930236DAB7000C1E96C /* MainHostingController.swift in Sources */,
 				8AB365AA2370884400353D5A /* PayloadKey.swift in Sources */,
 				8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */,
+				8A4D3B7223858F6F007A3792 /* NotificationManager.swift in Sources */,
 				8A58807823773432007F31A1 /* WorkoutSessionManagerStore.swift in Sources */,
 				8AA0A214236E1AD600C6AF93 /* WeightUnit.swift in Sources */,
 				8A34FA092379B59D009CF1DD /* EndContentView.swift in Sources */,

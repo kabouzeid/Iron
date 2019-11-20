@@ -21,6 +21,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
         handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?!
         PhoneConnectionManager.shared.activateSession()
+        NotificationManager.shared.awake()
     }
     
     private var cancellable: AnyCancellable?
