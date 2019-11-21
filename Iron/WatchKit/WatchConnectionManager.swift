@@ -33,6 +33,10 @@ class WatchConnectionManager: NSObject {
     
     typealias PerpareHandler = (() -> Void)
     private var preparedHandler: PerpareHandler?
+    
+    let selectedSetChangePublisher = PassthroughSubject<(WorkoutSet?, UUID), Never>()
+    var selectedSetChangePublisherCancellable: Cancellable?
+    var selectedSetCancellable: Cancellable?
 }
 
 extension WatchConnectionManager: WCSessionDelegate {
@@ -96,12 +100,10 @@ extension WatchConnectionManager {
 }
 
 extension WatchConnectionManager {
-    // 1. we need to monitor when a workout is started / finished / discarded
-    // 2. we need to monitor the start time
-    
     /// wrapper to send either via message or transfer, depending on what's available
     private func sendUserInfo(userInfo: [String : Any]) {
-        if session.isReachable {
+        assert(isActivated)
+        if isReachable {
             session.sendMessage(userInfo, replyHandler: nil) { error in
                 self.session.transferUserInfo(userInfo)
             }
@@ -112,6 +114,7 @@ extension WatchConnectionManager {
     
     func prepareWatchWorkout(preparedHandler: @escaping PerpareHandler) {
         print(#function)
+        guard isActivated else { return } // makes no sense to prepare the workout when we can't send messages
         self.preparedHandler = preparedHandler // set here, because the prepare message is received even before startWatchApp() completion fires
         HealthManager.shared.healthStore.startWatchApp(with: HealthManager.shared.workoutConfiguration) { success, error in
             guard success else {
@@ -124,32 +127,42 @@ extension WatchConnectionManager {
     
     func unprepareWatchWorkout() {
         print(#function)
+        guard isActivated else { return }
         sendUserInfo(userInfo: [PayloadKey.unprepareWorkoutSession : true])
         currentWatchWorkoutUuid = nil
     }
     
     func startWatchWorkout(start: Date, uuid: UUID) {
         print(#function)
+        guard isActivated else { return }
+        #if DEBUG
         if currentWatchWorkoutUuid != nil {
             print("warning: overwriting currentWatchWorkoutUuid")
         }
+        #endif
         sendUserInfo(userInfo: [PayloadKey.startWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.uuid : uuid.uuidString]])
         currentWatchWorkoutUuid = uuid
     }
     
     func updateWatchWorkoutStart(start: Date, uuid: UUID) {
         print(#function)
+        guard isActivated else { return }
+        #if DEBUG
         if currentWatchWorkoutUuid != uuid {
             print("warning: sending update watch workout start for different uuid")
         }
+        #endif
         sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionStart : [PayloadKey.Arg.start : start, PayloadKey.Arg.uuid : uuid.uuidString]])
     }
     
     func updateWatchWorkoutEnd(end: Date?, uuid: UUID) {
         print(#function)
+        guard isActivated else { return }
+        #if DEBUG
         if currentWatchWorkoutUuid != uuid {
-            print("warning: sending update watch workout start for different uuid")
+            print("warning: sending update watch workout end for different uuid")
         }
+        #endif
         if let end = end {
             sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionEnd : [PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
         } else {
@@ -157,20 +170,56 @@ extension WatchConnectionManager {
         }
     }
     
+    func updateWatchWorkoutRestTimerEnd(end: Date?, uuid: UUID) {
+        print(#function)
+        guard isActivated else { return }
+        #if DEBUG
+        if currentWatchWorkoutUuid != uuid {
+            print("warning: sending update rest timer end for different uuid")
+        }
+        #endif
+        if let end = end {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionRestTimerEnd : [PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
+        } else {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionRestTimerEnd : [PayloadKey.Arg.uuid : uuid.uuidString]])
+        }
+    }
+    
+    func updateWatchWorkoutSelectedSet(text: String?, uuid: UUID) {
+        print(#function)
+        guard isActivated else { return }
+        #if DEBUG
+        if currentWatchWorkoutUuid != uuid {
+            print("warning: sending update selected set for different uuid")
+        }
+        #endif
+        if let text = text {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionSelectedSet : [PayloadKey.Arg.text : text, PayloadKey.Arg.uuid : uuid.uuidString]])
+        } else {
+            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionSelectedSet : [PayloadKey.Arg.uuid : uuid.uuidString]])
+        }
+    }
+    
     func finishWatchWorkout(start: Date, end: Date, uuid: UUID) {
         print(#function)
+        guard isActivated else { return }
+        #if DEBUG
         if currentWatchWorkoutUuid != uuid {
             print("warning: sending finish watch workout for different uuid")
         }
+        #endif
         sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
         currentWatchWorkoutUuid = nil
     }
     
     func discardWatchWorkout(uuid: UUID) {
         print(#function)
+        guard isActivated else { return }
+        #if DEBUG
         if currentWatchWorkoutUuid != uuid {
             print("warning: sending discard watch workout for different uuid")
         }
+        #endif
         sendUserInfo(userInfo: [PayloadKey.discardWorkoutSession : [PayloadKey.Arg.uuid : uuid.uuidString]])
         currentWatchWorkoutUuid = nil
     }
@@ -207,4 +256,22 @@ extension WatchConnectionManager {
     }
     
     // TODO: add convenience functions for the other watch workout related actions
+}
+
+extension WatchConnectionManager {
+    func updateAndObserveWatchWorkoutSelectedSet(workoutSet: WorkoutSet?, uuid: UUID) {
+        if selectedSetChangePublisherCancellable == nil {
+            selectedSetChangePublisherCancellable = selectedSetChangePublisher
+                .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+                .drop { self.currentWatchWorkoutUuid != $0.1 }
+                .map { ($0.0?.displayTitle(unit: SettingsStore.shared.weightUnit), $0.1) }
+                .removeDuplicates { $0.0 == $1.0 }
+                .sink { self.updateWatchWorkoutSelectedSet(text: $0.0, uuid: $0.1) }
+        }
+        
+        selectedSetChangePublisher.send((workoutSet, uuid))
+        selectedSetCancellable = workoutSet?.objectWillChange
+            .map { _ in (workoutSet, uuid) }
+            .subscribe(selectedSetChangePublisher)
+    }
 }

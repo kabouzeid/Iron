@@ -15,6 +15,37 @@ class WorkoutSessionManager: NSObject, ObservableObject {
     
     var objectWillChange = ObservableObjectPublisher()
     
+    var restTimerEnd: Date? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    
+    var selectedSetText: String? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    
+    private var _burnedCalories: Double? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    private var _mostRecentHeartRate: Double? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    
     private var _startDate: Date? {
         willSet {
             DispatchQueue.main.async {
@@ -265,43 +296,58 @@ extension WorkoutSessionManager: HKLiveWorkoutBuilderDelegate {
     }
     
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
-        DispatchQueue.main.async {
-            self.objectWillChange.send()
+        if let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) {
+            if collectedTypes.contains(heartRate) {
+                mostRecentHeartRate = getMostRecentHeartRate(workoutBuilder: workoutBuilder)
+            }
         }
-//        if let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) {
-//            if collectedTypes.contains(heartRate) {
-//
-//            }
-//        }
-//
-//        if let activeEnergyBurned = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) {
-//            if collectedTypes.contains(activeEnergyBurned) {
-//
-//            }
-//        }
+
+        if let activeEnergyBurned = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) {
+            if collectedTypes.contains(activeEnergyBurned) {
+                burnedCalories = getBurnedCalories(workoutBuilder: workoutBuilder)
+            }
+        }
     }
 }
 
 extension WorkoutSessionManager {
-    var burnedCalories: Double? {
-        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { return nil }
-        return workoutBuilder.statistics(for: heartRate)?.sumQuantity()?.doubleValue(for: .kilocalorie())
+    private func getBurnedCalories(workoutBuilder: HKWorkoutBuilder) -> Double? {
+        guard let burnedCalories = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { return nil }
+        return workoutBuilder.statistics(for: burnedCalories)?.sumQuantity()?.doubleValue(for: .kilocalorie())
     }
     
-    var mostRecentHeartRate: Double? {
+    private func getMostRecentHeartRate(workoutBuilder: HKWorkoutBuilder) -> Double? {
         guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
         return workoutBuilder.statistics(for: heartRate)?.mostRecentQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
     }
     
-//    var averageHeartRate: Double? {
-//        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
-//        return workoutBuilder.statistics(for: heartRate)?.averageQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
-//    }
-//
-//    var maxHeartRate: Double? {
-//        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
-//        return workoutBuilder.statistics(for: heartRate)?.maximumQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
-//    }
+    var burnedCalories: Double? {
+        get {
+            if let burnedCalories = _burnedCalories {
+                return burnedCalories
+            }
+            guard let burnedCalories = getBurnedCalories(workoutBuilder: workoutBuilder) else { return nil }
+            _burnedCalories = burnedCalories
+            return burnedCalories
+        }
+        set {
+            _burnedCalories = newValue
+        }
+    }
+    
+    var mostRecentHeartRate: Double? {
+        get {
+            if let mostRecentHeartRate = _mostRecentHeartRate {
+                return mostRecentHeartRate
+            }
+            guard let mostRecentHeartRate = getMostRecentHeartRate(workoutBuilder: workoutBuilder) else { return nil }
+            _mostRecentHeartRate = mostRecentHeartRate
+            return mostRecentHeartRate
+        }
+        set {
+            _mostRecentHeartRate = newValue
+        }
+    }
 }
 
 extension WorkoutSessionManager: HKWorkoutSessionDelegate {

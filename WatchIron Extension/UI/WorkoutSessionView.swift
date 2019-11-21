@@ -12,39 +12,42 @@ import Combine
 struct WorkoutSessionView: View {
     @ObservedObject var workoutSessionManager: WorkoutSessionManager
     
+    private let timeRefresher = Refresher()
+    
     var labelSize: CGFloat {
         let width = WKInterfaceDevice.current().screenBounds.width
         if width >= 184 { // Series 5 - 44mm
-            return 24
+            return 21 // max 21
         } else if width >= 162 { // Series 5 - 40mm
-            return 20 // 21 works too, but lets play it safe
+            return 18 // max 18
         } else if width >= 156 { // Series 3 - 40mm
-            return 20
+            return 18
         } else /* width >= 136 */ { // Series 3 - 38mm
             return 16
         }
     }
     
-    var burnedCalories: Double? {
+    private var burnedCalories: Double? {
         workoutSessionManager.burnedCalories
     }
     
-    var burnedCaloriesString: String {
+    private var burnedCaloriesString: String {
         burnedCalories.map { String(format: "%.0f", $0) } ?? "--"
     }
     
-    var mostRecentHeartRate: Double? {
+    private var mostRecentHeartRate: Double? {
         workoutSessionManager.mostRecentHeartRate
     }
     
-    var mostRecentHeartRateString: String {
+    private var mostRecentHeartRateString: String {
         mostRecentHeartRate.map { String(format: "%.0f", $0) } ?? "--"
     }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             HStack(alignment: .center) {
-                ElapsedTimeView(start: workoutSessionManager.startDate, end: workoutSessionManager.endDate).font(Font.title.monospacedDigit())
+                ElapsedTimeView(refresher: timeRefresher, start: workoutSessionManager.startDate, end: workoutSessionManager.endDate)
+                    .font(Font.system(size: labelSize * 1.5).monospacedDigit())
                 Spacer()
                 Image(systemName: "stopwatch.fill")
                     .foregroundColor(.blue)
@@ -52,7 +55,18 @@ struct WorkoutSessionView: View {
             }
             
             HStack(alignment: .firstTextBaseline) {
-                Text(burnedCaloriesString).font(.title)
+                RestTimerView(refresher: timeRefresher, end: workoutSessionManager.restTimerEnd)
+                    .font(Font.system(size: labelSize * 1.5).monospacedDigit())
+                Spacer()
+                Image(systemName: "timer")
+                    .foregroundColor(.blue)
+                    .font(.system(size: labelSize, weight: .bold, design: .rounded))
+            }
+            
+            HStack(alignment: .firstTextBaseline) {
+                Text(burnedCaloriesString)
+                    .foregroundColor(burnedCalories == nil ? .secondary : .primary)
+                    .font(.system(size: labelSize * 1.5))
                 Spacer()
                 HStack(alignment: .center) {
                     Text("kcal".uppercased())
@@ -63,7 +77,9 @@ struct WorkoutSessionView: View {
             }
             
             HStack(alignment: .firstTextBaseline) {
-                Text(mostRecentHeartRateString).font(.title)
+                Text(mostRecentHeartRateString)
+                    .foregroundColor(mostRecentHeartRate == nil ? .secondary : .primary)
+                    .font(.system(size: labelSize * 1.5))
                 
                 Spacer()
                 
@@ -74,12 +90,18 @@ struct WorkoutSessionView: View {
                 .foregroundColor(.red)
                 .font(.system(size: labelSize, weight: .bold, design: .rounded))
             }
-        }.lineLimit(1)
+            
+            Divider().padding([.top, .bottom], 2)
+            
+            Text(workoutSessionManager.selectedSetText ?? "No set selected")
+        }
+        .lineLimit(1)
+        .onReceive(Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()) { _ in self.timeRefresher.refresh() } // refreshing only every second is too choppy
     }
 }
 
 private struct ElapsedTimeView: View {
-    @ObservedObject private var refresher = Refresher()
+    @ObservedObject var refresher: Refresher
     
     private static let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -94,7 +116,42 @@ private struct ElapsedTimeView: View {
     
     var body: some View {
         Text(Self.durationFormatter.string(from: start ?? Date(), to: end ?? Date()) ?? "")
-            .onReceive(Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()) { _ in self.refresher.refresh() } // refreshing only every second is choppy
+            .foregroundColor(start == nil ? .secondary : .primary)
+    }
+}
+
+private struct RestTimerView: View {
+    @ObservedObject var refresher: Refresher
+    
+    private static let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    let end: Date?
+    
+    private var remainingTime: TimeInterval? {
+        guard let end = end else { return nil }
+        let remainingTime = end.timeIntervalSince(Date())
+        guard remainingTime >= 0 else { return nil }
+        return remainingTime
+    }
+    
+    // i.e. 8.1 and 8.9 should be displayed as 9
+    private var roundedRemainingTime: TimeInterval? {
+        remainingTime?.rounded(.up)
+    }
+    
+    private var timerText: String {
+        Self.durationFormatter.string(from: roundedRemainingTime ?? 0) ?? ""
+    }
+    
+    var body: some View {
+        Text(timerText)
+            .foregroundColor(remainingTime == nil ? .secondary : .primary)
     }
 }
 

@@ -66,7 +66,15 @@ struct WorkoutExerciseDetailView : View {
                 initRepsAndWeight(for: set)
             }
             selectedWorkoutSet = set
+            
+            updateWatchSelectedSet()
         }
+    }
+    
+    private func updateWatchSelectedSet() {
+        guard isCurrentWorkout else { return }
+        guard let uuid = selectedWorkoutSet?.workoutExercise?.workout?.uuid else { return }
+        WatchConnectionManager.shared.updateAndObserveWatchWorkoutSelectedSet(workoutSet: selectedWorkoutSet, uuid: uuid)
     }
     
     private func initRepsAndWeight(for set: WorkoutSet) {

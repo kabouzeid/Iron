@@ -12,7 +12,6 @@ struct EndContentView: View {
         var body: some View {
             _EndContentView()
                 .environmentObject(WorkoutSessionManagerStore.shared)
-                .environmentObject(PhoneConnectionManager.shared)
         }
 }
 

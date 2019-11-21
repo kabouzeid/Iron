@@ -297,4 +297,46 @@ extension WorkoutSessionManagerStore {
             print("success: unprepared workout session")
         }
     }
+    
+    func updateWorkoutSessionRestTimerEnd(end: Date?, uuid: UUID) {
+        WorkoutSessionManager.perform {
+            guard let workoutSessionManager = self.workoutSessionManager else {
+                // invalid
+                // should not happen normally, but can happen
+                print("warning: attempt to update rest timer end while no workout session manager is set")
+                return
+            }
+            
+            // make sure the message means the current workout
+            guard workoutSessionManager.uuid == uuid else {
+                // invalid
+                // should not happen normally, but can happen
+                print("warning: attempt to update rest timer end with different UUID")
+                return
+            }
+            
+            workoutSessionManager.restTimerEnd = end
+        }
+    }
+    
+    func updateWorkoutSessionSelectedSetText(text: String?, uuid: UUID) {
+        WorkoutSessionManager.perform {
+            guard let workoutSessionManager = self.workoutSessionManager else {
+                // invalid
+                // should not happen normally, but can happen
+                print("warning: attempt to update selected set text while no workout session manager is set")
+                return
+            }
+            
+            // make sure the message means the current workout
+            guard workoutSessionManager.uuid == uuid else {
+                // invalid
+                // should not happen normally, but can happen
+                print("warning: attempt to update selected set text with different UUID")
+                return
+            }
+            
+            workoutSessionManager.selectedSetText = text
+        }
+    }
 }

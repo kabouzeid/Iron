@@ -33,6 +33,14 @@ enum PayloadKey {
     static let updateWorkoutSessionEnd = "updateWorkoutSessionEnd"
     
     // phone --> watch
+    // Args: [end: Date, uuid: UUID]
+    static let updateWorkoutSessionRestTimerEnd = "updateWorkoutSessionRestTimerEnd"
+    
+    // phone --> watch
+    // Args: [text: String, uuid: UUID] // TODO: replace with [reps: Int, weight: Double, uuid: UUID]
+    static let updateWorkoutSessionSelectedSet = "updateWorkoutSessionSelectedSet"
+    
+    // phone --> watch
     // Args: [start: Date, end: Date, uuid: UUID]
     static let endWorkoutSession = "endWorkoutSession"
     
@@ -43,6 +51,7 @@ enum PayloadKey {
     enum Arg {
         static let start = "start"
         static let end = "end"
+        static let text = "text"
         static let uuid = "uuid"
     }
 }
