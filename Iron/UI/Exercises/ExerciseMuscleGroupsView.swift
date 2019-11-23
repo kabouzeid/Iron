@@ -38,10 +38,7 @@ struct ExerciseMuscleGroupsView : View {
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination:
-                        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: exercisesGrouped)
-                            .environmentObject(settingsStore)
-                            .navigationBarTitle(Text("All Exercises"), displayMode: .inline)) {
+                    NavigationLink(destination: AllExercisesView(exercisesGrouped: exercisesGrouped)) {
                         HStack {
                             Text("All")
                             Spacer()
@@ -90,6 +87,27 @@ struct ExerciseMuscleGroupsView : View {
             .navigationBarTitle("Exercises")
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+    }
+}
+
+private struct AllExercisesView: View {
+    @ObservedObject private var filter: ExerciseGroupFilter
+    
+    init(exercisesGrouped: [[Exercise]]) {
+        self.filter = ExerciseGroupFilter(exercises: exercisesGrouped)
+    }
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            TextField("Search", text: $filter.filter)
+                .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
+                .padding()
+            
+            Divider()
+            
+            MuscleGroupSectionedExercisesView(exerciseMuscleGroups: filter.exercises)
+        }
+        .navigationBarTitle(Text("All Exercises"), displayMode: .inline)
     }
 }
 

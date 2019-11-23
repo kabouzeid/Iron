@@ -11,29 +11,29 @@ import Combine
 
 class ExerciseGroupFilter: ObservableObject {
     var filter: String = "" {
-        willSet {
-            if isEmpty != newValue.isEmpty {
-                isEmpty = newValue.isEmpty
+        didSet {
+            if filter.isEmpty {
+                // not necessary, but when the user clears the search this makes it happen immediately
+                exercises = originalExercises
             }
-            searchSubject.send(newValue)
+            searchSubject.send(filter) // send even if filter.isEmpty because otherwise the searchSubject doesn't work correctly
         }
     }
     
+    private let originalExercises: [[Exercise]]
+
     @Published var exercises: [[Exercise]]
-    @Published var isEmpty: Bool
     
     private var searchSubject = PassthroughSubject<String, Never>()
     private var cancellable: Cancellable?
     
-    init(exercises: [[Exercise]], filter: String = "") {
+    init(exercises: [[Exercise]]) {
+        originalExercises = exercises
         self.exercises = exercises
-        self.filter = filter
-        self.isEmpty = filter.isEmpty
         
         cancellable = searchSubject
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global(qos: .userInteractive))
-            .removeDuplicates()
-            .map { ExerciseStore.filter(exercises: exercises, using: $0) }
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.global(qos: .userInteractive))
+            .map { ExerciseStore.filter(exercises: self.originalExercises, using: $0) }
             .receive(on: DispatchQueue.main)
             .assign(to: \.exercises, on: self)
     }
