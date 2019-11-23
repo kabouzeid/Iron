@@ -345,7 +345,7 @@ struct WorkoutView: View {
         }
         .actionSheet(isPresented: $showingCancelActionSheet, content: {
             ActionSheet(title: Text("This cannot be undone."), message: nil, buttons: [
-                .destructive(Text("Delete Workout"), action: {
+                .destructive(Text("Discard Workout"), action: {
                     self.cancelWorkout()
                 }),
                 .cancel()
