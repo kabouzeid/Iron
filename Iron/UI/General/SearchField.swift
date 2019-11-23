@@ -22,6 +22,7 @@ struct SearchTextFieldStyle: TextFieldStyle {
             if !text.isEmpty {
                 Button(action: {
                     self.text = ""
+                    UIApplication.shared.activeSceneKeyWindow?.endEditing(false)
                 }, label: {
                     Image(systemName: "xmark.circle.fill")
                 })
