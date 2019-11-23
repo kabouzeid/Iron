@@ -129,7 +129,7 @@ struct BackupAndExportView: View {
     private func shareFile(url: URL) {
         let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         // TODO: replace this hack with a proper way to retreive the rootViewController
-        guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+        guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
         rootVC.present(ac, animated: true)
     }
 }

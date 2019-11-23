@@ -192,7 +192,7 @@ extension WorkoutDetailView {
         guard let logText = workout.logText(in: exercises, weightUnit: weightUnit) else { return }
         let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
         // TODO: replace this hack with a proper way to retreive the rootViewController
-        guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+        guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
         rootVC.present(ac, animated: true)
     }
     

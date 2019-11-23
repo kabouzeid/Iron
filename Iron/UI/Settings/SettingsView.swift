@@ -66,7 +66,7 @@ struct SettingsView : View {
                 mail.setToRecipients(["support@ironapp.io"])
                 
                 // TODO: replace this hack with a proper way to retreive the rootViewController
-                guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+                guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
                 rootVC.present(mail, animated: true)
             }) {
                 HStack {
