@@ -247,9 +247,24 @@ struct WorkoutSetEditor : View {
         .drawingGroup() // fixes visual bug with show/hide animation of this view
         .gesture(DragGesture()
             .onEnded({ drag in
-                if drag.predictedEndTranslation.height > 100 {
-                    withAnimation {
-                        self.showKeyboard = .none
+                let width = drag.predictedEndTranslation.width
+                let height = drag.predictedEndTranslation.height
+                
+                if abs(height) > abs(width) {
+                    if height > 200 {
+                        withAnimation {
+                            self.showKeyboard = .none
+                        }
+                    }
+                } else {
+                    if width > 200 {
+                        withAnimation {
+                            self.showKeyboard = .repetitions
+                        }
+                    } else if width < 200 {
+                        withAnimation {
+                            self.showKeyboard = .weight
+                        }
                     }
                 }
             })
