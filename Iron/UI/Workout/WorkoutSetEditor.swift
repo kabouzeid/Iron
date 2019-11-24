@@ -226,6 +226,7 @@ struct WorkoutSetEditor : View {
                 buttons
             } else {
                 keyboardButtons
+                Divider()
             }
             
             if showKeyboard == .weight {

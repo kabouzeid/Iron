@@ -89,10 +89,10 @@ struct NumericKeyboard: View {
     private func textActionKeyboardButton(label: Text, width: CGFloat, action: @escaping () -> Void) -> some View {
         Button(action: { self.tockSound(); action() }) {
             label
+                .foregroundColor(.primary)
                 .padding()
-                .foregroundColor(Color.white)
                 .frame(width: width)
-                .background(Color(UIColor.darkGray))
+                .background(Color.clear)
         }
     }
     
@@ -103,11 +103,11 @@ struct NumericKeyboard: View {
                     .padding()
                     .foregroundColor(.clear)
                 label
+                    .foregroundColor(.primary)
                     .padding()
-                    .foregroundColor(.white)
                     .frame(width: width)
             }
-            .background(Color(UIColor.darkGray))
+            .background(Color.clear)
         }
     }
     
@@ -123,24 +123,21 @@ struct NumericKeyboard: View {
                     self.textKeyboardButton(label: Text("2"), value: "2", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("3"), value: "3", width: geometry.size.width / 3)
                 }
-                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("4"), value: "4", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("5"), value: "5", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("6"), value: "6", width: geometry.size.width / 3)
                 }
-                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("7"), value: "7", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("8"), value: "8", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("9"), value: "9", width: geometry.size.width / 3)
                 }
-                .buttonStyle(PlainButtonStyle())
                 
                 HStack(spacing: 0) {
-                    self.textActionKeyboardButton(label: Text(Locale.current.decimalSeparator ?? "."), width: geometry.size.width / 3) {
+                    self.textActionKeyboardButton(label: Text(self.allowsFloats ? (Locale.current.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
                         self.alwaysShowDecimalSeparator = true
                     }.environment(\.isEnabled, self.allowsFloats)
@@ -157,9 +154,7 @@ struct NumericKeyboard: View {
                         self.setValue(string: String(string.dropLast()))
                     }
                 }
-                .buttonStyle(PlainButtonStyle())
             }
-            .background(Color(UIColor.gray))
             .fixedSize()
         }
         .frame(height: 210) // TODO: only temporary because this doesn't support dynamic type size
