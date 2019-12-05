@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import WorkoutDataKit
 
 struct HistoryView : View {
     @EnvironmentObject var settingsStore: SettingsStore

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Charts
+import WorkoutDataKit
 
 struct ExerciseStatisticsView : View {
     var exercise: Exercise

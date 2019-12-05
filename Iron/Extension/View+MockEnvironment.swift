@@ -8,6 +8,7 @@
 
 #if DEBUG
 import SwiftUI
+import WorkoutDataKit
 
 extension View {
     func mockEnvironment(weightUnit: WeightUnit, isPro: Bool) -> some View {

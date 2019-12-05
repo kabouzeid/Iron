@@ -10,6 +10,7 @@ import SwiftUI
 import StoreKit
 import AVKit
 import HealthKit
+import WorkoutDataKit
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext

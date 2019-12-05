@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Charts
+import WorkoutDataKit
 
 struct ExerciseChartView : View {
     @EnvironmentObject var settingsStore: SettingsStore

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct HealthSettingsView: View {
     @EnvironmentObject var exerciseStore: ExerciseStore

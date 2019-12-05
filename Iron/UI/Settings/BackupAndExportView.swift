@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import WorkoutDataKit
 
 struct BackupAndExportView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -90,6 +91,9 @@ struct BackupAndExportView: View {
                     let encoder = JSONEncoder()
                     encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
                     encoder.dateEncodingStrategy = .iso8601
+                    if let exercisesKey = CodingUserInfoKey.exercisesKey {
+                        encoder.userInfo[exercisesKey] = ExerciseStore.shared.exercises
+                    }
                     
                     guard let data = try? encoder.encode(workouts) else { return }
                     guard let url = try? self.tempFile(data: data, name: "workout_data.json") else { return }

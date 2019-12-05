@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct WorkoutExerciseSectionHeader: View {
     @EnvironmentObject var settingsStore: SettingsStore
@@ -15,19 +16,16 @@ struct WorkoutExerciseSectionHeader: View {
     
     @ObservedObject var bodyWeightFetcher: BodyWeightFetcher
     
-    private var weightFormatter: NumberFormatter
-    
     init(workoutExercise: WorkoutExercise) {
         _workoutExercise = .init(initialValue: workoutExercise)
         _bodyWeightFetcher = .init(initialValue: .init(date: workoutExercise.workout?.start))
-        
-        let weightFormatter = NumberFormatter()
-        weightFormatter.maximumFractionDigits = 1
-        self.weightFormatter = weightFormatter
     }
     
     func format(weight: Double) -> String {
-        "BW: \(weightFormatter.string(from: weight as NSNumber) ?? String(format: "%.1f", weight) ) \(settingsStore.weightUnit.abbrev)"
+        let weightUnit = settingsStore.weightUnit
+        let formatter = weightUnit.formatter
+        formatter.numberFormatter.maximumFractionDigits = 1
+        return "BW: " + formatter.string(from: Measurement(value: weight, unit: UnitMass.kilograms).converted(to: weightUnit.unit))
     }
     
     var body: some View {

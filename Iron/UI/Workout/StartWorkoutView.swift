@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct StartWorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext

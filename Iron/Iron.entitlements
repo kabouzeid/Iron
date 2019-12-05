@@ -18,5 +18,9 @@
 	<array>
 		<string>iCloud.com.kabouzeid.Iron</string>
 	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.kabouzeid.Iron</string>
+	</array>
 </dict>
 </plist>

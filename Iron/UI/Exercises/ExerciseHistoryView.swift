@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import WorkoutDataKit
 
 struct ExerciseHistoryView : View {
     @FetchRequest(fetchRequest: WorkoutExercise.fetchRequest()) var history // will be overwritten in init()

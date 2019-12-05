@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import WorkoutDataKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -30,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .environmentObject(RestTimerStore.shared)
                     .environmentObject(ExerciseStore.shared)
                     .environmentObject(EntitlementStore.shared)
-                    .environment(\.managedObjectContext, AppDelegate.instance.persistentContainer.viewContext)
+                    .environment(\.managedObjectContext, WorkoutDataStorage.shared.persistentContainer.viewContext)
             )
             self.window = window
             window.makeKeyAndVisible()
@@ -117,9 +118,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         
         // Save changes in the application's managed object context when the application transitions to the background.
-        AppDelegate.instance.persistentContainer.viewContext.safeSave()
+        WorkoutDataStorage.shared.persistentContainer.viewContext.safeSave()
         
-        if let currentWorkout = try? AppDelegate.instance.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
+        if let currentWorkout = try? WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
             guard currentWorkout.hasCompletedSets ?? false else { return } // allows the user to prefill a workout without getting the notification
             
             // remind the user about his unfinished workout

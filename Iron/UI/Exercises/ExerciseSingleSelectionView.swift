@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct ExerciseSingleSelectionView: View {
     var exerciseMuscleGroups: [[Exercise]]

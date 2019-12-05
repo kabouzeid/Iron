@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct EditCurrentWorkoutTimeView: View {
     @ObservedObject var workout: Workout

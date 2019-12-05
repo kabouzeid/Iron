@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkoutDataKit
 
 extension UserDefaults {
     enum PinnedChartsKeys: String {

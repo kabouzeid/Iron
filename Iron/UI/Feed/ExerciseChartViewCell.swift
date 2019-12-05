@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct ExerciseChartViewCell : View {
     @EnvironmentObject var entitlementStore: EntitlementStore

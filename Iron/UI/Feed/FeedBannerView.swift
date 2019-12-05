@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import Combine
+import WorkoutDataKit
 
 struct FeedBannerView : View {
     @EnvironmentObject var settingsStore: SettingsStore

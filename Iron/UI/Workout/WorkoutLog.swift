@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct WorkoutLog: View {
     @EnvironmentObject var settingsStore: SettingsStore
@@ -31,7 +32,7 @@ struct WorkoutLog: View {
                     .foregroundColor(.secondary)
             }
             ForEach(self.workoutSets(workoutExercise: workoutExercise), id: \.objectID) { workoutSet in
-                Text(workoutSet.logTitle(unit: self.settingsStore.weightUnit))
+                Text(workoutSet.logTitle(weightUnit: self.settingsStore.weightUnit))
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
                     .lineLimit(nil)

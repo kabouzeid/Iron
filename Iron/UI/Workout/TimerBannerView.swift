@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct TimerBannerView: View {
     @EnvironmentObject var restTimerStore: RestTimerStore

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 let NAVIGATION_BAR_SPACING: CGFloat = 16
 
@@ -78,7 +79,7 @@ struct ContentView : View {
             self.restoreBackupData = IdentifiableHolder(value: backupData)
         }
         .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
-            RestoreActionSheet.create(context: AppDelegate.instance.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
+            RestoreActionSheet.create(context: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
                 self.restoreResult = IdentifiableHolder(value: result)
             }
         }

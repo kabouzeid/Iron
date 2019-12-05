@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import AVKit
+import WorkoutDataKit
 
 struct WorkoutExerciseDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext

@@ -9,6 +9,7 @@
 import XCTest
 import CoreData
 import Combine
+import WorkoutDataKit
 @testable import Iron
 
 class WorkoutDataTests: XCTestCase {
@@ -144,6 +145,17 @@ class WorkoutDataTests: XCTestCase {
         )
     }
     
+    func testDeleteExercisesWhereAllSetsAreUncompleted() {
+        testCurrentWorkout.deleteExercisesWhereAllSetsAreUncompleted()
+        XCTAssertTrue(
+            testCurrentWorkout.workoutExercises?
+                .compactMap { $0 as? WorkoutExercise }
+                .compactMap { $0.workoutSets?.array as? [WorkoutSet] }
+                .filter { $0.reduce(true, { $0 && !$1.isCompleted }) }
+                .isEmpty ?? true
+        )
+    }
+    
     func testStartEndValidation() {
         for workout in testWorkouts {
             if let start = workout.start, let end = workout.end {
@@ -262,7 +274,7 @@ class WorkoutDataTests: XCTestCase {
         }
     }
     
-    func testWorkoutDataObservation() {
+    func testSendObjectsWillChange() {
         let workout = Workout(context: persistenContainer.viewContext)
         let workoutExercise1 = WorkoutExercise(context: persistenContainer.viewContext)
         let workoutExercise2 = WorkoutExercise(context: persistenContainer.viewContext)
@@ -286,7 +298,7 @@ class WorkoutDataTests: XCTestCase {
         try! persistenContainer.viewContext.save()
         
         var cancellables = Set<AnyCancellable>()
-        persistenContainer.viewContext.observeWorkoutDataChanges().store(in: &cancellables)
+        persistenContainer.viewContext.publisher.sink { WorkoutDataStorage.sendObjectsWillChange(changes: $0) }.store(in: &cancellables)
         
         var expectations = changeExpectations(reason: "increment weight", objects: [
             (workoutSet1_1.workoutExercise!.workout!, true),

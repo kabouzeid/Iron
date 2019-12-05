@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct RestoreBackupView: View {
     @Environment(\.managedObjectContext) var managedObjectContext

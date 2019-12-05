@@ -8,10 +8,10 @@
 
 import XCTest
 import CoreData
+import WorkoutDataKit
 @testable import Iron
 
 class ExportImportWorkoutDataTests: XCTestCase {
-
     var persistenContainer: NSPersistentContainer!
     
     var encoder: JSONEncoder {

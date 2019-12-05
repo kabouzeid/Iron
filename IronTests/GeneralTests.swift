@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import WorkoutDataKit
 @testable import Iron
 
 class GeneralTests: XCTestCase {
@@ -22,8 +23,7 @@ class GeneralTests: XCTestCase {
     }
     
     private func loadExercises() -> [Exercise] {
-        let jsonUrl = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent("exercises.json")
-        let data = try! Data(contentsOf: jsonUrl)
+        let data = try! Data(contentsOf: ExerciseStore.defaultBuiltInExercisesURL)
         return try! JSONDecoder().decode([Exercise].self, from: data)
     }
     
@@ -52,7 +52,7 @@ class GeneralTests: XCTestCase {
         let exercises = loadExercises()
         for exercise in exercises {
             for pdf in exercise.pdfPaths {
-                let url = Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent(pdf)
+                let url = ExerciseStore.defaultBuiltInExercisesResourceURL.appendingPathComponent(pdf)
                 XCTAssertNoThrow(try Data(contentsOf: url))
             }
         }

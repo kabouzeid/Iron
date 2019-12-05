@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct WorkoutTab: View {
     @FetchRequest(fetchRequest: Workout.currentWorkoutFetchRequest) var currentWorkouts

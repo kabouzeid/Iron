@@ -8,6 +8,7 @@
 
 import Foundation
 import HealthKit
+import WorkoutDataKit
 
 class HealthManager {
     static let shared = HealthManager()

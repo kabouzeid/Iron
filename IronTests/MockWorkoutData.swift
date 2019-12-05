@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import WorkoutDataKit
 @testable import Iron
 
 private let testDate = Date(timeIntervalSince1970: 1565692122) // approx 13. August 2019

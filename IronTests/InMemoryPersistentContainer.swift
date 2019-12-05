@@ -7,11 +7,10 @@
 //
 
 import CoreData
+import WorkoutDataKit
 
 func setUpInMemoryNSPersistentContainer() -> NSPersistentContainer {
-    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
-    
-    let container = NSPersistentContainer(name: "MockWorkoutData", managedObjectModel: managedObjectModel)
+    let container = NSPersistentContainer(name: "MockWorkoutData", managedObjectModel: WorkoutDataStorage.model)
     let description = NSPersistentStoreDescription()
     description.type = NSInMemoryStoreType
     description.shouldAddStoreAsynchronously = false // Make it simpler in test env

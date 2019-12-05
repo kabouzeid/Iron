@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct EditCustomExerciseView: View {
     struct ExerciseValues {

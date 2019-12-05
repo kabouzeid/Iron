@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
@@ -71,7 +72,7 @@ struct ExerciseDetailView : View {
 
     private func exerciseImages(width: CGFloat, height: CGFloat) -> [UIImage] {
         exercise.pdfPaths
-            .map { Bundle.main.bundleURL.appendingPathComponent("everkinetic-data").appendingPathComponent($0) }
+            .map { ExerciseStore.defaultBuiltInExercisesResourceURL.appendingPathComponent($0) }
             .compactMap { pdfToImage(url: $0, fit: CGSize(width: width, height: height)) }
             .compactMap { $0.tinted(with: .label) }
     }

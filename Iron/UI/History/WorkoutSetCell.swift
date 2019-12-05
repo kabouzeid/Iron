@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct WorkoutSetCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
@@ -31,7 +32,7 @@ struct WorkoutSetCell: View {
     private func title(textMode: TitleType) -> String {
         switch textMode {
         case .weightAndReps:
-            return workoutSet.displayTitle(unit: settingsStore.weightUnit)
+            return workoutSet.displayTitle(weightUnit: settingsStore.weightUnit)
         case .placeholder:
             return "Set"
         case .placeholderWeightAndReps:

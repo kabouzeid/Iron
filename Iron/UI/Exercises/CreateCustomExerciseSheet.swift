@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 struct CreateCustomExerciseSheet: View {
     @Environment(\.presentationMode) var presentationMode

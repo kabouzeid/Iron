@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WorkoutDataKit
 
 private enum KeyboardType {
     case weight
@@ -157,7 +158,7 @@ struct WorkoutSetEditor : View {
         Dragger(
             value: workoutSetWeight,
             numberFormatter: weightNumberFormatter,
-            unit: settingsStore.weightUnit.abbrev,
+            unit: settingsStore.weightUnit.unit.symbol,
             stepSize: weightStepSize,
             minValue: 0,
             maxValue: WeightUnit.convert(weight: WorkoutSet.MAX_WEIGHT, from: .metric, to: settingsStore.weightUnit),
@@ -202,7 +203,7 @@ struct WorkoutSetEditor : View {
     private var moreSheet: some View {
         NavigationView {
             MoreView(workoutSet: workoutSet)
-                .navigationBarTitle(Text(workoutSet.displayTitle(unit: settingsStore.weightUnit)), displayMode: .inline)
+                .navigationBarTitle(Text(workoutSet.displayTitle(weightUnit: settingsStore.weightUnit)), displayMode: .inline)
                 .navigationBarItems(leading:
                     Button("Close") {
                         self.showMoreSheet = false
