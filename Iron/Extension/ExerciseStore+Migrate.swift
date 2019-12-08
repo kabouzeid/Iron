@@ -17,10 +17,10 @@ extension ExerciseStore {
                 print("attempt to migrate custom exercises to app group")
                 do {
                     try FileManager.default.moveItem(at: localURL, to: groupURL)
+                    print("migrated custom exercises to app group")
                 } catch {
                     print("could not move custom_exercises.json: \(error)")
                 }
-                print("migrated custom exercises to app group")
             }
         }
     }

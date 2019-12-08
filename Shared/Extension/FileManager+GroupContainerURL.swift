@@ -19,8 +19,16 @@ extension FileManager {
     }
     
     var appGroupContainerApplicationSupportURL: URL {
-        appGroupContainerURL
+        let directory = appGroupContainerURL
             .appendingPathComponent("Library")
             .appendingPathComponent("Application Support")
+        
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        } catch {
+            fatalError("could not create \(directory)")
+        }
+        
+        return directory
     }
 }
