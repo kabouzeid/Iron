@@ -39,9 +39,10 @@ class ViewOneRepMaxIntentHandler: NSObject, ViewOneRepMaxIntentHandling {
 
         let weightUnit = SettingsStore.shared.weightUnit
         let oneRepMaxMeasurement = Measurement(value: oneRepMaxSet.1, unit: UnitMass.kilograms).converted(to: weightUnit.unit)
+        let oneRepMaxIntentWeight = IntentWeight(measurement: oneRepMaxMeasurement, weightUnit: weightUnit)
         let intentSet = IntentWorkoutSet(workoutSet: oneRepMaxSet.0, weightUnit: weightUnit)
         
-        completion(.success(exercise: intentExercise, oneRepMax: oneRepMaxMeasurement, set: intentSet))
+        completion(.success(exercise: intentExercise, oneRepMax: oneRepMaxIntentWeight, set: intentSet))
     }
     
     func resolveExercise(for intent: ViewOneRepMaxIntent, with completion: @escaping (IntentExerciseResolutionResult) -> Void) {

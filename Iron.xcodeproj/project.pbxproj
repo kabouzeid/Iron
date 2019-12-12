@@ -113,6 +113,7 @@
 		8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73823041637000A3C76 /* RestTimerView.swift */; };
 		8A799F5F22BF868500DD5E1B /* WorkoutExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
+		8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
@@ -553,6 +554,7 @@
 		8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Publisher.swift"; sourceTree = "<group>"; };
 		8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentWeight+Measurement.swift"; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Iron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1050,6 +1052,7 @@
 				8A6043A6239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift */,
 				8A51E492239D45B200336296 /* ViewOneRepMaxIntentHandler.swift */,
 				8A4C129923A2A5DA0026BD4E /* IntentWorkoutSet+WorkoutSet.swift */,
+				8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */,
 			);
 			path = IronIntents;
 			sourceTree = "<group>";
@@ -1768,6 +1771,7 @@
 				8AAD1042239D928C00C1A447 /* SheetBar.swift in Sources */,
 				8A141CBD239C8C3A00993A61 /* SettingsStore.swift in Sources */,
 				8AAD104F239D929500C1A447 /* ValueHolder.swift in Sources */,
+				8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */,
 				8AAD104D239D929500C1A447 /* IdentifiableHolder.swift in Sources */,
 				8AAD1060239D92AA00C1A447 /* StyledBarChartView.swift in Sources */,
 				8AAD0FF3239D823200C1A447 /* Exercise+IntentExercise.swift in Sources */,

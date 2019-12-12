@@ -32,7 +32,7 @@ final class EntitlementStore: ObservableObject {
 
 extension EntitlementStore {
     var isPro: Bool {
-        #if false//DEBUG
+        #if DEBUG
         return true
         #else
         return IAPIdentifiers.pro.contains { entitlements.contains($0) }

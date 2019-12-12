@@ -11,8 +11,8 @@ import WorkoutDataKit
 
 extension IntentWorkoutSet {
     convenience init(workoutSet: WorkoutSet, weightUnit: WeightUnit) {
-        let weight = Measurement(value: Double(workoutSet.weight), unit: UnitMass.kilograms).converted(to: weightUnit.unit)
-        self.init(identifier: workoutSet.objectID.uriRepresentation().absoluteString, display: workoutSet.displayTitle(weightUnit: weightUnit), pronunciationHint: "\(weight.value) times \(workoutSet.repetitions)")
+        let weight = IntentWeight(measurement: Measurement(value: Double(workoutSet.weight), unit: UnitMass.kilograms), weightUnit: weightUnit)
+        self.init(identifier: workoutSet.objectID.uriRepresentation().absoluteString, display: workoutSet.displayTitle(weightUnit: weightUnit), pronunciationHint: "\(weight.value!) times \(workoutSet.repetitions)")
         self.weight = weight
         self.repetitions = workoutSet.repetitions as NSNumber
     }

@@ -9,11 +9,11 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>hRgkE9</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>19B88</string>
+	<string>19C57</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>11B53</string>
+	<string>11C29</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>11.2.1</string>
+	<string>11.3</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -356,7 +356,7 @@
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>12</integer>
+				<integer>15</integer>
 				<key>INIntentResponseOutput</key>
 				<string>oneRepMax</string>
 				<key>INIntentResponseParameters</key>
@@ -370,10 +370,14 @@
 						<integer>1</integer>
 						<key>INIntentResponseParameterName</key>
 						<string>oneRepMax</string>
+						<key>INIntentResponseParameterObjectType</key>
+						<string>IntentWeight</string>
+						<key>INIntentResponseParameterObjectTypeNamespace</key>
+						<string>hRgkE9</string>
 						<key>INIntentResponseParameterTag</key>
-						<integer>8</integer>
+						<integer>15</integer>
 						<key>INIntentResponseParameterType</key>
-						<string>Mass</string>
+						<string>Object</string>
 					</dict>
 					<dict>
 						<key>INIntentResponseParameterDisplayName</key>
@@ -431,7 +435,7 @@
 			<key>INTypeDisplayNameID</key>
 			<string>tZRUQq</string>
 			<key>INTypeLastPropertyTag</key>
-			<integer>115</integer>
+			<integer>120</integer>
 			<key>INTypeName</key>
 			<string>IntentWorkoutSet</string>
 			<key>INTypeProperties</key>
@@ -504,15 +508,19 @@
 					<key>INTypePropertyDisplayName</key>
 					<string>Weight</string>
 					<key>INTypePropertyDisplayNameID</key>
-					<string>f84dUQ</string>
+					<string>GfkSvt</string>
 					<key>INTypePropertyDisplayPriority</key>
 					<integer>6</integer>
 					<key>INTypePropertyName</key>
 					<string>weight</string>
+					<key>INTypePropertyObjectType</key>
+					<string>IntentWeight</string>
+					<key>INTypePropertyObjectTypeNamespace</key>
+					<string>hRgkE9</string>
 					<key>INTypePropertyTag</key>
-					<integer>107</integer>
+					<integer>120</integer>
 					<key>INTypePropertyType</key>
-					<string>Mass</string>
+					<string>Object</string>
 				</dict>
 			</array>
 		</dict>
@@ -576,6 +584,97 @@
 					<integer>4</integer>
 					<key>INTypePropertyType</key>
 					<string>SpeakableString</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>INTypeDisplayName</key>
+			<string>Weight</string>
+			<key>INTypeDisplayNameID</key>
+			<string>K1gbaP</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>103</integer>
+			<key>INTypeName</key>
+			<string>IntentWeight</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Value</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>UjLwFk</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>5</integer>
+					<key>INTypePropertyName</key>
+					<string>value</string>
+					<key>INTypePropertyTag</key>
+					<integer>101</integer>
+					<key>INTypePropertyType</key>
+					<string>Decimal</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Unit</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>yDuPGB</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>6</integer>
+					<key>INTypePropertyName</key>
+					<string>unit</string>
+					<key>INTypePropertyTag</key>
+					<integer>102</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
 				</dict>
 			</array>
 		</dict>
