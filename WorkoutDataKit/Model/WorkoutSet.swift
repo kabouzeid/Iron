@@ -14,6 +14,12 @@ public class WorkoutSet: NSManagedObject, Codable {
     public static var MAX_WEIGHT: Double = 99999
     
     // MARK: Derived properties
+    
+    public func estimatedOneRepMax(maxReps: Int) -> Double? {
+        guard repetitions > 0 && repetitions <= maxReps else { return nil }
+        assert(repetitions < 37) // formula doesn't work for 37+ reps
+        return weight * (36 / (37 - Double(repetitions))) // Brzycki 1RM formula
+    }
 
     public var isPersonalRecord: Bool? {
         guard let start = workoutExercise?.workout?.start else { return nil }

@@ -14,7 +14,7 @@ struct ExerciseDemoChartView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     
     var exercise: Exercise
-    var measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
+    var measurementType: WorkoutExerciseChartData.MeasurementType
     
     private let xAxisValueFormatter = WorkoutExerciseChartDataGenerator.DateAxisFormatter()
     private let yAxisValueFormatter = DefaultAxisValueFormatter(decimals: 0)
@@ -56,7 +56,7 @@ struct ExerciseDemoChartView : View {
             xAxisValueFormatter: xAxisValueFormatter,
             yAxisValueFormatter: yAxisValueFormatter,
             balloonValueFormatter: nil,
-            customization: { uiView, _ in uiView.isUserInteractionEnabled = false }
+            preCustomization: { uiView, _ in uiView.isUserInteractionEnabled = false }
         )
     }
 }

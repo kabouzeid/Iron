@@ -43,7 +43,7 @@ extension UserDefaults {
     // TODO: remove in future
     private struct PinnedChartOldId: Hashable, Codable {
         let exerciseId: Int
-        let measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
+        let measurementType: WorkoutExerciseChartData.MeasurementType
     }
 
 }

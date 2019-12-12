@@ -14,17 +14,18 @@ import WorkoutDataKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: remove in future when every user should've been migrated
         ExerciseStore.migrateCustomExercisesToAppGroupIfNecessary()
         WorkoutDataStorage.migrateToAppGroupIfNecessary()
         SettingsStore.migrateToAppGroupIfNecessary()
+        EntitlementStore.migrateToAppGroupIfNecessary()
         ExerciseStore.migrateHiddenExercisesToAppGroupIfNecessary()
         
         SKPaymentQueue.default().add(StoreObserver.shared)
         refreshEntitlements()
         WatchConnectionManager.shared.activateSession()
+        Shortcuts.addDefaultSuggestions()
         return true
     }
     

@@ -10,15 +10,18 @@ import CoreData
 import Combine
 
 public class WorkoutExercise: NSManagedObject, Codable {
-    public static func historyFetchRequest(of exerciseUuid: UUID?, until: Date?) -> NSFetchRequest<WorkoutExercise> {
+    public static func historyFetchRequest(of exerciseUuid: UUID?, from: Date? = nil, until: Date? = nil) -> NSFetchRequest<WorkoutExercise> {
         let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
-        let basePredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseUuid)) == %@", NSNumber(booleanLiteral: true), (exerciseUuid ?? UUID()) as CVarArg)
+        var predicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.isCurrentWorkout)) != %@ AND \(#keyPath(WorkoutExercise.exerciseUuid)) == %@", NSNumber(booleanLiteral: true), (exerciseUuid ?? UUID()) as CVarArg)
+        if let from = from {
+            let fromPredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.start)) >= %@", from as NSDate)
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, fromPredicate])
+        }
         if let until = until {
             let untilPredicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.workout.start)) < %@", until as NSDate)
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate, untilPredicate])
-        } else {
-            request.predicate = basePredicate
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, untilPredicate])
         }
+        request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \WorkoutExercise.workout?.start, ascending: false)]
         return request
     }

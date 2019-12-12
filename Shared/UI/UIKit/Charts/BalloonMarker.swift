@@ -42,7 +42,7 @@ class BalloonMarker: IMarker
         paragraphStyle?.alignment = .center
         xDrawAttributes[.font] = UIFont.systemFont(ofSize: 12)
         xDrawAttributes[.paragraphStyle] = paragraphStyle
-        xDrawAttributes[.foregroundColor] = UIColor.white.withAlphaComponent(2/3)
+        xDrawAttributes[.foregroundColor] = UIColor.white.withAlphaComponent(3/4)
         yDrawAttributes[.font] = UIFont.boldSystemFont(ofSize: 14)
         yDrawAttributes[.paragraphStyle] = paragraphStyle
         yDrawAttributes[.foregroundColor] = UIColor.white // TODO: change to UIColor.black depending on chartView.tintColor
@@ -85,10 +85,15 @@ class BalloonMarker: IMarker
             offset.x = chartView.bounds.size.width - origin.x - size.width - (chartView.layoutMargins.right - 5) // corner radius = 5
         }
         
-        if origin.y - (size.height + 8) >= 0 {
-            offset.y -= (size.height + 8)
+        let distanceToOrigin: CGFloat = chartView.bounds.size.height * (1/3)
+        if origin.y - (size.height + distanceToOrigin) >= 0 {
+            offset.y -= (size.height + distanceToOrigin)
+        } else if origin.y + distanceToOrigin <= (chartView.bounds.size.height - size.height) {
+            offset.y += distanceToOrigin
+        } else if chartView.bounds.size.height - origin.y > origin.y {
+            offset.y += (chartView.bounds.size.height - origin.y) - size.height
         } else {
-            offset.y += 8
+            offset.y -= origin.y
         }
 
         return offset
@@ -112,8 +117,10 @@ class BalloonMarker: IMarker
         context.saveGState()
 
         context.setFillColor(chartView.tintColor.cgColor)
+        context.setAlpha(3/4)
         context.addPath(UIBezierPath(roundedRect: rect, cornerRadius: 5.0).cgPath)
         context.fillPath()
+        context.setAlpha(1)
 
         rect.origin.y += insets.top
         rect.origin.x += insets.left

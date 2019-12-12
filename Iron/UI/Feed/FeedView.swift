@@ -83,7 +83,7 @@ private struct PinnedChartSelectorSheet: View {
     }
     
     private func actionButtons(exercise: Exercise) -> [ActionSheet.Button] {
-        WorkoutExerciseChartDataGenerator.MeasurementType.allCases.compactMap { measurementType in
+        WorkoutExerciseChartData.MeasurementType.allCases.compactMap { measurementType in
             let pinnedChart = PinnedChart(exerciseUuid: exercise.uuid, measurementType: measurementType)
             if self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                 return nil
@@ -108,7 +108,7 @@ private struct PinnedChartSelectorSheet: View {
             ExerciseSingleSelectionView(exerciseMuscleGroups: filter.exercises) { exercise in
                 guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
                     // for now just add the first measuremnt type
-                    for measurementType in WorkoutExerciseChartDataGenerator.MeasurementType.allCases {
+                    for measurementType in WorkoutExerciseChartData.MeasurementType.allCases {
                         let pinnedChart = PinnedChart(exerciseUuid: exercise.uuid, measurementType: measurementType)
                         if !self.pinnedChartsStore.pinnedCharts.contains(pinnedChart) {
                             self.onSelection(pinnedChart)

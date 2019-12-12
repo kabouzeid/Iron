@@ -10,13 +10,11 @@ import Foundation
 import Combine
 
 final class EntitlementStore: ObservableObject {
-    static let shared = EntitlementStore(userDefaults: UserDefaults.standard)
-    
     let objectWillChange = ObservableObjectPublisher()
     
     private var userDefaults: UserDefaults
     
-    private init(userDefaults: UserDefaults) {
+    init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     
@@ -34,7 +32,7 @@ final class EntitlementStore: ObservableObject {
 
 extension EntitlementStore {
     var isPro: Bool {
-        #if DEBUG
+        #if false//DEBUG
         return true
         #else
         return IAPIdentifiers.pro.contains { entitlements.contains($0) }

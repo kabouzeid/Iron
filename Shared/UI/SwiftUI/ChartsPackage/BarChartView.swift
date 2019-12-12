@@ -13,7 +13,8 @@ struct _BarChartView : UIViewRepresentable {
     var chartData: ChartData
     var xAxisValueFormatter: IAxisValueFormatter
     var yAxisValueFormatter: IAxisValueFormatter
-    var customization: ((BarChartView, ChartData) -> ())?
+    var preCustomization: ((BarChartView, ChartData) -> ())?
+    var postCustomization: ((BarChartView) -> ())?
 
     func makeUIView(context: UIViewRepresentableContext<_BarChartView>) -> StyledBarChartView {
         StyledBarChartView()
@@ -22,8 +23,9 @@ struct _BarChartView : UIViewRepresentable {
     func updateUIView(_ uiView: StyledBarChartView, context: UIViewRepresentableContext<_BarChartView>) {
         uiView.xAxis.valueFormatter = xAxisValueFormatter
         uiView.leftAxis.valueFormatter = yAxisValueFormatter
-        customization?(uiView, chartData)
+        preCustomization?(uiView, chartData)
         uiView.data = chartData
         uiView.fitScreen()
+        postCustomization?(uiView)
     }
 }

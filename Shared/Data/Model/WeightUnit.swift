@@ -53,6 +53,7 @@ extension WeightUnit {
     
     var formatter: MeasurementFormatter {
         let formatter = MeasurementFormatter()
+        formatter.unitOptions = .providedUnit
         formatter.numberFormatter = numberFormatter
         return formatter
     }

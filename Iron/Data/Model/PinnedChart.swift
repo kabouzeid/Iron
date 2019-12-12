@@ -10,7 +10,7 @@ import Foundation
 
 struct PinnedChart: Hashable, Codable {
     let exerciseUuid: UUID
-    let measurementType: WorkoutExerciseChartDataGenerator.MeasurementType
+    let measurementType: WorkoutExerciseChartData.MeasurementType
 }
 
-extension WorkoutExerciseChartDataGenerator.MeasurementType: Codable {}
+extension WorkoutExerciseChartData.MeasurementType: Codable {}

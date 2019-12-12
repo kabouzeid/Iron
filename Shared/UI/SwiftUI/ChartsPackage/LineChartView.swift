@@ -14,7 +14,8 @@ struct _LineChartView : UIViewRepresentable {
     let xAxisValueFormatter: IAxisValueFormatter?
     let yAxisValueFormatter: IAxisValueFormatter?
     let balloonValueFormatter: BalloonValueFormatter?
-    var customization: ((LineChartView, ChartData) -> ())?
+    var preCustomization: ((LineChartView, ChartData) -> ())?
+    var postCustomization: ((LineChartView) -> ())?
 
     func makeUIView(context: UIViewRepresentableContext<_LineChartView>) -> StyledLineChartView {
         StyledLineChartView()
@@ -24,8 +25,9 @@ struct _LineChartView : UIViewRepresentable {
         uiView.xAxis.valueFormatter = xAxisValueFormatter
         uiView.leftAxis.valueFormatter = yAxisValueFormatter
         uiView.balloonMarker.valueFormatter = balloonValueFormatter
-        customization?(uiView, chartData)
+        preCustomization?(uiView, chartData)
         uiView.data = chartData
         uiView.fitScreen()
+        postCustomization?(uiView)
     }
 }

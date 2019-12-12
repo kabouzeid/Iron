@@ -73,7 +73,7 @@ extension BarLineChartViewBase {
         chartDataSet.mode = .linear
         chartDataSet.cubicIntensity = 0.05
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
-        chartDataSet.highlightColor = color
+        chartDataSet.highlightColor = color.withAlphaComponent(0.5)
         chartDataSet.highlightLineWidth = 2
         
 //        chartDataSet.drawFilledEnabled = fillEnabled
