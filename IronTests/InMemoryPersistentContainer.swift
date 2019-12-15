@@ -11,19 +11,17 @@ import WorkoutDataKit
 
 func setUpInMemoryNSPersistentContainer() -> NSPersistentContainer {
     let container = NSPersistentContainer(name: "MockWorkoutData", managedObjectModel: WorkoutDataStorage.model)
-    let description = NSPersistentStoreDescription()
-    description.type = NSInMemoryStoreType
-    description.shouldAddStoreAsynchronously = false // Make it simpler in test env
+    let storeDescription = NSPersistentStoreDescription()
+    storeDescription.type = NSInMemoryStoreType
+    storeDescription.shouldAddStoreAsynchronously = false // Make it simpler in test env
     
-    container.persistentStoreDescriptions = [description]
-    container.loadPersistentStores { (description, error) in
-        // Check if the data store is in memory
-        precondition( description.type == NSInMemoryStoreType )
-        
-        // Check if creating container wrong
-        if let error = error {
-            fatalError("Create an in-mem coordinator failed \(error)")
+    container.persistentStoreDescriptions = [storeDescription]
+    container.loadPersistentStores { storeDescription, error in
+        if let error = error as NSError? {
+            fatalError("could not load persistent store \(storeDescription): \(error), \(error.userInfo)")
         }
+        
+        precondition(storeDescription.type == NSInMemoryStoreType)
     }
     return container
 }
