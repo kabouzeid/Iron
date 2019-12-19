@@ -2198,7 +2198,7 @@
 				CODE_SIGN_ENTITLEMENTS = IronIntents/IronIntents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2207,7 +2207,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronIntents;
@@ -2225,7 +2225,7 @@
 				CODE_SIGN_ENTITLEMENTS = IronIntents/IronIntents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2234,7 +2234,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronIntents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2251,7 +2251,7 @@
 				CODE_SIGN_ENTITLEMENTS = IronIntentsUI/IronIntentsUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntentsUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2260,7 +2260,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronIntentsUI;
@@ -2278,7 +2278,7 @@
 				CODE_SIGN_ENTITLEMENTS = IronIntentsUI/IronIntentsUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntentsUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2287,7 +2287,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2417,7 +2417,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2425,7 +2425,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2442,7 +2442,7 @@
 				CODE_SIGN_ENTITLEMENTS = Iron/Iron.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -2450,7 +2450,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2509,11 +2509,11 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				IBSC_MODULE = WatchIron_Extension;
 				INFOPLIST_FILE = WatchIron/Info.plist;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp;
@@ -2534,11 +2534,11 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				IBSC_MODULE = WatchIron_Extension;
 				INFOPLIST_FILE = WatchIron/Info.plist;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2557,7 +2557,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatchIron Extension/WatchIron Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchIron Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				ENABLE_PREVIEWS = YES;
@@ -2567,7 +2567,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp.watchkitextension;
@@ -2587,7 +2587,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatchIron Extension/WatchIron Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchIron Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				ENABLE_PREVIEWS = YES;
@@ -2597,7 +2597,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
