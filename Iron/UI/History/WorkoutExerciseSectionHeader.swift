@@ -21,7 +21,7 @@ struct WorkoutExerciseSectionHeader: View {
         _bodyWeightFetcher = .init(initialValue: .init(date: workoutExercise.workout?.start))
     }
     
-    func format(weight: Double) -> String {
+    func format(weight: Double) -> String { // weight should always be in kg
         let weightUnit = settingsStore.weightUnit
         let formatter = weightUnit.formatter
         formatter.numberFormatter.maximumFractionDigits = 1
@@ -33,7 +33,7 @@ struct WorkoutExerciseSectionHeader: View {
             Text(Workout.dateFormatter.string(from: workoutExercise.workout?.start, fallback: "Unknown date"))
             Spacer()
             bodyWeightFetcher.bodyWeight.map {
-                Text(format(weight: WeightUnit.convert(weight: $0, from: .metric, to: settingsStore.weightUnit)))
+                Text(format(weight: $0))
             }
         }.onAppear(perform: bodyWeightFetcher.fetchBodyWeight)
     }
