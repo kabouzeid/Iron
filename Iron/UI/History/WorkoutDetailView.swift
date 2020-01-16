@@ -207,6 +207,7 @@ extension WorkoutDetailView {
         }
         guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: false) else { return }
         newWorkout.uuid = UUID()
+        newWorkout.title = workout.title
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
         context.safeSave()
@@ -229,6 +230,7 @@ extension WorkoutDetailView {
         }
         guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: true) else { return }
         newWorkout.uuid = UUID()
+        newWorkout.title = workout.title
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
         context.safeSave()
