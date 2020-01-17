@@ -26,7 +26,6 @@
 		<dict>
 			<key>IntentsSupported</key>
 			<array>
-				<string>INSendMessageIntent</string>
 				<string>ViewOneRepMaxIntent</string>
 				<string>ViewPersonalRecordsIntent</string>
 			</array>
