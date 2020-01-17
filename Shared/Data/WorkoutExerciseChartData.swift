@@ -110,7 +110,7 @@ extension WorkoutExerciseChartDataGenerator {
         }
 
         func stringForYValue(y: Double) -> String? {
-            return yAxisValueFormatter.stringForValue(y, axis: nil) + (yUnit ?? "")
+            return yAxisValueFormatter.stringForValue(y, axis: nil) + (yUnit.map { " " + $0 } ?? "")
         }
     }
 }
