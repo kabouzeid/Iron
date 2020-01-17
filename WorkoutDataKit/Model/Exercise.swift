@@ -114,7 +114,7 @@ extension Exercise {
             case .barbell:
                 return "barbell"
             case .dumbbell:
-                return "dumbbells"
+                return "dumbbell"
             case .other:
                 return nil
             }
