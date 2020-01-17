@@ -22,9 +22,9 @@ enum WorkoutExerciseChartData {
     static func ballonValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> BalloonValueFormatter {
         switch measurementType {
         case .oneRM, .totalWeight:
-            return WorkoutExerciseChartDataGenerator.DateBalloonValueFormatter(append: weightUnit.unit.symbol)
+            return WorkoutExerciseChartDataGenerator.DateBalloonValueFormatter(yUnit: weightUnit.unit.symbol)
         case .totalSets, .totalRepetitions:
-            return WorkoutExerciseChartDataGenerator.DateBalloonValueFormatter(append: "×")
+            return WorkoutExerciseChartDataGenerator.DateBalloonValueFormatter(yUnit: nil)
         }
     }
 

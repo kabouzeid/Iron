@@ -89,10 +89,10 @@ extension WorkoutExerciseChartDataGenerator {
         }())
         let dateFormatter: DateFormatter
         let yearDateFormatter: DateFormatter
-        let append: String?
+        let yUnit: String?
 
-        init(append: String?) {
-            self.append = append
+        init(yUnit: String?) {
+            self.yUnit = yUnit
             dateFormatter = DateFormatter()
             yearDateFormatter = DateFormatter()
             dateFormatter.doesRelativeDateFormatting = true
@@ -110,7 +110,7 @@ extension WorkoutExerciseChartDataGenerator {
         }
 
         func stringForYValue(y: Double) -> String? {
-            return yAxisValueFormatter.stringForValue(y, axis: nil) + (append ?? "")
+            return yAxisValueFormatter.stringForValue(y, axis: nil) + (yUnit ?? "")
         }
     }
 }

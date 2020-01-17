@@ -23,7 +23,7 @@ struct ExerciseChartView : View {
     }
     
     private var chartData: ChartData {
-        WorkoutExerciseChartDataGenerator(workoutExercises: workoutExercises,evaluator: WorkoutExerciseChartData.evaluator(
+        WorkoutExerciseChartDataGenerator(workoutExercises: workoutExercises, evaluator: WorkoutExerciseChartData.evaluator(
             for: measurementType,
             weightUnit: settingsStore.weightUnit,
             maxRepetitionsForOneRepMax: settingsStore.maxRepetitionsOneRepMax)
