@@ -319,14 +319,15 @@ struct WorkoutExerciseDetailView : View {
         .navigationBarTitle(Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
-                // TODO: disable for now because it crashes when going back as of iOS 13.2.2
-//                workoutExercise.exercise(in: exerciseStore.exercises).map {
-//                    NavigationLink(destination: ExerciseDetailView(exercise: $0)
-//                        .environmentObject(self.settingsStore)) {
-//                            Image(systemName: "info.circle")
-//                                .padding([.leading, .top, .bottom])
-//                    }
-//                }
+                iOS13_3.map { // otherwise crashes when going back on iOS 13.2.2
+                    workoutExercise.exercise(in: exerciseStore.exercises).map {
+                        NavigationLink(destination: ExerciseDetailView(exercise: $0)
+                            .environmentObject(self.settingsStore)) {
+                                Image(systemName: "info.circle")
+                                    .padding([.leading, .top, .bottom])
+                        }
+                    }
+                }
                 EditButton()
             }
         )
@@ -336,6 +337,15 @@ struct WorkoutExerciseDetailView : View {
         }
         .onDisappear {
             self.managedObjectContext.safeSave()
+        }
+    }
+    
+    // kind of a hack
+    private var iOS13_3: Void? {
+        if #available(iOS 13.3, *) {
+            return ()
+        } else {
+            return nil
         }
     }
 }
