@@ -44,7 +44,7 @@ struct GeneralSettingsView: View {
     }
     
     private var oneRmSection: some View {
-        Section(footer: Text("Maximum number of repetitions for a set to be considered in the one rep max (1RM) calculation. Keep in mind that higher values are less accurate.")) {
+        Section(footer: Text("Maximum number of repetitions that a set can have for it to be considered in the one rep max (1RM) calculation. Keep in mind that higher values are less accurate.")) {
             Picker("Max Repetitions for 1RM", selection: $settingsStore.maxRepetitionsOneRepMax) {
                 ForEach(maxRepetitionsOneRepMaxValues, id: \.self) { i in
                     Text("\(i)").tag(i)
