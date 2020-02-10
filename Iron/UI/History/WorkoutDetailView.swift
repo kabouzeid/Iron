@@ -161,13 +161,16 @@ struct WorkoutDetailView : View {
             }
         )
         .sheet(isPresented: $showingExerciseSelectorSheet) {
-            AddExercisesSheet(exercises: self.exerciseStore.shownExercises, onAdd: { selection in
-                for exercise in selection {
-                    let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
-                    self.workout.addToWorkoutExercises(workoutExercise)
-                    workoutExercise.exerciseUuid = exercise.uuid
-                }
-                self.managedObjectContext.safeSave()
+            AddExercisesSheet(
+                exercises: self.exerciseStore.shownExercises,
+                recentExercises: AddExercisesSheet.loadRecentExercises(context: self.managedObjectContext, exercises: self.exerciseStore.shownExercises),
+                onAdd: { selection in
+                    for exercise in selection {
+                        let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                        self.workout.addToWorkoutExercises(workoutExercise)
+                        workoutExercise.exerciseUuid = exercise.uuid
+                    }
+                    self.managedObjectContext.safeSave()
             })
         }
         .actionSheet(isPresented: $showingOptionsMenu) {

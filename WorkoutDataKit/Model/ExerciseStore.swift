@@ -91,8 +91,8 @@ extension ExerciseStore {
 
 // MARK: - Split
 extension ExerciseStore {
-    public static func splitIntoMuscleGroups(exercises: [Exercise]) -> [[Exercise]] {
-        var groups = [[Exercise]]()
+    public static func splitIntoMuscleGroups(exercises: [Exercise]) -> [ExerciseGroup] {
+        var groups = [ExerciseGroup]()
         var nextIndex = 0
         let exercises = exercises.sorted { (a, b) -> Bool in
             a.muscleGroup < b.muscleGroup
@@ -111,7 +111,7 @@ extension ExerciseStore {
             muscleGroup = muscleGroup.sorted(by: { (a, b) -> Bool in
                 a.title < b.title
             })
-            groups.append(muscleGroup)
+            groups.append(ExerciseGroup(title: groupName, exercises: muscleGroup))
         }
         return groups
     }
@@ -154,10 +154,10 @@ extension ExerciseStore {
         }
     }
     
-    public static func filter(exercises: [[Exercise]], using filter: String) -> [[Exercise]] {
-        exercises
-            .map { Self.filter(exercises: $0, using: filter) }
-            .filter { !$0.isEmpty }
+    public static func filter(exerciseGroups: [ExerciseGroup], using filter: String) -> [ExerciseGroup] {
+        exerciseGroups
+            .map { ExerciseGroup(title: $0.title, exercises: Self.filter(exercises: $0.exercises, using: filter)) }
+            .filter { !$0.exercises.isEmpty }
     }
 }
 

@@ -36,16 +36,20 @@ struct WorkoutView: View {
         case .log:
             return self.workoutsLogSheet.typeErased
         case .exerciseSelector:
-            return AddExercisesSheet(exercises: exerciseStore.shownExercises, onAdd: { selection in
-                for exercise in selection {
-                    let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
-                    self.workout.addToWorkoutExercises(workoutExercise)
-                    workoutExercise.exerciseUuid = exercise.uuid
-                    precondition(self.workout.isCurrentWorkout == true)
-                    workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
+            return AddExercisesSheet(
+                exercises: exerciseStore.shownExercises,
+                recentExercises: AddExercisesSheet.loadRecentExercises(context: managedObjectContext, exercises: exerciseStore.shownExercises),
+                onAdd: { selection in
+                    for exercise in selection {
+                        let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                        self.workout.addToWorkoutExercises(workoutExercise)
+                        workoutExercise.exerciseUuid = exercise.uuid
+                        precondition(self.workout.isCurrentWorkout == true)
+                        workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
+                    }
+                    self.managedObjectContext.safeSave()
                 }
-                self.managedObjectContext.safeSave()
-                }).typeErased
+            ).typeErased
         case .finish:
             return self.finishWorkoutSheet.typeErased
         }

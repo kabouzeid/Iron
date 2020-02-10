@@ -135,6 +135,10 @@
 		8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */; };
 		8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */; };
 		8A861951236DBC0100C1E96C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A861950236DBC0100C1E96C /* Charts */; };
+		8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */; };
+		8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
+		8A9742E023F1824A00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
+		8A9742E123F1824B00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
@@ -582,6 +586,8 @@
 		8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionManager.swift; sourceTree = "<group>"; };
 		8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionManager.swift; sourceTree = "<group>"; };
 		8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignpostLog.swift; sourceTree = "<group>"; };
+		8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroup.swift; sourceTree = "<group>"; };
+		8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseGroup+Identifieable.swift"; sourceTree = "<group>"; };
 		8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartView.swift; sourceTree = "<group>"; };
 		8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChartViewCell.swift; sourceTree = "<group>"; };
 		8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -848,6 +854,7 @@
 				8AA57E5E22C3EE2E00B9AC79 /* Workout+SwiftUI.swift */,
 				8AB14BA722C500070025D835 /* WorkoutExercise+SwiftUI.swift */,
 				8AB14BA922C500430025D835 /* Exercise+SwiftUI.swift */,
+				8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */,
 				8A63B3792329467F001BD7B5 /* UIImage+Tinting.swift */,
 				8A63B37C23294694001BD7B5 /* Exercise+Identifiable.swift */,
 				8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */,
@@ -1278,6 +1285,7 @@
 				8AF4C535230EEE0A003A84DC /* WorkoutSetTag.swift */,
 				8AF4C539230EFB5F003A84DC /* RPE.swift */,
 				8AC2B322200D2C8000DC68BE /* Exercise.swift */,
+				8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */,
 				8AE0A7A1233128DE0021EE23 /* ExerciseStore.swift */,
 			);
 			path = Model;
@@ -1787,6 +1795,7 @@
 				8AAD1003239D900F00C1A447 /* IAPIdentifiers.swift in Sources */,
 				8A0683AF239C5B6F001F0A1E /* WorkoutDataStorage+GroupStoreURL.swift in Sources */,
 				8A141CB1239C870E00993A61 /* ExerciseStore+shared.swift in Sources */,
+				8A9742E023F1824A00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */,
 				8A141CB8239C8C1000993A61 /* Workout+WeightUnit.swift in Sources */,
 				8AAD1051239D929500C1A447 /* ExerciseGroupFilter.swift in Sources */,
 				8A4C129A23A2A5DA0026BD4E /* IntentWorkoutSet+WorkoutSet.swift in Sources */,
@@ -1898,6 +1907,7 @@
 				8AAD1029239D927900C1A447 /* Exercise+Identifiable.swift in Sources */,
 				8AAD102B239D927900C1A447 /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
 				8AAD102C239D927900C1A447 /* WorkoutSetTag+SwiftUI.swift in Sources */,
+				8A9742E123F1824B00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1933,6 +1943,7 @@
 				8A6B1A6B22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* WorkoutExerciseChartDataGenerator.swift in Sources */,
 				8AB14BA822C500070025D835 /* WorkoutExercise+SwiftUI.swift in Sources */,
+				8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */,
 				8AF0786D239B0CCD00CA95D6 /* ExerciseStore+Migrate.swift in Sources */,
 				8AB0C950234540660009F031 /* HealthManager.swift in Sources */,
 				8AFDEBC6236B421800ABE234 /* GeneralSettingsView.swift in Sources */,
@@ -2088,6 +2099,7 @@
 				8AB52129239931C3008064B2 /* SignpostLog.swift in Sources */,
 				8AB5212D239933FE008064B2 /* Array+uniq.swift in Sources */,
 				8AB5213023993450008064B2 /* RPE.swift in Sources */,
+				8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */,
 				8AB52131239934A7008064B2 /* Array+sorted.swift in Sources */,
 				8AB5212123992F2E008064B2 /* WorkoutSet.swift in Sources */,
 				8AB5212B239932A7008064B2 /* Exercise.swift in Sources */,

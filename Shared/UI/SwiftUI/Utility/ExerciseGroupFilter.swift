@@ -15,27 +15,27 @@ class ExerciseGroupFilter: ObservableObject {
         didSet {
             if filter.isEmpty {
                 // not necessary, but when the user clears the search this makes it happen immediately
-                exercises = originalExercises
+                exerciseGroups = originalExerciseGroups
             }
             searchSubject.send(filter) // send even if filter.isEmpty because otherwise the searchSubject doesn't work correctly
         }
     }
     
-    private let originalExercises: [[Exercise]]
+    private let originalExerciseGroups: [ExerciseGroup]
 
-    @Published var exercises: [[Exercise]]
+    @Published var exerciseGroups: [ExerciseGroup]
     
     private var searchSubject = PassthroughSubject<String, Never>()
     private var cancellable: Cancellable?
     
-    init(exercises: [[Exercise]]) {
-        originalExercises = exercises
-        self.exercises = exercises
+    init(exerciseGroups: [ExerciseGroup]) {
+        originalExerciseGroups = exerciseGroups
+        self.exerciseGroups = exerciseGroups
         
         cancellable = searchSubject
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.global(qos: .userInteractive))
-            .map { ExerciseStore.filter(exercises: self.originalExercises, using: $0) }
+            .map { ExerciseStore.filter(exerciseGroups: self.originalExerciseGroups, using: $0) }
             .receive(on: DispatchQueue.main)
-            .assign(to: \.exercises, on: self)
+            .assign(to: \.exerciseGroups, on: self)
     }
 }

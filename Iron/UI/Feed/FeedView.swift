@@ -73,7 +73,7 @@ private struct PinnedChartSelectorSheet: View {
     @ObservedObject private var filter: ExerciseGroupFilter
     
     init(exercises: [Exercise], onSelection: @escaping (PinnedChart) -> Void) {
-        filter = ExerciseGroupFilter(exercises: ExerciseStore.splitIntoMuscleGroups(exercises: exercises))
+        filter = ExerciseGroupFilter(exerciseGroups: ExerciseStore.splitIntoMuscleGroups(exercises: exercises))
         self.onSelection = onSelection
     }
     
@@ -105,7 +105,7 @@ private struct PinnedChartSelectorSheet: View {
                     .padding(.top)
             }.padding()
             
-            ExerciseSingleSelectionView(exerciseMuscleGroups: filter.exercises) { exercise in
+            ExerciseSingleSelectionView(exerciseGroups: filter.exerciseGroups) { exercise in
                 guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
                     // for now just add the first measuremnt type
                     for measurementType in WorkoutExerciseChartData.MeasurementType.allCases {
