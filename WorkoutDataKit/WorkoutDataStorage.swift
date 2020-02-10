@@ -76,6 +76,34 @@ extension WorkoutDataStorage {
             } else if let workoutSet = changedObject as? WorkoutSet {
                 workoutSet.workoutExercise?.objectWillChange.send()
                 workoutSet.workoutExercise?.workout?.objectWillChange.send()
+            } else if let workoutPlan = changedObject as? WorkoutPlan {
+                workoutPlan.workoutRoutines?.compactMap { $0 as? WorkoutRoutine }
+                    .forEach { workoutRoutine in
+                        workoutRoutine.objectWillChange.send()
+                        workoutRoutine.workoutRoutineExercises?.compactMap { $0 as? WorkoutRoutineExercise }
+                            .forEach { workoutRoutineExercise in
+                                workoutRoutineExercise.objectWillChange.send()
+                                workoutRoutineExercise.workoutRoutineSets?.compactMap { $0 as? WorkoutRoutineSet }
+                                    .forEach { $0.objectWillChange.send() }
+                        }
+                }
+            } else if let workoutRoutine = changedObject as? WorkoutRoutine {
+                workoutRoutine.workoutPlan?.objectWillChange.send()
+                workoutRoutine.workoutRoutineExercises?.compactMap { $0 as? WorkoutRoutineExercise }
+                    .forEach { workoutRoutineExercise in
+                        workoutRoutineExercise.objectWillChange.send()
+                        workoutRoutineExercise.workoutRoutineSets?.compactMap { $0 as? WorkoutRoutineSet }
+                            .forEach { $0.objectWillChange.send() }
+                }
+            } else if let workoutRoutineExercise = changedObject as? WorkoutRoutineExercise {
+                workoutRoutineExercise.workoutRoutine?.objectWillChange.send()
+                workoutRoutineExercise.workoutRoutine?.workoutPlan?.objectWillChange.send()
+                workoutRoutineExercise.workoutRoutineSets?.compactMap { $0 as? WorkoutRoutineSet }
+                    .forEach { $0.objectWillChange.send() }
+            } else if let workoutRoutineSet = changedObject as? WorkoutRoutineSet {
+                workoutRoutineSet.workoutRoutineExercise?.objectWillChange.send()
+                workoutRoutineSet.workoutRoutineExercise?.workoutRoutine?.objectWillChange.send()
+                workoutRoutineSet.workoutRoutineExercise?.workoutRoutine?.workoutPlan?.objectWillChange.send()
             } else {
                 print("change in unknown NSManagedObject \(changedObject)")
             }

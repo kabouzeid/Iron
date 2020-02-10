@@ -7,103 +7,191 @@
 //
 
 import SwiftUI
+import CoreData
 import WorkoutDataKit
 
 struct StartWorkoutView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var settingsStore: SettingsStore
-    
     @State private var quote = Quotes.quotes.randomElement()
-//    let quote: Quote? = Quotes.quotes[4] // for the preview
+    
+    @FetchRequest(fetchRequest: StartWorkoutView.fetchRequest) var workoutPlans
 
-    private var plateImage: some View {
-        Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
-            .resizable()
-            .aspectRatio(contentMode: ContentMode.fit)
-//            .frame(maxWidth: 500, maxHeight: 500)
-            .padding([.leading, .trailing], 40)
+    static var fetchRequest: NSFetchRequest<WorkoutPlan> {
+        let request: NSFetchRequest<WorkoutPlan> = WorkoutPlan.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \WorkoutPlan.title, ascending: false)]
+        return request
     }
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                Spacer()
-                
-                Group {
-                    if colorScheme == .dark {
-                        plateImage.colorInvert()
-                    } else {
-                        plateImage
-                    }
-                }.layoutPriority(1)
-                
-                Spacer()
-                
-                quote.map { // just to be safe, but should be never nil
-                    Text($0.displayText)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.secondary)
+            List {
+                Section {
+                    StartEmptyWorkoutCell()
                 }
                 
-                Spacer()
-                
-                Button(action: {
-                    precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
-                    // create a new workout
-                    let workout = Workout(context: self.managedObjectContext)
-                    workout.uuid = UUID()
-                    workout.isCurrentWorkout = true
-                    workout.start = Date()
-                    self.managedObjectContext.safeSave()
-                    
-                    if self.settingsStore.watchCompanion {
-                        WatchConnectionManager.shared.tryStartWatchWorkout(workout: workout)
+                ForEach(workoutPlans, id: \.objectID) { workoutPlan in
+                    Section {
+                        WorkoutPlanCell(workoutPlan: workoutPlan)
+                        WorkoutPlanRoutines(workoutPlan: workoutPlan)
                     }
-                    
-                    NotificationManager.shared.requestAuthorization()
-                }) {
-                   Text("Start Workout")
-                        .padding()
-                        .foregroundColor(Color.white)
-                        .background(RoundedRectangle(cornerRadius: 16, style: .continuous).foregroundColor(.accentColor))
                 }
                 
-                Spacer()
+                Section {
+                    Button(action: {
+                        #warning("TODO create plan sheet")
+                    }) {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Create Workout Plan")
+                        }
+                    }
+                }
             }
-            .padding([.leading, .trailing])
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Workout")
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-#if DEBUG
-struct StartWorkoutView_Previews: PreviewProvider {
-    struct StartWorkoutViewDemo: View {
-        var body: some View {
-            TabView {
-                StartWorkoutView()
+private struct StartEmptyWorkoutCell: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
+    @EnvironmentObject var settingsStore: SettingsStore
+    
+    let quote: Quote? = Quotes.quotes[4]
+    
+    private var plateImage: some View {
+        Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
+            .resizable()
+            .aspectRatio(contentMode: ContentMode.fit)
+            .frame(maxWidth: 100)
+    }
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Group {
+                if colorScheme == .dark {
+                    plateImage.colorInvert()
+                } else {
+                    plateImage
+                }
+            }
+            
+            quote.map {
+                Text($0.displayText)
+                     .multilineTextAlignment(.center)
+                     .foregroundColor(.secondary)
+            }
+            
+            Button(action: {
+                precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
+                // create a new workout
+                let workout = Workout(context: self.managedObjectContext)
+                workout.uuid = UUID()
+                
+                workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Start Workout")
+                    Spacer()
+                }
+                .padding()
+                .foregroundColor(.accentColor)
+                .background(RoundedRectangle(cornerRadius: 8, style: .continuous).foregroundColor(Color(.systemFill)))
+            }.buttonStyle(BorderlessButtonStyle())
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 8)
+    }
+}
+
+private struct WorkoutPlanCell: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @ObservedObject var workoutPlan: WorkoutPlan
+    
+    var body: some View {
+        NavigationLink(destination: WorkoutPlanView(workoutPlan: workoutPlan)) {
+            VStack(alignment: .leading) {
+                Text(workoutPlan.title ?? "").font(.headline)
+            }
+            .contextMenu {
+                Button(action: {
+                    _ = self.workoutPlan.duplicate(context: self.managedObjectContext)
+                }) {
+                    Text("Duplicate")
+                    Image(systemName: "doc.on.doc")
+                }
+                Button(action: {
+                    self.managedObjectContext.delete(self.workoutPlan)
+                }) {
+                    Text("Delete")
+                    Image(systemName: "trash")
+                }
             }
         }
     }
+}
 
+private struct WorkoutPlanRoutines: View {
+    @EnvironmentObject var settingsStore: SettingsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @ObservedObject var workoutPlan: WorkoutPlan
+    
+    private var workoutRoutines: [WorkoutRoutine] {
+        workoutPlan.workoutRoutines?.array as? [WorkoutRoutine] ?? []
+    }
+    
+    private func workoutRoutineExercises(workoutRoutine: WorkoutRoutine) -> [WorkoutRoutineExercise] {
+        workoutRoutine.workoutRoutineExercises?.array as? [WorkoutRoutineExercise] ?? []
+    }
+    
+    private func workoutRoutineExercisesString(workoutRoutine: WorkoutRoutine) -> String {
+        workoutRoutineExercises(workoutRoutine: workoutRoutine)
+            .compactMap { $0.exercise(in: self.exerciseStore.exercises)?.title }
+            .joined(separator: ", ")
+    }
+    
+    var body: some View {
+        ForEach(workoutRoutines, id: \.objectID) { workoutRoutine in
+            Button(action: {
+                precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
+                // create the workout
+                let workout = workoutRoutine.createWorkout(context: self.managedObjectContext)
+                
+                workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
+            }) {
+                VStack(alignment: .leading) {
+                    Text(workoutRoutine.title ?? "").italic()
+                    Text(self.workoutRoutineExercisesString(workoutRoutine: workoutRoutine))
+                        .lineLimit(1)
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                }
+            }
+        }
+    }
+}
+
+#if DEBUG
+struct StartWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            StartWorkoutViewDemo()
+            StartWorkoutView()
+            
+            StartWorkoutView()
+                .environment(\.colorScheme, .dark)
+            
+            StartWorkoutView()
                 .previewDevice(.init("iPhone SE"))
             
-            StartWorkoutViewDemo()
-                .previewDevice(.init("iPhone 8"))
-            
-            StartWorkoutViewDemo()
-                .previewDevice(.init("iPhone Xs"))
-            
-            StartWorkoutViewDemo()
-                .previewDevice(.init("iPhone Xs Max"))
-            
-            StartWorkoutViewDemo()
-                .environment(\.colorScheme, .dark)
+            StartWorkoutView()
+                .previewDevice(.init("iPhone 11 Pro Max"))
         }
         .mockEnvironment(weightUnit: .metric, isPro: true)
     }

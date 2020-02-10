@@ -55,6 +55,9 @@ public class Workout: NSManagedObject, Codable {
         if let title = title {
             return title
         }
+        if let workoutRoutineTitle = workoutRoutine?.title, let workoutPlanTitle = workoutRoutine?.workoutPlan?.title {
+            return workoutPlanTitle + " - " + workoutRoutineTitle
+        }
         let muscleGroups = self.muscleGroups(in: exercises)
         switch muscleGroups.count {
         case 0:
@@ -166,6 +169,13 @@ extension Workout {
     
     public var safeDuration: TimeInterval {
         safeEnd.timeIntervalSince(safeStart)
+    }
+}
+
+// MARK: - Prepare for start
+extension Workout {
+    public func prepareForStart() {
+        start = Date()
     }
 }
 

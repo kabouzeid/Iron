@@ -50,7 +50,7 @@ public class WorkoutSet: NSManagedObject, Codable {
         guard let index = workoutExercise?.workoutSets?.index(of: self), index != NSNotFound else { return nil }
         guard let numberOfBetterOrEqualPreviousSetsInCurrentWorkout = (workoutExercise?.workoutSets?.array[0..<index]
             .compactMap { $0 as? WorkoutSet }
-            .filter { $0.isCompleted && $0.weight >= weight && $0.repetitions >= repetitions } // check isCompleted only to be sure, but it should never be false here
+            .filter { $0.weight >= weight && $0.repetitions >= repetitions }
             .count)
             else { return nil }
         return numberOfBetterOrEqualPreviousSetsInCurrentWorkout == 0
