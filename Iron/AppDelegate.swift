@@ -23,7 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ExerciseStore.migrateHiddenExercisesToAppGroupIfNecessary()
         
         SKPaymentQueue.default().add(StoreObserver.shared)
+        #if DEBUG
+        print("Skipping license verification in DEBUG build")
+        #else
         refreshEntitlements()
+        #endif
         WatchConnectionManager.shared.activateSession()
         Shortcuts.addDefaultSuggestions()
         return true
