@@ -56,6 +56,17 @@ struct SettingsView : View {
             }
             
             Button(action: {
+                guard let writeReviewURL = URL(string: "https://fider.ironapp.io") else { return }
+                UIApplication.shared.open(writeReviewURL)
+            }) {
+                HStack {
+                    Text("Request a Feature")
+                    Spacer()
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+            
+            Button(action: {
                 guard MFMailComposeViewController.canSendMail() else {
                     self.showSupportMailAlert = true // fallback
                     return
