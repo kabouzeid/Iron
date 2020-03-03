@@ -69,7 +69,6 @@ struct WorkoutSetEditor : View {
                 Spacer()
                 label
                     .padding(6)
-                    .transition(.opacity)
                 Spacer()
             }
             .background(
@@ -79,16 +78,20 @@ struct WorkoutSetEditor : View {
         }
     }
     
-    private var moreButton: some View {
-        textButton(label: Text("More").foregroundColor(.secondary), color: Color(UIColor.systemFill), action: { self.showMoreSheet = true })
+    private var tagButton: some View {
+        Button(action: {
+            self.showMoreSheet = true
+        }) {
+            HStack(spacing: 0) {
+                Image(systemName: "tag")
+                    .padding(6)
+            }
+        }
     }
     
     private var doneButton: some View {
         textButton(label: Text(workoutSet.isCompleted ? "Ok" : "Complete Set").foregroundColor(.white), color: .accentColor, action: {
             self.onDone()
-            if self.showKeyboard == .repetitions {
-                self.showKeyboard = .weight
-            }
         })
     }
     
@@ -121,31 +124,6 @@ struct WorkoutSetEditor : View {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .foregroundColor(Color(UIColor.systemFill))
             )
-        }
-    }
-    
-    private var buttons: some View {
-        HStack(spacing: 0) {
-            moreButton
-                .padding()
-            
-            doneButton
-                .padding()
-        }
-    }
-    
-    private var keyboardButtons: some View {
-        HStack(spacing: 0) {
-            hideKeyboardButton
-                .padding()
-            
-            if showKeyboard == .weight {
-                nextButton
-                    .padding()
-            } else {
-                doneButton
-                    .padding()
-            }
         }
     }
     
@@ -213,40 +191,84 @@ struct WorkoutSetEditor : View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    var body: some View {
-        VStack {
+    private var keyboard: some View {
+        GeometryReader { geometry in
             HStack(spacing: 0) {
-                weightDragger
-                    .padding([.leading, .trailing])
-                repetitionsDragger
-                    .padding([.leading, .trailing])
-            }
-            .padding([.top])
-            
-            if showKeyboard == .none {
-                buttons
-            } else {
-                keyboardButtons
-                Divider()
-            }
-            
-            if showKeyboard == .weight {
                 NumericKeyboard(
-                    value: workoutSetWeight,
-                    alwaysShowDecimalSeparator: $alwaysShowDecimalSeparator,
-                    minimumFractionDigits: $minimumFractionDigits,
-                    maximumFractionDigits: settingsStore.weightUnit.maximumFractionDigits
+                    value: self.showKeyboard == .weight ? self.workoutSetWeight : self.workoutSetRepetitions,
+                    alwaysShowDecimalSeparator: self.showKeyboard == .weight ? self.$alwaysShowDecimalSeparator : .constant(false),
+                    minimumFractionDigits: self.showKeyboard == .weight ? self.$minimumFractionDigits : .constant(0),
+                    maximumFractionDigits: self.showKeyboard == .weight ? self.settingsStore.weightUnit.maximumFractionDigits : 0
                 )
-            } else if showKeyboard == .repetitions {
-                NumericKeyboard(
-                    value: workoutSetRepetitions,
-                    alwaysShowDecimalSeparator: .constant(false),
-                    minimumFractionDigits: .constant(0),
-                    maximumFractionDigits: 0
-                )
+                VStack(spacing: 0) {
+                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "keyboard.chevron.compact.down"), width: geometry.size.width / 4) {
+                        withAnimation {
+                            self.showKeyboard = .none
+                        }
+                    }
+                    
+                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "plusminus.circle"), width: geometry.size.width / 4) {
+                        // TODO plate calculator
+                    }.disabled(true)
+                    
+                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "tag"), width: geometry.size.width / 4) {
+                        self.showMoreSheet = true
+                    }
+                    
+                    Button(action: {
+                        NumericKeyboard.playButtonSound()
+                        if self.showKeyboard == .weight {
+                            self.showKeyboard = .repetitions
+                        } else if self.showKeyboard == .repetitions {
+                            self.onDone()
+                            self.showKeyboard = .weight
+                        }
+                    }) {
+                        Image(systemName: self.showKeyboard == .weight ? "arrow.right" : "checkmark")
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                    .foregroundColor(Color.accentColor)
+                        )
+                            .frame(width: geometry.size.width / 4, height: geometry.size.height / 4)
+                    }
+                }
+                .frame(width: geometry.size.width / 4)
+            }
+        }.frame(height: NumericKeyboard.HEIGHT)
+    }
+    
+    var body: some View {
+        VStack { /// no spacing to the keyboard
+            VStack(spacing: 24) {
+                HStack(spacing: 16) {
+                    /**
+                     NOTE: the draggers shouldn't be too low because
+                     1. the thumb would be in an uncomfortable position
+                     2. one easily triggers the reachability accessibilty on devices without a home button
+                     */
+                    weightDragger
+                    Divider().frame(height: 44)
+//                    Text("×").foregroundColor(Color(.quaternaryLabel))
+                    repetitionsDragger
+                }
+                
+                if showKeyboard == .none {
+                    HStack(spacing: 16) {
+                        tagButton
+                        doneButton
+                    }
+                    .padding(.bottom, 8) /// pushes the draggers up and makes the buttons look more centered
+                }
+            }.padding([.leading, .trailing])
+            
+            if showKeyboard != .none {
+                keyboard
             }
         }
-        .drawingGroup() // fixes visual bug with show/hide animation of this view
+        .padding([.top, .bottom])
+        .drawingGroup() /// fixes visual bug with show/hide animation of this view
         .gesture(DragGesture()
             .onEnded({ drag in
                 let width = drag.predictedEndTranslation.width

@@ -287,7 +287,7 @@ struct WorkoutExerciseDetailView : View {
                 
                 self.managedObjectContext.safeSave()
             })
-            .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+            .background(Color(.systemFill).opacity(0.5))
         }
         .transition(AnyTransition.move(edge: .bottom))
     }

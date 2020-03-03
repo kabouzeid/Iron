@@ -15,6 +15,8 @@ struct NumericKeyboard: View {
     @Binding var minimumFractionDigits: Int
     var maximumFractionDigits: Int
     
+    static var HEIGHT: CGFloat = 210
+    
     private var allowsFloats: Bool {
         maximumFractionDigits > 0
     }
@@ -71,7 +73,7 @@ struct NumericKeyboard: View {
     }
     
     private func textKeyboardButton(label: Text, value: String, width: CGFloat) -> some View {
-        textActionKeyboardButton(label: label, width: width) {
+        Self.textActionKeyboardButton(label: label, width: width) {
             self.prepareNumberFormatter()
             guard !self.allowsFloats || self.minimumFractionDigits < self.maximumFractionDigits else { return } // otherwise we might get a bug with rounding
             guard let string = self.getValueString() else { return }
@@ -82,12 +84,12 @@ struct NumericKeyboard: View {
         }
     }
     
-    private func tockSound() {
+    static func playButtonSound() {
         AudioServicesPlaySystemSound(1104)
     }
     
-    private func textActionKeyboardButton(label: Text, width: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: { self.tockSound(); action() }) {
+    static func textActionKeyboardButton(label: Text, width: CGFloat, action: @escaping () -> Void) -> some View {
+        Button(action: { playButtonSound(); action() }) {
             label
                 .foregroundColor(.primary)
                 .padding()
@@ -96,8 +98,8 @@ struct NumericKeyboard: View {
         }
     }
     
-    private func imageActionKeyboardButton(label: Image, width: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: { self.tockSound(); action() }) {
+    static func imageActionKeyboardButton(label: Image, width: CGFloat, action: @escaping () -> Void) -> some View {
+        Button(action: { playButtonSound(); action() }) {
             ZStack {
                 Text("0") // only used so this button is the same height as the other buttons
                     .padding()
@@ -113,36 +115,32 @@ struct NumericKeyboard: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 0) {
-//                Text("value: \(self.value), formatted: \(self.numberFormatter.string(from: self.value as NSNumber) ?? "nil")")
-//                Text("min fraction digits: \(self.minimumFractionDigits)")
-//                Text("alwaysShowSeparator: \(self.alwaysShowDecimalSeparator ? "True" : "False")")
-//                Text("is fraction string: \((self.isFractionString(string: self.getValueString() ?? "") ? "yes" : "no"))")
-                HStack(spacing: 0) {
+            HStack(spacing: 0) {
+                VStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("1"), value: "1", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("2"), value: "2", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("3"), value: "3", width: geometry.size.width / 3)
-                }
-                
-                HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("4"), value: "4", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("5"), value: "5", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("6"), value: "6", width: geometry.size.width / 3)
-                }
-                
-                HStack(spacing: 0) {
                     self.textKeyboardButton(label: Text("7"), value: "7", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("8"), value: "8", width: geometry.size.width / 3)
-                    self.textKeyboardButton(label: Text("9"), value: "9", width: geometry.size.width / 3)
-                }
-                
-                HStack(spacing: 0) {
-                    self.textActionKeyboardButton(label: Text(self.allowsFloats ? (Locale.current.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
+                    
+                    Self.textActionKeyboardButton(label: Text(self.allowsFloats ? (Locale.current.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
                         self.alwaysShowDecimalSeparator = true
                     }.environment(\.isEnabled, self.allowsFloats)
+                }
+                
+                VStack(spacing: 0) {
+                    self.textKeyboardButton(label: Text("2"), value: "2", width: geometry.size.width / 3)
+                    self.textKeyboardButton(label: Text("5"), value: "5", width: geometry.size.width / 3)
+                    self.textKeyboardButton(label: Text("8"), value: "8", width: geometry.size.width / 3)
+                    
                     self.textKeyboardButton(label: Text("0"), value: "0", width: geometry.size.width / 3)
-                    self.imageActionKeyboardButton(label: Image(systemName: "delete.left"), width: geometry.size.width / 3) {
+                }
+                
+                VStack(spacing: 0) {
+                    self.textKeyboardButton(label: Text("3"), value: "3", width: geometry.size.width / 3)
+                    self.textKeyboardButton(label: Text("6"), value: "6", width: geometry.size.width / 3)
+                    self.textKeyboardButton(label: Text("9"), value: "9", width: geometry.size.width / 3)
+                    
+                    Self.imageActionKeyboardButton(label: Image(systemName: "delete.left"), width: geometry.size.width / 3) {
                         self.prepareNumberFormatter()
                         guard let string = self.getValueString() else { return }
                         if !(string.last?.isNumber ?? false) {
@@ -157,7 +155,7 @@ struct NumericKeyboard: View {
             }
             .fixedSize()
         }
-        .frame(height: 210) // TODO: only temporary because this doesn't support dynamic type size
+        .frame(height: Self.HEIGHT) // TODO: only temporary because this doesn't support dynamic type size
     }
 }
 
@@ -191,7 +189,10 @@ struct NumericKeyboard_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        NumericKeyboardPreviewView()
+//        NumericKeyboardPreviewView()
+//            .previewLayout(.sizeThatFits)
+        
+        NumericKeyboard(value: .constant(0), alwaysShowDecimalSeparator: .constant(false), minimumFractionDigits: .constant(0), maximumFractionDigits: 1)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -85,7 +85,8 @@ struct TimerBannerView: View {
                 .padding()
             }
         }
-        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
+        .background(Color(.systemFill).opacity(0.5))
+//        .background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)))
         .sheet(item: $activeSheet) { sheet in
             if sheet == .editTime {
                 self.editTimeSheet
