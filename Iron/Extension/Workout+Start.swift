@@ -12,7 +12,6 @@ import WorkoutDataKit
 extension Workout {
     func start(alsoStartOnWatch: Bool) {
         prepareForStart()
-        start = Date()
         managedObjectContext?.safeSave()
         
         if alsoStartOnWatch {

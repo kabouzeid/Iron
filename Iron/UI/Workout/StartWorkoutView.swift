@@ -89,7 +89,7 @@ private struct StartEmptyWorkoutCell: View {
                 // create a new workout
                 let workout = Workout(context: self.managedObjectContext)
                 workout.uuid = UUID()
-                
+                workout.isCurrentWorkout = true
                 workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
             }) {
                 HStack {
