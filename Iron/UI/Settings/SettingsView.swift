@@ -42,8 +42,12 @@ struct SettingsView : View {
     }
     
     @State private var showSupportMailAlert = false // if mail client is not configured
-    private var ratingAndSupportSection: some View {
+    private var aboutRatingAndSupportSection: some View {
         Section {
+            NavigationLink(destination: AboutView()) {
+                Text("About")
+            }
+            
             Button(action: {
                 guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1479893244?action=write-review") else { return }
                 UIApplication.shared.open(writeReviewURL)
@@ -56,8 +60,8 @@ struct SettingsView : View {
             }
             
             Button(action: {
-                guard let writeReviewURL = URL(string: "https://fider.ironapp.io") else { return }
-                UIApplication.shared.open(writeReviewURL)
+                guard let fiderURL = URL(string: "https://fider.ironapp.io") else { return }
+                UIApplication.shared.open(fiderURL)
             }) {
                 HStack {
                     Text("Request a Feature")
@@ -99,7 +103,7 @@ struct SettingsView : View {
                 
                 mainSection
                 
-                ratingAndSupportSection
+                aboutRatingAndSupportSection
             }
             .navigationBarTitle(Text("Settings"))
         }
