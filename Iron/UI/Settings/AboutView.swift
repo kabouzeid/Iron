@@ -55,6 +55,12 @@ struct AboutView: View {
                         Image("twitter")
                     }
                 }
+                Button(action: {
+                    guard let url = URL(string: "https://www.reddit.com/r/ironapp/") else { return }
+                    UIApplication.shared.open(url)
+                }) {
+                    Text("Join /r/ironapp")
+                }
             }
         }.navigationBarTitle("About", displayMode: .inline)
     }
