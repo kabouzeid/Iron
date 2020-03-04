@@ -127,12 +127,13 @@ extension PhoneConnectionManager {
             assertionFailure("end workout with no end parameter")
             return
         }
+        let title = message[PayloadKey.Arg.title] as? String // nil is allowed
         guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
             assertionFailure("end workout with no uuid parameter")
             return
         }
         
-        WorkoutSessionManagerStore.shared.endWorkoutSession(start: start, end: end, uuid: uuid)
+        WorkoutSessionManagerStore.shared.endWorkoutSession(start: start, end: end, title: title, uuid: uuid)
     }
     
     private func handleUpdateWorkoutSessionStartMessage(message: [String : Any]) {

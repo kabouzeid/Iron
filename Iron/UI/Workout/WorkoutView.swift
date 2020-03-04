@@ -219,7 +219,7 @@ struct WorkoutView: View {
                 HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
             }
             if let start = workout.start, let end = workout.end, let uuid = workout.uuid {
-                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, uuid: uuid)
+                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, title: workout.optionalDisplayTitle(in: exerciseStore.exercises), uuid: uuid)
             }
         } else {
             HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)

@@ -150,6 +150,24 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
     }
     
+    func setTitle(_ title: String) throws { // there doesn't seem to be a way to undo this
+        print(#function)
+        dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        var _error: Error?
+        workoutBuilder.addMetadata([HKMetadataKeyWorkoutBrandName : title], completion: { (success, error) in
+            defer { semaphore.signal() }
+            if !success {
+                _error = error ?? NSError()
+            }
+        })
+        semaphore.wait()
+        if let error = _error {
+            throw error
+        }
+    }
+    
     func updateStartDate(_ startDate: Date) throws {
         print(#function)
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))

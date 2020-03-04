@@ -51,19 +51,24 @@ public class Workout: NSManagedObject, Codable {
             }
     }
     
-    public func displayTitle(in exercises: [Exercise]) -> String {
-        if let title = title {
-            return title
-        }
+    public func generatedTitle(in exercises: [Exercise]) -> String? {
         let muscleGroups = self.muscleGroups(in: exercises)
         switch muscleGroups.count {
-        case 0:
-            return "Workout"
         case 1:
             return muscleGroups[0].capitalized
-        default:
+        case 2...:
             return "\(muscleGroups[0].capitalized) & \(muscleGroups[1].capitalized)"
+        default:
+            return nil
         }
+    }
+    
+    public func optionalDisplayTitle(in exercises: [Exercise]) -> String? {
+        title ?? generatedTitle(in: exercises)
+    }
+    
+    public func displayTitle(in exercises: [Exercise]) -> String {
+        optionalDisplayTitle(in: exercises) ?? "Workout"
     }
     
     // no duplicate entries, sorted descending by frequency

@@ -56,8 +56,11 @@ extension HealthManager {
     func saveWorkout(workout: Workout, exerciseStore: ExerciseStore) {
         requestShareWorkoutPermission {
             guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return }
-            let title = workout.displayTitle(in: exerciseStore.exercises)
-            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
+            var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
+            if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                metadata[HKMetadataKeyWorkoutBrandName] = title
+            }
+            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
             HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
         }
     }
@@ -130,8 +133,11 @@ extension HealthManager {
                                 }
                                 .compactMap { workout in
                                     guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil } // should never fail
-                                    let title = workout.displayTitle(in: exerciseStore.exercises)
-                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
+                                    var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
+                                    if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                                        metadata[HKMetadataKeyWorkoutBrandName] = title
+                                    }
+                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
                                 }
                                 print("saving HKWorkouts \(workoutSamplesToSave)")
                                 if !workoutSamplesToSave.isEmpty {
@@ -163,9 +169,11 @@ extension HealthManager {
                                     
                                     let modifiedWorkoutSamples = workoutSamplesToModify.compactMap { workoutSample, workout -> HKWorkout? in
                                         guard let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil }
-                                        let title = workout.displayTitle(in: exerciseStore.exercises)
+                                        
                                         var metadata = workoutSample.metadata
-                                        metadata?[HKMetadataKeyWorkoutBrandName] = title
+                                        if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                                            metadata?[HKMetadataKeyWorkoutBrandName] = title
+                                        }
                                         
                                         return HKWorkout(activityType: workoutSample.workoutActivityType, start: start, end: end, duration: duration, totalEnergyBurned: workoutSample.totalEnergyBurned, totalDistance: workoutSample.totalDistance, device: workoutSample.device, metadata: metadata)
                                     }

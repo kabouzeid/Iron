@@ -201,7 +201,7 @@ extension WatchConnectionManager {
         }
     }
     
-    func finishWatchWorkout(start: Date, end: Date, uuid: UUID) {
+    func finishWatchWorkout(start: Date, end: Date, title: String?, uuid: UUID) {
         print(#function)
         guard isActivated else { return }
         #if DEBUG
@@ -209,7 +209,11 @@ extension WatchConnectionManager {
             print("warning: sending finish watch workout for different uuid")
         }
         #endif
-        sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
+        if let title = title {
+            sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.end : end, PayloadKey.Arg.title: title, PayloadKey.Arg.uuid : uuid.uuidString]])
+        } else {
+            sendUserInfo(userInfo: [PayloadKey.endWorkoutSession : [PayloadKey.Arg.start : start, PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
+        }
         currentWatchWorkoutUuid = nil
     }
     
