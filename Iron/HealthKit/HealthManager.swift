@@ -73,7 +73,13 @@ extension HealthManager {
         case noHKWorkouts
     }
     
-    func updateHealthWorkouts(managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore, completion: @escaping (Result<Void, Error>) -> Void) {
+    struct WorkoutUpdates {
+        let created: Int
+        let deleted: Int
+        let modified: Int
+    }
+    
+    func updateHealthWorkouts(managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore, completion: @escaping (Result<WorkoutUpdates, Error>) -> Void) {
         self.requestShareWorkoutPermission {
             DispatchQueue.global(qos: .background).async {
                 let workoutPredicate = HKQuery.predicateForWorkouts(with: .traditionalStrengthTraining)
@@ -124,6 +130,7 @@ extension HealthManager {
                                         group.leave()
                                     }
                                 }
+                                let deletedCount = workoutSamplesToDelete.count
                                 
                                 // save workouts that are missing from HealthKit
                                 let workoutSamplesToSave: [HKWorkout] = workouts.filter { workout in
@@ -148,6 +155,7 @@ extension HealthManager {
                                         group.leave()
                                     }
                                 }
+                                let createdCount = workoutSamplesToSave.count
                                 
                                 // update start / end times
                                 let workoutSamplesToModify: [(HKWorkout, Workout)] = workouts.compactMap { workout in
@@ -159,6 +167,7 @@ extension HealthManager {
                                     !self.approximatelyEqual(date1: $0.0.startDate, date2: $0.1.safeStart) || !self.approximatelyEqual(date1: $0.0.endDate, date2: $0.1.safeEnd)
                                 }
                                 print("modifying HKWorkouts \(workoutSamplesToModify)")
+                                var modifiedCount = 0
                                 if !workoutSamplesToModify.isEmpty {
                                     group.enter()
                                     self.healthStore.delete(workoutSamplesToModify.map { $0.0 }) { success, error in
@@ -184,11 +193,12 @@ extension HealthManager {
                                         _error = error
                                         group.leave()
                                     }
+                                    modifiedCount = modifiedWorkoutSamples.count
                                 }
                                 
                                 group.wait()
                                 if _success {
-                                    completion(.success(()))
+                                    completion(.success((WorkoutUpdates(created: createdCount, deleted: deletedCount, modified: modifiedCount))))
                                 } else if let error = _error {
                                     completion(.failure(error))
                                 } else {
