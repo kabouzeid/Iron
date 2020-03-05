@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import WorkoutDataKit
+import os.log
 
 struct BackupAndExportView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -52,6 +53,7 @@ struct BackupAndExportView: View {
                 }
                 Button("Backup") {
                     do {
+                        os_log("Creating backup data", log: .backup, type: .default)
                         let data = try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
                         
                         let formatter = DateFormatter()
@@ -60,7 +62,7 @@ struct BackupAndExportView: View {
                         
                         self.shareFile(url: url)
                     } catch {
-                        print(error)
+                        os_log("Could not create backup: %@", log: .backup, type: .default, error.localizedDescription)
                         self.backupError = BackupError(error: error)
                     }
                 }
@@ -73,9 +75,9 @@ struct BackupAndExportView: View {
                 Toggle("Auto Backup", isOn: $settingsStore.autoBackup)
                 Button("Back Up Now") {
                     self.backupStore.create(data: {
-                        try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
+                        os_log("Creating backup data", log: .backup, type: .default)
+                        return try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
                     }, onError: { error in
-                        print(error)
                         self.backupError = BackupError(error: error)
                     })
                 }

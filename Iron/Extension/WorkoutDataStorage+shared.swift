@@ -12,6 +12,11 @@ import CoreData
 import Combine
 
 extension WorkoutDataStorage {
+    private static var cancellables = Set<AnyCancellable>()
+    
+    private static var startChangedSubject = PassthroughSubject<(Date, UUID), Never>()
+    private static var endChangedSubject = PassthroughSubject<(Date?, UUID), Never>()
+    
     static let shared: WorkoutDataStorage = {
         let workoutDataStorage = WorkoutDataStorage(storeDescription: .init(url: groupStoreURL))
         workoutDataStorage.persistentContainer.viewContext.publisher
@@ -19,9 +24,7 @@ extension WorkoutDataStorage {
             .sink { changes in
                 WorkoutDataStorage.sendObjectsWillChange(changes: changes)
                 for changedObject in changes.updated {
-                    if let workout = changedObject as? Workout,
-                        !workout.isFault,
-                        let uuid = workout.uuid {
+                    if let workout = changedObject as? Workout, !workout.isFault, let uuid = workout.uuid {
                         // TODO: update stored health workout if not current workout
                         if workout.isCurrentWorkout {
                             if uuid == WatchConnectionManager.shared.currentWatchWorkoutUuid {
@@ -35,12 +38,12 @@ extension WorkoutDataStorage {
                         }
                     }
                 }
-        }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
         startChangedSubject
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
             .sink {
-                print("subject start")
                 WatchConnectionManager.shared.updateWatchWorkoutStart(start: $0.0, uuid: $0.1)
             }
             .store(in: &cancellables)
@@ -48,16 +51,10 @@ extension WorkoutDataStorage {
         endChangedSubject
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
             .sink {
-                print("subject end")
                 WatchConnectionManager.shared.updateWatchWorkoutEnd(end: $0.0, uuid: $0.1)
             }
             .store(in: &cancellables)
         
         return workoutDataStorage
     }()
-    
-    static var cancellables = Set<AnyCancellable>()
-    
-    static var startChangedSubject = PassthroughSubject<(Date, UUID), Never>()
-    static var endChangedSubject = PassthroughSubject<(Date?, UUID), Never>()
 }

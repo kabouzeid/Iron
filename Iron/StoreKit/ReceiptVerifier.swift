@@ -8,11 +8,11 @@
 
 import StoreKit
 import Combine
+import os.log
 
 enum ReceiptVerifier {
     enum VerificationError: Error {
         case httpStatus(Int)
-        case malformedServerURL
         case payloadEncoding(Error)
         case network(Error)
         case noDataReturned
@@ -21,13 +21,11 @@ enum ReceiptVerifier {
     }
     
     static func verify(receipt: Data, completion: @escaping (Result<VerificationResponse, VerificationError>) -> Void) {
-        guard let url = URL(string: "https://iron-iap-verifier.herokuapp.com/verifyReceipt") else {
-            assertionFailure("URL is hardcoded and this should never fail");
-            completion(.failure(.malformedServerURL));
-            return
-        }
+        os_log("Verifiyng receipt", log: .iap, type: .default)
         
-        print("verifiyng receipt...")
+        guard let url = URL(string: "https://iron-iap-verifier.herokuapp.com/verifyReceipt") else {
+            fatalError("URL is hardcoded and this should never fail")
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -37,6 +35,7 @@ enum ReceiptVerifier {
         do {
             request.httpBody = try JSONEncoder().encode(payload)
         } catch {
+            os_log("Could not encode payload for receipt verification: %@", log: .iap, type: .error, error.localizedDescription)
             completion(.failure(.payloadEncoding(error)))
             return
         }
@@ -44,17 +43,20 @@ enum ReceiptVerifier {
         let dataTask = URLSession.shared.dataTask(with: request) { data, urlResponse, urlError in
             if let urlResponse = urlResponse as? HTTPURLResponse {
                 guard urlResponse.statusCode == 200 else {
+                    os_log("HTTP response status code of the verification server was %d", log: .iap, type: .error, urlResponse.statusCode)
                     completion(.failure(.httpStatus(urlResponse.statusCode)))
                     return
                 }
             }
             
             if let urlError = urlError {
+                os_log("HTTP request to the verification server failed: %@", log: .iap, type: .fault, urlError.localizedDescription)
                 completion(.failure(.network(urlError)))
                 return
             }
             
             guard let data = data else {
+                os_log("Verification server did not return any data", log: .iap, type: .error)
                 completion(.failure(.noDataReturned))
                 return
             }
@@ -63,11 +65,15 @@ enum ReceiptVerifier {
             do {
                 response = try JSONDecoder().decode(VerificationResponse.self, from: data)
             } catch {
+                os_log("Could not decode the response of the verification server: %@", log: .iap, type: .error, error.localizedDescription)
                 completion(.failure(.payloadDecoding(error)))
                 return
             }
             
+            os_log("Successfully got response from verification server", log: .iap, type: .info)
+            
             guard response.status == 0 else {
+                os_log("Verification server response status=%d", log: .iap, type: .error, response.status)
                 completion(.failure(.responseStatus(response)))
                 return
             }

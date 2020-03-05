@@ -8,6 +8,7 @@
 
 import Foundation
 import StoreKit
+import os.log
 
 class StoreObserver: NSObject {
     static let shared = StoreObserver()
@@ -24,7 +25,7 @@ class StoreObserver: NSObject {
     }
     
     func restore() {
-        print("restoring transactions...")
+        os_log("Restoring completed transactions", log: .iap, type: .default)
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 }
@@ -35,16 +36,16 @@ extension StoreObserver: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
-                print("purchasing: \(transaction.transactionIdentifier ?? "nil")")
+                os_log("Transaction in payment queue: (purchasing) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")
             case .deferred:
-                print("deferred: \(transaction.transactionIdentifier ?? "nil")")
+                os_log("Transaction in payment queue: (deferred) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")
             case .failed:
-                print("failed: \(transaction.transactionIdentifier ?? "nil") with error: \(transaction.error?.localizedDescription ?? "nil")")
+                os_log("Transaction in payment queue: (failed) %@ (%@)", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil", transaction.error?.localizedDescription ?? "nil")
                 queue.finishTransaction(transaction)
             case .purchased: // will handle later, this is just for debugging
-                print("purchased: \(transaction.transactionIdentifier ?? "nil")")
+                os_log("Transaction in payment queue: (purchased) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")
             case .restored: // will handle later, this is just for debugging
-                print("restored: \(transaction.transactionIdentifier ?? "nil")")
+                os_log("Transaction in payment queue: (restored) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")
             @unknown default:
                 break
             }
@@ -54,12 +55,10 @@ extension StoreObserver: SKPaymentTransactionObserver {
         guard transactions.contains(where: { $0.transactionState == .purchased || $0.transactionState == .restored }) else { return }
         
         ReceiptFetcher.fetch { result in
-            switch result {
-            case .success(let data):
+            if let data = try? result.get() {
                 ReceiptVerifier.verify(receipt: data) { result in
                     DispatchQueue.main.async {
-                        switch result {
-                        case .success(let response):
+                        if let response = try? result.get() {
                             EntitlementStore.shared.updateEntitlements(response: response)
                             
                             for transaction in transactions {
@@ -67,33 +66,29 @@ extension StoreObserver: SKPaymentTransactionObserver {
                                 // for now: just mark as finished
                                 switch transaction.transactionState {
                                 case .purchased:
-                                    print("finish purchased \(transaction.transactionIdentifier ?? "nil")")
+                                    os_log("Finish purchased transaction: %@", transaction.transactionIdentifier ?? "nil")
                                     queue.finishTransaction(transaction)
                                 case .restored:
-                                    print("finish restored \(transaction.transactionIdentifier ?? "nil")")
+                                    os_log("Finish restored transaction: %@", transaction.transactionIdentifier ?? "nil")
                                     queue.finishTransaction(transaction)
                                 default:
                                     break
                                 }
                             }
-                        case .failure(let error):
-                            print(error)
                         }
                     }
                 }
-            case .failure(let error):
-                print(error)
             }
         }
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        print("restore complete")
+        os_log("Successfully restored completed transactions", log: .iap, type: .info)
         NotificationCenter.default.post(name: .RestorePurchasesComplete, object: self, userInfo: [restorePurchasesSuccessUserInfoKey : true])
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        print("restore failed \(error)")
+        os_log("Could not restore completed transactions: %@", log: .iap, type: .fault, error.localizedDescription)
         NotificationCenter.default.post(name: .RestorePurchasesComplete, object: self, userInfo: [restorePurchasesSuccessUserInfoKey : false, restorePurchasesErrorUserInfoKey : error])
     }
 }

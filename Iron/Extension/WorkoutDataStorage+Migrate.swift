@@ -8,20 +8,22 @@
 
 import Foundation
 import WorkoutDataKit
+import os.log
 
 extension WorkoutDataStorage {
     static func migrateToAppGroupIfNecessary() {
         // check if we need to migrate the stores location
         if let localStoreURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent("WorkoutData").appendingPathExtension("sqlite") {
             if FileManager.default.fileExists(atPath: localStoreURL.path) && !FileManager.default.fileExists(atPath: groupStoreURL.path) {
-                print("attempt to migrate \(localStoreURL) ---> \(groupStoreURL)")
+                os_log("Migrating workout data to app group", log: .migration, type: .default)
+                os_log("local=%@ group=%@", log: .migration, type: .debug, localStoreURL.path, groupStoreURL.path)
                 
                 let coordinator = WorkoutDataStorage(storeDescription: .init(url: localStoreURL)).persistentContainer.persistentStoreCoordinator
                 guard let store = coordinator.persistentStore(for: localStoreURL) else {
-                    fatalError("local store not found in coordinator")
+                    fatalError("Local workout data store not found in coordinator")
                 }
                 do {
-                    print("migrating (moving) store file...")
+                    os_log("Migrating persistent store to app group", log: .migration, type: .debug)
                     try coordinator.migratePersistentStore(store, to: groupStoreURL, withType: store.type)
                 } catch {
                     // migrate persistent store seems to always create a store
@@ -29,19 +31,21 @@ extension WorkoutDataStorage {
                     try? FileManager.default.removeItem(atPath: groupStoreURL.path + "-wal")
                     try? FileManager.default.removeItem(atPath: groupStoreURL.path + "-shm")
                     
-                    fatalError("could not migrate (move) store file: \(error)")
+                    fatalError("Could not migrate persistent store to app group: \(error.localizedDescription)")
                 }
                 
                 // only remove the file after successful migration
                 do {
-                    print("removing old store files...")
+                    os_log("Removing old store files", log: .migration, type: .debug)
                     try FileManager.default.removeItem(at: localStoreURL)
                     try FileManager.default.removeItem(atPath: localStoreURL.path + "-wal")
                     try FileManager.default.removeItem(atPath: localStoreURL.path + "-shm")
                 } catch {
-                    print("could not delete old store files: \(error)")
+                    os_log("Could not delete old store files: %@", log: .migration, type: .fault, error.localizedDescription)
                     // this is not a fatal error, continue...
                 }
+                
+                os_log("Successfully migrated workout data to app group", log: .migration, type: .info)
             }
         }
     }

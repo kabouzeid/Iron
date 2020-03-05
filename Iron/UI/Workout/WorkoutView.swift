@@ -11,6 +11,7 @@ import StoreKit
 import AVKit
 import HealthKit
 import WorkoutDataKit
+import os.log
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -215,7 +216,7 @@ struct WorkoutView: View {
         
         if let watchWorkoutUuid = WatchConnectionManager.shared.currentWatchWorkoutUuid {
             if watchWorkoutUuid != workout.uuid {
-                print("warning: currentWatchWorkoutUuid = \(watchWorkoutUuid.uuidString) but workout.uuid = \(workout.uuid?.uuidString ?? "nil"), saving HKWorkout on phone too to be safe")
+                os_log("currentWatchWorkoutUuid=%@ but workout.uuid=%@, saving HealthKit workout on phone too to be safe", log: .watch, type: .error, watchWorkoutUuid.uuidString, workout.uuid?.uuidString ?? "nil")
                 HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
             }
             if let start = workout.start, let end = workout.end, let uuid = workout.uuid {
