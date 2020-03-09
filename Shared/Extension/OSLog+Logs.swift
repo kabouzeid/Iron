@@ -22,7 +22,7 @@ extension OSLog {
 }
 
 extension OSLog {
-    func trace(type: OSLogType = .debug,file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
+    func trace(type: OSLogType = .debug, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
         guard isEnabled(type: type) else { return }
         let file = URL(fileURLWithPath: String(describing: file)).lastPathComponent
         os_log("%{public}@ %{public}@:%ld", log: self, type: type, String(describing: function), file, line)
