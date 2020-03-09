@@ -11,6 +11,7 @@ import CoreData
 import Combine
 import StoreKit
 import WorkoutDataKit
+import os.log
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SKPaymentQueue.default().add(StoreObserver.shared)
         #if DEBUG
-        print("Skipping license verification in DEBUG build")
+        os_log("Skipping license verification in DEBUG build", log: .iap, type: .default)
         #else
         refreshEntitlements()
         #endif
@@ -44,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try IronBackup.createBackupData(managedObjectContext: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared)
             }) { result in
                 if case let .failure(error) = result {
-                    print("Auto backup failed: \(error)")
+                    os_log("Auto backup failed: %@", log: .backup, type: .error, error.localizedDescription)
                 }
                 dispatchGroup.leave()
             }
@@ -72,20 +73,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func refreshEntitlements() {
         ReceiptFetcher.fetch { result in
-            switch result {
-            case .success(let data):
+            if let data = try? result.get() {
                 ReceiptVerifier.verify(receipt: data) { result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let response):
+                    if let response = try? result.get() {
+                        DispatchQueue.main.async {
                             EntitlementStore.shared.updateEntitlements(response: response)
-                        case .failure(let error):
-                            print(error)
                         }
                     }
                 }
-            case .failure(let error):
-                print(error)
             }
         }
     }

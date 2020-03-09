@@ -11,6 +11,7 @@ import StoreKit
 import AVKit
 import HealthKit
 import WorkoutDataKit
+import os.log
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -36,16 +37,20 @@ struct WorkoutView: View {
         case .log:
             return self.workoutsLogSheet.typeErased
         case .exerciseSelector:
-            return AddExercisesSheet(exercises: exerciseStore.shownExercises, onAdd: { selection in
-                for exercise in selection {
-                    let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
-                    self.workout.addToWorkoutExercises(workoutExercise)
-                    workoutExercise.exerciseUuid = exercise.uuid
-                    precondition(self.workout.isCurrentWorkout == true)
-                    workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
+            return AddExercisesSheet(
+                exercises: exerciseStore.shownExercises,
+                recentExercises: AddExercisesSheet.loadRecentExercises(context: managedObjectContext, exercises: exerciseStore.shownExercises),
+                onAdd: { selection in
+                    for exercise in selection {
+                        let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                        self.workout.addToWorkoutExercises(workoutExercise)
+                        workoutExercise.exerciseUuid = exercise.uuid
+                        precondition(self.workout.isCurrentWorkout == true)
+                        workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
+                    }
+                    self.managedObjectContext.safeSave()
                 }
-                self.managedObjectContext.safeSave()
-                }).typeErased
+            ).typeErased
         case .finish:
             return self.finishWorkoutSheet.typeErased
         }
@@ -211,11 +216,11 @@ struct WorkoutView: View {
         
         if let watchWorkoutUuid = WatchConnectionManager.shared.currentWatchWorkoutUuid {
             if watchWorkoutUuid != workout.uuid {
-                print("warning: currentWatchWorkoutUuid = \(watchWorkoutUuid.uuidString) but workout.uuid = \(workout.uuid?.uuidString ?? "nil"), saving HKWorkout on phone too to be safe")
+                os_log("currentWatchWorkoutUuid=%@ but workout.uuid=%@, saving HealthKit workout on phone too to be safe", log: .watch, type: .error, watchWorkoutUuid.uuidString, workout.uuid?.uuidString ?? "nil")
                 HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
             }
             if let start = workout.start, let end = workout.end, let uuid = workout.uuid {
-                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, uuid: uuid)
+                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, title: workout.optionalDisplayTitle(in: exerciseStore.exercises), uuid: uuid)
             }
         } else {
             HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)

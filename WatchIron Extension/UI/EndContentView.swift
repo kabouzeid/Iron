@@ -27,7 +27,7 @@ private struct _EndContentView: View {
                     guard let start = self.workoutSessionManagerStore.workoutSessionManager?.startDate else { return }
                     guard let uuid = self.workoutSessionManagerStore.workoutSessionManager?.uuid else { return }
                     let end = self.workoutSessionManagerStore.workoutSessionManager?.endDate ?? Date()
-                    self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, uuid: uuid)
+                    self.workoutSessionManagerStore.endWorkoutSession(start: start, end: end, title: nil, uuid: uuid)
                 }) {
                     HStack {
                         Image(systemName: "checkmark")

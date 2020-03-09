@@ -62,26 +62,33 @@ struct PurchaseView: View {
     var body: some View {
         List {
             Section {
-                FeatureView(
-                    image: Image(systemName: "waveform.path.ecg"),
-                    imageColor: .blue,
-                    title: Text("Charts"),
-                    text: Text("View beautiful charts and analyze your progress over time.")
-                )
-                
-                FeatureView(
-                    image: Image(systemName: "plus"),
-                    imageColor: .green,
-                    title: Text("Custom Exercises"),
-                    text: Text("Some of your exercises are missing in Iron? No problem, create as many custom exercises as you want.")
-                )
-                
-                FeatureView(
-                    image: Image(systemName: "heart.fill"),
-                    imageColor: .red,
-                    title: Text("Support the Development"),
-                    text: Text("This ensures that I can focus on making Iron better every day.")
-                )
+                VStack(alignment: .leading, spacing: 24) {
+                    Spacer().frame(height: 0)
+                    
+                    FeatureView(
+                        image: Image(systemName: "waveform.path.ecg"),
+                        imageColor: .blue,
+                        title: Text("Charts"),
+                        text: Text("View beautiful charts and analyze your progress over time.")
+                    )
+
+                    FeatureView(
+                        image: Image(systemName: "plus"),
+                        imageColor: .green,
+                        title: Text("Custom Exercises"),
+                        text: Text("Create as many custom exercises as you want.")
+                    )
+
+                    FeatureView(
+                        image: Image(systemName: "heart.fill"),
+                        imageColor: .red,
+                        title: Text("Support the Development"),
+                        text: Text("This ensures that I can focus on making Iron better every day.")
+                    )
+                    
+                    Spacer().frame(height: 0)
+                }
+                .fixedSize(horizontal: false, vertical: true) // fixes bug where text gets truncated (iOS 13.3.1)
             }
             
             proLifetimeProduct.map {
@@ -155,12 +162,12 @@ private struct FeatureView: View {
     let text: Text
     
     var body: some View {
-        HStack(alignment: .center) {
-            image.padding().foregroundColor(imageColor)
-            VStack(alignment: .leading) {
-                title.font(.headline)
-                text
-            }
+        VStack(alignment: .leading) {
+            HStack {
+                title
+                image.foregroundColor(imageColor)
+            }.font(.headline)
+            text.lineLimit(Int.max)
         }
     }
 }

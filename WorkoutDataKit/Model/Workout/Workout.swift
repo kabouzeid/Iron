@@ -50,25 +50,34 @@ public class Workout: NSManagedObject, Codable {
                 return sets.contains { $0.isCompleted }
             }
     }
-    
-    public func displayTitle(in exercises: [Exercise]) -> String {
-        if let title = title {
-            return title
-        }
+
+    public func workoutPlanAndRoutineTitle() -> String? {
         if let workoutRoutineTitle = workoutRoutine?.title, let workoutPlanTitle = workoutRoutine?.workoutPlan?.title {
             return workoutPlanTitle + " - " + workoutRoutineTitle
         }
-        let muscleGroups = self.muscleGroups(in: exercises)
-        switch muscleGroups.count {
-        case 0:
-            return "Workout"
-        case 1:
-            return muscleGroups[0].capitalized
-        default:
-            return "\(muscleGroups[0].capitalized) & \(muscleGroups[1].capitalized)"
-        }
+        return nil
     }
     
+    public func generatedTitle(in exercises: [Exercise]) -> String? {
+        let muscleGroups = self.muscleGroups(in: exercises)
+        switch muscleGroups.count {
+        case 1:
+            return muscleGroups[0].capitalized
+        case 2...:
+            return "\(muscleGroups[0].capitalized) & \(muscleGroups[1].capitalized)"
+        default:
+            return nil
+        }
+    }
+
+    public func optionalDisplayTitle(in exercises: [Exercise]) -> String? {
+        title ?? workoutPlanAndRoutineTitle() ?? generatedTitle(in: exercises)
+    }
+
+    public func displayTitle(in exercises: [Exercise]) -> String {
+        optionalDisplayTitle(in: exercises) ?? "Workout"
+    }
+
     // no duplicate entries, sorted descending by frequency
     public func muscleGroups(in exercises: [Exercise]) -> [String] {
         var muscleGroups = [String]()
@@ -305,23 +314,23 @@ extension Workout {
     
     func validateConsistency() throws {
         if start == nil {
-            throw error(code: 1, message: "start not set")
+            throw error(code: 1, message: "The start date is not set.")
         }
         
         if !isCurrentWorkout, end == nil {
-            throw error(code: 2, message: "end not set on finished workout")
+            throw error(code: 2, message: "The end date is not set eventhough the workout is not the current workout.")
         }
         
         if let start = start, let end = end, start > end {
-            throw error(code: 3, message: "start is greater than end")
+            throw error(code: 3, message: "The start date is greater than the end date.")
         }
         
         if isCurrentWorkout, let count = try? managedObjectContext?.count(for: Self.currentWorkoutFetchRequest), count > 1 {
-            throw error(code: 4, message: "more than one current workout")
+            throw error(code: 4, message: "There is more than one current workout.")
         }
 
         if !isCurrentWorkout, let isCompleted = isCompleted, !isCompleted {
-            throw error(code: 5, message: "workout that is not current workout is uncompleted")
+            throw error(code: 5, message: "The workout is not completed eventhough the workout is not the current workout.")
         }
     }
     

@@ -153,7 +153,7 @@ extension WorkoutSessionManagerStore {
         }
     }
     
-    func endWorkoutSession(start: Date, end: Date, uuid: UUID) {
+    func endWorkoutSession(start: Date, end: Date, title: String?, uuid: UUID) {
         WorkoutSessionManager.perform {
             guard let workoutSessionManager = self.workoutSessionManager else {
                 // invalid
@@ -179,6 +179,14 @@ extension WorkoutSessionManagerStore {
             } catch {
                 print("could not update start date: \(error)")
                 // continue though
+            }
+            if let title = title {
+                do {
+                    try workoutSessionManager.setTitle(title)
+                } catch {
+                    print("could not set title: \(error)")
+                    // continue though
+                }
             }
             workoutSessionManager.end(end: end) { result in
                 WorkoutSessionManager.perform {

@@ -42,28 +42,36 @@ private struct BarStackView: View {
 struct BarStacksView: View {
     let barStacks: [BarStack]
     let spacing: CGFloat
-    private let max: Int
-
+    private let stackSize: Int
+    
     init(barStacks: [BarStack], spacing: CGFloat) {
+        self.init(barStacks: barStacks, spacing: spacing, stackSize: 0)
+    }
+
+    init(barStacks: [BarStack], spacing: CGFloat, stackSize: Int) {
         self.barStacks = barStacks
         self.spacing = spacing
-        max = barStacks
+        let maxEntryCount = barStacks
             .map { $0.entries.count }
             .max() ?? 0
+        self.stackSize = max(stackSize, maxEntryCount)
     }
     
     private func entryHeight(height: CGFloat) -> CGFloat {
-        guard self.max > 0 else { return 0 }
-        let spacingHeight = CGFloat(self.max - 1) * spacing
-        let availableEntryHeight = (height - spacingHeight) / CGFloat(self.max)
+        guard self.stackSize > 0 else { return 0 }
+        let spacingHeight = CGFloat(self.stackSize - 1) * spacing
+        let availableEntryHeight = (height - spacingHeight) / CGFloat(self.stackSize)
         return availableEntryHeight
     }
 
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .bottom) {
-                ForEach(self.barStacks, id: \.self) { barStack in
-                    BarStackView(barStack: barStack, entryHeight: self.entryHeight(height: geometry.size.height), spacing: self.spacing)
+            VStack {
+                Spacer()
+                HStack(alignment: .bottom) {
+                    ForEach(self.barStacks, id: \.self) { barStack in
+                        BarStackView(barStack: barStack, entryHeight: self.entryHeight(height: geometry.size.height), spacing: self.spacing)
+                    }
                 }
             }
         }
@@ -135,7 +143,7 @@ import WorkoutDataKit
 struct BarChartView_Previews: PreviewProvider {
     static func randomBarStackEntries() -> [BarStackEntry] {
         var entries = [BarStackEntry]()
-        for _ in 0...Int.random(in: 0...6) {
+        for _ in 0..<Int.random(in: 1...6) {
             var muscleGroup = "other"
             switch Int.random(in: 0...5) {
             case 0:
@@ -177,6 +185,7 @@ struct BarChartView_Previews: PreviewProvider {
             LegendView(barStacks: activityData)
         }
         .padding([.leading, .trailing])
+        .previewLayout(.sizeThatFits)
     }
 }
 #endif

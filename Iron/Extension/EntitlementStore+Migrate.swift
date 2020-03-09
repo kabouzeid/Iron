@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import os.log
 
 extension EntitlementStore {
     static func migrateToAppGroupIfNecessary() {
         let didMigrateEntitlementsToAppGroup = "didMigrateEntitlementsToAppGroup"
         guard !UserDefaults.standard.bool(forKey: didMigrateEntitlementsToAppGroup) else { return }
-        print("attempt to migrate entitlements to app group")
+        os_log("Migrating entitlements to app group", log: .migration, type: .default)
         guard let groupUserDefaults = UserDefaults(suiteName: FileManager.appGroupIdentifier) else {
-            fatalError("could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
+            fatalError("Could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
         }
         
         let entitlementKey = UserDefaults.IAPKeys.entitlements.rawValue
@@ -23,6 +24,6 @@ extension EntitlementStore {
         }
 
         UserDefaults.standard.set(true, forKey: didMigrateEntitlementsToAppGroup)
-        print("migrated entitlements to app group")
+        os_log("Successfully migrated entitlements to app group", log: .migration, type: .info)
     }
 }

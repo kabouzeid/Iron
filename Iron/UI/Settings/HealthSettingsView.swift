@@ -14,12 +14,15 @@ struct HealthSettingsView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @State private var updating = false
-    @State private var updateResult: IdentifiableHolder<Result<Void, Error>>?
+    @State private var updateResult: IdentifiableHolder<Result<HealthManager.WorkoutUpdates, Error>>?
     
-    func updateResultAlert(updateResult: Result<Void, Error>) -> Alert {
+    func updateResultAlert(updateResult: Result<HealthManager.WorkoutUpdates, Error>) -> Alert {
         switch updateResult {
-        case .success():
-            return Alert(title: Text("Successfully Updated Workouts in Apple Health"))
+        case .success(let updates):
+            return Alert(
+                title: Text("Successfully Updated Workouts in Apple Health"),
+                message: Text("\(updates.created) workouts were created, \(updates.deleted) workouts were deleted and \(updates.modified) workouts were modified.")
+            )
         case .failure(let error):
             return Alert(title: Text("Update Workouts in Apple Health Failed"), message: Text(error.localizedDescription))
         }
@@ -27,7 +30,7 @@ struct HealthSettingsView: View {
     
     var body: some View {
         Form {
-            Section(footer: Text("Adds missing workouts to Apple Health and removes workouts from Apple Health that are no longer present in Iron.")) {
+            Section(footer: Text("Adds missing workouts to Apple Health and removes workouts from Apple Health that are no longer present in Iron. This also updates workouts where the start or end time has been modified.")) {
                 Button("Update Apple Health Workouts") {
                     self.updating = true
                     HealthManager.shared.updateHealthWorkouts(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore) { result in

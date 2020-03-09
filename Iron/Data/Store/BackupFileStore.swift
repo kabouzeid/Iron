@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import os.log
 
 class BackupFileStore: ObservableObject {
     static let shared = BackupFileStore()
@@ -26,6 +27,7 @@ class BackupFileStore: ObservableObject {
     @Published var backups = [BackupFile]()
     
     func fetchBackups() {
+        os_log("Fetching backup file list", log: .backup, type: .default)
         UbiquityContainer.backupsUrl { result in
             guard let url = try? result.get() else { return }
             
@@ -43,11 +45,11 @@ class BackupFileStore: ObservableObject {
                     if uti == "com.apple.icloud-file-fault" {
                         do {
                             // if there are undownloaded files, download them and call fetchBackups() again after a short delay
-                            print("starting download of iCloud file \(backupUrl)")
+                            os_log("Starting download of iCloud file %@", log: .backup, type: .default, backupUrl.path)
                             try FileManager.default.startDownloadingUbiquitousItem(at: backupUrl)
                             startedDownloads = true
                         } catch {
-                            print(error)
+                            os_log("Could not download iCloud file %@:", log: .backup, type: .fault, backupUrl.path, error.localizedDescription)
                         }
                     }
                     guard uti == "com.kabouzeid.ironbackup" else { return nil }
@@ -63,9 +65,9 @@ class BackupFileStore: ObservableObject {
                     .sorted { $0.creationDate > $1.creationDate }
             }
             
+            // as long as there are still files being downloaded, recursively call fetchBackups() until every file is downloaded
             if startedDownloads {
                 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(1)) {
-                    print("reloading backups...")
                     self.fetchBackups()
                 }
             }
@@ -106,8 +108,11 @@ extension BackupFileStore {
                 
                 if !FileManager.default.fileExists(atPath: deviceBackupUrl.path) {
                     do {
+                        os_log("Creating device backup folder", log: .backup, type: .default)
                         try FileManager.default.createDirectory(at: deviceBackupUrl, withIntermediateDirectories: false)
+                        os_log("Successfully created device backup folder", log: .backup, type: .info)
                     } catch {
+                        os_log("Could not create device backup folder, falling back to creating folder for \"Unknown Device\"", log: .backup, type: .error)
                         deviceBackupUrl = backupsUrl.appendingPathComponent("Unknown Device")
                         if !FileManager.default.fileExists(atPath: deviceBackupUrl.path) {
                             try FileManager.default.createDirectory(at: deviceBackupUrl, withIntermediateDirectories: false)
@@ -123,6 +128,7 @@ extension BackupFileStore {
                 
                 completion(.success(fileUrl))
             } catch {
+                os_log("Could not create backup: %@", log: .backup, type: .error, error.localizedDescription)
                 completion(.failure(error))
             }
         }

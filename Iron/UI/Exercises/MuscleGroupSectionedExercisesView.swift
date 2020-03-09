@@ -10,13 +10,13 @@ import SwiftUI
 import WorkoutDataKit
 
 struct MuscleGroupSectionedExercisesView : View {
-    var exerciseMuscleGroups: [[Exercise]]
+    var exerciseGroups: [ExerciseGroup]
     
     var body: some View {
         List {
-            ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
-                Section(header: Text(exercises.first?.muscleGroup.uppercased() ?? "")) {
-                    ForEach(exercises, id: \.id) { exercise in
+            ForEach(exerciseGroups) { exerciseGroup in
+                Section(header: Text(exerciseGroup.title.capitalized)) {
+                    ForEach(exerciseGroup.exercises, id: \.id) { exercise in
                         NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
                     }
                 }
@@ -28,7 +28,7 @@ struct MuscleGroupSectionedExercisesView : View {
 #if DEBUG
 struct MuscleGroupSectionedExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        MuscleGroupSectionedExercisesView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises))
+        MuscleGroupSectionedExercisesView(exerciseGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises))
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

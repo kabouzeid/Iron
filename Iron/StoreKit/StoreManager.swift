@@ -7,6 +7,7 @@
 //
 
 import StoreKit
+import os.log
 
 class StoreManager: NSObject {
     static let shared = StoreManager()
@@ -17,6 +18,7 @@ class StoreManager: NSObject {
     private var productRequest: SKProductsRequest!
     
     func fetchProducts(matchingIdentifiers identifiers: [String]) {
+        os_log("Fetching products", log: .iap, type: .default)
         // Create a set for the product identifiers.
         let productIdentifiers = Set(identifiers)
 
@@ -31,14 +33,14 @@ class StoreManager: NSObject {
 
 extension StoreManager: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        os_log("Successfully fetched products", log: .iap, type: .info)
         DispatchQueue.main.async { // make sure to publish on the main thread
             self.products = response.products
         }
     }
     
-    // optional
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        print(error)
+        os_log("Could not fetch products: %@", log: .iap, type: .fault, error.localizedDescription)
     }
 }
 

@@ -67,6 +67,7 @@ struct GeneralSettingsView: View {
 struct GeneralSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         GeneralSettingsView()
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

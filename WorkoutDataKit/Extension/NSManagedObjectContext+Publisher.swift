@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import CoreData
+import os.log
 import os.signpost
 
 extension NSManagedObjectContext {
@@ -24,17 +25,16 @@ extension NSManagedObjectContext {
                 guard let userInfo = notification.userInfo else { return nil }
                 guard let managedObjectContext = notification.object as? NSManagedObjectContext else { return nil }
                 
-                // instruments
-                let signPostID = OSSignpostID(log: SignpostLog.workoutDataPublisher)
+                let signPostID = OSSignpostID(log: .coreDataMonitor)
                 let signPostName: StaticString = "process MOC change notification"
-                os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID, "%{public}s", managedObjectContext.description)
-                defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
-                //
+                os_signpost(.begin, log: .coreDataMonitor, name: signPostName, signpostID: signPostID)
+                defer { os_signpost(.end, log: .coreDataMonitor, name: signPostName, signpostID: signPostID) }
 
                 let inserted = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> ?? Set()
                 let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> ?? Set()
                 let deleted = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> ?? Set()
                 
+                os_log("Received change notification inserted=%d updated=%d deleted=%d", log: .coreDataMonitor, type: .debug, inserted.count, updated.count, deleted.count)
                 return (ObjectChanges(inserted: inserted, updated: updated, deleted: deleted), managedObjectContext)
             }
             .share()

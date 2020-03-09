@@ -10,14 +10,14 @@ import SwiftUI
 import WorkoutDataKit
 
 struct ExerciseMultiSelectionView: View {
-    var exerciseMuscleGroups: [[Exercise]]
+    var exerciseGroups: [ExerciseGroup]
     @Binding var selection: Set<Exercise>
     
     var body: some View {
         List(selection: $selection) {
-            ForEach(exerciseMuscleGroups, id: \.first?.muscleGroup) { exercises in
-                Section(header: Text(exercises.first?.muscleGroup.capitalized ?? "")) {
-                    ForEach(exercises, id: \.self) { exercise in
+            ForEach(exerciseGroups) { exerciseGroup in
+                Section(header: Text(exerciseGroup.title.capitalized)) {
+                    ForEach(exerciseGroup.exercises, id: \.self) { exercise in
                         Text(exercise.title)
                     }
                 }
@@ -30,7 +30,7 @@ struct ExerciseMultiSelectionView: View {
 #if DEBUG
 struct ExerciseMultiSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseMultiSelectionView(exerciseMuscleGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises), selection: .constant(Set()))
+        ExerciseMultiSelectionView(exerciseGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises), selection: .constant(Set()))
     }
 }
 #endif

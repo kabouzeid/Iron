@@ -7,6 +7,7 @@
 //
 
 import StoreKit
+import os.log
 
 enum ReceiptFetcher {
     enum FetchError: Error {
@@ -19,23 +20,25 @@ enum ReceiptFetcher {
     
     /// verifies with the production server first, and then with the sandbox server if necessary
     static func fetch(completion: @escaping (Result<Data, FetchError>) -> Void) {
-        print("fetching receipt...")
+        os_log("Fetching receipt", log: .iap, type: .default)
         if let data = fetchLocalReceipt() {
-            print("found local receipt")
+            os_log("Found local receipt", log: .iap, type: .info)
             completion(.success(data))
         } else {
-            print("request receipt...")
+            os_log("Requesting receipt from Apple", log: .iap, type: .default)
             let receiptRequest = ReceiptRequest { receiptRequest, result in
                 receiptRequests.remove(receiptRequest)
                 switch result {
                 case .success:
                     if let data = fetchLocalReceipt() {
-                        print("received receipt")
+                        os_log("Received receipt", log: .iap, type: .info)
                         completion(.success(data))
                     } else {
+                        os_log("Receipt fetch reported success, but the receipt is still missing.", log: .iap, type: .fault)
                         completion(.failure(.noReceiptAfterFetch))
                     }
                 case .failure(let error):
+                    os_log("Could not fetch receipt: %@", log: .iap, type: .fault, error.localizedDescription)
                     completion(.failure(.receiptFetch(error)))
                 }
             }

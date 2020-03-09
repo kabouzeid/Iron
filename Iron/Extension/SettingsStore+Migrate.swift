@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import os.log
 
 extension SettingsStore {
     static func migrateToAppGroupIfNecessary() {
         let didMigrateSettingsToAppGroup = "didMigrateSettingsToAppGroup"
         guard !UserDefaults.standard.bool(forKey: didMigrateSettingsToAppGroup) else { return }
-        print("attempt to migrate settings to app group")
+        os_log("Migrating settings to app group", log: .migration, type: .default)
         guard let groupUserDefaults = UserDefaults(suiteName: FileManager.appGroupIdentifier) else {
-            fatalError("could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
+            fatalError("Could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
         }
         
         let keys = UserDefaults.SettingsKeys.allCases.map { $0.rawValue }
@@ -24,6 +25,6 @@ extension SettingsStore {
             }
         }
         UserDefaults.standard.set(true, forKey: didMigrateSettingsToAppGroup)
-        print("migrated settings to app group")
+        os_log("Successfully migrated settings to app group", log: .migration, type: .info)
     }
 }

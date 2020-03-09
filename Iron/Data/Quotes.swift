@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 enum Quotes {
     static let quotes: [Quote] = loadQuotes() ?? []
@@ -17,7 +18,7 @@ enum Quotes {
         do {
             return try JSONDecoder().decode([Quote].self, from: data)
         } catch {
-            print(error)
+            os_log("Could not load quotes.json", log: .main, type: .error)
             assertionFailure()
             return nil
         }

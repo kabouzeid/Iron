@@ -8,18 +8,20 @@
 
 import Foundation
 import WorkoutDataKit
+import os.log
 
 extension ExerciseStore {
     static func migrateCustomExercisesToAppGroupIfNecessary() {
         if let localURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent("custom_exercises").appendingPathExtension("json") {
             let groupURL = ExerciseStore.customExercisesURL
             if FileManager.default.fileExists(atPath: localURL.path) && !FileManager.default.fileExists(atPath: groupURL.path) {
-                print("attempt to migrate custom exercises to app group")
+                os_log("Migrating custom exercises to app group", log: .migration, type: .default)
                 do {
+                    os_log("Moving %@ to %@", log: .migration, type: .debug, localURL.path, groupURL.path)
                     try FileManager.default.moveItem(at: localURL, to: groupURL)
-                    print("migrated custom exercises to app group")
+                    os_log("Successfully migrated custom exercises to app group", log: .migration, type: .info)
                 } catch {
-                    print("could not move custom_exercises.json: \(error)")
+                    os_log("Could not move custom exercises file to app group: %{public}@", log: .migration, type: .fault, error.localizedDescription)
                 }
             }
         }
@@ -32,9 +34,9 @@ extension ExerciseStore {
     static func migrateHiddenExercisesToAppGroupIfNecessary() {
         let didMigrateHiddenExercisesToAppGroup = "didMigrateHiddenExercisesToAppGroup"
         guard !UserDefaults.standard.bool(forKey: didMigrateHiddenExercisesToAppGroup) else { return }
-        print("attempt to migrate hidden exercises to app group")
+        os_log("Migrating hidden exercises to app group", log: .migration, type: .default)
         guard let groupUserDefaults = UserDefaults(suiteName: FileManager.appGroupIdentifier) else {
-            fatalError("could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
+            fatalError("Could not create user defaults for group suite \(FileManager.appGroupIdentifier)")
         }
         
         if let uuids = hiddenExerciseUUIDs() {
@@ -42,7 +44,7 @@ extension ExerciseStore {
         }
 
         UserDefaults.standard.set(true, forKey: didMigrateHiddenExercisesToAppGroup)
-        print("migrated hidden exercises to app group")
+        os_log("Successfully migrated hidden exercises to app group", log: .migration, type: .info)
     }
     
     private static func hiddenExerciseUUIDs() -> [String]? {

@@ -31,7 +31,7 @@ struct ExerciseMuscleGroupsView : View {
         }
     }
     
-    private var exercisesGrouped: [[Exercise]] {
+    private var exerciseGroups: [ExerciseGroup] {
         ExerciseStore.splitIntoMuscleGroups(exercises: exerciseStore.shownExercises)
     }
     
@@ -39,7 +39,7 @@ struct ExerciseMuscleGroupsView : View {
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination: AllExercisesView(exercisesGrouped: exercisesGrouped)) {
+                    NavigationLink(destination: AllExercisesView(exerciseGroups: exerciseGroups)) {
                         HStack {
                             Text("All")
                             Spacer()
@@ -50,8 +50,8 @@ struct ExerciseMuscleGroupsView : View {
                 }
                 
                 Section {
-                    ForEach(exercisesGrouped, id: \.first?.muscleGroup) { exerciseGroup in
-                       self.exerciseGroupCell(exercises: exerciseGroup)
+                    ForEach(exerciseGroups) { exerciseGroup in
+                        self.exerciseGroupCell(exercises: exerciseGroup.exercises)
                     }
                 }
                 
@@ -94,8 +94,8 @@ struct ExerciseMuscleGroupsView : View {
 private struct AllExercisesView: View {
     @ObservedObject private var filter: ExerciseGroupFilter
     
-    init(exercisesGrouped: [[Exercise]]) {
-        self.filter = ExerciseGroupFilter(exercises: exercisesGrouped)
+    init(exerciseGroups: [ExerciseGroup]) {
+        self.filter = ExerciseGroupFilter(exerciseGroups: exerciseGroups)
     }
     
     var body: some View {
@@ -106,7 +106,7 @@ private struct AllExercisesView: View {
             
             Divider()
             
-            MuscleGroupSectionedExercisesView(exerciseMuscleGroups: filter.exercises)
+            MuscleGroupSectionedExercisesView(exerciseGroups: filter.exerciseGroups)
         }
         .navigationBarTitle(Text("All Exercises"), displayMode: .inline)
     }

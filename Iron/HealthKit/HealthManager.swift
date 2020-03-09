@@ -9,6 +9,7 @@
 import Foundation
 import HealthKit
 import WorkoutDataKit
+import os.log
 
 class HealthManager {
     static let shared = HealthManager()
@@ -22,11 +23,16 @@ class HealthManager {
 
 extension HealthManager {
     private func requestPermissions(toShare typesToShare: Set<HKSampleType>?, read typesToRead: Set<HKObjectType>?, completion: @escaping () -> Void) {
-        guard HKHealthStore.isHealthDataAvailable() else { return }
+        os_log("Requesting HealthKit permissions share=%@ read=%@", log: .health, type: .default, typesToShare ?? [], typesToRead ?? [])
+        
+        guard HKHealthStore.isHealthDataAvailable() else {
+            os_log("HealthKit is not available on this device", log: .health, type: .error)
+            return
+        }
         
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
             guard success else {
-                if let error = error { print(error) }
+                os_log("Could not request health authorization: %@", log: .health, type: .fault, error?.localizedDescription ?? "nil")
                 return
             }
             completion()
@@ -56,8 +62,11 @@ extension HealthManager {
     func saveWorkout(workout: Workout, exerciseStore: ExerciseStore) {
         requestShareWorkoutPermission {
             guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return }
-            let title = workout.displayTitle(in: exerciseStore.exercises)
-            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
+            var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
+            if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                metadata[HKMetadataKeyWorkoutBrandName] = title
+            }
+            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
             HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
         }
     }
@@ -70,7 +79,15 @@ extension HealthManager {
         case noHKWorkouts
     }
     
-    func updateHealthWorkouts(managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore, completion: @escaping (Result<Void, Error>) -> Void) {
+    struct WorkoutUpdates {
+        let created: Int
+        let deleted: Int
+        let modified: Int
+    }
+    
+    func updateHealthWorkouts(managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore, completion: @escaping (Result<WorkoutUpdates, Error>) -> Void) {
+        os_log("Updating HealthKit workouts", log: .health, type: .default)
+        
         self.requestShareWorkoutPermission {
             DispatchQueue.global(qos: .background).async {
                 let workoutPredicate = HKQuery.predicateForWorkouts(with: .traditionalStrengthTraining)
@@ -84,10 +101,12 @@ extension HealthManager {
                     limit: HKObjectQueryNoLimit,
                     sortDescriptors: [sortDescriptor]) { query, samples, error in
                         if let error = error {
+                            os_log("Could not query the HealthKit workout: %@", log: .health, type: .fault, error.localizedDescription)
                             completion(.failure(error))
                             return
                         }
                         guard let workoutSamples = samples as? [HKWorkout] else {
+                            os_log("Could not cast to HealthKit workouts", log: .health, type: .fault)
                             completion(.failure(UpdateError.noHKWorkouts))
                             return
                         }
@@ -112,7 +131,7 @@ extension HealthManager {
                                     // if there is no workout for this uuid --> delete
                                     return !workouts.contains { $0.uuid == externalUuid }
                                 }
-                                print("deleting HKWorkouts: \(workoutSamplesToDelete)")
+                                os_log("Deleting HealthKit workouts: %@", log: .health, type: .info, workoutSamplesToDelete)
                                 if !workoutSamplesToDelete.isEmpty {
                                     group.enter()
                                     self.healthStore.delete(workoutSamplesToDelete) { success, error in
@@ -121,6 +140,7 @@ extension HealthManager {
                                         group.leave()
                                     }
                                 }
+                                let deletedCount = workoutSamplesToDelete.count
                                 
                                 // save workouts that are missing from HealthKit
                                 let workoutSamplesToSave: [HKWorkout] = workouts.filter { workout in
@@ -130,10 +150,13 @@ extension HealthManager {
                                 }
                                 .compactMap { workout in
                                     guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil } // should never fail
-                                    let title = workout.displayTitle(in: exerciseStore.exercises)
-                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: [HKMetadataKeyWorkoutBrandName : title, HKMetadataKeyExternalUUID : uuid.uuidString])
+                                    var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
+                                    if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                                        metadata[HKMetadataKeyWorkoutBrandName] = title
+                                    }
+                                    return HKWorkout(activityType: .traditionalStrengthTraining, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
                                 }
-                                print("saving HKWorkouts \(workoutSamplesToSave)")
+                                os_log("Saving HealthKit workouts %@", log: .health, type: .info, workoutSamplesToSave)
                                 if !workoutSamplesToSave.isEmpty {
                                     group.enter()
                                     self.healthStore.save(workoutSamplesToSave) { success, error in
@@ -142,6 +165,7 @@ extension HealthManager {
                                         group.leave()
                                     }
                                 }
+                                let createdCount = workoutSamplesToSave.count
                                 
                                 // update start / end times
                                 let workoutSamplesToModify: [(HKWorkout, Workout)] = workouts.compactMap { workout in
@@ -152,7 +176,8 @@ extension HealthManager {
                                 .filter {
                                     !self.approximatelyEqual(date1: $0.0.startDate, date2: $0.1.safeStart) || !self.approximatelyEqual(date1: $0.0.endDate, date2: $0.1.safeEnd)
                                 }
-                                print("modifying HKWorkouts \(workoutSamplesToModify)")
+                                os_log("Modifying HealthKit workouts %@", log: .health, type: .info, workoutSamplesToModify)
+                                var modifiedCount = 0
                                 if !workoutSamplesToModify.isEmpty {
                                     group.enter()
                                     self.healthStore.delete(workoutSamplesToModify.map { $0.0 }) { success, error in
@@ -163,9 +188,11 @@ extension HealthManager {
                                     
                                     let modifiedWorkoutSamples = workoutSamplesToModify.compactMap { workoutSample, workout -> HKWorkout? in
                                         guard let start = workout.start, let end = workout.end, let duration = workout.duration else { return nil }
-                                        let title = workout.displayTitle(in: exerciseStore.exercises)
+                                        
                                         var metadata = workoutSample.metadata
-                                        metadata?[HKMetadataKeyWorkoutBrandName] = title
+                                        if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                                            metadata?[HKMetadataKeyWorkoutBrandName] = title
+                                        }
                                         
                                         return HKWorkout(activityType: workoutSample.workoutActivityType, start: start, end: end, duration: duration, totalEnergyBurned: workoutSample.totalEnergyBurned, totalDistance: workoutSample.totalDistance, device: workoutSample.device, metadata: metadata)
                                     }
@@ -176,17 +203,22 @@ extension HealthManager {
                                         _error = error
                                         group.leave()
                                     }
+                                    modifiedCount = modifiedWorkoutSamples.count
                                 }
                                 
                                 group.wait()
                                 if _success {
-                                    completion(.success(()))
+                                    os_log("Successfully updated HealthKit workouts", log: .health, type: .default)
+                                    completion(.success((WorkoutUpdates(created: createdCount, deleted: deletedCount, modified: modifiedCount))))
                                 } else if let error = _error {
+                                    os_log("Could not update HealthKit workouts: %@", log: .health, type: .error, error.localizedDescription)
                                     completion(.failure(error))
                                 } else {
+                                    os_log("Could not update HealthKit workouts", log: .health, type: .error)
                                     completion(.failure(UpdateError.noSuccess))
                                 }
                             } catch {
+                                os_log("Could not update HealthKit workouts: %@", log: .health, type: .error, error.localizedDescription)
                                 completion(.failure(error))
                             }
                         }

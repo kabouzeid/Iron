@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WorkoutDataKit
+import CoreData
 
 struct AddExercisesSheet: View {
     @Environment(\.presentationMode) var presentationMode
@@ -18,8 +19,10 @@ struct AddExercisesSheet: View {
     
     @State private var exerciseSelectorSelection: Set<Exercise> = Set()
     
-    init(exercises: [Exercise], onAdd: @escaping (Set<Exercise>) -> Void) {
-        self.filter = ExerciseGroupFilter(exercises: ExerciseStore.splitIntoMuscleGroups(exercises: exercises))
+    init(exercises: [Exercise], recentExercises: [Exercise], onAdd: @escaping (Set<Exercise>) -> Void) {
+        let recentExercisesGroup = ExerciseGroup(title: "Recent", exercises: recentExercises)
+        let exerciseGroups = ExerciseStore.splitIntoMuscleGroups(exercises: exercises)
+        self.filter = ExerciseGroupFilter(exerciseGroups: recentExercisesGroup.exercises.isEmpty ? exerciseGroups : [recentExercisesGroup] + exerciseGroups)
         self.onAdd = onAdd
     }
     
@@ -27,6 +30,30 @@ struct AddExercisesSheet: View {
         self.presentationMode.wrappedValue.dismiss()
         self.exerciseSelectorSelection.removeAll()
         self.filter.filter = ""
+    }
+    
+    static func loadRecentExercises(context: NSManagedObjectContext, exercises: [Exercise], maxCount: Int = 7) -> [Exercise] {
+        guard maxCount > 0 else { return [] }
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
+        guard let workouts = try? context.fetch(request) else { return [] }
+        var recentExercises = [Exercise]()
+        for workout in workouts {
+            if let workoutExercises = workout.workoutExercises?.array as? [WorkoutExercise] {
+                for workoutExercise in workoutExercises {
+                    if let exercise = workoutExercise.exercise(in: exercises) {
+                        if !recentExercises.contains(exercise) {
+                            recentExercises.append(exercise)
+                            if recentExercises.count >= maxCount {
+                                return recentExercises
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return recentExercises
     }
     
     var body: some View {
@@ -49,7 +76,7 @@ struct AddExercisesSheet: View {
                     .padding(.top)
             }.padding()
             
-            ExerciseMultiSelectionView(exerciseMuscleGroups: filter.exercises, selection: self.$exerciseSelectorSelection)
+            ExerciseMultiSelectionView(exerciseGroups: filter.exerciseGroups, selection: self.$exerciseSelectorSelection)
         }
     }
 }
@@ -57,7 +84,11 @@ struct AddExercisesSheet: View {
 struct AddExercisesSheet_Previews: PreviewProvider {
     static var previews: some View {
 //        Color.clear.sheet(isPresented: .constant(true)) {
-        AddExercisesSheet(exercises: ExerciseStore.shared.shownExercises, onAdd: { _ in })
+        AddExercisesSheet(
+            exercises: ExerciseStore.shared.shownExercises,
+            recentExercises: [],
+            onAdd: { _ in }
+        )
 //        }
     }
 }

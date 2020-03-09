@@ -75,7 +75,7 @@ struct ActivityChartView: View {
     var body: some View {
         VStack {
             if hasData {
-                BarStacksView(barStacks: activityData, spacing: 2)
+                BarStacksView(barStacks: activityData, spacing: 2, stackSize: 4) // assume 4 workouts / week
             } else {
                 Color.clear.overlay(
                     Text("No data available")
@@ -92,8 +92,7 @@ struct ActivityChartView: View {
 struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityChartView()
-            .environmentObject(SettingsStore.mockMetric)
-            .environment(\.managedObjectContext, MockWorkoutData.metricRandom.context)
+            .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

@@ -39,10 +39,10 @@ class GeneralTests: XCTestCase {
         let groups = ExerciseStore.splitIntoMuscleGroups(exercises: exercises)
         var totalCount = 0
         for group in groups {
-            totalCount += group.count
+            totalCount += group.exercises.count
 
-            for exercise in group {
-                XCTAssert(exercise.muscleGroup == group.first!.muscleGroup)
+            for exercise in group.exercises {
+                XCTAssert(exercise.muscleGroup == group.title)
             }
         }
         XCTAssert(totalCount == exercises.count)

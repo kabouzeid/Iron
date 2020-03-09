@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkoutDataKit
+import os.log
 
 extension UserDefaults {
     enum PinnedChartsKeys: String {
@@ -26,7 +27,7 @@ extension UserDefaults {
             }
             
             // TODO: remove in future
-            print("Trying to decode pinnedChartUuids as Ids")
+            os_log("Trying to decode pinnedChartUuids as Ids", log: .migration, type: .debug)
             if let pinnedChartsOld = try? JSONDecoder().decode([PinnedChartOldId].self, from: data) {
                 let pinnedCharts: [PinnedChart] = pinnedChartsOld.compactMap { pinnedChart in
                     guard let uuid = ExerciseStore.shared.exercises.first(where: { exercise in exercise.everkineticId == pinnedChart.exerciseId })?.uuid else { return nil }

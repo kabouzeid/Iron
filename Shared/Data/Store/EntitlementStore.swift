@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import os.log
 
 final class EntitlementStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
@@ -44,7 +45,7 @@ extension EntitlementStore {
     func updateEntitlements(response: VerificationResponse) {
         assert(response.status == 0)
         entitlements = response.entitlements
-        print("updated entitlements: \(entitlements)")
+        os_log("Updated entitlements: %@", log: .iap, type: .debug, response.entitlements)
     }
 }
 
