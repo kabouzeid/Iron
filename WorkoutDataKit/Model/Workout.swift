@@ -300,23 +300,23 @@ extension Workout {
     
     func validateConsistency() throws {
         if start == nil {
-            throw error(code: 1, message: "start not set")
+            throw error(code: 1, message: "The start date is not set.")
         }
         
         if !isCurrentWorkout, end == nil {
-            throw error(code: 2, message: "end not set on finished workout")
+            throw error(code: 2, message: "The end date is not set eventhough the workout is not the current workout.")
         }
         
         if let start = start, let end = end, start > end {
-            throw error(code: 3, message: "start is greater than end")
+            throw error(code: 3, message: "The start date is greater than the end date.")
         }
         
         if isCurrentWorkout, let count = try? managedObjectContext?.count(for: Self.currentWorkoutFetchRequest), count > 1 {
-            throw error(code: 4, message: "more than one current workout")
+            throw error(code: 4, message: "There is more than one current workout.")
         }
 
         if !isCurrentWorkout, let isCompleted = isCompleted, !isCompleted {
-            throw error(code: 5, message: "workout that is not current workout is uncompleted")
+            throw error(code: 5, message: "The workout is not completed eventhough the workout is not the current workout.")
         }
     }
     

@@ -27,8 +27,8 @@ extension NSManagedObjectContext {
                 
                 let signPostID = OSSignpostID(log: .coreDataMonitor)
                 let signPostName: StaticString = "process MOC change notification"
-                os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID)
-                defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
+                os_signpost(.begin, log: .coreDataMonitor, name: signPostName, signpostID: signPostID)
+                defer { os_signpost(.end, log: .coreDataMonitor, name: signPostName, signpostID: signPostID) }
 
                 let inserted = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> ?? Set()
                 let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> ?? Set()

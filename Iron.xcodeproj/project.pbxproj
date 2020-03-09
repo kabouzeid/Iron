@@ -286,7 +286,6 @@
 		8AB5212523992F42008064B2 /* WorkoutExerciseMigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68F7D1236329940089263B /* WorkoutExerciseMigrationPolicyV1_V2.swift */; };
 		8AB5212623992F42008064B2 /* WorkoutDataV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4500A2363872B0041E8CD /* WorkoutDataV1_V2.xcmappingmodel */; };
 		8AB52128239931A8008064B2 /* NSManagedObjectContext+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */; };
-		8AB52129239931C3008064B2 /* SignpostLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */; };
 		8AB5212A2399329D008064B2 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EBC200C156500AA0FA7 /* everkinetic-data */; };
 		8AB5212B239932A7008064B2 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2B322200D2C8000DC68BE /* Exercise.swift */; };
 		8AB5212C239932B5008064B2 /* ExerciseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0A7A1233128DE0021EE23 /* ExerciseStore.swift */; };
@@ -590,7 +589,6 @@
 		8A861938236DAB7100C1E96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionManager.swift; sourceTree = "<group>"; };
 		8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionManager.swift; sourceTree = "<group>"; };
-		8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignpostLog.swift; sourceTree = "<group>"; };
 		8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroup.swift; sourceTree = "<group>"; };
 		8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseGroup+Identifieable.swift"; sourceTree = "<group>"; };
 		8A982531241149FC0020A644 /* OSLog+Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Logs.swift"; sourceTree = "<group>"; };
@@ -832,7 +830,6 @@
 		8A440806239C0FFD00A6D2C7 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				8A8D51EC2369C6FF00FD896B /* SignpostLog.swift */,
 				8AB5211023992ABC008064B2 /* WorkoutDataKit.h */,
 				8AB5211123992ABC008064B2 /* Info.plist */,
 				8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */,
@@ -2111,7 +2108,6 @@
 				8A141CB0239C7E0100993A61 /* Benchmark.swift in Sources */,
 				8AB5211E23992F1E008064B2 /* WorkoutData.xcdatamodeld in Sources */,
 				8AB5211F23992F2E008064B2 /* Workout.swift in Sources */,
-				8AB52129239931C3008064B2 /* SignpostLog.swift in Sources */,
 				8AB5212D239933FE008064B2 /* Array+uniq.swift in Sources */,
 				8AB5213023993450008064B2 /* RPE.swift in Sources */,
 				8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */,
