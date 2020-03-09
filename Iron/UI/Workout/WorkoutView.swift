@@ -163,10 +163,8 @@ struct WorkoutView: View {
                 .layoutPriority(1)
                 if isCompleted {
                     Spacer()
-                    Image(systemName: "checkmark")
-                        .imageScale(.small)
-                        .foregroundColor(.secondary)
-                        .padding(.trailing, 8)
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
                 }
             }
         }

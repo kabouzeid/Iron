@@ -163,7 +163,7 @@ struct WorkoutExerciseDetailView : View {
     
     private var currentWorkoutSets: some View {
         ForEach(indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { (index, workoutSet) in
-            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, titleType: self.titleType(for: workoutSet))
+            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, titleType: self.titleType(for: workoutSet), showCompleted: true)
                 .listRowBackground(self.selectedWorkoutSet == workoutSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
                 .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
                 .onTapGesture {
