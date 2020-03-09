@@ -163,7 +163,7 @@ private struct WorkoutPlanRoutines: View {
                 precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
                 // create the workout
                 let workout = workoutRoutine.createWorkout(context: self.managedObjectContext)
-                
+                workout.isCurrentWorkout = true
                 workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
             }) {
                 VStack(alignment: .leading) {

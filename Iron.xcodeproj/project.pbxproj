@@ -64,6 +64,12 @@
 		8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */; };
 		8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154D23019A3F008ACDAD /* RestTimerStore.swift */; };
 		8A3815502301B865008ACDAD /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154F2301B865008ACDAD /* WorkoutLog.swift */; };
+		8A3AAC622416EB4D009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; };
+		8A3AAC632416EB4D009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8A3AAC652416EB72009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC642416EB72009FE65F /* Charts */; };
+		8A3AAC662416EB72009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC642416EB72009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8A3AAC692416EB77009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC682416EB77009FE65F /* Charts */; };
+		8A3AAC6A2416EB77009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC682416EB77009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */; };
 		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
@@ -134,7 +140,6 @@
 		8A86193B236DAB7100C1E96C /* WatchIron.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8A86191C236DAB6E00C1E96C /* WatchIron.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */; };
 		8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */; };
-		8A861951236DBC0100C1E96C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A861950236DBC0100C1E96C /* Charts */; };
 		8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */; };
 		8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
 		8A9742E023F1824A00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
@@ -262,8 +267,6 @@
 		8AAD1064239D92AB00C1A447 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
 		8AAD1065239D92B900C1A447 /* PayloadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB365A8237085E500353D5A /* PayloadKey.swift */; };
 		8AAD1066239D92B900C1A447 /* PayloadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB365A8237085E500353D5A /* PayloadKey.swift */; };
-		8AAD1068239D930100C1A447 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAD1067239D930100C1A447 /* Charts */; };
-		8AAD106A239D930B00C1A447 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAD1069239D930B00C1A447 /* Charts */; };
 		8AAD106C239D94C900C1A447 /* OneRepMaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD106B239D94C900C1A447 /* OneRepMaxView.swift */; };
 		8AAD106E239DA97B00C1A447 /* WorkoutExerciseChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD106D239DA97B00C1A447 /* WorkoutExerciseChartData.swift */; };
 		8AAD106F239DB27900C1A447 /* WorkoutExerciseChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD106D239DA97B00C1A447 /* WorkoutExerciseChartData.swift */; };
@@ -433,6 +436,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8A3AAC672416EB72009FE65F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8A3AAC662416EB72009FE65F /* Charts in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A3AAC6B2416EB77009FE65F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8A3AAC6A2416EB77009FE65F /* Charts in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A60439B239C4DBB00CFB7C0 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,6 +499,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8AB5211623992ABC008064B2 /* WorkoutDataKit.framework in Embed Frameworks */,
+				8A3AAC632416EB4D009FE65F /* Charts in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,7 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0683B7239C77B4001F0A1E /* WorkoutDataKit.framework in Frameworks */,
-				8AAD1068239D930100C1A447 /* Charts in Frameworks */,
+				8A3AAC652416EB72009FE65F /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,7 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A60438D239C4DBB00CFB7C0 /* IntentsUI.framework in Frameworks */,
-				8AAD106A239D930B00C1A447 /* Charts in Frameworks */,
+				8A3AAC692416EB77009FE65F /* Charts in Frameworks */,
 				8A0683BC239C77BB001F0A1E /* WorkoutDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,8 +767,8 @@
 			files = (
 				8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */,
 				8AB5211523992ABC008064B2 /* WorkoutDataKit.framework in Frameworks */,
-				8A861951236DBC0100C1E96C /* Charts in Frameworks */,
 				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
+				8A3AAC622416EB4D009FE65F /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1507,6 +1533,7 @@
 				8A60437E239C4DBB00CFB7C0 /* Sources */,
 				8A60437F239C4DBB00CFB7C0 /* Frameworks */,
 				8A604380239C4DBB00CFB7C0 /* Resources */,
+				8A3AAC672416EB72009FE65F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1515,7 +1542,7 @@
 			);
 			name = IronIntents;
 			packageProductDependencies = (
-				8AAD1067239D930100C1A447 /* Charts */,
+				8A3AAC642416EB72009FE65F /* Charts */,
 			);
 			productName = IronIntents;
 			productReference = 8A604382239C4DBB00CFB7C0 /* IronIntents.appex */;
@@ -1528,6 +1555,7 @@
 				8A604387239C4DBB00CFB7C0 /* Sources */,
 				8A604388239C4DBB00CFB7C0 /* Frameworks */,
 				8A604389239C4DBB00CFB7C0 /* Resources */,
+				8A3AAC6B2416EB77009FE65F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1536,7 +1564,7 @@
 			);
 			name = IronIntentsUI;
 			packageProductDependencies = (
-				8AAD1069239D930B00C1A447 /* Charts */,
+				8A3AAC682416EB77009FE65F /* Charts */,
 			);
 			productName = IronIntentsUI;
 			productReference = 8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */;
@@ -1563,7 +1591,7 @@
 			);
 			name = Iron;
 			packageProductDependencies = (
-				8A861950236DBC0100C1E96C /* Charts */,
+				8A3AAC612416EB4D009FE65F /* Charts */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Iron.app */;
@@ -1709,7 +1737,7 @@
 			);
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
-				8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */,
+				8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -2873,30 +2901,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */ = {
+		8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			repositoryURL = "https://github.com/kabouzeid/Charts.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.4.0;
+				branch = "xc11.4-fix";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8A861950236DBC0100C1E96C /* Charts */ = {
+		8A3AAC612416EB4D009FE65F /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
-		8AAD1067239D930100C1A447 /* Charts */ = {
+		8A3AAC642416EB72009FE65F /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
-		8AAD1069239D930B00C1A447 /* Charts */ = {
+		8A3AAC682416EB77009FE65F /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A86194F236DBC0100C1E96C /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */

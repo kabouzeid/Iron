@@ -17,7 +17,8 @@ extension NSManagedObjectContext {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                fatalError("Unresolved error \(error.localizedDescription)")
+                let detailedErrors = (error as NSError).userInfo[NSDetailedErrorsKey] as? [NSError]
+                fatalError("Unresolved error \(error.localizedDescription)\(detailedErrors.map { "\n" + $0.map { "    \($0.localizedDescription)" }.joined(separator: "\n") + "\n" } ?? "")")
             }
         }
     }
