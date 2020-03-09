@@ -68,6 +68,7 @@ struct WorkoutSetEditor : View {
             HStack {
                 Spacer()
                 label
+                    .animation(.none)
                     .padding(6)
                 Spacer()
             }

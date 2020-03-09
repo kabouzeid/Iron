@@ -16,6 +16,7 @@ struct WorkoutSetCell: View {
     let index: Int
     var colorMode: ColorMode = .activated
     var titleType: TitleType = .weightAndReps
+    var showCompleted = false
     
     enum ColorMode {
         case activated
@@ -72,6 +73,10 @@ struct WorkoutSetCell: View {
                 // TODO: replace with a trophy symbol
                 Image(systemName: "star.circle.fill")
                     .foregroundColor(colorMode == .disabled ? .secondary : .yellow)
+            }
+            if showCompleted && workoutSet.isCompleted {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(colorMode == .disabled ? .secondary : .green)
             }
             Text("\(index)")
                 .font(Font.body.monospacedDigit())
