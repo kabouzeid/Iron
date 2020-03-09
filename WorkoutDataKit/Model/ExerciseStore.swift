@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 public class ExerciseStore: ObservableObject {
     public static var defaultBuiltInExercisesResourceURL: URL {
@@ -50,8 +51,7 @@ public class ExerciseStore: ObservableObject {
         do {
             return try JSONDecoder().decode([Exercise].self, from: Data(contentsOf: builtInExercisesURL))
         } catch {
-            print(error)
-            fatalError("Error decoding built in exercises")
+            fatalError("Error decoding built in exercises: \(error.localizedDescription)")
         }
     }
     
@@ -63,7 +63,7 @@ public class ExerciseStore: ObservableObject {
             // try to migrate the exercises to the new UUID format
             let success = Self.migrateCustomExercises(customExercisesURL: url)
             guard success else { return [] }
-            print("Successfully migrated custom exercises")
+            os_log("Successfully migrated custom exercises", log: .migration, type: .info)
             return (try? JSONDecoder().decode([Exercise].self, from: Data(contentsOf: url))) ?? []
         }
     }

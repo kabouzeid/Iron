@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import Combine
+import os.log
 
 public class WorkoutDataStorage {
     public static var model: NSManagedObjectModel {
@@ -29,6 +30,7 @@ public class WorkoutDataStorage {
             assert(storeDescription.shouldAddStoreAsynchronously == false) // this is the default value
             persistentContainer.persistentStoreDescriptions = [storeDescription]
         }
+        os_log("Loading persistent store", log: .workoutDataStorage, type: .default)
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -42,9 +44,10 @@ public class WorkoutDataStorage {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("could not load persistent store \(storeDescription): \(error), \(error.userInfo)")
+                os_log("Could not load persistent store", log: .workoutDataStorage, type: .fault, error)
+                fatalError("Could not load persistent store \(storeDescription): \(error.localizedDescription)")
             } else {
-                print("loaded persistent store: \(storeDescription)")
+                os_log("Successfully loaded persistent store: %@", log: .workoutDataStorage, type: .info, storeDescription)
             }
         })
     }
@@ -55,10 +58,10 @@ extension WorkoutDataStorage {
     public static func sendObjectsWillChange(changes: NSManagedObjectContext.ObjectChanges) {
         for changedObject in changes.inserted.union(changes.updated).union(changes.deleted) {
             // instruments debugging
-            let signPostID = OSSignpostID(log: SignpostLog.workoutDataPublisher)
+            let signPostID = OSSignpostID(log: .coreDataMonitor)
             let signPostName: StaticString = "process single workout data change"
-            os_signpost(.begin, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID, "%{public}s", changedObject.objectID.description)
-            defer { os_signpost(.end, log: SignpostLog.workoutDataPublisher, name: signPostName, signpostID: signPostID) }
+            os_signpost(.begin, log: .coreDataMonitor, name: signPostName, signpostID: signPostID, "%{public}s", changedObject.objectID)
+            defer { os_signpost(.end, log: .coreDataMonitor, name: signPostName, signpostID: signPostID) }
             //
             
             changedObject.objectWillChange.send()
@@ -77,7 +80,7 @@ extension WorkoutDataStorage {
                 workoutSet.workoutExercise?.objectWillChange.send()
                 workoutSet.workoutExercise?.workout?.objectWillChange.send()
             } else {
-                print("change in unknown NSManagedObject \(changedObject)")
+                os_log("Change for unknown NSManagedObject: %@", log: .coreDataMonitor, type: .error, changedObject)
             }
         }
     }

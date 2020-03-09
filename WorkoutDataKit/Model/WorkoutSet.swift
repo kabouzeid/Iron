@@ -144,7 +144,7 @@ extension WorkoutSet {
     
     func validateConsistency() throws {
         if !isCompleted, let workout = workoutExercise?.workout, !workout.isCurrentWorkout {
-            throw error(code: 1, message: "uncompleted set in workout that is not current workout")
+            throw error(code: 1, message: "The set is not completed eventhough its workout is not the current workout.")
         }
     }
     
