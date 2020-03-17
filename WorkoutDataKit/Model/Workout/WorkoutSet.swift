@@ -13,15 +13,74 @@ public class WorkoutSet: NSManagedObject, Codable {
     public static var MAX_REPETITIONS: Int16 = 9999
     public static var MAX_WEIGHT: Double = 99999
     
+    // MARK: Normalized properties
+    
+    public var weightValue: Double {
+        get {
+            weight?.doubleValue ?? 0
+        }
+        set {
+            weight = newValue as NSNumber
+        }
+    }
+    
+    public var repetitionsValue: Int16 {
+        get {
+            repetitions?.int16Value ?? 0
+        }
+        set {
+            repetitions = newValue as NSNumber
+        }
+    }
+    
+    public var plannedRepetitionsMinValue: Int16? {
+        get {
+            plannedRepetitionsMin?.int16Value
+        }
+        set {
+            plannedRepetitionsMin = newValue as NSNumber?
+        }
+    }
+    
+    public var plannedRepetitionsMaxValue: Int16? {
+        get {
+            plannedRepetitionsMax?.int16Value
+        }
+        set {
+            plannedRepetitionsMax = newValue as NSNumber?
+        }
+    }
+    
+    public var tagValue: WorkoutSetTag? {
+        get {
+            WorkoutSetTag(rawValue: tag ?? "")
+        }
+        set {
+            tag = newValue?.rawValue
+        }
+    }
+    
+    public var rpeValue: Double? {
+        get {
+            RPE.allowedValues.contains(rpe) ? rpe : nil
+        }
+        set {
+            let newValue = newValue ?? 0
+            rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
+        }
+    }
+    
     // MARK: Derived properties
     
     public func estimatedOneRepMax(maxReps: Int) -> Double? {
-        guard repetitions > 0 && repetitions <= maxReps else { return nil }
-        assert(repetitions < 37) // formula doesn't work for 37+ reps
-        return weight * (36 / (37 - Double(repetitions))) // Brzycki 1RM formula
+        guard repetitionsValue > 0 && repetitionsValue <= maxReps else { return nil }
+        assert(repetitionsValue < 37) // formula doesn't work for 37+ reps
+        return weightValue * (36 / (37 - Double(repetitionsValue))) // Brzycki 1RM formula
     }
 
     public var isPersonalRecord: Bool? {
+        guard let weight = weight else { return nil }
+        guard let repetitions = repetitions else { return nil }
         guard let start = workoutExercise?.workout?.start else { return nil }
         guard let exerciseUuid = workoutExercise?.exerciseUuid else { return nil }
 
@@ -38,10 +97,7 @@ public class WorkoutSet: NSManagedObject, Codable {
         betterOrEqualPreviousSetsRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates:
             [
                 previousSetsPredicate,
-                NSPredicate(format:
-                    "\(#keyPath(WorkoutSet.weight)) >= %@ AND \(#keyPath(WorkoutSet.repetitions)) >= %@",
-                    weight as NSNumber, repetitions as NSNumber
-                )
+                NSPredicate(format: "\(#keyPath(WorkoutSet.weight)) >= %@ AND \(#keyPath(WorkoutSet.repetitions)) >= %@", weight, repetitions)
             ]
         )
         guard let numberOfBetterOrEqualPreviousSets = try? managedObjectContext?.count(for: betterOrEqualPreviousSetsRequest) else { return nil }
@@ -50,7 +106,7 @@ public class WorkoutSet: NSManagedObject, Codable {
         guard let index = workoutExercise?.workoutSets?.index(of: self), index != NSNotFound else { return nil }
         guard let numberOfBetterOrEqualPreviousSetsInCurrentWorkout = (workoutExercise?.workoutSets?.array[0..<index]
             .compactMap { $0 as? WorkoutSet }
-            .filter { $0.weight >= weight && $0.repetitions >= repetitions }
+            .filter { $0.weightValue >= weightValue && $0.repetitionsValue >= repetitionsValue }
             .count)
             else { return nil }
         return numberOfBetterOrEqualPreviousSetsInCurrentWorkout == 0
@@ -75,20 +131,20 @@ public class WorkoutSet: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        repetitions = try container.decode(Int16.self, forKey: .repetitions)
-        weight = try container.decode(Double.self, forKey: .weight)
-        displayRpe = try container.decodeIfPresent(Double.self, forKey: .rpe)
-        displayTag = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
+        repetitionsValue = try container.decode(Int16.self, forKey: .repetitions)
+        weightValue = try container.decode(Double.self, forKey: .weight)
+        rpeValue = try container.decodeIfPresent(Double.self, forKey: .rpe)
+        tagValue = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
         isCompleted = true
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(repetitions, forKey: .repetitions)
-        try container.encode(weight, forKey: .weight)
-        try container.encodeIfPresent(displayRpe, forKey: .rpe)
-        try container.encodeIfPresent(displayTag?.rawValue, forKey: .tag)
+        try container.encode(repetitionsValue, forKey: .repetitions)
+        try container.encode(weightValue, forKey: .weight)
+        try container.encodeIfPresent(rpeValue, forKey: .rpe)
+        try container.encodeIfPresent(tagValue?.rawValue, forKey: .tag)
         try container.encodeIfPresent(comment, forKey: .comment)
     }
 }
@@ -100,33 +156,12 @@ extension WorkoutSet {
 //        numberFormatter.minimumFractionDigits = unit.defaultFractionDigits
 //        let weightInUnit = WeightUnit.convert(weight: weight, from: .metric, to: unit)
 //        return "\(numberFormatter.string(from: weightInUnit as NSNumber) ?? String(format: "%\(unit.maximumFractionDigits).f")) \(unit.abbrev) × \(repetitions)"
-        return formatter.string(from: Measurement(value: weight, unit: UnitMass.kilograms).converted(to: unit)) + " × \(repetitions)"
-    }
-    
-    // use this instead of tag
-    public var displayTag: WorkoutSetTag? {
-        get {
-            WorkoutSetTag(rawValue: tag ?? "")
-        }
-        set {
-            tag = newValue?.rawValue
-        }
-    }
-    
-    // use this instead of rpe
-    public var displayRpe: Double? {
-        get {
-            RPE.allowedValues.contains(rpe) ? rpe : nil
-        }
-        set {
-            let newValue = newValue ?? 0
-            rpe = RPE.allowedValues.contains(newValue) ? newValue : 0
-        }
+        return formatter.string(from: Measurement(value: weightValue, unit: UnitMass.kilograms).converted(to: unit)) + " × \(repetitionsValue)"
     }
     
     public func logTitle(unit: UnitMass, formatter: MeasurementFormatter) -> String {
         let title = displayTitle(unit: unit, formatter: formatter)
-        guard let tag = displayTag?.title.capitalized, !tag.isEmpty else { return title }
+        guard let tag = tagValue?.title.capitalized, !tag.isEmpty else { return title }
         return title + " (\(tag))"
     }
 }

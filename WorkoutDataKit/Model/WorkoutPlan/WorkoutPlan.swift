@@ -29,8 +29,8 @@ public class WorkoutPlan: NSManagedObject {
                                         .compactMap { $0 as? WorkoutRoutineSet }
                                         .map { workoutRoutineSet in
                                             let workoutRoutineSetCopy  = WorkoutRoutineSet(context: context)
-                                            workoutRoutineSetCopy.weight = workoutRoutineSet.weight
-                                            workoutRoutineSetCopy.repetitions = workoutRoutineSet.repetitions
+                                            workoutRoutineSetCopy.repetitionsMax = workoutRoutineSet.repetitionsMax
+                                            workoutRoutineSetCopy.repetitionsMin = workoutRoutineSet.repetitionsMin
                                             return workoutRoutineSetCopy
                                         }
                                 ?? [])

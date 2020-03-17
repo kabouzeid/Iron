@@ -33,10 +33,10 @@ struct WorkoutSetEditor : View {
     private var workoutSetWeight: Binding<Double> {
         Binding(
             get: {
-                WeightUnit.convert(weight: self.workoutSet.weight, from: .metric, to: self.settingsStore.weightUnit)
+                WeightUnit.convert(weight: self.workoutSet.weightValue, from: .metric, to: self.settingsStore.weightUnit)
             },
             set: { newValue in
-                self.workoutSet.weight = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), WorkoutSet.MAX_WEIGHT), 0)
+                self.workoutSet.weightValue = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), WorkoutSet.MAX_WEIGHT), 0)
                 self.refresher.refresh()
             }
         )
@@ -45,10 +45,10 @@ struct WorkoutSetEditor : View {
     private var workoutSetRepetitions: Binding<Double> {
         Binding(
             get: {
-                Double(self.workoutSet.repetitions)
+                Double(self.workoutSet.repetitionsValue)
             },
             set: { newValue in
-                self.workoutSet.repetitions = Int16(max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0))
+                self.workoutSet.repetitionsValue = Int16(max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0))
                 self.refresher.refresh()
             }
         )
@@ -68,7 +68,6 @@ struct WorkoutSetEditor : View {
             HStack {
                 Spacer()
                 label
-                    .animation(.none)
                     .padding(6)
                 Spacer()
             }
@@ -338,10 +337,10 @@ private struct MoreView: View {
 
     private func tagButton(tag: WorkoutSetTag) -> some View {
         Button(action: {
-            if self.workoutSet.displayTag == tag {
-                self.workoutSet.displayTag = nil
+            if self.workoutSet.tagValue == tag {
+                self.workoutSet.tagValue = nil
             } else {
-                self.workoutSet.displayTag = tag
+                self.workoutSet.tagValue = tag
             }
         }) {
             HStack {
@@ -350,7 +349,7 @@ private struct MoreView: View {
                     .foregroundColor(tag.color)
                 Text(tag.title.capitalized)
                 Spacer()
-                if self.workoutSet.displayTag == tag {
+                if self.workoutSet.tagValue == tag {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }
@@ -361,10 +360,10 @@ private struct MoreView: View {
     
     private func rpeButton(rpe: Double) -> some View {
         Button(action: {
-            if self.workoutSet.displayRpe == rpe {
-                self.workoutSet.displayRpe = nil
+            if self.workoutSet.rpeValue == rpe {
+                self.workoutSet.rpeValue = nil
             } else {
-                self.workoutSet.displayRpe = rpe
+                self.workoutSet.rpeValue = rpe
             }
         }) {
             HStack {
@@ -373,7 +372,7 @@ private struct MoreView: View {
                     .lineLimit(nil)
                     .foregroundColor(.secondary)
                 Spacer()
-                if self.workoutSet.displayRpe == rpe {
+                if self.workoutSet.rpeValue == rpe {
                     Image(systemName: "checkmark")
                         .foregroundColor(.secondary)
                 }

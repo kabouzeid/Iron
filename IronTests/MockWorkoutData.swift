@@ -51,8 +51,8 @@ private func createTestWorkoutExercises(workout: Workout) {
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
                 let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-                workoutSet.weight = 50 + Double(setNumber) * 2.5
-                workoutSet.repetitions = Int16(3 + setNumber)
+                workoutSet.weightValue = 50 + Double(setNumber) * 2.5
+                workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
                 workoutSet.workoutExercise = workoutExercise
             }
@@ -74,8 +74,8 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
         let numberOfSets = 5
         for setNumber in 1...numberOfSets {
             let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-            workoutSet.weight = 50 + Double(setNumber) * 2.5
-            workoutSet.repetitions = Int16(3 + setNumber)
+            workoutSet.weightValue = 50 + Double(setNumber) * 2.5
+            workoutSet.repetitionsValue = Int16(3 + setNumber)
             workoutSet.isCompleted = true
             workoutSet.workoutExercise = workoutExercise
         }
@@ -91,12 +91,12 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
             workoutSet.workoutExercise = workoutExercise
             switch setNumber {
             case 1:
-                workoutSet.weight = 50 + Double(setNumber) * 2.5
-                workoutSet.repetitions = Int16(3 + setNumber)
+                workoutSet.weightValue = 50 + Double(setNumber) * 2.5
+                workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
             case 2:
-                workoutSet.weight = 50 + Double(setNumber) * 2.5
-                workoutSet.repetitions = Int16(3 + setNumber)
+                workoutSet.weightValue = 50 + Double(setNumber) * 2.5
+                workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = false
             default:
                 workoutSet.isCompleted = false

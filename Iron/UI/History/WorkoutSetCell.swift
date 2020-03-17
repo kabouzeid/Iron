@@ -15,49 +15,65 @@ struct WorkoutSetCell: View {
     @ObservedObject var workoutSet: WorkoutSet
     let index: Int
     var colorMode: ColorMode = .activated
-    var titleType: TitleType = .weightAndReps
+    var isPlaceholder = false
     var showCompleted = false
+    var showUpNextIndicator = false
     
     enum ColorMode {
+        case selected
         case activated
         case deactivated
         case disabled
     }
     
-    enum TitleType {
-        case weightAndReps
-        case placeholder
-        case placeholderWeightAndReps
-    }
-    
-    private func title(textMode: TitleType) -> String {
-        switch textMode {
-        case .weightAndReps:
-            return workoutSet.displayTitle(weightUnit: settingsStore.weightUnit)
-        case .placeholder:
-            return "Set"
-        case .placeholderWeightAndReps:
-            return title(textMode: .placeholder) + " (\(title(textMode: .weightAndReps)))"
+    private func titleView(isPlaceholder: Bool, colorMode: ColorMode) -> some View {
+        HStack {
+            if isPlaceholder {
+                Text("Set")
+                    .foregroundColor(.secondary)
+            } else {
+                Text(workoutSet.displayTitle(weightUnit: settingsStore.weightUnit))
+                    .font(Font.body.monospacedDigit())
+                    .foregroundColor(colorMode == .selected ? .accentColor : colorMode == .activated ? .primary : .secondary)
+            }
+            
+//            if colorMode == .selected || isPlaceholder {
+                workoutSet.plannedRepetitionsMinValue.map { plannedRepetitionsMin in
+                    workoutSet.plannedRepetitionsMaxValue.map { plannedRepetitionsMax in
+                        Text("\(plannedRepetitionsMin == plannedRepetitionsMax ? "\(plannedRepetitionsMin)" : "\(plannedRepetitionsMin)-\(plannedRepetitionsMax)") reps")
+                            .foregroundColor(Color(.tertiaryLabel))
+                    }
+                }
+//            }
         }
     }
     
     private func rpe(rpe: Double) -> some View {
-        VStack {
-            Group {
-                Text(String(format: "%.1f", rpe))
-                Text("RPE")
-            }
-            .font(.caption)
+        Text("RPE \(String(format: "%.1f", rpe))")
+            .font(Font.caption.monospacedDigit())
             .foregroundColor(.secondary)
-        }
+            .padding(4)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder()
+                    .foregroundColor(Color(.systemFill))
+                
+        )
     }
     
     var body: some View {
         HStack {
+            if showUpNextIndicator {
+                Image(systemName: "chevron.right.circle.fill")
+                    .foregroundColor(.accentColor)
+            } else if showCompleted && workoutSet.isCompleted {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(colorMode == .disabled ? .secondary : .green)
+            }
+            
             VStack(alignment: .leading) {
-                Text(title(textMode: titleType))
-                    .font(Font.body.monospacedDigit())
-                    .foregroundColor(colorMode == .activated ? .primary : .secondary)
+                titleView(isPlaceholder: isPlaceholder, colorMode: colorMode)
+                
                 workoutSet.comment.map {
                     Text($0.enquoted)
                         .lineLimit(1)
@@ -66,7 +82,7 @@ struct WorkoutSetCell: View {
                 }
             }
             Spacer()
-            workoutSet.displayRpe.map {
+            workoutSet.rpeValue.map {
                 self.rpe(rpe: $0)
             }
             if workoutSet.isPersonalRecord ?? false {
@@ -74,16 +90,13 @@ struct WorkoutSetCell: View {
                 Image(systemName: "star.circle.fill")
                     .foregroundColor(colorMode == .disabled ? .secondary : .yellow)
             }
-            if showCompleted && workoutSet.isCompleted {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(colorMode == .disabled ? .secondary : .green)
-            }
+
             Text("\(index)")
                 .font(Font.body.monospacedDigit())
-                .foregroundColor(workoutSet.displayTag != nil ? .clear : .secondary)
+                .foregroundColor(workoutSet.tagValue != nil ? .clear : .secondary)
                 .background(
                     Group {
-                        workoutSet.displayTag.map {
+                        workoutSet.tagValue.map {
                             Text($0.title.first!.uppercased())
                                 .fontWeight(.semibold)
                                 .foregroundColor($0.color)

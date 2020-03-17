@@ -62,20 +62,22 @@ struct WorkoutExerciseDetailView : View {
     }
     
     private func select(set: WorkoutSet?) {
-        withAnimation {
-            if let set = set, !set.isCompleted && set.repetitions == 0 && set.weight == 0 { // treat as uninitialized
-                initRepsAndWeight(for: set)
-            }
-            selectedWorkoutSet = set
-            
-            updateWatchSelectedSet()
+        if let set = set, !set.isCompleted, set.repetitions == nil || set.weight == nil { // treat as uninitialized
+            initRepsAndWeight(for: set)
         }
-    }
-    
-    private func updateWatchSelectedSet() {
-        guard isCurrentWorkout else { return }
-        guard let uuid = selectedWorkoutSet?.workoutExercise?.workout?.uuid else { return }
-        WatchConnectionManager.shared.updateAndObserveWatchWorkoutSelectedSet(workoutSet: selectedWorkoutSet, uuid: uuid)
+        
+        // only animate if we would show/hide the editor
+        if set == nil && selectedWorkoutSet != nil || set != nil && selectedWorkoutSet == nil {
+            withAnimation {
+                selectedWorkoutSet = set
+            }
+        } else {
+            selectedWorkoutSet = set
+        }
+        
+        if isCurrentWorkout, let uuid = set?.workoutExercise?.workout?.uuid {
+            WatchConnectionManager.shared.updateAndObserveWatchWorkoutSelectedSet(workoutSet: set, uuid: uuid)
+        }
     }
     
     private func initRepsAndWeight(for set: WorkoutSet) {
@@ -91,14 +93,14 @@ struct WorkoutExerciseDetailView : View {
             previousSet = workoutExerciseHistory.first?.workoutSets?.firstObject as? WorkoutSet
         }
         if let previousSet = previousSet {
-            set.repetitions = previousSet.repetitions
-            set.weight = previousSet.weight
+            set.repetitionsValue = previousSet.repetitionsValue
+            set.weightValue = previousSet.weightValue
         } else {
             // TODO: let the user configure default repetitions and weight
-            set.repetitions = 5
+            set.repetitionsValue = 5
             if workoutExercise.exercise(in: exerciseStore.exercises)?.type == .barbell {
                 let weightUnit = self.settingsStore.weightUnit
-                set.weight = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
+                set.weightValue = WeightUnit.convert(weight: weightUnit.barbellWeight, from: weightUnit, to: .metric)
             }
         }
     }
@@ -110,7 +112,7 @@ struct WorkoutExerciseDetailView : View {
             for i in 0..<index {
                 guard let workoutSet1 = workoutExercise.workoutSets?[i] as? WorkoutSet else { return false }
                 guard let workoutSet2 = $0.workoutSets?[i] as? WorkoutSet else { return false }
-                if workoutSet1.weight != workoutSet2.weight || workoutSet1.repetitions != workoutSet2.repetitions {
+                if workoutSet1.weightValue != workoutSet2.weightValue || workoutSet1.repetitionsValue != workoutSet2.repetitionsValue {
                     return false
                 }
             }
@@ -136,16 +138,6 @@ struct WorkoutExerciseDetailView : View {
         }
     }
     
-    private func titleType(for set: WorkoutSet) -> WorkoutSetCell.TitleType {
-        if set.isCompleted || set == self.firstUncompletedSet {
-            return .weightAndReps
-        } else if set.weight == 0 && set.repetitions == 0 {
-            return .placeholder
-        } else {
-            return .placeholderWeightAndReps
-        }
-    }
-    
     private func shouldHighlightRow(for set: WorkoutSet) -> Bool {
         !self.isCurrentWorkout || set == self.firstUncompletedSet
     }
@@ -163,8 +155,8 @@ struct WorkoutExerciseDetailView : View {
     
     private var currentWorkoutSets: some View {
         ForEach(indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { (index, workoutSet) in
-            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, titleType: self.titleType(for: workoutSet), showCompleted: true)
-                .listRowBackground(self.selectedWorkoutSet == workoutSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
+            WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.selectedWorkoutSet == workoutSet ? .selected : self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, isPlaceholder: !workoutSet.isCompleted && workoutSet != self.firstUncompletedSet, showCompleted: self.isCurrentWorkout, showUpNextIndicator: self.firstUncompletedSet == workoutSet)
+//                .listRowBackground(self.selectedWorkoutSet == workoutSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
                 .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
                 .onTapGesture {
                     guard self.editMode?.wrappedValue != .active else { return }
@@ -268,8 +260,8 @@ struct WorkoutExerciseDetailView : View {
                 if !set.isCompleted {
                      assert(self.isCurrentWorkout)
                     // these preconditions should never ever happen, but just to be sure
-                    precondition(set.weight >= 0)
-                    precondition(set.repetitions >= 0)
+                    precondition(set.weightValue >= 0)
+                    precondition(set.repetitionsValue >= 0)
                     set.isCompleted = true
                     let workout = set.workoutExercise?.workout
                     workout?.start = workout?.start ?? Date()

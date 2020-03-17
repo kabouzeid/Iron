@@ -21,11 +21,26 @@ struct WorkoutExerciseSectionHeader: View {
         _bodyWeightFetcher = .init(initialValue: .init(date: workoutExercise.workout?.start))
     }
     
-    func format(weight: Double) -> String { // weight should always be in kg
+    // weight should always be in kg
+    func format(weight: Double) -> String {
         let weightUnit = settingsStore.weightUnit
         let formatter = weightUnit.formatter
         formatter.numberFormatter.maximumFractionDigits = 1
-        return "BW: " + formatter.string(from: Measurement(value: weight, unit: UnitMass.kilograms).converted(to: weightUnit.unit))
+        return formatter.string(from: Measurement(value: weight, unit: UnitMass.kilograms).converted(to: weightUnit.unit))
+    }
+    
+    // weight should always be in kg
+    private func bodyWeight(weight: Double) -> some View {
+        HStack {
+            Image(systemName: "person")
+            Text(format(weight: weight))
+        }
+        .padding(4)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .strokeBorder()
+                .foregroundColor(Color(.systemFill))
+        )
     }
     
     var body: some View {
@@ -33,7 +48,7 @@ struct WorkoutExerciseSectionHeader: View {
             Text(Workout.dateFormatter.string(from: workoutExercise.workout?.start, fallback: "Unknown date"))
             Spacer()
             bodyWeightFetcher.bodyWeight.map {
-                Text(format(weight: $0))
+                bodyWeight(weight: $0)
             }
         }.onAppear(perform: bodyWeightFetcher.fetchBodyWeight)
     }

@@ -138,17 +138,17 @@ extension MockWorkoutData {
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
                 let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-                workoutSet.weight = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
-                workoutSet.repetitions = Int16.random(in: 1...10)
+                workoutSet.weightValue = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
+                workoutSet.repetitionsValue = Int16.random(in: 1...10)
                 workoutSet.comment = Int.random(in: 1...5) == 1 ? "This is a comment" : nil
-                workoutSet.displayRpe = Int.random(in: 1...5) == 1 ? (Double(Int.random(in: 0..<7)) * 0.5 + 7) : nil
+                workoutSet.rpeValue = Int.random(in: 1...5) == 1 ? (Double(Int.random(in: 0..<7)) * 0.5 + 7) : nil
                 switch Int.random(in: 1...15) {
     //            case 1:
     //                workoutSet.displayTag = .warmUp
                 case 2:
-                    workoutSet.displayTag = .dropSet
+                    workoutSet.tagValue = .dropSet
                 case 3:
-                    workoutSet.displayTag = .failure
+                    workoutSet.tagValue = .failure
                 default:
                     break
                 }
@@ -172,8 +172,8 @@ extension MockWorkoutData {
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
                 let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-                workoutSet.weight = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
-                workoutSet.repetitions = Int16.random(in: 1...10)
+                workoutSet.weightValue = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
+                workoutSet.repetitionsValue = Int16.random(in: 1...10)
                 workoutSet.isCompleted = true
                 workoutSet.workoutExercise = workoutExercise
             }
@@ -189,8 +189,8 @@ extension MockWorkoutData {
                 workoutSet.workoutExercise = workoutExercise
                 switch setNumber {
                 case 1:
-                    workoutSet.weight = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
-                    workoutSet.repetitions = Int16.random(in: 1...10)
+                    workoutSet.weightValue = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
+                    workoutSet.repetitionsValue = Int16.random(in: 1...10)
                     workoutSet.isCompleted = true
                 default:
                     workoutSet.isCompleted = false
@@ -252,8 +252,8 @@ extension MockWorkoutData {
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
                 let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-                workoutSet.weight = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
-                workoutSet.repetitions = Int16(3 + setNumber)
+                workoutSet.weightValue = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
+                workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
                 workoutSet.workoutExercise = workoutExercise
             }
@@ -274,8 +274,8 @@ extension MockWorkoutData {
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
                 let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
-                workoutSet.weight = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
-                workoutSet.repetitions = Int16(3 + setNumber)
+                workoutSet.weightValue = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
+                workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
                 workoutSet.workoutExercise = workoutExercise
             }
@@ -291,12 +291,12 @@ extension MockWorkoutData {
                 workoutSet.workoutExercise = workoutExercise
                 switch setNumber {
                 case 1:
-                    workoutSet.weight = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
-                    workoutSet.repetitions = Int16(3 + setNumber)
+                    workoutSet.weightValue = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
+                    workoutSet.repetitionsValue = Int16(3 + setNumber)
                     workoutSet.isCompleted = true
                 case 2:
-                    workoutSet.weight = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
-                    workoutSet.repetitions = Int16(3 + setNumber)
+                    workoutSet.weightValue = niceWeight(weight: 20 + Double(setNumber) * 2.5, unit: unit)
+                    workoutSet.repetitionsValue = Int16(3 + setNumber)
                     workoutSet.isCompleted = false
                 default:
                     workoutSet.isCompleted = false
@@ -324,8 +324,8 @@ extension MockWorkoutData {
         let create5x5 = { (weight: Double) -> [WorkoutRoutineSet] in
             (0..<5).map { _ -> WorkoutRoutineSet in
                 let set = WorkoutRoutineSet(context: context)
-                set.repetitions = 5
-                set.weight = weight
+                set.repetitionsMinValue = 8
+                set.repetitionsMaxValue = 12
                 return set
             }
         }

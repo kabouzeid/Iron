@@ -287,9 +287,10 @@ extension Workout {
                         newWorkoutExercise.addToWorkoutSets(newWorkoutSet)
                         newWorkoutSet.isCompleted = false
                         if !blank {
-                            newWorkoutSet.weight = workoutSet.weight
-                            newWorkoutSet.repetitions = workoutSet.repetitions
-                            // don't copy RPE, tag, comment, etc.
+                            let repetitions = workoutSet.repetitionsValue
+                            newWorkoutSet.plannedRepetitionsMinValue = repetitions
+                            newWorkoutSet.plannedRepetitionsMaxValue = repetitions
+                            // don't copy weight, RPE, tag, comment, etc.
                         }
                     }
                 }

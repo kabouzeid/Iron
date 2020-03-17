@@ -54,7 +54,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
         workoutSets?
             .compactMap { $0 as? WorkoutSet }
             .reduce(0, { (count, workoutSet) -> Int in
-                count + (workoutSet.isCompleted ? Int(workoutSet.repetitions) : 0)
+                count + (workoutSet.isCompleted ? Int(workoutSet.repetitionsValue) : 0)
             })
     }
 
@@ -62,7 +62,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
         workoutSets?
             .compactMap { $0 as? WorkoutSet }
             .reduce(0, { (weight, workoutSet) -> Double in
-                weight + (workoutSet.isCompleted ? workoutSet.weight * Double(workoutSet.repetitions) : 0)
+                weight + (workoutSet.isCompleted ? workoutSet.weightValue * Double(workoutSet.repetitionsValue) : 0)
             })
     }
     

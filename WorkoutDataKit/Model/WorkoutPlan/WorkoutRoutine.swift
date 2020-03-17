@@ -26,8 +26,8 @@ public class WorkoutRoutine: NSManagedObject {
                         let workoutSet = WorkoutSet(context: context)
                         workoutExercise.addToWorkoutSets(workoutSet)
                         workoutSet.isCompleted = false
-                        workoutSet.weight = workoutRoutineSet.weight
-                        workoutSet.repetitions = workoutRoutineSet.repetitions
+                        workoutSet.plannedRepetitionsMax = workoutRoutineSet.repetitionsMax
+                        workoutSet.plannedRepetitionsMin = workoutRoutineSet.repetitionsMin
                     }
                 }
             }
