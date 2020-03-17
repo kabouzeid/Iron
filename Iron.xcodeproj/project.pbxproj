@@ -140,6 +140,7 @@
 		8A86193B236DAB7100C1E96C /* WatchIron.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8A86191C236DAB6E00C1E96C /* WatchIron.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */; };
 		8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */; };
+		8A9598C724213B720039D57D /* DeveloperSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9598C624213B720039D57D /* DeveloperSettings.swift */; };
 		8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */; };
 		8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
 		8A9742E023F1824A00D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
@@ -621,6 +622,7 @@
 		8A861938236DAB7100C1E96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionManager.swift; sourceTree = "<group>"; };
 		8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionManager.swift; sourceTree = "<group>"; };
+		8A9598C624213B720039D57D /* DeveloperSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettings.swift; sourceTree = "<group>"; };
 		8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroup.swift; sourceTree = "<group>"; };
 		8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseGroup+Identifieable.swift"; sourceTree = "<group>"; };
 		8A982531241149FC0020A644 /* OSLog+Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Logs.swift"; sourceTree = "<group>"; };
@@ -956,7 +958,6 @@
 			children = (
 				8AB5213323993C3D008064B2 /* WeightUnit.swift */,
 				8AED58B3236491B600BF06D3 /* IronBackup.swift */,
-				8A59283122BE575300BFD57E /* MockWorkoutData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1201,6 +1202,7 @@
 				8AB0C94E234540420009F031 /* HealthKit */,
 				8A861944236DABDC00C1E96C /* WatchConnectivity */,
 				8A0683B6239C76FE001F0A1E /* Siri */,
+				8A9598C524213B220039D57D /* _debug */,
 				8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */,
 				8AC8063822BABC8C00086032 /* SceneDelegate.swift */,
 				8A36F9E9231EA62F0036E504 /* NotificationManager.swift */,
@@ -1272,6 +1274,22 @@
 				8A34FA082379B59D009CF1DD /* EndContentView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		8A9598C424213AF90039D57D /* _debug */ = {
+			isa = PBXGroup;
+			children = (
+				8A59283122BE575300BFD57E /* MockWorkoutData.swift */,
+			);
+			path = _debug;
+			sourceTree = "<group>";
+		};
+		8A9598C524213B220039D57D /* _debug */ = {
+			isa = PBXGroup;
+			children = (
+				8A9598C624213B720039D57D /* DeveloperSettings.swift */,
+			);
+			path = _debug;
 			sourceTree = "<group>";
 		};
 		8AA6252523AE673A00217DA9 /* Workout */ = {
@@ -1456,6 +1474,7 @@
 				8A507E04239C094700883339 /* WatchConnectivity */,
 				8A0683B1239C615E001F0A1E /* Siri */,
 				8AAD1002239D8FE900C1A447 /* StoreKit */,
+				8A9598C424213AF90039D57D /* _debug */,
 				8A16BBD822E337A0002150F0 /* Benchmark.swift */,
 			);
 			path = Shared;
@@ -2076,6 +2095,7 @@
 				8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */,
 				8AB4F7EF234217290074B88E /* ActivityDemoChartView.swift in Sources */,
 				8AB5213623999315008064B2 /* String+LocalizedError.swift in Sources */,
+				8A9598C724213B720039D57D /* DeveloperSettings.swift in Sources */,
 				8AF4C538230EEE51003A84DC /* WorkoutSetTag+SwiftUI.swift in Sources */,
 				8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */,
 				8A5F9A11233B6B6D00C2F32A /* StoreObserver.swift in Sources */,
