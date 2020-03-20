@@ -1,5 +1,5 @@
 //
-//  WorkoutView.swift
+//  CurrentWorkoutView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.07.19.
@@ -13,7 +13,7 @@ import HealthKit
 import WorkoutDataKit
 import os.log
 
-struct WorkoutView: View {
+struct CurrentWorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var restTimerStore: RestTimerStore
     @EnvironmentObject var exerciseStore: ExerciseStore
@@ -365,7 +365,7 @@ struct WorkoutView_Previews: PreviewProvider {
             RestTimerStore.shared.restTimerStart = Date()
             RestTimerStore.shared.restTimerDuration = 10
         }
-        return WorkoutView(workout: MockWorkoutData.metricRandom.currentWorkout)
+        return CurrentWorkoutView(workout: MockWorkoutData.metricRandom.currentWorkout)
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

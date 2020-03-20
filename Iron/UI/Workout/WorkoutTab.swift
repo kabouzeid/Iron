@@ -20,7 +20,7 @@ struct WorkoutTab: View {
     private func workoutView(workout: Workout?) -> some View {
         Group { // is Group the appropiate choice here? (want to avoid AnyView)
             if workout != nil {
-                WorkoutView(workout: workout!)
+                CurrentWorkoutView(workout: workout!)
             } else {
                 StartWorkoutView()
             }

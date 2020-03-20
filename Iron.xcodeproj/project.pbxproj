@@ -98,7 +98,7 @@
 		8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A604382239C4DBB00CFB7C0 /* IronIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A6043A3239C4E1F00CFB7C0 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8A6043A2239C4E1F00CFB7C0 /* Intents.intentdefinition */; };
 		8A6043A7239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6043A6239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift */; };
-		8A63B3772329463A001BD7B5 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B3752329463A001BD7B5 /* WorkoutView.swift */; };
+		8A63B3772329463A001BD7B5 /* CurrentWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B3752329463A001BD7B5 /* CurrentWorkoutView.swift */; };
 		8A63B3782329463A001BD7B5 /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B3762329463A001BD7B5 /* StartWorkoutView.swift */; };
 		8A63B37A2329467F001BD7B5 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B3792329467F001BD7B5 /* UIImage+Tinting.swift */; };
 		8A63B37D23294694001BD7B5 /* NSManagedObjectContext+save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B37B23294694001BD7B5 /* NSManagedObjectContext+save.swift */; };
@@ -571,7 +571,7 @@
 		8A604394239C4DBB00CFB7C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A6043A2239C4E1F00CFB7C0 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		8A6043A6239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPersonalRecordsIntentHandler.swift; sourceTree = "<group>"; };
-		8A63B3752329463A001BD7B5 /* WorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
+		8A63B3752329463A001BD7B5 /* CurrentWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutView.swift; sourceTree = "<group>"; };
 		8A63B3762329463A001BD7B5 /* StartWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
 		8A63B3792329467F001BD7B5 /* UIImage+Tinting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tinting.swift"; sourceTree = "<group>"; };
 		8A63B37B23294694001BD7B5 /* NSManagedObjectContext+save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+save.swift"; sourceTree = "<group>"; };
@@ -841,7 +841,7 @@
 				8A0ADC32232964E700081F4B /* WorkoutTab.swift */,
 				8A63B3762329463A001BD7B5 /* StartWorkoutView.swift */,
 				8AA39B0423AEB636005FAD84 /* WorkoutPlanView.swift */,
-				8A63B3752329463A001BD7B5 /* WorkoutView.swift */,
+				8A63B3752329463A001BD7B5 /* CurrentWorkoutView.swift */,
 				8A1D989722C7C6AC0071225D /* WorkoutSetEditor.swift */,
 				8A38154F2301B865008ACDAD /* WorkoutLog.swift */,
 				8A70A73623041542000A3C76 /* TimerBannerView.swift */,
@@ -2006,7 +2006,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A63B3772329463A001BD7B5 /* WorkoutView.swift in Sources */,
+				8A63B3772329463A001BD7B5 /* CurrentWorkoutView.swift in Sources */,
 				8AF92552232FD49600C6977D /* ExerciseFilter.swift in Sources */,
 				8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */,
 				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
