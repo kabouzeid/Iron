@@ -11,7 +11,11 @@ import CoreData
 import WorkoutDataKit
 
 struct StartWorkoutView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @State private var quote = Quotes.quotes.randomElement()
+    
+    @State private var selectedWorkoutPlan: WorkoutPlan?
     
     @FetchRequest(fetchRequest: StartWorkoutView.fetchRequest) var workoutPlans
 
@@ -30,14 +34,21 @@ struct StartWorkoutView: View {
                 
                 ForEach(workoutPlans, id: \.objectID) { workoutPlan in
                     Section {
-                        WorkoutPlanCell(workoutPlan: workoutPlan)
+                        WorkoutPlanCell(workoutPlan: workoutPlan, selectedWorkoutPlan: self.$selectedWorkoutPlan)
                         WorkoutPlanRoutines(workoutPlan: workoutPlan)
+                            .deleteDisabled(true)
+                    }
+                }
+                .onDelete { offsets in
+                    let workoutPlans = self.workoutPlans
+                    for i in offsets {
+                        self.managedObjectContext.delete(workoutPlans[i])
                     }
                 }
                 
                 Section {
                     Button(action: {
-                        #warning("TODO create plan sheet")
+                        self.createWorkoutPlan()
                     }) {
                         HStack {
                             Image(systemName: "plus")
@@ -51,6 +62,11 @@ struct StartWorkoutView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+    private func createWorkoutPlan() {
+        assert(self.selectedWorkoutPlan == nil)
+        selectedWorkoutPlan = WorkoutPlan(context: managedObjectContext)
+    }
 }
 
 private struct StartEmptyWorkoutCell: View {
@@ -60,6 +76,15 @@ private struct StartEmptyWorkoutCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
     
     let quote: Quote? = Quotes.quotes[4]
+    
+    private func startWorkout() {
+        precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
+        // create a new workout
+        let workout = Workout(context: self.managedObjectContext)
+        workout.uuid = UUID()
+        workout.isCurrentWorkout = true
+        workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
+    }
     
     private var plateImage: some View {
         Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
@@ -85,12 +110,7 @@ private struct StartEmptyWorkoutCell: View {
             }
             
             Button(action: {
-                precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
-                // create a new workout
-                let workout = Workout(context: self.managedObjectContext)
-                workout.uuid = UUID()
-                workout.isCurrentWorkout = true
-                workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
+                self.startWorkout()
             }) {
                 HStack {
                     Spacer()
@@ -111,11 +131,12 @@ private struct WorkoutPlanCell: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @ObservedObject var workoutPlan: WorkoutPlan
+    @Binding var selectedWorkoutPlan: WorkoutPlan?
     
     var body: some View {
-        NavigationLink(destination: WorkoutPlanView(workoutPlan: workoutPlan)) {
+        NavigationLink(destination: WorkoutPlanView(workoutPlan: workoutPlan), tag: workoutPlan, selection: $selectedWorkoutPlan) {
             VStack(alignment: .leading) {
-                Text(workoutPlan.title ?? "").font(.headline)
+                Text(workoutPlan.displayTitle).font(.headline)
             }
             .contextMenu {
                 Button(action: {
@@ -147,16 +168,6 @@ private struct WorkoutPlanRoutines: View {
         workoutPlan.workoutRoutines?.array as? [WorkoutRoutine] ?? []
     }
     
-    private func workoutRoutineExercises(workoutRoutine: WorkoutRoutine) -> [WorkoutRoutineExercise] {
-        workoutRoutine.workoutRoutineExercises?.array as? [WorkoutRoutineExercise] ?? []
-    }
-    
-    private func workoutRoutineExercisesString(workoutRoutine: WorkoutRoutine) -> String {
-        workoutRoutineExercises(workoutRoutine: workoutRoutine)
-            .compactMap { $0.exercise(in: self.exerciseStore.exercises)?.title }
-            .joined(separator: ", ")
-    }
-    
     var body: some View {
         ForEach(workoutRoutines, id: \.objectID) { workoutRoutine in
             Button(action: {
@@ -167,8 +178,8 @@ private struct WorkoutPlanRoutines: View {
                 workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
             }) {
                 VStack(alignment: .leading) {
-                    Text(workoutRoutine.title ?? "").italic()
-                    Text(self.workoutRoutineExercisesString(workoutRoutine: workoutRoutine))
+                    Text(workoutRoutine.displayTitle).italic()
+                    Text(workoutRoutine.subtitle(in: self.exerciseStore.exercises))
                         .lineLimit(1)
                         .foregroundColor(.secondary)
                         .font(.caption)

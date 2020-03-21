@@ -28,26 +28,12 @@ struct WorkoutPlanView: View {
     }
     private func adjustAndSaveWorkoutTitleInput() {
         guard let newValue = workoutPlanTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        if newValue.isEmpty {
-            workoutPlanTitleInput.value = nil
-        } else {
-            workoutPlanTitleInput.value = newValue
-            workoutPlan.title = newValue
-        }
+        workoutPlanTitleInput.value = newValue
+        workoutPlan.title = newValue.isEmpty ? nil : newValue
     }
     
     private var workoutRoutines: [WorkoutRoutine] {
         workoutPlan.workoutRoutines?.array as? [WorkoutRoutine] ?? []
-    }
-    
-    private func workoutRoutineExercises(workoutRoutine: WorkoutRoutine) -> [WorkoutRoutineExercise] {
-        workoutRoutine.workoutRoutineExercises?.array as? [WorkoutRoutineExercise] ?? []
-    }
-    
-    private func workoutRoutineExercisesString(workoutRoutine: WorkoutRoutine) -> String {
-        workoutRoutineExercises(workoutRoutine: workoutRoutine)
-            .compactMap { $0.exercise(in: self.exerciseStore.exercises)?.title }
-            .joined(separator: ", ")
     }
     
     var body: some View {
@@ -61,10 +47,10 @@ struct WorkoutPlanView: View {
             }
             Section(header: Text("Routines".uppercased())) {
                 ForEach(workoutRoutines, id: \.objectID) { workoutRoutine in
-                    NavigationLink(destination: Text("TODO")) {
+                    NavigationLink(destination: WorkoutRoutineView(workoutRoutine: workoutRoutine)) {
                         VStack(alignment: .leading) {
-                            Text(workoutRoutine.title ?? "")
-                            Text(self.workoutRoutineExercisesString(workoutRoutine: workoutRoutine))
+                            Text(workoutRoutine.displayTitle)
+                            Text(workoutRoutine.subtitle(in: self.exerciseStore.exercises))
                                 .lineLimit(1)
                                 .foregroundColor(.secondary)
                                 .font(.caption)
@@ -86,8 +72,7 @@ struct WorkoutPlanView: View {
                 }
                 
                 Button(action: {
-                    #warning("TODO add routine sheet")
-//                    self.activeSheet = .exerciseSelector
+                    self.createWorkoutRoutine()
                 }) {
                     HStack {
                         Image(systemName: "plus")
@@ -97,8 +82,13 @@ struct WorkoutPlanView: View {
             }
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle(Text(workoutPlan.title ?? ""), displayMode: .inline)
+        .navigationBarTitle(Text(workoutPlan.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing: EditButton())
+    }
+    
+    private func createWorkoutRoutine() {
+        let workoutRoutine = WorkoutRoutine(context: managedObjectContext)
+        workoutRoutine.workoutPlan = workoutPlan
     }
 }
 

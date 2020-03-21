@@ -17,11 +17,11 @@
         <relationship name="workoutSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutSet" inverseName="workoutExercise" inverseEntity="WorkoutSet" elementID="trainingSets"/>
     </entity>
     <entity name="WorkoutPlan" representedClassName=".WorkoutPlan" syncable="YES" codeGenerationType="category">
-        <attribute name="title" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="workoutRoutines" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutRoutine" inverseName="workoutPlan" inverseEntity="WorkoutRoutine"/>
     </entity>
     <entity name="WorkoutRoutine" representedClassName=".WorkoutRoutine" syncable="YES" codeGenerationType="category">
-        <attribute name="title" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="workoutPlan" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutPlan" inverseName="workoutRoutines" inverseEntity="WorkoutPlan"/>
         <relationship name="workoutRoutineExercises" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="WorkoutRoutineExercise" inverseName="workoutRoutine" inverseEntity="WorkoutRoutineExercise"/>
         <relationship name="workouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Workout" inverseName="workoutRoutine" inverseEntity="Workout"/>

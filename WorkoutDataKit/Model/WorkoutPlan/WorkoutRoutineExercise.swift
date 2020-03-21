@@ -9,6 +9,26 @@
 import CoreData
 
 public class WorkoutRoutineExercise: NSManagedObject {
+    public var subtitle: String? {
+        guard let workoutRoutineSets = workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) else { return nil }
+        
+        if let firstSet = workoutRoutineSets.first, let minReps = firstSet.repetitionsMinValue, let maxReps = firstSet.repetitionsMaxValue {
+            var sameReps = true
+            for set in workoutRoutineSets {
+                if minReps != set.repetitionsMinValue || maxReps != set.repetitionsMaxValue {
+                    sameReps = false
+                    break
+                }
+            }
+            if sameReps {
+                let reps = minReps == maxReps ? "\(minReps)" : "\(minReps)-\(maxReps)"
+                return "\(workoutRoutineSets.count) sets of \(reps) reps"
+            }
+        }
+        
+        return "\(workoutRoutineSets.count) sets"
+    }
+    
     public func exercise(in exercises: [Exercise]) -> Exercise? {
         ExerciseStore.find(in: exercises, with: exerciseUuid)
     }

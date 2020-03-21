@@ -9,6 +9,10 @@
 import CoreData
 
 public class WorkoutPlan: NSManagedObject {
+    public var displayTitle: String {
+        title ?? "Workout Plan"
+    }
+    
     public func duplicate(context: NSManagedObjectContext) -> WorkoutPlan {
         let workoutPlanCopy = WorkoutPlan(context: context)
         workoutPlanCopy.title = self.title

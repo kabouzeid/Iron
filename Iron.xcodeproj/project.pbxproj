@@ -64,6 +64,7 @@
 		8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */; };
 		8A38154E23019A3F008ACDAD /* RestTimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154D23019A3F008ACDAD /* RestTimerStore.swift */; };
 		8A3815502301B865008ACDAD /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A38154F2301B865008ACDAD /* WorkoutLog.swift */; };
+		8A3A11532426661D006DA244 /* WorkoutRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A11522426661D006DA244 /* WorkoutRoutineView.swift */; };
 		8A3AAC622416EB4D009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; };
 		8A3AAC632416EB4D009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8A3AAC652416EB72009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC642416EB72009FE65F /* Charts */; };
@@ -540,6 +541,7 @@
 		8A381549230181C9008ACDAD /* UserDefaults+RestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+RestTimer.swift"; sourceTree = "<group>"; };
 		8A38154D23019A3F008ACDAD /* RestTimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerStore.swift; sourceTree = "<group>"; };
 		8A38154F2301B865008ACDAD /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+		8A3A11522426661D006DA244 /* WorkoutRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRoutineView.swift; sourceTree = "<group>"; };
 		8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Style.swift"; sourceTree = "<group>"; };
 		8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBarChartView.swift; sourceTree = "<group>"; };
 		8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PinnedCharts.swift"; sourceTree = "<group>"; };
@@ -841,6 +843,7 @@
 				8A0ADC32232964E700081F4B /* WorkoutTab.swift */,
 				8A63B3762329463A001BD7B5 /* StartWorkoutView.swift */,
 				8AA39B0423AEB636005FAD84 /* WorkoutPlanView.swift */,
+				8A3A11522426661D006DA244 /* WorkoutRoutineView.swift */,
 				8A63B3752329463A001BD7B5 /* CurrentWorkoutView.swift */,
 				8A1D989722C7C6AC0071225D /* WorkoutSetEditor.swift */,
 				8A38154F2301B865008ACDAD /* WorkoutLog.swift */,
@@ -2031,6 +2034,7 @@
 				8AF07864239AFA5E00CA95D6 /* SettingsStore+Migrate.swift in Sources */,
 				8A3815482301803A008ACDAD /* Refresher.swift in Sources */,
 				8AC503292340E732006D1BC6 /* PurchaseSheet.swift in Sources */,
+				8A3A11532426661D006DA244 /* WorkoutRoutineView.swift in Sources */,
 				8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */,
 				8A6B1A6B22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift in Sources */,
 				8A1916B9214E6BC000D96E9E /* WorkoutExerciseChartDataGenerator.swift in Sources */,

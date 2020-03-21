@@ -160,7 +160,7 @@ struct CurrentWorkoutView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                .layoutPriority(1)
+                .layoutPriority(1) // without this the text is suddenly displayed multiline (because of the spacer below)
                 if isCompleted {
                     Spacer()
                     Image(systemName: "checkmark.circle.fill")
