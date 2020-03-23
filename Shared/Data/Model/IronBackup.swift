@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import WorkoutDataKit
+import os.log
 
 enum IronBackup {
     private struct IronBackup: Codable {
@@ -52,7 +53,13 @@ enum IronBackup {
         defer {
             if !success {
                 // if something went wrong, undo all changes
-                try? ExerciseStore.shared.replaceCustomExercises(with: previousCustomExercises)
+                os_log("Restoring backup data was unsuccessful, trying to undo changes", log: .backup, type: .default)
+                do {
+                    try ExerciseStore.shared.replaceCustomExercises(with: previousCustomExercises)
+                    os_log("Successfully reverted changes to custom exercises", log: .backup, type: .default)
+                } catch {
+                    os_log("Could not revert changes to custom exercises", log: .backup, type: .error)
+                }
             }
             restoringBackupData = false
         }
@@ -63,6 +70,7 @@ enum IronBackup {
         context.parent = WorkoutDataStorage.shared.persistentContainer.viewContext
         
         // delete all workouts (except for the current workout)
+        os_log("Deleting all workouts", log: .backup, type: .default)
         let workoutRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
         workoutRequest.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
         let workouts = try context.fetch(workoutRequest)
@@ -71,6 +79,7 @@ enum IronBackup {
         }
         
         // try to restore the workouts
+        os_log("Restoring workouts", log: .backup, type: .default)
         guard let managedObjectContextKey = CodingUserInfoKey.managedObjectContextKey else { throw "Managed object context key is nill" }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -78,10 +87,12 @@ enum IronBackup {
         let workoutDataBackup = try decoder.decode(IronBackup.self, from: data) // this already inserts the workout into the context
         
         // try to restore the custom exercises
+        os_log("Restoring custom exercises", log: .backup, type: .default)
         try ExerciseStore.shared.replaceCustomExercises(with: workoutDataBackup.customExercises)
         
         // if everything went well, save the changes
         try context.save()
         success = true
+        os_log("Successfully restored backup data", log: .backup, type: .info)
     }
 }
