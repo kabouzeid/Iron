@@ -29,7 +29,7 @@ struct BackupAndExportView: View {
     private func alert(backupError: BackupError) -> Alert {
         let errorMessage = backupError.error?.localizedDescription
         let text = errorMessage.map { Text($0) }
-        return Alert(title: Text("Could not Create Backup"), message: text)
+        return Alert(title: Text("Could Not Create Backup"), message: text)
     }
     
     private var cloudBackupFooter: some View {

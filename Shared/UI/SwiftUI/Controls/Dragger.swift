@@ -158,6 +158,7 @@ struct Dragger : View {
                         self.onTextTapped()
                     }
             )
+            .animation(.none) // prevents "..." being displayed when number length changes and animation is activated
 
             Image(systemName: "line.horizontal.3")
                 .rotationEffect(Angle(degrees: 0))

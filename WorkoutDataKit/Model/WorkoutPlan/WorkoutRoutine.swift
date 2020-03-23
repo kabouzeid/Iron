@@ -52,6 +52,8 @@ public class WorkoutRoutine: NSManagedObject {
     public func createWorkout(context: NSManagedObjectContext) -> Workout {
         let workout = Workout(context: context)
         workout.uuid = UUID()
+        workout.comment = self.comment
+        // NOTE: don't set title here, it should be inferred automatically by the relation ship
         
         if let workoutRoutineExercises = workoutRoutineExercises?.compactMap({ $0 as? WorkoutRoutineExercise }) {
             // copy the exercises
@@ -59,6 +61,7 @@ public class WorkoutRoutine: NSManagedObject {
                 let workoutExercise = WorkoutExercise(context: context)
                 workout.addToWorkoutExercises(workoutExercise)
                 workoutExercise.exerciseUuid = workoutRoutineExercise.exerciseUuid
+                workoutExercise.comment = workoutRoutineExercise.comment
                 
                 if let workoutRoutineSets = workoutRoutineExercise.workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) {
                     // copy the sets
@@ -68,6 +71,8 @@ public class WorkoutRoutine: NSManagedObject {
                         workoutSet.isCompleted = false
                         workoutSet.plannedRepetitionsMax = workoutRoutineSet.repetitionsMax
                         workoutSet.plannedRepetitionsMin = workoutRoutineSet.repetitionsMin
+                        workoutSet.tagValue = workoutRoutineSet.tagValue
+                        workoutSet.comment = workoutRoutineSet.comment
                     }
                 }
             }

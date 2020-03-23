@@ -22,12 +22,14 @@ public class WorkoutPlan: NSManagedObject {
                 .map { workoutRoutine in
                     let workoutRoutineCopy = WorkoutRoutine(context: context)
                     workoutRoutineCopy.title = workoutRoutine.title
+                    workoutRoutineCopy.comment = workoutRoutine.comment
                     workoutRoutineCopy.workoutRoutineExercises = NSOrderedSet(array:
                         workoutRoutine.workoutRoutineExercises?
                             .compactMap { $0 as? WorkoutRoutineExercise }
                             .map { workoutRoutineExercise in
                                 let workoutRoutineExerciseCopy = WorkoutRoutineExercise(context: context)
                                 workoutRoutineExerciseCopy.exerciseUuid = workoutRoutineExercise.exerciseUuid
+                                workoutRoutineExerciseCopy.comment = workoutRoutineExercise.comment
                                 workoutRoutineExerciseCopy.workoutRoutineSets = NSOrderedSet(array:
                                     workoutRoutineExercise.workoutRoutineSets?
                                         .compactMap { $0 as? WorkoutRoutineSet }
@@ -35,6 +37,8 @@ public class WorkoutPlan: NSManagedObject {
                                             let workoutRoutineSetCopy  = WorkoutRoutineSet(context: context)
                                             workoutRoutineSetCopy.repetitionsMax = workoutRoutineSet.repetitionsMax
                                             workoutRoutineSetCopy.repetitionsMin = workoutRoutineSet.repetitionsMin
+                                            workoutRoutineSetCopy.tagValue = workoutRoutineSet.tagValue
+                                            workoutRoutineSetCopy.comment = workoutRoutineSet.comment
                                             return workoutRoutineSetCopy
                                         }
                                 ?? [])

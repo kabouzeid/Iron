@@ -34,6 +34,23 @@ struct WorkoutRoutineView: View {
         workoutRoutine.title = newValue.isEmpty ? nil : newValue
     }
     
+    @ObservedObject private var workoutRoutineCommentInput = ValueHolder<String?>(initial: nil)
+    private var workoutRoutineComment: Binding<String> {
+        Binding(
+            get: {
+                self.workoutRoutineCommentInput.value ?? self.workoutRoutine.comment ?? ""
+            },
+            set: { newValue in
+                self.workoutRoutineCommentInput.value = newValue
+            }
+        )
+    }
+    private func adjustAndSaveWorkoutRoutineCommentInput() {
+        guard let newValue = workoutRoutineCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutRoutineCommentInput.value = newValue
+        workoutRoutine.comment = newValue.isEmpty ? nil : newValue
+    }
+    
     private var workoutRoutineExercises: [WorkoutRoutineExercise] {
         workoutRoutine.workoutRoutineExercises?.array as? [WorkoutRoutineExercise] ?? []
     }
@@ -62,10 +79,15 @@ struct WorkoutRoutineView: View {
                         self.adjustAndSaveWorkoutRoutineTitleInput()
                     }
                 })
+                TextField("Comment", text: workoutRoutineComment, onEditingChanged: { isEditingTextField in
+                    if !isEditingTextField {
+                        self.adjustAndSaveWorkoutRoutineCommentInput()
+                    }
+                })
             }
             Section(header: Text("Exercises".uppercased())) {
                 ForEach(workoutRoutineExercises, id: \.objectID) { workoutRoutineExercise in
-                    NavigationLink(destination: Text("TODO")) {
+                    NavigationLink(destination: WorkoutRoutineExerciseView(workoutRoutineExercise: workoutRoutineExercise)) {
                         VStack(alignment: .leading) {
                             Text(workoutRoutineExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "Unknown Exercise")
                             workoutRoutineExercise.subtitle.map {
@@ -95,7 +117,7 @@ struct WorkoutRoutineView: View {
                 }) {
                     HStack {
                         Image(systemName: "plus")
-                        Text("Add Exercise")
+                        Text("Add Exercises")
                     }
                 }
             }

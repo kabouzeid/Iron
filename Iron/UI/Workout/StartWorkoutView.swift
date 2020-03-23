@@ -66,6 +66,7 @@ struct StartWorkoutView: View {
     private func createWorkoutPlan() {
         assert(self.selectedWorkoutPlan == nil)
         selectedWorkoutPlan = WorkoutPlan(context: managedObjectContext)
+        managedObjectContext.safeSave()
     }
 }
 
@@ -141,12 +142,14 @@ private struct WorkoutPlanCell: View {
             .contextMenu {
                 Button(action: {
                     _ = self.workoutPlan.duplicate(context: self.managedObjectContext)
+                    self.managedObjectContext.safeSave()
                 }) {
                     Text("Duplicate")
                     Image(systemName: "doc.on.doc")
                 }
                 Button(action: {
                     self.managedObjectContext.delete(self.workoutPlan)
+                    self.managedObjectContext.safeSave()
                 }) {
                     Text("Delete")
                     Image(systemName: "trash")

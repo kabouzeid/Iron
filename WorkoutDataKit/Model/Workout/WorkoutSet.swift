@@ -112,7 +112,8 @@ public class WorkoutSet: NSManagedObject, Codable {
         return numberOfBetterOrEqualPreviousSetsInCurrentWorkout == 0
     }
     
-    // MARK: - Codable
+    // MARK: Codable
+    
     private enum CodingKeys: String, CodingKey {
         case repetitions
         case weight
@@ -150,6 +151,7 @@ public class WorkoutSet: NSManagedObject, Codable {
 }
 
 // MARK: Display
+
 extension WorkoutSet {
     public func displayTitle(unit: UnitMass, formatter: MeasurementFormatter) -> String {
 //        let numberFormatter = unit.numberFormatter
@@ -165,6 +167,8 @@ extension WorkoutSet {
         return title + " (\(tag))"
     }
 }
+
+// MARK: Validation
 
 extension WorkoutSet {
     override public func validateForUpdate() throws {

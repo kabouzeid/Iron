@@ -64,11 +64,13 @@ struct WorkoutPlanView: View {
                         self.managedObjectContext.delete(workoutRoutine)
                         workoutRoutine.workoutPlan?.removeFromWorkoutRoutines(workoutRoutine)
                     }
+                    self.managedObjectContext.safeSave()
                 }
                 .onMove { source, destination in
                     var workoutRoutines = self.workoutRoutines
                     workoutRoutines.move(fromOffsets: source, toOffset: destination)
                     self.workoutPlan.workoutRoutines = NSOrderedSet(array: workoutRoutines)
+                    self.managedObjectContext.safeSave()
                 }
                 
                 Button(action: {
@@ -89,6 +91,7 @@ struct WorkoutPlanView: View {
     private func createWorkoutRoutine() {
         let workoutRoutine = WorkoutRoutine(context: managedObjectContext)
         workoutRoutine.workoutPlan = workoutPlan
+        managedObjectContext.safeSave()
     }
 }
 
