@@ -39,8 +39,8 @@
     </entity>
     <entity name="WorkoutRoutineSet" representedClassName=".WorkoutRoutineSet" syncable="YES" codeGenerationType="category">
         <attribute name="comment" optional="YES" attributeType="String"/>
-        <attribute name="repetitionsMax" optional="YES" attributeType="Integer 16" minValueString="0" usesScalarValueType="NO"/>
-        <attribute name="repetitionsMin" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
+        <attribute name="maxRepetitions" optional="YES" attributeType="Integer 16" minValueString="0" usesScalarValueType="NO"/>
+        <attribute name="minRepetitions" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
         <attribute name="tag" optional="YES" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="workoutRoutineExercise" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutRoutineExercise" inverseName="workoutRoutineSets" inverseEntity="WorkoutRoutineExercise"/>
@@ -48,8 +48,8 @@
     <entity name="WorkoutSet" representedClassName=".WorkoutSet" elementID="TrainingSet" syncable="YES" codeGenerationType="category">
         <attribute name="comment" optional="YES" attributeType="String"/>
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="plannedRepetitionsMax" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
-        <attribute name="plannedRepetitionsMin" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
+        <attribute name="maxTargetRepetitions" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
+        <attribute name="minTargetRepetitions" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
         <attribute name="repetitions" optional="YES" attributeType="Integer 16" minValueString="0" usesScalarValueType="NO"/>
         <attribute name="rpe" optional="YES" attributeType="Double" minValueString="0" maxValueString="10" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tag" optional="YES" attributeType="String"/>

@@ -308,8 +308,8 @@ extension Workout {
                         newWorkoutSet.isCompleted = false
                         if !blank {
                             let repetitions = workoutSet.repetitionsValue
-                            newWorkoutSet.plannedRepetitionsMinValue = repetitions
-                            newWorkoutSet.plannedRepetitionsMaxValue = repetitions
+                            newWorkoutSet.minTargetRepetitionsValue = repetitions
+                            newWorkoutSet.maxTargetRepetitionsValue = repetitions
                             // don't copy weight, RPE, tag, comment, etc.
                         }
                     }

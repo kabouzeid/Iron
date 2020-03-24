@@ -37,10 +37,10 @@ struct WorkoutRoutineSetEditor: View {
     @Binding var overwriteRepetitionsMax: Int16? // should be set to nil by the parent view when the selected workoutRoutineSet changes
     
     private var editorRepetitionsMin: Int16? {
-        self.overwriteRepetitionsMin ?? self.workoutRoutineSet.repetitionsMinValue
+        self.overwriteRepetitionsMin ?? self.workoutRoutineSet.minRepetitionsValue
     }
     private var editorRepetitionsMax: Int16? {
-        self.overwriteRepetitionsMax ?? self.workoutRoutineSet.repetitionsMaxValue
+        self.overwriteRepetitionsMax ?? self.workoutRoutineSet.maxRepetitionsValue
     }
     
     private var displayRepetitionsMin: Double {
@@ -63,8 +63,8 @@ struct WorkoutRoutineSetEditor: View {
                 let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
                 let repsMaxValue = self.displayRepetitionsMax
                 if newValue <= repsMaxValue {
-                    self.workoutRoutineSet.repetitionsMinValue = Int16(newValue)
-                    self.workoutRoutineSet.repetitionsMaxValue = Int16(repsMaxValue)
+                    self.workoutRoutineSet.minRepetitionsValue = Int16(newValue)
+                    self.workoutRoutineSet.maxRepetitionsValue = Int16(repsMaxValue)
                     self.overwriteRepetitionsMin = nil
                     self.overwriteRepetitionsMax = nil
                 } else {
@@ -84,8 +84,8 @@ struct WorkoutRoutineSetEditor: View {
                 let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
                 let repsMinValue = self.displayRepetitionsMin
                 if newValue >= repsMinValue {
-                    self.workoutRoutineSet.repetitionsMaxValue = Int16(newValue)
-                    self.workoutRoutineSet.repetitionsMinValue = Int16(repsMinValue)
+                    self.workoutRoutineSet.maxRepetitionsValue = Int16(newValue)
+                    self.workoutRoutineSet.minRepetitionsValue = Int16(repsMinValue)
                     self.overwriteRepetitionsMax = nil
                     self.overwriteRepetitionsMin = nil
                 } else {
@@ -104,8 +104,8 @@ struct WorkoutRoutineSetEditor: View {
             set: { newValue in
                 let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
                 let repsMaxValue = self.displayRepetitionsMax
-                self.workoutRoutineSet.repetitionsMinValue = Int16(newValue)
-                self.workoutRoutineSet.repetitionsMaxValue = Int16(max(repsMaxValue, newValue))
+                self.workoutRoutineSet.minRepetitionsValue = Int16(newValue)
+                self.workoutRoutineSet.maxRepetitionsValue = Int16(max(repsMaxValue, newValue))
                 self.overwriteRepetitionsMin = nil
                 self.overwriteRepetitionsMax = nil
                 self.refresher.refresh()
@@ -121,8 +121,8 @@ struct WorkoutRoutineSetEditor: View {
             set: { newValue in
                 let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
                 let repsMinValue = self.displayRepetitionsMin
-                self.workoutRoutineSet.repetitionsMaxValue = Int16(newValue)
-                self.workoutRoutineSet.repetitionsMinValue = Int16(min(repsMinValue, newValue))
+                self.workoutRoutineSet.maxRepetitionsValue = Int16(newValue)
+                self.workoutRoutineSet.minRepetitionsValue = Int16(min(repsMinValue, newValue))
                 self.overwriteRepetitionsMax = nil
                 self.overwriteRepetitionsMin = nil
                 self.refresher.refresh()
@@ -185,8 +185,8 @@ struct WorkoutRoutineSetEditor: View {
     }
     
     private func clearReps() {
-        self.workoutRoutineSet.repetitionsMinValue = nil
-        self.workoutRoutineSet.repetitionsMaxValue = nil
+        self.workoutRoutineSet.minRepetitionsValue = nil
+        self.workoutRoutineSet.maxRepetitionsValue = nil
         self.overwriteRepetitionsMin = nil
         self.overwriteRepetitionsMax = nil
     }

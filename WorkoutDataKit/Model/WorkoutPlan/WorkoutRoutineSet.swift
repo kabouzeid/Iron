@@ -19,21 +19,21 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
     
     // MARK: Normalized properties
     
-    public var repetitionsMinValue: Int16? {
+    public var minRepetitionsValue: Int16? {
         get {
-            repetitionsMin?.int16Value
+            minRepetitions?.int16Value
         }
         set {
-            repetitionsMin = newValue as NSNumber?
+            minRepetitions = newValue as NSNumber?
         }
     }
     
-    public var repetitionsMaxValue: Int16? {
+    public var maxRepetitionsValue: Int16? {
         get {
-            repetitionsMax?.int16Value
+            maxRepetitions?.int16Value
         }
         set {
-            repetitionsMax = newValue as NSNumber?
+            maxRepetitions = newValue as NSNumber?
         }
     }
     
@@ -72,8 +72,8 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
-        repetitionsMinValue = try container.decodeIfPresent(Int16.self, forKey: .minRepetitions)
-        repetitionsMaxValue = try container.decodeIfPresent(Int16.self, forKey: .maxRepetitions)
+        minRepetitionsValue = try container.decodeIfPresent(Int16.self, forKey: .minRepetitions)
+        maxRepetitionsValue = try container.decodeIfPresent(Int16.self, forKey: .maxRepetitions)
         tagValue = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
     }
@@ -81,8 +81,8 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(uuid ?? UUID(), forKey: .uuid)
-        try container.encodeIfPresent(repetitionsMinValue, forKey: .minRepetitions)
-        try container.encodeIfPresent(repetitionsMinValue, forKey: .maxRepetitions)
+        try container.encodeIfPresent(minRepetitionsValue, forKey: .minRepetitions)
+        try container.encodeIfPresent(minRepetitionsValue, forKey: .maxRepetitions)
         try container.encodeIfPresent(tagValue?.rawValue, forKey: .tag)
         try container.encodeIfPresent(comment, forKey: .comment)
     }
@@ -92,7 +92,7 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
 
 extension WorkoutRoutineSet {
     public var displayTitle: String? {
-        guard let repsMin = repetitionsMinValue, let repsMax = repetitionsMaxValue else { return nil }
+        guard let repsMin = minRepetitionsValue, let repsMax = maxRepetitionsValue else { return nil }
         return "\(repsMin == repsMax ? "\(repsMax)" : "\(repsMin)-\(repsMax)") reps"
     }
 }
@@ -111,10 +111,10 @@ extension WorkoutRoutineSet {
     }
     
     func validateConsistency() throws {
-        if (repetitionsMin == nil && repetitionsMax != nil) {
+        if (minRepetitions == nil && maxRepetitions != nil) {
             throw error(code: 1, message: "min repetitions is not set, but max repetitions is set.")
         }
-        if (repetitionsMin != nil && repetitionsMax == nil) {
+        if (minRepetitions != nil && maxRepetitions == nil) {
             throw error(code: 1, message: "max repetitions is not set, but min repetitions is set.")
         }
     }

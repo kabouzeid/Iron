@@ -18,10 +18,10 @@ public class WorkoutRoutineExercise: NSManagedObject, Codable {
     public var subtitle: String? {
         guard let workoutRoutineSets = workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) else { return nil }
         
-        if let firstSet = workoutRoutineSets.first, let minReps = firstSet.repetitionsMinValue, let maxReps = firstSet.repetitionsMaxValue {
+        if let firstSet = workoutRoutineSets.first, let minReps = firstSet.minRepetitionsValue, let maxReps = firstSet.maxRepetitionsValue {
             var sameReps = true
             for set in workoutRoutineSets {
-                if minReps != set.repetitionsMinValue || maxReps != set.repetitionsMaxValue {
+                if minReps != set.minRepetitionsValue || maxReps != set.maxRepetitionsValue {
                     sameReps = false
                     break
                 }

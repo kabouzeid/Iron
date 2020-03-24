@@ -36,8 +36,8 @@ func createDefaultWorkoutPlans() {
     let create5x5 = { (weight: Double) -> [WorkoutRoutineSet] in
         (0..<5).map { _ -> WorkoutRoutineSet in
             let set = WorkoutRoutineSet.create(context: context)
-            set.repetitionsMinValue = 8
-            set.repetitionsMaxValue = 12
+            set.minRepetitionsValue = 8
+            set.maxRepetitionsValue = 12
             return set
         }
     }

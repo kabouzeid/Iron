@@ -99,11 +99,11 @@ struct WorkoutRoutineExerciseView: View {
             workoutRoutineSet.workoutRoutineExercise = self.workoutRoutineExercise
             
             if let previousSet = lastSet {
-                workoutRoutineSet.repetitionsMinValue = previousSet.repetitionsMinValue
-                workoutRoutineSet.repetitionsMaxValue = previousSet.repetitionsMaxValue
+                workoutRoutineSet.minRepetitionsValue = previousSet.minRepetitionsValue
+                workoutRoutineSet.maxRepetitionsValue = previousSet.maxRepetitionsValue
             } else {
-                workoutRoutineSet.repetitionsMinValue = 5
-                workoutRoutineSet.repetitionsMaxValue = 5
+                workoutRoutineSet.minRepetitionsValue = 5
+                workoutRoutineSet.maxRepetitionsValue = 5
             }
             
             self.managedObjectContext.safeSave()

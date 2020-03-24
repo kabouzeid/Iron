@@ -41,8 +41,8 @@ public class WorkoutPlan: NSManagedObject, Codable {
                                         .compactMap { $0 as? WorkoutRoutineSet }
                                         .map { workoutRoutineSet in
                                             let workoutRoutineSetCopy  = WorkoutRoutineSet.create(context: context)
-                                            workoutRoutineSetCopy.repetitionsMax = workoutRoutineSet.repetitionsMax
-                                            workoutRoutineSetCopy.repetitionsMin = workoutRoutineSet.repetitionsMin
+                                            workoutRoutineSetCopy.maxRepetitions = workoutRoutineSet.maxRepetitions
+                                            workoutRoutineSetCopy.minRepetitions = workoutRoutineSet.minRepetitions
                                             workoutRoutineSetCopy.tagValue = workoutRoutineSet.tagValue
                                             workoutRoutineSetCopy.comment = workoutRoutineSet.comment
                                             return workoutRoutineSetCopy

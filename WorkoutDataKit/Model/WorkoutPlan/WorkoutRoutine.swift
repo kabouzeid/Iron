@@ -74,8 +74,8 @@ public class WorkoutRoutine: NSManagedObject, Codable {
                         let workoutSet = WorkoutSet.create(context: context)
                         workoutSet.workoutExercise = workoutExercise
                         workoutSet.isCompleted = false
-                        workoutSet.plannedRepetitionsMax = workoutRoutineSet.repetitionsMax
-                        workoutSet.plannedRepetitionsMin = workoutRoutineSet.repetitionsMin
+                        workoutSet.maxTargetRepetitions = workoutRoutineSet.maxRepetitions
+                        workoutSet.minTargetRepetitions = workoutRoutineSet.minRepetitions
                         workoutSet.tagValue = workoutRoutineSet.tagValue
                         workoutSet.comment = workoutRoutineSet.comment
                     }

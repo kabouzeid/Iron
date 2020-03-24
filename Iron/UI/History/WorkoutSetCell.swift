@@ -38,8 +38,8 @@ struct WorkoutSetCell: View {
             }
             
 //            if colorMode == .selected || isPlaceholder {
-                workoutSet.plannedRepetitionsMinValue.map { plannedRepetitionsMin in
-                    workoutSet.plannedRepetitionsMaxValue.map { plannedRepetitionsMax in
+                workoutSet.minTargetRepetitionsValue.map { plannedRepetitionsMin in
+                    workoutSet.maxTargetRepetitionsValue.map { plannedRepetitionsMax in
                         Text("\(plannedRepetitionsMin == plannedRepetitionsMax ? "\(plannedRepetitionsMin)" : "\(plannedRepetitionsMin)-\(plannedRepetitionsMax)") reps")
                             .foregroundColor(Color(.tertiaryLabel))
                     }
