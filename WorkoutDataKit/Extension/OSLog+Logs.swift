@@ -14,4 +14,5 @@ extension OSLog {
     static let workoutDataStorage = OSLog(subsystem: subsystem, category: "Workout Data Storage")
     static let coreDataMonitor = OSLog(subsystem: subsystem, category: "Core Data Monitor")
     static let migration = OSLog(subsystem: subsystem, category: "Migration")
+    static let modelCoding = OSLog(subsystem: subsystem, category: "Model Coding")
 }

@@ -8,7 +8,7 @@
 
 import CoreData
 
-public class WorkoutPlan: NSManagedObject {
+public class WorkoutPlan: NSManagedObject, Codable {
     public class func create(context: NSManagedObjectContext) -> WorkoutPlan {
         let workoutPlan = WorkoutPlan(context: context)
         workoutPlan.uuid = UUID()
@@ -55,5 +55,35 @@ public class WorkoutPlan: NSManagedObject {
                 }
         ?? [])
         return workoutPlanCopy
+    }
+    
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid
+        case title
+        case routines
+    }
+    
+    required convenience public init(from decoder: Decoder) throws {
+        guard let contextKey = CodingUserInfoKey.managedObjectContextKey,
+            let context = decoder.userInfo[contextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "WorkoutPlan", in: context)
+            else {
+            throw CodingUserInfoKey.DecodingError.managedObjectContextMissing
+        }
+        self.init(entity: entity, insertInto: context)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
+        title = try container.decodeIfPresent(String.self, forKey: .title)
+        workoutRoutines = NSOrderedSet(array: try container.decodeIfPresent([WorkoutRoutine].self, forKey: .routines) ?? [])
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid ?? UUID(), forKey: .uuid)
+        try container.encodeIfPresent(title, forKey: .title)
+        try container.encodeIfPresent(workoutRoutines?.array.compactMap { $0 as? WorkoutRoutine }, forKey: .routines)
     }
 }

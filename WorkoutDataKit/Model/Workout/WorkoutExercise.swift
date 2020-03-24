@@ -94,7 +94,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
         uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
         exerciseUuid = try container.decodeIfPresent(UUID.self, forKey: .exerciseUuid)
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
-        workoutSets = NSOrderedSet(array: try container.decodeIfPresent([WorkoutSet].self, forKey: .sets) ?? []) // TODO: check if this is correct
+        workoutSets = NSOrderedSet(array: try container.decodeIfPresent([WorkoutSet].self, forKey: .sets) ?? [])
     }
     
     public func encode(to encoder: Encoder) throws {

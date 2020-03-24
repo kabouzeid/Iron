@@ -8,7 +8,7 @@
 
 import CoreData
 
-public class WorkoutRoutineSet: NSManagedObject {
+public class WorkoutRoutineSet: NSManagedObject, Codable {
     public static let supportedTags = [WorkoutSetTag.dropSet]
     
     public class func create(context: NSManagedObjectContext) -> WorkoutRoutineSet {
@@ -47,6 +47,44 @@ public class WorkoutRoutineSet: NSManagedObject {
             if let tag = newValue, !Self.supportedTags.contains(tag) { return }
             tag = newValue?.rawValue
         }
+    }
+    
+    // MARK: - Codable
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid
+        case minRepetitions
+        case maxRepetitions
+        case weight
+        case rpe
+        case tag
+        case comment
+    }
+    
+    required convenience public init(from decoder: Decoder) throws {
+        guard let contextKey = CodingUserInfoKey.managedObjectContextKey,
+            let context = decoder.userInfo[contextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "WorkoutRoutineSet", in: context)
+            else {
+            throw CodingUserInfoKey.DecodingError.managedObjectContextMissing
+        }
+        self.init(entity: entity, insertInto: context)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
+        repetitionsMinValue = try container.decodeIfPresent(Int16.self, forKey: .minRepetitions)
+        repetitionsMaxValue = try container.decodeIfPresent(Int16.self, forKey: .maxRepetitions)
+        tagValue = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
+        comment = try container.decodeIfPresent(String.self, forKey: .comment)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid ?? UUID(), forKey: .uuid)
+        try container.encodeIfPresent(repetitionsMinValue, forKey: .minRepetitions)
+        try container.encodeIfPresent(repetitionsMinValue, forKey: .maxRepetitions)
+        try container.encodeIfPresent(tagValue?.rawValue, forKey: .tag)
+        try container.encodeIfPresent(comment, forKey: .comment)
     }
 }
 

@@ -118,11 +118,13 @@ public class WorkoutSet: NSManagedObject, Codable {
         return numberOfBetterOrEqualPreviousSetsInCurrentWorkout == 0
     }
     
-    // MARK: Codable
+    // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
         case uuid
         case repetitions
+        case minTargetRepetitions
+        case maxTargetRepetitions
         case weight
         case rpe
         case tag
@@ -145,6 +147,8 @@ public class WorkoutSet: NSManagedObject, Codable {
         rpeValue = try container.decodeIfPresent(Double.self, forKey: .rpe)
         tagValue = WorkoutSetTag(rawValue: try container.decodeIfPresent(String.self, forKey: .tag) ?? "")
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
+        plannedRepetitionsMinValue = try container.decodeIfPresent(Int16.self, forKey: .minTargetRepetitions)
+        plannedRepetitionsMaxValue = try container.decodeIfPresent(Int16.self, forKey: .maxTargetRepetitions)
         isCompleted = true
     }
     
@@ -156,6 +160,8 @@ public class WorkoutSet: NSManagedObject, Codable {
         try container.encodeIfPresent(rpeValue, forKey: .rpe)
         try container.encodeIfPresent(tagValue?.rawValue, forKey: .tag)
         try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(plannedRepetitionsMinValue, forKey: .minTargetRepetitions)
+        try container.encodeIfPresent(plannedRepetitionsMaxValue, forKey: .maxTargetRepetitions)
     }
 }
 

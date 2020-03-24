@@ -8,6 +8,7 @@
 
 import CoreData
 import Combine
+import os.log
 
 public class Workout: NSManagedObject, Codable {
     public static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {
@@ -58,7 +59,7 @@ public class Workout: NSManagedObject, Codable {
     }
 
     public func workoutPlanAndRoutineTitle() -> String? {
-        if let workoutRoutineTitle = workoutRoutine?.title, let workoutPlanTitle = workoutRoutine?.workoutPlan?.title {
+        if let workoutRoutineTitle = workoutRoutine?.displayTitle, let workoutPlanTitle = workoutRoutine?.workoutPlan?.displayTitle {
             return workoutPlanTitle + " - " + workoutRoutineTitle
         }
         return nil
@@ -128,6 +129,7 @@ public class Workout: NSManagedObject, Codable {
         case start
         case end
         case exercises
+        case routineUuid
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -145,7 +147,18 @@ public class Workout: NSManagedObject, Codable {
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
         start = try container.decode(Date.self, forKey: .start)
         end = try container.decode(Date.self, forKey: .end)
-        workoutExercises = NSOrderedSet(array: try container.decodeIfPresent([WorkoutExercise].self, forKey: .exercises) ?? []) // TODO: check if this is correct
+        workoutExercises = NSOrderedSet(array: try container.decodeIfPresent([WorkoutExercise].self, forKey: .exercises) ?? [])
+        
+        if let routineUuid = try container.decodeIfPresent(UUID.self, forKey: .routineUuid) {
+            os_log("Fetching workout routine with uuid=%@", log: .modelCoding, type: .default, routineUuid as NSUUID)
+            let request: NSFetchRequest<WorkoutRoutine> = WorkoutRoutine.fetchRequest()
+            request.predicate = NSPredicate(format: "\(#keyPath(WorkoutRoutine.uuid)) == %@", routineUuid as NSUUID)
+            workoutRoutine = try managedObjectContext?.fetch(request).first
+            if workoutRoutine == nil {
+                os_log("Could not find workout routine with uuid=%@", log: .modelCoding, type: .fault, routineUuid as NSUUID)
+            }
+        }
+        
         isCurrentWorkout = false // just to be sure
     }
     
@@ -157,6 +170,7 @@ public class Workout: NSManagedObject, Codable {
         try container.encode(safeStart, forKey: .start)
         try container.encode(safeEnd, forKey: .end)
         try container.encodeIfPresent(workoutExercises?.array.compactMap { $0 as? WorkoutExercise }, forKey: .exercises)
+        try container.encodeIfPresent(workoutRoutine?.uuid, forKey: .routineUuid)
     }
 }
 
