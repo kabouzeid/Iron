@@ -9,6 +9,12 @@
 import CoreData
 
 public class WorkoutRoutine: NSManagedObject {
+    public class func create(context: NSManagedObjectContext) -> WorkoutRoutine {
+        let workoutRoutine = WorkoutRoutine(context: context)
+        workoutRoutine.uuid = UUID()
+        return workoutRoutine
+    }
+    
     public var fallbackTitle: String? {
         guard let index = workoutPlan?.workoutRoutines?.index(of: self), index != NSNotFound else { return nil }
         guard let letters = toLetters(from: index) else { return nil }
@@ -50,15 +56,14 @@ public class WorkoutRoutine: NSManagedObject {
     }
     
     public func createWorkout(context: NSManagedObjectContext) -> Workout {
-        let workout = Workout(context: context)
-        workout.uuid = UUID()
+        let workout = Workout.create(context: context)
         workout.comment = self.comment
         // NOTE: don't set title here, it should be inferred automatically by the relation ship
         
         if let workoutRoutineExercises = workoutRoutineExercises?.compactMap({ $0 as? WorkoutRoutineExercise }) {
             // copy the exercises
             for workoutRoutineExercise in workoutRoutineExercises {
-                let workoutExercise = WorkoutExercise(context: context)
+                let workoutExercise = WorkoutExercise.create(context: context)
                 workout.addToWorkoutExercises(workoutExercise)
                 workoutExercise.exerciseUuid = workoutRoutineExercise.exerciseUuid
                 workoutExercise.comment = workoutRoutineExercise.comment
@@ -66,8 +71,8 @@ public class WorkoutRoutine: NSManagedObject {
                 if let workoutRoutineSets = workoutRoutineExercise.workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) {
                     // copy the sets
                     for workoutRoutineSet in workoutRoutineSets {
-                        let workoutSet = WorkoutSet(context: context)
-                        workoutExercise.addToWorkoutSets(workoutSet)
+                        let workoutSet = WorkoutSet.create(context: context)
+                        workoutSet.workoutExercise = workoutExercise
                         workoutSet.isCompleted = false
                         workoutSet.plannedRepetitionsMax = workoutRoutineSet.repetitionsMax
                         workoutSet.plannedRepetitionsMin = workoutRoutineSet.repetitionsMin

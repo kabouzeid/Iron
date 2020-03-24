@@ -82,7 +82,7 @@ class ExportImportWorkoutDataTests: XCTestCase {
     }
     
     func testExportWorkoutWithoutStartEnd() {
-        let workout = Workout(context: persistenContainer.viewContext)
+        let workout = Workout.create(context: persistenContainer.viewContext)
         // no start / end is set
         // encoding shouldn't crash but set safeStart and safeEnd
         let data = try! encoder.encode([workout])

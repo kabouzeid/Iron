@@ -59,7 +59,7 @@ struct WorkoutRoutineExerciseView: View {
     }
     
     private var workoutRoutineSets: some View {
-        ForEach(indexedWorkoutRoutineSets(for: workoutRoutineExercise), id: \.1.objectID) { (index, workoutRoutineSet) in
+        ForEach(indexedWorkoutRoutineSets(for: workoutRoutineExercise), id: \.1.id) { (index, workoutRoutineSet) in
             WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet, index: index, isSelected: self.selectedWorkoutRoutineSet == workoutRoutineSet)
                 .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
                 .onTapGesture {
@@ -95,7 +95,7 @@ struct WorkoutRoutineExerciseView: View {
             // get the lastSet before adding a new set
             let lastSet = self.workoutRoutineExercise.workoutRoutineSets?.lastObject as? WorkoutRoutineSet
             
-            let workoutRoutineSet = WorkoutRoutineSet(context: self.managedObjectContext)
+            let workoutRoutineSet = WorkoutRoutineSet.create(context: self.managedObjectContext)
             workoutRoutineSet.workoutRoutineExercise = self.workoutRoutineExercise
             
             if let previousSet = lastSet {

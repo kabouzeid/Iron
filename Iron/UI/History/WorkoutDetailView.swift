@@ -71,7 +71,7 @@ struct WorkoutDetailView : View {
                     .font(Font.caption.italic())
                     .foregroundColor(.secondary)
             }
-            ForEach(self.workoutSets(workoutExercise: workoutExercise), id: \.objectID) { workoutSet in
+            ForEach(self.workoutSets(workoutExercise: workoutExercise)) { workoutSet in
                 Text(workoutSet.logTitle(weightUnit: self.settingsStore.weightUnit))
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
@@ -116,7 +116,7 @@ struct WorkoutDetailView : View {
 //            }
 
             Section {
-                ForEach(workoutExercises, id: \.objectID) { workoutExercise in
+                ForEach(workoutExercises) { workoutExercise in
                     NavigationLink(destination: WorkoutExerciseDetailView(workoutExercise: workoutExercise).environmentObject(self.settingsStore)) {
                         self.workoutExerciseView(workoutExercise: workoutExercise)
                     }
@@ -166,7 +166,7 @@ struct WorkoutDetailView : View {
                 recentExercises: AddExercisesSheet.loadRecentExercises(context: self.managedObjectContext, exercises: self.exerciseStore.shownExercises),
                 onAdd: { selection in
                     for exercise in selection {
-                        let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                        let workoutExercise = WorkoutExercise.create(context: self.managedObjectContext)
                         self.workout.addToWorkoutExercises(workoutExercise)
                         workoutExercise.exerciseUuid = exercise.uuid
                     }
@@ -209,7 +209,6 @@ extension WorkoutDetailView {
             return
         }
         guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: false) else { return }
-        newWorkout.uuid = UUID()
         newWorkout.title = workout.title
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()
@@ -232,7 +231,6 @@ extension WorkoutDetailView {
             return
         }
         guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: true) else { return }
-        newWorkout.uuid = UUID()
         newWorkout.title = workout.title
         newWorkout.isCurrentWorkout = true
         newWorkout.start = Date()

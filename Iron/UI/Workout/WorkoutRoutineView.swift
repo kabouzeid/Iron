@@ -61,7 +61,7 @@ struct WorkoutRoutineView: View {
             recentExercises: AddExercisesSheet.loadRecentExercises(context: managedObjectContext, exercises: exerciseStore.shownExercises),
             onAdd: { selection in
                 for exercise in selection {
-                    let workoutRoutineExercise = WorkoutRoutineExercise(context: self.managedObjectContext)
+                    let workoutRoutineExercise = WorkoutRoutineExercise.create(context: self.managedObjectContext)
                     workoutRoutineExercise.workoutRoutine = self.workoutRoutine
                     workoutRoutineExercise.exerciseUuid = exercise.uuid
                     // TODO: add default sets?
@@ -86,7 +86,7 @@ struct WorkoutRoutineView: View {
                 })
             }
             Section(header: Text("Exercises".uppercased())) {
-                ForEach(workoutRoutineExercises, id: \.objectID) { workoutRoutineExercise in
+                ForEach(workoutRoutineExercises) { workoutRoutineExercise in
                     NavigationLink(destination: WorkoutRoutineExerciseView(workoutRoutineExercise: workoutRoutineExercise)) {
                         VStack(alignment: .leading) {
                             Text(workoutRoutineExercise.exercise(in: self.exerciseStore.exercises)?.title ?? "Unknown Exercise")

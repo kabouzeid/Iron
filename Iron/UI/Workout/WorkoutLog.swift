@@ -31,7 +31,7 @@ struct WorkoutLog: View {
                     .font(Font.caption.italic())
                     .foregroundColor(.secondary)
             }
-            ForEach(self.workoutSets(workoutExercise: workoutExercise), id: \.objectID) { workoutSet in
+            ForEach(self.workoutSets(workoutExercise: workoutExercise)) { workoutSet in
                 Text(workoutSet.logTitle(weightUnit: self.settingsStore.weightUnit))
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(.secondary)
@@ -48,7 +48,7 @@ struct WorkoutLog: View {
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }
             Section {
-                ForEach(workout.workoutExercisesWhereNotAllSetsAreUncompleted ?? [], id: \.objectID) {
+                ForEach(workout.workoutExercisesWhereNotAllSetsAreUncompleted ?? []) {
                     self.workoutExerciseView(workoutExercise: $0)
                 }
             }

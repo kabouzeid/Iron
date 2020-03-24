@@ -42,7 +42,7 @@ struct CurrentWorkoutView: View {
                 recentExercises: AddExercisesSheet.loadRecentExercises(context: managedObjectContext, exercises: exerciseStore.shownExercises),
                 onAdd: { selection in
                     for exercise in selection {
-                        let workoutExercise = WorkoutExercise(context: self.managedObjectContext)
+                        let workoutExercise = WorkoutExercise.create(context: self.managedObjectContext)
                         self.workout.addToWorkoutExercises(workoutExercise)
                         workoutExercise.exerciseUuid = exercise.uuid
                         precondition(self.workout.isCurrentWorkout == true)
@@ -84,7 +84,7 @@ struct CurrentWorkoutView: View {
         }
         var workoutSets = [WorkoutSet]()
         for _ in 0..<numberOfSets {
-            let workoutSet = WorkoutSet(context: managedObjectContext)
+            let workoutSet = WorkoutSet.create(context: managedObjectContext)
             workoutSets.append(workoutSet)
         }
         return NSOrderedSet(array: workoutSets)
@@ -301,7 +301,7 @@ struct CurrentWorkoutView: View {
                         })
                     }
                     Section(header: Text("Exercises".uppercased())) {
-                        ForEach(workoutExercises, id: \.objectID) { workoutExercise in
+                        ForEach(workoutExercises) { workoutExercise in
                             self.workoutExerciseCell(workoutExercise: workoutExercise)
                         }
                         .onDelete { offsets in

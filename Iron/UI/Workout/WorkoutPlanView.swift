@@ -46,7 +46,7 @@ struct WorkoutPlanView: View {
                 })
             }
             Section(header: Text("Routines".uppercased())) {
-                ForEach(workoutRoutines, id: \.objectID) { workoutRoutine in
+                ForEach(workoutRoutines) { workoutRoutine in
                     NavigationLink(destination: WorkoutRoutineView(workoutRoutine: workoutRoutine)) {
                         VStack(alignment: .leading) {
                             Text(workoutRoutine.displayTitle)
@@ -89,7 +89,7 @@ struct WorkoutPlanView: View {
     }
     
     private func createWorkoutRoutine() {
-        let workoutRoutine = WorkoutRoutine(context: managedObjectContext)
+        let workoutRoutine = WorkoutRoutine.create(context: managedObjectContext)
         workoutRoutine.workoutPlan = workoutPlan
         managedObjectContext.safeSave()
     }

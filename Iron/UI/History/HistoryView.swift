@@ -37,7 +37,7 @@ struct HistoryView : View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(workouts, id: \.objectID) { workout in
+                ForEach(workouts) { workout in
                     NavigationLink(destination: WorkoutDetailView(workout: workout)
                         .environmentObject(self.settingsStore)
                     ) {

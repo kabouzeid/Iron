@@ -13,6 +13,12 @@ public class WorkoutSet: NSManagedObject, Codable {
     public static var MAX_REPETITIONS: Int16 = 9999
     public static var MAX_WEIGHT: Double = 99999
     
+    public class func create(context: NSManagedObjectContext) -> WorkoutSet {
+        let workoutSet = WorkoutSet(context: context)
+        workoutSet.uuid = UUID()
+        return workoutSet
+    }
+    
     // MARK: Normalized properties
     
     public var weightValue: Double {
@@ -115,6 +121,7 @@ public class WorkoutSet: NSManagedObject, Codable {
     // MARK: Codable
     
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case repetitions
         case weight
         case rpe
@@ -132,6 +139,7 @@ public class WorkoutSet: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
         repetitionsValue = try container.decode(Int16.self, forKey: .repetitions)
         weightValue = try container.decode(Double.self, forKey: .weight)
         rpeValue = try container.decodeIfPresent(Double.self, forKey: .rpe)
@@ -142,6 +150,7 @@ public class WorkoutSet: NSManagedObject, Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid ?? UUID(), forKey: .uuid)
         try container.encode(repetitionsValue, forKey: .repetitions)
         try container.encode(weightValue, forKey: .weight)
         try container.encodeIfPresent(rpeValue, forKey: .rpe)

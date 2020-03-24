@@ -32,7 +32,7 @@ struct StartWorkoutView: View {
                     StartEmptyWorkoutCell()
                 }
                 
-                ForEach(workoutPlans, id: \.objectID) { workoutPlan in
+                ForEach(workoutPlans) { workoutPlan in
                     Section {
                         WorkoutPlanCell(workoutPlan: workoutPlan, selectedWorkoutPlan: self.$selectedWorkoutPlan)
                         WorkoutPlanRoutines(workoutPlan: workoutPlan)
@@ -65,7 +65,7 @@ struct StartWorkoutView: View {
     
     private func createWorkoutPlan() {
         assert(self.selectedWorkoutPlan == nil)
-        selectedWorkoutPlan = WorkoutPlan(context: managedObjectContext)
+        selectedWorkoutPlan = WorkoutPlan.create(context: managedObjectContext)
         managedObjectContext.safeSave()
     }
 }
@@ -81,8 +81,7 @@ private struct StartEmptyWorkoutCell: View {
     private func startWorkout() {
         precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
         // create a new workout
-        let workout = Workout(context: self.managedObjectContext)
-        workout.uuid = UUID()
+        let workout = Workout.create(context: self.managedObjectContext)
         workout.isCurrentWorkout = true
         workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
     }
@@ -172,7 +171,7 @@ private struct WorkoutPlanRoutines: View {
     }
     
     var body: some View {
-        ForEach(workoutRoutines, id: \.objectID) { workoutRoutine in
+        ForEach(workoutRoutines) { workoutRoutine in
             Button(action: {
                 precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
                 // create the workout

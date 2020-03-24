@@ -35,46 +35,46 @@ func createDefaultWorkoutPlans() {
 
     let create5x5 = { (weight: Double) -> [WorkoutRoutineSet] in
         (0..<5).map { _ -> WorkoutRoutineSet in
-            let set = WorkoutRoutineSet(context: context)
+            let set = WorkoutRoutineSet.create(context: context)
             set.repetitionsMinValue = 8
             set.repetitionsMaxValue = 12
             return set
         }
     }
 
-    let workoutRoutineExerciseSquatA = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseSquatA = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseSquatA.exerciseUuid = toUuid(122) // squat
     workoutRoutineExerciseSquatA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 120, unit: unit)))
 
-    let workoutRoutineExerciseBenchA = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseBenchA = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseBenchA.exerciseUuid = toUuid(42) // bench
     workoutRoutineExerciseBenchA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 80, unit: unit)))
 
-    let workoutRoutineExerciseRowA = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseRowA = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseRowA.exerciseUuid = toUuid(298) // row
     workoutRoutineExerciseRowA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 60, unit: unit)))
 
-    let workoutRoutineA = WorkoutRoutine(context: context)
+    let workoutRoutineA = WorkoutRoutine.create(context: context)
     workoutRoutineA.title = "Workout A"
     workoutRoutineA.workoutRoutineExercises = NSOrderedSet(arrayLiteral: workoutRoutineExerciseSquatA, workoutRoutineExerciseBenchA, workoutRoutineExerciseRowA)
 
-    let workoutRoutineExerciseSquatB = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseSquatB = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseSquatB.exerciseUuid = toUuid(122) // squat
     workoutRoutineExerciseSquatB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 120, unit: unit)))
 
-    let workoutRoutineExerciseBenchB = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseBenchB = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseBenchB.exerciseUuid = toUuid(9001) // press
     workoutRoutineExerciseBenchB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 65, unit: unit)))
 
-    let workoutRoutineExerciseRowB = WorkoutRoutineExercise(context: context)
+    let workoutRoutineExerciseRowB = WorkoutRoutineExercise.create(context: context)
     workoutRoutineExerciseRowB.exerciseUuid = toUuid(99) // deadlift
     workoutRoutineExerciseRowB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 140, unit: unit)))
 
-    let workoutRoutineB = WorkoutRoutine(context: context)
+    let workoutRoutineB = WorkoutRoutine.create(context: context)
     workoutRoutineB.title = "Workout B"
     workoutRoutineB.workoutRoutineExercises = NSOrderedSet(arrayLiteral: workoutRoutineExerciseSquatB, workoutRoutineExerciseBenchB, workoutRoutineExerciseRowB)
 
-    let workoutPlan = WorkoutPlan(context: context)
+    let workoutPlan = WorkoutPlan.create(context: context)
     workoutPlan.title = "StrongLifts 5x5"
     workoutPlan.workoutRoutines = NSOrderedSet(arrayLiteral: workoutRoutineA, workoutRoutineB)
 }

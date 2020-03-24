@@ -31,6 +31,12 @@ public class WorkoutDataStorage {
             persistentContainer.persistentStoreDescriptions = [storeDescription]
         }
         os_log("Loading persistent store", log: .workoutDataStorage, type: .default)
+        loadPersistentStores(tryToRecoverFromFailedMigration: true) { storeDescription in
+            os_log("Successfully loaded persistent store: %@", log: .workoutDataStorage, type: .info, storeDescription)
+        }
+    }
+    
+    private func loadPersistentStores(tryToRecoverFromFailedMigration: Bool, completion: @escaping (NSPersistentStoreDescription) -> Void) {
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -45,11 +51,67 @@ public class WorkoutDataStorage {
                  Check the error message to determine what the actual problem was.
                  */
                 os_log("Could not load persistent store", log: .workoutDataStorage, type: .fault, error)
-                fatalError("Could not load persistent store \(storeDescription): \(error.localizedDescription)")
+                guard tryToRecoverFromFailedMigration && error.code == NSMigrationError else {
+                    fatalError("Could not load persistent store \(storeDescription): \(error.localizedDescription)")
+                }
+                os_log("Trying to recover from migration error", log: .workoutDataStorage, type: .default)
+                self.loadPersistentStores(tryToRecoverFromFailedMigration: false) { storeDescription in
+                    self.tryToRecoverFromMigrationError()
+                    completion(storeDescription)
+                }
             } else {
-                os_log("Successfully loaded persistent store: %@", log: .workoutDataStorage, type: .info, storeDescription)
+                completion(storeDescription)
             }
         })
+    }
+}
+
+extension WorkoutDataStorage {
+    private func tryToRecoverFromMigrationError() {
+        let context = persistentContainer.viewContext
+        context.performAndWait {
+            let workoutRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
+            workoutRequest.predicate = NSPredicate(format: "\(#keyPath(Workout.uuid)) == NULL")
+            let workouts = try? context.fetch(workoutRequest)
+            workouts?.forEach { $0.uuid = UUID() }
+            (workouts?.count).map { os_log("Adding UUIDs for %d workouts", log: .migration, type: .info, $0) }
+            
+            let workoutExerciseRequest: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()
+            workoutExerciseRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutExercise.uuid)) == NULL")
+            let workoutExercises = try? context.fetch(workoutExerciseRequest)
+            workoutExercises?.forEach { $0.uuid = UUID() }
+            (workoutExercises?.count).map { os_log("Adding UUIDs for %d workout exercises", log: .migration, type: .info, $0) }
+
+            let workoutSetRequest: NSFetchRequest<WorkoutSet> = WorkoutSet.fetchRequest()
+            workoutSetRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutSet.uuid)) == NULL")
+            let workoutSets = try? context.fetch(workoutSetRequest)
+            workoutSets?.forEach { $0.uuid = UUID() }
+            (workoutSets?.count).map { os_log("Adding UUIDs for %d workout sets", log: .migration, type: .info, $0) }
+            
+            let workoutPlanRequest: NSFetchRequest<WorkoutPlan> = WorkoutPlan.fetchRequest()
+            workoutPlanRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutPlan.uuid)) == NULL")
+            let workoutPlans = try? context.fetch(workoutPlanRequest)
+            workoutPlans?.forEach { $0.uuid = UUID() }
+            (workoutPlans?.count).map { os_log("Adding UUIDs for %d workout plans", log: .migration, type: .info, $0) }
+            
+            let workoutRoutineRequest: NSFetchRequest<WorkoutRoutine> = WorkoutRoutine.fetchRequest()
+            workoutRoutineRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutRoutine.uuid)) == NULL")
+            let workoutRoutines = try? context.fetch(workoutRoutineRequest)
+            workoutRoutines?.forEach { $0.uuid = UUID() }
+            (workoutRoutines?.count).map { os_log("Adding UUIDs for %d workout routines", log: .migration, type: .info, $0) }
+            
+            let workoutRoutineExerciseRequest: NSFetchRequest<WorkoutRoutineExercise> = WorkoutRoutineExercise.fetchRequest()
+            workoutRoutineExerciseRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutRoutineExercise.uuid)) == NULL")
+            let workoutRoutineExercises = try? context.fetch(workoutRoutineExerciseRequest)
+            workoutRoutineExercises?.forEach { $0.uuid = UUID() }
+            (workoutRoutineExercises?.count).map { os_log("Adding UUIDs for %d workout routine exercises", log: .migration, type: .info, $0) }
+            
+            let workoutRoutineSetRequest: NSFetchRequest<WorkoutRoutineSet> = WorkoutRoutineSet.fetchRequest()
+            workoutRoutineSetRequest.predicate = NSPredicate(format: "\(#keyPath(WorkoutRoutineSet.uuid)) == NULL")
+            let workoutRoutineSets = try? context.fetch(workoutRoutineSetRequest)
+            workoutRoutineSets?.forEach { $0.uuid = UUID() }
+            (workoutRoutineSets?.count).map { os_log("Adding UUIDs for %d workout routine sets", log: .migration, type: .info, $0) }
+        }
     }
 }
 

@@ -22,6 +22,7 @@ class HealthManager {
 }
 
 extension HealthManager {
+    // completion is called on a background queue!
     private func requestPermissions(toShare typesToShare: Set<HKSampleType>?, read typesToRead: Set<HKObjectType>?, completion: @escaping () -> Void) {
         os_log("Requesting HealthKit permissions share=%@ read=%@", log: .health, type: .default, typesToShare ?? [], typesToRead ?? [])
         
@@ -39,6 +40,7 @@ extension HealthManager {
         }
     }
     
+    // completion is called on a background queue!
     func requestReadBodyWeightPermission(completion: @escaping () -> Void) {
         let read = Set([
             HKObjectType.quantityType(forIdentifier: .bodyMass)
@@ -46,6 +48,7 @@ extension HealthManager {
         requestPermissions(toShare: nil, read: read, completion: completion)
     }
     
+    // completion is called on a background queue!
     func requestShareWorkoutPermission(completion: @escaping () -> Void) {
         let share: Set = [HKObjectType.workoutType()]
         requestPermissions(toShare: share, read: nil, completion: completion)
@@ -61,13 +64,15 @@ extension HealthManager {
     
     func saveWorkout(workout: Workout, exerciseStore: ExerciseStore) {
         requestShareWorkoutPermission {
-            guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return }
-            var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
-            if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
-                metadata[HKMetadataKeyWorkoutBrandName] = title
+            DispatchQueue.main.async {
+                guard let uuid = workout.uuid, let start = workout.start, let end = workout.end, let duration = workout.duration else { return }
+                var metadata: [String : Any] = [HKMetadataKeyExternalUUID : uuid.uuidString]
+                if let title = workout.optionalDisplayTitle(in: exerciseStore.exercises) {
+                    metadata[HKMetadataKeyWorkoutBrandName] = title
+                }
+                let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
+                HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
             }
-            let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
-            HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
         }
     }
 }

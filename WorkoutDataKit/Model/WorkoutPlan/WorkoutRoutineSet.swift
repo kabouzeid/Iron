@@ -11,6 +11,12 @@ import CoreData
 public class WorkoutRoutineSet: NSManagedObject {
     public static let supportedTags = [WorkoutSetTag.dropSet]
     
+    public class func create(context: NSManagedObjectContext) -> WorkoutRoutineSet {
+        let workoutRoutineSet = WorkoutRoutineSet(context: context)
+        workoutRoutineSet.uuid = UUID()
+        return workoutRoutineSet
+    }
+    
     // MARK: Normalized properties
     
     public var repetitionsMinValue: Int16? {

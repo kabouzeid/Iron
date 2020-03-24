@@ -154,7 +154,7 @@ struct WorkoutExerciseDetailView : View {
     }
     
     private var currentWorkoutSets: some View {
-        ForEach(indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { (index, workoutSet) in
+        ForEach(indexedWorkoutSets(for: workoutExercise), id: \.1.id) { (index, workoutSet) in
             WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: self.selectedWorkoutSet == workoutSet ? .selected : self.shouldHighlightRow(for: workoutSet) ? .activated : .deactivated, isPlaceholder: !workoutSet.isCompleted && workoutSet != self.firstUncompletedSet, showCompleted: self.isCurrentWorkout, showUpNextIndicator: self.firstUncompletedSet == workoutSet)
 //                .listRowBackground(self.selectedWorkoutSet == workoutSet && self.editMode?.wrappedValue != .active ? Color(UIColor.systemGray4) : nil)
                 .background(Color.fakeClear) // hack that allows tap gesture to work (13.1 beta2)
@@ -207,8 +207,8 @@ struct WorkoutExerciseDetailView : View {
     
     private var addSetButton: some View {
         Button(action: {
-            let workoutSet = WorkoutSet(context: self.workoutExercise.managedObjectContext!)
-            self.workoutExercise.addToWorkoutSets(workoutSet)
+            let workoutSet = WorkoutSet.create(context: self.workoutExercise.managedObjectContext!)
+            workoutSet.workoutExercise = self.workoutExercise
             self.select(set: self.firstUncompletedSet)
             if !self.isCurrentWorkout {
                 // don't allow uncompleted sets if not in current workout
@@ -224,7 +224,7 @@ struct WorkoutExerciseDetailView : View {
     }
     
     private var historyWorkoutSets: some View {
-        ForEach(workoutExerciseHistory, id: \.objectID) { workoutExercise in
+        ForEach(workoutExerciseHistory) { workoutExercise in
             Section(header: WorkoutExerciseSectionHeader(workoutExercise: workoutExercise)) {
                 workoutExercise.comment.map {
                     Text($0.enquoted)
@@ -232,7 +232,7 @@ struct WorkoutExerciseDetailView : View {
                         .font(Font.body.italic())
                         .foregroundColor(.secondary)
                 }
-                ForEach(self.indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { (index, workoutSet) in
+                ForEach(self.indexedWorkoutSets(for: workoutExercise), id: \.1.id) { (index, workoutSet) in
                     WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: .disabled)
                 }
             }

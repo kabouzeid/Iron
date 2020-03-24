@@ -25,8 +25,7 @@ private func toUuid(_ ids: [[Int]]) -> [[UUID]] {
 }
 
 func createTestWorkoutData(context: NSManagedObjectContext) {
-    let workout = Workout(context: context)
-    workout.uuid = UUID()
+    let workout = Workout.create(context: context)
     workout.start = Calendar.current.date(byAdding: .day, value: -2, to: testDate)!
     workout.end = Calendar.current.date(byAdding: .minute, value: 110, to: workout.start!)!
     
@@ -44,13 +43,13 @@ private func createTestWorkoutExercises(workout: Workout) {
     ])
     for uuids in exerciseUuids {
         for uuid in uuids {
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.weightValue = 50 + Double(setNumber) * 2.5
                 workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
@@ -61,19 +60,18 @@ private func createTestWorkoutExercises(workout: Workout) {
 }
 
 func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
-    let workout = Workout(context: context)
-    workout.uuid = UUID()
+    let workout = Workout.create(context: context)
     workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: testDate)!
     workout.isCurrentWorkout = true
     
     for uuid in toUuid([42, 48, 206]) { // bench press, cable crossover, triceps pushdown
-        let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+        let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
         workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 5
         for setNumber in 1...numberOfSets {
-            let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+            let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
             workoutSet.weightValue = 50 + Double(setNumber) * 2.5
             workoutSet.repetitionsValue = Int16(3 + setNumber)
             workoutSet.isCompleted = true
@@ -81,13 +79,13 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
         }
     }
     for uuid in toUuid([291, 289]) { // crunches, cross-body crunches
-        let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+        let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
         workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 6
         for setNumber in 1...numberOfSets {
-            let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+            let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
             workoutSet.workoutExercise = workoutExercise
             switch setNumber {
             case 1:
@@ -104,13 +102,13 @@ func createTestCurrentWorkout(context: NSManagedObjectContext) -> Workout {
         }
     }
     for uuid in toUuid([211, 206]) { // biceps curls, triceps pushdown
-        let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+        let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
         workoutExercise.exerciseUuid = uuid
         workoutExercise.workout = workout
         
         let numberOfSets = 3
         for _ in 1...numberOfSets {
-            let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+            let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
             workoutSet.workoutExercise = workoutExercise
             workoutSet.isCompleted = false
         }

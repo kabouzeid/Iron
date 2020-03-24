@@ -30,7 +30,7 @@ struct ExerciseHistoryView : View {
     
     var body: some View {
         List {
-            ForEach(history, id: \.objectID) { workoutExercise in
+            ForEach(history) { workoutExercise in
                 Section(header: WorkoutExerciseSectionHeader(workoutExercise: workoutExercise)) {
                     workoutExercise.comment.map {
                         Text($0.enquoted)
@@ -38,7 +38,7 @@ struct ExerciseHistoryView : View {
                             .font(Font.body.italic())
                             .foregroundColor(.secondary)
                     }
-                    ForEach(self.indexedWorkoutSets(for: workoutExercise), id: \.1.objectID) { index, workoutSet in
+                    ForEach(self.indexedWorkoutSets(for: workoutExercise), id: \.1.id) { index, workoutSet in
                         WorkoutSetCell(workoutSet: workoutSet, index: index, colorMode: .activated)
                     }
                 }

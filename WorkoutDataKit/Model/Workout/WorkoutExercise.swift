@@ -26,6 +26,12 @@ public class WorkoutExercise: NSManagedObject, Codable {
         return request
     }
     
+    public class func create(context: NSManagedObjectContext) -> WorkoutExercise {
+        let workoutExercise = WorkoutExercise(context: context)
+        workoutExercise.uuid = UUID()
+        return workoutExercise
+    }
+    
     public var historyFetchRequest: NSFetchRequest<WorkoutExercise> {
         WorkoutExercise.historyFetchRequest(of: exerciseUuid, until: workout?.start)
     }
@@ -68,6 +74,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
     
     // MARK: - Codable
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case exerciseUuid
         case exerciseName
         case comment
@@ -84,6 +91,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        uuid = try container.decodeIfPresent(UUID.self, forKey: .uuid) ?? UUID() // make sure we always have an UUID
         exerciseUuid = try container.decodeIfPresent(UUID.self, forKey: .exerciseUuid)
         comment = try container.decodeIfPresent(String.self, forKey: .comment)
         workoutSets = NSOrderedSet(array: try container.decodeIfPresent([WorkoutSet].self, forKey: .sets) ?? []) // TODO: check if this is correct
@@ -91,6 +99,7 @@ public class WorkoutExercise: NSManagedObject, Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid ?? UUID(), forKey: .uuid)
         try container.encodeIfPresent(exerciseUuid, forKey: .exerciseUuid)
         try container.encodeIfPresent(comment, forKey: .comment)
         try container.encodeIfPresent(workoutSets?.array.compactMap { $0 as? WorkoutSet }, forKey: .sets)

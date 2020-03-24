@@ -185,6 +185,22 @@ class WorkoutDataTests: XCTestCase {
             workout.uuid = UUID()
             XCTAssertNoThrow(try persistenContainer.viewContext.save())
         }
+        
+        for workoutExercise in testWorkoutExercises {
+            workoutExercise.uuid = nil
+            XCTAssertThrowsError(try persistenContainer.viewContext.save())
+            workoutExercise.uuid = UUID()
+            XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        }
+        
+        for workoutSet in testWorkoutSets{
+            workoutSet.uuid = nil
+            XCTAssertThrowsError(try persistenContainer.viewContext.save())
+            workoutSet.uuid = UUID()
+            XCTAssertNoThrow(try persistenContainer.viewContext.save())
+        }
+        
+        // TODO: also for workout plans
     }
     
     func testCurrentWorkoutValidation() {
@@ -220,14 +236,14 @@ class WorkoutDataTests: XCTestCase {
     }
     
     func testDetachedWorkoutExercise() {
-        let workoutExercise = WorkoutExercise(context: persistenContainer.viewContext)
+        let workoutExercise = WorkoutExercise.create(context: persistenContainer.viewContext)
         XCTAssertThrowsError(try persistenContainer.viewContext.save())
         workoutExercise.workout = testWorkouts.first
         XCTAssertNoThrow(try persistenContainer.viewContext.save())
     }
     
     func testDetachedWorkoutSet() {
-        let workoutSet = WorkoutSet(context: persistenContainer.viewContext)
+        let workoutSet = WorkoutSet.create(context: persistenContainer.viewContext)
         workoutSet.isCompleted = true
         XCTAssertThrowsError(try persistenContainer.viewContext.save())
         workoutSet.workoutExercise = testWorkoutExercises.first
@@ -235,7 +251,7 @@ class WorkoutDataTests: XCTestCase {
     }
     
     func testUncompletedSet() {
-        let workoutSet = WorkoutSet(context: persistenContainer.viewContext)
+        let workoutSet = WorkoutSet.create(context: persistenContainer.viewContext)
         workoutSet.isCompleted = false
         workoutSet.workoutExercise = testCurrentWorkout.workoutExercises?.firstObject as? WorkoutExercise
         XCTAssertNotNil(workoutSet.workoutExercise)
@@ -255,14 +271,14 @@ class WorkoutDataTests: XCTestCase {
     }
     
     func testWorkoutHasCompletedSets() {
-        let workout = Workout(context: persistenContainer.viewContext)
+        let workout = Workout.create(context: persistenContainer.viewContext)
         XCTAssertFalse(workout.hasCompletedSets!)
         
-        let exercise = WorkoutExercise(context: persistenContainer.viewContext)
+        let exercise = WorkoutExercise.create(context: persistenContainer.viewContext)
         workout.addToWorkoutExercises(exercise)
         XCTAssertFalse(workout.hasCompletedSets!)
         
-        let set = WorkoutSet(context: persistenContainer.viewContext)
+        let set = WorkoutSet.create(context: persistenContainer.viewContext)
         exercise.addToWorkoutSets(set)
         XCTAssertFalse(workout.hasCompletedSets!)
         
@@ -275,15 +291,14 @@ class WorkoutDataTests: XCTestCase {
     }
     
     func testSendObjectsWillChange() {
-        let workout = Workout(context: persistenContainer.viewContext)
-        let workoutExercise1 = WorkoutExercise(context: persistenContainer.viewContext)
-        let workoutExercise2 = WorkoutExercise(context: persistenContainer.viewContext)
-        let workoutSet1_1 = WorkoutSet(context: persistenContainer.viewContext)
-        let workoutSet1_2 = WorkoutSet(context: persistenContainer.viewContext)
-        let workoutSet2_1 = WorkoutSet(context: persistenContainer.viewContext)
-        let workoutSet2_2 = WorkoutSet(context: persistenContainer.viewContext)
+        let workout = Workout.create(context: persistenContainer.viewContext)
+        let workoutExercise1 = WorkoutExercise.create(context: persistenContainer.viewContext)
+        let workoutExercise2 = WorkoutExercise.create(context: persistenContainer.viewContext)
+        let workoutSet1_1 = WorkoutSet.create(context: persistenContainer.viewContext)
+        let workoutSet1_2 = WorkoutSet.create(context: persistenContainer.viewContext)
+        let workoutSet2_1 = WorkoutSet.create(context: persistenContainer.viewContext)
+        let workoutSet2_2 = WorkoutSet.create(context: persistenContainer.viewContext)
         
-        workout.uuid = UUID()
         workout.start = Date()
         workout.end = Date()
         workoutSet1_1.isCompleted = true
@@ -308,7 +323,7 @@ class WorkoutDataTests: XCTestCase {
             (workoutSet2_1, false),
             (workoutSet2_2, false)
         ], store: &cancellables)
-        workoutSet1_1.weight += 1
+        workoutSet1_1.weightValue += 1
         wait(for: expectations, timeout: 1)
         
         expectations = changeExpectations(reason: "set exercise uuid", objects: [

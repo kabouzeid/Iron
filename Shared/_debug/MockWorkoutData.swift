@@ -112,8 +112,7 @@ extension MockWorkoutData {
     
     private static func createRandomWorkoutData(context: NSManagedObjectContext, unit: WeightUnit) {
         for i in 1...20 {
-            let workout = Workout(context: context)
-            workout.uuid = UUID()
+            let workout = Workout.create(context: context)
             workout.start = Calendar.current.date(byAdding: .day, value: -Int.random(in: 1...4) * i, to: Date())!
             workout.end = Calendar.current.date(byAdding: .minute, value: Int.random(in: 80...120), to: workout.start!)!
             
@@ -131,13 +130,13 @@ extension MockWorkoutData {
             [218, 206], // biceps curls, triceps pushdown
         ])
         for uuid in exerciseUuids[Int.random(in: 0..<exerciseUuids.count)] {
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.weightValue = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
                 workoutSet.repetitionsValue = Int16.random(in: 1...10)
                 workoutSet.comment = Int.random(in: 1...5) == 1 ? "This is a comment" : nil
@@ -159,19 +158,18 @@ extension MockWorkoutData {
     }
     
     private static func createRandomCurrentWorkout(context: NSManagedObjectContext, unit: WeightUnit) -> Workout {
-        let workout = Workout(context: context)
-        workout.uuid = UUID()
+        let workout = Workout.create(context: context)
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: Date())!
         workout.isCurrentWorkout = true
         
         for uuid in toUuid([42, 48, 206]) { // bench press, cable crossover, triceps pushdown
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.weightValue = niceWeight(weight: Double(Int.random(in: 20...50)) * 2.5, unit: unit)
                 workoutSet.repetitionsValue = Int16.random(in: 1...10)
                 workoutSet.isCompleted = true
@@ -179,13 +177,13 @@ extension MockWorkoutData {
             }
         }
         for uuid in toUuid([291]) { // crunches
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
             for setNumber in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.workoutExercise = workoutExercise
                 switch setNumber {
                 case 1:
@@ -198,13 +196,13 @@ extension MockWorkoutData {
             }
         }
         for uuid in toUuid([289]) { // cross-body crunches
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5 + Int.random(in: 0...4)
             for _ in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.workoutExercise = workoutExercise
                 workoutSet.isCompleted = false
             }
@@ -234,8 +232,7 @@ extension MockWorkoutData {
                     dayOffset -= 2
                 }
                 
-                let workout = Workout(context: context)
-                workout.uuid = UUID()
+                let workout = Workout.create(context: context)
                 workout.start = Calendar.current.date(byAdding: .minute, value: Int(sin(Double(number)) * 60), to: Calendar.current.date(byAdding: .day, value: -number + dayOffset, to: referenceDate)!)!
                 workout.end = Calendar.current.date(byAdding: .minute, value: 70 + Int(sin(Double(number)) * 30) , to: workout.start!)!
                 createWorkoutExercises(workout: workout, exerciseUuids: exerciseUuids[(j + indexOffset) % exerciseUuids.count], unit: unit)
@@ -245,13 +242,13 @@ extension MockWorkoutData {
 
     private static func createWorkoutExercises(workout: Workout, exerciseUuids: [UUID], unit: WeightUnit) {
         for uuid in exerciseUuids {
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.weightValue = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
                 workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
@@ -261,19 +258,18 @@ extension MockWorkoutData {
     }
 
     private static func createCurrentWorkout(context: NSManagedObjectContext, unit: WeightUnit, referenceDate: Date = Date()) -> Workout {
-        let workout = Workout(context: context)
-        workout.uuid = UUID()
+        let workout = Workout.create(context: context)
         workout.start = Calendar.current.date(byAdding: .minute, value: -71, to: referenceDate)!
         workout.isCurrentWorkout = true
         
         for uuid in toUuid([42, 48]) { // bench press, cable crossover
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 5
             for setNumber in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.weightValue = niceWeight(weight: 50 + Double(setNumber) * 2.5, unit: unit)
                 workoutSet.repetitionsValue = Int16(3 + setNumber)
                 workoutSet.isCompleted = true
@@ -281,13 +277,13 @@ extension MockWorkoutData {
             }
         }
         for uuid in toUuid([218, 206]) { // biceps curls, triceps pushdown
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 6
             for setNumber in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.workoutExercise = workoutExercise
                 switch setNumber {
                 case 1:
@@ -304,13 +300,13 @@ extension MockWorkoutData {
             }
         }
         for uuid in toUuid([291]) { // crunches
-            let workoutExercise = WorkoutExercise(context: workout.managedObjectContext!)
+            let workoutExercise = WorkoutExercise.create(context: workout.managedObjectContext!)
             workoutExercise.exerciseUuid = uuid
             workoutExercise.workout = workout
             
             let numberOfSets = 3
             for _ in 1...numberOfSets {
-                let workoutSet = WorkoutSet(context: workout.managedObjectContext!)
+                let workoutSet = WorkoutSet.create(context: workout.managedObjectContext!)
                 workoutSet.workoutExercise = workoutExercise
                 workoutSet.isCompleted = false
             }
@@ -323,46 +319,46 @@ extension MockWorkoutData {
     private static func createWorkoutPlanStrongLifts(context: NSManagedObjectContext, unit: WeightUnit) {
         let create5x5 = { (weight: Double) -> [WorkoutRoutineSet] in
             (0..<5).map { _ -> WorkoutRoutineSet in
-                let set = WorkoutRoutineSet(context: context)
+                let set = WorkoutRoutineSet.create(context: context)
                 set.repetitionsMinValue = 8
                 set.repetitionsMaxValue = 12
                 return set
             }
         }
         
-        let workoutRoutineExerciseSquatA = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseSquatA = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseSquatA.exerciseUuid = toUuid(122) // squat
         workoutRoutineExerciseSquatA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 120, unit: unit)))
         
-        let workoutRoutineExerciseBenchA = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseBenchA = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseBenchA.exerciseUuid = toUuid(42) // bench
         workoutRoutineExerciseBenchA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 80, unit: unit)))
         
-        let workoutRoutineExerciseRowA = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseRowA = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseRowA.exerciseUuid = toUuid(298) // row
         workoutRoutineExerciseRowA.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 60, unit: unit)))
         
-        let workoutRoutineA = WorkoutRoutine(context: context)
+        let workoutRoutineA = WorkoutRoutine.create(context: context)
         workoutRoutineA.title = "Workout A"
         workoutRoutineA.workoutRoutineExercises = NSOrderedSet(arrayLiteral: workoutRoutineExerciseSquatA, workoutRoutineExerciseBenchA, workoutRoutineExerciseRowA)
         
-        let workoutRoutineExerciseSquatB = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseSquatB = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseSquatB.exerciseUuid = toUuid(122) // squat
         workoutRoutineExerciseSquatB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 120, unit: unit)))
         
-        let workoutRoutineExerciseBenchB = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseBenchB = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseBenchB.exerciseUuid = toUuid(9001) // press
         workoutRoutineExerciseBenchB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 65, unit: unit)))
         
-        let workoutRoutineExerciseRowB = WorkoutRoutineExercise(context: context)
+        let workoutRoutineExerciseRowB = WorkoutRoutineExercise.create(context: context)
         workoutRoutineExerciseRowB.exerciseUuid = toUuid(99) // deadlift
         workoutRoutineExerciseRowB.workoutRoutineSets = NSOrderedSet(array: create5x5(niceWeight(weight: 140, unit: unit)))
         
-        let workoutRoutineB = WorkoutRoutine(context: context)
+        let workoutRoutineB = WorkoutRoutine.create(context: context)
         workoutRoutineB.title = "Workout B"
         workoutRoutineB.workoutRoutineExercises = NSOrderedSet(arrayLiteral: workoutRoutineExerciseSquatB, workoutRoutineExerciseBenchB, workoutRoutineExerciseRowB)
         
-        let workoutPlan = WorkoutPlan(context: context)
+        let workoutPlan = WorkoutPlan.create(context: context)
         workoutPlan.title = "StrongLifts 5x5"
         workoutPlan.workoutRoutines = NSOrderedSet(arrayLiteral: workoutRoutineA, workoutRoutineB)
     }

@@ -9,6 +9,12 @@
 import CoreData
 
 public class WorkoutRoutineExercise: NSManagedObject {
+    public class func create(context: NSManagedObjectContext) -> WorkoutRoutineExercise {
+        let workoutRoutineExercise = WorkoutRoutineExercise(context: context)
+        workoutRoutineExercise.uuid = UUID()
+        return workoutRoutineExercise
+    }
+    
     public var subtitle: String? {
         guard let workoutRoutineSets = workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) else { return nil }
         

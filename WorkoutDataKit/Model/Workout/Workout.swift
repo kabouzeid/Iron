@@ -32,6 +32,12 @@ public class Workout: NSManagedObject, Codable {
         return formatter
     }()
     
+    public class func create(context: NSManagedObjectContext) -> Workout {
+        let workout = Workout(context: context)
+        workout.uuid = UUID()
+        return workout
+    }
+    
     // MARK: Derived properties
     
     public var isCompleted: Bool? {
@@ -271,20 +277,20 @@ extension Workout {
         guard let context = workout.managedObjectContext else { return nil }
         
         // create the workout
-        let newWorkout = Workout(context: context)
+        let newWorkout = Workout.create(context: context)
         
         if let workoutExercises = workout.workoutExercises?.compactMap({ $0 as? WorkoutExercise }) {
             // copy the exercises
             for workoutExercise in workoutExercises {
-                let newWorkoutExercise = WorkoutExercise(context: context)
-                newWorkout.addToWorkoutExercises(newWorkoutExercise)
+                let newWorkoutExercise = WorkoutExercise.create(context: context)
+                newWorkoutExercise.workout = newWorkout
                 newWorkoutExercise.exerciseUuid = workoutExercise.exerciseUuid
                 
                 if let workoutSets = workoutExercise.workoutSets?.compactMap({ $0 as? WorkoutSet }) {
                     // copy the sets
                     for workoutSet in workoutSets {
-                        let newWorkoutSet = WorkoutSet(context: context)
-                        newWorkoutExercise.addToWorkoutSets(newWorkoutSet)
+                        let newWorkoutSet = WorkoutSet.create(context: context)
+                        newWorkoutSet.workoutExercise = newWorkoutExercise
                         newWorkoutSet.isCompleted = false
                         if !blank {
                             let repetitions = workoutSet.repetitionsValue
