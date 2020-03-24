@@ -120,6 +120,13 @@ enum IronBackup {
             context.delete(workout)
         }
         
+        os_log("Deleting all workout plans", log: .backup, type: .default)
+        let workoutPlanRequest: NSFetchRequest<WorkoutPlan> = WorkoutPlan.fetchRequest()
+        let workoutPlans = try context.fetch(workoutPlanRequest)
+        for workoutPlan in workoutPlans {
+            context.delete(workoutPlan)
+        }
+        
         // try to restore the workouts
         os_log("Restoring workouts", log: .backup, type: .default)
         guard let managedObjectContextKey = CodingUserInfoKey.managedObjectContextKey else { throw "Managed object context key is nill" }

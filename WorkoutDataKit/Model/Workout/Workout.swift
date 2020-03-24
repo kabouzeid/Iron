@@ -150,12 +150,12 @@ public class Workout: NSManagedObject, Codable {
         workoutExercises = NSOrderedSet(array: try container.decodeIfPresent([WorkoutExercise].self, forKey: .exercises) ?? [])
         
         if let routineUuid = try container.decodeIfPresent(UUID.self, forKey: .routineUuid) {
-            os_log("Fetching workout routine with uuid=%@", log: .modelCoding, type: .default, routineUuid as NSUUID)
             let request: NSFetchRequest<WorkoutRoutine> = WorkoutRoutine.fetchRequest()
             request.predicate = NSPredicate(format: "\(#keyPath(WorkoutRoutine.uuid)) == %@", routineUuid as NSUUID)
             workoutRoutine = try managedObjectContext?.fetch(request).first
             if workoutRoutine == nil {
                 os_log("Could not find workout routine with uuid=%@", log: .modelCoding, type: .fault, routineUuid as NSUUID)
+                throw DecodingError.dataCorruptedError(forKey: .routineUuid, in: container, debugDescription: "Could not find workout routine with uuid=\(routineUuid)")
             }
         }
         
