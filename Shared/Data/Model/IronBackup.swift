@@ -52,6 +52,9 @@ enum IronBackup {
             workoutPlans = try container.decodeIfPresent([WorkoutPlan].self, forKey: .workoutPlans) ?? []
             // workout plans must be decoded before workouts
             workouts = try container.decode([Workout].self, forKey: .workouts)
+            /**
+             Note: the UUIDs in the backup are not checked for uniqueness because it would take too much time (10s)
+             */
         }
         
 //        public func encode(to encoder: Encoder) throws {
