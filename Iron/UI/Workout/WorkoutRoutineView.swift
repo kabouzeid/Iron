@@ -32,6 +32,7 @@ struct WorkoutRoutineView: View {
         guard let newValue = workoutRoutineTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutRoutineTitleInput.value = newValue
         workoutRoutine.title = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.safeSave()
     }
     
     @ObservedObject private var workoutRoutineCommentInput = ValueHolder<String?>(initial: nil)
@@ -49,6 +50,7 @@ struct WorkoutRoutineView: View {
         guard let newValue = workoutRoutineCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutRoutineCommentInput.value = newValue
         workoutRoutine.comment = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.safeSave()
     }
     
     private var workoutRoutineExercises: [WorkoutRoutineExercise] {
@@ -105,11 +107,13 @@ struct WorkoutRoutineView: View {
                         self.managedObjectContext.delete(workoutRoutineExercise)
                         workoutRoutineExercise.workoutRoutine?.removeFromWorkoutRoutineExercises(workoutRoutineExercise)
                     }
+                    self.managedObjectContext.safeSave()
                 }
                 .onMove { source, destination in
                     var workoutRoutineExercises = self.workoutRoutineExercises
                     workoutRoutineExercises.move(fromOffsets: source, toOffset: destination)
                     self.workoutRoutine.workoutRoutineExercises = NSOrderedSet(array: workoutRoutineExercises)
+                    self.managedObjectContext.safeSave()
                 }
 
                 Button(action: {

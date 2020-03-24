@@ -33,6 +33,7 @@ struct WorkoutRoutineExerciseView: View {
         guard let newValue = workoutRoutineExerciseCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutRoutineExerciseCommentInput.value = newValue
         workoutRoutineExercise.comment = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.safeSave()
     }
     
     private func workoutRoutineSets(for workoutRoutineExercise: WorkoutRoutineExercise) -> [WorkoutRoutineSet] {
@@ -87,6 +88,7 @@ struct WorkoutRoutineExerciseView: View {
             var workoutRoutineSets = self.workoutRoutineSets(for: self.workoutRoutineExercise)
             workoutRoutineSets.move(fromOffsets: source, toOffset: destination)
             self.workoutRoutineExercise.workoutRoutineSets = NSOrderedSet(array: workoutRoutineSets)
+            self.managedObjectContext.safeSave()
         }
     }
     
@@ -128,9 +130,7 @@ struct WorkoutRoutineExerciseView: View {
                 overwriteRepetitionsMax: $editorRepetitionsMax,
                 showNext: self.selectedWorkoutRoutineSet! != sets.last,
                 onDone: {
-                    if self.selectedWorkoutRoutineSet?.hasChanges ?? false {
-                        self.managedObjectContext.safeSave()
-                    }
+                    self.managedObjectContext.safeSave()
                     
                     if let index = sets.firstIndex(of: self.selectedWorkoutRoutineSet!), index + 1 < sets.count {
                         self.select(set: sets[index + 1])

@@ -44,6 +44,7 @@ struct StartWorkoutView: View {
                     for i in offsets {
                         self.managedObjectContext.delete(workoutPlans[i])
                     }
+                    self.managedObjectContext.safeSave()
                 }
                 
                 Section {

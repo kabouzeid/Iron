@@ -30,6 +30,7 @@ struct WorkoutPlanView: View {
         guard let newValue = workoutPlanTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutPlanTitleInput.value = newValue
         workoutPlan.title = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.safeSave()
     }
     
     private var workoutRoutines: [WorkoutRoutine] {
