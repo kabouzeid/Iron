@@ -83,7 +83,7 @@ enum IronBackup {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         if let exercisesKey = CodingUserInfoKey.exercisesKey {
-            encoder.userInfo[exercisesKey] = ExerciseStore.shared.exercises
+            encoder.userInfo[exercisesKey] = exerciseStore.exercises
         }
         
         return try encoder.encode(backup)
@@ -92,7 +92,7 @@ enum IronBackup {
     static var restoringBackupData = false
     static func restoreBackupData(data: Data, managedObjectContext: NSManagedObjectContext, exerciseStore: ExerciseStore) throws {
         // save the current state before we touch anything
-        let previousCustomExercises = ExerciseStore.shared.customExercises
+        let previousCustomExercises = exerciseStore.customExercises
         
         var success = false
         defer {
@@ -100,7 +100,7 @@ enum IronBackup {
                 // if something went wrong, undo all changes
                 os_log("Restoring backup data was unsuccessful, trying to undo changes", log: .backup, type: .default)
                 do {
-                    try ExerciseStore.shared.replaceCustomExercises(with: previousCustomExercises)
+                    try exerciseStore.replaceCustomExercises(with: previousCustomExercises)
                     os_log("Successfully reverted changes to custom exercises", log: .backup, type: .default)
                 } catch {
                     os_log("Could not revert changes to custom exercises", log: .backup, type: .error)
@@ -112,7 +112,7 @@ enum IronBackup {
         
         // use a child context so we don't lose the current data if anything goes wrong
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.parent = WorkoutDataStorage.shared.persistentContainer.viewContext
+        context.parent = managedObjectContext
         
         // delete all workouts (except for the current workout)
         os_log("Deleting all workouts", log: .backup, type: .default)
@@ -140,7 +140,7 @@ enum IronBackup {
         
         // try to restore the custom exercises
         os_log("Restoring custom exercises", log: .backup, type: .default)
-        try ExerciseStore.shared.replaceCustomExercises(with: workoutDataBackup.customExercises)
+        try exerciseStore.replaceCustomExercises(with: workoutDataBackup.customExercises)
         
         // if everything went well, save the changes
         try context.save()
