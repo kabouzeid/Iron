@@ -124,6 +124,7 @@ extension BackupFileStore {
                 formatter.dateFormat = "yyyy-MM-dd"
                 let fileUrl = deviceBackupUrl.appendingPathComponent(formatter.string(from: Date())).appendingPathExtension("ironbackup")
                 
+                os_log("Saving backup to %@", log: .backup, type: .default, fileUrl as NSURL)
                 try data().write(to: fileUrl, options: .atomic)
                 
                 completion(.success(fileUrl))

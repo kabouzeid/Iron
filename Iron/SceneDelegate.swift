@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import WorkoutDataKit
+import os.log
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -118,6 +119,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         
         // Save changes in the application's managed object context when the application transitions to the background.
+        os_log("Scene did enter background, saving workout data", log: .default)
         WorkoutDataStorage.shared.persistentContainer.viewContext.safeSave()
         
         if let currentWorkout = try? WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {

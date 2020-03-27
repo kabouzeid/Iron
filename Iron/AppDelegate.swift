@@ -41,8 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
             
+            os_log("Auto backup is enabled, creating backup", log: .backup, type: .default)
             BackupFileStore.create(data: { () -> Data in
-                try IronBackup.createBackupData(managedObjectContext: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared)
+                return try WorkoutDataStorage.shared.persistentContainer.viewContext.performAndWait { context in
+                    try IronBackup.createBackupData(managedObjectContext: context, exerciseStore: ExerciseStore.shared)
+                }
             }) { result in
                 if case let .failure(error) = result {
                     os_log("Auto backup failed: %@", log: .backup, type: .error, error.localizedDescription)

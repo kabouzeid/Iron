@@ -18,7 +18,7 @@ enum Quotes {
         do {
             return try JSONDecoder().decode([Quote].self, from: data)
         } catch {
-            os_log("Could not load quotes.json", log: .main, type: .error)
+            os_log("Could not load quotes.json", log: .default, type: .error)
             assertionFailure()
             return nil
         }

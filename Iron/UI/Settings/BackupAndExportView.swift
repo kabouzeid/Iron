@@ -75,8 +75,10 @@ struct BackupAndExportView: View {
                 Toggle("Auto Backup", isOn: $settingsStore.autoBackup)
                 Button("Back Up Now") {
                     self.backupStore.create(data: {
-                        os_log("Creating backup data", log: .backup, type: .default)
-                        return try IronBackup.createBackupData(managedObjectContext: self.managedObjectContext, exerciseStore: self.exerciseStore)
+                        return try self.managedObjectContext.performAndWait { context in
+                            os_log("Creating backup data", log: .backup, type: .default)
+                            return try IronBackup.createBackupData(managedObjectContext: context, exerciseStore: self.exerciseStore)
+                        }
                     }, onError: { error in
                         self.backupError = BackupError(error: error)
                     })

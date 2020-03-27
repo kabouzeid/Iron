@@ -12,7 +12,6 @@ import os.log
 extension OSLog {
     private static let subsystem = Bundle.main.bundleIdentifier ?? "-"
     
-    static let main = OSLog(subsystem: subsystem, category: "main")
     static let iap = OSLog(subsystem: subsystem, category: "IAP")
     static let migration = OSLog(subsystem: subsystem, category: "migration")
     static let backup = OSLog(subsystem: subsystem, category: "backup")

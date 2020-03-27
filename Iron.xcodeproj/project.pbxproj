@@ -367,6 +367,7 @@
 		8AF5DAF3242E364E00A90A60 /* UuidMigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5DAF2242E364E00A90A60 /* UuidMigrationPolicy.swift */; };
 		8AF5DAF5242E375000A90A60 /* WorkoutDataV2_V4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5DAF4242E375000A90A60 /* WorkoutDataV2_V4.xcmappingmodel */; };
 		8AF5DAF7242E3EC800A90A60 /* WorkoutDataV1_V4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5DAF6242E3EC800A90A60 /* WorkoutDataV1_V4.xcmappingmodel */; };
+		8AF5DAF9242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5DAF8242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift */; };
 		8AF8919423212C290024B2EF /* Comparable+Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919323212C290024B2EF /* Comparable+Clamped.swift */; };
 		8AF8919623215FEE0024B2EF /* IndexSet+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */; };
 		8AF92550232FD47A00C6977D /* ExerciseGroupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */; };
@@ -753,6 +754,7 @@
 		8AF5DAF2242E364E00A90A60 /* UuidMigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UuidMigrationPolicy.swift; sourceTree = "<group>"; };
 		8AF5DAF4242E375000A90A60 /* WorkoutDataV2_V4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WorkoutDataV2_V4.xcmappingmodel; sourceTree = "<group>"; };
 		8AF5DAF6242E3EC800A90A60 /* WorkoutDataV1_V4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WorkoutDataV1_V4.xcmappingmodel; sourceTree = "<group>"; };
+		8AF5DAF8242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+performAndWait.swift"; sourceTree = "<group>"; };
 		8AF8919323212C290024B2EF /* Comparable+Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Clamped.swift"; sourceTree = "<group>"; };
 		8AF8919523215FEE0024B2EF /* IndexSet+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexSet+Identifiable.swift"; sourceTree = "<group>"; };
 		8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroupFilter.swift; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 				8AAD0FF4239D82B400C1A447 /* ExerciseStore+IntentExercise.swift */,
 				8A982531241149FC0020A644 /* OSLog+Logs.swift */,
 				8A9EF4462429A6B300136259 /* WorkoutDataKit+Identifieable.swift */,
+				8AF5DAF8242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2030,6 +2033,7 @@
 				8A63B3772329463A001BD7B5 /* CurrentWorkoutView.swift in Sources */,
 				8AF92552232FD49600C6977D /* ExerciseFilter.swift in Sources */,
 				8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */,
+				8AF5DAF9242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift in Sources */,
 				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
 				8AA5D4942344C9D20092D20C /* UserDefaults+Misc.swift in Sources */,
 				8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */,
