@@ -56,7 +56,7 @@ public class WorkoutDataStorage {
                 }
                 os_log("Trying to recover from migration error", log: .workoutDataStorage, type: .default)
                 self.loadPersistentStores(tryToRecoverFromFailedMigration: false) { storeDescription in
-                    self.tryToRecoverFromMigrationError()
+                    Self.tryToRecoverFromMigrationError(context: self.persistentContainer.viewContext)
                     completion(storeDescription)
                 }
             } else {
@@ -67,8 +67,7 @@ public class WorkoutDataStorage {
 }
 
 extension WorkoutDataStorage {
-    private func tryToRecoverFromMigrationError() {
-        let context = persistentContainer.viewContext
+    static func tryToRecoverFromMigrationError(context: NSManagedObjectContext) {
         context.performAndWait {
             let workoutRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
             workoutRequest.predicate = NSPredicate(format: "\(#keyPath(Workout.uuid)) == NULL")

@@ -1,5 +1,5 @@
 //
-//  WorkoutExerciseMigrationPolicyV1_V2.swift
+//  WorkoutExerciseMigrationPolicyV1.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 25.10.19.
@@ -9,7 +9,7 @@
 import CoreData
 import os.log
 
-class WorkoutExerciseMigrationPolicyV1_V2: NSEntityMigrationPolicy {
+class WorkoutExerciseMigrationPolicyV1: UuidMigrationPolicy {
     private static let exerciseStore = ExerciseStore(
         // not completely clean to hardcode the custom exercises path here
         customExercisesURL: FileManager.default
