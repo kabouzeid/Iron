@@ -13,8 +13,10 @@ import WorkoutDataKit
 
 struct DeveloperSettings: View {
     var body: some View {
-        Button("Create default workout plans") {
-            createDefaultWorkoutPlans()
+        Form {
+            Button("Create default workout plans") {
+                createDefaultWorkoutPlans()
+            }
         }.navigationBarTitle("Developer", displayMode: .inline)
     }
 }
@@ -36,8 +38,8 @@ func createDefaultWorkoutPlans() {
     let create5x5 = { (weight: Double) -> [WorkoutRoutineSet] in
         (0..<5).map { _ -> WorkoutRoutineSet in
             let set = WorkoutRoutineSet.create(context: context)
-            set.minRepetitionsValue = 8
-            set.maxRepetitionsValue = 12
+            set.minRepetitionsValue = 5
+            set.maxRepetitionsValue = 5
             return set
         }
     }
