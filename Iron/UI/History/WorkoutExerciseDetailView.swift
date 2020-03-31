@@ -265,7 +265,8 @@ struct WorkoutExerciseDetailView : View {
                     set.isCompleted = true
                     let workout = set.workoutExercise?.workout
                     workout?.start = workout?.start ?? Date()
-                    self.moveWorkoutExerciseBehindLastBegun()
+                    #warning("enable moveWorkoutExerciseBehindLastBegun() again later? Currenlty causes a 'jump back' bug in NavigationView")
+//                    self.moveWorkoutExerciseBehindLastBegun()
                     
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.prepare()
