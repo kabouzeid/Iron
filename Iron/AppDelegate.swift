@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         EntitlementStore.migrateToAppGroupIfNecessary()
         ExerciseStore.migrateHiddenExercisesToAppGroupIfNecessary()
         
-        SKPaymentQueue.default().add(StoreObserver.shared)
+        StoreObserver.shared.addToPaymentQueue()
         #if DEBUG
         os_log("Skipping license verification in DEBUG build", log: .iap, type: .default)
         #else

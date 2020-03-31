@@ -91,13 +91,21 @@ struct PurchaseView: View {
                 .fixedSize(horizontal: false, vertical: true) // fixes bug where text gets truncated (iOS 13.3.1)
             }
             
+            if storeManager.products == nil {
+                HStack {
+                    Spacer()
+                    ActivityIndicatorView(style: .medium)
+                    Spacer()
+                }
+            }
+            
             proLifetimeProduct.map {
                 ProductCell(
                     product: $0,
                     purchased: hasProLifetime
                 ).disabled(!canMakePayments)
             }
-            
+
             Section(footer: subscriptionInfo) {
                 proMonthlyProduct.map {
                     ProductCell(
@@ -191,6 +199,8 @@ private struct FeatureView: View {
 }
 
 private struct ProductCell: View {
+    @ObservedObject var storeObserver = StoreObserver.shared
+    
     let product: SKProduct
     
     let purchased: Bool
@@ -217,27 +227,78 @@ private struct ProductCell: View {
         product.subscriptionPeriod != nil
     }
     
+    enum State {
+        case `default`
+        case processing
+        case waitingForParentApproval
+    }
+    private var state: State {
+        let relevantTransactions = storeObserver.pendingTransactions.filter { $0.payment.productIdentifier == product.productIdentifier }
+        if relevantTransactions.contains(where: { $0.transactionState == .deferred }) {
+            return .waitingForParentApproval
+        } else if relevantTransactions.contains(where: { $0.transactionState == .purchasing || $0.transactionState == .purchased || $0.transactionState == .restored }) {
+            return .processing
+        } else {
+            // in this we either have no relevant pending transactions, or .failed, but it's unlikely because those transactions are immediately removed
+            return .default
+        }
+    }
+    
+    @ViewBuilder
+    private var buttonLabel: some View {
+        if state == .processing {
+            ActivityIndicatorView(style: .medium)
+        } else {
+            Text(buttonText).fontWeight(.semibold)
+        }
+    }
+    
     var body: some View {
         HStack {
-            Text(product.localizedTitle)
+            VStack(alignment: .leading) {
+                Text(product.localizedTitle)
+                if state == .waitingForParentApproval {
+                    Text("Waiting for approval")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+            
             Spacer()
             
             Button(action: {
-                StoreObserver.shared.buy(product: self.product)
+                self.storeObserver.buy(product: self.product)
             }) {
-                Text(buttonText)
-                    .fontWeight(.semibold)
+                buttonLabel
                     .padding([.leading, .trailing], 12)
                     .padding([.top, .bottom], 6)
                     .background(
                         RoundedRectangle(cornerRadius: 100, style: .circular) // cornerRadius is arbitrary
                             .foregroundColor(Color(.systemFill)) // mimic the App Store
-                )
+                    )
             }
             .buttonStyle(BorderlessButtonStyle())
-            .disabled(purchased)
+            .disabled(purchased || state == .processing)
         }
         .padding([.top, .bottom], 8)
+    }
+}
+
+struct ActivityIndicatorView: UIViewRepresentable {
+    let style: UIActivityIndicatorView.Style
+
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndicatorView>) -> UIActivityIndicatorView {
+        let view = UIActivityIndicatorView(style: style)
+        view.startAnimating()
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
+        // nothing to be done
+    }
+    
+    static func dismantleUIView(_ uiView: UIActivityIndicatorView, coordinator: ()) {
+        uiView.stopAnimating()
     }
 }
 
