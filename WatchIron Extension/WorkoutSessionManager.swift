@@ -386,7 +386,7 @@ extension WorkoutSessionManager: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
         os_log("Workout session did fail with error: %@", error.localizedDescription)
         
-        #warning("TODO: Notify phone about this, so the phone can clear the watchWorkoutUuid and also save the workout when it finishes. Or display the error on the watch and allow to discard or save.")
+        // TODO: Notify phone about this, so the phone can clear the watchWorkoutUuid and also save the workout when it finishes. Or display the error on the watch and allow to discard or save.
         discard()
         
         DispatchQueue.main.async {

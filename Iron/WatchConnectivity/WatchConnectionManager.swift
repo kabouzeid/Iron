@@ -22,8 +22,6 @@ import os.log
 ///     I think this is a bug, because when the app was already in background before that, this doesn't happen.
 ///     Tested on iOS 13.4, watchOS 6.2, Xcode 11.
 
-#warning("Move everything to a private serial queue?")
-
 class WatchConnectionManager: NSObject {
     static let shared = WatchConnectionManager()
     

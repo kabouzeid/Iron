@@ -307,15 +307,7 @@ struct CurrentWorkoutView: View {
                 .listStyle(GroupedListStyle())
             }
             .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
-            .navigationBarItems(leading: HStack {
-                cancelButton
-                Button(action: {
-                    #warning("Move this somewhere else")
-                    WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: self.workout)
-                }) {
-                    Image(systemName: "ant")
-                }
-            }, trailing: EditButton())
+            .navigationBarItems(leading: cancelButton, trailing: EditButton())
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
         .sheet(item: $activeSheet) { type in
