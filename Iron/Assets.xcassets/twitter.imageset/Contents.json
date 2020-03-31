@@ -5,17 +5,17 @@
       "scale" : "1x"
     },
     {
+      "filename" : "icons8-twitter (3).pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icons8-twitter.pdf",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
