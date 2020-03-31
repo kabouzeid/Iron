@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    var urlContexts: Set<UIOpenURLContext>?
+    private var urlContexts: Set<UIOpenURLContext>?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -98,23 +98,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.handleURLContext(urlContext: urlContext)
             }
         }
-        
-        #warning("do this in scene become active or in foreground")
-        // prepareAndStartWatchWorkout() only works when the app is active (not in background), therefore it could be that we have to call it now
-        if SettingsStore.shared.watchCompanion && WatchConnectionManager.shared.currentWatchWorkoutUuid == nil {
-            // if the watch companion is enabled and we haven't (successfully) started a watch workout yet
-            do {
-                // check if we have a workout running
-                os_log("Watch companion is enabled and no watch workout was started, checking if we have a current workout", log: .watch)
-                #warning("measure how long this takes, maybe move to background context, docs say this function should not block")
-                if let currentWorkout = try WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
-                    os_log("Current workout exists, but no watch workout was started. Trying to start it now.", log: .watch)
-                    WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: currentWorkout)
-                }
-            } catch {
-                os_log("Could not fetch current workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
-            }
-        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -123,8 +106,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
+        OSLog.default.trace()
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        // prepareAndStartWatchWorkout() only works when the app is active (not in background), therefore it could be that we have to call it now
+        if SettingsStore.shared.watchCompanion && WatchConnectionManager.shared.currentWatchWorkoutUuid == nil {
+            // if the watch companion is enabled and we haven't (successfully) started a watch workout yet
+            do {
+                // check if we have a workout running
+                os_log("Watch companion is enabled and no watch workout was started, checking if we have a current workout", log: .watch)
+                if let currentWorkout = try WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
+                    os_log("Current workout exists, but no watch workout was started. Trying to start it now.", log: .watch)
+                    WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: currentWorkout)
+                }
+            } catch {
+                os_log("Could not fetch current workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
+            }
+        }
+
         NotificationManager.shared.notificationCenter.removeAllDeliveredNotifications()
         NotificationManager.shared.removePendingNotificationRequests(withIdentifiers: [.unfinishedWorkout])
         
@@ -141,10 +141,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         WorkoutDataStorage.shared.persistentContainer.viewContext.saveOrCrash()
         
         if let currentWorkout = try? WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
-            guard currentWorkout.hasCompletedSets ?? false else { return } // allows the user to prefill a workout without getting the notification
-            
-            // remind the user about his unfinished workout
-            NotificationManager.shared.requestUnfinishedWorkoutNotification()
+            if currentWorkout.hasCompletedSets ?? false { // allows the user to prefill a workout without getting the notification
+                // remind the user about his unfinished workout
+                NotificationManager.shared.requestUnfinishedWorkoutNotification()
+            }
         }
     }
 }

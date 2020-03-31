@@ -34,14 +34,16 @@ public struct Benchmark {
         sharedInstance = nil
     }
 
-    public static func measure(_ key: String = "Benchmark", block: () -> ()) {
+    @discardableResult
+    public static func measure<T>(key: String = "Benchmark", _ block: () throws -> T) rethrows -> T {
         let benchmark = Benchmark(key: key)
-        block()
+        let result = try block()
         benchmark.finish()
+        return result
     }
 }
 
 prefix operator ⏲
-public prefix func ⏲(handler: () -> ()) {
-    Benchmark.measure(block: handler)
+public prefix func ⏲<T>(handler: () -> T) -> T {
+    return Benchmark.measure(handler)
 }

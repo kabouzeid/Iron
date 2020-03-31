@@ -13,7 +13,7 @@ import os.log
 extension Workout {
     // TODO: would be better when SettingsStore, WatchConnectionManager, RestTimerStore etc are injected
     
-    func start() throws {
+    func start(startWatchCompanionErrorHandler: WatchConnectionManager.StartWatchCompanionErrorHandler? = nil) throws {
         guard let context = managedObjectContext else {
             os_log("Attempt to start workout without context", log: .workoutData, type: .error)
             assertionFailure("Attempt to start workout without context")
@@ -25,7 +25,7 @@ extension Workout {
         try context.save() // this also checks that there is only one currentWorkout
         
         if SettingsStore.shared.watchCompanion {
-            WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: self)
+            WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: self, startWatchCompanionErrorHandler: startWatchCompanionErrorHandler)
         }
         
         // TODO: move this to the current workout view controller, or maybe even when a notification is scheduled?
@@ -121,9 +121,9 @@ extension Workout {
 
 import CoreData
 extension Workout {
-    func startOrCrash() {
+    func startOrCrash(startWatchCompanionErrorHandler: WatchConnectionManager.StartWatchCompanionErrorHandler? = nil) {
         do {
-            try start()
+            try start(startWatchCompanionErrorHandler: startWatchCompanionErrorHandler)
         } catch {
             let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)
             os_log("Could not start workout: %@", log: .workoutData, type: .error, errorDescription)

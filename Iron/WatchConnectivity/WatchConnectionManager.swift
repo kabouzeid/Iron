@@ -49,6 +49,8 @@ class WatchConnectionManager: NSObject {
     typealias PrepareHandler = (() -> Void)
     private var preparedHandler: PrepareHandler?
     
+    typealias StartWatchCompanionErrorHandler = ((Error) -> Void)
+    
     let selectedSetChangePublisher = PassthroughSubject<(WorkoutSet?, UUID), Never>()
     var selectedSetChangePublisherCancellable: Cancellable?
     var selectedSetCancellable: Cancellable?
@@ -139,7 +141,7 @@ extension WatchConnectionManager {
     
     
     /// - NOTE: If in the prepare handler a workout session isn't started, a ignorePreparedWorkoutSession should be send
-    func prepareWatchWorkout(preparedHandler: @escaping PrepareHandler) {
+    func prepareWatchWorkout(startWatchCompanionErrorHandler: StartWatchCompanionErrorHandler? = nil, preparedHandler: @escaping PrepareHandler) {
         os_log("Preparing watch app", log: .watch, type: .default)
         guard isActivated else {
             // makes no sense to prepare the workout if we can't send messages
@@ -152,13 +154,7 @@ extension WatchConnectionManager {
             guard success else {
                 // This happens when app is in background (e.g. when started from an intent)
                 os_log("HKHealthStore could not open watch app: %@", log: .watch, type: .fault, error?.localizedDescription ?? "nil")
-                
-                #warning("refactor this to a cleaner place")
-                NotificationManager.shared.requestStartedWorkoutFromBackgroundNotification()
-//
-//                os_log("Falling back to sending a prepareWorkoutSession message", log: .watch)
-//                self._prepareWatchWorkout()
-//
+                startWatchCompanionErrorHandler?(error ?? GenericError(description: "Opening the watch app was unsuccessful"))
                 return
             }
             os_log("Successfully opened watch app", log: .watch, type: .info)
@@ -297,8 +293,8 @@ extension WatchConnectionManager {
 }
 
 extension WatchConnectionManager {
-    func prepareAndStartWatchWorkout(workout: Workout) {
-        prepareWatchWorkout {
+    func prepareAndStartWatchWorkout(workout: Workout, startWatchCompanionErrorHandler: StartWatchCompanionErrorHandler? = nil) {
+        prepareWatchWorkout(startWatchCompanionErrorHandler: startWatchCompanionErrorHandler) {
             self.startWatchWorkout(workout: workout)
         }
     }
