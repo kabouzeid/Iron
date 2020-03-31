@@ -123,6 +123,7 @@ import CoreData
 extension Workout {
     func startOrCrash(startWatchCompanionErrorHandler: WatchConnectionManager.StartWatchCompanionErrorHandler? = nil) {
         do {
+            os_log("Starting workout", log: .workoutData)
             try start(startWatchCompanionErrorHandler: startWatchCompanionErrorHandler)
         } catch {
             let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)
@@ -133,6 +134,7 @@ extension Workout {
     
     func cancelOrCrash() {
         do {
+            os_log("Cancelling workout", log: .workoutData)
             try cancel()
         } catch {
             let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)
@@ -143,6 +145,7 @@ extension Workout {
     
     func finishOrCrash() {
         do {
+            os_log("Finishing workout", log: .workoutData)
             try finish()
         } catch {
             let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)

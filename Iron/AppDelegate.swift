@@ -82,11 +82,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if count == 0 {
                 let workout = Workout.create(context: context)
                 do {
+                    os_log("Starting workout from intent", log: .workoutData)
                     try workout.start(startWatchCompanionErrorHandler: { error in
                         // the Apple Watch wasn't started, most probably because the app is in the background
-                        os_log("Sending notification to open the app because the watch app wasn't started. Probably because the app is in the background")
+                        os_log("Sending user notification to open the app because the watch app wasn't started. Probably because the app is in the background", log: .watch)
                         NotificationManager.shared.requestStartedWorkoutFromBackgroundNotification()
                     })
+                    // select the workout tab
+                    UITabView.viewController?.selectedIndex = 2
                     return .init(code: .success, userActivity: nil)
                 } catch {
                     os_log("Could not start workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
@@ -107,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let workout = try context.fetch(Workout.currentWorkoutFetchRequest).first else {
                 return .init(code: .failureNoMatchingWorkout, userActivity: nil)
             }
+            os_log("Cancelling workout from intent", log: .workoutData)
             try workout.cancel()
             return .init(code: .success, userActivity: nil)
         } catch {
@@ -121,6 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let workout = try context.fetch(Workout.currentWorkoutFetchRequest).first else {
                 return .init(code: .failureNoMatchingWorkout, userActivity: nil)
             }
+            os_log("Finishing workout from intent", log: .workoutData)
             try workout.finish()
             return .init(code: .success, userActivity: nil)
         } catch {
