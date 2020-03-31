@@ -121,21 +121,39 @@ struct PurchaseView: View {
             }.disabled(!canMakePayments)
             
             Section {
-                Button("Restore Purchases") {
+                Button(action: {
                     StoreObserver.shared.restore()
+                }) {
+                    HStack {
+                        Text("Restore Purchases")
+                        Spacer()
+                        Image(systemName: "arrow.clockwise")
+                    }
                 }
             }.disabled(!canMakePayments)
             
             Section {
-                Button("Terms of Service") {
-                    if let url = URL(string: "https://ironapp.io/tos/") {
+                Button(action: {
+                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
                         UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Text("Privacy Policy")
+                        Spacer()
+                        Image(systemName: "hand.raised")
                     }
                 }
                 
-                Button("Privacy Policy") {
-                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
+                Button(action: {
+                    if let url = URL(string: "https://ironapp.io/tos/") {
                         UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Text("Terms of Service")
+                        Spacer()
+                        Image(systemName: "doc.text")
                     }
                 }
             }

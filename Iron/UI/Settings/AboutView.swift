@@ -62,6 +62,20 @@ struct AboutView: View {
                     Text("Join /r/ironapp")
                 }
             }
+            
+            Section {
+                Button(action: {
+                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Text("Privacy Policy")
+                        Spacer()
+                        Image(systemName: "hand.raised")
+                    }
+                }
+            }
         }.navigationBarTitle("About", displayMode: .inline)
     }
     
