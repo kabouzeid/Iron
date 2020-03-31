@@ -17,13 +17,12 @@ struct PlaceholderModifier<Placeholder>: ViewModifier where Placeholder: View {
         self.placeholder = placeholder
     }
     
+    @ViewBuilder
     func body(content: Content) -> some View {
-        Group {
-            if show {
-                placeholder
-            } else {
-                content
-            }
+        if show {
+            placeholder
+        } else {
+            content
         }
     }
 }

@@ -365,7 +365,7 @@ private struct MoreView: View {
         guard let newValue = workoutRoutineSetCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutRoutineSetCommentInput = newValue
         workoutRoutineSet.comment = newValue.isEmpty ? nil : newValue
-        self.workoutRoutineSet.managedObjectContext?.safeSave()
+        self.workoutRoutineSet.managedObjectContext?.saveOrCrash()
     }
 
     private func tagButton(tag: WorkoutSetTag) -> some View {
@@ -375,7 +375,7 @@ private struct MoreView: View {
             } else {
                 self.workoutRoutineSet.tagValue = tag
             }
-            self.workoutRoutineSet.managedObjectContext?.safeSave()
+            self.workoutRoutineSet.managedObjectContext?.saveOrCrash()
         }) {
             HStack {
                 Image(systemName: "circle.fill")

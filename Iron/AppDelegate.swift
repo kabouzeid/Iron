@@ -11,6 +11,7 @@ import CoreData
 import Combine
 import StoreKit
 import WorkoutDataKit
+import Intents
 import os.log
 
 @UIApplicationMain
@@ -55,6 +56,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // the app terminates after this function returns and the backup is written on another queue, therefore we have to wait() here
             dispatchGroup.wait()
+        }
+    }
+    
+    // MARK: Intents
+    
+    func application(_ application: UIApplication, handle intent: INIntent, completionHandler: @escaping (INIntentResponse) -> Void) {
+        os_log("Handling intent=%@", log: .intents, type: .info, intent)
+        
+        if let intent = intent as? INStartWorkoutIntent {
+            completionHandler(handle(intent))
+        } else if let intent = intent as? INCancelWorkoutIntent {
+            completionHandler(handle(intent))
+        } else if let intent = intent as? INEndWorkoutIntent {
+            completionHandler(handle(intent))
+        } else {
+            preconditionFailure("Unhandled intent type: \(intent)")
+        }
+    }
+    
+    private func handle(_ startWorkoutIntent: INStartWorkoutIntent) -> INStartWorkoutIntentResponse {
+        let context = WorkoutDataStorage.shared.persistentContainer.viewContext
+        do {
+            let count = try context.count(for: Workout.currentWorkoutFetchRequest)
+            if count == 0 {
+                let workout = Workout.create(context: context)
+                do {
+                    try workout.start()
+                    return .init(code: .success, userActivity: nil)
+                } catch {
+                    os_log("Could not start workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
+                    context.delete(workout)
+                    return .init(code: .failure, userActivity: nil)
+                }
+            } else {
+                return .init(code: .failureOngoingWorkout, userActivity: nil)
+            }
+        } catch {
+            return .init(code: .failure, userActivity: nil)
+        }
+    }
+    
+    private func handle(_ cancelWorkoutIntent: INCancelWorkoutIntent) -> INCancelWorkoutIntentResponse {
+        let context = WorkoutDataStorage.shared.persistentContainer.viewContext
+        do {
+            guard let workout = try context.fetch(Workout.currentWorkoutFetchRequest).first else {
+                return .init(code: .failureNoMatchingWorkout, userActivity: nil)
+            }
+            try workout.cancel()
+            return .init(code: .success, userActivity: nil)
+        } catch {
+            os_log("Could not cancel workout: %@", log: .workoutData, type: .error, error.localizedDescription)
+            return .init(code: .failure, userActivity: nil)
+        }
+    }
+    
+    private func handle(_ endWorkoutIntent: INEndWorkoutIntent) -> INEndWorkoutIntentResponse {
+        let context = WorkoutDataStorage.shared.persistentContainer.viewContext
+        do {
+            guard let workout = try context.fetch(Workout.currentWorkoutFetchRequest).first else {
+                return .init(code: .failureNoMatchingWorkout, userActivity: nil)
+            }
+            try workout.finish()
+            return .init(code: .success, userActivity: nil)
+        } catch {
+            os_log("Could not finish workout: %@", log: .workoutData, type: .error, error.localizedDescription)
+            return .init(code: .failure, userActivity: nil)
         }
     }
 

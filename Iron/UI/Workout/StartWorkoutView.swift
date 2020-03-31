@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import WorkoutDataKit
+import os.log
 
 struct StartWorkoutView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -44,7 +45,7 @@ struct StartWorkoutView: View {
                     for i in offsets {
                         self.managedObjectContext.delete(workoutPlans[i])
                     }
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
                 
                 Section {
@@ -67,7 +68,7 @@ struct StartWorkoutView: View {
     private func createWorkoutPlan() {
         assert(self.selectedWorkoutPlan == nil)
         selectedWorkoutPlan = WorkoutPlan.create(context: managedObjectContext)
-        managedObjectContext.safeSave()
+        managedObjectContext.saveOrCrash()
     }
 }
 
@@ -78,14 +79,6 @@ private struct StartEmptyWorkoutCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
     
     let quote: Quote? = Quotes.quotes[4]
-    
-    private func startWorkout() {
-        precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
-        // create a new workout
-        let workout = Workout.create(context: self.managedObjectContext)
-        workout.isCurrentWorkout = true
-        workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
-    }
     
     private var plateImage: some View {
         Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
@@ -111,7 +104,7 @@ private struct StartEmptyWorkoutCell: View {
             }
             
             Button(action: {
-                self.startWorkout()
+                Workout.create(context: self.managedObjectContext).startOrCrash()
             }) {
                 HStack {
                     Spacer()
@@ -142,14 +135,14 @@ private struct WorkoutPlanCell: View {
             .contextMenu {
                 Button(action: {
                     _ = self.workoutPlan.duplicate(context: self.managedObjectContext)
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }) {
                     Text("Duplicate")
                     Image(systemName: "doc.on.doc")
                 }
                 Button(action: {
                     self.managedObjectContext.delete(self.workoutPlan)
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }) {
                     Text("Delete")
                     Image(systemName: "trash")
@@ -174,11 +167,7 @@ private struct WorkoutPlanRoutines: View {
     var body: some View {
         ForEach(workoutRoutines) { workoutRoutine in
             Button(action: {
-                precondition((try? self.managedObjectContext.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0)
-                // create the workout
-                let workout = workoutRoutine.createWorkout(context: self.managedObjectContext)
-                workout.isCurrentWorkout = true
-                workout.start(alsoStartOnWatch: self.settingsStore.watchCompanion)
+                workoutRoutine.createWorkout(context: self.managedObjectContext).startOrCrash()
             }) {
                 VStack(alignment: .leading) {
                     Text(workoutRoutine.displayTitle).italic()

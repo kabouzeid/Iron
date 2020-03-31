@@ -9,6 +9,7 @@
 import Foundation
 import HealthKit
 import Combine
+import os.log
 
 class WorkoutSessionManager: NSObject, ObservableObject {
     static let healthStore = HKHealthStore()
@@ -89,12 +90,12 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
     }
     
-    let workoutSession: HKWorkoutSession
-    let workoutBuilder: HKLiveWorkoutBuilder
+    private let workoutSession: HKWorkoutSession
+    private let workoutBuilder: HKLiveWorkoutBuilder
     
     init(session: HKWorkoutSession) {
-        self.workoutSession = session
-        self.workoutBuilder = session.associatedWorkoutBuilder()
+        workoutSession = session
+        workoutBuilder = session.associatedWorkoutBuilder()
         
         super.init()
         
@@ -118,7 +119,11 @@ class WorkoutSessionManager: NSObject, ObservableObject {
     }
     
     var state: HKWorkoutSessionState {
-        return workoutSession.state
+        workoutSession.state
+    }
+    
+    var workoutConfiguration: HKWorkoutConfiguration {
+        workoutSession.workoutConfiguration
     }
     
     var uuid: UUID? {
@@ -168,7 +173,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
     }
     
-    func updateStartDate(_ startDate: Date) throws {
+    func updateStartDate(_ startDate: Date) {
         print(#function)
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
@@ -176,7 +181,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         self.startDate = startDate
     }
     
-    func updateEndDate(_ endDate: Date?) throws {
+    func updateEndDate(_ endDate: Date?) {
         print(#function)
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
@@ -184,7 +189,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         self.endDate = endDate
     }
     
-    func prepare() throws {
+    func prepare() {
         print(#function)
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
@@ -214,16 +219,16 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
         
         workoutBuilder.dataSource = HKLiveWorkoutDataSource(healthStore: Self.healthStore, workoutConfiguration: workoutSession.workoutConfiguration)
+        os_log("Types to collect: %@", type: .debug, workoutBuilder.dataSource?.typesToCollect ?? "nil")
         workoutSession.startActivity(with: start)
+        os_log("Beginning collection")
         workoutBuilder.beginCollection(withStart: start, completion: { (success, error) in
             guard success else {
-                completion(.failure(error ?? NSError()))
+                completion(.failure(error ?? GenericError(description: "Could not begin collection of health samples")))
                 return
             }
             completion(.success(()))
         })
-        
-        print("collecting samples for \(workoutBuilder.dataSource?.typesToCollect.description ?? "nil")")
     }
     
     func discard() {
@@ -254,7 +259,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         
         let endCollectionSemaphore = DispatchSemaphore(value: 0)
         var endCollectionError: Error?
-        print("ending collection...")
+        os_log("Ending collection")
         workoutBuilder.endCollection(withEnd: end, completion: { (success, error) in
             defer { endCollectionSemaphore.signal() }
             if !success {
@@ -266,7 +271,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
             completion(.failure(error))
             return
         }
-        print("ended collection")
+        os_log("Successfully ended collection", type: .info)
         
         do {
             try self.requestWorkoutPermissions().get()
@@ -275,6 +280,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
             return
         }
         
+        os_log("Finishing workout")
         workoutBuilder.finishWorkout(completion: { (workout, error) in
             guard let workout = workout else {
                 completion(.failure(error ?? NSError()))
@@ -370,7 +376,7 @@ extension WorkoutSessionManager {
 
 extension WorkoutSessionManager: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
-        print(#function + " \(toState.name)")
+        os_log("Workout session state changed to %@ from %@", toState.name, fromState.name)
         
         DispatchQueue.main.async {
             self.objectWillChange.send()
@@ -378,12 +384,14 @@ extension WorkoutSessionManager: HKWorkoutSessionDelegate {
     }
     
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        print(#function)
+        os_log("Workout session did fail with error: %@", error.localizedDescription)
+        
+        #warning("TODO: Notify phone about this, so the phone can clear the watchWorkoutUuid and also save the workout when it finishes. Or display the error on the watch and allow to discard or save.")
+        discard()
         
         DispatchQueue.main.async {
             self.objectWillChange.send()
         }
-        // TODO: notify phone about this
     }
 }
 
@@ -391,13 +399,13 @@ extension WorkoutSessionManager: HKWorkoutSessionDelegate {
 extension WorkoutSessionManager {
     private static func requestPermissions(toShare typesToShare: Set<HKSampleType>?, read typesToRead: Set<HKObjectType>?, completion: @escaping (Result<Void, Error>) -> Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
-            completion(.failure(NSError()))
+            completion(.failure(GenericError(description: "HealthKit is not available on this device.")))
             return
         }
         
         Self.healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
             guard success else {
-                completion(.failure(error ?? NSError()))
+                completion(.failure(error ?? GenericError(description: "Requesting authorization failed")))
                 return
             }
             completion(.success(()))
@@ -416,14 +424,13 @@ extension WorkoutSessionManager {
     private func requestWorkoutPermissions() -> Result<Void, Error> {
         let permissionSemaphore = DispatchSemaphore(value: 0)
         var permissionsResult: Result<Void, Error>?
-        print("requesting permissions...")
         requestWorkoutPermissions { result in
             defer { permissionSemaphore.signal() }
             permissionsResult = result
         }
         permissionSemaphore.wait()
-        print("permission request result: \(permissionsResult.debugDescription)")
-        return permissionsResult ?? .failure(NSError())
+        precondition(permissionsResult != nil)
+        return permissionsResult!
     }
 }
 

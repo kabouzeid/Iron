@@ -10,6 +10,7 @@ import Foundation
 import WatchConnectivity
 import Combine
 import HealthKit
+import os.log
 
 class PhoneConnectionManager: NSObject, ObservableObject {
     static let shared = PhoneConnectionManager()
@@ -30,6 +31,22 @@ class PhoneConnectionManager: NSObject, ObservableObject {
     
     var isActivated: Bool {
         session.activationState == .activated
+    }
+    
+    private let scheduleDiscardUnstartedWorkoutSessionSubject = PassthroughSubject<Void, Never>()
+    private var cancellable: AnyCancellable?
+
+    override init() {
+        cancellable = scheduleDiscardUnstartedWorkoutSessionSubject
+            .debounce(for: .seconds(60), scheduler: RunLoop.main) // seems to be a bug in watchOS, when using the accessQueue, debounce fires immediately (watchOS 6.2)
+            .receive(on: WorkoutSessionManager.accessQueue)
+            .sink {
+                os_log("Running scheduled check whether current workout session was never started")
+                guard let state = WorkoutSessionManagerStore.shared.workoutSessionManager?.state, state == .prepared || state == .notStarted else { return } // not really necessary
+                guard WorkoutSessionManagerStore.shared.workoutSessionManager?.uuid == nil else { return } // make sure the UUID is nil
+                os_log("Discarding workout session that is still in the prepared state after 60 seconds have passed since last prepare message")
+                WorkoutSessionManagerStore.shared.discardUnstartedWorkoutSession()
+            }
     }
 }
 
@@ -93,8 +110,8 @@ extension PhoneConnectionManager {
             handleUpdateSelectedSetMessage(message: updateSelectedSetMessage)
         } else if let discardMessage = message[PayloadKey.discardWorkoutSession] as? [String : Any] {
             handleDiscardWorkoutSessionMessage(message: discardMessage)
-        } else if let unprepare = message[PayloadKey.unprepareWorkoutSession] as? Bool, unprepare {
-            handleUnprepareWorkoutSession()
+        } else if let unprepare = message[PayloadKey.ignoredPreparedWorkoutSession] as? Bool, unprepare {
+            handleIgnoredPreparedWorkoutSession()
         }
     }
     
@@ -198,8 +215,23 @@ extension PhoneConnectionManager {
         WorkoutSessionManagerStore.shared.discardWorkoutSession(uuid: uuid)
     }
     
-    private func handleUnprepareWorkoutSession() {
-        WorkoutSessionManagerStore.shared.unprepareWorkoutSession()
+    private func handleIgnoredPreparedWorkoutSession() {
+        WorkoutSessionManagerStore.shared.discardUnstartedWorkoutSession()
+    }
+}
+
+extension PhoneConnectionManager {
+    func handlePrepareWorkoutSession(_ workoutConfiguration: HKWorkoutConfiguration) {
+        os_log("Ensuring we have a workout session that keeps the app alive")
+        WorkoutSessionManagerStore.shared.ensurePreparedWorkoutSession(configuration: workoutConfiguration) { [weak self] result in
+            switch result {
+            case .success:
+                self?.sendPreparedWorkoutSession()
+                self?.scheduleDiscardUnstartedWorkoutSessionSubject.send()
+            case .failure(let error):
+                os_log("Could not prepare workout session: %@", error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -207,17 +239,21 @@ extension PhoneConnectionManager {
 extension PhoneConnectionManager {
     /// wrapper to send either via message or transfer, depending on what's available
     private func sendUserInfo(userInfo: [String : Any]) {
-        if session.isReachable {
+        assert(isActivated)
+        if isReachable {
+            os_log("Messaging userInfo=%@", type: .debug, userInfo)
             session.sendMessage(userInfo, replyHandler: nil) { error in
+                os_log("Messaging not possible, falling back to transfering", type: .debug)
                 self.session.transferUserInfo(userInfo)
             }
         } else {
+            os_log("Transfering userInfo=%@", type: .debug, userInfo)
             session.transferUserInfo(userInfo)
         }
     }
     
     func sendPreparedWorkoutSession() {
-        print(#function)
+        os_log("Sending prepared message")
         sendUserInfo(userInfo: [PayloadKey.preparedWorkoutSession : true])
     }
 }

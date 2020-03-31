@@ -10,16 +10,18 @@ import WatchKit
 import HealthKit
 import Foundation
 import Combine
+import os.log
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
-        print(#function)
         // Perform any final initialization of your application.
         reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
         cancellable = WorkoutSessionManagerStore.shared.objectWillChange.sink {
+            os_log("Reloading root page controllers", type: .info)
             self.reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
         }
-        handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?!
+        os_log("Checking whether active workout session can be recovered")
+        handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?! last checked I think watchOS 6.0
         PhoneConnectionManager.shared.activateSession()
         NotificationManager.shared.awake()
     }
@@ -34,7 +36,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
     func applicationDidBecomeActive() {
-        print(#function)
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -74,32 +75,23 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
     func handleActiveWorkoutRecovery() {
-        print(#function)
+        os_log("Recovering active workout session")
         WorkoutSessionManager.healthStore.recoverActiveWorkoutSession { workoutSession, error in
             guard let workoutSession = workoutSession else {
-                print("could not recover active workout session: \(error?.localizedDescription ?? "nil")")
+                if let error = error {
+                    os_log("Could not recover active workout session: %@", error.localizedDescription)
+                } else {
+                    os_log("No active workout session to recover", type: .info)
+                }
                 return
             }
-            
-            print("successfully recovered workout session")
-        
+            os_log("Successfully recovered active workout session", type: .info)
             WorkoutSessionManagerStore.shared.recoverWorkoutSession(workoutSession: workoutSession)
         }
     }
     
-    /**
-     prepares the current workout session so that the startWorkout message can be received
-     */
+    /// from `HKHealthStore.startWatchApp`
     func handle(_ workoutConfiguration: HKWorkoutConfiguration) {
-        print(#function)
-        
-        WorkoutSessionManagerStore.shared.ensurePreparedWorkoutSession(configuration: workoutConfiguration) { result in
-            switch result {
-            case .success:
-                PhoneConnectionManager.shared.sendPreparedWorkoutSession()
-            case .failure(let error):
-                print("could not prepare workout session: \(error)")
-            }
-        }
+        PhoneConnectionManager.shared.handlePrepareWorkoutSession(workoutConfiguration)
     }
 }

@@ -30,6 +30,9 @@
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
+				<string>INStartWorkoutIntent</string>
+				<string>INCancelWorkoutIntent</string>
+				<string>INEndWorkoutIntent</string>
 				<string>ViewOneRepMaxIntent</string>
 				<string>ViewPersonalRecordsIntent</string>
 			</array>

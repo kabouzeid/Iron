@@ -31,7 +31,7 @@ struct HistoryView : View {
         for i in offsets.sorted().reversed() {
             self.managedObjectContext.delete(workouts[i])
         }
-        self.managedObjectContext.safeSave()
+        self.managedObjectContext.saveOrCrash()
     }
 
     var body: some View {
@@ -73,6 +73,7 @@ struct HistoryView : View {
                     .cancel()
                 ])
             }
+            // FIXME: .placeholder() suddenly crashes the app when the last workout is deleted (iOS 13.4)
             .placeholder(show: workouts.isEmpty,
                          Text("Your finished workouts will appear here.")
                             .multilineTextAlignment(.center)

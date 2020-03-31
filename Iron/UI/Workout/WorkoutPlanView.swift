@@ -30,7 +30,7 @@ struct WorkoutPlanView: View {
         guard let newValue = workoutPlanTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutPlanTitleInput.value = newValue
         workoutPlan.title = newValue.isEmpty ? nil : newValue
-        self.managedObjectContext.safeSave()
+        self.managedObjectContext.saveOrCrash()
     }
     
     private var workoutRoutines: [WorkoutRoutine] {
@@ -65,13 +65,13 @@ struct WorkoutPlanView: View {
                         self.managedObjectContext.delete(workoutRoutine)
                         workoutRoutine.workoutPlan?.removeFromWorkoutRoutines(workoutRoutine)
                     }
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
                 .onMove { source, destination in
                     var workoutRoutines = self.workoutRoutines
                     workoutRoutines.move(fromOffsets: source, toOffset: destination)
                     self.workoutPlan.workoutRoutines = NSOrderedSet(array: workoutRoutines)
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
                 
                 Button(action: {
@@ -92,7 +92,7 @@ struct WorkoutPlanView: View {
     private func createWorkoutRoutine() {
         let workoutRoutine = WorkoutRoutine.create(context: managedObjectContext)
         workoutRoutine.workoutPlan = workoutPlan
-        managedObjectContext.safeSave()
+        managedObjectContext.saveOrCrash()
     }
 }
 

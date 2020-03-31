@@ -18,7 +18,7 @@ enum PayloadKey {
     
     // phone --> watch
     // Args: true
-    static let unprepareWorkoutSession = "unprepareWorkoutSession" // send if the prepare message came to late, i.e. after the workout was already canceled / finished
+    static let ignoredPreparedWorkoutSession = "ignoredPreparedWorkoutSession" // send if the prepared message came to late, i.e. after the workout was already canceled / finished
     
     // phone --> watch
     // Args: [start: Date, uuid: UUID]

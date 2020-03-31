@@ -68,6 +68,7 @@
 	</dict>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>INStartWorkoutIntent</string>
 		<string>ViewOneRepMaxIntent</string>
 		<string>ViewPersonalRecordsIntent</string>
 	</array>

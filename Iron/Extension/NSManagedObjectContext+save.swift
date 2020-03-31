@@ -8,18 +8,36 @@
 
 import Foundation
 import CoreData
+import os.log
 
 extension NSManagedObjectContext {
-    func safeSave () {
+    func saveOrCrash () {
         if hasChanges {
             do {
                 try save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let detailedErrors = (error as NSError).userInfo[NSDetailedErrorsKey] as? [NSError]
-                fatalError("Unresolved error \(error.localizedDescription)\(detailedErrors.map { "\n" + $0.map { "    \($0.localizedDescription)" }.joined(separator: "\n") + "\n" } ?? "")")
+                let description = Self.descriptionWithDetailedErrors(error: error as NSError)
+                os_log("Could not save context: %@", log: .workoutData, type: .error, description)
+                fatalError("Could not save context: \(description)")
             }
         }
+    }
+}
+
+extension NSManagedObjectContext {
+    static func descriptionWithDetailedErrors(error: NSError) -> String {
+        var append: String?
+        if let detailedErrors = (error as NSError).userInfo[NSDetailedErrorsKey] as? [NSError] {
+            let detailedString = detailedErrors
+                .map { descriptionWithEntityName(error: $0) }
+                .joined(separator: "\n")
+            append = " Detailed Errors:\n\(detailedString)\n"
+        }
+        return descriptionWithEntityName(error: error) + (append ?? "")
+    }
+    
+    private static func descriptionWithEntityName(error: NSError) -> String {
+        let entityName = (error.userInfo[NSValidationObjectErrorKey] as? NSManagedObject)?.entity.name
+        return "\(entityName.map { "\($0):" } ?? "") \(error.localizedDescription)"
     }
 }

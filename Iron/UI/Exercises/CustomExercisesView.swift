@@ -47,7 +47,7 @@ struct CustomExercisesView: View {
             self.deleteWorkoutExercises(with: uuid)
             self.exerciseStore.deleteCustomExercise(with: uuid)
         }
-        self.managedObjectContext.safeSave()
+        self.managedObjectContext.saveOrCrash()
     }
     
     var body: some View {

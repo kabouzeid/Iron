@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WorkoutDataKit
+import os.log
 
 struct WorkoutDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -128,13 +129,13 @@ struct WorkoutDetailView : View {
                         self.managedObjectContext.delete(workoutExercise)
                         workoutExercise.workout?.removeFromWorkoutExercises(workoutExercise)
                     }
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
                 .onMove { source, destination in
                     guard var workoutExercises = self.workout.workoutExercises?.array as? [WorkoutExercise] else { return }
                     workoutExercises.move(fromOffsets: source, toOffset: destination)
                     self.workout.workoutExercises = NSOrderedSet(array: workoutExercises)
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
                 
                 Button(action: {
@@ -170,7 +171,7 @@ struct WorkoutDetailView : View {
                         self.workout.addToWorkoutExercises(workoutExercise)
                         workoutExercise.exerciseUuid = exercise.uuid
                     }
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
             })
         }
         .actionSheet(isPresented: $showingOptionsMenu) {
@@ -201,47 +202,35 @@ extension WorkoutDetailView {
     }
     
     static func repeatWorkout(workout: Workout, settingsStore: SettingsStore) {
+        guard let newWorkout = workout.copyForRepeat(blank: false) else { return }
+        
         guard let context = workout.managedObjectContext else { return }
-        guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+        guard let count = try? context.count(for: Workout.currentWorkoutFetchRequest), count == 0 else {
             let feedbackGenerator = UINotificationFeedbackGenerator()
             feedbackGenerator.prepare()
             feedbackGenerator.notificationOccurred(.error)
             return
         }
-        guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: false) else { return }
-        newWorkout.title = workout.title
-        newWorkout.isCurrentWorkout = true
-        newWorkout.start = Date()
-        context.safeSave()
         
-        if settingsStore.watchCompanion {
-            WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
-        }
+        newWorkout.startOrCrash()
         
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
-        NotificationManager.shared.requestAuthorization()
     }
     
     static func repeatWorkoutBlank(workout: Workout, settingsStore: SettingsStore) {
+        guard let newWorkout = workout.copyForRepeat(blank: true) else { return }
+        
         guard let context = workout.managedObjectContext else { return }
-        guard (try? context.count(for: Workout.currentWorkoutFetchRequest)) ?? 0 == 0 else {
+        guard let count = try? context.count(for: Workout.currentWorkoutFetchRequest), count == 0 else {
             let feedbackGenerator = UINotificationFeedbackGenerator()
             feedbackGenerator.prepare()
             feedbackGenerator.notificationOccurred(.error)
             return
         }
-        guard let newWorkout = Workout.copyExercisesForRepeat(workout: workout, blank: true) else { return }
-        newWorkout.title = workout.title
-        newWorkout.isCurrentWorkout = true
-        newWorkout.start = Date()
-        context.safeSave()
         
-        if settingsStore.watchCompanion {
-            WatchConnectionManager.shared.tryStartWatchWorkout(workout: newWorkout)
-        }
+        newWorkout.startOrCrash()
         
         UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
-        NotificationManager.shared.requestAuthorization()
     }
 }
 

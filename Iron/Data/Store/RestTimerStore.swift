@@ -95,3 +95,10 @@ extension RestTimerStore {
         return remainingTime
     }
 }
+
+extension RestTimerStore {
+    func cancel() {
+        restTimerStart = nil
+        restTimerDuration = nil
+    }
+}

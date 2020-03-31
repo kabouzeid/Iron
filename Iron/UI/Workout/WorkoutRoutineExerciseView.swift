@@ -33,7 +33,7 @@ struct WorkoutRoutineExerciseView: View {
         guard let newValue = workoutRoutineExerciseCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutRoutineExerciseCommentInput.value = newValue
         workoutRoutineExercise.comment = newValue.isEmpty ? nil : newValue
-        self.managedObjectContext.safeSave()
+        self.managedObjectContext.saveOrCrash()
     }
     
     private func workoutRoutineSets(for workoutRoutineExercise: WorkoutRoutineExercise) -> [WorkoutRoutineSet] {
@@ -66,7 +66,7 @@ struct WorkoutRoutineExerciseView: View {
                 .onTapGesture {
                     guard self.editMode?.wrappedValue != .active else { return }
                     if self.selectedWorkoutRoutineSet?.hasChanges ?? false {
-                        self.managedObjectContext.safeSave()
+                        self.managedObjectContext.saveOrCrash()
                     }
                     if self.selectedWorkoutRoutineSet == workoutRoutineSet {
                         self.select(set: nil)
@@ -82,13 +82,13 @@ struct WorkoutRoutineExerciseView: View {
                 self.managedObjectContext.delete(workoutRoutineSet)
                 workoutRoutineSet.workoutRoutineExercise?.removeFromWorkoutRoutineSets(workoutRoutineSet)
             }
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }
         .onMove { source, destination in
             var workoutRoutineSets = self.workoutRoutineSets(for: self.workoutRoutineExercise)
             workoutRoutineSets.move(fromOffsets: source, toOffset: destination)
             self.workoutRoutineExercise.workoutRoutineSets = NSOrderedSet(array: workoutRoutineSets)
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }
     }
     
@@ -108,7 +108,7 @@ struct WorkoutRoutineExerciseView: View {
                 workoutRoutineSet.maxRepetitionsValue = 5
             }
             
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }) {
             HStack {
                 Image(systemName: "plus")
@@ -130,7 +130,7 @@ struct WorkoutRoutineExerciseView: View {
                 overwriteRepetitionsMax: $editorRepetitionsMax,
                 showNext: self.selectedWorkoutRoutineSet! != sets.last,
                 onDone: {
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                     
                     if let index = sets.firstIndex(of: self.selectedWorkoutRoutineSet!), index + 1 < sets.count {
                         self.select(set: sets[index + 1])
@@ -180,7 +180,7 @@ struct WorkoutRoutineExerciseView: View {
             }
         )
         .onDisappear {
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }
     }
     

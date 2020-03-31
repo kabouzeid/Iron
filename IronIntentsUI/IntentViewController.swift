@@ -17,6 +17,7 @@ import WorkoutDataKit
 // You can test this example integration by saying things to Siri like:
 // "Send a message using <myApp>"
 
+/// - NOTE: somehow we don't receive logs from this class...
 class IntentViewController: UIViewController, INUIHostedViewControlling {
     
     override func viewDidLoad() {
@@ -60,7 +61,6 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
                     .padding()
             ))
             completion(true, parameters, .init(width: desiredSize.width, height: 300))
-            return
         } else if let response = interaction.intentResponse as? ViewPersonalRecordsIntentResponse {
             guard let intentSet = response.set else {
                     completion(false, parameters, .zero)
@@ -73,9 +73,9 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
 //                    .padding()
             ))
             completion(true, parameters, .init(width: desiredSize.width, height: 150))
+        } else {
+            completion(false, parameters, .zero)
         }
-        
-        completion(false, parameters, .zero)
     }
     
     var desiredSize: CGSize {

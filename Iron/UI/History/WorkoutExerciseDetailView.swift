@@ -161,7 +161,7 @@ struct WorkoutExerciseDetailView : View {
                 .onTapGesture {
                     guard self.editMode?.wrappedValue != .active else { return }
                     if self.selectedWorkoutSet?.hasChanges ?? false {
-                        self.managedObjectContext.safeSave()
+                        self.managedObjectContext.saveOrCrash()
                     }
                     if self.selectedWorkoutSet == workoutSet {
                         self.select(set: nil)
@@ -185,7 +185,7 @@ struct WorkoutExerciseDetailView : View {
             if deletedSelectedSet {
                 self.select(set: self.firstUncompletedSet)
             }
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }
         // TODO: move is yet too buggy
         //                        .onMove { source, destination in
@@ -214,7 +214,7 @@ struct WorkoutExerciseDetailView : View {
                 // don't allow uncompleted sets if not in current workout
                 workoutSet.isCompleted = true
             }
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }) {
             HStack {
                 Image(systemName: "plus")
@@ -277,7 +277,7 @@ struct WorkoutExerciseDetailView : View {
                 }
                 self.select(set: self.firstUncompletedSet)
                 
-                self.managedObjectContext.safeSave()
+                self.managedObjectContext.saveOrCrash()
             })
             .background(Color(.systemFill).opacity(0.5))
         }
@@ -328,7 +328,7 @@ struct WorkoutExerciseDetailView : View {
 //            self.fetchWorkoutExerciseHistory()
         }
         .onDisappear {
-            self.managedObjectContext.safeSave()
+            self.managedObjectContext.saveOrCrash()
         }
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import WorkoutDataKit
+import CoreData
 import os.log
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -97,6 +98,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.handleURLContext(urlContext: urlContext)
             }
         }
+        
+        #warning("do this in scene become active or in foreground")
+        // prepareAndStartWatchWorkout() only works when the app is active (not in background), therefore it could be that we have to call it now
+        if SettingsStore.shared.watchCompanion && WatchConnectionManager.shared.currentWatchWorkoutUuid == nil {
+            // if the watch companion is enabled and we haven't (successfully) started a watch workout yet
+            do {
+                // check if we have a workout running
+                os_log("Watch companion is enabled and no watch workout was started, checking if we have a current workout", log: .watch)
+                #warning("measure how long this takes, maybe move to background context, docs say this function should not block")
+                if let currentWorkout = try WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
+                    os_log("Current workout exists, but no watch workout was started. Trying to start it now.", log: .watch)
+                    WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: currentWorkout)
+                }
+            } catch {
+                os_log("Could not fetch current workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -120,7 +138,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Save changes in the application's managed object context when the application transitions to the background.
         os_log("Scene did enter background, saving workout data", log: .default)
-        WorkoutDataStorage.shared.persistentContainer.viewContext.safeSave()
+        WorkoutDataStorage.shared.persistentContainer.viewContext.saveOrCrash()
         
         if let currentWorkout = try? WorkoutDataStorage.shared.persistentContainer.viewContext.fetch(Workout.currentWorkoutFetchRequest).first {
             guard currentWorkout.hasCompletedSets ?? false else { return } // allows the user to prefill a workout without getting the notification

@@ -201,23 +201,8 @@ extension Workout {
     }
 }
 
-// MARK: - Prepare for start
-extension Workout {
-    public func prepareForStart() {
-        start = Date()
-    }
-}
-
 // MARK: - Prepare for finish
 extension Workout {
-    public func prepareForFinish() {
-        deleteExercisesWhereAllSetsAreUncompleted()
-        deleteUncompletedSets()
-        // should already be set, but just to be safe
-        start = safeStart
-        end = safeEnd
-    }
-    
     // exercises with no sets won't be deleted
     public func deleteExercisesWhereAllSetsAreUncompleted() {
         workoutExercises?
@@ -285,42 +270,6 @@ extension Workout {
     }
 }
 
-// MARK: - Repeat
-extension Workout {
-    public static func copyExercisesForRepeat(workout: Workout, blank: Bool) -> Workout? {
-        guard let context = workout.managedObjectContext else { return nil }
-        
-        // create the workout
-        let newWorkout = Workout.create(context: context)
-        
-        if let workoutExercises = workout.workoutExercises?.compactMap({ $0 as? WorkoutExercise }) {
-            // copy the exercises
-            for workoutExercise in workoutExercises {
-                let newWorkoutExercise = WorkoutExercise.create(context: context)
-                newWorkoutExercise.workout = newWorkout
-                newWorkoutExercise.exerciseUuid = workoutExercise.exerciseUuid
-                
-                if let workoutSets = workoutExercise.workoutSets?.compactMap({ $0 as? WorkoutSet }) {
-                    // copy the sets
-                    for workoutSet in workoutSets {
-                        let newWorkoutSet = WorkoutSet.create(context: context)
-                        newWorkoutSet.workoutExercise = newWorkoutExercise
-                        newWorkoutSet.isCompleted = false
-                        if !blank {
-                            let repetitions = workoutSet.repetitionsValue
-                            newWorkoutSet.minTargetRepetitionsValue = repetitions
-                            newWorkoutSet.maxTargetRepetitionsValue = repetitions
-                            // don't copy weight, RPE, tag, comment, etc.
-                        }
-                    }
-                }
-            }
-        }
-        
-        return newWorkout
-    }
-}
-
 // MARK: - Validation
 extension Workout {
     override public func validateForUpdate() throws {
@@ -333,6 +282,8 @@ extension Workout {
         try validateConsistency()
     }
     
+    /// TODO Subclasses should combine any error returned by super’s implementation with their own (see Managed Object Validation).
+    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/ObjectValidation.html
     func validateConsistency() throws {
         if start == nil {
             throw error(code: 1, message: "The start date is not set.")

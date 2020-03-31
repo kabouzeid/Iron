@@ -10,20 +10,14 @@ import Foundation
 import os.log
 
 extension OSLog {
-    private static let subsystem = Bundle.main.bundleIdentifier ?? "-"
+    private static let subsystem = Bundle.main.bundleIdentifier ?? "com.kabouzeid.Iron.nobundle"
     
     static let iap = OSLog(subsystem: subsystem, category: "IAP")
-    static let migration = OSLog(subsystem: subsystem, category: "migration")
-    static let backup = OSLog(subsystem: subsystem, category: "backup")
-    static let ubiquityContainer = OSLog(subsystem: subsystem, category: "ubiquityContainer")
-    static let health = OSLog(subsystem: subsystem, category: "health")
-    static let watch = OSLog(subsystem: subsystem, category: "watch")
-}
-
-extension OSLog {
-    func trace(type: OSLogType = .debug, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
-        guard isEnabled(type: type) else { return }
-        let file = URL(fileURLWithPath: String(describing: file)).lastPathComponent
-        os_log("%{public}@ %{public}@:%ld", log: self, type: type, String(describing: function), file, line)
-    }
+    static let migration = OSLog(subsystem: subsystem, category: "Migration")
+    static let backup = OSLog(subsystem: subsystem, category: "Backup")
+    static let ubiquityContainer = OSLog(subsystem: subsystem, category: "Ubiquity Container")
+    static let health = OSLog(subsystem: subsystem, category: "Health")
+    static let watch = OSLog(subsystem: subsystem, category: "Watch")
+    static let intents = OSLog(subsystem: subsystem, category: "Intents")
+    static let workoutData = OSLog(subsystem: subsystem, category: "Workout Data")
 }

@@ -48,17 +48,12 @@ struct CurrentWorkoutView: View {
                         precondition(self.workout.isCurrentWorkout == true)
                         workoutExercise.addToWorkoutSets(self.createDefaultWorkoutSets(workoutExercise: workoutExercise))
                     }
-                    self.managedObjectContext.safeSave()
+                    self.managedObjectContext.saveOrCrash()
                 }
             ).typeErased
         case .finish:
             return self.finishWorkoutSheet.typeErased
         }
-    }
-    
-    private func cancelRestTimer() {
-        self.restTimerStore.restTimerStart = nil
-        self.restTimerStore.restTimerDuration = nil
     }
     
     private func createDefaultWorkoutSets(workoutExercise: WorkoutExercise) -> NSOrderedSet {
@@ -197,32 +192,13 @@ struct CurrentWorkoutView: View {
     }
     
     private func finishWorkout() {
-        self.managedObjectContext.safeSave() // just in case the precondition below fires
-        
-        // save the workout
-        self.workout.prepareForFinish()
-        self.workout.isCurrentWorkout = false
-        self.managedObjectContext.safeSave()
-        
-        self.cancelRestTimer()
+        workout.finishOrCrash()
         
         // haptic feedback
         let feedbackGenerator = UINotificationFeedbackGenerator()
         feedbackGenerator.prepare()
         feedbackGenerator.notificationOccurred(.success)
         AudioServicesPlaySystemSound(1103) // Tink sound
-        
-        if let watchWorkoutUuid = WatchConnectionManager.shared.currentWatchWorkoutUuid {
-            if watchWorkoutUuid != workout.uuid {
-                os_log("currentWatchWorkoutUuid=%@ but workout.uuid=%@, saving HealthKit workout on phone too to be safe", log: .watch, type: .error, watchWorkoutUuid.uuidString, workout.uuid?.uuidString ?? "nil")
-                HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
-            }
-            if let start = workout.start, let end = workout.end, let uuid = workout.uuid {
-                WatchConnectionManager.shared.finishWatchWorkout(start: start, end: end, title: workout.optionalDisplayTitle(in: exerciseStore.exercises), uuid: uuid)
-            }
-        } else {
-            HealthManager.shared.saveWorkout(workout: workout, exerciseStore: exerciseStore)
-        }
         
         UserDefaults.standard.finishedWorkoutsCount += 1
         if UserDefaults.standard.finishedWorkoutsCount == 3 {
@@ -249,21 +225,11 @@ struct CurrentWorkoutView: View {
     }
     
     private func cancelWorkout() {
-        let uuid = workout.uuid // after delete, uuid will be nil
+        workout.cancelOrCrash()
         
-        self.managedObjectContext.delete(self.workout)
-        self.managedObjectContext.safeSave()
-        self.cancelRestTimer()
-        
-        let generator = UINotificationFeedbackGenerator()
-        generator.prepare()
-        generator.notificationOccurred(.success)
-        
-        if WatchConnectionManager.shared.currentWatchWorkoutUuid != nil {
-            if let uuid = uuid {
-                WatchConnectionManager.shared.discardWatchWorkout(uuid: uuid)
-            }
-        }
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.prepare()
+        feedbackGenerator.notificationOccurred(.success)
     }
     
     private var cancelButton: some View {
@@ -341,7 +307,15 @@ struct CurrentWorkoutView: View {
                 .listStyle(GroupedListStyle())
             }
             .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
-            .navigationBarItems(leading: cancelButton, trailing: EditButton())
+            .navigationBarItems(leading: HStack {
+                cancelButton
+                Button(action: {
+                    #warning("Move this somewhere else")
+                    WatchConnectionManager.shared.prepareAndStartWatchWorkout(workout: self.workout)
+                }) {
+                    Image(systemName: "ant")
+                }
+            }, trailing: EditButton())
         }
         .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
         .sheet(item: $activeSheet) { type in
