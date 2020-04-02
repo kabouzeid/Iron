@@ -78,11 +78,15 @@ struct ContentView : View {
             guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }
             self.restoreBackupData = IdentifiableHolder(value: backupData)
         }
-        .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
-            RestoreActionSheet.create(context: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
-                self.restoreResult = IdentifiableHolder(value: result)
+        .overlay(
+            Color.clear.frame(width: 0, height: 0)
+                // This is a hack, we need to have this in an overlay and in Color.clear so it also works on iPad, tested on iOS 13.4
+                .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
+                    RestoreActionSheet.create(context: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
+                        self.restoreResult = IdentifiableHolder(value: result)
+                    }
             }
-        }
+        )
         .alert(item: $restoreResult) { restoreResultHolder in
             RestoreActionSheet.restoreResultAlert(restoreResult: restoreResultHolder.value)
         }
