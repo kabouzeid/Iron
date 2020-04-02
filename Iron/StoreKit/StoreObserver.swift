@@ -40,8 +40,8 @@ class StoreObserver: NSObject, ObservableObject {
         SKPaymentQueue.default().transactions
     }
     
-    /// Set when a .failed transaction appears
-    var error: Error?
+    /// We've already removed them from the queue but we want to keep them temporarily to display the error to the user
+    var failedTransactions = [SKPaymentTransaction]()
 }
 
 extension StoreObserver: SKPaymentTransactionObserver {
@@ -57,7 +57,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
                 os_log("Transaction in payment queue: (deferred) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")
             case .failed:
                 os_log("Transaction in payment queue: (failed) %@ (%@)", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil", transaction.error?.localizedDescription ?? "nil")
-                error = transaction.error
+                failedTransactions.append(transaction)
                 queue.finishTransaction(transaction)
             case .purchased: // will handle later, this is just for debugging
                 os_log("Transaction in payment queue: (purchased) %@", log: .iap, type: .info, transaction.transactionIdentifier ?? "nil")

@@ -16,20 +16,19 @@ struct PurchaseView: View {
     
     @State private var restoreResult: RestoreResult?
     private struct RestoreResult: Identifiable {
-         let id = UUID()
-         let success: Bool
-         let error: Error?
-     }
-     
-     private func alert(restoreResult: RestoreResult) -> Alert {
-         if restoreResult.success {
-             return Alert(title: Text("Restore Successful"))
-         } else {
+        let id = UUID()
+        let success: Bool
+        let error: Error?
+    }
+    
+    private func alert(restoreResult: RestoreResult) -> Alert {
+        if restoreResult.success {
+            return Alert(title: Text("Restore Successful"))
+        } else {
             let errorMessage = restoreResult.error?.localizedDescription
-             let text = errorMessage.map { Text($0) }
-             return Alert(title: Text("Restore Failed"), message: text)
-         }
-     }
+            return Alert(title: Text("Restore Failed"), message: errorMessage.map { Text($0) })
+        }
+    }
     
     private var canMakePayments: Bool {
         StoreObserver.shared.canMakePayments
@@ -71,14 +70,14 @@ struct PurchaseView: View {
                         title: Text("Charts"),
                         text: Text("View beautiful charts and analyze your progress over time.")
                     )
-
+                    
                     FeatureView(
                         image: Image(systemName: "plus"),
                         imageColor: .green,
                         title: Text("Custom Exercises"),
                         text: Text("Create as many custom exercises as you want.")
                     )
-
+                    
                     FeatureView(
                         image: Image(systemName: "heart.fill"),
                         imageColor: .red,
@@ -105,7 +104,7 @@ struct PurchaseView: View {
                     purchased: hasProLifetime
                 ).disabled(!canMakePayments)
             }
-
+            
             Section(footer: subscriptionInfo) {
                 proMonthlyProduct.map {
                     ProductCell(
@@ -205,6 +204,26 @@ private struct ProductCell: View {
     
     let purchased: Bool
     
+    private var transactionError: Binding<IdentifieableError?> {
+        Binding(
+            get: {
+                guard let transaction = self.storeObserver.failedTransactions.first(where: { $0.payment.productIdentifier == self.product.productIdentifier }) else { return nil }
+                let error = transaction.error
+                if let error = error as? SKError, error.code == .paymentCancelled { return nil } // this is not really an error, ignore it
+                return IdentifieableError(error: error, id: transaction.hash)
+            },
+            set: { newValue in
+                guard newValue == nil else { return }
+                self.storeObserver.failedTransactions.removeAll { $0.payment.productIdentifier == self.product.productIdentifier }
+            }
+        )
+    }
+    
+    private struct IdentifieableError: Identifiable {
+        let error: Error?
+        let id: Int
+    }
+    
     private var buttonText: String {
         if purchased {
             if isSubscription {
@@ -275,18 +294,21 @@ private struct ProductCell: View {
                     .background(
                         RoundedRectangle(cornerRadius: 100, style: .circular) // cornerRadius is arbitrary
                             .foregroundColor(Color(.systemFill)) // mimic the App Store
-                    )
+                )
             }
             .buttonStyle(BorderlessButtonStyle())
             .disabled(purchased || state == .processing)
         }
         .padding([.top, .bottom], 8)
+        .alert(item: transactionError) { transactionError in
+            Alert(title: Text("Transaction Failed"), message: transactionError.error.map { Text($0.localizedDescription) })
+        }
     }
 }
 
 struct ActivityIndicatorView: UIViewRepresentable {
     let style: UIActivityIndicatorView.Style
-
+    
     func makeUIView(context: UIViewRepresentableContext<ActivityIndicatorView>) -> UIActivityIndicatorView {
         let view = UIActivityIndicatorView(style: style)
         view.startAnimating()
