@@ -25,7 +25,6 @@ struct CurrentWorkoutView: View {
     @State private var activeSheet: SheetType?
     
     private enum SheetType: Identifiable {
-        case log
         case exerciseSelector
         case finish
         
@@ -34,8 +33,6 @@ struct CurrentWorkoutView: View {
     
     private func sheetView(type: SheetType) -> AnyView {
         switch type {
-        case .log:
-            return self.workoutsLogSheet.typeErased
         case .exerciseSelector:
             return AddExercisesSheet(
                 exercises: exerciseStore.shownExercises,
@@ -125,8 +122,11 @@ struct CurrentWorkoutView: View {
     
     private func currentWorkoutExerciseDetailView(workoutExercise: WorkoutExercise) -> some View {
         VStack(spacing: 0) {
-            TimerBannerView(workout: workout)
-            Divider()
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                // on the iPad we have two columns at once so we already have a TimerBannerView
+                TimerBannerView(workout: workout)
+                Divider()
+            }
             WorkoutExerciseDetailView(workoutExercise: workoutExercise)
                 .layoutPriority(1)
                 .environmentObject(settingsStore)
@@ -171,26 +171,6 @@ struct CurrentWorkoutView: View {
         }
     }
     
-    private var workoutsLogSheet: some View {
-        NavigationView {
-            WorkoutLog(workout: self.workout)
-                .navigationBarTitle("Log", displayMode: .inline)
-                .navigationBarItems(
-                    leading: closeSheetButton,
-                    trailing:
-                    Button(action: {
-                        // TODO: share
-                        // UIActivityViewController doesn't work in sheets as of 13.1 beta3
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                )
-                .environmentObject(settingsStore)
-                .environmentObject(exerciseStore)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
     private func finishWorkout() {
         workout.finishOrCrash()
         
@@ -207,6 +187,7 @@ struct CurrentWorkoutView: View {
         }
     }
     
+    @State private var finishWorkoutSheetActivityItems: [Any]?
     private var finishWorkoutSheet: some View {
         NavigationView {
             WorkoutLog(workout: self.workout)
@@ -214,10 +195,20 @@ struct CurrentWorkoutView: View {
                 .navigationBarItems(
                     leading: closeSheetButton,
                     trailing:
-                    Button("Finish") {
-                        self.finishWorkout()
+                    HStack(spacing: NAVIGATION_BAR_SPACING) {
+                        Button(action: {
+                            guard let logText = self.workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+                            self.finishWorkoutSheetActivityItems = [logText]
+                        }) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        
+                        Button("Finish") {
+                            self.finishWorkout()
+                        }
                     }
                 )
+                .overlay(ActivitySheet(activityItems: $finishWorkoutSheetActivityItems))
                 .environmentObject(settingsStore)
                 .environmentObject(exerciseStore)
         }
@@ -308,8 +299,11 @@ struct CurrentWorkoutView: View {
             }
             .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
             .navigationBarItems(leading: cancelButton, trailing: EditButton())
+            
+            Text("No exercise selected")
+                .foregroundColor(.secondary)
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+        .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode
         .sheet(item: $activeSheet) { type in
             self.sheetView(type: type)
         }

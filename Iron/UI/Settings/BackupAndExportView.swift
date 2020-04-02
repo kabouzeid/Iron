@@ -24,7 +24,9 @@ struct BackupAndExportView: View {
     private struct BackupError: Identifiable {
          let id = UUID()
          let error: Error?
-     }
+    }
+    
+    @State private var activityItems: [Any]?
      
     private func alert(backupError: BackupError) -> Alert {
         let errorMessage = backupError.error?.localizedDescription
@@ -118,6 +120,7 @@ struct BackupAndExportView: View {
         .alert(item: $backupError) { backupError in
             self.alert(backupError: backupError)
         }
+        .overlay(ActivitySheet(activityItems: $activityItems))
     }
     
     private func fetchWorkouts() -> [Workout]? {
@@ -135,10 +138,7 @@ struct BackupAndExportView: View {
     }
     
     private func shareFile(url: URL) {
-        let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        // TODO: replace this hack with a proper way to retreive the rootViewController
-        guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
-        rootVC.present(ac, animated: true)
+        self.activityItems = [url]
     }
 }
 

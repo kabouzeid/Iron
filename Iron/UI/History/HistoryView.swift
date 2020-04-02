@@ -24,6 +24,8 @@ struct HistoryView : View {
         return request
     }
     
+    @State private var activityItems: [Any]?
+    
     @State private var offsetsToDelete: IndexSet?
     
     private func deleteAtOffsets(offsets: IndexSet) {
@@ -44,8 +46,12 @@ struct HistoryView : View {
                         WorkoutCell(workout: workout)
                             .contextMenu {
                                 // TODO add images when SwiftUI fixes the image size
-                                Button("Share") {
-                                    WorkoutDetailView.shareWorkout(workout: workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
+                                if UIDevice.current.userInterfaceIdiom != .pad {
+                                    // not working on iPad, last checked iOS 13.4
+                                    Button("Share") {
+                                        guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+                                        self.activityItems = [logText]
+                                    }
                                 }
                                 Button("Repeat") {
                                     WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore)
@@ -53,14 +59,10 @@ struct HistoryView : View {
                                 Button("Repeat (Blank)") {
                                     WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore)
                                 }
-                            }
+                        }
                     }
                 }
                 .onDelete { offsets in
-                    guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)
-                        self.deleteAtOffsets(offsets: offsets)
-                        return
-                    }
                     self.offsetsToDelete = offsets
                 }
             }
@@ -81,8 +83,13 @@ struct HistoryView : View {
                             .padding()
             )
             .navigationBarTitle(Text("History"))
+            
+            // Placeholder
+            Text("No workout selected")
+                .foregroundColor(.secondary)
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+        .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode
+        .overlay(ActivitySheet(activityItems: self.$activityItems))
     }
 }
 

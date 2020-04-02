@@ -234,13 +234,12 @@ extension Workout {
 extension Workout {
     public func logText(in exercises: [Exercise], unit: UnitMass, formatter: MeasurementFormatter) -> String? {
         guard let start = start else { return nil }
-        guard let duration = duration else { return nil }
         guard let weight = totalCompletedWeight else { return nil }
         let dateFormatter = DateFormatter() // we don't want relative formatting here
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         let dateString = "\(dateFormatter.string(from: start))"
-        let durationString = "Duration: \(Self.durationFormatter.string(from: duration)!)"
+        let durationString = duration.map { "Duration: \(Self.durationFormatter.string(from: $0)!)" }
         let weightString = "Total weight: \(formatter.string(from: Measurement(value: weight, unit: UnitMass.kilograms).converted(to: unit)))"
         
         guard let workoutExercises = workoutExercisesWhereNotAllSetsAreUncompleted else { return nil }
@@ -257,7 +256,7 @@ extension Workout {
                 return exerciseTitle + "\n" + setsDescription
         }
         .joined(separator: "\n\n")
-        return [dateString, durationString, weightString + "\n", exercisesDescription].joined(separator: "\n")
+        return [dateString, durationString, weightString + "\n", exercisesDescription].compactMap { $0 }.joined(separator: "\n")
     }
     
     public var workoutExercisesWhereNotAllSetsAreUncompleted: [WorkoutExercise]? {

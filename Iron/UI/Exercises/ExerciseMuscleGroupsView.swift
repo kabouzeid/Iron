@@ -13,6 +13,9 @@ struct ExerciseMuscleGroupsView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
+    // select the all exercises tab by default on iPad
+    @State private var allExercisesSelected = UIDevice.current.userInterfaceIdiom == .pad ? true : false
+    
     func exerciseGroupCell(exercises: [Exercise]) -> some View {
         let muscleGroup = exercises.first?.muscleGroup ?? ""
         return NavigationLink(destination:
@@ -39,7 +42,7 @@ struct ExerciseMuscleGroupsView : View {
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination: AllExercisesView(exerciseGroups: exerciseGroups)) {
+                    NavigationLink(destination: AllExercisesView(exerciseGroups: exerciseGroups), isActive: $allExercisesSelected) {
                         HStack {
                             Text("All")
                             Spacer()
@@ -87,7 +90,7 @@ struct ExerciseMuscleGroupsView : View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Exercises")
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+        .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode
     }
 }
 

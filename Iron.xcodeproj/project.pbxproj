@@ -175,6 +175,7 @@
 		8AA68CFE242F84A200418F36 /* GenericError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA68CFC242F824A00418F36 /* GenericError.swift */; };
 		8AA68CFF242FB0D200418F36 /* IdentifiableHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A204B3E236796B100F40F79 /* IdentifiableHolder.swift */; };
 		8AA749A0240F197500A90F91 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA7499F240F197500A90F91 /* AboutView.swift */; };
+		8AA8BE7B24367C87005CAD86 /* ActivitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA8BE7A24367C87005CAD86 /* ActivitySheet.swift */; };
 		8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */; };
 		8AA99C3922CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */; };
 		8AA99C3B22CE39B900E0B6B9 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */; };
@@ -672,6 +673,7 @@
 		8AA68CF7242F7C9E00418F36 /* OSLog+trace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+trace.swift"; sourceTree = "<group>"; };
 		8AA68CFC242F824A00418F36 /* GenericError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericError.swift; sourceTree = "<group>"; };
 		8AA7499F240F197500A90F91 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		8AA8BE7A24367C87005CAD86 /* ActivitySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySheet.swift; sourceTree = "<group>"; };
 		8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupSectionedExercisesView.swift; sourceTree = "<group>"; };
 		8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
@@ -1488,6 +1490,7 @@
 				8A56A47D22D7C91B0076E99A /* Settings */,
 				8AC503272340E712006D1BC6 /* Purchase */,
 				8AB4F7ED2342165B0074B88E /* Demo */,
+				8AA8BE7A24367C87005CAD86 /* ActivitySheet.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2073,6 +2076,7 @@
 				8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */,
 				8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */,
 				8AE0A7972330FF100021EE23 /* BackupAndExportView.swift in Sources */,
+				8AA8BE7B24367C87005CAD86 /* ActivitySheet.swift in Sources */,
 				8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */,
 				8AF07871239B18EF00CA95D6 /* UserDefaults+AppGroup.swift in Sources */,
 				8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */,

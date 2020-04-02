@@ -23,7 +23,7 @@ struct SettingsView : View {
     
     private var mainSection: some View {
         Section {
-            NavigationLink(destination: GeneralSettingsView()) {
+            NavigationLink(destination: GeneralSettingsView(), isActive: $generalSelected) {
                 Text("General")
             }
             
@@ -121,8 +121,11 @@ struct SettingsView : View {
             }
             .navigationBarTitle(Text("Settings"))
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // TODO: remove, currently needed for iPad as of 13.1.1
+        .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode
     }
+    
+    // select the general tab by default on iPad
+    @State private var generalSelected = UIDevice.current.userInterfaceIdiom == .pad ? true : false
 }
 
 // hack because we can't store it in the View

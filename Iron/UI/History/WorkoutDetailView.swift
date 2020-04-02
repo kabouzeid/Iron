@@ -19,6 +19,8 @@ struct WorkoutDetailView : View {
 //    @Environment(\.editMode) var editMode
     @State private var showingExerciseSelectorSheet = false
     @State private var showingOptionsMenu = false
+    
+    @State private var activityItems: [Any]?
 
     @ObservedObject private var workoutCommentInput = ValueHolder<String?>(initial: nil)
     private var workoutComment: Binding<String> {
@@ -177,7 +179,8 @@ struct WorkoutDetailView : View {
         .actionSheet(isPresented: $showingOptionsMenu) {
             ActionSheet(title: Text("Workout"), buttons: [
                 .default(Text("Share"), action: {
-                    Self.shareWorkout(workout: self.workout, in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit)
+                    guard let logText = self.workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+                    self.activityItems = [logText]
                 }),
                 .default(Text("Repeat"), action: {
                     Self.repeatWorkout(workout: self.workout, settingsStore: self.settingsStore)
@@ -188,19 +191,12 @@ struct WorkoutDetailView : View {
                 .cancel()
             ])
         }
+        .overlay(ActivitySheet(activityItems: $activityItems))
     }
 }
 
 // MARK: Actions
 extension WorkoutDetailView {
-    static func shareWorkout(workout: Workout, in exercises: [Exercise], weightUnit: WeightUnit) {
-        guard let logText = workout.logText(in: exercises, weightUnit: weightUnit) else { return }
-        let ac = UIActivityViewController(activityItems: [logText], applicationActivities: nil)
-        // TODO: replace this hack with a proper way to retreive the rootViewController
-        guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
-        rootVC.present(ac, animated: true)
-    }
-    
     static func repeatWorkout(workout: Workout, settingsStore: SettingsStore) {
         guard let newWorkout = workout.copyForRepeat(blank: false) else { return }
         
