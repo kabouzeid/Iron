@@ -27,12 +27,16 @@ struct SettingsView : View {
                 Text("General")
             }
             
-            NavigationLink(destination: HealthSettingsView()) {
-                Text("Apple Health")
+            if HealthSettingsView.isSupported {
+                NavigationLink(destination: HealthSettingsView()) {
+                    Text("Apple Health")
+                }
             }
             
-            NavigationLink(destination: WatchSettingsView()) {
-                Text("Apple Watch")
+            if WatchSettingsView.isSupported {
+                NavigationLink(destination: WatchSettingsView()) {
+                    Text("Apple Watch")
+                }
             }
             
             NavigationLink(destination: BackupAndExportView()) {

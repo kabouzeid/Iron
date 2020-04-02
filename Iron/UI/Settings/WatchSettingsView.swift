@@ -31,6 +31,13 @@ struct WatchSettingsView: View {
     }
 }
 
+import WatchConnectivity
+extension WatchSettingsView {
+    static var isSupported: Bool {
+        WCSession.isSupported()
+    }
+}
+
 struct WatchSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         WatchSettingsView().environmentObject(SettingsStore.shared)

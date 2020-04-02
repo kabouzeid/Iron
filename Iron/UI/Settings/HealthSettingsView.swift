@@ -50,6 +50,13 @@ struct HealthSettingsView: View {
     }
 }
 
+import HealthKit
+extension HealthSettingsView {
+    static var isSupported: Bool {
+        HKHealthStore.isHealthDataAvailable()
+    }
+}
+
 struct HealthSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         HealthSettingsView()
