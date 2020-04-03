@@ -159,6 +159,7 @@
 		8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7D231436260038ACC5 /* String+Enquote.swift */; };
 		8A9EF4472429A6B300136259 /* WorkoutDataKit+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EF4462429A6B300136259 /* WorkoutDataKit+Identifieable.swift */; };
 		8AA02615230AF74C00324853 /* ActivityChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA02614230AF74C00324853 /* ActivityChartView.swift */; };
+		8AA14D692437631E009B5C2F /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8AA14D682437631E009B5C2F /* AppIntentVocabulary.plist */; };
 		8AA39B0523AEB636005FAD84 /* WorkoutPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA39B0423AEB636005FAD84 /* WorkoutPlanView.swift */; };
 		8AA57E5F22C3EE2E00B9AC79 /* Workout+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Workout+SwiftUI.swift */; };
 		8AA5D4942344C9D20092D20C /* UserDefaults+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5D4932344C9D20092D20C /* UserDefaults+Misc.swift */; };
@@ -661,6 +662,7 @@
 		8A9E4F7D231436260038ACC5 /* String+Enquote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Enquote.swift"; sourceTree = "<group>"; };
 		8A9EF4462429A6B300136259 /* WorkoutDataKit+Identifieable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutDataKit+Identifieable.swift"; sourceTree = "<group>"; };
 		8AA02614230AF74C00324853 /* ActivityChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartView.swift; sourceTree = "<group>"; };
+		8AA14D682437631E009B5C2F /* AppIntentVocabulary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppIntentVocabulary.plist; sourceTree = "<group>"; };
 		8AA39B0423AEB636005FAD84 /* WorkoutPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanView.swift; sourceTree = "<group>"; };
 		8AA4500A2363872B0041E8CD /* WorkoutDataV1_V2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WorkoutDataV1_V2.xcmappingmodel; sourceTree = "<group>"; };
 		8AA57E5E22C3EE2E00B9AC79 /* Workout+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 		8A0FBA8C239C0D4700B9D636 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				8AA14D682437631E009B5C2F /* AppIntentVocabulary.plist */,
 				8AB0C94B23453F080009F031 /* Iron.entitlements */,
 				8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */,
 				8A7D6EA6200BF92E00AA0FA7 /* Info.plist */,
@@ -1839,6 +1842,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AC4C9D223254A7E008E474A /* quotes in Resources */,
+				8AA14D692437631E009B5C2F /* AppIntentVocabulary.plist in Resources */,
 				8AED58C02364B79800BF06D3 /* iron_backup_file_images in Resources */,
 				8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */,
 				8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */,

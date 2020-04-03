@@ -26,6 +26,9 @@
 		<dict>
 			<key>IntentsSupported</key>
 			<array>
+				<string>INCancelWorkoutIntent</string>
+				<string>INEndWorkoutIntent</string>
+				<string>INStartWorkoutIntent</string>
 				<string>ViewOneRepMaxIntent</string>
 				<string>ViewPersonalRecordsIntent</string>
 			</array>

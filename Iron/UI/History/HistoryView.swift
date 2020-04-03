@@ -31,9 +31,8 @@ struct HistoryView : View {
     private func deleteAtOffsets(offsets: IndexSet) {
         let workouts = self.workouts
         for i in offsets.sorted().reversed() {
-            self.managedObjectContext.delete(workouts[i])
+            workouts[i].deleteOrCrash()
         }
-        self.managedObjectContext.saveOrCrash()
     }
 
     var body: some View {

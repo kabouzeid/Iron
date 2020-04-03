@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         refreshEntitlements()
         #endif
         WatchConnectionManager.shared.activateSession()
-        Shortcuts.addDefaultSuggestions()
+        Shortcuts.setDefaultSuggestions()
+        Shortcuts.setRelevantShortcuts()
         return true
     }
     

@@ -19,5 +19,6 @@ extension OSLog {
     static let health = OSLog(subsystem: subsystem, category: "Health")
     static let watch = OSLog(subsystem: subsystem, category: "Watch")
     static let intents = OSLog(subsystem: subsystem, category: "Intents")
+    static let siri = OSLog(subsystem: subsystem, category: "Siri")
     static let workoutData = OSLog(subsystem: subsystem, category: "Workout Data")
 }

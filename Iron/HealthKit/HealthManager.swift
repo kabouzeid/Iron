@@ -71,9 +71,42 @@ extension HealthManager {
                     metadata[HKMetadataKeyWorkoutBrandName] = title
                 }
                 let hkWorkout = HKWorkout(activityType: self.workoutConfiguration.activityType, start: start, end: end, duration: duration, totalEnergyBurned: nil, totalDistance: nil, device: .local(), metadata: metadata)
-                HealthManager.shared.healthStore.save(hkWorkout) { _,_ in }
+                self.healthStore.save(hkWorkout) { _,_ in }
             }
         }
+    }
+    
+    func deleteWorkout(workout: Workout) {
+        guard let uuid = workout.uuid else { return }
+        
+        let uuidPredicate = HKQuery.predicateForObjects(withMetadataKey: HKMetadataKeyExternalUUID, allowedValues: [uuid.uuidString])
+        let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [uuidPredicate, sourcePredicate])
+        
+        os_log("Deleting HealthKit workout with uuid=%@", log: .health, uuid as NSUUID)
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: predicate,
+            limit: 1,
+            sortDescriptors: nil) { (query, samples, error) in
+                if let error = error {
+                    os_log("Could not query HealthKit workout with uuid=%@: %@", log: .health, type: .fault, uuid as NSUUID, error.localizedDescription)
+                    return
+                }
+                guard let workoutSample = samples?.first as? HKWorkout else {
+                    os_log("No HealthKit workout with uuid=%@", log: .health, type: .fault, uuid as NSUUID)
+                    return
+                }
+                
+                self.healthStore.delete(workoutSample) { success, error in
+                    guard success else {
+                        os_log("Could not delete HealthKit workout with uuid=%@: %@", log: .health, type: .fault, uuid as NSUUID, error?.localizedDescription ?? "nil")
+                        return
+                    }
+                    os_log("Successfully deleted HealthKit workout with uuid=%@", log: .health, type: .info, uuid as NSUUID)
+                }
+        }
+        healthStore.execute(query)
     }
 }
 
@@ -228,7 +261,7 @@ extension HealthManager {
                             }
                         }
                 }
-                HealthManager.shared.healthStore.execute(query)
+                self.healthStore.execute(query)
             }
         }
     }

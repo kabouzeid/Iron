@@ -30,11 +30,17 @@ extension Workout {
         
         // TODO: move this to the current workout view controller, or maybe even when a notification is scheduled?
         NotificationManager.shared.requestAuthorization()
+        
+        if (workoutExercises?.count ?? 0) == 0 && workoutRoutine == nil {
+            // only donate when we start an empty workout
+            // we don't have apropriate intent parameters for other workouts yet
+            Shortcuts.donateStartWorkoutInteraction(for: self)
+        }
     }
     
     func cancel() throws {
         guard let context = managedObjectContext else {
-            os_log("Attempt to copy cancel without context", log: .workoutData, type: .error)
+            os_log("Attempt to cancel workout without context", log: .workoutData, type: .error)
             assertionFailure("Attempt to cancel workout without context")
             return
         }
@@ -44,6 +50,9 @@ extension Workout {
         if WatchConnectionManager.shared.currentWatchWorkoutUuid != nil, let uuid = uuid {
             WatchConnectionManager.shared.discardWatchWorkout(uuid: uuid)
         }
+        
+        // the user did not go through with the workout, we should remove our previous donation
+        Shortcuts.deleteStartWorkoutInteractionDonation(for: self)
         
         context.delete(self)
         try context.save()
@@ -79,6 +88,21 @@ extension Workout {
         } else {
             HealthManager.shared.saveWorkout(workout: self, exerciseStore: ExerciseStore.shared)
         }
+    }
+    
+    func delete() throws {
+        guard let context = managedObjectContext else {
+            os_log("Attempt to delete workout without context", log: .workoutData, type: .error)
+            assertionFailure("Attempt to delete workout without context")
+            return
+        }
+        
+        HealthManager.shared.deleteWorkout(workout: self)
+        
+        Shortcuts.deleteStartWorkoutInteractionDonation(for: self)
+        
+        context.delete(self)
+        try context.save()
     }
     
     func copyForRepeat(blank: Bool) -> Workout? {
@@ -151,6 +175,17 @@ extension Workout {
             let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)
             os_log("Could not finish workout: %@", log: .workoutData, type: .error, errorDescription)
             fatalError("Could not finish workout: \(errorDescription)")
+        }
+    }
+    
+    func deleteOrCrash() {
+        do {
+            os_log("Deleting workout", log: .workoutData)
+            try delete()
+        } catch {
+            let errorDescription = NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError)
+            os_log("Could not delete workout: %@", log: .workoutData, type: .error, errorDescription)
+            fatalError("Could not delete workout: \(errorDescription)")
         }
     }
 }
