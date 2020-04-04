@@ -15,6 +15,8 @@ struct WorkoutPlanView: View {
     
     @ObservedObject var workoutPlan: WorkoutPlan
     
+    @State private var offsetsToDelete: IndexSet?
+    
     @ObservedObject private var workoutPlanTitleInput = ValueHolder<String?>(initial: nil)
     private var workoutPlanTitle: Binding<String> {
         Binding(
@@ -59,13 +61,11 @@ struct WorkoutPlanView: View {
                     }
                 }
                 .onDelete { offsets in
-                    let workoutRoutines = self.workoutRoutines
-                    for i in offsets {
-                        let workoutRoutine = workoutRoutines[i]
-                        self.managedObjectContext.delete(workoutRoutine)
-                        workoutRoutine.workoutPlan?.removeFromWorkoutRoutines(workoutRoutine)
+                    if self.needsConfirmBeforeDelete(offsets: offsets) {
+                        self.offsetsToDelete = offsets
+                    } else {
+                        self.deleteAt(offsets: offsets)
                     }
-                    self.managedObjectContext.saveOrCrash()
                 }
                 .onMove { source, destination in
                     var workoutRoutines = self.workoutRoutines
@@ -87,12 +87,38 @@ struct WorkoutPlanView: View {
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text(workoutPlan.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing: EditButton())
+        .actionSheet(item: $offsetsToDelete) { offsets in
+            ActionSheet(title: Text("This cannot be undone."), buttons: [
+                .destructive(Text("Delete Workout Routine"), action: {
+                    self.deleteAt(offsets: offsets)
+                }),
+                .cancel()
+            ])
+        }
     }
     
     private func createWorkoutRoutine() {
         let workoutRoutine = WorkoutRoutine.create(context: managedObjectContext)
         workoutRoutine.workoutPlan = workoutPlan
         managedObjectContext.saveOrCrash()
+    }
+    
+    /// Resturns `true` if at least one workout routine has workout routine exercises
+    private func needsConfirmBeforeDelete(offsets: IndexSet) -> Bool {
+        for index in offsets {
+            if workoutRoutines[index].workoutRoutineExercises?.count ?? 0 != 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func deleteAt(offsets: IndexSet) {
+        let workoutRoutines = self.workoutRoutines
+        for i in offsets {
+            self.managedObjectContext.delete(workoutRoutines[i])
+        }
+        self.managedObjectContext.saveOrCrash()
     }
 }
 

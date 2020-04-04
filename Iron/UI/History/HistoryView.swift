@@ -28,7 +28,17 @@ struct HistoryView : View {
     
     @State private var offsetsToDelete: IndexSet?
     
-    private func deleteAtOffsets(offsets: IndexSet) {
+    /// Resturns `true` if at least one workout has workout exercises
+    private func needsConfirmBeforeDelete(offsets: IndexSet) -> Bool {
+        for index in offsets {
+            if workouts[index].workoutExercises?.count ?? 0 != 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func deleteAt(offsets: IndexSet) {
         let workouts = self.workouts
         for i in offsets.sorted().reversed() {
             workouts[i].deleteOrCrash()
@@ -62,14 +72,18 @@ struct HistoryView : View {
                     }
                 }
                 .onDelete { offsets in
-                    self.offsetsToDelete = offsets
+                    if self.needsConfirmBeforeDelete(offsets: offsets) {
+                        self.offsetsToDelete = offsets
+                    } else {
+                        self.deleteAt(offsets: offsets)
+                    }
                 }
             }
             .navigationBarItems(trailing: EditButton())
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
                     .destructive(Text("Delete Workout"), action: {
-                        self.deleteAtOffsets(offsets: offsets)
+                        self.deleteAt(offsets: offsets)
                     }),
                     .cancel()
                 ])
