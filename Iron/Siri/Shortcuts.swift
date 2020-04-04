@@ -12,7 +12,7 @@ import WorkoutDataKit
 import os.log
 
 enum Shortcuts {
-    static func setDefaultSuggestions() {
+    static func setShortcutSuggestions() {
         let exercises = ExerciseStore.shared.shownExercises.filter { exercise in
             ["Bench Press: Barbell", "Squat: Barbell", "Deadlift: Barbell"].contains(exercise.title)
         }
@@ -37,20 +37,21 @@ enum Shortcuts {
     }
     
     /// Used for the Siri Watch face on the Apple Watch
-    static func setRelevantShortcuts() {
-        guard let shortcut = INShortcut(intent: INStartWorkoutIntent()) else { return }
-        let suggestedShortcut = INRelevantShortcut(shortcut: shortcut)
-        suggestedShortcut.relevanceProviders = [INDailyRoutineRelevanceProvider(situation: .gym)]
-        
-        os_log("Setting relevant shortcuts", log: .siri)
-        INRelevantShortcutStore.default.setRelevantShortcuts([suggestedShortcut]) { (error) in
-            if let error = error {
-                os_log("Setting relevant shortcuts failed %@", log: .siri, type: .error, error.localizedDescription)
-            } else {
-                os_log("Successfully set relevant shortcuts", log: .siri, type: .info)
-            }
-        }
-    }
+    // This doesn't work (iOS 13.4), the watch shows the suggestion but gets an error when executed
+//    static func setRelevantShortcuts() {
+//        guard let shortcut = INShortcut(intent: INStartWorkoutIntent()) else { return }
+//        let relevantShortcut = INRelevantShortcut(shortcut: shortcut)
+//        relevantShortcut.relevanceProviders = [INDailyRoutineRelevanceProvider(situation: .gym)]
+//
+//        os_log("Setting relevant shortcuts", log: .siri)
+//        INRelevantShortcutStore.default.setRelevantShortcuts([relevantShortcut]) { (error) in
+//            if let error = error {
+//                os_log("Setting relevant shortcuts failed %@", log: .siri, type: .error, error.localizedDescription)
+//            } else {
+//                os_log("Successfully set relevant shortcuts", log: .siri, type: .info)
+//            }
+//        }
+//    }
     
     /// Should be called when a new *empty* workout is created by the user
     static func donateStartWorkoutInteraction(for workout: Workout) {
