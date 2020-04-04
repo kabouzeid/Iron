@@ -33,6 +33,7 @@ struct WorkoutExerciseSectionHeader: View {
     private func bodyWeight(weight: Double) -> some View {
         HStack {
             Image(systemName: "person")
+                .foregroundColor(.secondary)
             Text(format(weight: weight))
         }
         .padding(4)
