@@ -33,6 +33,14 @@ public struct Benchmark {
         sharedInstance?.finish()
         sharedInstance = nil
     }
+    
+    @discardableResult
+    public static func measure<T>(key: String = "Benchmark", _ block: () -> T) -> T {
+        let benchmark = Benchmark(key: key)
+        let result = block()
+        benchmark.finish()
+        return result
+    }
 
     @discardableResult
     public static func measure<T>(key: String = "Benchmark", _ block: () throws -> T) rethrows -> T {

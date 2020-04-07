@@ -16,7 +16,7 @@ struct MuscleGroupSectionedExercisesView : View {
         List {
             ForEach(exerciseGroups) { exerciseGroup in
                 Section(header: Text(exerciseGroup.title.capitalized)) {
-                    ForEach(exerciseGroup.exercises, id: \.id) { exercise in
+                    ForEach(exerciseGroup.exercises) { exercise in
                         NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
                     }
                 }
