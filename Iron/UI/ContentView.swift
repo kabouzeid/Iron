@@ -30,13 +30,13 @@ struct ContentView : View {
 //                    Text("History")
 //                }
 //                .tag(1)
-//            workoutView(workout: currentWorkout)
+//            WorkoutTab()
 //                .tabItem {
 //                    Image("workout")
 //                    Text("Workout")
 //                }
 //                .tag(2)
-//            ExerciseMuscleGroupsView(exerciseMuscleGroups: Exercises.exercisesGrouped)
+//            ExerciseMuscleGroupsView()
 //                .tabItem {
 //                    Image("list")
 //                    Text("Exercises")
@@ -51,24 +51,33 @@ struct ContentView : View {
 //        }
         // TODO: replace with native SwiftUI TabView above
         // -----------------------------------------------
+        /**
+         *  We inject .productionEnvironment() for every tab, because when the "screen reading" accessibility setting is enabled,
+         *  some Tabs get created by the system in the background without its parents environment! This is probably a bug and it happens since iOS 13.4
+         */
         UITabView(viewControllers: [
             FeedView()
+                .productionEnvironment()
                 .hostingController()
                 .tabItem(title: "Feed", image: UIImage(named: "today_apps"), tag: 0),
-            
+
             HistoryView()
+                .productionEnvironment()
                 .hostingController()
                 .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
-            
+
             WorkoutTab()
+                .productionEnvironment()
                 .hostingController()
                 .tabItem(title: "Workout", image: UIImage(named: "workout"), tag: 2),
-            
+
             ExerciseMuscleGroupsView()
+                .productionEnvironment()
                 .hostingController()
                 .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
-            
+
             SettingsView()
+                .productionEnvironment()
                 .hostingController()
                 .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
         ], initialSelection: 2)
@@ -90,6 +99,18 @@ struct ContentView : View {
         .alert(item: $restoreResult) { restoreResultHolder in
             RestoreActionSheet.restoreResultAlert(restoreResult: restoreResultHolder.value)
         }
+    }
+}
+
+private extension View {
+    func productionEnvironment() -> some View {
+        self
+//            .screenshotEnvironment(weightUnit: .imperial) // only enable for taking screenshots
+            .environmentObject(SettingsStore.shared)
+            .environmentObject(RestTimerStore.shared)
+            .environmentObject(ExerciseStore.shared)
+            .environmentObject(EntitlementStore.shared)
+            .environment(\.managedObjectContext, WorkoutDataStorage.shared.persistentContainer.viewContext)
     }
 }
 

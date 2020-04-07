@@ -16,14 +16,14 @@ struct UITabView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<UITabView>) -> UITabBarController {
         let tabController = UITabBarController()
-        updateUIViewController(tabController, context: context)
+        tabController.viewControllers = viewControllers
         tabController.selectedIndex = initialSelection
         Self.viewController = tabController
         return tabController
     }
     
     func updateUIViewController(_ uiViewController: UITabBarController, context: UIViewControllerRepresentableContext<UITabView>) {
-        uiViewController.viewControllers = viewControllers
+        
     }
 }
 
@@ -52,7 +52,7 @@ struct UITabView_Previews: PreviewProvider {
                 .hostingController()
                 .tabItem(title: "Tab B", image: UIImage(systemName: "b.circle"), tag: 1),
         ], initialSelection: 1)
-        .edgesIgnoringSafeArea([.top])
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
 }
 #endif
