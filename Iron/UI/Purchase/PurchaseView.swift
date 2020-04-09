@@ -160,7 +160,7 @@ struct PurchaseView: View {
                     HStack {
                         Text("Terms of Service")
                         Spacer()
-                        Image(systemName: "doc.text")
+                        Image(systemName: "doc.plaintext")
                     }
                 }
             }
