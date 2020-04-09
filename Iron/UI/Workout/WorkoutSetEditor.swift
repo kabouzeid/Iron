@@ -435,7 +435,7 @@ struct WorkoutSetEditor_Previews : PreviewProvider {
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
-            WorkoutSetEditor(workoutSet: MockWorkoutData.metricRandom.workoutSet)
+            WorkoutSetEditor(workoutSet: MockWorkoutData.imperialRandom.workoutSet)
                 .mockEnvironment(weightUnit: .imperial, isPro: true)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
