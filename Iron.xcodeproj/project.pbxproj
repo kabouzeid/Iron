@@ -70,18 +70,15 @@
 		8A3A115524269675006DA244 /* WorkoutRoutineExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A115424269675006DA244 /* WorkoutRoutineExerciseView.swift */; };
 		8A3A1157242699C0006DA244 /* WorkoutRoutineSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A1156242699C0006DA244 /* WorkoutRoutineSetCell.swift */; };
 		8A3A11592426B667006DA244 /* WorkoutRoutineSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A11582426B667006DA244 /* WorkoutRoutineSetEditor.swift */; };
-		8A3AAC622416EB4D009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; };
-		8A3AAC632416EB4D009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC612416EB4D009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8A3AAC652416EB72009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC642416EB72009FE65F /* Charts */; };
-		8A3AAC662416EB72009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC642416EB72009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8A3AAC692416EB77009FE65F /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC682416EB77009FE65F /* Charts */; };
-		8A3AAC6A2416EB77009FE65F /* Charts in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8A3AAC682416EB77009FE65F /* Charts */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */; };
 		8A3C5F97218E2E5500467DA6 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8A3C5F99218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F98218E3F4F00467DA6 /* UserDefaults+PinnedCharts.swift */; };
 		8A442AD7207A428500A2BDBD /* Date+Days.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A442AD6207A428500A2BDBD /* Date+Days.swift */; };
 		8A4C129A23A2A5DA0026BD4E /* IntentWorkoutSet+WorkoutSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C129923A2A5DA0026BD4E /* IntentWorkoutSet+WorkoutSet.swift */; };
 		8A4D3B7223858F6F007A3792 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4D3B7123858F6F007A3792 /* NotificationManager.swift */; };
+		8A50F127243F5253003B3A6E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A50F126243F5253003B3A6E /* Charts */; };
+		8A50F129243F525D003B3A6E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A50F128243F525D003B3A6E /* Charts */; };
+		8A50F12B243F5262003B3A6E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8A50F12A243F5262003B3A6E /* Charts */; };
 		8A51E493239D45B200336296 /* ViewOneRepMaxIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A51E492239D45B200336296 /* ViewOneRepMaxIntentHandler.swift */; };
 		8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A47E22D7C93B0076E99A /* SettingsView.swift */; };
 		8A56A48122D7CDC60076E99A /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A56A48022D7CDC60076E99A /* UserDefaults+Settings.swift */; };
@@ -467,7 +464,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8A3AAC662416EB72009FE65F /* Charts in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +474,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8A3AAC6A2416EB77009FE65F /* Charts in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +519,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8AB5211623992ABC008064B2 /* WorkoutDataKit.framework in Embed Frameworks */,
-				8A3AAC632416EB4D009FE65F /* Charts in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,7 +787,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0683B7239C77B4001F0A1E /* WorkoutDataKit.framework in Frameworks */,
-				8A3AAC652416EB72009FE65F /* Charts in Frameworks */,
+				8A50F129243F525D003B3A6E /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,7 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A60438D239C4DBB00CFB7C0 /* IntentsUI.framework in Frameworks */,
-				8A3AAC692416EB77009FE65F /* Charts in Frameworks */,
+				8A50F12B243F5262003B3A6E /* Charts in Frameworks */,
 				8A0683BC239C77BB001F0A1E /* WorkoutDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,7 +808,7 @@
 				8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */,
 				8AB5211523992ABC008064B2 /* WorkoutDataKit.framework in Frameworks */,
 				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
-				8A3AAC622416EB4D009FE65F /* Charts in Frameworks */,
+				8A50F127243F5253003B3A6E /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1608,7 +1602,7 @@
 			);
 			name = IronIntents;
 			packageProductDependencies = (
-				8A3AAC642416EB72009FE65F /* Charts */,
+				8A50F128243F525D003B3A6E /* Charts */,
 			);
 			productName = IronIntents;
 			productReference = 8A604382239C4DBB00CFB7C0 /* IronIntents.appex */;
@@ -1630,7 +1624,7 @@
 			);
 			name = IronIntentsUI;
 			packageProductDependencies = (
-				8A3AAC682416EB77009FE65F /* Charts */,
+				8A50F12A243F5262003B3A6E /* Charts */,
 			);
 			productName = IronIntentsUI;
 			productReference = 8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */;
@@ -1657,7 +1651,7 @@
 			);
 			name = Iron;
 			packageProductDependencies = (
-				8A3AAC612416EB4D009FE65F /* Charts */,
+				8A50F126243F5253003B3A6E /* Charts */,
 			);
 			productName = "Rhino Fit";
 			productReference = 8A7D6E94200BF92E00AA0FA7 /* Iron.app */;
@@ -1803,7 +1797,7 @@
 			);
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
-				8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */,
+				8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -2514,6 +2508,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2573,6 +2568,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2992,30 +2988,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */ = {
+		8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kabouzeid/Charts.git";
+			repositoryURL = "https://github.com/danielgindi/Charts";
 			requirement = {
-				branch = "xc11.4-fix";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8A3AAC612416EB4D009FE65F /* Charts */ = {
+		8A50F126243F5253003B3A6E /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
-		8A3AAC642416EB72009FE65F /* Charts */ = {
+		8A50F128243F525D003B3A6E /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
-		8A3AAC682416EB77009FE65F /* Charts */ = {
+		8A50F12A243F5262003B3A6E /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A3AAC602416EB4D009FE65F /* XCRemoteSwiftPackageReference "Charts" */;
+			package = 8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
