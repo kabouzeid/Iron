@@ -82,7 +82,7 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(uuid ?? UUID(), forKey: .uuid)
         try container.encodeIfPresent(minRepetitionsValue, forKey: .minRepetitions)
-        try container.encodeIfPresent(minRepetitionsValue, forKey: .maxRepetitions)
+        try container.encodeIfPresent(maxRepetitionsValue, forKey: .maxRepetitions)
         try container.encodeIfPresent(tagValue?.rawValue, forKey: .tag)
         try container.encodeIfPresent(comment, forKey: .comment)
     }
