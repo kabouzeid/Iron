@@ -14,4 +14,4 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Test
-      run: set -o pipefail && xcodebuild clean test -scheme Iron -project Iron.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11' | xcpretty
+      run: xcodebuild clean test -scheme Iron -project Iron.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11'
