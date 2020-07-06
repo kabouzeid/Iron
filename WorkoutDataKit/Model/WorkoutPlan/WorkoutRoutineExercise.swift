@@ -18,17 +18,34 @@ public class WorkoutRoutineExercise: NSManagedObject, Codable {
     public var subtitle: String? {
         guard let workoutRoutineSets = workoutRoutineSets?.compactMap({ $0 as? WorkoutRoutineSet }) else { return nil }
         
-        if let firstSet = workoutRoutineSets.first, let minReps = firstSet.minRepetitionsValue, let maxReps = firstSet.maxRepetitionsValue {
+        if let firstSet = workoutRoutineSets.first {
+            let minRepetitions = firstSet.minRepetitionsValue
+            let maxRepetitions = firstSet.maxRepetitionsValue
+            
             var sameReps = true
             for set in workoutRoutineSets {
-                if minReps != set.minRepetitionsValue || maxReps != set.maxRepetitionsValue {
+                if minRepetitions != set.minRepetitionsValue || maxRepetitions != set.maxRepetitionsValue {
                     sameReps = false
                     break
                 }
             }
             if sameReps {
-                let reps = minReps == maxReps ? "\(minReps)" : "\(minReps)-\(maxReps)"
-                return "\(workoutRoutineSets.count) sets of \(reps) reps"
+                func reps() -> String? {
+                    if let minRepetitions = minRepetitions {
+                        if let maxRepetitions = maxRepetitions {
+                            return "\(minRepetitions == maxRepetitions ? "\(maxRepetitions)" : "\(minRepetitions)–\(maxRepetitions)")"
+                        } else {
+                            return ">\(minRepetitions)"
+                        }
+                    } else if let maxRepetitions = maxRepetitions {
+                        return "<\(maxRepetitions)"
+                    } else {
+                        return nil
+                    }
+                }
+                if let reps = reps() {
+                    return "\(workoutRoutineSets.count) sets of \(reps) reps"
+                }
             }
         }
         

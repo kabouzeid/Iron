@@ -22,6 +22,8 @@ struct WorkoutSetEditor : View {
     @ObservedObject var workoutSet: WorkoutSet
     var onDone: () -> Void = {}
     
+    @State private var showHelpAlert = false
+    
     @State private var showMoreSheet = false
     @State private var showKeyboard: KeyboardType = .none
     @State private var alwaysShowDecimalSeparator = false
@@ -30,25 +32,25 @@ struct WorkoutSetEditor : View {
     // used to immediatelly update the weight & rep texts so the keyboard feels more smooth
     @ObservedObject private var refresher = Refresher()
     
-    private var workoutSetWeight: Binding<Double> {
+    private var workoutSetWeight: Binding<Double?> {
         Binding(
             get: {
                 WeightUnit.convert(weight: self.workoutSet.weightValue, from: .metric, to: self.settingsStore.weightUnit)
             },
             set: { newValue in
-                self.workoutSet.weightValue = max(min(WeightUnit.convert(weight: newValue, from: self.settingsStore.weightUnit, to: .metric), WorkoutSet.MAX_WEIGHT), 0)
+                self.workoutSet.weightValue = max(min(WeightUnit.convert(weight: newValue ?? 0, from: self.settingsStore.weightUnit, to: .metric), WorkoutSet.MAX_WEIGHT), 0)
                 self.refresher.refresh()
             }
         )
     }
     
-    private var workoutSetRepetitions: Binding<Double> {
+    private var workoutSetRepetitions: Binding<Double?> {
         Binding(
             get: {
                 Double(self.workoutSet.repetitionsValue)
             },
             set: { newValue in
-                self.workoutSet.repetitionsValue = Int16(max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0))
+                self.workoutSet.repetitionsValue = Int16(max(min(newValue ?? 0, Double(WorkoutSet.MAX_REPETITIONS)), 0))
                 self.refresher.refresh()
             }
         )
@@ -207,9 +209,9 @@ struct WorkoutSetEditor : View {
                         }
                     }
                     
-                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "plusminus.circle"), width: geometry.size.width / 4) {
-                        // TODO plate calculator
-                    }.disabled(true)
+                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "questionmark"), width: geometry.size.width / 4) {
+                        self.showHelpAlert = true
+                    }
                     
                     NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "tag"), width: geometry.size.width / 4) {
                         self.showMoreSheet = true
@@ -294,6 +296,7 @@ struct WorkoutSetEditor : View {
             })
         )
         .sheet(isPresented: $showMoreSheet) { self.moreSheet }
+        .alert(isPresented: $showHelpAlert) { Alert(title: Text("You can also drag ☰ up and down to adjust the values.")) }
     }
 }
 

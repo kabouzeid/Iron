@@ -37,14 +37,12 @@ struct WorkoutSetCell: View {
                     .foregroundColor(colorMode == .selected ? .accentColor : colorMode == .activated ? .primary : .secondary)
             }
             
-//            if colorMode == .selected || isPlaceholder {
-                workoutSet.minTargetRepetitionsValue.map { plannedRepetitionsMin in
-                    workoutSet.maxTargetRepetitionsValue.map { plannedRepetitionsMax in
-                        Text("\(plannedRepetitionsMin == plannedRepetitionsMax ? "\(plannedRepetitionsMin)" : "\(plannedRepetitionsMin)-\(plannedRepetitionsMax)") reps")
-                            .foregroundColor(Color(.tertiaryLabel))
-                    }
-                }
-//            }
+            TargetRepetitionsView(
+                minRepetitions: workoutSet.minTargetRepetitionsValue,
+                maxRepetitions: workoutSet.maxTargetRepetitionsValue
+            )
+            .foregroundColor(Color(.tertiaryLabel))
+            .padding(.leading, 8)
         }
     }
     
@@ -110,10 +108,73 @@ struct WorkoutSetCell: View {
 
 #if DEBUG
 struct WorkoutSetCell_Previews: PreviewProvider {
+    static var workoutSet1: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        return set
+    }()
+    
+    static var workoutSet2: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.tagValue = .dropSet
+        set.comment = "This is a comment"
+        return set
+    }()
+    
+    static var workoutSet3: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.minTargetRepetitionsValue = 8
+        set.maxTargetRepetitionsValue = 12
+        return set
+    }()
+    
+    static var workoutSet4: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.maxTargetRepetitionsValue = 12
+        return set
+    }()
+    
+    static var workoutSet5: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.minTargetRepetitionsValue = 8
+        return set
+    }()
+    
+    static var workoutSet6: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.isCompleted = true
+        return set
+    }()
+    
     static var previews: some View {
-        WorkoutSetCell(workoutSet: MockWorkoutData.metricRandom.workoutSet, index: 1)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
-            .previewLayout(.sizeThatFits)
+        List {
+            WorkoutSetCell(workoutSet: workoutSet1, index: 1)
+            WorkoutSetCell(workoutSet: workoutSet2, index: 2)
+            WorkoutSetCell(workoutSet: workoutSet3, index: 3)
+            WorkoutSetCell(workoutSet: workoutSet4, index: 4)
+            WorkoutSetCell(workoutSet: workoutSet5, index: 5)
+            
+            Section {
+                WorkoutSetCell(workoutSet: workoutSet6, index: 1, showCompleted: true)
+                WorkoutSetCell(workoutSet: workoutSet6, index: 2, colorMode: .selected, showCompleted: true)
+                WorkoutSetCell(workoutSet: workoutSet6, index: 3, showUpNextIndicator: true)
+                WorkoutSetCell(workoutSet: workoutSet3, index: 4, isPlaceholder: true)
+                WorkoutSetCell(workoutSet: workoutSet1, index: 5, isPlaceholder: true)
+            }
+        }
+        .listStyle(GroupedListStyle())
+        .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
 #endif

@@ -29,6 +29,8 @@ struct WorkoutRoutineSetEditor: View {
     
     @State private var showMoreSheet = false
     
+    @State private var showHelpAlert = false
+    
     @ObservedObject var workoutRoutineSet: WorkoutRoutineSet
     
     @ObservedObject private var refresher = Refresher()
@@ -43,69 +45,69 @@ struct WorkoutRoutineSetEditor: View {
         self.overwriteRepetitionsMax ?? self.workoutRoutineSet.maxRepetitionsValue
     }
     
-    private var displayRepetitionsMin: Double {
-        Double(editorRepetitionsMin ?? 0)
-    }
-    private var displayRepetitionsMax: Double {
-        Double(editorRepetitionsMax ?? 0)
-    }
-    
     private var validRepetitions: Bool {
-        displayRepetitionsMin <= displayRepetitionsMax
+        isValid(minReps: editorRepetitionsMin, maxReps: editorRepetitionsMax)
     }
     
-    private var keyboardRepetitionsMin: Binding<Double> {
+    private func isValid(minReps: Int16?, maxReps: Int16?) -> Bool {
+        if let minReps = minReps, let maxReps = maxReps {
+            return minReps <= maxReps
+        }
+        return true
+    }
+    
+    private var keyboardRepetitionsMin: Binding<Double?> {
         Binding(
             get: {
-                self.displayRepetitionsMin
+                self.editorRepetitionsMin.map { Double($0) }
             },
             set: { newValue in
-                let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
-                let repsMaxValue = self.displayRepetitionsMax
-                if newValue <= repsMaxValue {
-                    self.workoutRoutineSet.minRepetitionsValue = Int16(newValue)
-                    self.workoutRoutineSet.maxRepetitionsValue = Int16(repsMaxValue)
+                let newValue = newValue.map { Int16(max(min($0, Double(WorkoutSet.MAX_REPETITIONS)), 0)) }
+                let maxValue = self.editorRepetitionsMax
+                if self.isValid(minReps: newValue, maxReps: maxValue) {
+                    self.workoutRoutineSet.minRepetitionsValue = newValue
+                    self.workoutRoutineSet.maxRepetitionsValue = maxValue
                     self.overwriteRepetitionsMin = nil
                     self.overwriteRepetitionsMax = nil
                 } else {
-                    self.overwriteRepetitionsMin = Int16(newValue)
+                    self.overwriteRepetitionsMin = newValue
                 }
                 self.refresher.refresh()
             }
         )
     }
     
-    private var keyboardRepetitionsMax: Binding<Double> {
+    private var keyboardRepetitionsMax: Binding<Double?> {
         Binding(
             get: {
-                self.displayRepetitionsMax
+                self.editorRepetitionsMax.map { Double($0) }
             },
             set: { newValue in
-                let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
-                let repsMinValue = self.displayRepetitionsMin
-                if newValue >= repsMinValue {
-                    self.workoutRoutineSet.maxRepetitionsValue = Int16(newValue)
-                    self.workoutRoutineSet.minRepetitionsValue = Int16(repsMinValue)
-                    self.overwriteRepetitionsMax = nil
+                let newValue = newValue.map { Int16(max(min($0, Double(WorkoutSet.MAX_REPETITIONS)), 0)) }
+                let minValue = self.editorRepetitionsMin
+                if self.isValid(minReps: minValue, maxReps: newValue) {
+                    self.workoutRoutineSet.minRepetitionsValue = minValue
+                    self.workoutRoutineSet.maxRepetitionsValue = newValue
                     self.overwriteRepetitionsMin = nil
+                    self.overwriteRepetitionsMax = nil
                 } else {
-                    self.overwriteRepetitionsMax = Int16(newValue)
+                    self.overwriteRepetitionsMax = newValue
                 }
                 self.refresher.refresh()
             }
         )
     }
     
-    private var draggerRepetitionsMin: Binding<Double> {
+    private var draggerRepetitionsMin: Binding<Double?> {
         Binding(
             get: {
-                self.displayRepetitionsMin
+                self.editorRepetitionsMin.map { Double($0) }
             },
             set: { newValue in
-                let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
-                let repsMaxValue = self.displayRepetitionsMax
-                self.workoutRoutineSet.minRepetitionsValue = Int16(newValue)
-                self.workoutRoutineSet.maxRepetitionsValue = Int16(max(repsMaxValue, newValue))
+                let newValue = newValue.map { Int16(max(min($0, Double(WorkoutSet.MAX_REPETITIONS)), 0)) }
+                let maxValue = self.editorRepetitionsMax
+                self.workoutRoutineSet.minRepetitionsValue = newValue
+                self.workoutRoutineSet.maxRepetitionsValue = self.isValid(minReps: newValue, maxReps: maxValue) ? maxValue : newValue
                 self.overwriteRepetitionsMin = nil
                 self.overwriteRepetitionsMax = nil
                 self.refresher.refresh()
@@ -113,16 +115,16 @@ struct WorkoutRoutineSetEditor: View {
         )
     }
     
-    private var draggerRepetitionsMax: Binding<Double> {
+    private var draggerRepetitionsMax: Binding<Double?> {
         Binding(
             get: {
-                self.displayRepetitionsMax
+                self.editorRepetitionsMax.map { Double($0) }
             },
             set: { newValue in
-                let newValue = max(min(newValue, Double(WorkoutSet.MAX_REPETITIONS)), 0)
-                let repsMinValue = self.displayRepetitionsMin
-                self.workoutRoutineSet.maxRepetitionsValue = Int16(newValue)
-                self.workoutRoutineSet.minRepetitionsValue = Int16(min(repsMinValue, newValue))
+                let newValue = newValue.map { Int16(max(min($0, Double(WorkoutSet.MAX_REPETITIONS)), 0)) }
+                let minValue = self.editorRepetitionsMin
+                self.workoutRoutineSet.maxRepetitionsValue = newValue
+                self.workoutRoutineSet.minRepetitionsValue = self.isValid(minReps: minValue, maxReps: newValue) ? minValue : newValue
                 self.overwriteRepetitionsMax = nil
                 self.overwriteRepetitionsMin = nil
                 self.refresher.refresh()
@@ -139,6 +141,7 @@ struct WorkoutRoutineSetEditor: View {
             unit: "min reps",
             minValue: 0,
             maxValue: Double(WorkoutSet.MAX_REPETITIONS),
+            nilPosition: .belowMin,
             showCursor: showKeyboard == .repetitionsMin,
             onTextTapped: {
                 if self.showKeyboard == .none {
@@ -150,7 +153,7 @@ struct WorkoutRoutineSetEditor: View {
                 }
             }
         )
-        .foregroundColor(editorRepetitionsMin == nil ? .secondary : validRepetitions ? .primary : .red)
+        .foregroundColor(validRepetitions ? .primary : .red)
     }
     
     private var repetitionsMaxDragger: some View {
@@ -159,6 +162,7 @@ struct WorkoutRoutineSetEditor: View {
             unit: "max reps",
             minValue: 0,
             maxValue: Double(WorkoutSet.MAX_REPETITIONS),
+            nilPosition: .belowMin,
             showCursor: showKeyboard == .repetitionsMax,
             onTextTapped: {
                 if self.showKeyboard == .none {
@@ -170,7 +174,7 @@ struct WorkoutRoutineSetEditor: View {
                 }
             }
         )
-        .foregroundColor(editorRepetitionsMax == nil ? .secondary : validRepetitions ? .primary : .red)
+        .foregroundColor(validRepetitions ? .primary : .red)
     }
     
     private var tagButton: some View {
@@ -179,24 +183,6 @@ struct WorkoutRoutineSetEditor: View {
         }) {
             HStack(spacing: 0) {
                 Image(systemName: "tag")
-                    .padding(6)
-            }
-        }
-    }
-    
-    private func clearReps() {
-        self.workoutRoutineSet.minRepetitionsValue = nil
-        self.workoutRoutineSet.maxRepetitionsValue = nil
-        self.overwriteRepetitionsMin = nil
-        self.overwriteRepetitionsMax = nil
-    }
-    
-    private var clearButton: some View {
-        Button(action: {
-            self.clearReps()
-        }) {
-            HStack(spacing: 0) {
-                Image(systemName: "xmark")
                     .padding(6)
             }
         }
@@ -255,8 +241,8 @@ struct WorkoutRoutineSetEditor: View {
                         }
                     }
                     
-                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "xmark"), width: geometry.size.width / 4) {
-                        self.clearReps()
+                    NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "questionmark"), width: geometry.size.width / 4) {
+                        self.showHelpAlert = true
                     }
                     
                     NumericKeyboard.imageActionKeyboardButton(label: Image(systemName: "tag"), width: geometry.size.width / 4) {
@@ -306,7 +292,6 @@ struct WorkoutRoutineSetEditor: View {
                 if showKeyboard == .none {
                     HStack(spacing: 16) {
                         tagButton
-                        clearButton
                         doneButton
                     }
                     .padding(.bottom, 8) /// pushes the draggers up and makes the buttons look more centered
@@ -344,6 +329,7 @@ struct WorkoutRoutineSetEditor: View {
             })
         )
         .sheet(isPresented: $showMoreSheet) { self.moreSheet }
+        .alert(isPresented: $showHelpAlert) { Alert(title: Text("You can also drag ☰ up and down to adjust the values.")) }
     }
 }
 

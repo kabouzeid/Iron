@@ -87,39 +87,3 @@ public class WorkoutRoutineSet: NSManagedObject, Codable {
         try container.encodeIfPresent(comment, forKey: .comment)
     }
 }
-
-// MARK: Display
-
-extension WorkoutRoutineSet {
-    public var displayTitle: String? {
-        guard let repsMin = minRepetitionsValue, let repsMax = maxRepetitionsValue else { return nil }
-        return "\(repsMin == repsMax ? "\(repsMax)" : "\(repsMin)-\(repsMax)") reps"
-    }
-}
-
-// MARK: Validation
-
-extension WorkoutRoutineSet {
-    override public func validateForUpdate() throws {
-        try super.validateForUpdate()
-        try validateConsistency()
-    }
-    
-    override public func validateForInsert() throws {
-        try super.validateForInsert()
-        try validateConsistency()
-    }
-    
-    func validateConsistency() throws {
-        if (minRepetitions == nil && maxRepetitions != nil) {
-            throw error(code: 1, message: "min repetitions is not set, but max repetitions is set.")
-        }
-        if (minRepetitions != nil && maxRepetitions == nil) {
-            throw error(code: 1, message: "max repetitions is not set, but min repetitions is set.")
-        }
-    }
-    
-    private func error(code: Int, message: String) -> NSError {
-        NSError(domain: "WORKOUT_ROUTINE_SET_ERROR_DOMAIN", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: message, NSValidationObjectErrorKey: self])
-    }
-}

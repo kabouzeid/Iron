@@ -10,7 +10,7 @@ import SwiftUI
 import AVKit
 
 struct NumericKeyboard: View {
-    @Binding var value: Double
+    @Binding var value: Double?
     @Binding var alwaysShowDecimalSeparator: Bool
     @Binding var minimumFractionDigits: Int
     var maximumFractionDigits: Int
@@ -32,6 +32,7 @@ struct NumericKeyboard: View {
     
     // computes the maximal value of minimumFractionDigits, that produces the same result as the current value of minimumFractionDigits
     private func computeMinimumFractionDigits() -> Int {
+        guard let value = value else { return 0 }
         let numberFormatter = self.numberFormatter
         let originalMinimumFractionDigits = numberFormatter.minimumFractionDigits
         if originalMinimumFractionDigits < maximumFractionDigits {
@@ -62,14 +63,14 @@ struct NumericKeyboard: View {
         }
     }
     
-    private func setValue(string: String?) {
-        guard let string = string else { value = 0; return }
-        guard let number = self.numberFormatter.number(from: string) else { value = 0; return }
+    private func setValue(string: String) {
+        guard let number = self.numberFormatter.number(from: string) else { value = nil; return }
         value = Double(truncating: number)
     }
     
     private func getValueString() -> String? {
-        numberFormatter.string(from: value as NSNumber)
+        guard let value = value else { return "" }
+        return numberFormatter.string(from: value as NSNumber)
     }
     
     private func textKeyboardButton(label: Text, value: String, width: CGFloat) -> some View {
@@ -123,6 +124,10 @@ struct NumericKeyboard: View {
                     
                     Self.textActionKeyboardButton(label: Text(self.allowsFloats ? (Locale.current.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
+                        if self.value == nil {
+                            self.prepareNumberFormatter()
+                            self.value = 0
+                        }
                         self.alwaysShowDecimalSeparator = true
                     }.environment(\.isEnabled, self.allowsFloats)
                 }
@@ -162,7 +167,7 @@ struct NumericKeyboard: View {
 #if DEBUG
 struct NumericKeyboard_Previews: PreviewProvider {
     private struct NumericKeyboardPreviewView: View {
-        @State private var value: Double = 15
+        @State private var value: Double? = 15
         @State private var minimumFractionDigits = 0
         @State private var alwaysShowDecimalSeparator = false
         
@@ -179,7 +184,7 @@ struct NumericKeyboard_Previews: PreviewProvider {
         
         var body: some View {
             VStack(spacing: 0) {
-                Text("value: \(value), formatted: \(numberFormatter.string(from: value as NSNumber) ?? "nil")")
+                Text("value: \(value?.description ?? "nil"), formatted: \(value.map { numberFormatter.string(from: $0 as NSNumber) ?? "nil" } ?? "")")
                 Text("min fraction digits: \(minimumFractionDigits)")
                 Text("alwaysShowSeparator: \(alwaysShowDecimalSeparator ? "True" : "False")")
                 
