@@ -61,13 +61,13 @@ struct WorkoutExerciseDetailView : View {
         workoutExercise.workoutSets?.first(where: { !($0 as! WorkoutSet).isCompleted }) as? WorkoutSet
     }
     
-    private func select(set: WorkoutSet?) {
+    private func select(set: WorkoutSet?, forceNoAnimation: Bool = false) {
         if let set = set, !set.isCompleted, set.repetitions == nil || set.weight == nil { // treat as uninitialized
             initRepsAndWeight(for: set)
         }
         
         // only animate if we would show/hide the editor
-        if set == nil && selectedWorkoutSet != nil || set != nil && selectedWorkoutSet == nil {
+        if !forceNoAnimation, set == nil && selectedWorkoutSet != nil || set != nil && selectedWorkoutSet == nil {
             withAnimation {
                 selectedWorkoutSet = set
             }
@@ -326,7 +326,7 @@ struct WorkoutExerciseDetailView : View {
             }
         )
         .onAppear {
-            self.select(set: self.firstUncompletedSet)
+            self.select(set: self.firstUncompletedSet, forceNoAnimation: true)
 //            self.fetchWorkoutExerciseHistory()
         }
         .onDisappear {
