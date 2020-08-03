@@ -28,10 +28,10 @@ struct WorkoutExerciseDetailView : View {
         Binding(
             get: {
                 self.workoutExerciseCommentInput.value ?? self.workoutExercise.comment ?? ""
-        },
+            },
             set: { newValue in
                 self.workoutExerciseCommentInput.value = newValue
-        }
+            }
         )
     }
     private func adjustAndSaveWorkoutExerciseCommentInput() {
