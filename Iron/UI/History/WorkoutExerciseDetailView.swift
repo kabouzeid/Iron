@@ -185,7 +185,9 @@ struct WorkoutExerciseDetailView : View {
             if deletedSelectedSet {
                 self.select(set: self.firstUncompletedSet)
             }
-            self.managedObjectContext.saveOrCrash()
+            DispatchQueue.main.async { // iOS 14 beta crashes if this is not async
+                self.managedObjectContext.saveOrCrash()
+            }
         }
         // TODO: move is yet too buggy
         //                        .onMove { source, destination in
