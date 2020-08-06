@@ -36,28 +36,15 @@ struct WorkoutSetCell: View {
                     .font(Font.body.monospacedDigit())
                     .foregroundColor(colorMode == .selected ? .accentColor : colorMode == .activated ? .primary : .secondary)
             }
-            
-            TargetRepetitionsView(
-                minRepetitions: workoutSet.minTargetRepetitionsValue,
-                maxRepetitions: workoutSet.maxTargetRepetitionsValue
-            )
-            .foregroundColor(Color(.tertiaryLabel))
-            .padding(.leading, 8)
         }
     }
     
-    private func rpe(rpe: Double) -> some View {
-        Text("RPE \(String(format: "%.1f", rpe))")
-            .font(Font.caption.monospacedDigit())
-            .foregroundColor(.secondary)
-            .padding(4)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder()
-                    .foregroundColor(Color(.systemFill))
-                
-        )
-    }
+    private static var rpeFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
     
     var body: some View {
         HStack {
@@ -79,10 +66,22 @@ struct WorkoutSetCell: View {
                         .foregroundColor(.secondary)
                 }
             }
+            
             Spacer()
-            workoutSet.rpeValue.map {
-                self.rpe(rpe: $0)
+            
+            if let interval = WorkoutRoutineSetCell.repetitionIntervalText(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
+                HStack(spacing: 4) {
+                    Image(systemName: "target")
+                    Text("\(interval) reps")
+                }
+                .modifier(TagStyle())
             }
+            
+            if let rpe = workoutSet.rpeValue {
+                Text("RPE " + (Self.rpeFormatter.string(from: NSNumber(value: rpe)) ?? String(format: "%.1f", rpe)))
+                    .modifier(TagStyle())
+            }
+            
             if workoutSet.isPersonalRecord ?? false {
                 // TODO: replace with a trophy symbol
                 Image(systemName: "star.circle.fill")
@@ -103,6 +102,20 @@ struct WorkoutSetCell: View {
                     }
                 )
         }
+    }
+}
+
+private struct TagStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(4)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder()
+                    .foregroundColor(Color(.systemFill))
+            )
     }
 }
 
@@ -138,6 +151,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.weightValue = 82.5
         set.repetitionsValue = 5
         set.maxTargetRepetitionsValue = 12
+        set.rpeValue = 7.5
         return set
     }()
     
@@ -146,10 +160,20 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.weightValue = 82.5
         set.repetitionsValue = 5
         set.minTargetRepetitionsValue = 8
+        set.rpeValue = 8
         return set
     }()
     
     static var workoutSet6: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 82.5
+        set.repetitionsValue = 5
+        set.minTargetRepetitionsValue = 5
+        set.maxTargetRepetitionsValue = 5
+        return set
+    }()
+    
+    static var workoutSet7: WorkoutSet = {
         let set = WorkoutSet(context: MockWorkoutData.metric.context)
         set.weightValue = 82.5
         set.repetitionsValue = 5
@@ -164,11 +188,12 @@ struct WorkoutSetCell_Previews: PreviewProvider {
             WorkoutSetCell(workoutSet: workoutSet3, index: 3)
             WorkoutSetCell(workoutSet: workoutSet4, index: 4)
             WorkoutSetCell(workoutSet: workoutSet5, index: 5)
+            WorkoutSetCell(workoutSet: workoutSet6, index: 6)
             
             Section {
                 WorkoutSetCell(workoutSet: workoutSet6, index: 1, showCompleted: true)
                 WorkoutSetCell(workoutSet: workoutSet6, index: 2, colorMode: .selected, showCompleted: true)
-                WorkoutSetCell(workoutSet: workoutSet6, index: 3, showUpNextIndicator: true)
+                WorkoutSetCell(workoutSet: workoutSet7, index: 3, showUpNextIndicator: true)
                 WorkoutSetCell(workoutSet: workoutSet3, index: 4, isPlaceholder: true)
                 WorkoutSetCell(workoutSet: workoutSet1, index: 5, isPlaceholder: true)
             }

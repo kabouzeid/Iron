@@ -18,12 +18,15 @@ struct WorkoutRoutineSetCell: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Text("Set")
-                    
-                    TargetRepetitionsView(minRepetitions: workoutRoutineSet.minRepetitionsValue, maxRepetitions: workoutRoutineSet.maxRepetitionsValue)
-                        .padding(.leading, 8)
-                        
+                Group {
+                    if let interval = Self.repetitionIntervalText(minRepetitions: workoutRoutineSet.minRepetitions?.intValue, maxRepetitions: workoutRoutineSet.maxRepetitions?.intValue) {
+                        HStack {
+                            Image(systemName: "target")
+                            Text("\(interval) reps")
+                        }
+                    } else {
+                        Text("Set")
+                    }
                 }.foregroundColor(isSelected ? .accentColor : .primary)
                 
                 workoutRoutineSet.comment.map {
@@ -53,22 +56,19 @@ struct WorkoutRoutineSetCell: View {
     }
 }
 
-struct TargetRepetitionsView: View {
-    let minRepetitions: Int16?
-    let maxRepetitions: Int16?
-    
-    var body: some View {
+extension WorkoutRoutineSetCell {
+    static func repetitionIntervalText(minRepetitions: Int?, maxRepetitions: Int?) -> String? {
         if let minRepetitions = minRepetitions {
             if let maxRepetitions = maxRepetitions {
                 // NOTE: this is an en-dash and not a hyphen
-                return Text("\(minRepetitions == maxRepetitions ? "\(maxRepetitions)" : "\(minRepetitions)–\(maxRepetitions)")").typeErased
+                return "\(minRepetitions == maxRepetitions ? "\(maxRepetitions)" : "\(minRepetitions)–\(maxRepetitions)")"
             } else {
-                return HStack(spacing: 4) { Image(systemName: "greaterthan"); Text("\(minRepetitions)") }.typeErased
+                return "\(minRepetitions)+"
             }
         } else if let maxRepetitions = maxRepetitions {
-            return HStack(spacing: 4) { Image(systemName: "lessthan"); Text("\(maxRepetitions)") }.typeErased
+            return "\(maxRepetitions)-"
         } else {
-            return EmptyView().typeErased
+            return nil
         }
     }
 }
