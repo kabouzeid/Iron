@@ -32,7 +32,9 @@ struct AboutView: View {
                     }.padding()
 
                     Spacer()
-                }.padding()
+                }
+                .padding()
+                .modifier(TextCaseNil())
             ) {
                 Button(action: {
                     guard let url = URL(string: "https://twitter.com/theironapp") else { return }
@@ -84,6 +86,17 @@ struct AboutView: View {
 //        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
 //        return "\(version ?? "?") (\(build ?? "?"))"
         return "\(version ?? "?")"
+    }
+}
+
+private struct TextCaseNil: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 14.0, *) {
+            content.textCase(nil)
+        } else {
+            content
+        }
     }
 }
 
