@@ -17,18 +17,14 @@ struct WorkoutTab: View {
         return currentWorkouts.first
     }
     
-    private func workoutView(workout: Workout?) -> some View {
-        Group { // is Group the appropiate choice here? (want to avoid AnyView)
-            if workout != nil {
-                CurrentWorkoutView(workout: workout!)
+    var body: some View {
+        ZStack { // ZStack is needed because of a bug where the TabView switches to another Tab (iOS 14.0)
+            if let workout = currentWorkout {
+                CurrentWorkoutView(workout: workout)
             } else {
                 StartWorkoutView()
             }
         }
-    }
-    
-    var body: some View {
-        workoutView(workout: currentWorkout)
     }
 }
 

@@ -17,87 +17,87 @@ struct ContentView : View {
     @State private var restoreBackupData: IdentifiableHolder<Data>?
     
     var body: some View {
-//        TabView {
-//            FeedView()
-//                .tabItem {
-//                    Image("today_apps")
-//                    Text("Feed")
-//                }
-//                .tag(0)
-//            HistoryView()
-//                .tabItem {
-//                    Image("clock")
-//                    Text("History")
-//                }
-//                .tag(1)
-//            WorkoutTab()
-//                .tabItem {
-//                    Image("workout")
-//                    Text("Workout")
-//                }
-//                .tag(2)
-//            ExerciseMuscleGroupsView()
-//                .tabItem {
-//                    Image("list")
-//                    Text("Exercises")
-//                }
-//                .tag(3)
-//            SettingsView()
-//                .tabItem {
-//                    Image("settings")
-//                    Text("Settings")
-//                }
-//                .tag(4)
-//        }
-        // TODO: replace with native SwiftUI TabView above
-        // -----------------------------------------------
-        /**
-         *  We inject .productionEnvironment() for every tab, because when the "screen reading" accessibility setting is enabled,
-         *  some Tabs get created by the system in the background without its parents environment! This is probably a bug and it happens since iOS 13.4
-         */
-        UITabView(viewControllers: [
-            FeedView()
-                .productionEnvironment()
-                .hostingController()
-                .tabItem(title: "Feed", image: UIImage(named: "today_apps"), tag: 0),
+        tabView
+            .edgesIgnoringSafeArea([.top, .bottom])
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
+                guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }
+                self.restoreBackupData = IdentifiableHolder(value: backupData)
+            }
+            .overlay(
+                Color.clear.frame(width: 0, height: 0)
+                    // This is a hack, we need to have this in an overlay and in Color.clear so it also works on iPad, tested on iOS 13.4
+                    .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
+                        RestoreActionSheet.create(context: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
+                            self.restoreResult = IdentifiableHolder(value: result)
+                        }
+                    }
+            )
+            .alert(item: $restoreResult) { restoreResultHolder in
+                RestoreActionSheet.restoreResultAlert(restoreResult: restoreResultHolder.value)
+            }
+    }
+    
+    @ViewBuilder
+    private var tabView: some View {
+        if #available(iOS 14, *) {
+            TabView {
+                FeedView()
+                    .tabItem {
+                        Label("Feed", image: "today_apps")
+                    }
 
-            HistoryView()
-                .productionEnvironment()
-                .hostingController()
-                .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
+                HistoryView()
+                    .tabItem {
+                        Label("History", image: "clock")
+                    }
 
-            WorkoutTab()
-                .productionEnvironment()
-                .hostingController()
-                .tabItem(title: "Workout", image: UIImage(named: "workout"), tag: 2),
+                WorkoutTab()
+                    .tabItem {
+                        Label("Workout", image: "workout")
+                    }
 
-            ExerciseMuscleGroupsView()
-                .productionEnvironment()
-                .hostingController()
-                .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
+                ExerciseMuscleGroupsView()
+                    .tabItem {
+                        Label("Exercises", image: "list")
+                    }
 
-            SettingsView()
-                .productionEnvironment()
-                .hostingController()
-                .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
-        ], initialSelection: 2)
-        // -----------------------------------------------
-        .edgesIgnoringSafeArea([.top, .bottom])
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
-            guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }
-            self.restoreBackupData = IdentifiableHolder(value: backupData)
-        }
-        .overlay(
-            Color.clear.frame(width: 0, height: 0)
-                // This is a hack, we need to have this in an overlay and in Color.clear so it also works on iPad, tested on iOS 13.4
-                .actionSheet(item: $restoreBackupData) { restoreBackupDataHolder in
-                    RestoreActionSheet.create(context: WorkoutDataStorage.shared.persistentContainer.viewContext, exerciseStore: ExerciseStore.shared, data: { restoreBackupDataHolder.value }) { result in
-                        self.restoreResult = IdentifiableHolder(value: result)
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", image: "settings")
                     }
             }
-        )
-        .alert(item: $restoreResult) { restoreResultHolder in
-            RestoreActionSheet.restoreResultAlert(restoreResult: restoreResultHolder.value)
+            .productionEnvironment()
+        } else {
+            /**
+             *  We inject .productionEnvironment() for every tab, because when the "screen reading" accessibility setting is enabled,
+             *  some Tabs get created by the system in the background without its parents environment! This is probably a bug and it happens since iOS 13.4
+             */
+            UITabView(viewControllers: [
+                FeedView()
+                    .productionEnvironment()
+                    .hostingController()
+                    .tabItem(title: "Feed", image: UIImage(named: "today_apps"), tag: 0),
+
+                HistoryView()
+                    .productionEnvironment()
+                    .hostingController()
+                    .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
+
+                WorkoutTab()
+                    .productionEnvironment()
+                    .hostingController()
+                    .tabItem(title: "Workout", image: UIImage(named: "workout"), tag: 2),
+
+                ExerciseMuscleGroupsView()
+                    .productionEnvironment()
+                    .hostingController()
+                    .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
+
+                SettingsView()
+                    .productionEnvironment()
+                    .hostingController()
+                    .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
+            ], initialSelection: 2)
         }
     }
 }
