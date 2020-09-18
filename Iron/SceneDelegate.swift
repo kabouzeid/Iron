@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    var sceneState = SceneState()
+    
     private var urlContexts: Set<UIOpenURLContext>?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -26,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView())
+            window.rootViewController = UIHostingController(rootView: ContentView().environmentObject(sceneState))
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -138,5 +140,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 NotificationManager.shared.requestUnfinishedWorkoutNotification()
             }
         }
+    }
+}
+
+class SceneState: ObservableObject {
+    @Published var selectedTabNumber: Int = Tab.workout.rawValue
+    
+    var selectedTab: Tab {
+        get {
+            Tab(rawValue: selectedTabNumber) ?? Tab.feed
+        }
+        set {
+            selectedTabNumber = newValue.rawValue
+        }
+    }
+    
+    enum Tab: Int {
+        case feed
+        case history
+        case workout
+        case exercises
+        case settings
     }
 }

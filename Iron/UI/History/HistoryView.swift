@@ -13,6 +13,7 @@ import WorkoutDataKit
 struct HistoryView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
+    @EnvironmentObject var sceneState: SceneState
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(fetchRequest: HistoryView.fetchRequest) var workouts
@@ -63,10 +64,10 @@ struct HistoryView : View {
                                     }
                                 }
                                 Button("Repeat") {
-                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore)
+                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
                                 }
                                 Button("Repeat (Blank)") {
-                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore)
+                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
                                 }
                         }
                     }

@@ -23,6 +23,8 @@ struct WorkoutExerciseDetailView : View {
 
     @State private var selectedWorkoutSet: WorkoutSet? = nil
     
+    @State private var showExerciseInfo = false
+    
     @ObservedObject private var workoutExerciseCommentInput = ValueHolder<String?>(initial: nil)
     private var workoutExerciseComment: Binding<String> {
         Binding(
@@ -309,18 +311,22 @@ struct WorkoutExerciseDetailView : View {
                 editMode?.wrappedValue != .active {
                 workoutSetEditor
             } // TODO: else if workoutExercise is finished, show next exercise / finish workout button
+            
+            if let exercise = workoutExercise.exercise(in: exerciseStore.exercises) {
+                NavigationLink(destination: ExerciseDetailView(exercise: exercise).environmentObject(self.settingsStore), isActive: $showExerciseInfo) { EmptyView() }
+            }
         }
         .navigationBarTitle(Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? ""), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {
-                iOS13_3.map { // otherwise crashes when going back on iOS 13.2.2
-                    workoutExercise.exercise(in: exerciseStore.exercises).map {
-                        NavigationLink(destination: ExerciseDetailView(exercise: $0)
-                            .environmentObject(self.settingsStore)) {
-                                Image(systemName: "info.circle")
-                                    .padding([.leading, .top, .bottom])
-                        }
-                    }
+                if workoutExercise.exercise(in: exerciseStore.exercises) != nil {
+                    // Use Button because NavigationLink in navigation bar works unreliable (iOS 14)
+                    Button(action: {
+                        showExerciseInfo = true
+                    }, label: {
+                        Image(systemName: "info.circle")
+                            .padding([.leading, .top, .bottom])
+                    })
                 }
                 EditButton()
             }

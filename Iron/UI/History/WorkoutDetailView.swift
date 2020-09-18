@@ -14,6 +14,7 @@ struct WorkoutDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
+    @EnvironmentObject var sceneState: SceneState
     @ObservedObject var workout: Workout
 
 //    @Environment(\.editMode) var editMode
@@ -183,10 +184,10 @@ struct WorkoutDetailView : View {
                     self.activityItems = [logText]
                 }),
                 .default(Text("Repeat"), action: {
-                    Self.repeatWorkout(workout: self.workout, settingsStore: self.settingsStore)
+                    Self.repeatWorkout(workout: self.workout, settingsStore: self.settingsStore, sceneState: sceneState)
                 }),
                 .default(Text("Repeat (Blank)"), action: {
-                    Self.repeatWorkoutBlank(workout: self.workout, settingsStore: self.settingsStore)
+                    Self.repeatWorkoutBlank(workout: self.workout, settingsStore: self.settingsStore, sceneState: sceneState)
                 }),
                 .cancel()
             ])
@@ -197,7 +198,7 @@ struct WorkoutDetailView : View {
 
 // MARK: Actions
 extension WorkoutDetailView {
-    static func repeatWorkout(workout: Workout, settingsStore: SettingsStore) {
+    static func repeatWorkout(workout: Workout, settingsStore: SettingsStore, sceneState: SceneState) {
         guard let newWorkout = workout.copyForRepeat(blank: false) else { return }
         
         guard let context = workout.managedObjectContext else { return }
@@ -210,10 +211,10 @@ extension WorkoutDetailView {
         
         newWorkout.startOrCrash()
         
-        UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+        sceneState.selectedTab = .workout
     }
     
-    static func repeatWorkoutBlank(workout: Workout, settingsStore: SettingsStore) {
+    static func repeatWorkoutBlank(workout: Workout, settingsStore: SettingsStore, sceneState: SceneState) {
         guard let newWorkout = workout.copyForRepeat(blank: true) else { return }
         
         guard let context = workout.managedObjectContext else { return }
@@ -226,7 +227,7 @@ extension WorkoutDetailView {
         
         newWorkout.startOrCrash()
         
-        UITabView.viewController?.selectedIndex = 2 // TODO: remove this hack
+        sceneState.selectedTab = .workout
     }
 }
 

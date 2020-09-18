@@ -17,6 +17,7 @@ extension View {
             .environmentObject(RestTimerStore.shared)
             .environmentObject(ExerciseStore.shared)
             .environmentObject(isPro ? EntitlementStore.mockPro : EntitlementStore.mockNoPro)
+            .environmentObject(SceneState())
             .environment(\.managedObjectContext, weightUnit == .metric ? MockWorkoutData.metricRandom.context : MockWorkoutData.imperialRandom.context)
     }
     

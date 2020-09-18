@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         os_log("Handling intent=%@", log: .intents, type: .info, intent)
         
         if let intent = intent as? INStartWorkoutIntent {
-            completionHandler(handle(intent))
+            completionHandler(handle(intent, sceneDelegate: application.connectedScenes.compactMap({ $0 as? UIWindowScene }).first?.delegate as? SceneDelegate))
         } else if let intent = intent as? INCancelWorkoutIntent {
             completionHandler(handle(intent))
         } else if let intent = intent as? INEndWorkoutIntent {
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func handle(_ startWorkoutIntent: INStartWorkoutIntent) -> INStartWorkoutIntentResponse {
+    private func handle(_ startWorkoutIntent: INStartWorkoutIntent, sceneDelegate: SceneDelegate?) -> INStartWorkoutIntentResponse {
         let context = WorkoutDataStorage.shared.persistentContainer.viewContext
         do {
             let count = try context.count(for: Workout.currentWorkoutFetchRequest)
@@ -89,8 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         os_log("Sending user notification to open the app because the watch app wasn't started. Probably because the app is in the background", log: .watch)
                         NotificationManager.shared.requestStartedWorkoutFromBackgroundNotification()
                     })
-                    // select the workout tab
-                    UITabView.viewController?.selectedIndex = 2
+                    
+                    sceneDelegate?.sceneState.selectedTab = .workout
+                    
                     return .init(code: .success, userActivity: nil)
                 } catch {
                     os_log("Could not start workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))

@@ -12,6 +12,7 @@ import WorkoutDataKit
 let NAVIGATION_BAR_SPACING: CGFloat = 16
 
 struct ContentView : View {
+    @EnvironmentObject private var sceneState: SceneState
     
     @State private var restoreResult: IdentifiableHolder<Result<Void, Error>>?
     @State private var restoreBackupData: IdentifiableHolder<Data>?
@@ -40,28 +41,33 @@ struct ContentView : View {
     @ViewBuilder
     private var tabView: some View {
         if #available(iOS 14, *) {
-            TabView {
+            TabView(selection: $sceneState.selectedTabNumber) {
                 FeedView()
+                    .tag(SceneState.Tab.feed.rawValue)
                     .tabItem {
                         Label("Feed", image: "today_apps")
                     }
 
                 HistoryView()
+                    .tag(SceneState.Tab.history.rawValue)
                     .tabItem {
                         Label("History", image: "clock")
                     }
 
                 WorkoutTab()
+                    .tag(SceneState.Tab.workout.rawValue)
                     .tabItem {
                         Label("Workout", image: "workout")
                     }
 
                 ExerciseMuscleGroupsView()
+                    .tag(SceneState.Tab.exercises.rawValue)
                     .tabItem {
                         Label("Exercises", image: "list")
                     }
 
                 SettingsView()
+                    .tag(SceneState.Tab.settings.rawValue)
                     .tabItem {
                         Label("Settings", image: "settings")
                     }
@@ -97,7 +103,7 @@ struct ContentView : View {
                     .productionEnvironment()
                     .hostingController()
                     .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
-            ], initialSelection: 2)
+            ], selection: sceneState.selectedTabNumber)
         }
     }
 }

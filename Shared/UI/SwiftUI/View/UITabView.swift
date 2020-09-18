@@ -9,21 +9,18 @@
 import SwiftUI
 
 struct UITabView: UIViewControllerRepresentable {
-    static var viewController: UITabBarController? // TODO: remove this hack, for now we need this to programatically switch tabs
-    
     let viewControllers: [UIViewController]
-    let initialSelection: Int
+    let selection: Int
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<UITabView>) -> UITabBarController {
         let tabController = UITabBarController()
         tabController.viewControllers = viewControllers
-        tabController.selectedIndex = initialSelection
-        Self.viewController = tabController
+        tabController.selectedIndex = selection
         return tabController
     }
     
     func updateUIViewController(_ uiViewController: UITabBarController, context: UIViewControllerRepresentableContext<UITabView>) {
-        
+        uiViewController.selectedIndex = selection
     }
 }
 
@@ -51,7 +48,7 @@ struct UITabView_Previews: PreviewProvider {
             Text("Tab B")
                 .hostingController()
                 .tabItem(title: "Tab B", image: UIImage(systemName: "b.circle"), tag: 1),
-        ], initialSelection: 1)
+        ], selection: 1)
         .edgesIgnoringSafeArea([.top, .bottom])
     }
 }
