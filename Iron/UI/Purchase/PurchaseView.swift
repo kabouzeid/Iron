@@ -165,7 +165,7 @@ struct PurchaseView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .onAppear {
             self.storeManager.fetchProducts(matchingIdentifiers: IAPIdentifiers.pro)
         }

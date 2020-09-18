@@ -236,7 +236,7 @@ struct ExerciseDetailView : View {
                     self.aliasSection
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
         }
         .sheet(item: $activeSheet) { type in
             self.sheetView(type: type)

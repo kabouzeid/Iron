@@ -53,7 +53,7 @@ struct WorkoutLog: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

@@ -47,7 +47,7 @@ struct FeedView : View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: EditButton())
             .sheet(isPresented: $showingPinnedChartSelector) {
@@ -104,6 +104,8 @@ private struct PinnedChartSelectorSheet: View {
                     .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
                     .padding(.top)
             }.padding()
+            
+            Divider()
             
             ExerciseSingleSelectionView(exerciseGroups: filter.exerciseGroups) { exercise in
                 guard UIDevice.current.userInterfaceIdiom != .pad else { // TODO: actionSheet not supported on iPad yet (13.2)

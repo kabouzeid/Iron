@@ -54,7 +54,7 @@ struct EditCurrentWorkoutTimeView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

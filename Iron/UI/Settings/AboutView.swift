@@ -89,17 +89,6 @@ struct AboutView: View {
     }
 }
 
-private struct TextCaseNil: ViewModifier {
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        if #available(iOS 14.0, *) {
-            content.textCase(nil)
-        } else {
-            content
-        }
-    }
-}
-
 #if DEBUG
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {

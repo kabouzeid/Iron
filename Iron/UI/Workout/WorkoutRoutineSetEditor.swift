@@ -394,7 +394,7 @@ private struct MoreView: View {
                 })
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

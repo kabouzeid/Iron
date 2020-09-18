@@ -157,7 +157,7 @@ struct WorkoutRoutineExerciseView: View {
                     addSetButton
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
             
             if selectedWorkoutRoutineSet != nil &&
                 (self.workoutRoutineExercise.workoutRoutineSets?.contains(self.selectedWorkoutRoutineSet!) ?? false) &&

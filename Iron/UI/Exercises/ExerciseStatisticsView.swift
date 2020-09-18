@@ -17,6 +17,7 @@ struct ExerciseStatisticsView : View {
         List(WorkoutExerciseChartData.MeasurementType.allCases, id: \.self) { measurementType in
             ExerciseChartViewCell(exercise: self.exercise, measurementType: measurementType)
         }
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

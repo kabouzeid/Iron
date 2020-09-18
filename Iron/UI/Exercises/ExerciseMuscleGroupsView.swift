@@ -20,7 +20,6 @@ struct ExerciseMuscleGroupsView : View {
         let muscleGroup = exercises.first?.muscleGroup ?? ""
         return NavigationLink(destination:
             ExercisesView(exercises: exercises)
-                .listStyle(PlainListStyle())
                 .navigationBarTitle(Text(muscleGroup.capitalized), displayMode: .inline)
         ) {
             HStack {
@@ -74,7 +73,6 @@ struct ExerciseMuscleGroupsView : View {
                     if !exerciseStore.hiddenExercises.isEmpty {
                         NavigationLink(destination:
                             ExercisesView(exercises: exerciseStore.hiddenExercises)
-                                .listStyle(PlainListStyle())
                                 .navigationBarTitle(Text("Hidden"), displayMode: .inline)
                         ) {
                             HStack {
@@ -87,7 +85,7 @@ struct ExerciseMuscleGroupsView : View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
             .navigationBarTitle("Exercises")
         }
         .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode

@@ -150,7 +150,7 @@ struct WorkoutDetailView : View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .navigationBarTitle(Text(workout.displayTitle(in: exerciseStore.exercises)), displayMode: .inline)
         .navigationBarItems(trailing:
             HStack(spacing: NAVIGATION_BAR_SPACING) {

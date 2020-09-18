@@ -84,7 +84,7 @@ struct WorkoutPlanView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .navigationBarTitle(Text(workoutPlan.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing: EditButton())
         .actionSheet(item: $offsetsToDelete) { offsets in

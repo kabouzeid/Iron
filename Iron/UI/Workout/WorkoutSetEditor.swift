@@ -394,6 +394,7 @@ private struct MoreView: View {
                         self.activeAlert = .tagInfo
                     }) {
                         Image(systemName: "questionmark.circle")
+                            .foregroundColor(.accentColor)
                     }
                 }) {
                 ForEach(WorkoutSetTag.allCases, id: \.self) { tag in
@@ -417,6 +418,7 @@ private struct MoreView: View {
                         self.activeAlert = .rpeInfo
                     }) {
                         Image(systemName: "questionmark.circle")
+                            .foregroundColor(.accentColor)
                     }
                 }) {
                 ForEach(RPE.allowedValues.reversed(), id: \.self) { rpe in
@@ -424,7 +426,7 @@ private struct MoreView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .alert(item: $activeAlert) { self.alertFor(type: $0) }
     }
 }

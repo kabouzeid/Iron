@@ -20,11 +20,12 @@ struct ExerciseSingleSelectionView: View {
                     ForEach(exerciseGroup.exercises, id: \.self) { exercise in
                         Button(exercise.title) {
                             self.onSelection(exercise)
-                        }
+                        }.foregroundColor(.primary)
                     }
                 }
             }
         }
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

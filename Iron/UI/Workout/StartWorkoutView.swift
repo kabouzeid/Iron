@@ -52,16 +52,16 @@ struct StartWorkoutView: View {
                 
                 Section {
                     Button(action: {
-                        self.createWorkoutPlan()
+                        self.newWorkoutPlan()
                     }) {
                         HStack {
                             Image(systemName: "plus")
-                            Text("Create Workout Plan")
+                            Text("New Workout Plan")
                         }
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
             .navigationBarTitle("Workout")
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
@@ -75,7 +75,7 @@ struct StartWorkoutView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    private func createWorkoutPlan() {
+    private func newWorkoutPlan() {
         assert(self.selectedWorkoutPlan == nil)
         selectedWorkoutPlan = WorkoutPlan.create(context: managedObjectContext)
         managedObjectContext.saveOrCrash()

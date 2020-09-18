@@ -76,6 +76,8 @@ struct AddExercisesSheet: View {
                     .padding(.top)
             }.padding()
             
+            Divider()
+            
             ExerciseMultiSelectionView(exerciseGroups: filter.exerciseGroups, selection: self.$exerciseSelectorSelection)
         }
     }

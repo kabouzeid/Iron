@@ -121,6 +121,7 @@
 		8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6F172A233A809D0048A75B /* StoreKit.framework */; };
 		8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73623041542000A3C76 /* TimerBannerView.swift */; };
 		8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73823041637000A3C76 /* RestTimerView.swift */; };
+		8A744EF025154E6B007361EC /* SwiftUISupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A744EEF25154E6B007361EC /* SwiftUISupport.swift */; };
 		8A799F5F22BF868500DD5E1B /* WorkoutExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */; };
@@ -616,6 +617,7 @@
 		8A6F172A233A809D0048A75B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8A70A73623041542000A3C76 /* TimerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBannerView.swift; sourceTree = "<group>"; };
 		8A70A73823041637000A3C76 /* RestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerView.swift; sourceTree = "<group>"; };
+		8A744EEF25154E6B007361EC /* SwiftUISupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISupport.swift; sourceTree = "<group>"; };
 		8A74BEB722FC828A00AC33C5 /* NSManagedObjectContext+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Publisher.swift"; sourceTree = "<group>"; };
 		8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -1488,6 +1490,7 @@
 				8AC503272340E712006D1BC6 /* Purchase */,
 				8AB4F7ED2342165B0074B88E /* Demo */,
 				8AA8BE7A24367C87005CAD86 /* ActivitySheet.swift */,
+				8A744EEF25154E6B007361EC /* SwiftUISupport.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2140,6 +2143,7 @@
 				8AB5213423993C3D008064B2 /* WeightUnit.swift in Sources */,
 				8AB52138239993DC008064B2 /* WorkoutSet+WeightUnit.swift in Sources */,
 				8AA02615230AF74C00324853 /* ActivityChartView.swift in Sources */,
+				8A744EF025154E6B007361EC /* SwiftUISupport.swift in Sources */,
 				8A56A47F22D7C93B0076E99A /* SettingsView.swift in Sources */,
 				8A5F9A23233BDEEB00C2F32A /* VerificationResponse.swift in Sources */,
 				8AA6252E23AE68CC00217DA9 /* Workout+Logic.swift in Sources */,

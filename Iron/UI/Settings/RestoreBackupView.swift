@@ -47,7 +47,7 @@ struct RestoreBackupView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .onAppear(perform: backupStore.fetchBackups)
         .navigationBarItems(trailing: EditButton())
         .actionSheet(item: $restoreBackupUrl) { urlHolder in

@@ -16,14 +16,17 @@ struct ExercisesView : View {
         List(exercises, id: \.id) { exercise in
             NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise))
         }
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 
 #if DEBUG
 struct ExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        ExercisesView(exercises: ExerciseStore.shared.shownExercises)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+        NavigationView {
+            ExercisesView(exercises: ExerciseStore.shared.shownExercises)
+                .mockEnvironment(weightUnit: .metric, isPro: true)
+        }
     }
 }
 #endif

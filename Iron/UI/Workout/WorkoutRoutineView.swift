@@ -126,7 +126,7 @@ struct WorkoutRoutineView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .navigationBarTitle(Text(workoutRoutine.displayTitle), displayMode: .inline)
         .navigationBarItems(trailing: EditButton())
         .sheet(isPresented: self.$showExerciseSelector) {

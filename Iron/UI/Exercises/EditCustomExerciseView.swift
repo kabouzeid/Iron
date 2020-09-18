@@ -139,8 +139,8 @@ struct MuscleSelectionView: View {
                 }
             }
         }
+        .listStyleCompat_InsetGroupedListStyle()
         .environment(\.editMode, .constant(.active))
-        .listStyle(GroupedListStyle())
     }
 }
 

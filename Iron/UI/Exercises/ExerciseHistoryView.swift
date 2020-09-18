@@ -44,7 +44,7 @@ struct ExerciseHistoryView : View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 

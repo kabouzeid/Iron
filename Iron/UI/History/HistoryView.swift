@@ -79,6 +79,7 @@ struct HistoryView : View {
                     }
                 }
             }
+            .listStyleCompat_InsetGroupedListStyle()
             .navigationBarItems(trailing: EditButton())
             .actionSheet(item: $offsetsToDelete) { offsets in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [

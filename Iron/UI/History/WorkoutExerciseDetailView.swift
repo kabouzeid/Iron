@@ -302,7 +302,7 @@ struct WorkoutExerciseDetailView : View {
                 
                 historyWorkoutSets
             }
-            .listStyle(GroupedListStyle())
+            .listStyleCompat_InsetGroupedListStyle()
             
             if selectedWorkoutSet != nil &&
                 (self.workoutExercise.workoutSets?.contains(self.selectedWorkoutSet!) ?? false) &&

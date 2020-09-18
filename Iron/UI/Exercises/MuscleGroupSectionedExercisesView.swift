@@ -22,14 +22,17 @@ struct MuscleGroupSectionedExercisesView : View {
                 }
             }
         }
+        .listStyleCompat_InsetGroupedListStyle()
     }
 }
 
 #if DEBUG
 struct MuscleGroupSectionedExercisesView_Previews : PreviewProvider {
     static var previews: some View {
-        MuscleGroupSectionedExercisesView(exerciseGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises))
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+        NavigationView {
+            MuscleGroupSectionedExercisesView(exerciseGroups: ExerciseStore.splitIntoMuscleGroups(exercises: ExerciseStore.shared.shownExercises))
+                .mockEnvironment(weightUnit: .metric, isPro: true)
+        }
     }
 }
 #endif

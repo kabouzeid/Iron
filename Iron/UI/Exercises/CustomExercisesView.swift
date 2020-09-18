@@ -79,7 +79,7 @@ struct CustomExercisesView: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .navigationBarItems(trailing: EditButton())
         .sheet(item: $activeSheet, content: { type in
             self.sheetView(type: type)
