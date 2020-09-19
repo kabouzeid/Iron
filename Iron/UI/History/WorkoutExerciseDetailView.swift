@@ -269,7 +269,10 @@ struct WorkoutExerciseDetailView : View {
                     set.isCompleted = true
                     let workout = set.workoutExercise?.workout
                     workout?.start = workout?.start ?? Date()
-//                    self.moveWorkoutExerciseBehindLastBegun() // this causes a "jump back" bug since iOS 13.4
+                    
+                    if #available(iOS 14, *) { // fixed in iOS 14.0
+                        self.moveWorkoutExerciseBehindLastBegun() // this causes a "jump back" bug since iOS 13.4
+                    }
                     
                     let feedbackGenerator = UINotificationFeedbackGenerator()
                     feedbackGenerator.prepare()
