@@ -56,17 +56,32 @@ struct WorkoutSetCell: View {
                     .foregroundColor(colorMode == .disabled ? .secondary : .green)
             }
             
-            VStack(alignment: .leading) {
-                titleView(isPlaceholder: isPlaceholder, colorMode: colorMode)
-                    .background(
-                        Group {
-                            if colorMode == .selected {
-                                RoundedRectangle(cornerRadius: 4, style: .continuous)
-                                    .stroke(Color.accentColor)
-                                    .padding(-4)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    titleView(isPlaceholder: isPlaceholder, colorMode: colorMode)
+                        .background(
+                            Group {
+                                if colorMode == .selected {
+                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                        .stroke(Color.accentColor)
+                                        .padding(-4)
+                                }
                             }
+                        )
+                    
+                    if let interval = WorkoutRoutineSetCell.repetitionIntervalText(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
+                        Group {
+                            if !isPlaceholder {
+                                Text("/")
+                            } else {
+                                Text(":")
+                            }
+                            
+                            Text("\(interval)")
                         }
-                    )
+                        .foregroundColor(Color(.tertiaryLabel))
+                    }
+                }
                 
                 workoutSet.comment.map {
                     Text($0.enquoted)
@@ -74,19 +89,6 @@ struct WorkoutSetCell: View {
                         .font(Font.caption.italic())
                         .foregroundColor(.secondary)
                 }
-            }
-            
-            if let interval = WorkoutRoutineSetCell.repetitionIntervalText(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
-                Group {
-                    if !isPlaceholder {
-                        Text("/")
-                    } else {
-                        Text(":")
-                    }
-                    
-                    Text("\(interval)")
-                }
-                .foregroundColor(Color(.tertiaryLabel))
             }
             
             Spacer()
@@ -188,6 +190,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.minTargetRepetitionsValue = 5
         set.maxTargetRepetitionsValue = 5
         set.isCompleted = true
+        set.comment = "This is a comment"
         return set
     }()
     
