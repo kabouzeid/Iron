@@ -34,7 +34,7 @@ struct WorkoutSetCell: View {
             } else {
                 Text(workoutSet.displayTitle(weightUnit: settingsStore.weightUnit))
                     .font(Font.body.monospacedDigit())
-                    .foregroundColor(colorMode == .selected ? .accentColor : colorMode == .activated ? .primary : .secondary)
+                    .foregroundColor(colorMode == .disabled ? .secondary : .primary)
             }
         }
     }
@@ -58,6 +58,15 @@ struct WorkoutSetCell: View {
             
             VStack(alignment: .leading) {
                 titleView(isPlaceholder: isPlaceholder, colorMode: colorMode)
+                    .background(
+                        Group {
+                            if colorMode == .selected {
+                                RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                    .stroke(Color.accentColor)
+                                    .padding(-4)
+                            }
+                        }
+                    )
                 
                 workoutSet.comment.map {
                     Text($0.enquoted)
@@ -67,15 +76,20 @@ struct WorkoutSetCell: View {
                 }
             }
             
-            Spacer()
-            
             if let interval = WorkoutRoutineSetCell.repetitionIntervalText(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
-                HStack(spacing: 4) {
-                    Image(systemName: "target")
-                    Text("\(interval) reps")
+                Group {
+                    if !isPlaceholder {
+                        Text("/")
+                    } else {
+                        Text(":")
+                    }
+                    
+                    Text("\(interval)")
                 }
-                .modifier(TagStyle())
+                .foregroundColor(Color(.tertiaryLabel))
             }
+            
+            Spacer()
             
             if let rpe = workoutSet.rpeValue {
                 Text("RPE " + (Self.rpeFormatter.string(from: NSNumber(value: rpe)) ?? String(format: "%.1f", rpe)))
@@ -134,6 +148,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.repetitionsValue = 5
         set.tagValue = .dropSet
         set.comment = "This is a comment"
+        set.isCompleted = true
         return set
     }()
     
@@ -152,6 +167,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.repetitionsValue = 5
         set.maxTargetRepetitionsValue = 12
         set.rpeValue = 7.5
+        set.isCompleted = true
         return set
     }()
     
@@ -161,6 +177,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.repetitionsValue = 5
         set.minTargetRepetitionsValue = 8
         set.rpeValue = 8
+        set.isCompleted = true
         return set
     }()
     
@@ -170,6 +187,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         set.repetitionsValue = 5
         set.minTargetRepetitionsValue = 5
         set.maxTargetRepetitionsValue = 5
+        set.isCompleted = true
         return set
     }()
     
@@ -181,24 +199,39 @@ struct WorkoutSetCell_Previews: PreviewProvider {
         return set
     }()
     
+    static var workoutSet8: WorkoutSet = {
+        let set = WorkoutSet(context: MockWorkoutData.metric.context)
+        set.weightValue = 132.5
+        set.repetitionsValue = 3
+        set.minTargetRepetitionsValue = 1
+        set.rpeValue = 10
+        set.isCompleted = true
+        return set
+    }()
+    
     static var previews: some View {
         List {
-            WorkoutSetCell(workoutSet: workoutSet1, index: 1)
-            WorkoutSetCell(workoutSet: workoutSet2, index: 2)
-            WorkoutSetCell(workoutSet: workoutSet3, index: 3)
-            WorkoutSetCell(workoutSet: workoutSet4, index: 4)
-            WorkoutSetCell(workoutSet: workoutSet5, index: 5)
-            WorkoutSetCell(workoutSet: workoutSet6, index: 6)
-            
             Section {
                 WorkoutSetCell(workoutSet: workoutSet6, index: 1, showCompleted: true)
                 WorkoutSetCell(workoutSet: workoutSet6, index: 2, colorMode: .selected, showCompleted: true)
-                WorkoutSetCell(workoutSet: workoutSet7, index: 3, showUpNextIndicator: true)
-                WorkoutSetCell(workoutSet: workoutSet3, index: 4, isPlaceholder: true)
-                WorkoutSetCell(workoutSet: workoutSet1, index: 5, isPlaceholder: true)
+                WorkoutSetCell(workoutSet: workoutSet8, index: 4, showCompleted: true)
+                WorkoutSetCell(workoutSet: workoutSet7, index: 5, showUpNextIndicator: true)
+                WorkoutSetCell(workoutSet: workoutSet3, index: 6, isPlaceholder: true)
+                WorkoutSetCell(workoutSet: workoutSet6, index: 7, isPlaceholder: true)
+                WorkoutSetCell(workoutSet: workoutSet1, index: 8, isPlaceholder: true)
+            }
+            
+            Section {
+                WorkoutSetCell(workoutSet: workoutSet1, index: 1)
+                WorkoutSetCell(workoutSet: workoutSet2, index: 2)
+                WorkoutSetCell(workoutSet: workoutSet3, index: 3)
+                WorkoutSetCell(workoutSet: workoutSet4, index: 4)
+                WorkoutSetCell(workoutSet: workoutSet5, index: 5)
+                WorkoutSetCell(workoutSet: workoutSet6, index: 6)
+                WorkoutSetCell(workoutSet: workoutSet8, index: 7)
             }
         }
-        .listStyle(GroupedListStyle())
+        .listStyleCompat_InsetGroupedListStyle()
         .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
