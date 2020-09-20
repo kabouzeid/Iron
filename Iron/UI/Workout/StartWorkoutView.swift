@@ -16,8 +16,6 @@ struct StartWorkoutView: View {
     
     @State private var quote = Quotes.quotes.randomElement()
     
-    @State private var selectedWorkoutPlan: WorkoutPlan?
-    
     @State private var offsetsToDelete: IndexSet?
     
     @FetchRequest(fetchRequest: StartWorkoutView.fetchRequest) var workoutPlans
@@ -37,7 +35,7 @@ struct StartWorkoutView: View {
                 
                 ForEach(workoutPlans) { workoutPlan in
                     Section {
-                        WorkoutPlanCell(workoutPlan: workoutPlan, selectedWorkoutPlan: self.$selectedWorkoutPlan)
+                        WorkoutPlanCell(workoutPlan: workoutPlan)
                         WorkoutPlanRoutines(workoutPlan: workoutPlan)
                             .deleteDisabled(true)
                     }
@@ -76,8 +74,7 @@ struct StartWorkoutView: View {
     }
     
     private func newWorkoutPlan() {
-        assert(self.selectedWorkoutPlan == nil)
-        selectedWorkoutPlan = WorkoutPlan.create(context: managedObjectContext)
+        _ = WorkoutPlan.create(context: managedObjectContext)
         managedObjectContext.saveOrCrash()
     }
     
@@ -153,10 +150,9 @@ private struct WorkoutPlanCell: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @ObservedObject var workoutPlan: WorkoutPlan
-    @Binding var selectedWorkoutPlan: WorkoutPlan?
     
     var body: some View {
-        NavigationLink(destination: WorkoutPlanView(workoutPlan: workoutPlan), tag: workoutPlan, selection: $selectedWorkoutPlan) {
+        NavigationLink(destination: WorkoutPlanView(workoutPlan: workoutPlan)) {
             VStack(alignment: .leading) {
                 Text(workoutPlan.displayTitle).font(.headline)
             }
