@@ -38,7 +38,7 @@ struct BannerViewEntry : View, Identifiable {
     var body: some View {
         VStack {
             text
-                .font(.title)
+                .font(.compatTitle2)
             if detail != nil {
                 detail!
                     .font(.body)
@@ -49,6 +49,16 @@ struct BannerViewEntry : View, Identifiable {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
+        }
+    }
+}
+
+extension Font {
+    static var compatTitle2: Font {
+        if #available(iOS 14.0, *) {
+            return .title2
+        } else {
+            return Font(UIFont.preferredFont(forTextStyle: .title2))
         }
     }
 }
