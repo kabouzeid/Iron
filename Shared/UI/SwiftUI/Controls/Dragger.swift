@@ -211,14 +211,14 @@ struct Dragger : View {
                         self.onTextTapped()
                     }
             )
-            .animation(.none) // prevents "..." being displayed when number length changes and animation is activated
+//            .animation(.none) // prevents "..." being displayed when number length changes and animation is activated
 
             Image(systemName: "line.horizontal.3")
                 .rotationEffect(Angle(degrees: 0))
                 .offset(y: draggerOffset)
                 /// disable for now, crashes on iOS 13.1.x production builds but not on iOS 13.2 (built with Xcode 11.2.1 GM)
 //                .modifier(WiggleModifier(wiggleToggle: wiggleDraggerToggle, wiggleDistance: Self.DRAGGER_MOVEMENT).animation(.linear(duration: 1)))
-                .animation(.interactiveSpring())
+                .animation(.interactiveSpring(), value: draggerOffset)
                 .foregroundColor(isDragging ? Color.primary : Color.secondary)
 //                .padding()
                 .imageScale(.large)

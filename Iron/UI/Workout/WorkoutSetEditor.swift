@@ -270,7 +270,7 @@ struct WorkoutSetEditor : View {
             }
         }
         .padding([.top, .bottom])
-        .drawingGroup() /// fixes visual bug with show/hide animation of this view
+//        .drawingGroup() /// fixes visual bug with show/hide animation of this view
         .gesture(DragGesture()
             .onEnded({ drag in
                 let width = drag.predictedEndTranslation.width
