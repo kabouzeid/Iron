@@ -15,19 +15,30 @@ struct WorkoutRoutineSetCell: View {
     
     var isSelected = false
     
+    private var repetitionIntervalString: String? {
+       return Self.repetitionIntervalString(
+                minRepetitions: workoutRoutineSet.minRepetitions?.intValue,
+                maxRepetitions: workoutRoutineSet.maxRepetitions?.intValue
+       )
+    }
+    
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Group {
-                    if let interval = Self.repetitionIntervalText(minRepetitions: workoutRoutineSet.minRepetitions?.intValue, maxRepetitions: workoutRoutineSet.maxRepetitions?.intValue) {
-                        HStack {
-                            Image(systemName: "target")
-                            Text("\(interval) reps")
-                        }
-                    } else {
-                        Text("Set")
-                    }
-                }.foregroundColor(isSelected ? .accentColor : .primary)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Set")
+                    
+                    Text(repetitionIntervalString ?? " ")
+                        .background(
+                            Group {
+                                if isSelected {
+                                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                        .stroke(Color.accentColor)
+                                        .padding(-4)
+                                }
+                            }
+                        )
+                }
                 
                 workoutRoutineSet.comment.map {
                     Text($0.enquoted)
@@ -57,7 +68,7 @@ struct WorkoutRoutineSetCell: View {
 }
 
 extension WorkoutRoutineSetCell {
-    static func repetitionIntervalText(minRepetitions: Int?, maxRepetitions: Int?) -> String? {
+    static func repetitionIntervalString(minRepetitions: Int?, maxRepetitions: Int?) -> String? {
         if let minRepetitions = minRepetitions {
             if let maxRepetitions = maxRepetitions {
                 // NOTE: this is an en-dash and not a hyphen
@@ -117,7 +128,7 @@ struct WorkoutRoutineSetCell_Previews: PreviewProvider {
         List {
             WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet1, index: 1, isSelected: false)
             
-            WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet2, index: 2, isSelected: false)
+            WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet2, index: 2, isSelected: true)
             
             WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet3, index: 3, isSelected: false)
             

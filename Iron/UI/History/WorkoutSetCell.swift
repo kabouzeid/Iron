@@ -69,12 +69,10 @@ struct WorkoutSetCell: View {
                             }
                         )
                     
-                    if let interval = WorkoutRoutineSetCell.repetitionIntervalText(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
+                    if let interval = WorkoutRoutineSetCell.repetitionIntervalString(minRepetitions: workoutSet.minTargetRepetitions?.intValue, maxRepetitions: workoutSet.maxTargetRepetitions?.intValue) {
                         Group {
                             if !isPlaceholder {
                                 Text("/")
-                            } else {
-                                Text(":")
                             }
                             
                             Text("\(interval)")
