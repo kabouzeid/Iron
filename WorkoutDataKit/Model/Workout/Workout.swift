@@ -10,6 +10,10 @@ import CoreData
 import Combine
 import os.log
 
+extension Workout {
+    public var id: NSManagedObjectID { self.objectID }
+}
+
 public class Workout: NSManagedObject, Codable {
     public static var currentWorkoutFetchRequest: NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()

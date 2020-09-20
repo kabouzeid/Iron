@@ -8,6 +8,11 @@
 
 import CoreData
 
+extension WorkoutRoutineSet {
+    public var id: NSManagedObjectID { self.objectID }
+}
+
+
 public class WorkoutRoutineSet: NSManagedObject, Codable {
     public static let supportedTags = [WorkoutSetTag.dropSet]
     

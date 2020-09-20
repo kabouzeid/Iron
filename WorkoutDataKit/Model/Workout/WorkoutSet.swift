@@ -9,6 +9,10 @@
 import CoreData
 import Combine
 
+extension WorkoutSet {
+    public var id: NSManagedObjectID { self.objectID }
+}
+
 public class WorkoutSet: NSManagedObject, Codable {
     public static var MAX_REPETITIONS: Int16 = 9999
     public static var MAX_WEIGHT: Double = 99999

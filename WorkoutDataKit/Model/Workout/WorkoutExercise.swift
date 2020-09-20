@@ -9,6 +9,10 @@
 import CoreData
 import Combine
 
+extension WorkoutExercise {
+    public var id: NSManagedObjectID { self.objectID }
+}
+
 public class WorkoutExercise: NSManagedObject, Codable {
     public static func historyFetchRequest(of exerciseUuid: UUID?, from: Date? = nil, until: Date? = nil) -> NSFetchRequest<WorkoutExercise> {
         let request: NSFetchRequest<WorkoutExercise> = WorkoutExercise.fetchRequest()

@@ -8,6 +8,10 @@
 
 import CoreData
 
+extension WorkoutPlan {
+    public var id: NSManagedObjectID { self.objectID }
+}
+
 public class WorkoutPlan: NSManagedObject, Codable {
     public class func create(context: NSManagedObjectContext) -> WorkoutPlan {
         let workoutPlan = WorkoutPlan(context: context)
