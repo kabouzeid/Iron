@@ -24,6 +24,14 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         }
     }
     
+    var keepRestTimerRunning: Bool = false {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    
     var selectedSetText: String? {
         willSet {
             DispatchQueue.main.async {

@@ -214,7 +214,7 @@ extension WatchConnectionManager {
         }
     }
     
-    func updateWatchWorkoutRestTimerEnd(end: Date?, uuid: UUID) {
+    func updateWatchWorkoutRestTimer(end: Date?, keepRunning: Bool?, uuid: UUID) {
         os_log("Updating watch workout rest timer end", log: .watch, type: .default)
         
         guard isActivated else {
@@ -224,11 +224,16 @@ extension WatchConnectionManager {
         if currentWatchWorkoutUuid != uuid {
             os_log("Sending update watch workout rest timer end for different uuid", log: .watch, type: .error)
         }
+        
+        var args: [String : Any] = [PayloadKey.Arg.uuid : uuid.uuidString]
         if let end = end {
-            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionRestTimerEnd : [PayloadKey.Arg.end : end, PayloadKey.Arg.uuid : uuid.uuidString]])
-        } else {
-            sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionRestTimerEnd : [PayloadKey.Arg.uuid : uuid.uuidString]])
+            args[PayloadKey.Arg.end] = end
         }
+        if let keepRunning = keepRunning {
+            args[PayloadKey.Arg.keepRestTimerRunning] = keepRunning
+        }
+        
+        sendUserInfo(userInfo: [PayloadKey.updateWorkoutSessionRestTimer : args])
     }
     
     func updateWatchWorkoutSelectedSet(text: String?, uuid: UUID) {

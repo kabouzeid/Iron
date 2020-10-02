@@ -104,14 +104,16 @@ extension PhoneConnectionManager {
             handleUpdateWorkoutSessionStartMessage(message: updateStartMessage)
         } else if let updateEndMessage = message[PayloadKey.updateWorkoutSessionEnd] as? [String : Any] {
             handleUpdateWorkoutSessionEndMessage(message: updateEndMessage)
-        } else if let updateRestTimerEndMessage = message[PayloadKey.updateWorkoutSessionRestTimerEnd] as? [String : Any] {
-            handleUpdateRestTimerEndMessage(message: updateRestTimerEndMessage)
+        } else if let updateRestTimerMessage = message[PayloadKey.updateWorkoutSessionRestTimer] as? [String : Any] {
+            handleUpdateRestTimerMessage(message: updateRestTimerMessage)
         } else if let updateSelectedSetMessage = message[PayloadKey.updateWorkoutSessionSelectedSet] as? [String : Any] {
             handleUpdateSelectedSetMessage(message: updateSelectedSetMessage)
         } else if let discardMessage = message[PayloadKey.discardWorkoutSession] as? [String : Any] {
             handleDiscardWorkoutSessionMessage(message: discardMessage)
         } else if let unprepare = message[PayloadKey.ignoredPreparedWorkoutSession] as? Bool, unprepare {
             handleIgnoredPreparedWorkoutSession()
+        } else {
+            assertionFailure("Unrecognized message: \(message)")
         }
     }
     
@@ -180,16 +182,17 @@ extension PhoneConnectionManager {
         WorkoutSessionManagerStore.shared.updateWorkoutSessionEnd(end: end, uuid: uuid)
     }
     
-    private func handleUpdateRestTimerEndMessage(message: [String : Any]) {
+    private func handleUpdateRestTimerMessage(message: [String : Any]) {
         // this message is only valid if the current workoutSession was started with the same UUID
         
         let end = message[PayloadKey.Arg.end] as? Date // nil is allowed
+        let keepRunning = message[PayloadKey.Arg.keepRestTimerRunning] as? Bool // nil is allowed
         guard let uuidString = message[PayloadKey.Arg.uuid] as? String, let uuid = UUID(uuidString: uuidString) else {
-            assertionFailure("update rest timer end with no uuid parameter")
+            assertionFailure("update rest timer with no uuid parameter")
             return
         }
         
-        WorkoutSessionManagerStore.shared.updateWorkoutSessionRestTimerEnd(end: end, uuid: uuid)
+        WorkoutSessionManagerStore.shared.updateWorkoutSessionRestTimer(end: end, keepRunning: keepRunning, uuid: uuid)
     }
     
     private func handleUpdateSelectedSetMessage(message: [String : Any]) {

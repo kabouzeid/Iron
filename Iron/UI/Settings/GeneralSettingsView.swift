@@ -21,7 +21,7 @@ struct GeneralSettingsView: View {
         }
     }
     
-    private var restTimerSection: some View {
+    private var restTimerTimesSection: some View {
         Section {
             Picker("Default Rest Time", selection: $settingsStore.defaultRestTime) {
                 ForEach(restTimerCustomTimes, id: \.self) { time in
@@ -43,6 +43,19 @@ struct GeneralSettingsView: View {
         }
     }
     
+    private var restTimerSection: some View {
+        Section(footer: Text("Keep the rest timer running even after it has elapsed. The time exceeded is displayed in red.")) {
+            Toggle("Keep Rest Timer Running", isOn: Binding(get: {
+                settingsStore.keepRestTimerRunning
+            }, set: { newValue in
+                settingsStore.keepRestTimerRunning = newValue
+                
+                // TODO in future somehow let RestTimerStore subscribe to this specific change
+                RestTimerStore.shared.notifyKeepRestTimerRunningChanged()
+            }))
+        }
+    }
+    
     private var oneRmSection: some View {
         Section(footer: Text("Maximum number of repetitions that a set can have for it to be considered in the one rep max (1RM) calculation. Keep in mind that higher values are less accurate.")) {
             Picker("Max Repetitions for 1RM", selection: $settingsStore.maxRepetitionsOneRepMax) {
@@ -56,6 +69,7 @@ struct GeneralSettingsView: View {
     var body: some View {
         Form {
             weightPickerSection
+            restTimerTimesSection
             restTimerSection
             oneRmSection
         }

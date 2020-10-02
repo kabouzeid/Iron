@@ -20,11 +20,6 @@ struct RestTimerView: View {
         restTimerStore.restTimerRemainingTime?.rounded(.up)
     }
     
-    private var timerText: String {
-        guard let remainingTime = roundedRemainingTime else { return "" }
-        return restTimerDurationFormatter.string(from: remainingTime) ?? ""
-    }
-    
     private var remainingTimeInPercent: CGFloat {
         guard let duration = restTimerStore.restTimerDuration else { return 0 }
         guard let remainingTime = roundedRemainingTime else { return 0 }
@@ -50,8 +45,11 @@ struct RestTimerView: View {
             progressCircle
                 .frame(width: 240, height: 240)
             VStack {
-                Text(timerText)
-                    .font(Font.system(size: 48, weight: .light).monospacedDigit())
+                if let remainingTime = roundedRemainingTime {
+                    Text(restTimerDurationFormatter.string(from: abs(remainingTime)) ?? "")
+                        .font(Font.system(size: 48, weight: .light).monospacedDigit())
+                        .foregroundColor(remainingTime < 0 ? .red : nil)
+                }
 
                 Text(restTimerDurationFormatter.string(from: restTimerStore.restTimerDuration ?? 0) ?? "")
                     .font(Font.subheadline.monospacedDigit())

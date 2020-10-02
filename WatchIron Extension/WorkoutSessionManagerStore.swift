@@ -409,13 +409,13 @@ extension WorkoutSessionManagerStore {
         }
     }
     
-    func updateWorkoutSessionRestTimerEnd(end: Date?, uuid: UUID) {
+    func updateWorkoutSessionRestTimer(end: Date?, keepRunning: Bool?, uuid: UUID) {
         WorkoutSessionManager.perform {
-            os_log("Updating workout session rest timer end=%@ uuid=%@", (end as NSDate?) ?? "nil", uuid as NSUUID)
+            os_log("Updating workout session rest timer end=%@ keepRunning=%@ uuid=%@", (end as NSDate?) ?? "nil", keepRunning.map { String(describing: $0) } ?? "nil", uuid as NSUUID)
             guard let workoutSessionManager = self.workoutSessionManager else {
                 // invalid
                 // should not happen normally, but can happen
-                print("warning: attempt to update rest timer end while no workout session manager is set")
+                print("warning: attempt to update rest timer while no workout session manager is set")
                 return
             }
             
@@ -432,6 +432,9 @@ extension WorkoutSessionManagerStore {
             }
             
             workoutSessionManager.restTimerEnd = end
+            if let keepRunning = keepRunning {
+                workoutSessionManager.keepRestTimerRunning = keepRunning
+            }
         }
     }
     

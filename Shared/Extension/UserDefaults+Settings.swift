@@ -14,6 +14,7 @@ extension UserDefaults {
         case defaultRestTime
         case defaultRestTimeDumbbellBased
         case defaultRestTimeBarbellBased
+        case keepRestTimerRunning
         case maxRepetitionsOneRepMax
         case autoBackup
         case watchCompanion
@@ -62,12 +63,21 @@ extension UserDefaults {
         }
     }
     
+    var keepRestTimerRunning: Bool {
+        set {
+            self.set(newValue, forKey: SettingsKeys.keepRestTimerRunning.rawValue)
+        }
+        get {
+            self.value(forKey: SettingsKeys.keepRestTimerRunning.rawValue) as? Bool ?? true // default true
+        }
+    }
+    
     var maxRepetitionsOneRepMax: Int {
         set {
             self.set(newValue, forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue)
         }
         get {
-            (self.value(forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue) as? Int)?.clamped(to: maxRepetitionsOneRepMaxValues) ?? 5
+            (self.value(forKey: SettingsKeys.maxRepetitionsOneRepMax.rawValue) as? Int)?.clamped(to: maxRepetitionsOneRepMaxValues) ?? 5 // default 5
         }
     }
     
@@ -76,7 +86,7 @@ extension UserDefaults {
             self.set(newValue, forKey: SettingsKeys.autoBackup.rawValue)
         }
         get {
-            self.bool(forKey: SettingsKeys.autoBackup.rawValue)
+            self.value(forKey: SettingsKeys.autoBackup.rawValue) as? Bool ?? false // default false
         }
     }
     
@@ -85,7 +95,7 @@ extension UserDefaults {
             self.set(newValue, forKey: SettingsKeys.watchCompanion.rawValue)
         }
         get {
-            self.value(forKey: SettingsKeys.watchCompanion.rawValue) as? Bool ?? true
+            self.value(forKey: SettingsKeys.watchCompanion.rawValue) as? Bool ?? true // default true
         }
     }
 }

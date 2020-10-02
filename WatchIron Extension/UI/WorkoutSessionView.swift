@@ -27,22 +27,6 @@ struct WorkoutSessionView: View {
         }
     }
     
-    private var burnedCalories: Double? {
-        workoutSessionManager.burnedCalories
-    }
-    
-    private var burnedCaloriesString: String {
-        burnedCalories.map { String(format: "%.0f", $0) } ?? "--"
-    }
-    
-    private var mostRecentHeartRate: Double? {
-        workoutSessionManager.mostRecentHeartRate
-    }
-    
-    private var mostRecentHeartRateString: String {
-        mostRecentHeartRate.map { String(format: "%.0f", $0) } ?? "--"
-    }
-    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             HStack(alignment: .center) {
@@ -55,7 +39,7 @@ struct WorkoutSessionView: View {
             }
             
             HStack(alignment: .firstTextBaseline) {
-                RestTimerView(refresher: timeRefresher, end: workoutSessionManager.restTimerEnd)
+                RestTimerView(refresher: timeRefresher, end: workoutSessionManager.restTimerEnd, keepRunning: workoutSessionManager.keepRestTimerRunning)
                     .font(Font.system(size: labelSize * 1.5).monospacedDigit())
                 Spacer()
                 Image(systemName: "timer")
@@ -64,9 +48,13 @@ struct WorkoutSessionView: View {
             }
             
             HStack(alignment: .firstTextBaseline) {
-                Text(burnedCaloriesString)
-                    .foregroundColor(burnedCalories == nil ? .secondary : .primary)
-                    .font(.system(size: labelSize * 1.5))
+                Group {
+                    if let burnedCalories = workoutSessionManager.burnedCalories {
+                        Text(String(format: "%.0f", burnedCalories))
+                    } else {
+                        Text("0").foregroundColor(.clear)
+                    }
+                }.font(.system(size: labelSize * 1.5))
                 Spacer()
                 HStack(alignment: .center) {
                     Text("kcal".uppercased())
@@ -77,15 +65,19 @@ struct WorkoutSessionView: View {
             }
             
             HStack(alignment: .firstTextBaseline) {
-                Text(mostRecentHeartRateString)
-                    .foregroundColor(mostRecentHeartRate == nil ? .secondary : .primary)
-                    .font(.system(size: labelSize * 1.5))
+                Group {
+                    if let mostRecentHeartRate = workoutSessionManager.mostRecentHeartRate {
+                        Text(String(format: "%.0f", mostRecentHeartRate))
+                    } else {
+                        Text("0").foregroundColor(.clear)
+                    }
+                }.font(.system(size: labelSize * 1.5))
                 
                 Spacer()
                 
                 HStack(alignment: .center) {
                     Text("bpm".uppercased())
-                    PulsatingHeartView(bpm: mostRecentHeartRate)
+                    PulsatingHeartView(bpm: workoutSessionManager.mostRecentHeartRate)
                 }
                 .foregroundColor(.red)
                 .font(.system(size: labelSize, weight: .bold, design: .rounded))
@@ -115,8 +107,11 @@ private struct ElapsedTimeView: View {
     let end: Date?
     
     var body: some View {
-        Text(Self.durationFormatter.string(from: start ?? Date(), to: end ?? Date()) ?? "")
-            .foregroundColor(start == nil ? .secondary : .primary)
+        if let start = start {
+            Text(Self.durationFormatter.string(from: start, to: end ?? Date()) ?? "")
+        } else {
+            Text("00:00").foregroundColor(.clear)
+        }
     }
 }
 
@@ -132,11 +127,12 @@ private struct RestTimerView: View {
     }()
     
     let end: Date?
+    let keepRunning: Bool
     
     private var remainingTime: TimeInterval? {
         guard let end = end else { return nil }
         let remainingTime = end.timeIntervalSince(Date())
-        guard remainingTime >= 0 else { return nil }
+        guard remainingTime >= 0 || keepRunning else { return nil }
         return remainingTime
     }
     
@@ -145,13 +141,13 @@ private struct RestTimerView: View {
         remainingTime?.rounded(.up)
     }
     
-    private var timerText: String {
-        Self.durationFormatter.string(from: roundedRemainingTime ?? 0) ?? ""
-    }
-    
     var body: some View {
-        Text(timerText)
-            .foregroundColor(remainingTime == nil ? .secondary : .primary)
+        if let remainingTime = roundedRemainingTime {
+            Text(Self.durationFormatter.string(from: abs(remainingTime)) ?? "00:00")
+                .foregroundColor(remainingTime < 0 ? .red : .primary)
+        } else {
+            Text("00:00").foregroundColor(.clear)
+        }
     }
 }
 

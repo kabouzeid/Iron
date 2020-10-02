@@ -59,6 +59,16 @@ final class SettingsStore: ObservableObject {
         }
     }
     
+    var keepRestTimerRunning: Bool {
+        get {
+            userDefaults.keepRestTimerRunning
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.keepRestTimerRunning = newValue
+        }
+    }
+    
     var maxRepetitionsOneRepMax: Int {
         get {
             userDefaults.maxRepetitionsOneRepMax

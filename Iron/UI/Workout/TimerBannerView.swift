@@ -75,13 +75,15 @@ struct TimerBannerView: View {
             Button(action: {
                 self.activeSheet = .restTimer
             }) {
+                let remainingTime = restTimerStore.restTimerRemainingTime
                 HStack {
                     Image(systemName: "timer")
-                    restTimerStore.restTimerRemainingTime.map({
-                        Text(restTimerDurationFormatter.string(from: $0.rounded(.up)) ?? "")
+                    if let remainingTime = remainingTime {
+                        Text(restTimerDurationFormatter.string(from: abs(remainingTime.rounded(.up))) ?? "")
                             .font(Font.body.monospacedDigit())
-                    })
+                    }
                 }
+                .foregroundColor(remainingTime ?? 0 < 0 ? .red : nil)
                 .padding()
             }
         }
