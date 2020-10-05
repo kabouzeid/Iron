@@ -14,7 +14,7 @@ struct ActivityWorkoutsPerWeekCell : View {
     private var chartView: some View {
         Group {
             if entitlementStore.isPro {
-                ActivityChartView()
+                ActivityWorkoutsPerWeekView()
             } else {
                 ActivityDemoChartView().overlay(UnlockProOverlay())
             }
@@ -44,7 +44,7 @@ struct ActivityWorkoutsPerWeekCell : View {
 }
 
 #if DEBUG
-struct ActivityChartViewCell_Previews : PreviewProvider {
+struct ActivityWorkoutsPerWeekViewCell_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ActivityWorkoutsPerWeekCell()

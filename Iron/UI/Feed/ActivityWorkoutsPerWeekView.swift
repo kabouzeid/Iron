@@ -1,5 +1,5 @@
 //
-//  ActivityChartView.swift
+//  ActivityWorkoutsPerWeekView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.08.19.
@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 import WorkoutDataKit
 
-struct ActivityChartView: View {
+struct ActivityWorkoutsPerWeekView: View {
     @EnvironmentObject var exerciseStore: ExerciseStore
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -91,7 +91,7 @@ struct ActivityChartView: View {
 #if DEBUG
 struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityChartView()
+        ActivityWorkoutsPerWeekView()
             .mockEnvironment(weightUnit: .metric, isPro: true)
             .frame(height: 250)
             .previewLayout(.sizeThatFits)

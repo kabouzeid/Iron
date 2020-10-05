@@ -24,7 +24,7 @@ struct ActivitySummaryLast7DaysCell: View {
             Divider()
                 .padding([.top, .bottom], 3)
             
-            FeedBannerView()
+            ActivitySummaryLast7DaysView()
                 .padding([.top, .bottom], 8)
         }
     }

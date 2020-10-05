@@ -1,5 +1,5 @@
 //
-//  FeedBannerView.swift
+//  ActivitySummaryLast7DaysView.swift
 //  Sunrise Fit
 //
 //  Created by Karim Abou Zeid on 19.06.19.
@@ -11,11 +11,11 @@ import CoreData
 import Combine
 import WorkoutDataKit
 
-struct FeedBannerView : View {
+struct ActivitySummaryLast7DaysView: View {
     @EnvironmentObject var settingsStore: SettingsStore
     
-    @FetchRequest(fetchRequest: FeedBannerView.sevenDaysFetchRequest) var workoutsFromSevenDaysAgo
-    @FetchRequest(fetchRequest: FeedBannerView.fourteenDaysFetchRequest) var workoutsFromFourteenDaysAgo
+    @FetchRequest(fetchRequest: ActivitySummaryLast7DaysView.sevenDaysFetchRequest) var workoutsFromSevenDaysAgo
+    @FetchRequest(fetchRequest: ActivitySummaryLast7DaysView.fourteenDaysFetchRequest) var workoutsFromFourteenDaysAgo
     
     private static var sevenDaysAgo: Date {
        Calendar.current.date(byAdding: .day, value: -7, to: Date())!
@@ -54,7 +54,7 @@ struct FeedBannerView : View {
     }()
     
     private func percentString(of: Double) -> String {
-        FeedBannerView.percentNumberFormatter.string(from: of as NSNumber) ?? "\(String(format: "%.1f", of * 100)) %"
+        ActivitySummaryLast7DaysView.percentNumberFormatter.string(from: of as NSNumber) ?? "\(String(format: "%.1f", of * 100)) %"
     }
 
     private var bannerViewEntries: [BannerViewEntry] {
@@ -145,9 +145,9 @@ struct FeedBannerView : View {
 }
 
 #if DEBUG
-struct SUISummaryView_Previews : PreviewProvider {
+struct ActivitySummaryLast7DaysView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedBannerView()
+        ActivitySummaryLast7DaysView()
             .mockEnvironment(weightUnit: .metric, isPro: true)
             .previewLayout(.sizeThatFits)
     }
