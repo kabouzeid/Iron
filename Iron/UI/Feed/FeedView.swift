@@ -15,7 +15,30 @@ struct FeedView : View {
     @EnvironmentObject var exerciseStore: ExerciseStore
     @ObservedObject private var pinnedChartsStore = PinnedChartsStore.shared
     
-    @State private var showingPinnedChartSelector = false
+    @State private var activeSheet: SheetType?
+    
+    private enum SheetType: Identifiable {
+        case pinnedChartSelector
+        case pinnedChartEditor
+        
+        var id: Self { self }
+    }
+    
+    private func sheetView(type: SheetType) -> AnyView {
+        switch type {
+        case .pinnedChartSelector:
+            return PinnedChartSelectorSheet(exercises: self.exerciseStore.shownExercises) { pinnedChart in
+                self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
+            }
+            .environmentObject(self.pinnedChartsStore)
+            .typeErased
+        case .pinnedChartEditor:
+            return PinnedChartEditSheet()
+                .environmentObject(pinnedChartsStore)
+                .environmentObject(exerciseStore)
+                .typeErased
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -25,39 +48,72 @@ struct FeedView : View {
                     FeedBannerView()
                 }
                 
-                Section {
-                    ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
-                        self.exerciseStore.find(with: chart.exerciseUuid).map {
-                            ExerciseChartViewCell(exercise: $0, measurementType: chart.measurementType)
+                ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
+                    if let exercise = self.exerciseStore.find(with: chart.exerciseUuid) {
+                        Section {
+                            ExerciseChartViewCell(exercise: exercise, measurementType: chart.measurementType)
                         }
                     }
-                    .onDelete { offsets in
-                        self.pinnedChartsStore.pinnedCharts.remove(atOffsets: offsets)
-                    }
-                    .onMove { source, destination in
-                        self.pinnedChartsStore.pinnedCharts.move(fromOffsets: source, toOffset: destination)
-                    }
-                    Button(action: {
-                        self.showingPinnedChartSelector = true
-                    }) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Add Chart")
-                        }
+                }
+                
+                Button(action: {
+                    activeSheet = .pinnedChartSelector
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Pin Chart")
                     }
                 }
             }
             .listStyleCompat_InsetGroupedListStyle()
             .navigationBarTitle(Text("Feed"))
-            .navigationBarItems(trailing: EditButton())
-            .sheet(isPresented: $showingPinnedChartSelector) {
-                PinnedChartSelectorSheet(exercises: self.exerciseStore.shownExercises) { pinnedChart in
-                    self.pinnedChartsStore.pinnedCharts.append(pinnedChart)
-                }
-                .environmentObject(self.pinnedChartsStore)
+            .navigationBarItems(trailing: Button("Edit") { activeSheet = .pinnedChartEditor })
+            .sheet(item: $activeSheet) { type in
+                sheetView(type: type)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
+
+private struct PinnedChartEditSheet: View {
+    @EnvironmentObject var pinnedChartsStore: PinnedChartsStore
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            SheetBar(title: "Edit Charts", leading: Button("Close") { self.presentationMode.wrappedValue.dismiss() }, trailing: EmptyView()).padding()
+            
+            Divider()
+            
+            List {
+                ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in
+                    Text((exerciseStore.find(with: chart.exerciseUuid)?.title ?? "Unknown Exercise") + " (\(chart.measurementType.title))")
+                }
+                .onDelete { offsets in
+                    self.pinnedChartsStore.pinnedCharts.remove(atOffsets: offsets)
+                }
+                .onMove { source, destination in
+                    self.pinnedChartsStore.pinnedCharts.move(fromOffsets: source, toOffset: destination)
+                }
+            }
+            .listStyleCompat_InsetGroupedListStyle()
+            .placeholder(show: pinnedChartsStore.pinnedCharts.isEmpty,
+                         VStack {
+                            Spacer()
+                            
+                            Text("You don't have any charts pinned.")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.secondary)
+                                .padding()
+                            
+                            Spacer()
+                         }
+            )
+        }
+        .environment(\.editMode, .constant(.active))
     }
 }
 
@@ -99,7 +155,7 @@ private struct PinnedChartSelectorSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
-                SheetBar(title: "Add Chart", leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
+                SheetBar(title: "Pin Chart", leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
                 TextField("Search", text: $filter.filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
                     .padding(.top)
