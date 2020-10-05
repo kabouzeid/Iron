@@ -42,7 +42,7 @@ struct FeedView : View {
                     }) {
                         HStack {
                             Image(systemName: "plus")
-                            Text("Add Widget")
+                            Text("Add Chart")
                         }
                     }
                 }
@@ -99,7 +99,7 @@ private struct PinnedChartSelectorSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
-                SheetBar(title: "Add Widget", leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
+                SheetBar(title: "Add Chart", leading: Button("Cancel") { self.resetAndDismiss() }, trailing: EmptyView())
                 TextField("Search", text: $filter.filter)
                     .textFieldStyle(SearchTextFieldStyle(text: $filter.filter))
                     .padding(.top)
