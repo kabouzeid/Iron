@@ -88,6 +88,7 @@ struct WorkoutDetailView : View {
         List {
             Section {
                 WorkoutDetailBannerView(workout: workout)
+                    .padding([.top, .bottom])
                     .listRowBackground(workout.muscleGroupColor(in: self.exerciseStore.exercises))
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }

@@ -1,39 +1,35 @@
 //
-//  PinnedChartViewCell.swift
+//  ActivityWorkoutsPerWeekCell.swift
 //  Sunrise Fit
 //
-//  Created by Karim Abou Zeid on 20.06.19.
+//  Created by Karim Abou Zeid on 19.06.19.
 //  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
 //
 
 import SwiftUI
-import WorkoutDataKit
 
-struct ExerciseChartViewCell : View {
+struct ActivityWorkoutsPerWeekCell : View {
     @EnvironmentObject var entitlementStore: EntitlementStore
-    
-    var exercise: Exercise
-    var measurementType: WorkoutExerciseChartData.MeasurementType
     
     private var chartView: some View {
         Group {
             if entitlementStore.isPro {
-                ExerciseChartView(exercise: exercise, measurementType: measurementType)
+                ActivityChartView()
             } else {
-                ExerciseDemoChartView(exercise: exercise, measurementType: measurementType).overlay(UnlockProOverlay())
+                ActivityDemoChartView().overlay(UnlockProOverlay())
             }
         }
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(exercise.title)
+            Text("Activity")
                 .bold()
                 .font(.subheadline)
-                .foregroundColor(exercise.muscleGroupColor)
+                .foregroundColor(.accentColor)
                 .padding([.top, .bottom], 5)
             
-            Text(measurementType.title + (entitlementStore.isPro ? "" : " (Demo data)"))
+            Text("Workouts Per Week" + (entitlementStore.isPro ? "" : " (Demo Data)"))
                 .font(.headline)
                 .padding([.top, .bottom], 3)
             
@@ -41,22 +37,22 @@ struct ExerciseChartViewCell : View {
                 .padding([.top, .bottom], 3)
             
             chartView
-                .frame(height: 200)
-                .padding(.bottom, 8)
+                .frame(height: 250)
+                .padding([.top, .bottom], 8)
         }
     }
 }
 
 #if DEBUG
-struct PinnedChartViewCell_Previews : PreviewProvider {
+struct ActivityChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         Group {
-            ExerciseChartViewCell(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
+            ActivityWorkoutsPerWeekCell()
                 .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewLayout(.sizeThatFits)
             
             List {
-                ExerciseChartViewCell(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
+                ActivityWorkoutsPerWeekCell()
                     .mockEnvironment(weightUnit: .metric, isPro: true)
                     .previewLayout(.sizeThatFits)
             }.listStyleCompat_InsetGroupedListStyle()

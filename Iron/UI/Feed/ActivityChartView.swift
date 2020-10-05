@@ -93,6 +93,8 @@ struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityChartView()
             .mockEnvironment(weightUnit: .metric, isPro: true)
+            .frame(height: 250)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

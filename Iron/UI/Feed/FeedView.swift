@@ -44,8 +44,11 @@ struct FeedView : View {
         NavigationView {
             List {
                 Section {
-                    ActivityChartViewCell()
-                    FeedBannerView()
+                    ActivityWorkoutsPerWeekCell()
+                }
+                
+                Section {
+                    ActivitySummaryLast7DaysCell()
                 }
                 
                 ForEach(pinnedChartsStore.pinnedCharts, id: \.self) { chart in

@@ -61,7 +61,7 @@ enum WorkoutExerciseChartData {
         var title: String {
             switch self {
             case .oneRM:
-                return "1RM"
+                return "Estimated 1RM"
             case .totalWeight:
                 return "Total Weight"
             case .totalSets:

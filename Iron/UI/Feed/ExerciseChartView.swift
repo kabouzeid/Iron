@@ -43,7 +43,13 @@ struct ExerciseChartView : View {
     }
     
     var body: some View {
-        _LineChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter)
+        _LineChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter, preCustomization: { chartView, data in
+            if #available(iOS 14.0, *) {
+                chartView.tintColor = UIColor(exercise.muscleGroupColor)
+            } else if let cgColor = exercise.muscleGroupColor.cgColor {
+                chartView.tintColor = UIColor(cgColor: cgColor)
+            }
+        })
     }
 }
 

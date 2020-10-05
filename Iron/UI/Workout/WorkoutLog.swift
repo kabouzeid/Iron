@@ -44,6 +44,7 @@ struct WorkoutLog: View {
         List {
             Section {
                 WorkoutLogBannerView(workout: workout)
+                    .padding([.top, .bottom])
                     .listRowBackground(workout.muscleGroupColor(in: exerciseStore.exercises))
                     .environment(\.colorScheme, .dark) // TODO: check whether accent color is actually dark
             }

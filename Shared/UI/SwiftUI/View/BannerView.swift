@@ -22,7 +22,6 @@ struct BannerView : View {
                 Spacer()
             }
         }
-        .padding([.top, .bottom])
     }
 }
 
