@@ -14,8 +14,12 @@ struct ExerciseStatisticsView : View {
     var exercise: Exercise
     
     var body: some View {
-        List(WorkoutExerciseChartData.MeasurementType.allCases, id: \.self) { measurementType in
-            ExerciseChartViewCell(exercise: self.exercise, measurementType: measurementType)
+        List {
+            ForEach(WorkoutExerciseChartData.MeasurementType.allCases, id: \.self) { measurementType in
+                Section {
+                    ExerciseChartViewCell(exercise: self.exercise, measurementType: measurementType)
+                }
+            }
         }
         .listStyleCompat_InsetGroupedListStyle()
     }
