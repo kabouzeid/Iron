@@ -13,6 +13,8 @@ import WorkoutDataKit
 struct ExerciseDemoChartView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     
+    @Environment(\.isEnabled) var isEnabled
+    
     var exercise: Exercise
     var measurementType: WorkoutExerciseChartData.MeasurementType
     
@@ -56,7 +58,22 @@ struct ExerciseDemoChartView : View {
             xAxisValueFormatter: xAxisValueFormatter,
             yAxisValueFormatter: yAxisValueFormatter,
             balloonValueFormatter: nil,
-            preCustomization: { uiView, _ in uiView.isUserInteractionEnabled = false }
+            preCustomization: { chartView, _ in
+                chartView.isUserInteractionEnabled = false
+                if isEnabled {
+                    if #available(iOS 14.0, *) {
+                        chartView.tintColor = UIColor(exercise.muscleGroupColor)
+                    } else if let cgColor = exercise.muscleGroupColor.cgColor {
+                        chartView.tintColor = UIColor(cgColor: cgColor)
+                    }
+                } else {
+                    if #available(iOS 14.0, *) {
+                        chartView.tintColor = UIColor(.accentColor)
+                    } else if let cgColor = Color.accentColor.cgColor {
+                        chartView.tintColor = UIColor(cgColor: cgColor)
+                    }
+                }
+            }
         )
     }
 }

@@ -20,7 +20,8 @@ struct ExerciseChartViewCell : View {
             if entitlementStore.isPro {
                 ExerciseChartView(exercise: exercise, measurementType: measurementType)
             } else {
-                ExerciseDemoChartView(exercise: exercise, measurementType: measurementType).overlay(UnlockProOverlay())
+                ExerciseDemoChartView(exercise: exercise, measurementType: measurementType)
+                    .overlay(UnlockProOverlay())
             }
         }
     }

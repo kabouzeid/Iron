@@ -12,12 +12,29 @@ import SwiftUI
 import WorkoutDataKit
 
 struct DeveloperSettings: View {
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
     var body: some View {
         Form {
             Button("Create default workout plans") {
                 createDefaultWorkoutPlans()
             }
+            
+            Toggle("Pro", isOn: isPro)
         }.navigationBarTitle("Developer", displayMode: .inline)
+    }
+    
+    var isPro: Binding<Bool> {
+        Binding {
+            entitlementStore.isPro
+        } set: { newValue in
+            if newValue {
+                entitlementStore.entitlements = IAPIdentifiers.pro
+            } else {
+                entitlementStore.entitlements = []
+            }
+        }
+
     }
 }
 

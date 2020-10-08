@@ -115,6 +115,10 @@ struct ActivityCalendarHeaderView: View {
 private struct ActivityCalendarCell: View {
     @Environment(\.calendar) var calendar
     
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
+    @State private var showingWorkout = false
+    
     let workoutDay: ActivityCalendarDay
     
     var hasWorkouts: Bool {
@@ -127,6 +131,13 @@ private struct ActivityCalendarCell: View {
     
     var day: Int {
         calendar.dateComponents([.day], from: workoutDay.date).day!
+    }
+    
+    @ViewBuilder
+    var navigationLink: some View {
+        if let workout = workoutDay.workouts.first {
+            NavigationLink(destination: WorkoutDetailView(workout: workout), isActive: $showingWorkout, label: { EmptyView() }).hidden()
+        }
     }
     
     var body: some View {
@@ -145,6 +156,12 @@ private struct ActivityCalendarCell: View {
                     }
                 }
             )
+            .modifier(if: entitlementStore.isPro) {
+                $0.onTapGesture {
+                    self.showingWorkout = true
+                }
+            }
+            .background(navigationLink)
     }
 }
 
@@ -187,17 +204,22 @@ private extension Calendar {
 
 struct ActivityCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 16) {
-            Divider()
-            
-            ActivityCalendarHeaderView()
-            
-            Divider()
-            
-            ActivityCalendarView()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
-                .frame(height: 250)
-                .previewLayout(.sizeThatFits)
+        NavigationView {
+            List {
+                VStack(spacing: 16) {
+                    Divider()
+                    
+                    ActivityCalendarHeaderView()
+                    
+                    Divider()
+                    
+                    ActivityCalendarView()
+                        .frame(height: 250)
+                }
+            }
+            .listStyleCompat_InsetGroupedListStyle()
         }
+        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .previewLayout(.sizeThatFits)
     }
 }
