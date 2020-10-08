@@ -66,12 +66,9 @@ struct BarStacksView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Spacer()
-                HStack(alignment: .bottom) {
-                    ForEach(self.barStacks, id: \.self) { barStack in
-                        BarStackView(barStack: barStack, entryHeight: self.entryHeight(height: geometry.size.height), spacing: self.spacing)
-                    }
+            HStack(alignment: .bottom) {
+                ForEach(self.barStacks, id: \.self) { barStack in
+                    BarStackView(barStack: barStack, entryHeight: self.entryHeight(height: geometry.size.height), spacing: self.spacing)
                 }
             }
         }
@@ -91,12 +88,12 @@ struct BarLabelsView: View {
         HStack {
             ForEach(0..<barStacks.count, id: \.self) { index in
                 ZStack {
-                    Rectangle() // just for correct spacing
-                        .frame(height: 0)
-                        .foregroundColor(.clear)
+                    Rectangle().frame(height: 0).hidden()
+                    
                     if index % self.threshold == 0 {
                         Text(self.barStacks[index].label)
-                            .font(.caption)
+                            .font(.subheadline)
+                            .bold()
                             .foregroundColor(.secondary)
                     }
                 }
@@ -166,7 +163,7 @@ struct BarChartView_Previews: PreviewProvider {
         return entries
     }
     
-    static var activityData: [BarStack] = [
+    static var chartData: [BarStack] = [
         BarStack(entries: randomBarStackEntries(), label: "1.7."),
         BarStack(entries: randomBarStackEntries(), label: "8.7."),
         BarStack(entries: randomBarStackEntries(), label: "15.7."),
@@ -179,10 +176,10 @@ struct BarChartView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            BarStacksView(barStacks: activityData, spacing: 2)
+            BarStacksView(barStacks: chartData, spacing: 2)
                 .frame(height: 200)
-            BarLabelsView(barStacks: activityData, labelCount: activityData.count)
-            LegendView(barStacks: activityData)
+            BarLabelsView(barStacks: chartData, labelCount: chartData.count)
+            LegendView(barStacks: chartData)
         }
         .padding([.leading, .trailing])
         .previewLayout(.sizeThatFits)

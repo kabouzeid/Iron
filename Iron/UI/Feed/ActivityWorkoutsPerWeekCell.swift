@@ -9,37 +9,22 @@
 import SwiftUI
 
 struct ActivityWorkoutsPerWeekCell : View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
-    private var chartView: some View {
-        Group {
-            if entitlementStore.isPro {
-                ActivityWorkoutsPerWeekView()
-            } else {
-                ActivityDemoChartView().overlay(UnlockProOverlay())
-            }
-        }
-    }
-    
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Activity")
                 .bold()
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
-                .padding([.top, .bottom], 5)
             
-            Text("Workouts Per Week" + (entitlementStore.isPro ? "" : " (Demo Data)"))
+            Text("Workouts Per Week")
                 .font(.headline)
-                .padding([.top, .bottom], 3)
             
             Divider()
-                .padding([.top, .bottom], 3)
             
-            chartView
-                .frame(height: 250)
-                .padding([.top, .bottom], 8)
+            ActivityWorkoutsPerWeekView()
+                .frame(height: 200)
         }
+        .padding([.top, .bottom], 8)
     }
 }
 

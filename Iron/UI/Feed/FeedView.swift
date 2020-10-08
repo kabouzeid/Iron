@@ -44,6 +44,10 @@ struct FeedView : View {
         NavigationView {
             List {
                 Section {
+                    ActivityCalendarViewCell()
+                }
+                
+                Section {
                     ActivityWorkoutsPerWeekCell()
                 }
                 

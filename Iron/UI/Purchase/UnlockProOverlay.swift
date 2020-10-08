@@ -13,6 +13,14 @@ struct UnlockProOverlay: View {
 
     @State private var showingPurchaseSheet = false
     
+    var size = Size.normal
+    
+    enum Size {
+        case normal
+        case large
+        case extraLarge
+    }
+    
     var body: some View {
         Button(action: {
             self.showingPurchaseSheet = true
@@ -22,6 +30,8 @@ struct UnlockProOverlay: View {
                 Image(systemName: "lock")
             }
             .padding()
+            .modifier(if: size == .large) { $0.padding() }
+            .modifier(if: size == .extraLarge) { $0.padding().padding() }
         }
         .buttonStyle(BorderlessButtonStyle()) // otherwise the whole table view cell becomes selected
         .background(VisualEffectView(effect: UIBlurEffect(style: .regular)).cornerRadius(8))

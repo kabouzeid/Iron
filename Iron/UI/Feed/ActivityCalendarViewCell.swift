@@ -1,5 +1,5 @@
 //
-//  ActivityLast7DaysCell.swift
+//  ActivityCalendarViewCell.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 05.10.20.
@@ -8,7 +8,9 @@
 
 import SwiftUI
 
-struct ActivitySummaryLast7DaysCell: View {
+struct ActivityCalendarViewCell: View {
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Activity")
@@ -16,26 +18,32 @@ struct ActivitySummaryLast7DaysCell: View {
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
             
-            Text("Summary Last 7 Days")
+            Text("Workouts Last 28 Days")
                 .font(.headline)
             
             Divider()
             
-            ActivitySummaryLast7DaysView()
+            ActivityCalendarHeaderView()
+                .padding([.top, .bottom], 4)
+            
+            Divider()
+            
+            ActivityCalendarView()
+                .frame(height: 250)
         }
         .padding([.top, .bottom], 8)
     }
 }
 
-struct ActivityLast7DaysCell_Previews: PreviewProvider {
+struct ActivityCalendarViewCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ActivitySummaryLast7DaysCell()
+            ActivityCalendarViewCell()
                 .mockEnvironment(weightUnit: .metric, isPro: true)
                 .previewLayout(.sizeThatFits)
             
             List {
-                ActivitySummaryLast7DaysCell()
+                ActivityCalendarViewCell()
                     .mockEnvironment(weightUnit: .metric, isPro: true)
             }.listStyleCompat_InsetGroupedListStyle()
         }

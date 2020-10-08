@@ -11,35 +11,42 @@ import CoreData
 import WorkoutDataKit
 
 struct ActivityWorkoutsPerWeekView: View {
-    @EnvironmentObject var exerciseStore: ExerciseStore
+    @Environment(\.calendar) var calendar
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(fetchRequest: Self.fetchRequest) var workoutHistory
+    @EnvironmentObject var exerciseStore: ExerciseStore
+    @EnvironmentObject var entitlementStore: EntitlementStore
     
-    private static let NUMBER_OF_WEEKS = 8
+    @FetchRequest(fetchRequest: Workout.fetchRequest()) var workoutHistory
     
-    private static let fetchRequest: NSFetchRequest<Workout> = {
+    static let NUMBER_OF_WEEKS = 7
+    
+    private static func fetchRequest(calendar: Calendar) -> NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
-        request.predicate = NSPredicate(format: "isCurrentWorkout != %@ AND start >= %@", NSNumber(booleanLiteral: true), Calendar.current.date(byAdding: Calendar.Component.weekOfYear ,value: -(NUMBER_OF_WEEKS - 1), to: Date())!.startOfWeek! as NSDate)
-        request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
+        request.predicate = NSPredicate(
+            format: "\(#keyPath(Workout.isCurrentWorkout)) != %@ AND \(#keyPath(Workout.start)) >= %@",
+            NSNumber(booleanLiteral: true),
+            calendar.startOfWeek(for: calendar.date(byAdding: .weekOfYear ,value: -(NUMBER_OF_WEEKS - 1), to: Date())!)! as NSDate
+        )
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
-    }()
+    }
     
     private static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.setLocalizedDateFormatFromTemplate("Md")
         return dateFormatter
     }()
+    
+    init() {
+        self._workoutHistory = FetchRequest(fetchRequest: Self.fetchRequest(calendar: calendar))
+    }
 
     private var weeks: [Date] {
-        var weeks = [Date]()
-        var date = Date().startOfWeek! // this week
-        weeks.append(date)
-        for _ in 1...Self.NUMBER_OF_WEEKS - 1 {
-            date = date.yesterday!.startOfWeek!
-            weeks.append(date)
-        }
-        return weeks.reversed()
+        let date = Date()
+        return (0..<Self.NUMBER_OF_WEEKS).map { i in
+            calendar.startOfWeek(for: calendar.date(byAdding: .weekOfYear, value: -i, to: date)!)!
+        }.reversed()
     }
     
     private func workoutsPerWeek(workouts: [Workout], weeks: [Date]) -> [([Workout], Date)] {
@@ -55,13 +62,13 @@ struct ActivityWorkoutsPerWeekView: View {
         }
     }
     
-    private var activityData: [BarStack] {
+    private var chartData: [BarStack] {
         workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
             let (workouts, week) = arg
             return BarStack(
                 entries: workouts.map { workout in
                     let muscleGroup = workout.muscleGroups(in: exerciseStore.exercises).first ?? "other"
-                    return BarStackEntry(color: Exercise.colorFor(muscleGroup: muscleGroup), label: muscleGroup.capitalized)
+                    return BarStackEntry(color: .accentColor /*Exercise.colorFor(muscleGroup: muscleGroup)*/, label: muscleGroup.capitalized)
                 },
                 label: Self.dateFormatter.string(from: week)
             )
@@ -69,32 +76,57 @@ struct ActivityWorkoutsPerWeekView: View {
     }
     
     private var hasData: Bool {
-        !activityData.flatMap { $0.entries }.isEmpty
+        !chartData.flatMap { $0.entries }.isEmpty
     }
-
-    var body: some View {
-        VStack {
-            if hasData {
-                BarStacksView(barStacks: activityData, spacing: 2, stackSize: 4) // assume 4 workouts / week
-            } else {
-                Color.clear.overlay(
-                    Text("No data available")
-                        .foregroundColor(.secondary)
-                )
-            }
-            BarLabelsView(barStacks: activityData, labelCount: activityData.count)
-            LegendView(barStacks: activityData)
+    
+    @ViewBuilder
+    private var chartView: some View {
+        if hasData {
+            BarStacksView(barStacks: chartData, spacing: 2, stackSize: 4) // assume 4 workouts / week
+        } else {
+            Color.clear.overlay(
+                Text("No data available")
+                    .foregroundColor(.secondary)
+            )
         }
+    }
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            chartView
+                .modifier(if: !entitlementStore.isPro) {
+                    $0.redacted_compat().overlay(UnlockProOverlay(size: .extraLarge))
+                }
+            
+            Divider()
+            
+            BarLabelsView(barStacks: chartData, labelCount: chartData.count)
+                .padding([.top, .bottom], 4)
+        }
+    }
+}
+
+extension Calendar {
+    func startOfWeek(for date: Date) -> Date? {
+        self.date(from: self.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date))
     }
 }
 
 #if DEBUG
 struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityWorkoutsPerWeekView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
-            .frame(height: 250)
-            .previewLayout(.sizeThatFits)
+        Group {
+            ActivityWorkoutsPerWeekView()
+                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .frame(height: 250)
+                .previewLayout(.sizeThatFits)
+            
+            List {
+                ActivityWorkoutsPerWeekView()
+                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .frame(height: 250)
+            }.listStyleCompat_InsetGroupedListStyle()
+        }
     }
 }
 #endif

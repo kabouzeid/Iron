@@ -12,12 +12,13 @@ import Combine
 import os.log
 
 public class WorkoutDataStorage {
-    public static var model: NSManagedObjectModel {
+    // make sure the model is only ever loaded once to avoid "Multiple NSEntityDescriptions Claim NSManagedObject Subclass" errors
+    public static var model: NSManagedObjectModel = {
         // TODO: try to use NSManagedObjectModel.mergedModel(from: [Bundle(for: Self.self))
-        guard let modelURL = Bundle(for: Self.self).url(forResource: "WorkoutData", withExtension: "momd") else { fatalError("invalid WorkoutData model URL") }
+        guard let modelURL = Bundle(for: WorkoutDataStorage.self).url(forResource: "WorkoutData", withExtension: "momd") else { fatalError("invalid WorkoutData model URL") }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else { fatalError("could not create managed object model from \(modelURL)") }
         return model
-    }
+    }()
     
     public let persistentContainer: NSPersistentContainer
     

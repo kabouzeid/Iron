@@ -26,24 +26,21 @@ struct ExerciseChartViewCell : View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(exercise.title)
                 .bold()
                 .font(.subheadline)
                 .foregroundColor(exercise.muscleGroupColor)
-                .padding([.top, .bottom], 5)
             
             Text(measurementType.title + (entitlementStore.isPro ? "" : " (Demo data)"))
                 .font(.headline)
-                .padding([.top, .bottom], 3)
             
             Divider()
-                .padding([.top, .bottom], 3)
             
             chartView
                 .frame(height: 200)
-                .padding(.bottom, 8)
         }
+        .padding([.top, .bottom], 8)
     }
 }
 
