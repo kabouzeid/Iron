@@ -17,6 +17,7 @@
 		8A0683BC239C77BB001F0A1E /* WorkoutDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */; };
 		8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC3023294EAD00081F4B /* UITabView.swift */; };
 		8A0ADC33232964E700081F4B /* WorkoutTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ADC32232964E700081F4B /* WorkoutTab.swift */; };
+		8A0C6E35252FB65100EA5F77 /* ActivitySummaryLast7DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0C6E34252FB65100EA5F77 /* ActivitySummaryLast7DaysView.swift */; };
 		8A0ECFCC242BBB9100C0B306 /* IronBackupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0ECFCB242BBB9100C0B306 /* IronBackupTests.swift */; };
 		8A0ECFD3242BC0A200C0B306 /* iron_backups in Resources */ = {isa = PBXBuildFile; fileRef = 8A0ECFD2242BC0A200C0B306 /* iron_backups */; };
 		8A1351B92389B407004959B9 /* UIApplication+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1351B82389B407004959B9 /* UIApplication+SwiftUI.swift */; };
@@ -332,7 +333,6 @@
 		8AC8063922BABC8C00086032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063822BABC8C00086032 /* SceneDelegate.swift */; };
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
-		8AC8064122BACECF00086032 /* ActivitySummaryLast7DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064022BACECE00086032 /* ActivitySummaryLast7DaysView.swift */; };
 		8AC8064422BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift */; };
 		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
@@ -529,6 +529,7 @@
 		8A08D3D52349486800B09687 /* WorkoutData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutData.xcdatamodel; sourceTree = "<group>"; };
 		8A0ADC3023294EAD00081F4B /* UITabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabView.swift; sourceTree = "<group>"; };
 		8A0ADC32232964E700081F4B /* WorkoutTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTab.swift; sourceTree = "<group>"; };
+		8A0C6E34252FB65100EA5F77 /* ActivitySummaryLast7DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySummaryLast7DaysView.swift; sourceTree = "<group>"; };
 		8A0ECFCB242BBB9100C0B306 /* IronBackupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronBackupTests.swift; sourceTree = "<group>"; };
 		8A0ECFD2242BC0A200C0B306 /* iron_backups */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iron_backups; sourceTree = "<group>"; };
 		8A1351B82389B407004959B9 /* UIApplication+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+SwiftUI.swift"; sourceTree = "<group>"; };
@@ -718,7 +719,6 @@
 		8AC8063822BABC8C00086032 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
-		8AC8064022BACECE00086032 /* ActivitySummaryLast7DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySummaryLast7DaysView.swift; sourceTree = "<group>"; };
 		8AC8064322BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWorkoutsPerWeekCell.swift; sourceTree = "<group>"; };
 		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
 		8AD329B7237608A700515B3B /* WorkoutData v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkoutData v3.xcdatamodel"; sourceTree = "<group>"; };
@@ -1497,7 +1497,7 @@
 				8AC8064322BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift */,
 				8AA02614230AF74C00324853 /* ActivityWorkoutsPerWeekView.swift */,
 				8A743DE0252B6DFA0037C162 /* ActivitySummaryLast7DaysCell.swift */,
-				8AC8064022BACECE00086032 /* ActivitySummaryLast7DaysView.swift */,
+				8A0C6E34252FB65100EA5F77 /* ActivitySummaryLast7DaysView.swift */,
 				8A743E13252B7AAF0037C162 /* ActivityCalendarViewCell.swift */,
 				8A743E0C252B7A9D0037C162 /* ActivityCalendarView.swift */,
 				8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */,
@@ -2125,7 +2125,6 @@
 				8AF07860239AF57A00CA95D6 /* WorkoutDataStorage+GroupStoreURL.swift in Sources */,
 				8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */,
 				8A81E85623328D610094BAAF /* PinnedChartsStore.swift in Sources */,
-				8AC8064122BACECF00086032 /* ActivitySummaryLast7DaysView.swift in Sources */,
 				8A1E5A2522E5AE950059329C /* NumericKeyboard.swift in Sources */,
 				8A1D989822C7C6AC0071225D /* WorkoutSetEditor.swift in Sources */,
 				8AA749A0240F197500A90F91 /* AboutView.swift in Sources */,
@@ -2173,6 +2172,7 @@
 				8AE0A79E233128280021EE23 /* Quote.swift in Sources */,
 				8A81CFB122E3B1CF00B11394 /* PinnedChart.swift in Sources */,
 				8A204B3D23676E7200F40F79 /* BackupFileStore.swift in Sources */,
+				8A0C6E35252FB65100EA5F77 /* ActivitySummaryLast7DaysView.swift in Sources */,
 				8A643E142147B8430044C3A1 /* BalloonMarker.swift in Sources */,
 				8A0683B3239C6171001F0A1E /* Intents.intentdefinition in Sources */,
 				8AF0786F239B0F9400CA95D6 /* ExerciseStore+shared.swift in Sources */,

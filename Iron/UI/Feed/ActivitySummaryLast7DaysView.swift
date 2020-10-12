@@ -1,47 +1,96 @@
 //
 //  ActivitySummaryLast7DaysView.swift
-//  Sunrise Fit
+//  Iron
 //
-//  Created by Karim Abou Zeid on 19.06.19.
-//  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
+//  Created by Karim Abou Zeid on 08.10.20.
+//  Copyright © 2020 Karim Abou Zeid Software. All rights reserved.
 //
 
 import SwiftUI
 import CoreData
-import Combine
 import WorkoutDataKit
 
 struct ActivitySummaryLast7DaysView: View {
+    @Environment(\.calendar) var calendar
+    
     @EnvironmentObject var settingsStore: SettingsStore
     
-    @FetchRequest(fetchRequest: ActivitySummaryLast7DaysView.sevenDaysFetchRequest) var workoutsFromSevenDaysAgo
-    @FetchRequest(fetchRequest: ActivitySummaryLast7DaysView.fourteenDaysFetchRequest) var workoutsFromFourteenDaysAgo
+    @FetchRequest(fetchRequest: Workout.fetchRequest()) var workoutsFromSevenDaysAgo // overwritten in init()
+    @FetchRequest(fetchRequest: Workout.fetchRequest()) var workoutsFromFourteenDaysAgo // overwritten in init()
     
-    private static var sevenDaysAgo: Date {
-       Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-    }
-    
-    private static var fourteenDaysAgo: Date {
-        Calendar.current.date(byAdding: .day, value: -7, to: sevenDaysAgo)!
-    }
-    
-    private static var sevenDaysFetchRequest: NSFetchRequest<Workout> {
+    private static func sevenDaysFetchRequest(sevenDaysAgo: Date) -> NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
         request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@ AND \(#keyPath(Workout.start)) >= %@", NSNumber(booleanLiteral: true), sevenDaysAgo as NSDate)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
     
-    private static var fourteenDaysFetchRequest: NSFetchRequest<Workout> {
+    private static func fourteenDaysFetchRequest(sevenDaysAgo: Date, fourteenDaysAgo: Date) -> NSFetchRequest<Workout> {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
         request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@ AND \(#keyPath(Workout.start)) >= %@ AND \(#keyPath(Workout.start)) < %@", NSNumber(booleanLiteral: true), fourteenDaysAgo as NSDate, sevenDaysAgo as NSDate)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
         return request
     }
     
+    init() {
+        let now = Date()
+        self._workoutsFromSevenDaysAgo = FetchRequest(fetchRequest: Self.sevenDaysFetchRequest(sevenDaysAgo: calendar.date(byAdding: .day, value: -7, to: now)!))
+        self._workoutsFromFourteenDaysAgo = FetchRequest(fetchRequest: Self.fourteenDaysFetchRequest(sevenDaysAgo: calendar.date(byAdding: .day, value: -7, to: now)!, fourteenDaysAgo: calendar.date(byAdding: .day, value: -14, to: now)!))
+    }
+    
+    var totalTime: (duration: TimeInterval, difference: Double) {
+        let totalTimeSevenDaysAgo = workoutsFromSevenDaysAgo.map { $0.safeDuration }.reduce(0, +)
+        let totalTimeFourteenDaysAgo = workoutsFromFourteenDaysAgo.map { $0.safeDuration }.reduce(0, +)
+        
+        var durationPercent = totalTimeSevenDaysAgo == 0 ? 0 : (totalTimeSevenDaysAgo / totalTimeFourteenDaysAgo) - 1
+        durationPercent = abs(durationPercent) < 0.001 ? 0 : durationPercent
+        
+        return (totalTimeSevenDaysAgo, durationPercent)
+    }
+    
+    var totalWeight: (weight: Double, difference: Double) {
+        let totalWeightSevenDaysAgo = workoutsFromSevenDaysAgo.map { $0.totalCompletedWeight ?? 0 }.reduce(0, +)
+        let totalWeightFourteenDaysAgo = workoutsFromFourteenDaysAgo.map { $0.totalCompletedWeight ?? 0 }.reduce(0, +)
+        
+        var weightPercent = totalWeightSevenDaysAgo == 0 ? 0 : (totalWeightSevenDaysAgo / totalWeightFourteenDaysAgo) - 1
+        weightPercent = abs(weightPercent) < 0.001 ? 0 : weightPercent
+        
+        return (totalWeightSevenDaysAgo, weightPercent)
+    }
+    
     var body: some View {
-        BannerView(entries: bannerViewEntries)
-            .lineLimit(2)
+        let totalTime = self.totalTime
+        let totalWeight = self.totalWeight
+        
+        VStack(alignment: .leading, spacing: 8) {
+            Entry(title: durationFormatter.string(from: totalTime.duration)!, percent: totalTime.difference)
+            Entry(title: WeightUnit.format(weight: totalWeight.weight, from: .metric, to: settingsStore.weightUnit), percent: totalWeight.difference)
+        }
+    }
+    
+    let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        formatter.allowedUnits = [.hour, .minute]
+        return formatter
+    }()
+}
+
+private struct Entry: View {
+    let title: String
+    let percent: Double
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            
+            Spacer()
+            
+            if percent != 0 {
+                Text(percentString(for: percent))
+                    .foregroundColor(percent < 0 ? .red : .green)
+            }
+        }
     }
     
     private static var percentNumberFormatter: NumberFormatter = {
@@ -53,103 +102,30 @@ struct ActivitySummaryLast7DaysView: View {
         return formatter
     }()
     
-    private func percentString(of: Double) -> String {
-        ActivitySummaryLast7DaysView.percentNumberFormatter.string(from: of as NSNumber) ?? "\(String(format: "%.1f", of * 100)) %"
-    }
-
-    private var bannerViewEntries: [BannerViewEntry] {
-        var entries = [BannerViewEntry]()
-
-        // compute the values
-        let valuesSevenDaysAgo = workoutsFromSevenDaysAgo.reduce((0, 0, 0)) { (result, workout) -> (TimeInterval, Int, Double) in
-            return (result.0 + workout.safeDuration, result.1 + (workout.numberOfCompletedSets ?? 0), result.2 + (workout.totalCompletedWeight ?? 0))
-        }
-        let valuesFourTeenDaysAgo = workoutsFromFourteenDaysAgo.reduce((0, 0, 0)) { (result, workout) -> (TimeInterval, Int, Double) in
-            return (result.0 + workout.safeDuration, result.1 + (workout.numberOfCompletedSets ?? 0), result.2 + (workout.totalCompletedWeight ?? 0))
-        }
-
-        // set the values
-
-        // Duration
-        var durationDetailText: String
-        var durationDetailColor: Color
-        var durationPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (valuesSevenDaysAgo.0 / valuesFourTeenDaysAgo.0) - 1
-        durationPercent = abs(durationPercent) < 0.001 ? 0 : durationPercent
-        if durationPercent > 0 {
-            durationDetailColor = Color.green
-            durationDetailText = "+"
-        } else if durationPercent < 0 {
-            durationDetailColor = Color.red
-            durationDetailText = ""
-        } else {
-            durationDetailColor = Color(UIColor.tertiaryLabel)
-            durationDetailText = "+"
-        }
-        durationDetailText += percentString(of: durationPercent)
-
-        entries.append(
-            BannerViewEntry(id: 0,
-                            title: Text("Duration\nLast 7 Days"),
-                            text: Text(Workout.durationFormatter.string(from: valuesSevenDaysAgo.0)!),
-                            detail: Text(durationDetailText),
-                            detailColor: durationDetailColor))
-
-        // Sets
-        var setsDetailText: String
-        var setsDetailColor: Color
-        var setsPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (Float(valuesSevenDaysAgo.1) / Float(valuesFourTeenDaysAgo.1)) - 1
-        setsPercent = abs(setsPercent) < 0.001 ? 0 : setsPercent
-        if setsPercent > 0 {
-            setsDetailColor = Color.green
-            setsDetailText = "+"
-        } else if setsPercent < 0 {
-            setsDetailColor = Color.red
-            setsDetailText = ""
-        } else {
-            setsDetailColor = Color(UIColor.tertiaryLabel)
-            setsDetailText = "+"
-        }
-        setsDetailText += percentString(of: Double(setsPercent))
-        entries.append(
-            BannerViewEntry(id: 1,
-                            title: Text("Sets\nLast 7 Days"),
-                            text: Text(String(valuesSevenDaysAgo.1)),
-                            detail: Text(setsDetailText),
-                            detailColor: setsDetailColor))
-
-        // Weight
-        var weightDetailText: String
-        var weightDetailColor: Color
-        var weightPercent = valuesFourTeenDaysAgo.0 == 0 ? 0 : (valuesSevenDaysAgo.2 / valuesFourTeenDaysAgo.2) - 1
-        weightPercent = abs(weightPercent) < 0.001 ? 0 : weightPercent
-        if weightPercent > 0 {
-            weightDetailColor = Color.green
-            weightDetailText = "+"
-        } else if weightPercent < 0 {
-            weightDetailColor = Color.red
-            weightDetailText = ""
-        } else {
-            weightDetailColor = Color(UIColor.tertiaryLabel)
-            weightDetailText = "+"
-        }
-        weightDetailText += percentString(of: weightPercent)
-        entries.append(
-            BannerViewEntry(id: 2,
-                            title: Text("Weight\nLast 7 Days"),
-                            text: Text(WeightUnit.format(weight: valuesSevenDaysAgo.2, from: .metric, to: settingsStore.weightUnit)),
-                            detail: Text(weightDetailText),
-                            detailColor: weightDetailColor))
-        
-        return entries
+    private func percentString(for percent: Double) -> String {
+        (percent > 0 ? "+" : "") + (Self.percentNumberFormatter.string(from: percent as NSNumber) ?? "\(String(format: "%.1f", percent * 100))%")
     }
 }
 
-#if DEBUG
-struct ActivitySummaryLast7DaysView_Previews: PreviewProvider {
+struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitySummaryLast7DaysView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
-            .previewLayout(.sizeThatFits)
+        List {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Activity")
+                    .bold()
+                    .font(.subheadline)
+                    .foregroundColor(.accentColor)
+                
+                Text("Summary Last 7 Days")
+                    .font(.headline)
+                
+                Divider()
+                
+                ActivitySummaryLast7DaysView()
+            }
+            .padding([.top, .bottom], 8)
+        }
+        .listStyleCompat_InsetGroupedListStyle()
+        .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
-#endif

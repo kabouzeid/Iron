@@ -95,6 +95,8 @@ struct BarLabelsView: View {
                             .font(.subheadline)
                             .bold()
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                 }
             }

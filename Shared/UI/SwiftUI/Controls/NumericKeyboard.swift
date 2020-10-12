@@ -10,6 +10,8 @@ import SwiftUI
 import AVKit
 
 struct NumericKeyboard: View {
+    @Environment(\.locale) var locale
+    
     @Binding var value: Double?
     @Binding var alwaysShowDecimalSeparator: Bool
     @Binding var minimumFractionDigits: Int
@@ -122,7 +124,7 @@ struct NumericKeyboard: View {
                     self.textKeyboardButton(label: Text("4"), value: "4", width: geometry.size.width / 3)
                     self.textKeyboardButton(label: Text("7"), value: "7", width: geometry.size.width / 3)
                     
-                    Self.textActionKeyboardButton(label: Text(self.allowsFloats ? (Locale.current.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
+                    Self.textActionKeyboardButton(label: Text(self.allowsFloats ? (locale.decimalSeparator ?? ".") : " "), width: geometry.size.width / 3) {
                         guard self.allowsFloats else { return }
                         if self.value == nil {
                             self.prepareNumberFormatter()
