@@ -107,7 +107,8 @@ private struct Entry: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+#if DEBUG
+struct ActivitySummaryLast7DaysView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             VStack(alignment: .leading, spacing: 8) {
@@ -129,3 +130,4 @@ struct SwiftUIView_Previews: PreviewProvider {
         .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }
+#endif

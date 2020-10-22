@@ -32,7 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         WatchConnectionManager.shared.activateSession()
         Shortcuts.setShortcutSuggestions()
-//        Shortcuts.setRelevantShortcuts()
+//        Shortcuts.setRelevantShortcuts() // This doesn't work, the watch shows the suggestion but gets an error when executed (tested with iOS 13.4)
+        if #available(iOS 14.0, *) {
+            WidgetKind.lastWorkout.reloadTimelines()
+        }
         return true
     }
     

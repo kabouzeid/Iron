@@ -37,24 +37,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let urlContext = URLContexts.first else { return } // for now we will only ever receive one URL
-        handleURLContext(urlContext: urlContext)
+        handleURLContexts(urlContexts: URLContexts)
     }
     
-    private func handleURLContext(urlContext: UIOpenURLContext) {
-        urlContext.url.downloadFile { result in
-            do {
-                switch result {
-                case .success():
-                    guard let backupData = try Self.urlData(url: urlContext.url, openInPlace: urlContext.options.openInPlace) else { return }
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .RestoreFromBackup, object: self, userInfo: [restoreFromBackupDataUserInfoKey : backupData])
+    private func handleURLContexts(urlContexts: Set<UIOpenURLContext>) {
+        // NOTE: currently, if for some reason there is more than 1 url context, we only process one of them
+        
+        if let urlContext = urlContexts.first(where: { $0.url.isFileURL }) {
+            urlContext.url.downloadFile { result in
+                do {
+                    switch result {
+                    case .success():
+                        guard let backupData = try Self.urlData(url: urlContext.url, openInPlace: urlContext.options.openInPlace) else { return }
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .RestoreFromBackup, object: self, userInfo: [restoreFromBackupDataUserInfoKey : backupData])
+                        }
+                    case .failure(let error):
+                        throw error
                     }
-                case .failure(let error):
-                    throw error
+                } catch {
+                    print(error)
                 }
-            } catch {
-                print(error)
+            }
+        } else if let urlContext = urlContexts.first(where: { $0.url.isDeepLinkURL }) {
+            if urlContext.url.host == DeepLink.startWorkout.rawValue {
+                let context = WorkoutDataStorage.shared.persistentContainer.viewContext
+                do {
+                    let count = try context.count(for: Workout.currentWorkoutFetchRequest)
+                    if count == 0 {
+                        let workout = Workout.create(context: context)
+                        do {
+                            os_log("Starting workout from deep link URL", log: .workoutData)
+                            try workout.start(startWatchCompanionErrorHandler: { error in
+                                // the Apple Watch wasn't started, most probably because the app is in the background
+                                os_log("Sending user notification to open the app because the watch app wasn't started. Probably because the app is in the background", log: .watch)
+                                NotificationManager.shared.requestStartedWorkoutFromBackgroundNotification()
+                            })
+                        } catch {
+                            os_log("Could not start workout: %@", log: .workoutData, type: .error, NSManagedObjectContext.descriptionWithDetailedErrors(error: error as NSError))
+                            context.delete(workout)
+                        }
+                    }
+                } catch {
+                    os_log("Could not get count of workouts", log: .workoutData, type: .error)
+                }
+                sceneState.selectedTab = .workout
             }
         }
     }
@@ -88,9 +115,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // the urls come from scene will connect, but they are handled here
         if let urlContexts = urlContexts {
             self.urlContexts = nil // don't process them again
-            if let urlContext = urlContexts.first { // for now we will only ever receive one URL
-                self.handleURLContext(urlContext: urlContext)
-            }
+            self.handleURLContexts(urlContexts: urlContexts)
         }
     }
 

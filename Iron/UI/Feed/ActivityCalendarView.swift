@@ -202,6 +202,7 @@ private extension Calendar {
     }
 }
 
+#if DEBUG
 struct ActivityCalendarView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -223,3 +224,4 @@ struct ActivityCalendarView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
+#endif

@@ -148,6 +148,8 @@
 		8A86193B236DAB7100C1E96C /* WatchIron.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8A86191C236DAB6E00C1E96C /* WatchIron.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A861946236DAC0100C1E96C /* WatchConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861945236DAC0100C1E96C /* WatchConnectionManager.swift */; };
 		8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861947236DB17C00C1E96C /* PhoneConnectionManager.swift */; };
+		8A8A9C752534E9840087FD46 /* WorkoutDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */; };
+		8A8A9C762534E9840087FD46 /* WorkoutDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A9598C724213B720039D57D /* DeveloperSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9598C624213B720039D57D /* DeveloperSettings.swift */; };
 		8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */; };
 		8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
@@ -156,6 +158,7 @@
 		8A982532241149FC0020A644 /* OSLog+Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A982531241149FC0020A644 /* OSLog+Logs.swift */; };
 		8A9BC5BA22BBACCB006CAA0F /* ExerciseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5B922BBACCB006CAA0F /* ExerciseChartView.swift */; };
 		8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BC5BB22BBAE3C006CAA0F /* ExerciseChartViewCell.swift */; };
+		8A9D3B442541F78A00C5A8B7 /* OSLog+Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A982531241149FC0020A644 /* OSLog+Logs.swift */; };
 		8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7B23142FAC0038ACC5 /* Color+SwiftUI.swift */; };
 		8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9E4F7D231436260038ACC5 /* String+Enquote.swift */; };
 		8AA02615230AF74C00324853 /* ActivityWorkoutsPerWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA02614230AF74C00324853 /* ActivityWorkoutsPerWeekView.swift */; };
@@ -289,6 +292,18 @@
 		8AAD1070239DB27A00C1A447 /* WorkoutExerciseChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD106D239DA97B00C1A447 /* WorkoutExerciseChartData.swift */; };
 		8AAD1071239DC04400C1A447 /* ExerciseStore+IntentExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD0FF4239D82B400C1A447 /* ExerciseStore+IntentExercise.swift */; };
 		8AAD1072239DC04500C1A447 /* ExerciseStore+IntentExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD0FF4239D82B400C1A447 /* ExerciseStore+IntentExercise.swift */; };
+		8AAFE3442534AB3800CF03E5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAFE3432534AB3800CF03E5 /* WidgetKit.framework */; };
+		8AAFE3462534AB3800CF03E5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAFE3452534AB3800CF03E5 /* SwiftUI.framework */; };
+		8AAFE3492534AB3800CF03E5 /* IronWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE3482534AB3800CF03E5 /* IronWidget.swift */; };
+		8AAFE34B2534AB3900CF03E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AAFE34A2534AB3900CF03E5 /* Assets.xcassets */; };
+		8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8AAFE35C2534B4BA00CF03E5 /* WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */; };
+		8AAFE36F2534B51000CF03E5 /* WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */; };
+		8AAFE3832534B68700CF03E5 /* WorkoutDataStorage+shared2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF07874239B246600CA95D6 /* WorkoutDataStorage+shared2.swift */; };
+		8AAFE38A2534B68D00CF03E5 /* WorkoutDataStorage+GroupStoreURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0785F239AF57A00CA95D6 /* WorkoutDataStorage+GroupStoreURL.swift */; };
+		8AAFE3912534B69900CF03E5 /* FileManager+GroupContainerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0785D239AF53500CA95D6 /* FileManager+GroupContainerURL.swift */; };
+		8AAFE39F2534DDDF00CF03E5 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE39E2534DDDF00CF03E5 /* DeepLink.swift */; };
+		8AAFE3A62534E07900CF03E5 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE39E2534DDDF00CF03E5 /* DeepLink.swift */; };
 		8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB0C94C23453F080009F031 /* HealthKit.framework */; };
 		8AB0C950234540660009F031 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0C94F234540660009F031 /* HealthManager.swift */; };
 		8AB0C952234543F70009F031 /* BodyWeightFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0C951234543F70009F031 /* BodyWeightFetcher.swift */; };
@@ -440,6 +455,20 @@
 			remoteGlobalIDString = 8A86191B236DAB6E00C1E96C;
 			remoteInfo = WatchIron;
 		};
+		8A8A9C772534E9840087FD46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AB5210D23992ABC008064B2;
+			remoteInfo = WorkoutDataKit;
+		};
+		8AAFE34D2534AB3900CF03E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AAFE3412534AB3800CF03E5;
+			remoteInfo = IronWidgetExtension;
+		};
 		8AB5211323992ABC008064B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
@@ -485,6 +514,7 @@
 			files = (
 				8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed App Extensions */,
 				8A604397239C4DBB00CFB7C0 /* IronIntentsUI.appex in Embed App Extensions */,
+				8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +539,17 @@
 				8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A8A9C792534E9840087FD46 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8A8A9C762534E9840087FD46 /* WorkoutDataKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8AB5211723992ABC008064B2 /* Embed Frameworks */ = {
@@ -682,6 +723,15 @@
 		8AAD1000239D8EA800C1A447 /* EntitlementStore+Migrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntitlementStore+Migrate.swift"; sourceTree = "<group>"; };
 		8AAD106B239D94C900C1A447 /* OneRepMaxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRepMaxView.swift; sourceTree = "<group>"; };
 		8AAD106D239DA97B00C1A447 /* WorkoutExerciseChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseChartData.swift; sourceTree = "<group>"; };
+		8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IronWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AAFE3432534AB3800CF03E5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8AAFE3452534AB3800CF03E5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8AAFE3482534AB3800CF03E5 /* IronWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronWidget.swift; sourceTree = "<group>"; };
+		8AAFE34A2534AB3900CF03E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8AAFE34C2534AB3900CF03E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetKind.swift; sourceTree = "<group>"; };
+		8AAFE37C2534B66400CF03E5 /* IronWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IronWidgetExtension.entitlements; sourceTree = "<group>"; };
+		8AAFE39E2534DDDF00CF03E5 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		8AB0C94B23453F080009F031 /* Iron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Iron.entitlements; sourceTree = "<group>"; };
 		8AB0C94C23453F080009F031 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8AB0C94F234540660009F031 /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
@@ -824,6 +874,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ADC1B61237221D90019C01A /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AAFE33F2534AB3800CF03E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AAFE3462534AB3800CF03E5 /* SwiftUI.framework in Frameworks */,
+				8A8A9C752534E9840087FD46 /* WorkoutDataKit.framework in Frameworks */,
+				8AAFE3442534AB3800CF03E5 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1200,6 +1260,8 @@
 				8AB0C94C23453F080009F031 /* HealthKit.framework */,
 				8A6F172A233A809D0048A75B /* StoreKit.framework */,
 				8A60438C239C4DBB00CFB7C0 /* IntentsUI.framework */,
+				8AAFE3432534AB3800CF03E5 /* WidgetKit.framework */,
+				8AAFE3452534AB3800CF03E5 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1207,6 +1269,7 @@
 		8A7D6E8B200BF92E00AA0FA7 = {
 			isa = PBXGroup;
 			children = (
+				8AAFE37C2534B66400CF03E5 /* IronWidgetExtension.entitlements */,
 				8AD39685239C075E0000E3C4 /* Shared */,
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
 				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
@@ -1215,6 +1278,7 @@
 				8A440804239C0F8000A6D2C7 /* Support */,
 				8A604383239C4DBB00CFB7C0 /* IronIntents */,
 				8A60438E239C4DBB00CFB7C0 /* IronIntentsUI */,
+				8AAFE3472534AB3800CF03E5 /* IronWidget */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				8A6F1729233A809D0048A75B /* Frameworks */,
 			);
@@ -1231,6 +1295,7 @@
 				8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */,
 				8A604382239C4DBB00CFB7C0 /* IronIntents.appex */,
 				8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */,
+				8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1377,6 +1442,25 @@
 			path = StoreKit;
 			sourceTree = "<group>";
 		};
+		8AAFE3472534AB3800CF03E5 /* IronWidget */ = {
+			isa = PBXGroup;
+			children = (
+				8AAFE3482534AB3800CF03E5 /* IronWidget.swift */,
+				8AAFE34A2534AB3900CF03E5 /* Assets.xcassets */,
+				8AAFE34C2534AB3900CF03E5 /* Info.plist */,
+			);
+			path = IronWidget;
+			sourceTree = "<group>";
+		};
+		8AAFE35A2534B4AB00CF03E5 /* WidgetKit */ = {
+			isa = PBXGroup;
+			children = (
+				8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */,
+				8AAFE39E2534DDDF00CF03E5 /* DeepLink.swift */,
+			);
+			path = WidgetKit;
+			sourceTree = "<group>";
+		};
 		8AB0C94E234540420009F031 /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1515,6 +1599,7 @@
 				8A507E04239C094700883339 /* WatchConnectivity */,
 				8A0683B1239C615E001F0A1E /* Siri */,
 				8AAD1002239D8FE900C1A447 /* StoreKit */,
+				8AAFE35A2534B4AB00CF03E5 /* WidgetKit */,
 				8A9598C424213AF90039D57D /* _debug */,
 				8A16BBD822E337A0002150F0 /* Benchmark.swift */,
 				8AA68CFC242F824A00418F36 /* GenericError.swift */,
@@ -1649,6 +1734,7 @@
 				8AB5211423992ABC008064B2 /* PBXTargetDependency */,
 				8A604396239C4DBB00CFB7C0 /* PBXTargetDependency */,
 				8A604399239C4DBB00CFB7C0 /* PBXTargetDependency */,
+				8AAFE34E2534AB3900CF03E5 /* PBXTargetDependency */,
 			);
 			name = Iron;
 			packageProductDependencies = (
@@ -1710,6 +1796,25 @@
 			productReference = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		8AAFE3412534AB3800CF03E5 /* IronWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AAFE3522534AB3900CF03E5 /* Build configuration list for PBXNativeTarget "IronWidgetExtension" */;
+			buildPhases = (
+				8AAFE33E2534AB3800CF03E5 /* Sources */,
+				8AAFE33F2534AB3800CF03E5 /* Frameworks */,
+				8AAFE3402534AB3800CF03E5 /* Resources */,
+				8A8A9C792534E9840087FD46 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A8A9C782534E9840087FD46 /* PBXTargetDependency */,
+			);
+			name = IronWidgetExtension;
+			productName = IronWidgetExtension;
+			productReference = 8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8AB5210D23992ABC008064B2 /* WorkoutDataKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AB5211A23992ABC008064B2 /* Build configuration list for PBXNativeTarget "WorkoutDataKit" */;
@@ -1752,7 +1857,7 @@
 		8A7D6E8C200BF92E00AA0FA7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
@@ -1777,6 +1882,9 @@
 					};
 					8A861927236DAB7000C1E96C = {
 						CreatedOnToolsVersion = 11.2;
+					};
+					8AAFE3412534AB3800CF03E5 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 					8AB5210D23992ABC008064B2 = {
 						CreatedOnToolsVersion = 11.2.1;
@@ -1812,6 +1920,7 @@
 				8AB5210D23992ABC008064B2 /* WorkoutDataKit */,
 				8A604381239C4DBB00CFB7C0 /* IronIntents */,
 				8A60438A239C4DBB00CFB7C0 /* IronIntentsUI */,
+				8AAFE3412534AB3800CF03E5 /* IronWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1870,6 +1979,14 @@
 			files = (
 				8A861937236DAB7100C1E96C /* Preview Assets.xcassets in Resources */,
 				8A861934236DAB7100C1E96C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AAFE3402534AB3800CF03E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AAFE34B2534AB3900CF03E5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2059,6 +2176,7 @@
 				8AF92552232FD49600C6977D /* ExerciseFilter.swift in Sources */,
 				8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */,
 				8AF5DAF9242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift in Sources */,
+				8AAFE35C2534B4BA00CF03E5 /* WidgetKind.swift in Sources */,
 				8A38154A230181C9008ACDAD /* UserDefaults+RestTimer.swift in Sources */,
 				8AA5D4942344C9D20092D20C /* UserDefaults+Misc.swift in Sources */,
 				8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */,
@@ -2134,6 +2252,7 @@
 				8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */,
 				8A1EE75622CB90CC00C742DF /* VisualEffectView.swift in Sources */,
 				8A63B37A2329467F001BD7B5 /* UIImage+Tinting.swift in Sources */,
+				8AAFE39F2534DDDF00CF03E5 /* DeepLink.swift in Sources */,
 				8A204B3F236796B100F40F79 /* IdentifiableHolder.swift in Sources */,
 				8A81E85423328B270094BAAF /* CustomExercisesView.swift in Sources */,
 				8AB5213423993C3D008064B2 /* WeightUnit.swift in Sources */,
@@ -2247,6 +2366,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8AAFE33E2534AB3800CF03E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A9D3B442541F78A00C5A8B7 /* OSLog+Logs.swift in Sources */,
+				8AAFE3832534B68700CF03E5 /* WorkoutDataStorage+shared2.swift in Sources */,
+				8AAFE3492534AB3800CF03E5 /* IronWidget.swift in Sources */,
+				8AAFE3912534B69900CF03E5 /* FileManager+GroupContainerURL.swift in Sources */,
+				8AAFE3A62534E07900CF03E5 /* DeepLink.swift in Sources */,
+				8AAFE36F2534B51000CF03E5 /* WidgetKind.swift in Sources */,
+				8AAFE38A2534B68D00CF03E5 /* WorkoutDataStorage+GroupStoreURL.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AB5210A23992ABC008064B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2327,6 +2460,16 @@
 			isa = PBXTargetDependency;
 			target = 8A86191B236DAB6E00C1E96C /* WatchIron */;
 			targetProxy = 8A861939236DAB7100C1E96C /* PBXContainerItemProxy */;
+		};
+		8A8A9C782534E9840087FD46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AB5210D23992ABC008064B2 /* WorkoutDataKit */;
+			targetProxy = 8A8A9C772534E9840087FD46 /* PBXContainerItemProxy */;
+		};
+		8AAFE34E2534AB3900CF03E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AAFE3412534AB3800CF03E5 /* IronWidgetExtension */;
+			targetProxy = 8AAFE34D2534AB3900CF03E5 /* PBXContainerItemProxy */;
 		};
 		8AB5211423992ABC008064B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2790,6 +2933,63 @@
 			};
 			name = Release;
 		};
+		8AAFE3502534AB3900CF03E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = IronWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 29;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				INFOPLIST_FILE = IronWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.4.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8AAFE3512534AB3900CF03E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = IronWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 29;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				INFOPLIST_FILE = IronWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.4.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.Iron.IronWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8AB5211823992ABC008064B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2965,6 +3165,15 @@
 			buildConfigurations = (
 				8A86193D236DAB7100C1E96C /* Debug */,
 				8A86193E236DAB7100C1E96C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AAFE3522534AB3900CF03E5 /* Build configuration list for PBXNativeTarget "IronWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AAFE3502534AB3900CF03E5 /* Debug */,
+				8AAFE3512534AB3900CF03E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

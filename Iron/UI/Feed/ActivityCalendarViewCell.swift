@@ -35,6 +35,7 @@ struct ActivityCalendarViewCell: View {
     }
 }
 
+#if DEBUG
 struct ActivityCalendarViewCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -49,3 +50,4 @@ struct ActivityCalendarViewCell_Previews: PreviewProvider {
         }
     }
 }
+#endif

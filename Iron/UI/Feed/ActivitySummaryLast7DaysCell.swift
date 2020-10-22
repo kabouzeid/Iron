@@ -27,6 +27,7 @@ struct ActivitySummaryLast7DaysCell: View {
     }
 }
 
+#if DEBUG
 struct ActivityLast7DaysCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -41,3 +42,4 @@ struct ActivityLast7DaysCell_Previews: PreviewProvider {
         }
     }
 }
+#endif

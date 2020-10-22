@@ -148,8 +148,7 @@ private struct WorkoutCell: View {
                         RoundedRectangle(cornerRadius: 8)
                             .strokeBorder()
                             .foregroundColor(Color(.systemFill))
-                        
-                )
+                    )
             }
             
             workout.muscleGroupImage(in: self.exerciseStore.exercises)
