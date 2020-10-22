@@ -4,7 +4,10 @@
     "id": 3,
     "name": "seated-shoulder-press-machine",
     "title": "Overhead Press: Machine (Seated)",
-    "alias": [],
+    "alias": [
+      "Shoulder Press: Machine (Seated)",
+      "Military Press: Machine (Seated)"
+    ],
     "primer": "This is an exercise for the shoulder strengthening.",
     "type": "isolation",
     "primary": [
@@ -39,7 +42,10 @@
     "id": 4,
     "name": "seated-overhead-press",
     "title": "Overhead Press: Barbell (Seated)",
-    "alias": [],
+    "alias": [
+      "Shoulder Press: Barbell (Seated)",
+      "Military Press: Barbell (Seated)"
+    ],
     "primer": "An exercise for the shoulder and triceps strengthening.",
     "type": "isolation",
     "primary": [
@@ -384,7 +390,9 @@
     "id": 20,
     "name": "reverse-flyes-cable",
     "title": "Reverse Flyes: Cable",
-    "alias": [],
+    "alias": [
+      "Back Flyes: Cable"
+    ],
     "primer": "This is an exercise for shoulder, middle back and triceps strengthening.",
     "type": "isolation",
     "primary": [
@@ -1534,7 +1542,7 @@
     "name": "machine-bench-press",
     "title": "Bench Press: Machine",
     "alias": [
-      "Chest Press: Machine"
+      "Chest Press"
     ],
     "primer": "This is an exercise for chest, biceps and shoulder strengthening.",
     "type": "isolation",
