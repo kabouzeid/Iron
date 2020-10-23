@@ -32,8 +32,10 @@ struct Provider: TimelineProvider {
 private extension WorkoutDataStorage {
     var lastWorkoutInfo: WorkoutInfo? {
         let request: NSFetchRequest<Workout> = Workout.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Workout.start)) == self.@max.\(#keyPath(Workout.start))")
+        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
+        request.sortDescriptors = [.init(keyPath: \Workout.start, ascending: false)]
         request.propertiesToFetch = ["\(#keyPath(Workout.start))", "\(#keyPath(Workout.end))"]
+        request.fetchLimit = 1
         do {
             let workouts = try persistentContainer.viewContext.fetch(request)
             assert(workouts.count <= 1) // the request should only fetch the max
