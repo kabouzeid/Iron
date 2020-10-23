@@ -19,6 +19,7 @@ struct UnlockProOverlay: View {
         case normal
         case large
         case extraLarge
+        case fill
     }
     
     var body: some View {
@@ -32,6 +33,7 @@ struct UnlockProOverlay: View {
             .padding()
             .modifier(if: size == .large) { $0.padding() }
             .modifier(if: size == .extraLarge) { $0.padding().padding() }
+            .modifier(if: size == .fill) { $0.frame(maxWidth: .infinity, maxHeight: .infinity) }
         }
         .buttonStyle(BorderlessButtonStyle()) // otherwise the whole table view cell becomes selected
         .background(VisualEffectView(effect: UIBlurEffect(style: .regular)).cornerRadius(8))

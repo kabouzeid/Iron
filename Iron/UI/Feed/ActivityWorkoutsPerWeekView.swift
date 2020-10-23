@@ -95,7 +95,7 @@ struct ActivityWorkoutsPerWeekView: View {
         VStack(spacing: 8) {
             chartView
                 .modifier(if: !entitlementStore.isPro) {
-                    $0.redacted_compat().overlay(UnlockProOverlay(size: .extraLarge))
+                    $0.overlay(UnlockProOverlay(size: .fill).padding())
                 }
             
             Divider()
