@@ -65,97 +65,53 @@ struct LastWorkoutWidgetEntryView : View {
     
     var entry: Provider.Entry
     
-    static let dayFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter
-    }()
-    
-    static let durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.hour, .minute]
-        return formatter
-    }()
-    
-    @ViewBuilder
-    func daysView(lastWorkoutDate: Date) -> some View {
-        let days = calendar.calendarDays(from: lastWorkoutDate, to: entry.date)
-        
-        VStack(alignment: .leading) {
-            Text(String(days))
-                .font(.system(.largeTitle, design: .rounded))
-                .foregroundColor(.accentColor)
-                +
-                Text(" ")
-                +
-                Text(days == 1 ? "day" : "days")
-                .font(.system(.body, design: .rounded))
-                .foregroundColor(.accentColor)
-            
-            Text(lastWorkoutDate, formatter: Self.dayFormatter)
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-    }
-    
-    func workoutView(duration: TimeInterval) -> some View {
-        Text(Self.durationFormatter.string(from: duration) ?? "Unknown Duration")
-            .foregroundColor(.white)
-            .padding(8)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .foregroundColor(.accentColor)
-            )
-    }
-    
-    var placeholderView: some View {
-        Text("No workouts")
-            .font(.subheadline)
-            .bold()
-            .foregroundColor(.secondary)
+    private var daysSinceLastWorkout: Int? {
+        guard let workoutInfo = entry.workoutInfo else { return nil }
+        return calendar.calendarDays(from: workoutInfo.start, to: entry.date)
     }
 
     var body: some View {
         ZStack {
-            Color(.systemBackground)
-            if let workoutInfo = entry.workoutInfo {
+            Color(red: 255/255, green: 105/255, blue: 0/255, opacity: 1)
+            VStack(alignment: .leading) {
+                Spacer()
+                
+                Text("Activity")
+                    .font(.headline)
+                    .foregroundColor(Color(white: 1, opacity: 0.9))
+                
+                Spacer()
+                
                 HStack {
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Last Workout")
-                                .font(.subheadline)
-                                .bold()
-                            
-                            if widgetFamily != .systemSmall {
-                                Spacer()
-                                
-                                // doesn't work every time (iOS 14.1)
-                                //                                Link(destination: DeepLink.url(for: .startWorkout), label: {
-                                //                                    Image(systemName: "plus")
-                                //                                        .foregroundColor(.accentColor)
-                                //                                })
-                            }
-                        }
+                        Text("Last Workout")
+                            .font(.subheadline)
+                            .foregroundColor(Color.primary.opacity(0.8))
+                        //                                .foregroundColor(.secondary)
+                        //                                .foregroundColor(Color.primary.opacity(0.7))
                         
-                        Divider()
-                        
-                        HStack {
-                            daysView(lastWorkoutDate: workoutInfo.start)
-                            
-                            if widgetFamily != .systemSmall {
-                                Spacer()
-                                
-                                workoutView(duration: workoutInfo.duration)
-                            }
+                        if let days = daysSinceLastWorkout {
+                            Text(String(days))
+                                .font(.system(.title3, design: .rounded))
+                                .foregroundColor(.primary)
+                                +
+                                Text(" ")
+                                +
+                                Text(days == 1 ? "day" : "days")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.primary)
+                        } else {
+                            Text("-")
+                                .font(.system(.title3, design: .rounded))
                         }
                     }
+                    .padding(8)
+                    
                     Spacer()
                 }
-                .padding()
-            } else {
-                placeholderView
+                .background(ContainerRelativeShape().fill(Color(.systemBackground).opacity(0.6)))
             }
+            .padding()
         }
     }
 }
@@ -174,7 +130,7 @@ struct IronWidget: Widget {
         }
         .configurationDisplayName("Last Workout")
         .description("The number of days since the last workout.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall])
     }
 }
 
@@ -189,10 +145,10 @@ struct IronWidget_Previews: PreviewProvider {
             
             LastWorkoutWidgetEntryView(entry: Entry(date: Date(), workoutInfo: WorkoutInfo(start: start, end: end)))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            
+
             LastWorkoutWidgetEntryView(entry: Entry(date: Date(), workoutInfo: WorkoutInfo(start: start, end: end)))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .environment(\.colorScheme, .dark)
         }
-        .environment(\.colorScheme, .dark)
     }
 }
