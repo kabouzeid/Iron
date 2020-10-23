@@ -117,9 +117,9 @@ struct LastWorkoutWidgetEntryView : View {
     }
 
     var body: some View {
-        if let workoutInfo = entry.workoutInfo {
-            ZStack {
-                Color(.systemBackground)
+        ZStack {
+            Color(.systemBackground)
+            if let workoutInfo = entry.workoutInfo {
                 HStack {
                     VStack(alignment: .leading) {
                         HStack {
@@ -131,10 +131,10 @@ struct LastWorkoutWidgetEntryView : View {
                                 Spacer()
                                 
                                 // doesn't work every time (iOS 14.1)
-//                                Link(destination: DeepLink.url(for: .startWorkout), label: {
-//                                    Image(systemName: "plus")
-//                                        .foregroundColor(.accentColor)
-//                                })
+                                //                                Link(destination: DeepLink.url(for: .startWorkout), label: {
+                                //                                    Image(systemName: "plus")
+                                //                                        .foregroundColor(.accentColor)
+                                //                                })
                             }
                         }
                         
@@ -153,9 +153,9 @@ struct LastWorkoutWidgetEntryView : View {
                     Spacer()
                 }
                 .padding()
+            } else {
+                placeholderView
             }
-        } else {
-            placeholderView
         }
     }
 }
