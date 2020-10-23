@@ -33,8 +33,11 @@ struct ExerciseChartViewCell : View {
                 .font(.subheadline)
                 .foregroundColor(exercise.muscleGroupColor)
             
-            Text(measurementType.title + (entitlementStore.isPro ? "" : " (Demo data)"))
-                .font(.headline)
+            HStack {
+                Text(measurementType.title).font(.headline)
+                Spacer()
+                Text(entitlementStore.isPro ? "" : " (Demo Data)").foregroundColor(.secondary)
+            }
             
             Divider()
             

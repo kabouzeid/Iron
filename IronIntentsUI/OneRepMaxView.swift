@@ -21,14 +21,16 @@ struct OneRepMaxView: View {
             if entitlementStore.isPro {
                 OneRepMaxChartView(exercise: exercise, highlightDate: highlightDate)
             } else {
-                GeometryReader { _ in // GeometryReader only for filling parent width and height
+                VStack {
+                    Spacer()
                     HStack {
+                        Spacer()
                         Text("Unlock charts with Iron Pro").font(.headline)
                         Image(systemName: "lock")
+                        Spacer()
                     }
-                    .padding()
+                    Spacer()
                 }
-
             }
         }
     }
@@ -38,9 +40,7 @@ struct OneRepMaxView: View {
             Text(exercise.title)
                 .font(.body)
             
-            Text(WorkoutExerciseChartData.MeasurementType.oneRM.title + (entitlementStore.isPro ? "" : " (Demo data)"))
-                .font(.caption)
-                .foregroundColor(.secondary)
+            Text(WorkoutExerciseChartData.MeasurementType.oneRM.title).font(.caption).foregroundColor(.secondary)
 
             chartView
         }
