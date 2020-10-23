@@ -24,6 +24,10 @@ class HealthManager {
 extension HealthManager {
     // completion is called on a background queue!
     private func requestPermissions(toShare typesToShare: Set<HKSampleType>?, read typesToRead: Set<HKObjectType>?, completion: @escaping () -> Void) {
+        #if DEBUG
+        guard !CommandLine.arguments.contains("-FASTLANE_SNAPSHOT") else { return }
+        #endif
+        
         os_log("Requesting HealthKit permissions share=%@ read=%@", log: .health, type: .default, typesToShare ?? [], typesToRead ?? [])
         
         guard HKHealthStore.isHealthDataAvailable() else {

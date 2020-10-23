@@ -109,9 +109,23 @@ struct ContentView : View {
 }
 
 private extension View {
+    #if DEBUG
     func productionEnvironment() -> some View {
         self
-//            .screenshotEnvironment(weightUnit: .imperial) // only enable for taking screenshots
+            .modifier(if: CommandLine.arguments.contains("-FASTLANE_SNAPSHOT"), then: {
+                $0.screenshotEnvironment(weightUnit: .imperial) // only enable for taking screenshots.
+            }, else: {
+                $0._productionEnvironment()
+            })
+    }
+    #else
+    func productionEnvironment() -> some View {
+        _productionEnvironment()
+    }
+    #endif
+    
+    private func _productionEnvironment() -> some View {
+        self
             .environmentObject(SettingsStore.shared)
             .environmentObject(RestTimerStore.shared)
             .environmentObject(ExerciseStore.shared)
