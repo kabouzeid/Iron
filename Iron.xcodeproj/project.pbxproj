@@ -113,8 +113,8 @@
 		8A643E1B21490C520044C3A1 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8A652C4222D0F6D300DBE10E /* AnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */; };
 		8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */; };
-		8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* LineChartView.swift */; };
-		8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* BarChartView.swift */; };
+		8A652C4622D1055600DBE10E /* ChartsLineChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */; };
+		8A652C4822D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */; };
 		8A6B1A6922BE8B210067DD41 /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* WorkoutDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift */; };
 		8A6F1728233A6E5E0048A75B /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6F1727233A6E5E0048A75B /* PurchaseView.swift */; };
@@ -200,8 +200,8 @@
 		8AAD1004239D901000C1A447 /* IAPIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A14233B702600C2F32A /* IAPIdentifiers.swift */; };
 		8AAD1005239D901500C1A447 /* VerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A22233BDEEB00C2F32A /* VerificationResponse.swift */; };
 		8AAD1006239D901500C1A447 /* VerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A22233BDEEB00C2F32A /* VerificationResponse.swift */; };
-		8AAD100C239D926800C1A447 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
-		8AAD100D239D926800C1A447 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
+		8AAD100C239D926800C1A447 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* BarChartView.swift */; };
+		8AAD100D239D926800C1A447 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* BarChartView.swift */; };
 		8AAD1010239D927900C1A447 /* UIFont+MonospacedDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */; };
 		8AAD1011239D927900C1A447 /* Chart+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F94218E29AC00467DA6 /* Chart+Style.swift */; };
 		8AAD1012239D927900C1A447 /* Workout+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57E5E22C3EE2E00B9AC79 /* Workout+SwiftUI.swift */; };
@@ -274,10 +274,10 @@
 		8AAD1058239D929A00C1A447 /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */; };
 		8AAD1059239D929A00C1A447 /* Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E335222C5570B00B1E04B /* Dragger.swift */; };
 		8AAD105A239D929A00C1A447 /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E5A2422E5AE950059329C /* NumericKeyboard.swift */; };
-		8AAD105B239D92A000C1A447 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* BarChartView.swift */; };
-		8AAD105C239D92A000C1A447 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* LineChartView.swift */; };
-		8AAD105D239D92A000C1A447 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* BarChartView.swift */; };
-		8AAD105E239D92A000C1A447 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* LineChartView.swift */; };
+		8AAD105B239D92A000C1A447 /* ChartsBarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */; };
+		8AAD105C239D92A000C1A447 /* ChartsLineChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */; };
+		8AAD105D239D92A000C1A447 /* ChartsBarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */; };
+		8AAD105E239D92A000C1A447 /* ChartsLineChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */; };
 		8AAD105F239D92AA00C1A447 /* StyledLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */; };
 		8AAD1060239D92AA00C1A447 /* StyledBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C5F96218E2E5500467DA6 /* StyledBarChartView.swift */; };
 		8AAD1061239D92AA00C1A447 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A643E132147B8430044C3A1 /* BalloonMarker.swift */; };
@@ -354,7 +354,7 @@
 		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
 		8ADC1B5E2371C9390019C01A /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */; };
 		8ADC1B61237221D90019C01A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ADC1B60237221D90019C01A /* HealthKit.framework */; };
-		8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */; };
+		8ADC6AF8230ADA25008B5636 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC6AF7230ADA25008B5636 /* BarChartView.swift */; };
 		8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE07AAB2325453600FDB2A0 /* Quotes.swift */; };
 		8AE0A08124115E0900A0C419 /* OSLog+Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A982531241149FC0020A644 /* OSLog+Logs.swift */; };
 		8AE0A08224115E0A00A0C419 /* OSLog+Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A982531241149FC0020A644 /* OSLog+Logs.swift */; };
@@ -646,8 +646,8 @@
 		8A643E1A21490C520044C3A1 /* StyledLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledLineChartView.swift; sourceTree = "<group>"; };
 		8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageView.swift; sourceTree = "<group>"; };
 		8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatisticsView.swift; sourceTree = "<group>"; };
-		8A652C4522D1055600DBE10E /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		8A652C4722D10C4900DBE10E /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsLineChartViewRepresentable.swift; sourceTree = "<group>"; };
+		8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsBarChartViewRepresentable.swift; sourceTree = "<group>"; };
 		8A68F7C7236319040089263B /* WorkoutData v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkoutData v2.xcdatamodel"; sourceTree = "<group>"; };
 		8A68F7D1236329940089263B /* WorkoutExerciseMigrationPolicyV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseMigrationPolicyV1.swift; sourceTree = "<group>"; };
 		8A6B1A6822BE8B210067DD41 /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
@@ -778,7 +778,7 @@
 		8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionManager.swift; sourceTree = "<group>"; };
 		8ADC1B5F237221D90019C01A /* WatchIron Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchIron Extension.entitlements"; sourceTree = "<group>"; };
 		8ADC1B60237221D90019C01A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
-		8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedBarChartView.swift; sourceTree = "<group>"; };
+		8ADC6AF7230ADA25008B5636 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		8AE07AAB2325453600FDB2A0 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		8AE0A084241188E000A0C419 /* OSLog+Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Logs.swift"; sourceTree = "<group>"; };
 		8AE0A7962330FF100021EE23 /* BackupAndExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAndExportView.swift; sourceTree = "<group>"; };
@@ -1140,8 +1140,8 @@
 		8A507E0E239C0B1600883339 /* ChartsPackage */ = {
 			isa = PBXGroup;
 			children = (
-				8A652C4722D10C4900DBE10E /* BarChartView.swift */,
-				8A652C4522D1055600DBE10E /* LineChartView.swift */,
+				8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */,
+				8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */,
 			);
 			path = ChartsPackage;
 			sourceTree = "<group>";
@@ -1161,7 +1161,7 @@
 				8A799F6522BFD33F00DD5E1B /* BannerView.swift */,
 				8A1EE75522CB90CC00C742DF /* VisualEffectView.swift */,
 				8A652C4122D0F6D300DBE10E /* AnimatedImageView.swift */,
-				8ADC6AF7230ADA25008B5636 /* StackedBarChartView.swift */,
+				8ADC6AF7230ADA25008B5636 /* BarChartView.swift */,
 				8AFE11B3232CF2E2000E9393 /* SheetBar.swift */,
 				8A0ADC3023294EAD00081F4B /* UITabView.swift */,
 			);
@@ -2014,7 +2014,7 @@
 			files = (
 				8AAD1017239D927900C1A447 /* DateFormatter+OptionalDate.swift in Sources */,
 				8AAD1012239D927900C1A447 /* Workout+SwiftUI.swift in Sources */,
-				8AAD105B239D92A000C1A447 /* BarChartView.swift in Sources */,
+				8AAD105B239D92A000C1A447 /* ChartsBarChartViewRepresentable.swift in Sources */,
 				8AAD101B239D927900C1A447 /* String+Enquote.swift in Sources */,
 				8AAD101F239D927900C1A447 /* URL+EnsureFileAccess.swift in Sources */,
 				8AAD104A239D929000C1A447 /* PlaceholderModifier.swift in Sources */,
@@ -2054,7 +2054,7 @@
 				8AAD1051239D929500C1A447 /* ExerciseGroupFilter.swift in Sources */,
 				8A4C129A23A2A5DA0026BD4E /* IntentWorkoutSet+WorkoutSet.swift in Sources */,
 				8AAD0FF8239D8E1C00C1A447 /* EntitlementStore.swift in Sources */,
-				8AAD105C239D92A000C1A447 /* LineChartView.swift in Sources */,
+				8AAD105C239D92A000C1A447 /* ChartsLineChartViewRepresentable.swift in Sources */,
 				8AAD1065239D92B900C1A447 /* PayloadKey.swift in Sources */,
 				8A141CBB239C8C1F00993A61 /* WeightUnit.swift in Sources */,
 				8AAD103C239D928700C1A447 /* WorkoutExerciseChartDataGenerator.swift in Sources */,
@@ -2070,7 +2070,7 @@
 				8A0683B0239C5B83001F0A1E /* FileManager+GroupContainerURL.swift in Sources */,
 				8AAD106F239DB27900C1A447 /* WorkoutExerciseChartData.swift in Sources */,
 				8AAD101D239D927900C1A447 /* View+TypeErased.swift in Sources */,
-				8AAD100C239D926800C1A447 /* StackedBarChartView.swift in Sources */,
+				8AAD100C239D926800C1A447 /* BarChartView.swift in Sources */,
 				8AAD1011239D927900C1A447 /* Chart+Style.swift in Sources */,
 				8AAD104E239D929500C1A447 /* Refresher.swift in Sources */,
 				8A0683AE239C5B53001F0A1E /* WorkoutDataStorage+shared2.swift in Sources */,
@@ -2099,7 +2099,7 @@
 				8AAD1052239D929600C1A447 /* IdentifiableHolder.swift in Sources */,
 				8AAD1066239D92B900C1A447 /* PayloadKey.swift in Sources */,
 				8AAD1059239D929A00C1A447 /* Dragger.swift in Sources */,
-				8AAD105E239D92A000C1A447 /* LineChartView.swift in Sources */,
+				8AAD105E239D92A000C1A447 /* ChartsLineChartViewRepresentable.swift in Sources */,
 				8A141CC0239C8C4B00993A61 /* UserDefaults+Settings.swift in Sources */,
 				8A141CB2239C870F00993A61 /* ExerciseStore+shared.swift in Sources */,
 				8AAD1063239D92AB00C1A447 /* StyledBarChartView.swift in Sources */,
@@ -2115,7 +2115,7 @@
 				8AAD1062239D92AB00C1A447 /* StyledLineChartView.swift in Sources */,
 				8AAD106C239D94C900C1A447 /* OneRepMaxView.swift in Sources */,
 				8AAD102D239D927900C1A447 /* Color+SwiftUI.swift in Sources */,
-				8AAD100D239D926800C1A447 /* StackedBarChartView.swift in Sources */,
+				8AAD100D239D926800C1A447 /* BarChartView.swift in Sources */,
 				8AAD102E239D927900C1A447 /* String+Enquote.swift in Sources */,
 				8A141CBA239C8C1000993A61 /* Workout+WeightUnit.swift in Sources */,
 				8AAD103A239D928100C1A447 /* MockWorkoutData.swift in Sources */,
@@ -2132,7 +2132,7 @@
 				8AAD1046239D928C00C1A447 /* AnimatedImageView.swift in Sources */,
 				8AAD1027239D927900C1A447 /* Exercise+SwiftUI.swift in Sources */,
 				8AA68CFA242F7CE200418F36 /* OSLog+trace.swift in Sources */,
-				8AAD105D239D92A000C1A447 /* BarChartView.swift in Sources */,
+				8AAD105D239D92A000C1A447 /* ChartsBarChartViewRepresentable.swift in Sources */,
 				8AAD0FF7239D879600C1A447 /* Exercise+IntentExercise.swift in Sources */,
 				8AAD1053239D929600C1A447 /* Refresher.swift in Sources */,
 				8A141CB5239C893800993A61 /* FileManager+GroupContainerURL.swift in Sources */,
@@ -2182,7 +2182,7 @@
 				8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */,
 				8AB365A9237085E500353D5A /* PayloadKey.swift in Sources */,
 				8A5F9A13233B6B7D00C2F32A /* StoreManager.swift in Sources */,
-				8A652C4622D1055600DBE10E /* LineChartView.swift in Sources */,
+				8A652C4622D1055600DBE10E /* ChartsLineChartViewRepresentable.swift in Sources */,
 				8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */,
 				8A0ADC33232964E700081F4B /* WorkoutTab.swift in Sources */,
 				8AB0C952234543F70009F031 /* BodyWeightFetcher.swift in Sources */,
@@ -2233,7 +2233,7 @@
 				8AFE11B0232CDDF6000E9393 /* EditCurrentWorkoutTimeView.swift in Sources */,
 				8AE132D6231BED920061C600 /* SearchField.swift in Sources */,
 				8A0ADC3123294EAD00081F4B /* UITabView.swift in Sources */,
-				8ADC6AF8230ADA25008B5636 /* StackedBarChartView.swift in Sources */,
+				8ADC6AF8230ADA25008B5636 /* BarChartView.swift in Sources */,
 				8A3815502301B865008ACDAD /* WorkoutLog.swift in Sources */,
 				8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */,
 				8A9BC5BC22BBAE3C006CAA0F /* ExerciseChartViewCell.swift in Sources */,
@@ -2304,7 +2304,7 @@
 				8AA99C3722CE300700E0B6B9 /* ExercisesView.swift in Sources */,
 				8AFE11B2232CE7CF000E9393 /* View+TypeErased.swift in Sources */,
 				8A5989AB20D0212C00DB9104 /* UIFont+MonospacedDigit.swift in Sources */,
-				8A652C4822D10C4900DBE10E /* BarChartView.swift in Sources */,
+				8A652C4822D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift in Sources */,
 				8A9E4F7C23142FAC0038ACC5 /* Color+SwiftUI.swift in Sources */,
 				8AE07AAC2325453600FDB2A0 /* Quotes.swift in Sources */,
 				8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */,

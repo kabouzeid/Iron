@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class StyledLineChartView: LineChartView {
+class StyledLineChartView: Charts.LineChartView {
     private(set) var balloonMarker: BalloonMarker!
     var autoStyleData: Bool = true
 

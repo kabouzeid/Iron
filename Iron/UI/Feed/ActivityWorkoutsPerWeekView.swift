@@ -62,47 +62,48 @@ struct ActivityWorkoutsPerWeekView: View {
         }
     }
     
-    private var chartData: [BarStack] {
-        workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map { (arg) -> BarStack in
-            let (workouts, week) = arg
-            return BarStack(
-                entries: workouts.map { workout in
-                    let muscleGroup = workout.muscleGroups(in: exerciseStore.exercises).first ?? "other"
-                    return BarStackEntry(color: .accentColor /*Exercise.colorFor(muscleGroup: muscleGroup)*/, label: muscleGroup.capitalized)
-                },
-                label: Self.dateFormatter.string(from: week)
-            )
+    private var chartData: [Bar] {
+        workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map {
+            Bar(value: $0.0.count, label: Self.dateFormatter.string(from: $0.1))
         }
     }
-    
+
     private var hasData: Bool {
-        !chartData.flatMap { $0.entries }.isEmpty
+        chartData.map { $0.value }.reduce(0, +) > 0
     }
     
-    @ViewBuilder
-    private var chartView: some View {
-        if hasData {
-            BarStacksView(barStacks: chartData, spacing: 2, stackSize: 4) // assume 4 workouts / week
-        } else {
-            Color.clear.overlay(
-                Text("No data available")
-                    .foregroundColor(.secondary)
-            )
-        }
+    private var meanWorkoutsPerWeek: Double {
+        let sum = chartData.map { $0.value }.reduce(0, +)
+        return Double(sum) / Double(chartData.count)
     }
     
     var body: some View {
-        VStack(spacing: 8) {
-            chartView
-                .modifier(if: !entitlementStore.isPro) {
-                    $0.overlay(UnlockProOverlay(size: .fill).padding())
+        Group {
+            if hasData {
+                BarChartView(bars: chartData, showLabels: entitlementStore.isPro, minimumMaxValue: 4)
+                    .modifier(if: !entitlementStore.isPro) {
+                        $0.redacted_compat()
+                    }
+            } else {
+                ZStack {
+                    Rectangle().hidden()
+                    Text("No data available")
+                        .foregroundColor(.secondary)
                 }
-            
-            Divider()
-            
-            BarLabelsView(barStacks: chartData, labelCount: chartData.count)
-                .padding([.top, .bottom], 4)
+            }
         }
+        .modifier(if: !entitlementStore.isPro) {
+            $0.overlay(UnlockProOverlay(size: .fill).padding())
+        }
+        .preference(key: WorkoutsPerWeekMeanKey.self, value: meanWorkoutsPerWeek)
+    }
+}
+
+struct WorkoutsPerWeekMeanKey: PreferenceKey {
+    static var defaultValue: Double?
+
+    static func reduce(value: inout Double?, nextValue: () -> Double?) {
+        value = nextValue()
     }
 }
 

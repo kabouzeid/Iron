@@ -53,7 +53,7 @@ struct ExerciseDemoChartView : View {
     }
     
     var body: some View {
-        _LineChartView(
+        ChartsLineChartViewRepresentable(
             chartData: chartData,
             xAxisValueFormatter: xAxisValueFormatter,
             yAxisValueFormatter: yAxisValueFormatter,

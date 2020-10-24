@@ -83,7 +83,7 @@ struct OneRepMaxChartView : View {
     }
     
     var body: some View {
-        _LineChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter, postCustomization:  { chartView in
+        ChartsLineChartViewRepresentable(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter, postCustomization:  { chartView in
             let dateValue = WorkoutExerciseChartDataGenerator.dateToValue(date: self.highlightDate)
             chartView.highlightValue(x: dateValue, dataSetIndex: 0)
         })

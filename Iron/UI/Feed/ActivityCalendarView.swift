@@ -64,6 +64,12 @@ struct ActivityCalendarView: View {
     }
     
     var body: some View {
+        let activityCalendarDaysByWeek = self.activityCalendarDaysByWeek
+        let numberOfWorkouts = activityCalendarDaysByWeek
+            .flatMap { $0 }
+            .compactMap { $0?.workouts.count }
+            .reduce(0, +)
+        
         VStack {
             ForEach(activityCalendarDaysByWeek, id: \.hashValue) { workoutWeek in
                 HStack {
@@ -80,6 +86,7 @@ struct ActivityCalendarView: View {
         .modifier(if: !entitlementStore.isPro) {
             $0.overlay(UnlockProOverlay(size: .fill).padding())
         }
+        .preference(key: WorkoutsLast28DaysKey.self, value: numberOfWorkouts)
     }
 }
 
@@ -199,6 +206,14 @@ private extension Calendar {
         }
         
         return weeks
+    }
+}
+
+struct WorkoutsLast28DaysKey: PreferenceKey {
+    static var defaultValue: Int?
+
+    static func reduce(value: inout Int?, nextValue: () -> Int?) {
+        value = nextValue()
     }
 }
 

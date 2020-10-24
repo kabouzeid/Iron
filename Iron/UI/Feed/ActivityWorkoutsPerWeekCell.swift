@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct ActivityWorkoutsPerWeekCell : View {
+    @EnvironmentObject var entitlementStore: EntitlementStore
+    
+    @State private var workoutsPerWeekMean = WorkoutsPerWeekMeanKey.defaultValue
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Activity")
@@ -16,13 +20,26 @@ struct ActivityWorkoutsPerWeekCell : View {
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
             
-            Text("Workouts Per Week")
-                .font(.headline)
+            HStack {
+                Text("Workouts Per Week")
+                    .font(.headline)
+                
+                Spacer()
+                
+                if let mean = workoutsPerWeekMean {
+                    Text("Ø\(String(format: "%.1f", mean))")
+                        .foregroundColor(.secondary)
+                        .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
+                }
+            }
             
             Divider()
             
             ActivityWorkoutsPerWeekView()
                 .frame(height: 200)
+                .onPreferenceChange(WorkoutsPerWeekMeanKey.self, perform: { value in
+                    self.workoutsPerWeekMean = value
+                })
         }
         .padding([.top, .bottom], 8)
     }

@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class StyledBarChartView: BarChartView {
+class StyledBarChartView: Charts.BarChartView {
     var autoStyleData: Bool = true
 
     override func layoutMarginsDidChange() {

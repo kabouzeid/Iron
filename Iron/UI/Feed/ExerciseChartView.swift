@@ -45,7 +45,7 @@ struct ExerciseChartView : View {
     }
     
     var body: some View {
-        _LineChartView(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter, preCustomization: { chartView, data in
+        ChartsLineChartViewRepresentable(chartData: chartData, xAxisValueFormatter: xAxisFormatter, yAxisValueFormatter: yAxisFormatter, balloonValueFormatter: balloonFormatter, preCustomization: { chartView, data in
             chartView.isUserInteractionEnabled = isEnabled
             if isEnabled {
                 if #available(iOS 14.0, *) {

@@ -11,6 +11,8 @@ import SwiftUI
 struct ActivityCalendarViewCell: View {
     @EnvironmentObject var entitlementStore: EntitlementStore
     
+    @State private var workoutsLast28Days = WorkoutsLast28DaysKey.defaultValue
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Activity")
@@ -18,8 +20,16 @@ struct ActivityCalendarViewCell: View {
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
             
-            Text("Workouts Last 28 Days")
-                .font(.headline)
+            HStack {
+                Text("Workouts Last 28 Days")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Text("\(workoutsLast28Days ?? 0) workouts")
+                    .foregroundColor(.secondary)
+                    .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
+            }
             
             Divider()
             
@@ -30,6 +40,9 @@ struct ActivityCalendarViewCell: View {
             
             ActivityCalendarView()
                 .frame(height: 250)
+                .onPreferenceChange(WorkoutsLast28DaysKey.self, perform: { value in
+                    workoutsLast28Days = value
+                })
         }
         .padding([.top, .bottom], 8)
     }
