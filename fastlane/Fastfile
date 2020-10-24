@@ -20,10 +20,12 @@ platform :ios do
   lane :screenshots do
     snapshot(
       dark_mode: false,
+      headless: true,
       output_directory: "./fastlane/screenshots"
     )
     snapshot(
       dark_mode: true,
+      headless: true,
       output_directory: "./fastlane/screenshots_dark"
     )
   end

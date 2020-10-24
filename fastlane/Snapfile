@@ -6,13 +6,13 @@ devices([
   "iPhone 11 Pro",
   "iPhone 8 Plus",
   "iPhone SE (2nd generation)",
-  "iPhone SE (1st generation)",
+  # "iPhone SE (1st generation)",
 
   "iPad Pro (12.9-inch) (4th generation)",
   "iPad Pro (12.9-inch) (2nd generation)",
-  "iPad Air (4th generation)",
-  "iPad (8th generation)",
-  "iPad mini (5th generation)"
+  # "iPad Air (4th generation)",
+  # "iPad (8th generation)",
+  # "iPad mini (5th generation)" # crashes
 ])
 
 # languages([
