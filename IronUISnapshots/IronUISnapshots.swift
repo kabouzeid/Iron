@@ -12,6 +12,9 @@ class IronUISnapshots: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            XCUIDevice.shared.orientation = .landscapeLeft
+        }
         
         let app = XCUIApplication()
         setupSnapshot(app)
@@ -29,26 +32,37 @@ class IronUISnapshots: XCTestCase {
 
     func testSnapshots() {
         let app = XCUIApplication()
-        
+
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["Feed"].tap()
         snapshot("01_Feed")
         
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            app.swipeUp()
+            snapshot("02_Feed")
+        }
+
         tabBarsQuery.buttons["History"].tap()
-        snapshot("02_History")
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            snapshot("03_History")
+        }
         app.tables.buttons.firstMatch.tap()
-        snapshot("03_History_Item")
+        snapshot("04_History_Item")
         
         tabBarsQuery.buttons["Workout"].tap()
-        snapshot("04_Workout")
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            snapshot("05_Workout")
+        }
         app.tables.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Biceps Curl" as NSString)).firstMatch.tap()
-        snapshot("05_Workout_Item")
+        snapshot("06_Workout_Item")
         
         tabBarsQuery.buttons["Exercises"].tap()
-        snapshot("06_Exercises")
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            snapshot("07_Exercises")
+        }
         
         app.tables.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Chest" as NSString)).firstMatch.tap()
         app.tables.buttons["Bench Press: Barbell"].tap()
-        snapshot("07_BenchPress")
+        snapshot("08_BenchPress")
     }
 }
