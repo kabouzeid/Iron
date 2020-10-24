@@ -12,13 +12,13 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
+### ios screenshots
 ```
-fastlane ios custom_lane
+fastlane ios screenshots
 ```
 Description of what the lane does
 

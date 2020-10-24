@@ -49,6 +49,10 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/screenshots/screenshots.html
 
+# snapshot generated screenshots
+fastlane/screenshots_dark/**/*.png
+fastlane/screenshots_dark/screenshots.html
+
 # scan temporary files
 fastlane/test_output
 
