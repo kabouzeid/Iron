@@ -20,6 +20,7 @@ struct BarChartView: View {
     let showLabels: Bool
     
     init(bars: [Bar], showGrid: Bool = true, showLabels: Bool = true, minimumMaxValue: Int = 0) {
+        assert(bars.allSatisfy({ $0.value >= 0 }))
         self.bars = bars
         self.showGrid = showGrid
         self.showLabels = showLabels

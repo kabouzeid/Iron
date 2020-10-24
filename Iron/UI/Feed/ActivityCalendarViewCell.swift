@@ -26,9 +26,11 @@ struct ActivityCalendarViewCell: View {
                 
                 Spacer()
                 
-                Text("\(workoutsLast28Days ?? 0) workouts")
-                    .foregroundColor(.secondary)
-                    .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
+                if let workoutsLast28Days = workoutsLast28Days {
+                    Text("\(workoutsLast28Days) workouts")
+                        .foregroundColor(.secondary)
+                        .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
+                }
             }
             
             Divider()
