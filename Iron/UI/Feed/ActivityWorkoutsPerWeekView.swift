@@ -63,9 +63,17 @@ struct ActivityWorkoutsPerWeekView: View {
     }
     
     private var chartData: [Bar] {
-        workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map {
+        var bars = workoutsPerWeek(workouts: workoutHistory.map { $0 }, weeks: weeks).map {
             Bar(value: $0.0.count, label: Self.dateFormatter.string(from: $0.1))
         }
+        
+        if let disableUntil = bars.firstIndex(where: { $0.value > 0 }) {
+            for i in 0..<disableUntil {
+                bars[i].labelColor = Color(.tertiaryLabel)
+            }
+        }
+        
+        return bars
     }
 
     private var hasData: Bool {
@@ -73,8 +81,10 @@ struct ActivityWorkoutsPerWeekView: View {
     }
     
     private var meanWorkoutsPerWeek: Double {
-        let sum = chartData.map { $0.value }.reduce(0, +)
-        return Double(sum) / Double(chartData.count)
+        let bars = chartData
+        let sum = bars.map { $0.value }.reduce(0, +)
+        let ignoredCount = bars.firstIndex(where: { $0.value > 0 }) ?? 0
+        return Double(sum) / (Double(bars.count - ignoredCount))
     }
     
     var body: some View {

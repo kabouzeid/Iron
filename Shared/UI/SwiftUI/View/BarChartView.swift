@@ -11,6 +11,9 @@ import SwiftUI
 struct Bar: Hashable {
     let value: Int
     let label: String // y
+    
+    var barColor: Color?
+    var labelColor: Color?
 }
 
 struct BarChartView: View {
@@ -63,10 +66,12 @@ private struct BarView: View {
                 ForEach(bars, id: \.self) { bar in
                     ZStack(alignment: .bottom) {
                         Rectangle().frame(height: geometry.size.height).hidden() // force fill width + height
-                        Rectangle()
-                            .foregroundColor(.accentColor)
-                            .frame(width: 20, height: (CGFloat(bar.value) / CGFloat(maxValue)) * geometry.size.height)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                        if maxValue > 0 { // should always be the case
+                            Rectangle()
+                                .foregroundColor(bar.barColor ?? .accentColor)
+                                .frame(width: 20, height: (CGFloat(bar.value) / CGFloat(maxValue)) * geometry.size.height)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                 }
             }
@@ -85,15 +90,15 @@ private struct BarLabelsView: View {
     
     var body: some View {
         HStack {
-            ForEach(0..<bars.count, id: \.self) { index in
+            ForEach(bars.enumerated().map { ($0.0, $0.1) }, id: \.1.self) { index, bar in
                 ZStack {
                     Rectangle().frame(height: 0).hidden()
                     
                     if index % self.threshold == 0 {
-                        Text(self.bars[index].label)
+                        Text(bar.label)
                             .font(.subheadline)
                             .bold()
-                            .foregroundColor(.secondary)
+                            .foregroundColor(bar.labelColor ?? .secondary)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                     }
