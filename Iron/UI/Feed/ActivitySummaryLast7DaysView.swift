@@ -86,8 +86,8 @@ private struct Entry: View {
             
             Spacer()
             
-            if percent != 0 {
-                Text(percentString(for: percent))
+            if percent != 0, let percentString = percentString(for: percent) {
+                Text(percentString)
                     .foregroundColor(percent < 0 ? .red : .green)
             }
         }
@@ -102,8 +102,9 @@ private struct Entry: View {
         return formatter
     }()
     
-    private func percentString(for percent: Double) -> String {
-        (percent > 0 ? "+" : "") + (Self.percentNumberFormatter.string(from: percent as NSNumber) ?? "\(String(format: "%.1f", percent * 100))%")
+    private func percentString(for percent: Double) -> String? {
+        guard percent.isFinite else { return nil } // we don't want to display +/- infinity
+        return (percent > 0 ? "+" : "") + (Self.percentNumberFormatter.string(from: percent as NSNumber) ?? "\(String(format: "%.1f", percent * 100))%")
     }
 }
 
