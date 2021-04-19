@@ -63,14 +63,14 @@ struct ExerciseDemoChartView : View {
                 if isEnabled {
                     if #available(iOS 14.0, *) {
                         chartView.tintColor = UIColor(exercise.muscleGroupColor)
-                    } else if let cgColor = exercise.muscleGroupColor.cgColor {
-                        chartView.tintColor = UIColor(cgColor: cgColor)
+                    } else {
+                        chartView.tintColor = .systemBlue
                     }
                 } else {
                     if #available(iOS 14.0, *) {
                         chartView.tintColor = UIColor(.accentColor)
-                    } else if let cgColor = Color.accentColor.cgColor {
-                        chartView.tintColor = UIColor(cgColor: cgColor)
+                    } else {
+                        chartView.tintColor = .systemBlue
                     }
                 }
             }
