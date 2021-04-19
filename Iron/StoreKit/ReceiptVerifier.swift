@@ -23,7 +23,7 @@ enum ReceiptVerifier {
     static func verify(receipt: Data, completion: @escaping (Result<VerificationResponse, VerificationError>) -> Void) {
         os_log("Verifiyng receipt", log: .iap, type: .default)
         
-        guard let url = URL(string: "https://iron-iap-verifier.herokuapp.com/verifyReceipt") else {
+        guard let url = URL(string: "https://verify.ironapp.io/verifyReceipt") else {
             fatalError("URL is hardcoded and this should never fail")
         }
         
