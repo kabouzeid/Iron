@@ -106,12 +106,12 @@ struct PurchaseView: View {
             }
             
             Section(footer: subscriptionInfo) {
-                proMonthlyProduct.map {
-                    ProductCell(
-                        product: $0,
-                        purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
-                    ).disabled(hasProLifetime)
-                }
+//                proMonthlyProduct.map {
+//                    ProductCell(
+//                        product: $0,
+//                        purchased: entitlementsStore.entitlements.contains($0.productIdentifier)
+//                    ).disabled(hasProLifetime)
+//                }
                 
                 proYearlyProduct.map {
                     ProductCell(
