@@ -36,6 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 14.0, *) {
             WidgetKind.lastWorkout.reloadTimelines()
         }
+        
+        // disable the transparent tab bar in iOS 15, there is a bug and it doesn't work correctly with the TimerBannerView for now
+        if #available(iOS 15.0, *) {
+            let barAppearance = UITabBarAppearance()
+            barAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = barAppearance
+        }
         return true
     }
     

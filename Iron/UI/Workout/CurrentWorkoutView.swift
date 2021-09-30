@@ -122,8 +122,11 @@ struct CurrentWorkoutView: View {
     
     private func currentWorkoutExerciseDetailView(workoutExercise: WorkoutExercise) -> some View {
         VStack(spacing: 0) {
+            // on the iPad we have two columns at once so we already have a TimerBannerView
             if UIDevice.current.userInterfaceIdiom != .pad {
-                // on the iPad we have two columns at once so we already have a TimerBannerView
+                if #available(iOS 15.0, *) {
+                    Divider()
+                }
                 TimerBannerView(workout: workout)
                 Divider()
             }
@@ -241,6 +244,9 @@ struct CurrentWorkoutView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
+                if #available(iOS 15.0, *) {
+                    Divider()
+                }
                 TimerBannerView(workout: workout)
                 Divider()
                 List {
