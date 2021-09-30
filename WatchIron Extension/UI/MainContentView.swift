@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct MainContentView: View {
     var body: some View {
@@ -60,7 +61,28 @@ private struct _ContentView: View {
 //                                        Alert(title: Text("Stopped Tracking"), message: Text("The workout on your phone is not affected."))
 //                                    }
         } else {
-            Text("Start a workout on your phone.")
+            if let s = errorMessage {
+                Text(s).foregroundColor(.red)
+            } else {
+                Text("Start a workout on your phone.")
+            }
+        }
+    }
+    
+    private var errorMessage: String? {
+        guard HKHealthStore.isHealthDataAvailable() else {
+            return "HealthKit is not available on this device."
+        }
+        
+        switch WorkoutSessionManager.healthStore.authorizationStatus(for: .workoutType()) {
+        case .notDetermined:
+            return nil
+        case .sharingAuthorized:
+            return nil
+        case .sharingDenied:
+            return "Not authorized for Apple Health. You can authorize Iron in the settings app."
+        @unknown default:
+            return nil
         }
     }
 }

@@ -149,6 +149,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
             }
         }
         
+        try Self.requestWorkoutPermissions().get() // request permissions -- apparently needed for addMetadata
         let uuidSemaphore = DispatchSemaphore(value: 0)
         var uuidError: Error?
         workoutBuilder.addMetadata([HKMetadataKeyExternalUUID : uuid.uuidString], completion: { (success, error) in
@@ -167,6 +168,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         print(#function)
         dispatchPrecondition(condition: DispatchPredicate.onQueue(Self.accessQueue))
         
+        try Self.requestWorkoutPermissions().get() // request permissions -- apparently needed for addMetadata
         let semaphore = DispatchSemaphore(value: 0)
         var _error: Error?
         workoutBuilder.addMetadata([HKMetadataKeyWorkoutBrandName : title], completion: { (success, error) in
@@ -214,7 +216,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         
         // request permissions
         do {
-            try requestWorkoutPermissions().get()
+            try Self.requestWorkoutPermissions().get()
         } catch {
             completion(.failure(error))
             return
@@ -282,7 +284,7 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         os_log("Successfully ended collection", type: .info)
         
         do {
-            try self.requestWorkoutPermissions().get()
+            try Self.requestWorkoutPermissions().get()
         } catch {
             completion(.failure(error))
             return
@@ -418,7 +420,7 @@ extension WorkoutSessionManager {
         }
     }
     
-    func requestWorkoutPermissions(completion: @escaping (Result<Void, Error>) -> Void) {
+    private static func requestWorkoutPermissions(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { completion(.failure(NSError())); return }
         guard let activeEnergyBurned = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { completion(.failure(NSError())); return }
         let share: Set = [HKObjectType.workoutType()]
@@ -427,7 +429,7 @@ extension WorkoutSessionManager {
         Self.requestPermissions(toShare: share, read: read, completion: completion)
     }
     
-    private func requestWorkoutPermissions() -> Result<Void, Error> {
+    static func requestWorkoutPermissions() -> Result<Void, Error> {
         let permissionSemaphore = DispatchSemaphore(value: 0)
         var permissionsResult: Result<Void, Error>?
         requestWorkoutPermissions { result in
