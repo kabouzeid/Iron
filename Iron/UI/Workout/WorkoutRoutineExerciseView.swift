@@ -18,20 +18,20 @@ struct WorkoutRoutineExerciseView: View {
     @ObservedObject var workoutRoutineExercise: WorkoutRoutineExercise
     @State private var selectedWorkoutRoutineSet: WorkoutRoutineSet? = nil
     
-    @ObservedObject private var workoutRoutineExerciseCommentInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutRoutineExerciseCommentInput: String? = nil
     private var workoutRoutineExerciseComment: Binding<String> {
         Binding(
             get: {
-                self.workoutRoutineExerciseCommentInput.value ?? self.workoutRoutineExercise.comment ?? ""
+                self.workoutRoutineExerciseCommentInput ?? self.workoutRoutineExercise.comment ?? ""
             },
             set: { newValue in
-                self.workoutRoutineExerciseCommentInput.value = newValue
+                self.workoutRoutineExerciseCommentInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutRoutineExerciseCommentInput() {
-        guard let newValue = workoutRoutineExerciseCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutRoutineExerciseCommentInput.value = newValue
+        guard let newValue = workoutRoutineExerciseCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutRoutineExerciseCommentInput = newValue
         workoutRoutineExercise.comment = newValue.isEmpty ? nil : newValue
         self.managedObjectContext.saveOrCrash()
     }

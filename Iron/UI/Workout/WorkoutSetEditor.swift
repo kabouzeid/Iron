@@ -336,6 +336,7 @@ private struct MoreView: View {
         guard let newValue = workoutSetCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         workoutSetCommentInput = newValue
         workoutSet.comment = newValue.isEmpty ? nil : newValue
+        workoutSet.managedObjectContext?.saveOrCrash()
     }
 
     private func tagButton(tag: WorkoutSetTag) -> some View {

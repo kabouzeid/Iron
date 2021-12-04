@@ -25,21 +25,22 @@ struct WorkoutExerciseDetailView : View {
     
     @State private var showExerciseInfo = false
     
-    @ObservedObject private var workoutExerciseCommentInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutExerciseCommentInput: String? = nil
     private var workoutExerciseComment: Binding<String> {
         Binding(
             get: {
-                self.workoutExerciseCommentInput.value ?? self.workoutExercise.comment ?? ""
+                return self.workoutExerciseCommentInput ?? self.workoutExercise.comment ?? ""
             },
             set: { newValue in
-                self.workoutExerciseCommentInput.value = newValue
+                self.workoutExerciseCommentInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutExerciseCommentInput() {
-        guard let newValue = workoutExerciseCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutExerciseCommentInput.value = newValue
+        guard let newValue = workoutExerciseCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutExerciseCommentInput = newValue
         workoutExercise.comment = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.saveOrCrash()
     }
     
     init(workoutExercise: WorkoutExercise) {

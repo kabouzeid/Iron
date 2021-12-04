@@ -23,37 +23,38 @@ struct WorkoutDetailView : View {
     
     @State private var activityItems: [Any]?
 
-    @ObservedObject private var workoutCommentInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutCommentInput: String? = nil
     private var workoutComment: Binding<String> {
         Binding(
             get: {
-                self.workoutCommentInput.value ?? self.workout.comment ?? ""
+                self.workoutCommentInput ?? self.workout.comment ?? ""
             },
             set: { newValue in
-                self.workoutCommentInput.value = newValue
+                self.workoutCommentInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutCommentInput() {
-        guard let newValue = workoutCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutCommentInput.value = newValue
+        guard let newValue = workoutCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutCommentInput = newValue
         workout.comment = newValue.isEmpty ? nil : newValue
+        self.managedObjectContext.saveOrCrash()
     }
     
-    @ObservedObject private var workoutTitleInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutTitleInput: String? = nil
     private var workoutTitle: Binding<String> {
         Binding(
             get: {
-                self.workoutTitleInput.value ?? self.workout.title ?? ""
+                self.workoutTitleInput ?? self.workout.title ?? ""
             },
             set: { newValue in
-                self.workoutTitleInput.value = newValue
+                self.workoutTitleInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutTitleInput() {
-        guard let newValue = workoutTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutTitleInput.value = newValue
+        guard let newValue = workoutTitleInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutTitleInput = newValue
         workout.title = newValue.isEmpty ? nil : newValue
     }
 

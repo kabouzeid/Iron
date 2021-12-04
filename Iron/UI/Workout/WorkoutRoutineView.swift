@@ -17,38 +17,38 @@ struct WorkoutRoutineView: View {
     
     @State private var showExerciseSelector = false
     
-    @ObservedObject private var workoutRoutineTitleInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutRoutineTitleInput: String? = nil
     private var workoutRoutineTitle: Binding<String> {
         Binding(
             get: {
-                self.workoutRoutineTitleInput.value ?? self.workoutRoutine.title ?? ""
+                self.workoutRoutineTitleInput ?? self.workoutRoutine.title ?? ""
             },
             set: { newValue in
-                self.workoutRoutineTitleInput.value = newValue
+                self.workoutRoutineTitleInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutRoutineTitleInput() {
-        guard let newValue = workoutRoutineTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutRoutineTitleInput.value = newValue
+        guard let newValue = workoutRoutineTitleInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutRoutineTitleInput = newValue
         workoutRoutine.title = newValue.isEmpty ? nil : newValue
         self.managedObjectContext.saveOrCrash()
     }
     
-    @ObservedObject private var workoutRoutineCommentInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutRoutineCommentInput: String? = nil
     private var workoutRoutineComment: Binding<String> {
         Binding(
             get: {
-                self.workoutRoutineCommentInput.value ?? self.workoutRoutine.comment ?? ""
+                self.workoutRoutineCommentInput ?? self.workoutRoutine.comment ?? ""
             },
             set: { newValue in
-                self.workoutRoutineCommentInput.value = newValue
+                self.workoutRoutineCommentInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutRoutineCommentInput() {
-        guard let newValue = workoutRoutineCommentInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutRoutineCommentInput.value = newValue
+        guard let newValue = workoutRoutineCommentInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutRoutineCommentInput = newValue
         workoutRoutine.comment = newValue.isEmpty ? nil : newValue
         self.managedObjectContext.saveOrCrash()
     }

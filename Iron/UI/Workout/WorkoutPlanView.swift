@@ -17,20 +17,20 @@ struct WorkoutPlanView: View {
     
     @State private var offsetsToDelete: IndexSet?
     
-    @ObservedObject private var workoutPlanTitleInput = ValueHolder<String?>(initial: nil)
+    @State private var workoutPlanTitleInput: String? = nil
     private var workoutPlanTitle: Binding<String> {
         Binding(
             get: {
-                self.workoutPlanTitleInput.value ?? self.workoutPlan.title ?? ""
+                self.workoutPlanTitleInput ?? self.workoutPlan.title ?? ""
             },
             set: { newValue in
-                self.workoutPlanTitleInput.value = newValue
+                self.workoutPlanTitleInput = newValue
             }
         )
     }
     private func adjustAndSaveWorkoutTitleInput() {
-        guard let newValue = workoutPlanTitleInput.value?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        workoutPlanTitleInput.value = newValue
+        guard let newValue = workoutPlanTitleInput?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        workoutPlanTitleInput = newValue
         workoutPlan.title = newValue.isEmpty ? nil : newValue
         self.managedObjectContext.saveOrCrash()
     }

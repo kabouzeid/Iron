@@ -261,12 +261,10 @@
 		8AAD104C239D929000C1A447 /* PlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4F7F4234244C50074B88E /* PlaceholderModifier.swift */; };
 		8AAD104D239D929500C1A447 /* IdentifiableHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A204B3E236796B100F40F79 /* IdentifiableHolder.swift */; };
 		8AAD104E239D929500C1A447 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3815472301803A008ACDAD /* Refresher.swift */; };
-		8AAD104F239D929500C1A447 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AAD1050239D929500C1A447 /* ExerciseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF92551232FD49600C6977D /* ExerciseFilter.swift */; };
 		8AAD1051239D929500C1A447 /* ExerciseGroupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */; };
 		8AAD1052239D929600C1A447 /* IdentifiableHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A204B3E236796B100F40F79 /* IdentifiableHolder.swift */; };
 		8AAD1053239D929600C1A447 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3815472301803A008ACDAD /* Refresher.swift */; };
-		8AAD1054239D929600C1A447 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AAD1055239D929600C1A447 /* ExerciseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF92551232FD49600C6977D /* ExerciseFilter.swift */; };
 		8AAD1056239D929600C1A447 /* ExerciseGroupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */; };
 		8AAD1057239D929A00C1A447 /* Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E335222C5570B00B1E04B /* Dragger.swift */; };
@@ -348,7 +346,6 @@
 		8AC8063B22BABCAA00086032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063A22BABCAA00086032 /* ContentView.swift */; };
 		8AC8063D22BAC54200086032 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8063C22BAC54200086032 /* FeedView.swift */; };
 		8AC8064422BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8064322BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift */; };
-		8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACBE80C231A69940027D3A8 /* ValueHolder.swift */; };
 		8AD85553232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */; };
 		8AD90A19233D1E2000328D96 /* EntitlementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90A18233D1E2000328D96 /* EntitlementStore.swift */; };
 		8ADC1B5E2371C9390019C01A /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC1B5D2371C9390019C01A /* WorkoutSessionManager.swift */; };
@@ -758,7 +755,6 @@
 		8AC8063A22BABCAA00086032 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AC8063C22BAC54200086032 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		8AC8064322BADC1B00086032 /* ActivityWorkoutsPerWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWorkoutsPerWeekCell.swift; sourceTree = "<group>"; };
-		8ACBE80C231A69940027D3A8 /* ValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueHolder.swift; sourceTree = "<group>"; };
 		8AD329B7237608A700515B3B /* WorkoutData v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkoutData v3.xcdatamodel"; sourceTree = "<group>"; };
 		8AD40833202FC71B00A73E05 /* Array+uniq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniq.swift"; sourceTree = "<group>"; };
 		8AD85552232907B300493BAF /* DateComponentsFormatter+OptionalDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+OptionalDuration.swift"; sourceTree = "<group>"; };
@@ -1118,7 +1114,6 @@
 			children = (
 				8A204B3E236796B100F40F79 /* IdentifiableHolder.swift */,
 				8A3815472301803A008ACDAD /* Refresher.swift */,
-				8ACBE80C231A69940027D3A8 /* ValueHolder.swift */,
 				8AF92551232FD49600C6977D /* ExerciseFilter.swift */,
 				8AF9254F232FD47A00C6977D /* ExerciseGroupFilter.swift */,
 			);
@@ -2018,7 +2013,6 @@
 				8A141CBF239C8C4B00993A61 /* UserDefaults+Settings.swift in Sources */,
 				8AAD1042239D928C00C1A447 /* SheetBar.swift in Sources */,
 				8A141CBD239C8C3A00993A61 /* SettingsStore.swift in Sources */,
-				8AAD104F239D929500C1A447 /* ValueHolder.swift in Sources */,
 				8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */,
 				8AAD104D239D929500C1A447 /* IdentifiableHolder.swift in Sources */,
 				8AA68CF9242F7CD500418F36 /* OSLog+trace.swift in Sources */,
@@ -2129,7 +2123,6 @@
 				8AAD1034239D927900C1A447 /* String+LocalizedError.swift in Sources */,
 				8A604390239C4DBB00CFB7C0 /* IntentViewController.swift in Sources */,
 				8AAD0FFF239D8E8400C1A447 /* UserDefaults+Entitlements.swift in Sources */,
-				8AAD1054239D929600C1A447 /* ValueHolder.swift in Sources */,
 				8A141CB4239C873D00993A61 /* UserDefaults+AppGroup.swift in Sources */,
 				8A141CBC239C8C1F00993A61 /* WeightUnit.swift in Sources */,
 				8AAD1045239D928C00C1A447 /* VisualEffectView.swift in Sources */,
@@ -2264,7 +2257,6 @@
 				8A63B381232946E0001BD7B5 /* ExerciseMultiSelectionView.swift in Sources */,
 				8A2F52A72316969B00194C54 /* WorkoutSetCell.swift in Sources */,
 				8A3C5F95218E29AC00467DA6 /* Chart+Style.swift in Sources */,
-				8ACBE80D231A69940027D3A8 /* ValueHolder.swift in Sources */,
 				8A204B412367AEE200F40F79 /* URL+EnsureFileAccess.swift in Sources */,
 				8AAD0FF6239D879500C1A447 /* Exercise+IntentExercise.swift in Sources */,
 				8AAD1070239DB27A00C1A447 /* WorkoutExerciseChartData.swift in Sources */,
