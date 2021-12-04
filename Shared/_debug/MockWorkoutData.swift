@@ -37,7 +37,7 @@ struct MockWorkoutData {
     }
     
     var workout: Workout {
-        try! context.fetch(Workout.fetchRequest()).first as! Workout
+        try! context.fetch(Workout.fetchRequest()).first!
     }
     
     var workoutExercise: WorkoutExercise {
@@ -49,7 +49,7 @@ struct MockWorkoutData {
     }
     
     var workoutPlan: WorkoutPlan {
-        try! context.fetch(WorkoutPlan.fetchRequest()).first as! WorkoutPlan
+        try! context.fetch(WorkoutPlan.fetchRequest()).first!
     }
     
     var workoutRoutine: WorkoutRoutine {

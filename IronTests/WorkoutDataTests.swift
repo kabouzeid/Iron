@@ -29,9 +29,9 @@ class WorkoutDataTests: XCTestCase {
         createTestWorkoutData(context: persistenContainer.viewContext)
         testCurrentWorkout = createTestCurrentWorkout(context: persistenContainer.viewContext)
         
-        testWorkouts = try? persistenContainer.viewContext.fetch(Workout.fetchRequest()) as? [Workout]
-        testWorkoutExercises = try? persistenContainer.viewContext.fetch(WorkoutExercise.fetchRequest()) as? [WorkoutExercise]
-        testWorkoutSets = try? persistenContainer.viewContext.fetch(WorkoutSet.fetchRequest()) as? [WorkoutSet]
+        testWorkouts = try? persistenContainer.viewContext.fetch(Workout.fetchRequest())
+        testWorkoutExercises = try? persistenContainer.viewContext.fetch(WorkoutExercise.fetchRequest())
+        testWorkoutSets = try? persistenContainer.viewContext.fetch(WorkoutSet.fetchRequest())
 
         XCTAssertNotNil(testWorkouts)
         XCTAssertTrue(testWorkouts.count > 0)
