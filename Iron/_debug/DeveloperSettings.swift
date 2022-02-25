@@ -14,6 +14,8 @@ import WorkoutDataKit
 struct DeveloperSettings: View {
     @EnvironmentObject var entitlementStore: EntitlementStore
     
+    @State private var activityItems: [Any]?
+    
     var body: some View {
         Form {
             Button("Create default workout plans") {
@@ -21,7 +23,13 @@ struct DeveloperSettings: View {
             }
             
             Toggle("Pro", isOn: isPro)
-        }.navigationBarTitle("Developer", displayMode: .inline)
+            
+            Button("Export Database") {
+                self.shareFile(url: WorkoutDataStorage.groupStoreURL)
+            }
+        }
+        .navigationBarTitle("Developer", displayMode: .inline)
+        .overlay(ActivitySheet(activityItems: $activityItems))
     }
     
     var isPro: Binding<Bool> {
@@ -35,6 +43,10 @@ struct DeveloperSettings: View {
             }
         }
 
+    }
+    
+    private func shareFile(url: URL) {
+        self.activityItems = [url]
     }
 }
 
