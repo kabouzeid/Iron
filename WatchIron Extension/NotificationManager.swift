@@ -23,8 +23,8 @@ class NotificationManager: NSObject {
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         print(#function)
-        completionHandler([.alert, .sound])
+        return [.banner, .sound]
     }
 }

@@ -58,8 +58,7 @@
 		8A204B412367AEE200F40F79 /* URL+EnsureFileAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A204B402367AEE200F40F79 /* URL+EnsureFileAccess.swift */; };
 		8A239AE8203580A1006BB38B /* WorkoutDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239AE7203580A1006BB38B /* WorkoutDataTests.swift */; };
 		8A2F52A72316969B00194C54 /* WorkoutSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F52A62316969B00194C54 /* WorkoutSetCell.swift */; };
-		8A34FA072379B509009CF1DD /* EndHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A34FA062379B509009CF1DD /* EndHostingController.swift */; };
-		8A34FA092379B59D009CF1DD /* EndContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A34FA082379B59D009CF1DD /* EndContentView.swift */; };
+		8A34FA092379B59D009CF1DD /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A34FA082379B59D009CF1DD /* OptionsView.swift */; };
 		8A362F2E23A2A2BC0071A167 /* PersonalRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A362F2D23A2A2BC0071A167 /* PersonalRecordView.swift */; };
 		8A36F9E8231E932A0036E504 /* AddExercisesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */; };
 		8A36F9EA231EA62F0036E504 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A36F9E9231EA62F0036E504 /* NotificationManager.swift */; };
@@ -140,8 +139,8 @@
 		8A861920236DAB6E00C1E96C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A86191E236DAB6E00C1E96C /* Interface.storyboard */; };
 		8A861922236DAB7000C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861921236DAB7000C1E96C /* Assets.xcassets */; };
 		8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8A86192E236DAB7000C1E96C /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192D236DAB7000C1E96C /* MainContentView.swift */; };
-		8A861930236DAB7000C1E96C /* MainHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192F236DAB7000C1E96C /* MainHostingController.swift */; };
+		8A86192E236DAB7000C1E96C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192D236DAB7000C1E96C /* ContentView.swift */; };
+		8A861930236DAB7000C1E96C /* WatchIronApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192F236DAB7000C1E96C /* WatchIronApp.swift */; };
 		8A861932236DAB7000C1E96C /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A861931236DAB7000C1E96C /* ExtensionDelegate.swift */; };
 		8A861934236DAB7100C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861933236DAB7100C1E96C /* Assets.xcassets */; };
 		8A861937236DAB7100C1E96C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861936236DAB7100C1E96C /* Preview Assets.xcassets */; };
@@ -577,8 +576,7 @@
 		8A239AE7203580A1006BB38B /* WorkoutDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataTests.swift; sourceTree = "<group>"; };
 		8A2D21C023563FF60012A0A4 /* UserDefaults+HiddenExerciseUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+HiddenExerciseUuids.swift"; sourceTree = "<group>"; };
 		8A2F52A62316969B00194C54 /* WorkoutSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSetCell.swift; sourceTree = "<group>"; };
-		8A34FA062379B509009CF1DD /* EndHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndHostingController.swift; sourceTree = "<group>"; };
-		8A34FA082379B59D009CF1DD /* EndContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndContentView.swift; sourceTree = "<group>"; };
+		8A34FA082379B59D009CF1DD /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		8A362F2D23A2A2BC0071A167 /* PersonalRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRecordView.swift; sourceTree = "<group>"; };
 		8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercisesSheet.swift; sourceTree = "<group>"; };
 		8A36F9E9231EA62F0036E504 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -667,8 +665,8 @@
 		8A861921236DAB7000C1E96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A861923236DAB7000C1E96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A861928236DAB7000C1E96C /* WatchIron Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchIron Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A86192D236DAB7000C1E96C /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
-		8A86192F236DAB7000C1E96C /* MainHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHostingController.swift; sourceTree = "<group>"; };
+		8A86192D236DAB7000C1E96C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A86192F236DAB7000C1E96C /* WatchIronApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchIronApp.swift; sourceTree = "<group>"; };
 		8A861931236DAB7000C1E96C /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		8A861933236DAB7100C1E96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A861936236DAB7100C1E96C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -1361,11 +1359,10 @@
 		8A86194C236DB65200C1E96C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8A86192F236DAB7000C1E96C /* MainHostingController.swift */,
-				8A86192D236DAB7000C1E96C /* MainContentView.swift */,
+				8A86192F236DAB7000C1E96C /* WatchIronApp.swift */,
+				8A86192D236DAB7000C1E96C /* ContentView.swift */,
 				8A58807923776004007F31A1 /* WorkoutSessionView.swift */,
-				8A34FA062379B509009CF1DD /* EndHostingController.swift */,
-				8A34FA082379B59D009CF1DD /* EndContentView.swift */,
+				8A34FA082379B59D009CF1DD /* OptionsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2330,7 +2327,7 @@
 				8A58807A23776004007F31A1 /* WorkoutSessionView.swift in Sources */,
 				8A141CAF239C7DFF00993A61 /* Benchmark.swift in Sources */,
 				8ADC1B5E2371C9390019C01A /* WorkoutSessionManager.swift in Sources */,
-				8A861930236DAB7000C1E96C /* MainHostingController.swift in Sources */,
+				8A861930236DAB7000C1E96C /* WatchIronApp.swift in Sources */,
 				8AA68CFF242FB0D200418F36 /* IdentifiableHolder.swift in Sources */,
 				8A861948236DB17C00C1E96C /* PhoneConnectionManager.swift in Sources */,
 				8A4D3B7223858F6F007A3792 /* NotificationManager.swift in Sources */,
@@ -2338,9 +2335,8 @@
 				8AF07868239B0A3000CA95D6 /* PayloadKey.swift in Sources */,
 				8AA68CFB242F7CE400418F36 /* OSLog+trace.swift in Sources */,
 				8A58807823773432007F31A1 /* WorkoutSessionManagerStore.swift in Sources */,
-				8A34FA092379B59D009CF1DD /* EndContentView.swift in Sources */,
-				8A86192E236DAB7000C1E96C /* MainContentView.swift in Sources */,
-				8A34FA072379B509009CF1DD /* EndHostingController.swift in Sources */,
+				8A34FA092379B59D009CF1DD /* OptionsView.swift in Sources */,
+				8A86192E236DAB7000C1E96C /* ContentView.swift in Sources */,
 				8A861932236DAB7000C1E96C /* ExtensionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2825,7 +2821,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -2849,7 +2845,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -2879,7 +2875,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -2908,7 +2904,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};

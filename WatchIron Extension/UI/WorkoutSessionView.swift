@@ -12,89 +12,41 @@ import Combine
 struct WorkoutSessionView: View {
     @ObservedObject var workoutSessionManager: WorkoutSessionManager
     
-    private let timeRefresher = Refresher()
-    
-    var labelSize: CGFloat {
-        let width = WKInterfaceDevice.current().screenBounds.width
-        if width >= 184 { // Series 5 - 44mm
-            return 21 // max 21
-        } else if width >= 162 { // Series 5 - 40mm
-            return 18 // max 18
-        } else if width >= 156 { // Series 3 - 40mm
-            return 18
-        } else /* width >= 136 */ { // Series 3 - 38mm
-            return 16
-        }
-    }
-    
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            HStack(alignment: .center) {
-                ElapsedTimeView(refresher: timeRefresher, start: workoutSessionManager.startDate, end: workoutSessionManager.endDate)
-                    .font(Font.system(size: labelSize * 1.5).monospacedDigit())
-                Spacer()
-                Image(systemName: "stopwatch.fill")
-                    .foregroundColor(.blue)
-                    .font(.system(size: labelSize, weight: .bold, design: .rounded))
-            }
-            
-            HStack(alignment: .firstTextBaseline) {
-                RestTimerView(refresher: timeRefresher, end: workoutSessionManager.restTimerEnd, keepRunning: workoutSessionManager.keepRestTimerRunning)
-                    .font(Font.system(size: labelSize * 1.5).monospacedDigit())
-                Spacer()
-                Image(systemName: "timer")
-                    .foregroundColor(.blue)
-                    .font(.system(size: labelSize, weight: .bold, design: .rounded))
-            }
-            
-            HStack(alignment: .firstTextBaseline) {
-                Group {
-                    if let burnedCalories = workoutSessionManager.burnedCalories {
-                        Text(String(format: "%.0f", burnedCalories))
-                    } else {
-                        Text("0").foregroundColor(.clear)
+        HStack {
+            VStack(alignment: .leading, spacing: 0) {
+                TimelineView(.periodic(from: Date(), by: 1)) { context in
+                    VStack(alignment: .leading, spacing: 0) {
+                        ElapsedTimeView(start: workoutSessionManager.startDate, end: workoutSessionManager.endDate ?? context.date)
+                            .font(.system(.title2, design: .rounded).bold().monospacedDigit())
+                            .foregroundColor(.yellow)
+                        
+                        HStack(alignment: .firstTextBaseline) {
+                            RestTimerView(date: context.date, end: workoutSessionManager.restTimerEnd, keepRunning: workoutSessionManager.keepRestTimerRunning)
+                                .font(.system(.title2, design: .rounded).monospacedDigit())
+                            Image(systemName: "timer")
+                                .font(.system(.title3, design: .rounded))
+                        }
+                        .opacity(workoutSessionManager.restTimerEnd != nil ? 1 : 0)
                     }
-                }.font(.system(size: labelSize * 1.5))
-                Spacer()
-                HStack(alignment: .center) {
+                }
+                
+                HStack(alignment: .firstTextBaseline) {
+                    Text(workoutSessionManager.burnedCalories.map {String(format: "%.0f", $0)} ?? "-")
+                        .font(.system(.title2, design: .rounded).monospacedDigit())
                     Text("kcal".uppercased())
-                    Image(systemName: "flame.fill")
+                        .font(.system(.title3, design: .rounded))
                 }
-                .foregroundColor(.orange)
-                .font(.system(size: labelSize, weight: .bold, design: .rounded))
-            }
-            
-            HStack(alignment: .firstTextBaseline) {
-                Group {
-                    if let mostRecentHeartRate = workoutSessionManager.mostRecentHeartRate {
-                        Text(String(format: "%.0f", mostRecentHeartRate))
-                    } else {
-                        Text("0").foregroundColor(.clear)
-                    }
-                }.font(.system(size: labelSize * 1.5))
                 
-                Spacer()
-                
-                HStack(alignment: .center) {
-                    Text("bpm".uppercased())
-                    PulsatingHeartView(bpm: workoutSessionManager.mostRecentHeartRate)
-                }
-                .foregroundColor(.red)
-                .font(.system(size: labelSize, weight: .bold, design: .rounded))
+                HeartRateView(mostRecentHeartRate: workoutSessionManager.mostRecentHeartRate, mostRecentHeartRateDate: workoutSessionManager.mostRecentHeartRateDate)
             }
-            
-            Divider().padding([.top, .bottom], 2)
-            
-            Text(workoutSessionManager.selectedSetText ?? "No set selected")
+            .lineLimit(1)
+            Spacer()
         }
-        .lineLimit(1)
-        .onReceive(Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()) { _ in self.timeRefresher.refresh() } // refreshing only every second is too choppy
     }
 }
 
 private struct ElapsedTimeView: View {
-    @ObservedObject var refresher: Refresher
-    
     private static let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -107,17 +59,11 @@ private struct ElapsedTimeView: View {
     let end: Date?
     
     var body: some View {
-        if let start = start {
-            Text(Self.durationFormatter.string(from: start, to: end ?? Date()) ?? "")
-        } else {
-            Text("00:00").foregroundColor(.clear)
-        }
+        Text(start.map { Self.durationFormatter.string(from: $0, to: end ?? Date()) ?? "--:--:--" } ?? "--:--:--")
     }
 }
 
 private struct RestTimerView: View {
-    @ObservedObject var refresher: Refresher
-    
     private static let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -126,12 +72,13 @@ private struct RestTimerView: View {
         return formatter
     }()
     
+    let date: Date
     let end: Date?
     let keepRunning: Bool
     
     private var remainingTime: TimeInterval? {
         guard let end = end else { return nil }
-        let remainingTime = end.timeIntervalSince(Date())
+        let remainingTime = end.timeIntervalSince(date)
         guard remainingTime >= 0 || keepRunning else { return nil }
         return remainingTime
     }
@@ -142,31 +89,56 @@ private struct RestTimerView: View {
     }
     
     var body: some View {
-        if let remainingTime = roundedRemainingTime {
-            Text(Self.durationFormatter.string(from: abs(remainingTime)) ?? "00:00")
-                .foregroundColor(remainingTime < 0 ? .red : .primary)
-        } else {
-            Text("00:00").foregroundColor(.clear)
+        let remainingTime = roundedRemainingTime
+        Text(remainingTime.map{ Self.durationFormatter.string(from: abs($0)) ?? "--:--" } ?? "--:--" )
+            .foregroundColor((remainingTime ?? 0) < 0 ? .red : .primary)
+    }
+}
+
+private struct HeartRateView: View {
+    private static let MAX_HEART_RATE_AGE: Double = 10
+    
+    let mostRecentHeartRate: Double?
+    let mostRecentHeartRateDate: Date?
+    
+    var body: some View {
+        TimelineView(.periodic(from: mostRecentHeartRateDate ?? Date(), by: Self.MAX_HEART_RATE_AGE)) { context in
+            HStack(alignment: .firstTextBaseline) {
+                Group {
+                    Text(mostRecentHeartRate.map { String(format: "%.0f", $0) } ?? "--")
+                }
+                .font(.system(.title2, design: .rounded).monospacedDigit())
+                
+                HStack(alignment: .center) {
+                    Text("bpm".uppercased())
+                    PulsatingHeartView(bpm: measurementWasRecent(date: context.date) ? mostRecentHeartRate : nil)
+                        .foregroundColor(measurementWasRecent(date: context.date) ? .red : .init(white: 0, opacity: 0.2))
+                }
+                .font(.system(.title3, design: .rounded))
+            }
+            .foregroundColor(measurementWasRecent(date: context.date) ? .primary : .secondary)
         }
+    }
+    
+    func measurementWasRecent(date: Date) -> Bool {
+        guard let mostRecentHeartRateDate = mostRecentHeartRateDate else {
+            return false
+        }
+        return date.timeIntervalSince(mostRecentHeartRateDate) < Self.MAX_HEART_RATE_AGE
     }
 }
 
 private struct PulsatingHeartView: View {
-    @State private var heartScale: CGFloat = 1
-    
     let bpm: Double?
     
     var body: some View {
-        Image(systemName: "heart.fill")
-            .scaleEffect(bpm != nil ? heartScale : 1)
-            .animation(Animation.easeInOut(duration: 60 / (bpm ?? 1) / 2).repeatForever()) // bpm = 1 is arbitrary, but we want to avoid 0
-            .onAppear { self.heartScale = 0.8 }
+        TimelineView(.animation) { context in
+            Image(systemName: bpm != nil ? "heart.fill" : "heart")
+                .scaleEffect(context.cadence == .live && bpm != nil ? scale(offset: context.date.timeIntervalSince1970) : 1)
+        }
     }
-}
-
-private class Refresher: ObservableObject {
-    var objectWillChange = ObservableObjectPublisher()
-    func refresh() {
-        self.objectWillChange.send()
+    
+    func scale(offset: Double) -> Double {
+        return max(sin(2 * .pi * offset * (bpm ?? 0) / 60) * 0.15, 0) + 1
     }
 }

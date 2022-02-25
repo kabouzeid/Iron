@@ -54,6 +54,13 @@ class WorkoutSessionManager: NSObject, ObservableObject {
             }
         }
     }
+    private var _mostRecentHeartRateDate: Date? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     
     private var _startDate: Date? {
         willSet {
@@ -109,6 +116,10 @@ class WorkoutSessionManager: NSObject, ObservableObject {
         
         workoutSession.delegate = self
         workoutBuilder.delegate = self
+        
+        // needs to be set again after active workout session recovery
+        workoutBuilder.dataSource = HKLiveWorkoutDataSource(healthStore: Self.healthStore, workoutConfiguration: workoutSession.workoutConfiguration)
+        os_log("Types to collect: %@", type: .debug, workoutBuilder.dataSource?.typesToCollect ?? "nil")
     }
     
     // make sure everything that modifies the session or the builder runs on this serial queue
@@ -228,8 +239,6 @@ class WorkoutSessionManager: NSObject, ObservableObject {
             }
         }
         
-        workoutBuilder.dataSource = HKLiveWorkoutDataSource(healthStore: Self.healthStore, workoutConfiguration: workoutSession.workoutConfiguration)
-        os_log("Types to collect: %@", type: .debug, workoutBuilder.dataSource?.typesToCollect ?? "nil")
         workoutSession.startActivity(with: start)
         os_log("Beginning collection")
         workoutBuilder.beginCollection(withStart: start, completion: { (success, error) in
@@ -333,12 +342,15 @@ extension WorkoutSessionManager: HKLiveWorkoutBuilderDelegate {
         if let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) {
             if collectedTypes.contains(heartRate) {
                 mostRecentHeartRate = getMostRecentHeartRate(workoutBuilder: workoutBuilder)
+                mostRecentHeartRateDate = getMostRecentHeartRateDate(workoutBuilder: workoutBuilder)
+//                os_log("Collected Heart Rate %@, date: %@", mostRecentHeartRate?.description ?? "nil", mostRecentHeartRateDate?.description ?? "nil")
             }
         }
 
         if let activeEnergyBurned = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) {
             if collectedTypes.contains(activeEnergyBurned) {
                 burnedCalories = getBurnedCalories(workoutBuilder: workoutBuilder)
+//                os_log("Collected Burned Calories %@", burnedCalories?.description ?? "nil")
             }
         }
     }
@@ -353,6 +365,11 @@ extension WorkoutSessionManager {
     private func getMostRecentHeartRate(workoutBuilder: HKWorkoutBuilder) -> Double? {
         guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
         return workoutBuilder.statistics(for: heartRate)?.mostRecentQuantity()?.doubleValue(for: HKUnit(from: "count/min"))
+    }
+    
+    private func getMostRecentHeartRateDate(workoutBuilder: HKWorkoutBuilder) -> Date? {
+        guard let heartRate = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return nil }
+        return workoutBuilder.statistics(for: heartRate)?.mostRecentQuantityDateInterval()?.end
     }
     
     var burnedCalories: Double? {
@@ -380,6 +397,20 @@ extension WorkoutSessionManager {
         }
         set {
             _mostRecentHeartRate = newValue
+        }
+    }
+    
+    var mostRecentHeartRateDate: Date? {
+        get {
+            if let mostRecentHeartRateDate = _mostRecentHeartRateDate {
+                return mostRecentHeartRateDate
+            }
+            guard let mostRecentHeartRateDate = getMostRecentHeartRateDate(workoutBuilder: workoutBuilder) else { return nil }
+            _mostRecentHeartRateDate = mostRecentHeartRateDate
+            return mostRecentHeartRateDate
+        }
+        set {
+            _mostRecentHeartRateDate = newValue
         }
     }
 }

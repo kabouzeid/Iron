@@ -15,24 +15,10 @@ import os.log
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
-        reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
-        cancellable = WorkoutSessionManagerStore.shared.objectWillChange.sink {
-            os_log("Reloading root page controllers", type: .info)
-            self.reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore.shared)
-        }
         os_log("Checking whether active workout session can be recovered")
-        handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?! last checked I think watchOS 6.0
+        handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?! last checked watchOS 8
         PhoneConnectionManager.shared.activateSession()
         NotificationManager.shared.awake()
-    }
-    
-    private var cancellable: AnyCancellable?
-    private func reloadRootPageControllers(workoutSessionManagerStore: WorkoutSessionManagerStore) {
-        if workoutSessionManagerStore.workoutSessionManager == nil {
-            WKInterfaceController.reloadRootPageControllers(withNames: ["workout"], contexts: nil, orientation: .horizontal, pageIndex: 0)
-        } else {
-            WKInterfaceController.reloadRootPageControllers(withNames: ["options", "workout", "music"], contexts: nil, orientation: .horizontal, pageIndex: 1)
-        }
     }
 
     func applicationDidBecomeActive() {
@@ -73,7 +59,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             }
         }
     }
-
+    
     func handleActiveWorkoutRecovery() {
         os_log("Recovering active workout session")
         WorkoutSessionManager.healthStore.recoverActiveWorkoutSession { workoutSession, error in
