@@ -18,12 +18,12 @@ struct WorkoutSessionView: View {
                 TimelineView(.periodic(from: Date(), by: 1)) { context in
                     VStack(alignment: .leading, spacing: 0) {
                         ElapsedTimeView(start: workoutSessionManager.startDate, end: workoutSessionManager.endDate ?? context.date)
-                            .font(.system(.title2, design: .rounded).bold().monospacedDigit())
+                            .font(.system(.title, design: .rounded).bold().monospacedDigit())
                             .foregroundColor(.yellow)
                         
                         HStack(alignment: .firstTextBaseline) {
                             RestTimerView(date: context.date, end: workoutSessionManager.restTimerEnd, keepRunning: workoutSessionManager.keepRestTimerRunning)
-                                .font(.system(.title2, design: .rounded).monospacedDigit())
+                                .font(.system(.title, design: .rounded).monospacedDigit())
                             Image(systemName: "timer")
                                 .font(.system(.title3, design: .rounded))
                         }
@@ -33,7 +33,7 @@ struct WorkoutSessionView: View {
                 
                 HStack(alignment: .firstTextBaseline) {
                     Text(workoutSessionManager.burnedCalories.map {String(format: "%.0f", $0)} ?? "-")
-                        .font(.system(.title2, design: .rounded).monospacedDigit())
+                        .font(.system(.title, design: .rounded).monospacedDigit())
                     Text("kcal".uppercased())
                         .font(.system(.title3, design: .rounded))
                 }
@@ -43,6 +43,7 @@ struct WorkoutSessionView: View {
             .lineLimit(1)
             Spacer()
         }
+        .scenePadding()
     }
 }
 
@@ -104,15 +105,13 @@ private struct HeartRateView: View {
     var body: some View {
         TimelineView(.periodic(from: mostRecentHeartRateDate ?? Date(), by: Self.MAX_HEART_RATE_AGE)) { context in
             HStack(alignment: .firstTextBaseline) {
-                Group {
-                    Text(mostRecentHeartRate.map { String(format: "%.0f", $0) } ?? "--")
-                }
-                .font(.system(.title2, design: .rounded).monospacedDigit())
+                Text(mostRecentHeartRate.map { String(format: "%.0f", $0) } ?? "--")
+                    .font(.system(.title, design: .rounded).monospacedDigit())
                 
                 HStack(alignment: .center) {
                     Text("bpm".uppercased())
                     PulsatingHeartView(bpm: measurementWasRecent(date: context.date) ? mostRecentHeartRate : nil)
-                        .foregroundColor(measurementWasRecent(date: context.date) ? .red : .init(white: 0, opacity: 0.2))
+                        .foregroundColor(measurementWasRecent(date: context.date) ? .red : .secondary)
                 }
                 .font(.system(.title3, design: .rounded))
             }
