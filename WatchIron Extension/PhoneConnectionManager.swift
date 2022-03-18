@@ -20,7 +20,7 @@ class PhoneConnectionManager: NSObject, ObservableObject {
     var objectWillChange = ObservableObjectPublisher() // called when something with the connection changes
     
     func activateSession() {
-        guard WCSession.isSupported() else { return }
+        assert(WCSession.isSupported())
         session.delegate = self
         session.activate()
     }
@@ -242,7 +242,14 @@ extension PhoneConnectionManager {
 extension PhoneConnectionManager {
     /// wrapper to send either via message or transfer, depending on what's available
     private func sendUserInfo(userInfo: [String : Any]) {
-        assert(isActivated)
+        guard isActivated else {
+            /// when the watch app is cold started via the phone, the session might not be activated yet, so try again in 1 second.
+            /// this is a kind of unclean workaround but it works very well
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.sendUserInfo(userInfo: userInfo)
+            }
+            return
+        }
         if isReachable {
             os_log("Messaging userInfo=%@", type: .debug, userInfo)
             session.sendMessage(userInfo, replyHandler: nil) { error in
