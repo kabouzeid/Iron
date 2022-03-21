@@ -186,7 +186,7 @@ struct CurrentWorkoutView: View {
         AudioServicesPlaySystemSound(1103) // Tink sound
         
         UserDefaults.standard.finishedWorkoutsCount += 1
-        if UserDefaults.standard.finishedWorkoutsCount == 3 {
+        if UserDefaults.standard.finishedWorkoutsCount == 6 {
             // ask for review after the user finishes his third workout
             SKStoreReviewController.requestReview()
         }
