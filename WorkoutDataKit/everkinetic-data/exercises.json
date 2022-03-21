@@ -312,7 +312,9 @@
     "id": 17,
     "name": "bent-over-lateral-cable-raises",
     "title": "Lateral Raise: Cable (Bent Over)",
-    "alias": [],
+    "alias": [
+      "Side Raise: Cable (Bent Over)"
+    ],
     "primer": "This is an exercise for shoulder, trapezius and middle back strengthening.",
     "type": "isolation",
     "primary": [
@@ -352,7 +354,9 @@
     "id": 18,
     "name": "lateral-dumbbell-raises",
     "title": "Lateral Raise: Dumbbell",
-    "alias": [],
+    "alias": [
+      "Side Raise: Dumbbell"
+    ],
     "primer": "This is an exercise for lateral deltoid, shoulder and forearm strengthening.",
     "type": "isolation",
     "primary": [
@@ -919,11 +923,11 @@
       "barbell"
     ],
     "steps": [
-      "Lie on a flat bench with your feet flat on the floor, keep your back flat on the bench.",
+      "Lie on a flat bench with your feet flat on the floor.",
       "Grasp the bar a little wider than shoulder width apart.",
-      "Raise the barbell above your body and move it over the middle of your chest, this is your starting position.",
-      "Lower the bar down so it just touches your chest.",
-      "Raise the bar till your arms are fully extended and your elbows are locked.",
+      "Raise the barbell above your body and balance it over your shoulders, this is your starting position.",
+      "Lower the bar down so it just touches your lower chest.",
+      "Push the bar up till your arms are fully extended and your elbows are locked.",
       "Return to starting position."
     ],
     "tips": [],
@@ -982,9 +986,11 @@
     "uuid": "6C2203F8-7DD8-4B18-A6A0-46B17B44F9E5",
     "id": 47,
     "name": "butterfly-machine",
-    "title": "Butterfly Machine",
+    "title": "Flyes: Machine",
     "alias": [
-      "Pec Deck Fly"
+      "Pec Deck Fly",
+      "Butterfly Machine",
+      "Chest Flyes: Machine"
     ],
     "primer": "This is an exercise for chest strengthening.",
     "type": "isolation",
@@ -1020,7 +1026,8 @@
     "name": "cable-crossover",
     "title": "Flyes: Cable",
     "alias": [
-      "Cable Crossover"
+      "Cable Crossover",
+      "Chest Flyes: Cable"
     ],
     "primer": "This is an exercise for chest and shoulder strengthening.",
     "type": "isolation",
@@ -1167,7 +1174,9 @@
     "id": 53,
     "name": "decline-dumbbell-flyes",
     "title": "Flyes: Dumbbell (Decline)",
-    "alias": [],
+    "alias": [
+      "Chest Flyes: Dumbbell (Decline)"
+    ],
     "primer": "This is an exercise for chest and shoulder strengthening.",
     "type": "isolation",
     "primary": [
@@ -1282,7 +1291,9 @@
     "id": 56,
     "name": "dumbbell-flyes",
     "title": "Flyes: Dumbbell",
-    "alias": [],
+    "alias": [
+      "Chest Flyes: Dumbbell"
+    ],
     "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
     "type": "isolation",
     "primary": [
@@ -1321,7 +1332,9 @@
     "id": 57,
     "name": "flat-bench-cable-flyes",
     "title": "Flyes: Cable (Lying)",
-    "alias": [],
+    "alias": [
+      "Chest Flyes: Cable (Lying)"
+    ],
     "primer": "This is an exercise for chest and shoulder strengthening.",
     "type": "isolation",
     "primary": [
@@ -1430,7 +1443,9 @@
     "id": 60,
     "name": "incline-cable-flyes",
     "title": "Flyes: Cable (Incline)",
-    "alias": [],
+    "alias": [
+      "Chest Flyes: Cable (Incline)"
+    ],
     "primer": "This exercise is an alternative to the Butterfly or Pec Deck, it defines the muscles of the chest.Place an incline bench set at a 45 degree angle between two cable towers.",
     "type": "isolation",
     "primary": [
@@ -1504,7 +1519,9 @@
     "id": 62,
     "name": "incline-dumbbell-flyes",
     "title": "Flyes: Dumbbell (Incline)",
-    "alias": [],
+    "alias": [
+      "Chest Flyes: Dumbbell (Incline)"
+    ],
     "primer": "This is an exercise for chest sculpting and strengthening.",
     "type": "isolation",
     "primary": [
@@ -2917,7 +2934,7 @@
       "Place your feet slightly wider than shoulder width apart with your knees and toes pointed slightly outward.",
       "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
       "Lower yourself as far as you can control without letting your body shift towards your toes (this will cause you to loose balance).",
-      "Pause in the downward position and slowly return upright to the starting position."
+      "Stand back up."
     ],
     "tips": [],
     "references": [
