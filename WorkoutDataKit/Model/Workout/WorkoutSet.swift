@@ -91,6 +91,7 @@ public class WorkoutSet: NSManagedObject, Codable {
     public var isPersonalRecord: Bool? {
         guard let weight = weight else { return nil }
         guard let repetitions = repetitions else { return nil }
+        guard repetitions.intValue > 0 else { return false }
         guard let start = workoutExercise?.workout?.start else { return nil }
         guard let exerciseUuid = workoutExercise?.exerciseUuid else { return nil }
 
