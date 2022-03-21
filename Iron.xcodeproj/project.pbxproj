@@ -1173,6 +1173,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		8A5BC4E427E931BD00E437A1 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8AAFE37C2534B66400CF03E5 /* IronWidgetExtension.entitlements */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		8A5F9A0F233B6B3600C2F32A /* StoreKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,7 +1258,6 @@
 		8A7D6E8B200BF92E00AA0FA7 = {
 			isa = PBXGroup;
 			children = (
-				8AAFE37C2534B66400CF03E5 /* IronWidgetExtension.entitlements */,
 				8AD39685239C075E0000E3C4 /* Shared */,
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
 				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
@@ -1425,6 +1432,7 @@
 		8AAFE3472534AB3800CF03E5 /* IronWidget */ = {
 			isa = PBXGroup;
 			children = (
+				8A5BC4E427E931BD00E437A1 /* Support */,
 				8AAFE3482534AB3800CF03E5 /* IronWidget.swift */,
 				8AAFE34A2534AB3900CF03E5 /* Assets.xcassets */,
 				8AAFE34C2534AB3900CF03E5 /* Info.plist */,
@@ -2914,7 +2922,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = IronWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IronWidget/IronWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 34;
@@ -2943,7 +2951,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = IronWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IronWidget/IronWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 34;

@@ -90,6 +90,9 @@ class NotificationManager: NSObject {
                 content.sound = UNNotificationSound.default
             }
             content.categoryIdentifier = NotificationCategoryIdentifier.restTimerUp.rawValue
+            if #available(iOS 15.0, *) {
+                content.interruptionLevel = .timeSensitive
+            }
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainingTime, repeats: false)
             
@@ -110,6 +113,9 @@ class NotificationManager: NSObject {
             let content = UNMutableNotificationContent()
             content.title = "Your workout was started"
             content.body = "Open Iron to launch the Apple Watch companion."
+            if #available(iOS 15.0, *) {
+                content.interruptionLevel = .timeSensitive
+            }
             
             let request = UNNotificationRequest(identifier: NotificationIdentifier.startedWorkout.rawValue, content: content, trigger: nil)
             
