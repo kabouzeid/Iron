@@ -243,9 +243,10 @@ extension PhoneConnectionManager {
     /// wrapper to send either via message or transfer, depending on what's available
     private func sendUserInfo(userInfo: [String : Any]) {
         guard isActivated else {
-            /// when the watch app is cold started via the phone, the session might not be activated yet, so try again in 1 second.
+            /// when the watch app is cold started via the phone, the session might not be activated yet, so try again after a short delay until the session is activated.
             /// this is a kind of unclean workaround but it works very well
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            /// Note: smaller timeouts don't work so well. maybe rate limiting or something?
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.sendUserInfo(userInfo: userInfo)
             }
             return
