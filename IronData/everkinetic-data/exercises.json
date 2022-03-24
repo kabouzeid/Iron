@@ -1,0 +1,5771 @@
+[
+  {
+    "uuid": "AA3C081D-2A51-4E20-B112-3B5C265B0A28",
+    "id": 3,
+    "name": "seated-shoulder-press-machine",
+    "title": "Overhead Press: Machine (Seated)",
+    "alias": [
+      "Shoulder Press: Machine (Seated)",
+      "Military Press: Machine (Seated)"
+    ],
+    "primer": "This is an exercise for the shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Sit upright with your back supported by the chair and draw your abs in.",
+      "Place your hands on the bars and with smooth even motions press upward extending your arms, but not locking them.",
+      "At the top pause then with controlled motion lower the bars to your starting position."
+    ],
+    "tips": [
+      "Ensure that the seat and bar have been adjusted for optimal posture."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0003-relaxation.pdf",
+      "pdf/0003-tension.pdf"
+    ],
+    "png": [
+      "png/0003-relaxation.png",
+      "png/0003-tension.png"
+    ]
+  },
+  {
+    "uuid": "2234A906-76BD-491C-B8D1-D6FC60CCB4F8",
+    "id": 4,
+    "name": "seated-overhead-press",
+    "title": "Overhead Press: Barbell (Seated)",
+    "alias": [
+      "Shoulder Press: Barbell (Seated)",
+      "Military Press: Barbell (Seated)"
+    ],
+    "primer": "An exercise for the shoulder and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "steps": [
+      "Sit on the bench with your toes pointing straight out, back straight and abs drawn in.",
+      "Grip the bar with your palms facing outwards and your hands shoulder width apart",
+      "With bar in front of your head, press upwards extending your arms but not locking them.",
+      "Pause at the top and then in a controlled movement lower the bar to the starting position."
+    ],
+    "tips": [
+      "Ensure your hips, knees and ankles are at 90 degree positions to ensure optimal posture.",
+      "This exercise can also be performed with the bar in the starting position behind your head."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0004-relaxation.pdf",
+      "pdf/0004-tension.pdf"
+    ],
+    "png": [
+      "png/0004-relaxation.png",
+      "png/0004-tension.png"
+    ]
+  },
+  {
+    "uuid": "242C1F11-54FE-4EB9-B350-3ED2814E9E2D",
+    "id": 5,
+    "name": "shoulder-shrugs",
+    "title": "Shrugs: Dumbbell",
+    "alias": [],
+    "primer": "An exercise for trapezius strengthening.",
+    "type": "isolation",
+    "primary": [
+      "trapezius"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart and a slight bend in your knees.",
+      "Hold a dumbbell in each hand and with your arms at your sides.",
+      "Lower your shoulders as much as possible.",
+      "With your arms straight raise both shoulders up towards your ears.",
+      "Hold the upright positions for a moment and then lower in a controlled motion."
+    ],
+    "tips": [
+      "Do not do this exercise if you are experiencing any shoulder or neck pain."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0005-relaxation.pdf",
+      "pdf/0005-tension.pdf"
+    ],
+    "png": [
+      "png/0005-relaxation.png",
+      "png/0005-tension.png"
+    ]
+  },
+  {
+    "uuid": "3641964C-08E0-40CB-B07E-4FE0F22FB556",
+    "id": 6,
+    "name": "arnold-press",
+    "title": "Arnold Press",
+    "alias": [],
+    "primer": "An exercise for shoulder and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sit on a flat bench, feet point forward with your abs drawn in.",
+      "Grasp a dumbbell in each hand with your palm facing towards your body",
+      "Bend your elbows to 90 degrees and raise both your arms to the starting point in line with your shoulders.",
+      "With a steady controlled motion raise your arms up while straightening your elbows while rotating your forearms so that your palms now face away from your body.",
+      "Bring the dumbbells closer together but do not fully extend your elbows.",
+      "With a controlled motion lower the dumbbells to the starting position at your shoulders."
+    ],
+    "tips": [
+      "Start with a lower dumbbell weight in order to perfect the technique.",
+      "Do not perform this exercise if you have shoulder pain."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0006-relaxation.pdf",
+      "pdf/0006-tension.pdf"
+    ],
+    "png": [
+      "png/0006-relaxation.png",
+      "png/0006-tension.png"
+    ]
+  },
+  {
+    "uuid": "D00DE650-3FA1-4A3E-87F7-E512820EB2FE",
+    "id": 7,
+    "name": "front-barbell-raises",
+    "title": "Front Raises: Barbell",
+    "alias": [],
+    "primer": "An exercise for shoulder, chest and forearm strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "pectoralis major",
+      "forerm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Grasp a barbell with an overhand grip(palms of hands face downwards) .",
+      "Stand up-right with your feet shoulder width apart, knees slightly bent and your abs drawn in.",
+      "With your arms straight, raise the barbell in a controlled motion to shoulder level.",
+      "Hold for a moment and then lower the barbell in at the same motion."
+    ],
+    "tips": [
+      "Maintain a good upright posture when performing this exercise, do not sway or arch your back.",
+      "Do not perform this exercise if you have shoulder pain."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0007-relaxation.pdf",
+      "pdf/0007-tension.pdf"
+    ],
+    "png": [
+      "png/0007-relaxation.png",
+      "png/0007-tension.png"
+    ]
+  },
+  {
+    "uuid": "5CF92AB3-67F6-444C-A9B3-D4812B6CB06E",
+    "id": 8,
+    "name": "front-cable-raises",
+    "title": "Front Raises: Cable",
+    "alias": [],
+    "primer": "An exercise for shoulders, chest and forearm strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "pectoralis major",
+      "forearm"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Place the pulley on the setting just above the floor.",
+      "Stand with your feet shoulder width apart, your abs drawn in and your knees slightly bent.",
+      "Starting at waist height, take the pulley in your left hand, palm facing the floor with otherwise known as an overhand grip, and raise your straight arm up towards your left shoulder.",
+      "At shoulder height pause for a moment.",
+      "With a controlled movement resist the weight and slowly lower your arm back to starting position at your waist.",
+      "Repeat the exercise with your right arm."
+    ],
+    "tips": [
+      "Maintain a good posture at all times during this exercise ensuring not swaying or arching at your back.",
+      "Do not perform this exercise if you have shoulder pain."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0008-relaxation.pdf",
+      "pdf/0008-tension.pdf"
+    ],
+    "png": [
+      "png/0008-relaxation.png",
+      "png/0008-tension.png"
+    ]
+  },
+  {
+    "uuid": "BDD44C1A-EDC3-48AE-89BC-DE1CB540BBFD",
+    "id": 9,
+    "name": "cable-shoulder-shrugs",
+    "title": "Shrugs: Cable",
+    "alias": [],
+    "primer": "An exercise for trapezius strengthening.",
+    "type": "isolation",
+    "primary": [
+      "trapezius"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a pulley to the lowest setting on cable machine.",
+      "Stand with your feet shoulder width apart, your abs drawn and your back straight.",
+      "Start with the pulley at waist height.",
+      "Grasp the pulley and shrug your shoulders up while keeping your arms extended.",
+      "Hold this position for a moment then with a controlled motion return to the starting position of the pulley to waist height."
+    ],
+    "tips": [
+      "Bend your knees slightly when standing."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0009-relaxation.pdf",
+      "pdf/0009-tension.pdf"
+    ],
+    "png": [
+      "png/0009-relaxation.png",
+      "png/0009-tension.png"
+    ]
+  },
+  {
+    "uuid": "2E087495-346B-4824-96BB-9CD854029E87",
+    "id": 12,
+    "name": "dumbbell-shoulder-press",
+    "title": "Shoulder Press: Dumbbell",
+    "alias": [
+      "Overhead Press: Dumbbell",
+      "Military Press: Dumbbell"
+    ],
+    "primer": "An exercise for shoulder, chest and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "pectoralis major"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sitting on a bench, with your abs drawn in grasp a dumbbell in each hand, with your palms facing forward.",
+      "Begin with your arms at the height of your shoulders.",
+      "Extend your arms and raise the dumbbells up above your head.",
+      "At the top of the movement, bring your arms closer together.",
+      "Pause for a moment and then in a controlled movement lower the dumbbells to the starting position.",
+      "Repeat"
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0012-relaxation.pdf",
+      "pdf/0012-tension.pdf"
+    ],
+    "png": [
+      "png/0012-relaxation.png",
+      "png/0012-tension.png"
+    ]
+  },
+  {
+    "uuid": "6C214811-961A-408A-8ABA-365F4F35A7FD",
+    "id": 17,
+    "name": "bent-over-lateral-cable-raises",
+    "title": "Lateral Raise: Cable (Bent Over)",
+    "alias": [
+      "Side Raise: Cable (Bent Over)"
+    ],
+    "primer": "This is an exercise for shoulder, trapezius and middle back strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "trapezius",
+      "latissimus dorsi"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Grasp the handle of the low pulley with your right hand.",
+      "Bend forward from the waist; your upper body should be nearly parallel with the floor. Bend your knees slightly and place your left hand on your left thigh. Let your right arm hang from your shoulder in front of you with your elbow slightly bent. This is your starting position.",
+      "Lift your right arm, keeping your elbow slightly bent.",
+      "Keep moving your arm until it is parallel to the floor, in line with your right ear.",
+      "Slowly bring the weight back down to the starting position.",
+      "Perform exercise on left arm and then repeat."
+    ],
+    "tips": [
+      "Start with a lower weight in order to perfect the technique.",
+      "Ensure your back remains straight throughout this exercise in order to prevent injury."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0017-relaxation.pdf",
+      "pdf/0017-tension.pdf"
+    ],
+    "png": [
+      "png/0017-relaxation.png",
+      "png/0017-tension.png"
+    ]
+  },
+  {
+    "uuid": "92D5B230-A226-45DD-8AA1-D3271EC24AF8",
+    "id": 18,
+    "name": "lateral-dumbbell-raises",
+    "title": "Lateral Raise: Dumbbell",
+    "alias": [
+      "Side Raise: Dumbbell"
+    ],
+    "primer": "This is an exercise for lateral deltoid, shoulder and forearm strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Grasp a dumbbell in each hand, palms facing inward towards your body and the dumbbells at your sides.",
+      "Standing with your feet shoulder with apart, draw your abs in and bend your knees slightly.",
+      "While keeping your torso still, raise the your arms up to the sides keeping your arms straight with a slight bend in the elbows.",
+      "Raise your arms up until in line with your shoulders, your palms should face the floor.",
+      "Hold the position for a moment then in a controlled movement lower your arms to the starting position.",
+      "Repeat"
+    ],
+    "tips": [
+      "Maintain a good upright posture ensuring no arching in the back in order to prevent injuries."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0018-relaxation.pdf",
+      "pdf/0018-tension.pdf"
+    ],
+    "png": [
+      "png/0018-relaxation.png",
+      "png/0018-tension.png"
+    ]
+  },
+  {
+    "uuid": "19D4F31D-AA33-4013-83DF-342DD6305AD5",
+    "id": 20,
+    "name": "reverse-flyes-cable",
+    "title": "Reverse Flyes: Cable",
+    "alias": [
+      "Back Flyes: Cable"
+    ],
+    "primer": "This is an exercise for shoulder, middle back and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "latissimus dorsi"
+    ],
+    "equipment": [
+      "exercise band"
+    ],
+    "steps": [
+      "Place an exercise band around a post or machine at mid chest height.",
+      "Stand with your feet shoulder width apart, abs drawn in and knees slightly bent.",
+      "Stand back from the post so there is tension in the band, grasping the band with your arms extended in front of you and a slight bend in your elbows; this is your starting position.",
+      "Bring your arms back in a controlled motion till they are parallel at your sides and in line with your shoulders.",
+      "Slowly return your arms to the starting position in front of your chest.",
+      "Repeat."
+    ],
+    "tips": [
+      "Maintain a good upright posture at all times during this exercise ensuring you do not arch your back."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0020-relaxation.pdf",
+      "pdf/0020-tension.pdf"
+    ],
+    "png": [
+      "png/0020-relaxation.png",
+      "png/0020-tension.png"
+    ]
+  },
+  {
+    "uuid": "09F6FB3A-A7E9-4E08-8BA2-5F1CE7FDE93F",
+    "id": 21,
+    "name": "leg-raises",
+    "title": "Leg Raises",
+    "alias": [],
+    "primer": "This is an exercise for lower abdominal strengthening.",
+    "type": "isolation",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lie on the floor with your hands under your hips supporting your back.",
+      "Your legs should not rest on the floor.",
+      "Keep your legs straight with a slight bend in the knees and raise your legs to just before 90 degrees with your hips.",
+      "Pause at the top and lower your legs in slow controlled manner back to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "If you are pregnant you should contact your doctor prior to doing this exercise.",
+      "Ensure your back stays in contact with the bench at all times during this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0021-relaxation.pdf",
+      "pdf/0021-tension.pdf"
+    ],
+    "png": [
+      "png/0021-relaxation.png",
+      "png/0021-tension.png"
+    ]
+  },
+  {
+    "uuid": "0926F2D0-B09A-4D74-9EDF-3654D79A4CDF",
+    "id": 22,
+    "name": "smith-machine-rear-deltoid-row",
+    "title": "Rear Deltoid Row: Smith Machine",
+    "alias": [],
+    "primer": "A exercise for the rear deltoid",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "This is an exercise for rear deltoid,shoulder, biceps and back strengthening.",
+      " Set the bar to the lowest setting.",
+      "Place your feet shoulder width apart with a slight bend in the knees.",
+      "Bend at the waist while keeping your back straight and chest parallel to the floor.",
+      "Grasp the bar slightly wider than your shoulders with an overhand grasp and your arms straight with a slight bend in the elbows.",
+      "Raise the bar with a controlled motion to the lower part of your chest by bending and elevating your elbows.",
+      "Hold for a moment and then lower to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure you back is straight and that you maintain a good posture throughout this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0022-relaxation.pdf",
+      "pdf/0022-tension.pdf"
+    ],
+    "png": [
+      "png/0022-relaxation.png",
+      "png/0022-tension.png"
+    ]
+  },
+  {
+    "uuid": "E905CE43-2692-44C4-8E98-6657CAEAA3D4",
+    "id": 23,
+    "name": "lying-rear-lateral-raise",
+    "title": "Rear Deltoid Raise (Lying)",
+    "alias": [],
+    "primer": "This is an exercise for shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [],
+    "equipment": [
+      "flat bench",
+      "dumbbell"
+    ],
+    "steps": [
+      "Place the dumbbells at he head of the bench.",
+      "Lie facedown on a raised bench; raised enough for your arms to move freely beneath the bench.",
+      "Place your toes on the floor in order to stabilise yourself.",
+      "Grasp the dumbbells and with a 30 degree bend in your elbows, this is the starting position.",
+      "Raise your arms to shoulder height, maintaining a controlled motion.",
+      "Return to starting position and repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0023-relaxation.pdf",
+      "pdf/0023-tension.pdf"
+    ],
+    "png": [
+      "png/0023-relaxation.png",
+      "png/0023-tension.png"
+    ]
+  },
+  {
+    "uuid": "1C18115B-4985-4CAE-BA7E-FBD86827C6FF",
+    "id": 24,
+    "name": "rear-deltoid-row-dumbbell",
+    "title": "Row: Dumbbell (One Arm)",
+    "alias": [],
+    "primer": "This is an exercise for deltoid, biceps and trapezius strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Place your right foot on the floor, rest your left knee and hand on a flat bench.",
+      "Lean forward so your body’s weight is supported by your left arm and knee.",
+      "Keeping your back flat, reach down and pick up the dumbbell with your right hand.",
+      "Raise your right arm as close to your chest as possible; while bending and bringing your elbow back as far as you can.",
+      "Pause at the top for a moment and then lower the dumbbell in a controlled manner to the starting position.",
+      "Switch arms by doing the opposite positioning.",
+      "Repeat."
+    ],
+    "tips": [
+      "maintain a good posture at all times throughout the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0024-relaxation.pdf",
+      "pdf/0024-tension.pdf"
+    ],
+    "png": [
+      "png/0024-relaxation.png",
+      "png/0024-tension.png"
+    ]
+  },
+  {
+    "uuid": "C30BC020-CD01-4DC6-BACD-BAB8C88D208F",
+    "id": 25,
+    "name": "seated-cable-row",
+    "title": "Row: Cable (Seated)",
+    "alias": [],
+    "primer": "This is an exercise for middle back, biceps and lower back strengthening.",
+    "type": "compound",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "erector spinae"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Sit at a low pulley machine with your feet resting against the footrests and your knees slightly bent.",
+      "With your abs drawn in and your back straight lean forward slightly to grasp the pulleys with an overhand grip (palms face downwards).",
+      "Slowly bring the pulleys back towards your abs while sitting upright, keep your elbows in close to your chest.",
+      "Pause for a moment then return slowly return the pulleys to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure that your back is straight at all times and do not lock your knees when rowing back."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0025-relaxation.pdf",
+      "pdf/0025-tension.pdf"
+    ],
+    "png": [
+      "png/0025-relaxation.png",
+      "png/0025-tension.png"
+    ]
+  },
+  {
+    "uuid": "794F1BDB-9F8C-487E-866D-D6E54E28A522",
+    "id": 26,
+    "name": "reverse-grips-bent-over-barbell-row",
+    "title": "Row: Barbell (Bent Over, Reverse)",
+    "alias": [],
+    "primer": "This is an exercise for middle back and biceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Bend over a barbell at slight angle with your knees bent and your back straight.",
+      "Grasp the bar with a reverse grip (palms facing up) and slowly pull the barbell to your abs, keeping your elbows close to your sides.",
+      "Pause for a moment at the top.",
+      "Return the barbell to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure that the weight of the barbell is evenly distributed through both hands."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0026-relaxation.pdf",
+      "pdf/0026-tension.pdf"
+    ],
+    "png": [
+      "png/0026-relaxation.png",
+      "png/0026-tension.png"
+    ]
+  },
+  {
+    "uuid": "D39C7398-C0DB-4501-95A3-67E8B27C7921",
+    "id": 28,
+    "name": "rear-deltoid-row-barbell",
+    "title": "Rear Deltoid Row: Barbell",
+    "alias": [],
+    "primer": "This is an exercise for shoulder and biceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Place a barbell on the floor in front of you with the resided weights attached.",
+      "With your knees bent and back straight grasp the bar with a wide overhand grip (palms facing downwards).",
+      "Keep your chest steady and your arms perpendicular to your chest.",
+      "Pull the bar as far up to your chest as you can.",
+      "Hold for a moment than lower the bar in a controlled manner.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0028-relaxation.pdf",
+      "pdf/0028-tension.pdf"
+    ],
+    "png": [
+      "png/0028-relaxation.png",
+      "png/0028-tension.png"
+    ]
+  },
+  {
+    "uuid": "44694EFA-7D2E-4C7F-AB7D-DC4F66CAFB60",
+    "id": 29,
+    "name": "t-bar-rows",
+    "title": "Row: T-Bar",
+    "alias": [],
+    "primer": "This is an exercise for middle back, biceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "t-bar machine"
+    ],
+    "steps": [
+      "Place your feet on either side of a T-Bar Machine.",
+      "With your knees slightly bent and abs drawn in, grasp the handles with a narrow grip.",
+      "Bend at the waist so your chest is parallel to the floor, this is starting position. Slowly pull the bar to your chest, as high as you can.",
+      "Pause at the top for a moment and then lower the bar to starting position.",
+      "Repeat"
+    ],
+    "tips": [
+      "Keep your back straight throughout this exercise in order to prevent injury.",
+      "Keep your elbows close to your body throughout the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0029-relaxation.pdf",
+      "pdf/0029-tension.pdf"
+    ],
+    "png": [
+      "png/0029-relaxation.png",
+      "png/0029-tension.png"
+    ]
+  },
+  {
+    "uuid": "C736BCEB-4699-4FFF-BE53-0D56336BA137",
+    "id": 30,
+    "name": "barbell-shrugs",
+    "title": "Shrugs: Barbell",
+    "alias": [],
+    "primer": "This is an exercise for trapezius strengthening.",
+    "type": "isolation",
+    "primary": [
+      "trapezius"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Stand on the floor with your abs drawn in and your back straight.",
+      "Grasp a barbell with a grip a little wider than shoulder width at arms length.",
+      "Drop your shoulders as much as possible to start.",
+      "Raise your shoulder as high as possible.",
+      "Pause for a moment at the top and then return to starting position in a controlled motion.",
+      "Repeat."
+    ],
+    "tips": [
+      "Do not arch your back at all during the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0030-relaxation.pdf",
+      "pdf/0030-tension.pdf"
+    ],
+    "png": [
+      "png/0030-relaxation.png",
+      "png/0030-tension.png"
+    ]
+  },
+  {
+    "uuid": "95A2FF8B-332D-427A-9EBD-7CE3151D5F4A",
+    "id": 32,
+    "name": "bent-over-rear-deltoid-raise-with-head-on-bench",
+    "title": "Rear Deltoid Raise (Bent Over)",
+    "alias": [],
+    "primer": "This is an exercise for shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Rest your forehead on an incline bench in oder to stabilise your movements so you are bent over with your back parallel to the floor, draw your abs in.",
+      "Grasp dumbbells in your hands with your arms straight and elbows slightly bent ensuring they are not locked.",
+      "Slowly raise the dumbbells up to shoulder height.",
+      "Pause for a moment and then return to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "ensure your back is straight and parallel to the floor throughout the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0032-relaxation.pdf",
+      "pdf/0032-tension.pdf"
+    ],
+    "png": [
+      "png/0032-relaxation.png",
+      "png/0032-tension.png"
+    ]
+  },
+  {
+    "uuid": "9C3417E1-2B6F-4E2D-9F49-0BF256CCC88D",
+    "id": 33,
+    "name": "front-dumbbell-raises",
+    "title": "Front Raises: Dumbbell",
+    "alias": [],
+    "primer": "This is an exercise for shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with a dumbbell in each hand with an overhand grip, your feet shoulder width apart and your abs drawn in.",
+      "Keeping each arm straight raise your left arm to just above shoulder height.",
+      "Pause for a moment then in a controlled motion lower the weight to starting position and repeat with your right arm."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0033-relaxation.pdf",
+      "pdf/0033-tension.pdf"
+    ],
+    "png": [
+      "png/0033-relaxation.png",
+      "png/0033-tension.png"
+    ]
+  },
+  {
+    "uuid": "B346DE7B-2E5C-4509-83AF-B5E58BA065E1",
+    "id": 34,
+    "name": "internal-cable-rotation",
+    "title": "Internal Cable Rotation",
+    "alias": [],
+    "primer": "This is an exercise for shoulder and biceps strengthening.",
+    "type": "compound",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Sit on the floor with your body close to low cable pulley.",
+      "Grasp the pulley with your left arm and position your elbow bent at 90 degree angle.",
+      "Pull the cable towards your body and internally rotate your shoulder until your forearm is across your abs.",
+      "Return to starting position.",
+      "Repeat with right arm."
+    ],
+    "tips": [
+      "Ensure your back is straight throughout the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0034-relaxation.pdf",
+      "pdf/0034-tension.pdf"
+    ],
+    "png": [
+      "png/0034-relaxation.png",
+      "png/0034-tension.png"
+    ]
+  },
+  {
+    "uuid": "9A268413-B96A-4943-94BC-C36FC0C91E07",
+    "id": 41,
+    "name": "smith-machine-shoulder-shrugs",
+    "title": "Shrugs: Smith Machine",
+    "alias": [],
+    "primer": "This is an exercise for shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "Place the barbell at waist height.",
+      "Stand with your feet shoulder width apart and your abs drawn in.",
+      "Grasp the bar with an overhand grip and straightened arms.",
+      "As you lift the bar allow the weight to pull your shoulders down, shrug your shoulders up and to the back.",
+      "Hold for a moment and then return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0041-relaxation.pdf",
+      "pdf/0041-tension.pdf"
+    ],
+    "png": [
+      "png/0041-relaxation.png",
+      "png/0041-tension.png"
+    ]
+  },
+  {
+    "uuid": "C0D3C3CD-9F1F-4A89-B845-DAB5923B22A7",
+    "id": 42,
+    "name": "bench-press",
+    "title": "Bench Press: Barbell",
+    "alias": [],
+    "primer": "This is one of the best exercises for the chest.",
+    "type": "compound",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "bench",
+      "barbell"
+    ],
+    "steps": [
+      "Lie on a flat bench with your feet flat on the floor.",
+      "Grasp the bar a little wider than shoulder width apart.",
+      "Raise the barbell above your body and balance it over your shoulders, this is your starting position.",
+      "Lower the bar down so it just touches your lower chest.",
+      "Push the bar up till your arms are fully extended and your elbows are locked.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [
+      "https://youtu.be/4T9UQ4FBVXI"
+    ],
+    "pdf": [
+      "pdf/0042-relaxation.pdf",
+      "pdf/0042-tension.pdf"
+    ],
+    "png": [
+      "png/0042-relaxation.png",
+      "png/0042-tension.png"
+    ]
+  },
+  {
+    "uuid": "D2B09DAE-2E3B-4A7A-95F8-811E5E41B433",
+    "id": 43,
+    "name": "incline-bench-press",
+    "title": "Bench Press: Barbell (Incline)",
+    "alias": [],
+    "primer": "This is an exercise for chest and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "bench: incline",
+      "barbell"
+    ],
+    "steps": [
+      "Lie flat on an incline bench set at a 45 degree angle, with your feet shoulder width apart.",
+      "Grasp the bar a little wider than shoulder width apart.",
+      "Raise the barbell above your body and move it over the middle of your chest, this is your starting position.",
+      "Lower the bar down so it just touches your chest.",
+      "Raise the bar straight up till your arms are fully extended and your elbows are locked.",
+      "Return to starting position."
+    ],
+    "tips": [
+      "Do not bounce the bar off your chest always maintain a controlled motion."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0043-relaxation.pdf",
+      "pdf/0043-tension.pdf"
+    ],
+    "png": [
+      "png/0043-relaxation.png",
+      "png/0043-tension.png"
+    ]
+  },
+  {
+    "uuid": "6C2203F8-7DD8-4B18-A6A0-46B17B44F9E5",
+    "id": 47,
+    "name": "butterfly-machine",
+    "title": "Flyes: Machine",
+    "alias": [
+      "Pec Deck Fly",
+      "Butterfly Machine",
+      "Chest Flyes: Machine"
+    ],
+    "primer": "This is an exercise for chest strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine: butterfly"
+    ],
+    "steps": [
+      "Adjust the machine so you are sitting at chest heights with the pads.",
+      "Sit on the machine with your back flat.",
+      "Place your forearms on the pads, parallel to the floor, this is starting position.",
+      "Using your forearms, push the pads together slowly as you squeeze your chest.",
+      "Return your arms to the stretched out starting position in a controlled motion.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0047-relaxation.pdf",
+      "pdf/0047-tension.pdf"
+    ],
+    "png": [
+      "png/0047-relaxation.png",
+      "png/0047-tension.png"
+    ]
+  },
+  {
+    "uuid": "CAEA1591-7DA3-4607-915A-04CFADA7E461",
+    "id": 48,
+    "name": "cable-crossover",
+    "title": "Flyes: Cable",
+    "alias": [
+      "Cable Crossover",
+      "Chest Flyes: Cable"
+    ],
+    "primer": "This is an exercise for chest and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach the cable pulley to shoulder height.",
+      "Grasp the pulley in both hands and stand approximately one foot in front of the weight stacks, with one foot slightly in front of the other.",
+      "With a slight bend in your elbows bring your hand together in front of your chest on downward angle.",
+      "When your hands meet at the midpoint of your chest, hold for a moment.",
+      "With a slow controlled motion return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0048-relaxation.pdf",
+      "pdf/0048-tension.pdf"
+    ],
+    "png": [
+      "png/0048-relaxation.png",
+      "png/0048-tension.png"
+    ]
+  },
+  {
+    "uuid": "7F521D26-66F9-40F5-B50A-044AAC0803FE",
+    "id": 49,
+    "name": "close-grip-barbell-bench-press",
+    "title": "Bench Press: Barbell (Close Grip)",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Lie on a flat bench with your feet flat on the floor, keep your back flat on the bench.",
+      "Grasp the bar a close grip (approximately 14” apart).",
+      "Raise the barbell above your body and move it over the middle of your chest, this is your starting position.",
+      "Lower the bar down so it just touches your chest.",
+      "Raise the bar till your arms are fully extended and your elbows are locked.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0049-relaxation.pdf",
+      "pdf/0049-tension.pdf"
+    ],
+    "png": [
+      "png/0049-relaxation.png",
+      "png/0049-tension.png"
+    ]
+  },
+  {
+    "uuid": "A7AF0DB8-C0B1-44BA-ADB2-6C08E03CB2CC",
+    "id": 51,
+    "name": "decline-barbell-bench-press",
+    "title": "Bench Press: Barbell (Decline)",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "bench: decline",
+      "barbell"
+    ],
+    "steps": [
+      "Lie on a decline bench with your head lower than your feet.",
+      "Grasp the bar at a grip 3-6 inches wider than your shoulders.",
+      "Raise the bar above your chest, keeping your elbows close in.",
+      "Slowly and with control lower the bar straight to your lower chest.",
+      "Raise the bar back up to starting position with the bar just above your chest.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0051-relaxation.pdf",
+      "pdf/0051-tension.pdf"
+    ],
+    "png": [
+      "png/0051-relaxation.png",
+      "png/0051-tension.png"
+    ]
+  },
+  {
+    "uuid": "A541E362-0EAD-42DA-B109-D452312BA2CA",
+    "id": 52,
+    "name": "decline-dumbbell-bench-press",
+    "title": "Bench Press: Dumbbell (Decline)",
+    "alias": [],
+    "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench: decline"
+    ],
+    "steps": [
+      "Grasp the dumbbells your hands and lie on a decline bench with your head lower than your feet.",
+      "Raise the dumbbells above your chest, bringing your elbows close in, this is your starting position.",
+      "Slowly and with control lower the dumbbells to either side of your lower chest.",
+      "Raise the dumbbells back up to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0052-relaxation.pdf",
+      "pdf/0052-tension.pdf"
+    ],
+    "png": [
+      "png/0052-relaxation.png",
+      "png/0052-tension.png"
+    ]
+  },
+  {
+    "uuid": "0DB5A1D0-91D7-4A7E-8537-8F1199B3FC0A",
+    "id": 53,
+    "name": "decline-dumbbell-flyes",
+    "title": "Flyes: Dumbbell (Decline)",
+    "alias": [
+      "Chest Flyes: Dumbbell (Decline)"
+    ],
+    "primer": "This is an exercise for chest and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench: decline"
+    ],
+    "steps": [
+      "Lie on a decline bench with your head lower than your body and your feet firmly on the ground.",
+      "With dumbbells together above your shoulders and your arms straight out above you as your starting position.",
+      "Keeping your arms straight and with a slight bend in your elbows lower the dumbbells down towards the floor in an arc, up until just above your shoulders.",
+      "Return to the starting position in a slow controlled manner.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0053-relaxation.pdf",
+      "pdf/0053-tension.pdf"
+    ],
+    "png": [
+      "png/0053-relaxation.png",
+      "png/0053-tension.png"
+    ]
+  },
+  {
+    "uuid": "AC43FDDC-D3C7-438D-A925-D4EF0F3CE290",
+    "id": 54,
+    "name": "chest-dips",
+    "title": "Dips (Chest)",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "body",
+      "parallel bars"
+    ],
+    "steps": [
+      "Stand in between the parallel bars.",
+      "Grip the handles of the parallel bars and push yourself up to the starting position with straightened arms.",
+      "With your elbows close to your body keep your hips straight, lower your body forward by bending your elbows so your chest is leading as you go down.",
+      "Raise yourself back up to the starting position and repeat.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure not to lock your elbows once you have raised yourself up."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0054-relaxation.pdf",
+      "pdf/0054-tension.pdf"
+    ],
+    "png": [
+      "png/0054-relaxation.png",
+      "png/0054-tension.png"
+    ]
+  },
+  {
+    "uuid": "6B09E781-80C2-4116-AB82-C9FC31D49E43",
+    "id": 55,
+    "name": "bench-press-dumbbell",
+    "title": "Bench Press: Dumbbell",
+    "alias": [],
+    "primer": "This is  an exercise for chest,triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "dumbbell",
+      "flat bench"
+    ],
+    "steps": [
+      "This is an exercise for chest, triceps and shoulder strengthening.",
+      "Grasp the dumbbells in each hand and lie on a flat bench with your feet firmly on the ground.",
+      "Extend your arms up over your chest with your palms facing forwards.",
+      "Press the dumbbells up over your chest till your arm are fully extended this is your starting position.",
+      "Bend your elbows to a 90 degree angle so your upper arms are parallel with the floor.",
+      "Slowly lower the dumbbells as low as comfortable along your chest.",
+      "With a controlled motion return back to your starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0055-relaxation.pdf",
+      "pdf/0055-tension.pdf"
+    ],
+    "png": [
+      "png/0055-relaxation.png",
+      "png/0055-tension.png"
+    ]
+  },
+  {
+    "uuid": "C28FA94C-D311-450F-B208-6366A2992837",
+    "id": 56,
+    "name": "dumbbell-flyes",
+    "title": "Flyes: Dumbbell",
+    "alias": [
+      "Chest Flyes: Dumbbell"
+    ],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "flat bench",
+      "dumbbell"
+    ],
+    "steps": [
+      "Lie on a flat bench with a dumbbell in each hand and your feet firmly on the ground.",
+      "Lift the dumbbells over your chest extending your arms fully with a slight bend in your elbows, this is your starting position.",
+      "Keeping a slight bend in your elbows, lower the dumbbells to the floor in an arc like motion.",
+      "Slowly return the dumbbells over your chest to the starting position in a controlled motion.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure your back and hips remain in contact with the bench at all times during this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0056-relaxation.pdf",
+      "pdf/0056-tension.pdf"
+    ],
+    "png": [
+      "png/0056-relaxation.png",
+      "png/0056-tension.png"
+    ]
+  },
+  {
+    "uuid": "61C900C2-8920-47BC-91E4-DC249F5C6127",
+    "id": 57,
+    "name": "flat-bench-cable-flyes",
+    "title": "Flyes: Cable (Lying)",
+    "alias": [
+      "Chest Flyes: Cable (Lying)"
+    ],
+    "primer": "This is an exercise for chest and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "flat bench",
+      "cable"
+    ],
+    "steps": [
+      "Lie on flat bench between two cable towers and your feet firmly on the ground.",
+      "Grasp a pulley in each hand with your palms facing up.",
+      "With a slight bend in your elbows, squeeze your chest and pull the cables together meeting in the middle of your chest.",
+      "Hold for a moment and then slowly lower your hands back to starting position at bench height.",
+      "Tip: Ensure your back and hips stay in contact with the bench at all times during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0057-relaxation.pdf",
+      "pdf/0057-tension.pdf"
+    ],
+    "png": [
+      "png/0057-relaxation.png",
+      "png/0057-tension.png"
+    ]
+  },
+  {
+    "uuid": "670F794D-3D03-4DC9-AC69-68D06CB784D4",
+    "id": 58,
+    "name": "barbell-front-raise-pullover",
+    "title": "Front Raise and Pullover",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "barbell",
+      "flat bench"
+    ],
+    "steps": [
+      "Lie on a flat bench and grasp a barbell using a medium grip (about 15” apart).",
+      "Place the barbell on your upper thighs and lock your arms straight with a slight bend in your elbows.",
+      "Draw your abs in and keeping your back flat on the bench, raise your arms up in an arc over and behind your head (as if you were performing a reverse pullover).",
+      "Slowly return the barbell to the starting position on your thighs."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0058-relaxation.pdf",
+      "pdf/0058-tension.pdf"
+    ],
+    "png": [
+      "png/0058-relaxation.png",
+      "png/0058-tension.png"
+    ]
+  },
+  {
+    "uuid": "5999199F-0BC8-414A-96FD-FA3377AFA5EF",
+    "id": 59,
+    "name": "hammer-grip-incline-bench-press",
+    "title": "Bench Press: Dumbbell (Incline, Hammer Grip)",
+    "alias": [],
+    "primer": "This is an advanced exercise for strengthening the chest, triceps and shoulders.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench: incline"
+    ],
+    "steps": [
+      "Grasp a dumbbell in each hand and lay on an incline bench set at a 45 degree angle.",
+      "Keep your feet flat on the floor and your back against the bench at all times.",
+      "Using a hammer grip (with your palms facing each other), lift the weights to shoulder height on either side of your chest.",
+      "Extend your arms fully and press the dumbbells up.",
+      "Slowly return the dumbbells to the starting position at the sides of your chest."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0059-relaxation.pdf",
+      "pdf/0059-tension.pdf"
+    ],
+    "png": [
+      "png/0059-relaxation.png",
+      "png/0059-tension.png"
+    ]
+  },
+  {
+    "uuid": "721F71AE-879A-4F6A-87DB-09C7A6906D60",
+    "id": 60,
+    "name": "incline-cable-flyes",
+    "title": "Flyes: Cable (Incline)",
+    "alias": [
+      "Chest Flyes: Cable (Incline)"
+    ],
+    "primer": "This exercise is an alternative to the Butterfly or Pec Deck, it defines the muscles of the chest.Place an incline bench set at a 45 degree angle between two cable towers.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "triceps brachii",
+      "forearm"
+    ],
+    "equipment": [
+      "bench: incline",
+      "cable"
+    ],
+    "steps": [
+      "Place an incline bench set at a 45 degree angle between two cable towers.",
+      "Grasp a pulley in each hand with your palms facing up.",
+      "With a slight bend in your elbows, squeeze your chest and pull the cables in an arc so they meet together in the middle of your chest.",
+      "Hold for a moment and then slowly lower your hands back to starting position at along the same arc."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0060-relaxation.pdf",
+      "pdf/0060-tension.pdf"
+    ],
+    "png": [
+      "png/0060-relaxation.png",
+      "png/0060-tension.png"
+    ]
+  },
+  {
+    "uuid": "C04B1262-EF69-449E-963F-282D34A0AA8D",
+    "id": 31,
+    "name": "dumbbell-incline-bench-press",
+    "title": "Bench Press: Dumbbell (Incline)",
+    "alias": [],
+    "primer": "This is an advanced exercise for building and sculpting the chest as well as your triceps and shoulders.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench: incline"
+    ],
+    "steps": [
+      "Lie on an incline bench which has been set to an incline of 45 degrees.",
+      "Start with the dumbbells at shoulder height, your arms wide and elbows pointing down to the floor.",
+      "Grasp the dumbbells with a grip so your palms face each other.",
+      "Raise your arms up over your chest bringing the dumbbells closer together as they meet over your chest, as if you were clapping.",
+      "Slowly return the dumbbells to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0031-relaxation.pdf",
+      "pdf/0031-tension.pdf"
+    ],
+    "png": [
+      "png/0031-relaxation.png",
+      "png/0031-tension.png"
+    ]
+  },
+  {
+    "uuid": "635746F0-1E44-4DAA-B2FA-81D1933F3EB3",
+    "id": 62,
+    "name": "incline-dumbbell-flyes",
+    "title": "Flyes: Dumbbell (Incline)",
+    "alias": [
+      "Chest Flyes: Dumbbell (Incline)"
+    ],
+    "primer": "This is an exercise for chest sculpting and strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "bench: incline",
+      "dumbbell"
+    ],
+    "steps": [
+      "Lie on an incline bench set a 45 degree angle with a dumbbell in each hand and your feet firmly on the ground.",
+      "Lift the dumbbells over your chest extending your arms fully and your palms facing each other.",
+      "Keeping a slight bend in your elbows, lower the dumbbells towards the floor in and arc like motion.",
+      "Slowly return to starting position."
+    ],
+    "tips": [
+      "Ensure your hips and back remain in contact with the bench throughout the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0062-relaxation.pdf",
+      "pdf/0062-tension.pdf"
+    ],
+    "png": [
+      "png/0062-relaxation.png",
+      "png/0062-tension.png"
+    ]
+  },
+  {
+    "uuid": "74D42B22-1842-4B9F-B6A7-83B90472CB43",
+    "id": 66,
+    "name": "machine-bench-press",
+    "title": "Bench Press: Machine",
+    "alias": [
+      "Chest Press"
+    ],
+    "primer": "This is an exercise for chest, biceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "machine: bench press"
+    ],
+    "steps": [
+      "Adjust the machine so that you are sitting with the bars at chest height.",
+      "Place your hands on the bars and place your feet on the foot rest.",
+      "Press out, extending your arms as far as possible in a steady motion.",
+      "Pause for a moment and then return slowly to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0066-relaxation.pdf",
+      "pdf/0066-tension.pdf"
+    ],
+    "png": [
+      "png/0066-relaxation.png",
+      "png/0066-tension.png"
+    ]
+  },
+  {
+    "uuid": "3B32B927-5C1D-4518-8CA0-C33921837F5A",
+    "id": 75,
+    "name": "push-up-feet-elevated",
+    "title": "Push Up (Decline)",
+    "alias": [],
+    "primer": "This is the same general movement as with a Push Up except your feet are elevated allowing greater range of motions and targeting the pectorals differently than the regular Push Up.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major",
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "body",
+      "bench"
+    ],
+    "steps": [
+      "Place your feet on a bench at least 18” off the ground.",
+      "Make sure the tops of your feet are flush against the bench.",
+      "Place your hands on the floor slightly wider than shoulder width apart.",
+      "With your hands directly under your shoulders, press up from the floor, keeping your back and neck in a straight line so you are looking forward during the entire exercise.",
+      "Once your arms are fully extended pause and then with slow controlled movements lower yourself to the floor again."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0075-relaxation.pdf",
+      "pdf/0075-tension.pdf"
+    ],
+    "png": [
+      "png/0075-relaxation.png",
+      "png/0075-tension.png"
+    ]
+  },
+  {
+    "uuid": "77C531EB-3CAD-4773-9F18-1A230B1FF7E5",
+    "id": 77,
+    "name": "push-ups",
+    "title": "Push Up",
+    "alias": [],
+    "primer": "This exercise is the main strengthening exercise when wanting to strengthen ones chest, biceps and triceps as well as core muscles.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Start with a basic push up, lay face down on the floor, or a mat; with your feet together curled slightly so you rise onto the ball of your feet.",
+      "Place you hands shoulder width apart on the either side of your chest.",
+      "Draw your abs in.",
+      "Inhale as you raise your body up till your arms are straight.",
+      "Keep your head and neck level with your body (don’t look up or down) and don’t allow your back to rise or fall.",
+      "Exhale out as you lower your body back to the ground.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0077-relaxation.pdf",
+      "pdf/0077-tension.pdf"
+    ],
+    "png": [
+      "png/0077-relaxation.png",
+      "png/0077-tension.png"
+    ]
+  },
+  {
+    "uuid": "AA58E724-D2BC-43BC-9AF5-BED923FF67D9",
+    "id": 78,
+    "name": "smith-machine-bench-press",
+    "title": "Bench Press: Smith Machine",
+    "alias": [],
+    "primer": "With the use of a Smith Machine this exercise strengthens your chest shoulders and triceps.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "flat bench",
+      "smith machine"
+    ],
+    "steps": [
+      "Place a flat bench in the middle of the Smith Machine, with the bar in line with the middle of your chest.",
+      "Lying on the bench, grasp the bar at shoulder width apart.",
+      "Unlatch the bar and slowly lower the bar to your chest.",
+      "Extend your arms fully and raise the bar to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure your hips and back remain in contact with the bench throughout this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0078-relaxation.pdf",
+      "pdf/0078-tension.pdf"
+    ],
+    "png": [
+      "png/0078-relaxation.png",
+      "png/0078-tension.png"
+    ]
+  },
+  {
+    "uuid": "A367C0FE-49B8-484A-B296-6D5EB723E0B2",
+    "id": 81,
+    "name": "smith-machine-incline-bench-press",
+    "title": "Bench Press: Smith Machine (Incline)",
+    "alias": [],
+    "primer": "This is an exercise for chest, shoulder and triceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "smith machine",
+      "bench: incline"
+    ],
+    "steps": [
+      "Place an incline bench at a 45 degree angle in the middle of the Smith Machine.",
+      "Align the bench so the bar is across the upper portion of your chest.",
+      "Grasp the bar with a shoulder width grip.",
+      "Unlock the bar and slowly lower the weight to your chest, do not bounce the bar on your chest.",
+      "With slow controlled movements, raise the bar back to the starting position."
+    ],
+    "tips": [
+      "when you are doing this exercise for the first time, start on a lower weight in oder to perfect the technique."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0081-relaxation.pdf",
+      "pdf/0081-tension.pdf"
+    ],
+    "png": [
+      "png/0081-relaxation.png",
+      "png/0081-tension.png"
+    ]
+  },
+  {
+    "uuid": "039D6D33-98FD-4CC7-A7AD-C96FAA0135AE",
+    "id": 82,
+    "name": "wide-grip-bench-press",
+    "title": "Bench Press: Barbell (Wide Grip)",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "flat bench",
+      "barbell"
+    ],
+    "steps": [
+      "Lie flat on a bench with your feet flat on the floor.",
+      "Place your hands wider than shoulder width apart on the bar and lift it off the rack, this is starting position.",
+      "Bring the bar over your chest and lower it till it is just above your body.",
+      "Extend your arms upward and raise the bar straight up.",
+      "Pause for a moment and with slow controlled movement, return the bar to starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure that your hips and back remain in contact through out the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0082-relaxation.pdf",
+      "pdf/0082-tension.pdf"
+    ],
+    "png": [
+      "png/0082-relaxation.png",
+      "png/0082-tension.png"
+    ]
+  },
+  {
+    "uuid": "0E2E4708-35DC-4128-8B32-718FF68B5491",
+    "id": 83,
+    "name": "wide-grip-decline-bench-press",
+    "title": "Bench Press: Barbell (Decline, Wide Grip)",
+    "alias": [],
+    "primer": "This is an exercise for chest, triceps and shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "barbell",
+      "bench: decline"
+    ],
+    "steps": [
+      "Lie on a decline bench with your head lower than your feet.",
+      "Place your hands wider than shoulder width apart on the bar and lift it off the rack.",
+      "Bring the bar over your chest and lower it till it is just above the lower portion of your chest, this is starting position.",
+      "Extend your arms upward and raise the bar straight up.",
+      "Pause for a moment and then lower the bar to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0083-relaxation.pdf",
+      "pdf/0083-tension.pdf"
+    ],
+    "png": [
+      "png/0083-relaxation.png",
+      "png/0083-tension.png"
+    ]
+  },
+  {
+    "uuid": "98D2649B-4616-455B-A0FA-481ECD780035",
+    "id": 84,
+    "name": "incline-machine-bench-press",
+    "title": "Bench Press: Machine (Incline)",
+    "alias": [
+      "Chest Press: Machine (Incline)"
+    ],
+    "primer": "This exercise is for strengthening the upper chest and is preferred among beginners as it provides support and control.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "triceps brachii",
+      "deltoid"
+    ],
+    "equipment": [
+      "chest machine"
+    ],
+    "steps": [
+      "Adjust the seat of the machine so that the handles are near the upper portion of your chest.",
+      "Slowly press the handles forward until your hands are fully extended, do not lock your elbows.",
+      "Pause for a moment and then with a controlled movement lower your hands back to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0084-relaxation.pdf",
+      "pdf/0084-tension.pdf"
+    ],
+    "png": [
+      "png/0084-relaxation.png",
+      "png/0084-tension.png"
+    ]
+  },
+  {
+    "uuid": "41CA09C9-E88C-42DF-997E-7D6FEA4A765E",
+    "id": 85,
+    "name": "decline-machine-bench-press",
+    "title": "Bench Press: Machine (Decline)",
+    "alias": [
+      "Chest Press: Machine (Decline)"
+    ],
+    "primer": "This is an exercise for the strengthening of the lower chest or pectoral muscles and is preferred by beginners as it provides support and stability.",
+    "type": "isolation",
+    "primary": [
+      "pectoralis major"
+    ],
+    "secondary": [
+      "deltoid",
+      "triceps brachii"
+    ],
+    "equipment": [
+      "machine: chest"
+    ],
+    "steps": [
+      "Adjust the seat of the machine so that the handles are near the lower portion of your chest.",
+      "Slowly press the handles forward until your hands are fully extended, do not lock your elbows.",
+      "Pause for a moment and then with a controlled movement lower your hands back to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0085-relaxation.pdf",
+      "pdf/0085-tension.pdf"
+    ],
+    "png": [
+      "png/0085-relaxation.png",
+      "png/0085-tension.png"
+    ]
+  },
+  {
+    "uuid": "7E117B7F-114F-415E-A646-780D9C744ED2",
+    "id": 86,
+    "name": "inverted-row",
+    "title": "Inverted Row",
+    "alias": [
+      "Horizontal Barbell Pull Up"
+    ],
+    "primer": "This is a good overall exercise which strengthens your chest, core and back muscles.",
+    "type": "compound",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "pectoralis major"
+    ],
+    "equipment": [
+      "bar"
+    ],
+    "steps": [
+      "Lie under a bar so that the bar is at mid chest level and your feet are firmly on the floor.",
+      "Draw your abs in and keep your back flat.",
+      "Using your arms, lift and row your body towards the bar.",
+      "Pause for a moment and with slow controlled movements lower your self back to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0086-relaxation.pdf",
+      "pdf/0086-tension.pdf"
+    ],
+    "png": [
+      "png/0086-relaxation.png",
+      "png/0086-tension.png"
+    ]
+  },
+  {
+    "uuid": "59185216-6167-4427-AC10-38A3FDA17572",
+    "id": 87,
+    "name": "pull-ups",
+    "title": "Pull Up",
+    "alias": [],
+    "primer": "This is an exercise in lats, biceps and middle back strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "bar"
+    ],
+    "steps": [
+      "Grab the pull-up bar with the palms facing forward using the prescribed grip.",
+      "As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.",
+      "Pull your torso up until the bar touches your upper chest by drawing the shoulders and the upper arms down and back. Exhale as you perform this portion of the movement.",
+      "After a second on the contracted position, start to inhale and slowly lower your torso back to the starting position when your arms are fully extended and the lats are fully stretched.",
+      "Repeat this motion.",
+      "Tip: Concentrate on squeezing the back muscles once you reach the full contracted position. The upper torso should remain stationary as it moves through space and only the arms should move. The forearms should do no other work other than hold the bar."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0087-relaxation.pdf",
+      "pdf/0087-tension.pdf"
+    ],
+    "png": [
+      "png/0087-relaxation.png",
+      "png/0087-tension.png"
+    ]
+  },
+  {
+    "uuid": "CF8EA748-48F2-4170-AE64-E206069D8836",
+    "id": 89,
+    "name": "chin-ups",
+    "title": "Chin Up",
+    "alias": [],
+    "primer": "This is an extremely good exercise for upper arm and middle back strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi",
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body",
+      "bar"
+    ],
+    "steps": [
+      "Grasp the bar with an supinated (overhand) grip.",
+      "Let your body hang from the bar with your arms straight.",
+      "Slowly pull yourself up so that your chin is higher than the bar.",
+      "With a controlled movement lower yourself to the starting position."
+    ],
+    "tips": [
+      "Ensure to contract your back and core muscles throughout this exercise to prevent injury and to maximise the effectiveness of the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0089-relaxation.pdf",
+      "pdf/0089-tension.pdf"
+    ],
+    "png": [
+      "png/0089-relaxation.png",
+      "png/0089-tension.png"
+    ]
+  },
+  {
+    "uuid": "3B1EE73B-7ADA-40EA-96E7-2228883D9FD8",
+    "id": 90,
+    "name": "narrow-parallel-grip-chin-ups",
+    "title": "Chin Up (Narrow Parallel Grip)",
+    "alias": [],
+    "primer": "This is an exercise similar to the regular Chin Up but focuses more on shoulder strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi",
+      "biceps brachii"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "bar",
+      "body"
+    ],
+    "steps": [
+      "Grasp the bar with an supinated (overhand) grip so that your palms are facing.",
+      "Let your body hang from the bar with your arms straight.",
+      "Slowly pull yourself up so that your chin is higher than the bar.",
+      "With a controlled movement lower yourself to the starting position.",
+      "Repeat"
+    ],
+    "tips": [
+      "Ensure that your body remains in one line throughout this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0090-relaxation.pdf",
+      "pdf/0090-tension.pdf"
+    ],
+    "png": [
+      "png/0090-relaxation.png",
+      "png/0090-tension.png"
+    ]
+  },
+  {
+    "uuid": "6346EEFD-83B0-4E7D-83A3-7BA003637AA8",
+    "id": 92,
+    "name": "straight-arm-pull-down",
+    "title": "Straight Arm Pulldown",
+    "alias": [
+      "Straight Arm Pushdown",
+      "Cable Pullover"
+    ],
+    "primer": "This exercise for strengthening the Lats and also works the Triceps.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Grasp wide grip pulldown bar with a wide grip so your hands are on the portion of the bar which curves down.",
+      "Stand erect with your abs drawn in.",
+      "Keeping a slight bend in your elbows and your wrist steady pull the bar down from the starting position to your upper thighs.",
+      "With a controlled motion bring the bar back up to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0092-relaxation.pdf",
+      "pdf/0092-tension.pdf"
+    ],
+    "png": [
+      "png/0092-relaxation.png",
+      "png/0092-tension.png"
+    ]
+  },
+  {
+    "uuid": "A7E6CAE5-2000-4E57-8704-D6B867A57439",
+    "id": 93,
+    "name": "underhand-pull-down",
+    "title": "Pulldown (Underhand)",
+    "alias": [
+      "Lat Pulldown (Underhand)"
+    ],
+    "primer": "This is an exercise for lats and biceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Sitting upright with your abs drawn in grasp a pulldown bar with and underhand grip shoulder width apart.",
+      "Pull the bar down till the bar reaches your upper chest, keeping your elbows close to your body.",
+      "Slowly return the bar to the starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0093-relaxation.pdf",
+      "pdf/0093-tension.pdf"
+    ],
+    "png": [
+      "png/0093-relaxation.png",
+      "png/0093-tension.png"
+    ]
+  },
+  {
+    "uuid": "BBD6B085-D50C-4BA5-88FA-AAD4A3737F0B",
+    "id": 95,
+    "name": "overhand-pull-down",
+    "title": "Pulldown (Overhand)",
+    "alias": [
+      "Lat Pulldown (Overhand)"
+    ],
+    "primer": "This is an exercise for lats and biceps strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Sitting upright with your abs drawn in grasp a pulldown bar with and overhand grip shoulder width apart.",
+      "Pull the bar down till the bar reaches your upper chest, keeping your elbows close to your body.",
+      "Slowly return the bar to the starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0095-relaxation.pdf",
+      "pdf/0095-tension.pdf"
+    ],
+    "png": [
+      "png/0095-relaxation.png",
+      "png/0095-tension.png"
+    ]
+  },
+  {
+    "uuid": "FD99103C-B691-4DD3-A40A-8CCEF23FBEC5",
+    "id": 96,
+    "name": "v-bar-pull-down",
+    "title": "Pulldown: V Bar ",
+    "alias": [
+      "Lat Pulldown: V Bar "
+    ],
+    "primer": "This is an exercise for lats, biceps and middle back strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a V bar to the pulldown pulley of a cable machine.",
+      "Sitting upright with your abs drawn grasp the bar with an overhand grip, your palms facing in.",
+      "Pull the bar straight down to your upper chest.",
+      "Pause for a moment after touching the chest and then slowly return the bar to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0096-relaxation.pdf",
+      "pdf/0096-tension.pdf"
+    ],
+    "png": [
+      "png/0096-relaxation.png",
+      "png/0096-tension.png"
+    ]
+  },
+  {
+    "uuid": "91F466BA-1D91-459A-8C5B-81E0B46C54AC",
+    "id": 97,
+    "name": "wide-grip-lat-pull-down",
+    "title": "Pulldown (Wide Grip)",
+    "alias": [
+      "Lat Pulldown (Wide Grip)"
+    ],
+    "primer": "This is an exercise for lats, biceps and middle back strengthening.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii",
+      "latissimus dorsi"
+    ],
+    "equipment": [
+      "cable",
+      "wide bar"
+    ],
+    "steps": [
+      "Sit at a cable pulldown machine fitted with a wide bar.",
+      "Grasp the bar with a wide overhand grip (palms facing forward) .",
+      "With your abs drawn in and back straight pull the bar down to your upper chest.",
+      "Pause for a moment and then return the bar to the starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Ensure you maintain a straight back trough out this exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0097-relaxation.pdf",
+      "pdf/0097-tension.pdf"
+    ],
+    "png": [
+      "png/0097-relaxation.png",
+      "png/0097-tension.png"
+    ]
+  },
+  {
+    "uuid": "E301F9A9-9516-47E3-9E77-D2C7E50B4D7A",
+    "id": 99,
+    "name": "barbell-deadlift",
+    "title": "Deadlift: Barbell",
+    "alias": [],
+    "primer": "The techniques is identical to that of the Smith Machine deadlift except for the fact that this exercise provides less support.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart so that your feet are under the bar.",
+      "Keeping your back straight bend at the waist, allow some bend in your knees.",
+      "Grasp the par with an overhand grip approximately 16 inches apart.",
+      "Straighten your back as you hold the bar at arm’s length.",
+      "Bend over again lowering the bar to just above the floor."
+    ],
+    "tips": [
+      "This is an advanced exercise and should be perfected first with the Smith Machine."
+    ],
+    "references": [
+      "https://youtu.be/4AObAU-EcYE"
+    ],
+    "pdf": [
+      "pdf/0099-relaxation.pdf",
+      "pdf/0099-tension.pdf"
+    ],
+    "png": [
+      "png/0099-relaxation.png",
+      "png/0099-tension.png"
+    ]
+  },
+  {
+    "uuid": "734F6CD7-9787-45BF-91B2-EB61A9C05575",
+    "id": 100,
+    "name": "smith-machine-deadlift",
+    "title": "Deadlift: Smith Machine",
+    "alias": [],
+    "primer": "This is the same as a Deadlift but the Smith Machine allows for better control of the weight.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart so that your feet are under the bar.",
+      "Keeping your back straight bend at the waist, allow some bend in your knees.",
+      "Grasp the par with an overhand grip approximately 16 inches apart.",
+      "Straighten your back as you hold the bar at arm’s length.",
+      "Bend over again lowering the bar to just above the floor."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0100-relaxation.pdf",
+      "pdf/0100-tension.pdf"
+    ],
+    "png": [
+      "png/0100-relaxation.png",
+      "png/0100-tension.png"
+    ]
+  },
+  {
+    "uuid": "3391381C-A3C2-4105-B9A9-9610FFF1912D",
+    "id": 101,
+    "name": "barbell-good-mornings",
+    "title": "Good Mornings: Barbell",
+    "alias": [],
+    "primer": "This is one of the oldest exercises in bodybuilding but it still is one of the best for working the lower back.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Place a barbell across your shoulders.",
+      "Keeping your head up and your back completely straight, bend at the waist until your back is parallel with the floor.",
+      "Return to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0101-relaxation.pdf",
+      "pdf/0101-tension.pdf"
+    ],
+    "png": [
+      "png/0101-relaxation.png",
+      "png/0101-tension.png"
+    ]
+  },
+  {
+    "uuid": "2F3CB755-027C-4E47-9C6D-DFD4ACB52B77",
+    "id": 102,
+    "name": "smith-machine-good-mornings",
+    "title": "Good Mornings: Smith Machine",
+    "alias": [],
+    "primer": "This exercise utilises the same technique of the standard Good Mornings yet the use of the Smith Machine provides more stability.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "Place a barbell across your shoulders.",
+      "Keeping your head up and your back completely straight, bend at the waist until your back is parallel with the floor.",
+      "Return to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0102-relaxation.pdf",
+      "pdf/0102-tension.pdf"
+    ],
+    "png": [
+      "png/0102-relaxation.png",
+      "png/0102-tension.png"
+    ]
+  },
+  {
+    "uuid": "DEB57677-680C-442E-AA95-7162C6126B18",
+    "id": 103,
+    "name": "hyperextensions",
+    "title": "Hyperextensions",
+    "alias": [
+      "Back Extensions"
+    ],
+    "primer": "This exercise not only adds strength but also flexibility to the back and core muscles.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "core"
+    ],
+    "equipment": [
+      "bench: hyperextension"
+    ],
+    "steps": [
+      "Adjust the hyperextension bench so that your ankles are tucked under the footpads and your thighs are flat across the top pad.",
+      "With your arms folded across your chest and your back straight, slowly bend at the waist towards the floor, keeping your back flat.",
+      "Slowly return to the starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0103-relaxation.pdf",
+      "pdf/0103-tension.pdf"
+    ],
+    "png": [
+      "png/0103-relaxation.png",
+      "png/0103-tension.png"
+    ]
+  },
+  {
+    "uuid": "B3FB3BC4-AC56-4D09-BC26-A0F1F98BA00C",
+    "id": 105,
+    "name": "supermans",
+    "title": "Supermans",
+    "alias": [],
+    "primer": "This is an excellent exercise and a stretch for the lower back and core muscles.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "core"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lie flat on your stomach with your arms stretched out in front of you.",
+      "Raise your arms and legs off the floor and hold this position for 2 seconds.",
+      "Return to the starting position on the floor.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0105-relaxation.pdf",
+      "pdf/0105-tension.pdf"
+    ],
+    "png": [
+      "png/0105-relaxation.png",
+      "png/0105-tension.png"
+    ]
+  },
+  {
+    "uuid": "7B27C3C2-B4C0-423E-8472-90DAFA53B5FB",
+    "id": 107,
+    "name": "dumbbell-deadlift",
+    "title": "Deadlift: Dumbbell",
+    "alias": [],
+    "primer": "This is an exercise for lower back, hamstring and calves strengthening.",
+    "type": "isolation",
+    "primary": [
+      "erector spinae"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Grasp 2 dumbbells and stand with your feet shoulder width apart.",
+      "Keeping your back straight bend at the waist, allow some bend in your knees.",
+      "Grasp the dumbbells with an overhand grip in each hand.",
+      "Straighten your back as you hold the dumbbells at arm’s length.",
+      "Bend over again lowering the dumbbells to just above the floor.",
+      "Return to starting position.",
+      "Repeat."
+    ],
+    "tips": [
+      "Do not increase the weight on this exercise until you have mastered the correct form."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0107-relaxation.pdf",
+      "pdf/0107-tension.pdf"
+    ],
+    "png": [
+      "png/0107-relaxation.png",
+      "png/0107-tension.png"
+    ]
+  },
+  {
+    "uuid": "82008701-4189-4693-9B68-00E32C78AB92",
+    "id": 108,
+    "name": "plank",
+    "title": "Plank",
+    "alias": [],
+    "primer": "This is an exercise for core strengthening.",
+    "type": "compound",
+    "primary": [
+      "obliques"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Put your hands and knees on the floor.",
+      "Balance yourself on your feet and forearms.",
+      "Hold this position and slowly return back to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0108-tension.pdf"
+    ],
+    "png": [
+      "png/0108-tension.png"
+    ]
+  },
+  {
+    "uuid": "B6223C8A-502E-4AA8-B9C5-AEB8CB301759",
+    "id": 109,
+    "name": "bridge",
+    "title": "Bridge",
+    "alias": [],
+    "primer": "This is an excellent exercise for strengthening and maintaining the core muscles.",
+    "type": "isolation",
+    "primary": [
+      "glutaeus maximus"
+    ],
+    "secondary": [
+      "core"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lie on your back with your knees bent and your feet flat on the floor.",
+      "Lift up hips and bum off the floor as you draw your abs in and keep your gluts tight.",
+      "Hold at the top for a second and then slowly go back to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0109-relaxation.pdf",
+      "pdf/0109-tension.pdf"
+    ],
+    "png": [
+      "png/0109-relaxation.png",
+      "png/0109-tension.png"
+    ]
+  },
+  {
+    "uuid": "6B849257-F025-473C-BB69-232E58DD7F66",
+    "id": 112,
+    "name": "cable-kickback",
+    "title": "Cable Kickback",
+    "alias": [
+      "Cable Hip Extension"
+    ],
+    "primer": "This is an exercise for gluts and hamstring strengthening.",
+    "type": "isolation",
+    "primary": [
+      "glutaeus maximus"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Standing at a cable tower attach an ankle cuff to a low pulley.",
+      "Facing the weight stack, with a slight bend in your knees and your abs drawn in",
+      "Slowly kick your ankle back in and arc as high as you are able to.",
+      "Return to starting position and switch ankles."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0112-relaxation.pdf",
+      "pdf/0112-tension.pdf"
+    ],
+    "png": [
+      "png/0112-relaxation.png",
+      "png/0112-tension.png"
+    ]
+  },
+  {
+    "uuid": "E76C6B6E-758D-43A1-A04D-618DC7D5D2C7",
+    "id": 113,
+    "name": "side-plank",
+    "title": "Side Plank",
+    "alias": [],
+    "primer": "This is an exercise for core strengthening.",
+    "type": "isolation",
+    "primary": [
+      "obliques"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lay on one side of your body with your legs straight and your forearm perpendicular to your body in front of you.",
+      "Drawing your abs in, slowly raise yourself up so you are balanced on your feet and your forearm.",
+      "Hold this position and slowly return back to the starting position.",
+      "Repeat on other side."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0113-tension.pdf"
+    ],
+    "png": [
+      "png/0113-tension.png"
+    ]
+  },
+  {
+    "uuid": "D645140E-5761-4096-AD31-8E66A8D6A562",
+    "id": 114,
+    "name": "barbell-lunges",
+    "title": "Lunges: Barbell",
+    "alias": [],
+    "primer": "This is a classic exercise used for strengthening the hamstrings, quadriceps, calves and gluts.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [
+      "glutaeus maximus",
+      "quadriceps",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Start by placing a barbell across your upper back, using a grip slightly wider than your shoulders.",
+      "Stand with your feet about 8 inches apart, toes facing forward.",
+      "Take a step forward (2-3 feet) keeping your abs drawn in and your upper body straight.",
+      "Slowly lower one knee down as if kneeling while keeping your other knee bent at a 90 degree angle, do not let your knee touch the ground.",
+      "Lower your body so that your rear knee is just above the floor and hold for a moment before returning to the starting position.",
+      "Repeat on other side."
+    ],
+    "tips": [
+      "Your front knee should never go past the toes of that foot and should remain at a 90 degree angle in order, to prevent knee injury."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0114-relaxation.pdf",
+      "pdf/0114-tension.pdf"
+    ],
+    "png": [
+      "png/0114-relaxation.png",
+      "png/0114-tension.png"
+    ]
+  },
+  {
+    "uuid": "D3BE22C1-9276-4EF9-9888-2E98D76DC618",
+    "id": 115,
+    "name": "dumbbell-lunges",
+    "title": "Lunges: Dumbbell",
+    "alias": [],
+    "primer": "This is an exercise for whole leg but mainly hamstring strengthening.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [
+      "glutaeus maximus",
+      "quadriceps",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Grasp a dumbbell in each hand.",
+      "Stand with your feet about 8 inches apart, toes facing forward.",
+      "Take a step forward (2-3 feet) keeping your abs drawn in and your upper body straight.",
+      "Slowly lower one knee down as if kneeling while keeping your other knee bent at a 90 degree angle, do not let your knee touch the ground.",
+      "Lower your body so that the rear knee is just above the floor and hold for a moment before returning to the starting position.",
+      "Repeat on opposite side."
+    ],
+    "tips": [
+      "Ensure not maintain your front knee at a 90 degree angle, in order to prevent knee injury."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0115-relaxation.pdf",
+      "pdf/0115-tension.pdf"
+    ],
+    "png": [
+      "png/0115-relaxation.png",
+      "png/0115-tension.png"
+    ]
+  },
+  {
+    "uuid": "62B9751E-0E1B-4F91-926F-A0A599096DDE",
+    "id": 116,
+    "name": "flutter-kicks",
+    "title": "Flutter Kicks",
+    "alias": [],
+    "primer": "This is an exercise for quadriceps and hamstring strengthening.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [
+      "quadriceps"
+    ],
+    "equipment": [
+      "flat bench"
+    ],
+    "steps": [
+      "Lie face down on a bench with your hips on the edge, hold onto the bench with your hands.",
+      "Allow your legs and toes hang down.",
+      "Draw your abs in, squeeze your gluts and hamstrings.",
+      "Kick each back and up while keeping your hips on the bench.",
+      "Alternate kicking each leg."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0116-relaxation.pdf",
+      "pdf/0116-tension.pdf"
+    ],
+    "png": [
+      "png/0116-relaxation.png",
+      "png/0116-tension.png"
+    ]
+  },
+  {
+    "uuid": "25B6655E-895A-41CB-835A-247A3A7B2E0F",
+    "id": 117,
+    "name": "lying-leg-curl-machine",
+    "title": "Leg Curl (Lying)",
+    "alias": [],
+    "primer": "This is an exercise for hamstring strengthening.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Lie face down on a leg curl machine and place your heels under the roller pad.",
+      "Grasp the grips with your hands for support and slowly curl your ankles up towards your back.",
+      "Hold for a moment and then return to starting position.",
+      "Repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0117-relaxation.pdf",
+      "pdf/0117-tension.pdf"
+    ],
+    "png": [
+      "png/0117-relaxation.png",
+      "png/0117-tension.png"
+    ]
+  },
+  {
+    "uuid": "37DF9EB1-8E5F-404E-91B2-36210D356F95",
+    "id": 118,
+    "name": "romanian-deadlift",
+    "title": "Romanian Deadlift",
+    "alias": [],
+    "primer": "This is an exercise similar to the regular deadlift and strengthens the hamstring, calves, quadriceps and gluts.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "quadriceps",
+      "glutaeus maximus"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Place a barbell in front of your feet on the ground.",
+      "Grasp the barbell with a grip a bit wider than shoulder width apart.",
+      "Bend your knees slightly, keeping your hips and back straight.",
+      "Lift the bar straight up concentrating on using your hips as you stand.",
+      "Stand with the bar resting against your thighs.",
+      "Lower the bar to the floor with a slight bend in your knees flexing your hips back for stability."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0118-relaxation.pdf",
+      "pdf/0118-tension.pdf"
+    ],
+    "png": [
+      "png/0118-relaxation.png",
+      "png/0118-tension.png"
+    ]
+  },
+  {
+    "uuid": "8CD1F963-7570-467A-A15E-FAAFFEBF2546",
+    "id": 119,
+    "name": "seated-leg-curl",
+    "title": "Leg Curl (Seated)",
+    "alias": [],
+    "primer": "This is an exercise for hamstring strengthening which is similar to the laying leg curls.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Adjust the machine so that the footpad is just above your heels.",
+      "Sit upright with your abs drawn in and your legs in front of you.",
+      "Slowly curl your legs back towards you and hold for a moment.",
+      "With controlled movement return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0119-relaxation.pdf",
+      "pdf/0119-tension.pdf"
+    ],
+    "png": [
+      "png/0119-relaxation.png",
+      "png/0119-tension.png"
+    ]
+  },
+  {
+    "uuid": "C6B9548C-B1ED-4A85-A200-331D1E08BE33",
+    "id": 120,
+    "name": "standing-leg-curl",
+    "title": "Leg Curl (Standing)",
+    "alias": [],
+    "primer": "This is an exercise for hamstring strengthening.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Standing at a leg curl machine adjust the rear footpad so it is just above your ankle.",
+      "Grasp the handles of the machine for support and draw your abs in.",
+      "Raise your foot up towards your back slowly.",
+      "Return to the starting position and chance legs."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0120-relaxation.pdf",
+      "pdf/0120-tension.pdf"
+    ],
+    "png": [
+      "png/0120-relaxation.png",
+      "png/0120-tension.png"
+    ]
+  },
+  {
+    "uuid": "E8763784-DDCF-4A7B-9321-189C1E93A1B7",
+    "id": 121,
+    "name": "walking-lunges",
+    "title": "Lunges: Dumbbell (Walking)",
+    "alias": [],
+    "primer": "A walking lunge gives you the benefit of lunges plus core muscle training from the constant motion.",
+    "type": "isolation",
+    "primary": [
+      "ischiocrural muscles"
+    ],
+    "secondary": [
+      "quadriceps",
+      "glutaeus maximus",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Start by grasping a dumbbell in each hand.",
+      "Stand with your feet about 8 inches apart, toes facing forward.",
+      "Take a lunge forward keeping your abs drawn in and your upper body straight.",
+      "Slowly lower one knee down as if kneeling while keeping your other knee bent at a 90 degree angle, do not let your knee touch the ground.",
+      "Lower your body to just above the floor and hold for a moment before pushing off with the back foot.",
+      "Step through and repeat the exercise with the other leg."
+    ],
+    "tips": [
+      "Practice the walking lunge without any weights until you are comfortable with the movements."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0121-relaxation1.pdf",
+      "pdf/0121-tension1.pdf",
+      "pdf/0121-relaxation2.pdf",
+      "pdf/0121-tension2.pdf"
+    ],
+    "png": [
+      "png/0121-relaxation1.png",
+      "png/0121-tension1.png",
+      "png/0121-relaxation2.png",
+      "png/0121-tension2.png"
+    ]
+  },
+  {
+    "uuid": "2339F5BD-2E8C-4446-B1A5-6156B1192229",
+    "id": 122,
+    "name": "barbell-squat",
+    "title": "Squat: Barbell",
+    "alias": [],
+    "primer": "This is the most important exercise for overall strength.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Lifting a barbell off of a weight rack, position it on your shoulders.",
+      "Place your feet slightly wider than shoulder width apart with your knees and toes pointed slightly outward.",
+      "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
+      "Lower yourself as far as you can control without letting your body shift towards your toes (this will cause you to loose balance).",
+      "Stand back up."
+    ],
+    "tips": [],
+    "references": [
+      "https://youtu.be/nhoikoUEI8U"
+    ],
+    "pdf": [
+      "pdf/0122-relaxation.pdf",
+      "pdf/0122-tension.pdf"
+    ],
+    "png": [
+      "png/0122-relaxation.png",
+      "png/0122-tension.png"
+    ]
+  },
+  {
+    "uuid": "60790477-29FD-4139-B89E-FE583BBFF658",
+    "id": 123,
+    "name": "hack-squat-machine",
+    "title": "Hack Squat: Machine",
+    "alias": [],
+    "primer": "This exercise is a variation of the Squat which uses a machine.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "This exercise is a variation of the Squat which uses a machine.  This exercise may be preferred by beginners.",
+      "Lie face up on a Hack Squat machine with your shoulders against the pad.",
+      "Place your feet facing forward at slightly less than shoulder width apart with your toes point slightly outward.",
+      "Release the dock levers and place your hands on the hand grips.",
+      "Drawing your abs in, extend your body standing upright.",
+      "Lower your body to a squatting position so you knees are bent as if you were sitting down.",
+      "Return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0123-relaxation.pdf",
+      "pdf/0123-tension.pdf"
+    ],
+    "png": [
+      "png/0123-relaxation.png",
+      "png/0123-tension.png"
+    ]
+  },
+  {
+    "uuid": "9D96C412-5D6C-4FDD-9781-1B89AF31EE3D",
+    "id": 124,
+    "name": "smith-machine-squat",
+    "title": "Squat: Smith Machine",
+    "alias": [],
+    "primer": "This exercise is a variation of a squat using the Smith Machine.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "glutaeus maximus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "This exercise uses the Smith Machine to work the Quadriceps, Hamstrings, Calves and Glutes. A great overall exercise for the lower body. There are many variations on the squat, this is the original version using a Smith Machine for better flow of movement.",
+      "Set the height of the barbell to shoulder height.",
+      "Place your feet slightly wider than shoulder width apart with your knees and toes pointed slightly outward.",
+      "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
+      "Lower yourself as far as you can control without letting your body shift over your toes (this will cause you to loose balance).",
+      "Pause in the downward squatting position and slowly return upright to the starting position.",
+      "If needed, a pad on the bar or towel on your shoulders can help improve your grip and the reduce the discomfort of the bar against your back. First practice the squat without any weight to allow yourself to become comfortable with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0124-relaxation.pdf",
+      "pdf/0124-tension.pdf"
+    ],
+    "png": [
+      "png/0124-relaxation.png",
+      "png/0124-tension.png"
+    ]
+  },
+  {
+    "uuid": "7DE5B1E4-9748-459E-9B79-DB02A72B89EF",
+    "id": 125,
+    "name": "hack-squat-with-barbell",
+    "title": "Hack Squat: Barbell",
+    "alias": [],
+    "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps or thigh muscles.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "This is another variation of the basic Squat that focuses primarily on the quadriceps or thigh muscles.",
+      "Place the barbell on the floor just behind your legs and stand with your feet shoulder width apart with your toes pointing forward.",
+      "With your feet firmly placed on the floor, reach down and grasp the barbell from behind with an overhand grip.",
+      "Lift the barbell by extending your hips and knees, taking care not to lock your knees.",
+      "Lower yourself (squat) down until your thighs are parallel to the floor.",
+      "Slowly raise yourself up to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0125-relaxation.pdf",
+      "pdf/0125-tension.pdf"
+    ],
+    "png": [
+      "png/0125-relaxation.png",
+      "png/0125-tension.png"
+    ]
+  },
+  {
+    "uuid": "4C200AB4-2298-4879-A059-46BB1536DF4D",
+    "id": 126,
+    "name": "smith-machine-hack-squat",
+    "title": "Hack Squat: Smith Machine",
+    "alias": [],
+    "primer": "This is another variation of the basic Squat that focuses primarily on the quadriceps, or thigh muscles, while using the Smith Machine.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "glutaeus maximus"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "This is another variation of the basic Squat that focuses primarily on the quadriceps, or thigh muscles, while using the Smith Machine.",
+      "Adjust the bar to a low setting just above your ankles.",
+      "Stand with the bar on the floor just behind your legs, with your feet shoulder width apart and your toes pointing forward.",
+      "With your feet firmly placed on the floor reach down and grasp the bar from behind, with an overhand grip.",
+      "Lift the bar by extending your hips and knees, taking care not to lock your knees.",
+      "Lower yourself (squat) down until your thighs are parallel to the floor.",
+      "Slowly raise yourself up to starting position.",
+      "Note: Your knees should be moving in the same direction as your feet."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0126-relaxation.pdf",
+      "pdf/0126-tension.pdf"
+    ],
+    "png": [
+      "png/0126-relaxation.png",
+      "png/0126-tension.png"
+    ]
+  },
+  {
+    "uuid": "8B3DE466-1552-4978-A378-55F64E8CA66B",
+    "id": 127,
+    "name": "leg-press",
+    "title": "Leg Press",
+    "alias": [],
+    "primer": "This exercise is crucial for building and strengthening the legs.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Along with the Squat, this exercise is crucial for building and strengthening the legs.",
+      "Adjust the seat of the machine so that your feet comfortably reach the crosspiece with a slight bend in your knees.",
+      "To begin, press your feet forward at a shoulder width stance and release the safety locks.",
+      "Slowly lower the weight towards your body, keeping your abs drawn in and your knees moving in the same direction as your feet to a 90 degree angle.",
+      "Do not lock your knees or bounce the weight."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0127-relaxation.pdf",
+      "pdf/0127-tension.pdf"
+    ],
+    "png": [
+      "png/0127-relaxation.png",
+      "png/0127-tension.png"
+    ]
+  },
+  {
+    "uuid": "B7ACD3EA-57FE-437F-9286-A03A3C58AAD7",
+    "id": 130,
+    "name": "squat-using-dumbbell",
+    "title": "Squat: Dumbbell",
+    "alias": [],
+    "primer": "This is a great overall exercise for the lower body that uses dumbbells.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "This is a great overall exercise for the lower body that uses dumbbells instead of a barbell. Beginners may find this version easier to perform.",
+      "Grasp a dumbbell in each hand.",
+      "Stand with feet slightly wider than shoulder width apart with your knees and toes pointed slightly outward.",
+      "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
+      "Lower yourself as far as you can control without letting your body shift towards your toes (this will cause you to loose balance).",
+      "Pause in the downward position and slowly return upright to the starting position.",
+      "Note: Practicing the squat without any weight will allow you to become comfortable with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0130-relaxation.pdf",
+      "pdf/0130-tension.pdf"
+    ],
+    "png": [
+      "png/0130-relaxation.png",
+      "png/0130-tension.png"
+    ]
+  },
+  {
+    "uuid": "52977031-70A7-4E08-98A1-4871B614B9FB",
+    "id": 135,
+    "name": "hip-adduction",
+    "title": "Cable Hip Adduction",
+    "alias": [],
+    "primer": "This exercises strengthens hip flexors and muscles of the thighs.",
+    "type": "isolation",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "hip adductors"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Stand alongside a cable pulley stack and attach a cuff to the pulley and your ankle.",
+      "Step away from the stack, holding onto the stack for support.",
+      "Standing firm on the foot not attached to the cable and slowly adduct, or pull, your cuffed ankle in front of your stabilizing leg.",
+      "Repeat and switch ankles."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0135-relaxation.pdf",
+      "pdf/0135-tension.pdf"
+    ],
+    "png": [
+      "png/0135-relaxation.png",
+      "png/0135-tension.png"
+    ]
+  },
+  {
+    "uuid": "0EE3033B-5E17-4F16-B8C4-85569F0C1C14",
+    "id": 138,
+    "name": "front-squat-with-barbell",
+    "title": "Front Squat: Barbell",
+    "alias": [],
+    "primer": "The Front Squat works the same muscles as the rear squat without placing the weight of the bar on your shoulders.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "The Front Squat works the same muscles as the rear squat without placing the weight of the bar on your shoulders. This exercise can be a good substitute for people with back and neck injuries.",
+      "Place the barbell on your upper chest, resting it across your front deltoids and holding it with your arms crossed securely.",
+      "Keep your head and back straight, abs drawn in and toes pointing slightly outward.",
+      "Slowly “squat” down so your upper thighs are parallel to the floor.",
+      "Slowly return to the starting position.",
+      "Note: Practice the squat without any weight to allow yourself to become comfortable with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0138-relaxation.pdf",
+      "pdf/0138-tension.pdf"
+    ],
+    "png": [
+      "png/0138-relaxation.png",
+      "png/0138-tension.png"
+    ]
+  },
+  {
+    "uuid": "62ABB8D5-C8AC-49C8-B870-1A38F731B4CF",
+    "id": 142,
+    "name": "leg-extension",
+    "title": "Leg Extension",
+    "alias": [],
+    "primer": "This exercise is a staple for building strong legs.",
+    "type": "isolation",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Adjust the seat so that your knees have full range of motion and that the footpad fits over your legs, just above your ankles.",
+      "Grasp the handles with your hands for support, keeping your hip and back against the bench.",
+      "Slowly extend your legs until your knees are straight, but do not lock your knees.",
+      "Hold for a moment and then with controlled movements return to the starting position.",
+      "Note: Use controlled movements for this exercise, do not swing the weight up."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0142-relaxation.pdf",
+      "pdf/0142-tension.pdf"
+    ],
+    "png": [
+      "png/0142-relaxation.png",
+      "png/0142-tension.png"
+    ]
+  },
+  {
+    "uuid": "5DC1047E-AFF0-4717-B9BD-6225B1D39AF5",
+    "id": 143,
+    "name": "narrow-stance-leg-press",
+    "title": "Leg Press (Narrow Stance)",
+    "alias": [],
+    "primer": "This is a variation of the leg press which targets more of the external muscles of the legs.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "This is a variation of the leg press which targets more of the external muscles of the legs by moving your feet closer together.",
+      "Sit on a leg press machine with your feet on the crosspiece 6 inches apart, with your toes pointed slightly outward.",
+      "Grasp the handles on the side of the machine and release the locks.",
+      "Keeping your abs drawn in, bend your knees and bring the weight as far as possible towards your chest.",
+      "Hold this position for a moment and then slowly return the weight to starting position.",
+      "Note: Do not lock your knees at the top."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0143-relaxation.pdf",
+      "pdf/0143-tension.pdf"
+    ],
+    "png": [
+      "png/0143-relaxation.png",
+      "png/0143-tension.png"
+    ]
+  },
+  {
+    "uuid": "2C0880E2-B58A-4178-B6E3-0B4E1455726C",
+    "id": 145,
+    "name": "narrow-stance-hack-squat",
+    "title": "Hack Squat: Machine (Narrow Stance)",
+    "alias": [],
+    "primer": "Like the Hack Squat, this exercise works the muscles of the leg.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles",
+      "gastrocnemius",
+      "soleus"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Like the Hack Squat, this exercise works the muscles of the leg. The narrow stance targets the external muscles more efficiently.",
+      "Lie face up on a Hack Squat machine with your shoulders against the pad.",
+      "Place your feet facing forward at a distance of 6 inches apart with your toes point slightly outward.",
+      "Release the dock levers and place your hands on the handgrips.",
+      "Drawing your abs in, extend your body standing upright.",
+      "Lower your body to a squatting position so your knees are bent as if you were sitting down.",
+      "Return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0145-relaxation.pdf",
+      "pdf/0145-tension.pdf"
+    ],
+    "png": [
+      "png/0145-relaxation.png",
+      "png/0145-tension.png"
+    ]
+  },
+  {
+    "uuid": "9ED2222B-7AF0-493F-ABAE-181DEB8A167A",
+    "id": 146,
+    "name": "narrow-stance-squat-with-barbell",
+    "title": "Squat: Barbell (Narrow Stance)",
+    "alias": [],
+    "primer": "This version of the Squat targets and defines more of the externals leg muscles.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "glutaeus maximus",
+      "gastrocnemius",
+      "soleus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "A great overall exercise for the lower body. This version of the Squat targets and defines more of the externals leg muscles.",
+      "Lifting a barbell off of a weight rack, position it on your shoulders.",
+      "Place your feet about 6 inches apart with your knees and toes pointed slightly outward.",
+      "Drawing your abs in, descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
+      "Lower yourself as far as you can control without letting your body shift towards your toes (this will cause you to loose balance).",
+      "Pause in the downward position and slowly return upright to the starting position.",
+      "Notes: A pad on the bar or towel on your shoulders can help improve your grip and reduce the discomfort of the bar against your back. Practice the squat without any weight to allow yourself to become comfortable with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0146-relaxation.pdf",
+      "pdf/0146-tension.pdf"
+    ],
+    "png": [
+      "png/0146-relaxation.png",
+      "png/0146-tension.png"
+    ]
+  },
+  {
+    "uuid": "3DBA09C5-B563-412D-B5DA-ECF33C131986",
+    "id": 156,
+    "name": "thigh-abductor",
+    "title": "Thigh Abductor",
+    "alias": [],
+    "primer": "This exercise targets and works the muscles of the outer thigh.",
+    "type": "isolation",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Sit on the machine and place your knees against the pads.",
+      "Draw your abs in and “abduct” or move your thighs apart against the pads.",
+      "Slowly return to the starting position and repeat.",
+      "Note: Maintain the same level of resistance throughout this exercise for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0156-relaxation.pdf",
+      "pdf/0156-tension.pdf"
+    ],
+    "png": [
+      "png/0156-relaxation.png",
+      "png/0156-tension.png"
+    ]
+  },
+  {
+    "uuid": "989BDD5D-1186-4634-A95E-E9BD3DE6C01A",
+    "id": 157,
+    "name": "thigh-adductor",
+    "title": "Thigh Adductor",
+    "alias": [],
+    "primer": "This exercise targets and works the muscles of the inner thigh.",
+    "type": "isolation",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Sit on the machine and place your knees against the pads.",
+      "Draw your abs in and “adduct” or move your thighs together.",
+      "Slowly return to the starting position and repeat.",
+      "Note: Maintain the same level of resistance throughout this exercise for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0157-relaxation.pdf",
+      "pdf/0157-tension.pdf"
+    ],
+    "png": [
+      "png/0157-relaxation.png",
+      "png/0157-tension.png"
+    ]
+  },
+  {
+    "uuid": "3B587709-4111-495D-BC4C-0658BCEE4145",
+    "id": 160,
+    "name": "wide-stance-squat-with-barbell",
+    "title": "Squat: Barbell (Wide Stance)",
+    "alias": [],
+    "primer": "This version of the squat uses a wider stance to isolate the inner thigh.",
+    "type": "compound",
+    "primary": [
+      "quadriceps"
+    ],
+    "secondary": [
+      "gastrocnemius",
+      "soleus",
+      "ischiocrural muscles"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Lifting a barbell off of a weight rack, position it on your shoulders.",
+      "Stand with your feet wider than shoulder width apart (about 30 inches apart) with your toes pointing out.",
+      "Drawing your abs in descend slowly by bending at the knees and hips as if you are sitting down (squatting).",
+      "Lower yourself as far as you can control without letting your body shift towards your toes (this will cause you to loose balance).",
+      "Pause in the downward position and slowly return upright to the starting position.",
+      "Note: A pad on the bar or towel on your shoulders can help improve your grip and reduce the discomfort of the bar against your back. Practice the squat without any weight to allow yourself to become comfortable with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0160-relaxation.pdf",
+      "pdf/0160-tension.pdf"
+    ],
+    "png": [
+      "png/0160-relaxation.png",
+      "png/0160-tension.png"
+    ]
+  },
+  {
+    "uuid": "FB545B25-89D7-4806-ACF0-B3399DFDE3A9",
+    "id": 162,
+    "name": "bench-dips",
+    "title": "Dips: Bench",
+    "alias": [],
+    "primer": "This exercise is one of the most basic and still one of the best for building the triceps.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "This exercise is one of the most basic and still one of the best for building the triceps (muscles on the back of the arm).",
+      "Place two benches parallel to each other 3-4 feet apart.",
+      "Sit on one bench and place your feet on the edge of the other bench so that your legs are suspended between the 2 benches.",
+      "Cross your feet for support.",
+      "Hold onto the bench with your hands for support and slowly lower body towards the floor by bending your elbows.",
+      "Pause and then return to starting position.",
+      "Note: Do not go below a 90 degree angle as this can cause on your shoulders."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0162-relaxation.pdf",
+      "pdf/0162-tension.pdf"
+    ],
+    "png": [
+      "png/0162-relaxation.png",
+      "png/0162-tension.png"
+    ]
+  },
+  {
+    "uuid": "6F15D017-C423-4BC0-8E39-DD276D34D66B",
+    "id": 163,
+    "name": "seated-pulldown-with-cable",
+    "title": "Straight Arm Pulldown (Incline)",
+    "alias": [
+      "Straight Arm Pushdown (Incline)",
+      "Cable Pullover (Incline)"
+    ],
+    "primer": "This exercise uses cables to isolate and work the triceps.",
+    "type": "isolation",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "This exercise uses cables to isolate and work the triceps (muscles on the back of the arms).",
+      "Place an incline bench facing away from a cable pulley.",
+      "Attach a short straight bar to the pulley and adjust the height so that your arms can extend fully.",
+      "Lie face up on the bench and grasp the bar with a narrow overhand grip.",
+      "Keeping your arms straight, slowly push the bar down towards your feet.",
+      "Pause at the bottom and then return to starting position.",
+      "Note: Keep your elbows steady throughout this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0163-relaxation.pdf",
+      "pdf/0163-tension.pdf"
+    ],
+    "png": [
+      "png/0163-relaxation.png",
+      "png/0163-tension.png"
+    ]
+  },
+  {
+    "uuid": "CA532615-1A4D-4895-AFFF-2CAAF90C2ECD",
+    "id": 164,
+    "name": "incline-triceps-extension-with-cable",
+    "title": "Triceps Extension: Cable (Incline)",
+    "alias": [],
+    "primer": "This exercise uses cables to isolate and work the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "This exercise uses cables to isolate and work the triceps (muscles on the back of the arms).",
+      "Place an incline bench facing away from a cable pulley.",
+      "Attach a short straight bar to the pulley and adjust the height so that your arms can extend fully.",
+      "Lie face up on the bench and grasp the bar with a narrow overhand grip.",
+      "Starting with your elbows bent overhead, slowly lower the bar towards your feet.",
+      "Pause at the bottom and then return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0164-relaxation.pdf",
+      "pdf/0164-tension.pdf"
+    ],
+    "png": [
+      "png/0164-relaxation.png",
+      "png/0164-tension.png"
+    ]
+  },
+  {
+    "uuid": "741A75F7-F59A-46D7-9673-89C3A7BD7975",
+    "id": 165,
+    "name": "lying-triceps-extension-with-cable",
+    "title": "Triceps Extension: Cable (Lying)",
+    "alias": [],
+    "primer": "This exercise uses cables to isolate and work the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "This exercise uses cables to isolate and work the triceps (muscles on the back of the arms).",
+      "Place a flat bench with the end towards a weight stack.",
+      "Attach a short straight bar to the pulley and lower the pulley to the bottom of the stack.",
+      "Lie face up on the bench and grasp the bar with a narrow overhand grip.",
+      "Starting with your arms extended lower the bar towards the bar towards the stack by bending your elbows.",
+      "Slowly extend your arms upright and return to the starting position.",
+      "Note: Keep your elbows level throughout the exercises."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0165-relaxation.pdf",
+      "pdf/0165-tension.pdf"
+    ],
+    "png": [
+      "png/0165-relaxation.png",
+      "png/0165-tension.png"
+    ]
+  },
+  {
+    "uuid": "1B9ACD34-B41B-48C1-A28E-F576484D8944",
+    "id": 168,
+    "name": "decline-close-grip-bench-to-skull-crusher",
+    "title": "Skull Crusher (Decline, Close Grip)",
+    "alias": [
+      "French Press (Decline, Close Grip)",
+      "Triceps Extension: EZ Curl Bar (Lying, Decline, Close Grip)"
+    ],
+    "primer": "This exercise combines a close grip bench press with triceps extension.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "ez-curl-bar"
+    ],
+    "steps": [
+      "Lay with your back on a flat bench.",
+      "Grip a barbell with a close grip 8-12 inches apart.",
+      "Keeping your arms close to your sides lower the bar so it touches your chest, approximately an inch below your nipples.",
+      "Slowly return to starting position, concentrating on your triceps.",
+      "At the top of the exercise bend your arms down towards your head.",
+      "Raise the bar back up over your chest and repeat."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0168-relaxation.pdf",
+      "pdf/0168-tension.pdf"
+    ],
+    "png": [
+      "png/0168-relaxation.png",
+      "png/0168-tension.png"
+    ]
+  },
+  {
+    "uuid": "4DF42F35-1A7C-4B3B-BCC5-6503231F540B",
+    "id": 169,
+    "name": "decline-triceps-extension-with-dumbbell",
+    "title": "Triceps Extension: Dumbbell (Decline)",
+    "alias": [],
+    "primer": "This exercise combines a decline bench and dumbbells to target the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Lay face up on a decline bench with a dumbbell in each hand.",
+      "Extend your arms so they are perpendicular to your chest, and keeping your elbows in one place, lower your hands so the dumbbells are lowered near your head.",
+      "Slowly return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0169-relaxation.pdf",
+      "pdf/0169-tension.pdf"
+    ],
+    "png": [
+      "png/0169-relaxation.png",
+      "png/0169-tension.png"
+    ]
+  },
+  {
+    "uuid": "5222009B-95E5-4A40-BB40-004B24E89BAE",
+    "id": 170,
+    "name": "decline-ez-bar-triceps-extension-with-barbell",
+    "title": "Triceps Extension: EZ Curl Bar (Decline)",
+    "alias": [],
+    "primer": "This exercise combines a decline bench and a curved bar to more efficiently work the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Lay face up on a decline bench and grasp an EZ Bar (Curved Barbell).",
+      "Extend your arms so they are perpendicular to your chest, and keeping your elbows in one place, lower the bar toward your head.",
+      "Slowly return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0170-relaxation.pdf",
+      "pdf/0170-tension.pdf"
+    ],
+    "png": [
+      "png/0170-relaxation.png",
+      "png/0170-tension.png"
+    ]
+  },
+  {
+    "uuid": "51C45857-F388-4538-A542-7703EDD5D7A4",
+    "id": 171,
+    "name": "tricep-dips",
+    "title": "Dips: Machine",
+    "alias": [],
+    "primer": "This exercise uses a machine to work the triceps while in seated position.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Adjust the seat of the machine so that the handles are equal with your elbows.",
+      "Grasping the handles, press down with equal pressure until your arms are fully extended.",
+      "Pause, and then return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0171-relaxation.pdf",
+      "pdf/0171-tension.pdf"
+    ],
+    "png": [
+      "png/0171-relaxation.png",
+      "png/0171-tension.png"
+    ]
+  },
+  {
+    "uuid": "971C7298-186F-4D2E-A79C-E4E3CC30277F",
+    "id": 172,
+    "name": "tricep-dips-using-body-weight",
+    "title": "Dips (Triceps)",
+    "alias": [],
+    "primer": "This classic exercise uses the weight of your own body to work your triceps.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "deltoid",
+      "pectoralis major"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Grasp a set of parallel bars and push yourself up to the starting position.",
+      "Keeping your elbows close to your body, lower yourself down until your triceps are parallel to the floor.",
+      "Slowly raise yourself back to the starting position.",
+      "Note: Keep your abs drawn in and your body straight during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0172-relaxation.pdf",
+      "pdf/0172-tension.pdf"
+    ],
+    "png": [
+      "png/0172-relaxation.png",
+      "png/0172-tension.png"
+    ]
+  },
+  {
+    "uuid": "D31D04AB-ED62-4F03-9D77-16DBF09CB662",
+    "id": 173,
+    "name": "one-arm-triceps-extension-with-dumbbell",
+    "title": "Triceps Extension: Dumbbell (One Arm)",
+    "alias": [],
+    "primer": "This exercise uses a dumbbell to work each arm individually.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sit on a bench with your back straight and your abs drawn in.",
+      "Grasp a dumbbell in your hand and place it behind your neck with your elbow bent.",
+      "Slowly extend your arm straight up over your head and slowly return to the starting position.",
+      "Note: Place your free hand across your chest to help steady yourself during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0173-relaxation.pdf",
+      "pdf/0173-tension.pdf"
+    ],
+    "png": [
+      "png/0173-relaxation.png",
+      "png/0173-tension.png"
+    ]
+  },
+  {
+    "uuid": "B0D44296-A4D5-49D9-8494-99A3F76543E4",
+    "id": 174,
+    "name": "incline-triceps-extension-with-barbell",
+    "title": "Triceps Extension: EZ Curl Bar (Incline)",
+    "alias": [],
+    "primer": "This version of a triceps extension uses gravity to increase the resistance of the exercise.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Grasp a barbell with a close grip (4-6 inches apart).",
+      "Lie on an incline bench and hold the bar over your head.",
+      "Lower your arms in a slight arc so your forearms are touching your biceps.",
+      "Slowly return back to the starting position with the bar over your head."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0174-relaxation.pdf",
+      "pdf/0174-tension.pdf"
+    ],
+    "png": [
+      "png/0174-relaxation.png",
+      "png/0174-tension.png"
+    ]
+  },
+  {
+    "uuid": "B118B527-D740-4A0A-B914-E29DA4835C41",
+    "id": 177,
+    "name": "kneeling-triceps-extension-with-cable-2",
+    "title": "Triceps Extension: Cable (Kneeling)",
+    "alias": [],
+    "primer": "Kneeling allows you to isolate your triceps more effectively.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Place a bench sideways in front of a high pulley machine.",
+      "Grasp a straight bar with an over head grip.",
+      "Kneel on the floor in front of the bench with your back straight and your head down.",
+      "With your elbows and forearms above your head, push the bar down in an arc so that your forearms are touching the bench.",
+      "Note: Keep your abs drawn in and your back straight as you perform this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0177-relaxation.pdf",
+      "pdf/0177-tension.pdf"
+    ],
+    "png": [
+      "png/0177-relaxation.png",
+      "png/0177-tension.png"
+    ]
+  },
+  {
+    "uuid": "43DA125B-379C-4471-A0CC-2C23DA882E12",
+    "id": 178,
+    "name": "low-triceps-extension-with-cable",
+    "title": "Triceps Extension: Cable (Low)",
+    "alias": [],
+    "primer": "This exercise is done while lying on a seated row station.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a rope to the cable pulley at of a seated row station.",
+      "Lie on your back on the bench with your head facing the weight stack.",
+      "Grasp the rope with your palms facing each other and raise your arms over your chest, with your forearms parallel to the floor at a 90 degree angle.",
+      "Slowly extend your arms upward squeezing your triceps.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0178-relaxation.pdf",
+      "pdf/0178-tension.pdf"
+    ],
+    "png": [
+      "png/0178-relaxation.png",
+      "png/0178-tension.png"
+    ]
+  },
+  {
+    "uuid": "B0958E4A-4C6E-405D-B89A-31528ED773E0",
+    "id": 179,
+    "name": "lying-close-grip-triceps-extension-behind-the-head-with-barbell",
+    "title": "Triceps Extension: EZ Curl Bar (Lying, Close Grip, Behind the Head)",
+    "alias": [],
+    "primer": "You can use a barbell or EZ bar to further concentrate the benefit to your triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "You can use a barbell or EZ (curl) bar to further concentrate the benefit to your triceps.",
+      "Lie flat on a bench on your back.",
+      "Grasp the bar with a grip approximately 8 inches apart and lower the bar behind your head.",
+      "Keeping the bar parallel with the floor, bend your arms down in an arc so the bar moves in a direction under your head.",
+      "Slowly return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0179-relaxation.pdf",
+      "pdf/0179-tension.pdf"
+    ],
+    "png": [
+      "png/0179-relaxation.png",
+      "png/0179-tension.png"
+    ]
+  },
+  {
+    "uuid": "599F78F6-12A3-40D9-8E64-DB407FA47F11",
+    "id": 180,
+    "name": "lying-close-grip-triceps-press-to-chin-with-barbell",
+    "title": "Skull Crusher (Close Grip)",
+    "alias": [
+      "French Press (Close Grip)",
+      "Triceps Extension: EZ Curl Bar (Lying, Close Grip)"
+    ],
+    "primer": "This exercise is a classic for building the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "ez-curl-bar"
+    ],
+    "steps": [
+      "Lie on a flat bench on your back, with your head at one end.",
+      "Grasp a bar with a close grip, approximately 6 inches apart.",
+      "Raise the bar straight up over your shoulders, keeping your elbows close in.",
+      "Slowly lower the bar in an arc over your head.",
+      "Return the bar to the starting position.",
+      "Note: Keep your arms straight throughout this exercise moving only your elbows."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0180-relaxation.pdf",
+      "pdf/0180-tension.pdf"
+    ],
+    "png": [
+      "png/0180-relaxation.png",
+      "png/0180-tension.png"
+    ]
+  },
+  {
+    "uuid": "2EBDAA0F-620B-4774-BAD8-E6F3FDE75AA9",
+    "id": 181,
+    "name": "lying-triceps-extension-with-dumbbells",
+    "title": "Triceps Extension: Dumbbell (Lying)",
+    "alias": [],
+    "primer": "This exercise uses gravity to increase the resistance of the weight.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Lay on a flat bench with your head at one end and your feet planted firmly on the floor.",
+      "Grasp a dumbbell with both hands with palms facing up.",
+      "Raise dumbbell over your body. Your arms will be pointed towards the ceiling.",
+      "While keeping your upper arms and elbows still, lower the dumbbell in an arc behind your head.",
+      "Slowly raise the dumbbell back to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0181-relaxation.pdf",
+      "pdf/0181-tension.pdf"
+    ],
+    "png": [
+      "png/0181-relaxation.png",
+      "png/0181-tension.png"
+    ]
+  },
+  {
+    "uuid": "7210F17F-91F7-401F-89CF-271332113319",
+    "id": 183,
+    "name": "lying-triceps-press-with-barbell",
+    "title": "Skull Crusher",
+    "alias": [
+      "French Press",
+      "Triceps Extension: EZ Curl Bar (Lying)"
+    ],
+    "primer": "This is another classic exercise for building the triceps.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "ez-curl-bar"
+    ],
+    "steps": [
+      "Lie on a flat bench on your back, with your head at one end.",
+      "Grasp an EZ or Curl bar with an overhand grip.",
+      "Raise the bar straight up over your shoulders, keeping your elbows close in.",
+      "Slowly lower the bar in an arc over your head.",
+      "Return the bar to the starting position.",
+      "Note: Keep your arms straight throughout this exercise moving only your elbows."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0183-relaxation.pdf",
+      "pdf/0183-tension.pdf"
+    ],
+    "png": [
+      "png/0183-relaxation.png",
+      "png/0183-tension.png"
+    ]
+  },
+  {
+    "uuid": "2BBF9DB2-8BD8-456E-A0CB-749D19E5FA26",
+    "id": 188,
+    "name": "close-triceps-pushups",
+    "title": "Push Up (Close)",
+    "alias": [],
+    "primer": "This version of the Pushup isolates the tricep muscles.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "This version of the Pushup isolates the tricep (back of the arm) muscles.",
+      "Kneel down on the floor or a mat, placing your hand thumbs together and raise your up on your toes.",
+      "Draw your abs in and keep your back and neck in a straight line.",
+      "Slowly lower your body towards the floor, by bending your arms, until you are nearly touching the floor.",
+      "In a controlled manner raise your body back up to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0188-relaxation.pdf",
+      "pdf/0188-tension.pdf"
+    ],
+    "png": [
+      "png/0188-relaxation.png",
+      "png/0188-tension.png"
+    ]
+  },
+  {
+    "uuid": "CDD01DA1-B5EF-44BD-BAE4-9A76EAC19078",
+    "id": 189,
+    "name": "reverse-grip-triceps-pushdown",
+    "title": "Triceps Pushdown: Cable (Reverse)",
+    "alias": [],
+    "primer": "This exercise is the reverse version of the triceps pushdown.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Stand in front of a cable machine and attach a bar to a high pulley.",
+      "Grasp the handle with palms facing up.",
+      "Keeping your elbows at your side, pull the handle down towards your thighs.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: You may want to stager one foot in front of the other for a better stance."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0189-relaxation.pdf",
+      "pdf/0189-tension.pdf"
+    ],
+    "png": [
+      "png/0189-relaxation.png",
+      "png/0189-tension.png"
+    ]
+  },
+  {
+    "uuid": "8F2612C6-DC64-482C-A024-8EB103E8DF51",
+    "id": 190,
+    "name": "reverse-triceps-bench-press-with-barbell",
+    "title": "Bench Press: Barbell (Reverse, Triceps)",
+    "alias": [],
+    "primer": "This exercise is a version of the Bench Press that specifically isolates the triceps.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Lie on a flat bench with your head at one end and your feet placed firmly on the floor.",
+      "Grasp a barbell with palms facing your head about 16 inches apart.",
+      "Move the bar over your chest (about 1 inch below your nipples).",
+      "Extend your arms fully raising the bar fully and then lower the bar to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0190-relaxation.pdf",
+      "pdf/0190-tension.pdf"
+    ],
+    "png": [
+      "png/0190-relaxation.png",
+      "png/0190-tension.png"
+    ]
+  },
+  {
+    "uuid": "C199BB33-F9DC-4F85-A05F-3BAA740AC4AE",
+    "id": 193,
+    "name": "seated-overhead-triceps-extension-with-barbell",
+    "title": "Triceps Extension: EZ Curl Bar (Seated, Overhead)",
+    "alias": [],
+    "primer": "This exercise uses a barbell behind your neck to isolate the triceps effectively.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Sit on a short straight back chair with your feet firmly placed on the floor and your back straight.",
+      "Grasp an EZ or Curl bar, or barbell with a grip about 6 inches apart.",
+      "Raise the bar to arms length above your head and then lower the bar in an arc towards the floor behind your head.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0193-relaxation.pdf",
+      "pdf/0193-tension.pdf"
+    ],
+    "png": [
+      "png/0193-relaxation.png",
+      "png/0193-tension.png"
+    ]
+  },
+  {
+    "uuid": "E420336A-82DA-4EB8-B821-9F29BB1A8D28",
+    "id": 195,
+    "name": "smith-machine-close-grip-bench-press",
+    "title": "Bench Press: Smith Machine (Close Grip)",
+    "alias": [],
+    "primer": "This version of a Bench Press uses a close grip to isolate the triceps as well as working the chest.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "pectoralis major"
+    ],
+    "equipment": [
+      "smith machine"
+    ],
+    "steps": [
+      "Place a flat bench in the middle of a Smith Machine.",
+      "Using a close grip (about 6 inches apart) unlatch the bar and lower it towards your chest.",
+      "Pause just before the bar hits your chest and raise the bar by extending your arms to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0195-relaxation.pdf",
+      "pdf/0195-tension.pdf"
+    ],
+    "png": [
+      "png/0195-relaxation.png",
+      "png/0195-tension.png"
+    ]
+  },
+  {
+    "uuid": "8861DB5C-A9F3-463E-9396-DB5FA6FC25F2",
+    "id": 198,
+    "name": "standing-triceps-extension",
+    "title": "Triceps Extension: Dumbbell (Standing)",
+    "alias": [],
+    "primer": "This exercise works the triceps by reaching behind your neck.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your back straight and your abs drawn in.",
+      "Hold a dumbbell in both hands, with your palms facing up.",
+      "Raise the dumbbell over your head and slowly lower the dumbbell in an arc behind your head.",
+      "Slowly raise the dumbbell back up to the starting position."
+    ],
+    "tips": [
+      "Keep your elbows close to your head during the exercise."
+    ],
+    "references": [],
+    "pdf": [
+      "pdf/0198-relaxation.pdf",
+      "pdf/0198-tension.pdf"
+    ],
+    "png": [
+      "png/0198-relaxation.png",
+      "png/0198-tension.png"
+    ]
+  },
+  {
+    "uuid": "408857B5-7B7D-4284-9602-8C8D546849BD",
+    "id": 199,
+    "name": "one-arm-low-pulley-triceps-extension-with-cable",
+    "title": "Triceps Extension: Cable (One Arm, Low-Pulley)",
+    "alias": [],
+    "primer": "This exercise uses a cable machine to isolate the triceps.",
+    "type": "compound",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a handle to a low cable pulley machine.",
+      "Stand with your back to the weight stack, your feet shoulder width apart.",
+      "With your left hand, reach behind you and grasp the handle.",
+      "Place your right hand on your left elbow for support.",
+      "Extend your left arm straight up towards the ceiling and then lower it to the starting position.",
+      "Repeat and switch arms."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0199-relaxation.pdf",
+      "pdf/0199-tension.pdf"
+    ],
+    "png": [
+      "png/0199-relaxation.png",
+      "png/0199-tension.png"
+    ]
+  },
+  {
+    "uuid": "215417E8-F482-48A6-83AB-C0EB1E428217",
+    "id": 200,
+    "name": "standing-one-arm-triceps-extension-with-dumbbell",
+    "title": "Triceps Extension: Dumbbell (Standing, One Arm)",
+    "alias": [],
+    "primer": "This is a single arm version of a behind the neck triceps exercise.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your back straight and your abs drawn in.",
+      "Hold a dumbbell in your right hand with your palms facing up.",
+      "Raise the dumbbell over your head and slowly lower the dumbbell in an arc behind your head, so that the dumbbell lines up with your spine.",
+      "Slowly raise the dumbbell back up to the starting position.",
+      "Switch arms and repeat.",
+      "Note: Keep your elbows close to your head during the exercise"
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0200-relaxation.pdf",
+      "pdf/0200-tension.pdf"
+    ],
+    "png": [
+      "png/0200-relaxation.png",
+      "png/0200-tension.png"
+    ]
+  },
+  {
+    "uuid": "40070A2D-E1D4-4B16-967F-C0739F9DF0BC",
+    "id": 201,
+    "name": "standing-overhead-triceps-extension-with-barbell",
+    "title": "Triceps Extension: EZ Curl Bar (Standing, Overhead)",
+    "alias": [],
+    "primer": "This is a double arm barbell version of a behind the neck triceps exercise.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "ez-curl-bar"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your back straight and your abs drawn in.",
+      "Hold a barbell or EZ Curl bar about 6-8 inches apart with your palms facing up.",
+      "Raise the bar over your head and slowly lower the dumbbell in an arc behind your head, towards your back.",
+      "Slowly raise the bar back up to the starting position.",
+      "Note: Keep your elbows close to your head during the exercise"
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0201-relaxation.pdf",
+      "pdf/0201-tension.pdf"
+    ],
+    "png": [
+      "png/0201-relaxation.png",
+      "png/0201-tension.png"
+    ]
+  },
+  {
+    "uuid": "8E9F7A47-5A01-4043-B055-D80F1954B1A7",
+    "id": 204,
+    "name": "triceps-kickback-with-dumbbell",
+    "title": "Triceps Kickback with Dumbbell",
+    "alias": [],
+    "primer": "This along with the Triceps Push Down is one of the most beneficial exercises for the arms.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Standing along side a flat bench, bend your left knee and place it on the bench.",
+      "Place your left hand on the bench for support, keeping your back at a 45 degree angle.",
+      "Hold a dumbbell in your right hand and place your right foot on the floor.",
+      "Bend your right arm and raise it up to your shoulder, then with controlled motion kick it back, fully extending your arm.",
+      "Switch arms and repeat.",
+      "Note: Keep your elbow close to your body during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0204-relaxation.pdf",
+      "pdf/0204-tension.pdf"
+    ],
+    "png": [
+      "png/0204-relaxation.png",
+      "png/0204-tension.png"
+    ]
+  },
+  {
+    "uuid": "7A74EBE7-512E-4846-BEF1-C5C4794B53F3",
+    "id": 205,
+    "name": "triceps-pushdown-with-cable",
+    "title": "Triceps Pushdown: Cable",
+    "alias": [],
+    "primer": "This exercise is the original version of the triceps pushdown.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Stand in front of a cable machine and attach a short bar to a high pulley.",
+      "Grasp the handle with your palms facing down.",
+      "Draw your abs in and keep your back straight.",
+      "Keeping your elbows at your side push the handle down towards your thighs.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: You may want to stager one foot in front of the other for a better stance."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0205-relaxation.pdf",
+      "pdf/0205-tension.pdf"
+    ],
+    "png": [
+      "png/0205-relaxation.png",
+      "png/0205-tension.png"
+    ]
+  },
+  {
+    "uuid": "FDEC211B-2157-4232-8E25-F796F067D37D",
+    "id": 206,
+    "name": "triceps-pushdown-with-rope-and-cable",
+    "title": "Triceps Pushdown: Cable (Rope)",
+    "alias": [],
+    "primer": "This version of the triceps pushdown uses a rope for better definition in the muscle.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Stand in front of a cable machine and attach a rope to a high pulley.",
+      "Grasp the rope with palms facing down.",
+      "Draw your abs in and keep your back straight.",
+      "Keeping your elbows at your side push the rope down towards your thighs, if possible “split” the rope apart at the bottom.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: You may want to stager one foot in front of the other for a better stance."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0206-relaxation.pdf",
+      "pdf/0206-tension.pdf"
+    ],
+    "png": [
+      "png/0206-relaxation.png",
+      "png/0206-tension.png"
+    ]
+  },
+  {
+    "uuid": "5FF607FC-1A9D-48D5-AC1A-F813249C0D1A",
+    "id": 207,
+    "name": "triceps-pushdown-with-v-bar-and-cable",
+    "title": "Triceps Pushdown: Cable (V-Bar)",
+    "alias": [],
+    "primer": "This exercise is the triceps pushdown uses a V shaped bar.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable",
+      "v-bar"
+    ],
+    "steps": [
+      "This exercise is the triceps pushdown uses a V shaped bar. Many people find this version easier on the elbows.",
+      "Steps",
+      "Stand in front of a cable machine and attach a V Bar to a high pulley.",
+      "Grasp the bar with palms facing down.",
+      "Draw your abs in and keep your back straight.",
+      "Keeping your elbows at your side push the bar down towards your thighs.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: You may want to stager one foot in front of the other for a better stance."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0207-relaxation.pdf",
+      "pdf/0207-tension.pdf"
+    ],
+    "png": [
+      "png/0207-relaxation.png",
+      "png/0207-tension.png"
+    ]
+  },
+  {
+    "uuid": "36E7BDFE-64BB-4A9B-BEA2-A80B3144F0B5",
+    "id": 209,
+    "name": "incline-triceps-extensions-with-dumbbell",
+    "title": "Triceps Extension: Dumbbell (Incline)",
+    "alias": [],
+    "primer": "This version of the triceps extension uses an incline bench.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [
+      "deltoid"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Grasp a dumbbell in each hand and lie against an incline bench, face up with your feet firmly planted on the floor.",
+      "Extend your arms over your shoulders with your palms facing each other.",
+      "Slowly lower the dumbbells behind your head by bending your elbows.",
+      "With a controlled motion raise your arms back up to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0209-relaxation.pdf",
+      "pdf/0209-tension.pdf"
+    ],
+    "png": [
+      "png/0209-relaxation.png",
+      "png/0209-tension.png"
+    ]
+  },
+  {
+    "uuid": "AA02F3FC-AE87-4C44-BAF6-E6AD2FB46015",
+    "id": 210,
+    "name": "triceps-extensions-using-machine",
+    "title": "Triceps Extension: Machine",
+    "alias": [],
+    "primer": "This exercise uses a machine to insure proper range of motion for tricep extensions.",
+    "type": "isolation",
+    "primary": [
+      "triceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Name: This exercise uses a machine to insure proper range of motion. This is a good exercise for beginners and people rehabilitating from injury.",
+      "Adjust the seat height of the machine so your upper arms and elbows lie flat on the pad. Draw your abs in and sit upright with your back straight. With your arms fully extended grasp the handles and pull them towards your body. Hold for a moment and then slowly return to the starting position.",
+      "Note: Stay seated and keep your feet firmly on the floor throughout this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0210-relaxation.pdf",
+      "pdf/0210-tension.pdf"
+    ],
+    "png": [
+      "png/0210-relaxation.png",
+      "png/0210-tension.png"
+    ]
+  },
+  {
+    "uuid": "405E1A53-1383-4DF9-9368-86E3CCF38012",
+    "id": 218,
+    "name": "biceps-curls-ez-curl-bar",
+    "title": "Biceps Curl: EZ Curl Bar",
+    "alias": [],
+    "primer": "This is a basic exercise for the biceps.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "deltoid",
+      "forearm"
+    ],
+    "equipment": [
+      "ez-curl-bar"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp an EZ curl bar with your palms facing up, approximately shoulder width apart.",
+      "Lower your arms fully to above your thighs and bending only your elbows, raise the bar to your upper chest.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: Do not swing your hips or back during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0218-relaxation.pdf",
+      "pdf/0218-tension.pdf"
+    ],
+    "png": [
+      "png/0218-relaxation.png",
+      "png/0218-tension.png"
+    ]
+  },
+  {
+    "uuid": "EEBD10DB-1C6D-44CE-BB9A-EBC981CF95EB",
+    "id": 212,
+    "name": "standing-biceps-curl-with-cable",
+    "title": "Biceps Curl: Cable",
+    "alias": [],
+    "primer": "This version of the biceps curl uses a cable instead of a barbell to work the muscles of the arms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm",
+      "deltoid"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a short bar to a cable pulley to the bottom of the weight stack.",
+      "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp the bar with palms facing up, and hands fairly close together.",
+      "Lower your arms fully to above your thighs and bending only your elbows, raise the bar to your upper chest.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: Do not swing your hips or back during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0212-relaxation.pdf",
+      "pdf/0212-tension.pdf"
+    ],
+    "png": [
+      "png/0212-relaxation.png",
+      "png/0212-tension.png"
+    ]
+  },
+  {
+    "uuid": "C0A5BF3D-3D68-4000-BC0F-9E44E2AF8862",
+    "id": 216,
+    "name": "hammer-curls-with-rope-and-cable",
+    "title": "Biceps Curl: Cable (Rope)",
+    "alias": [],
+    "primer": "Using the rope with the cable machine allows you isolate the biceps with this version of the Hammer Curl.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Using the rope with the cable machine allows you isolate the biceps with this version of the Hammer Curl. This is a good exercise for beginners.",
+      "Attach a rope to a cable pulley to the bottom of the weight stack. Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in. Grasp the rope with a close underhand grip (palms facing up). Lower your arms fully to above your thighs and bending only your elbows, raise the rope to your upper chest. Pause for a moment and then return to the starting position.",
+      "Note: Keep your elbows at your side throughout this exercise. Do not swing your hips or back during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0216-relaxation.pdf",
+      "pdf/0216-tension.pdf"
+    ],
+    "png": [
+      "png/0216-relaxation.png",
+      "png/0216-tension.png"
+    ]
+  },
+  {
+    "uuid": "8284C02D-73C8-4040-8F11-52162F3B9D5B",
+    "id": 217,
+    "name": "preacher-curl-with-cable",
+    "title": "Preacher Curl: Cable",
+    "alias": [
+      "Preacher Biceps Curl: Cable"
+    ],
+    "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Place a padded arm curl bench in front of a cable machine.",
+      "Attach a short bar to the bottom pulley.",
+      "Rest your arms against the bench and extend them fully.",
+      "With a narrow grip (6 inches) grasp the bar with palms facing up and pull it towards your head.",
+      "Pause for a moment and then lower the bar back to starting position.",
+      "Note: Perform this exercise in a slow controlled manner for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0217-relaxation.pdf",
+      "pdf/0217-tension.pdf"
+    ],
+    "png": [
+      "png/0217-relaxation.png",
+      "png/0217-tension.png"
+    ]
+  },
+  {
+    "uuid": "1C61F93B-5E6B-4517-9378-2F250EA6D28F",
+    "id": 220,
+    "name": "concentration-curls-with-dumbbell",
+    "title": "Concentration Curl: Dumbbell",
+    "alias": [
+      "Concentration Biceps Curl: Dumbbell"
+    ],
+    "primer": "Concentration exercises limit your range of movement to increase the effectiveness of the movement.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sit on the end of a flat bench with your feet flat and your legs spread apart.",
+      "Grasp a dumbbell in your hand, palms facing up.",
+      "With your elbow pressed against your inner thigh, curl the dumbbell up towards your chest.",
+      "Slowly return to the starting position.",
+      "Repeat and switch arms.",
+      "Note: Keep all of your body still except the arm you are exercising."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0220-relaxation.pdf",
+      "pdf/0220-tension.pdf"
+    ],
+    "png": [
+      "png/0220-relaxation.png",
+      "png/0220-tension.png"
+    ]
+  },
+  {
+    "uuid": "5AE0607D-88F0-4EF5-BB7B-878322FCBA9B",
+    "id": 222,
+    "name": "drag-curl-with-barbell",
+    "title": "Drag Curl: EZ Curl Bar",
+    "alias": [],
+    "primer": "This exercise works the biceps and forearms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "This exercise is credited to the late Vince Gironda, the “Iron Guru”. It not only blasts the biceps and works the forearms as well.",
+      "Stand with your feet shoulder width apart, your knees slightly bent, and your abs drawn in.",
+      "Grasp the bar with palms down, shoulder width apart.",
+      "Extend your arms fully so they are against your thighs.",
+      "Slowly raise your arms, palms down, to touch your chest.",
+      "Note: Do not move your elbows or shoulders during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0222-relaxation.pdf",
+      "pdf/0222-tension.pdf"
+    ],
+    "png": [
+      "png/0222-relaxation.png",
+      "png/0222-tension.png"
+    ]
+  },
+  {
+    "uuid": "154B1CB5-38B3-426D-B729-FF92A53D22A4",
+    "id": 224,
+    "name": "biceps-curl-with-dumbbell",
+    "title": "Biceps Curl: Dumbbell",
+    "alias": [],
+    "primer": "This version of a biceps curl uses both arms at the same time.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with our feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp a dumbbell in each hand with your palms facing up.",
+      "Extend your arms so they are at the sides of your body.",
+      "Keeping your elbows, locked lift your arms to your chest so that your forearms touch your biceps.",
+      "In a slow controlled manner, lower your arms to the starting position.",
+      "Note: Do not swing your body as you perform this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0224-relaxation.pdf",
+      "pdf/0224-tension.pdf"
+    ],
+    "png": [
+      "png/0224-relaxation.png",
+      "png/0224-tension.png"
+    ]
+  },
+  {
+    "uuid": "1A3DFD15-984D-4EDE-BD34-B4DA7129B9B6",
+    "id": 227,
+    "name": "biceps-hammer-curl-with-dumbbell",
+    "title": "Biceps Curl: Dumbbell (Hammer)",
+    "alias": [],
+    "primer": "This exercise uses a hammering motion to isolate the biceps.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "This exercise uses a hammering (up and down) motion to isolate the biceps.",
+      " Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp a dumbbell in each hand so your palms are facing each other.",
+      "Extend your arms so they are at the sides of your body.",
+      "Keeping your elbows locked lift your arms in an arc towards your shoulders.",
+      "Lower your arms in a steady controlled motion and repeat.",
+      "Note: Do not turn your wrists during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0227-relaxation.pdf",
+      "pdf/0227-tension.pdf"
+    ],
+    "png": [
+      "png/0227-relaxation.png",
+      "png/0227-tension.png"
+    ]
+  },
+  {
+    "uuid": "B93DE2B4-8BB7-48F7-A166-33B5DD363D1B",
+    "id": 228,
+    "name": "flexor-incline-curls-with-dumbbell",
+    "title": "Biceps Curl: Dumbbell (Incline)",
+    "alias": [],
+    "primer": "This exercise was designed to keep the stress on the biceps.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sit on an incline bench with your feet firmly on the floor in front of you.",
+      "Grasp a dumbbell with your palms facing up.",
+      "Bring your arms down to your sides and while keeping your wrists as straight as possible, raise your wrists to your shoulders.",
+      "Concentrate on squeezing your biceps as you contract (raise) your arms."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0228-relaxation.pdf",
+      "pdf/0228-tension.pdf"
+    ],
+    "png": [
+      "png/0228-relaxation.png",
+      "png/0228-tension.png"
+    ]
+  },
+  {
+    "uuid": "0C6E6F9F-B09E-4640-8FE6-4AD1374FA0C7",
+    "id": 236,
+    "name": "preacher-curl-with-machine",
+    "title": "Preacher Curl: Machine",
+    "alias": [
+      "Preacher Biceps Curl: Machine"
+    ],
+    "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms. This version of the exercises is a machine exercise. This is a good exercise for beginners.",
+      "Adjust the seat of the bench so your arms are level with the top of the bench. Rest your arms against the bench and extend them fully. Grasp the bar underhand (palms facing up) and pull it towards your head. Pause for a moment and then lower the bar back to starting position.",
+      "Note: Perform this exercise in a slow controlled manner for best results. Read the instructions on the machine before performing this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0236-relaxation.pdf",
+      "pdf/0236-tension.pdf"
+    ],
+    "png": [
+      "png/0236-relaxation.png",
+      "png/0236-tension.png"
+    ]
+  },
+  {
+    "uuid": "C920C06E-AD01-49FC-BEB3-3AA065C001E3",
+    "id": 237,
+    "name": "one-arm-preacher-curl-with-dumbbell",
+    "title": "Preacher Curl: Dumbbell (One Arm)",
+    "alias": [
+      "Preacher Biceps Curl: Dumbbell (One Arm)"
+    ],
+    "primer": "",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms. This version uses dumbbells and single arm movements for better control.",
+      "Adjust the seat of the bench so your arm is level with the top of the bench.",
+      "Grasp a dumbbell in your hand with palms facing up.",
+      "Rest your arm against the bench and extend it fully down.",
+      "Keeping your arm on the bench at all times, curl the dumbbell up towards your head.",
+      "Pause for a moment and then lower the dumbbell back to starting position.",
+      "Switch arms and repeat.",
+      "Note: Perform this exercise in a slow controlled manner for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0237-relaxation.pdf",
+      "pdf/0237-tension.pdf"
+    ],
+    "png": [
+      "png/0237-relaxation.png",
+      "png/0237-tension.png"
+    ]
+  },
+  {
+    "uuid": "42ED76CF-ABF6-42CD-8D2E-B9DDCED4AEC6",
+    "id": 238,
+    "name": "overhead-curl-with-cable",
+    "title": "Biceps Curl: Cable (Overhead)",
+    "alias": [],
+    "primer": "By using cable, this exercise isolates and defines the biceps muscles.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "By using cable this exercise isolates and defines the biceps (arm) muscles.",
+      "Attach a stirrup handle to each side of a high pulley on a cable machine.",
+      "Grasp the handles with palms facing up and stand with your feet shoulder width apart.",
+      "Extend your arms fully to each side.",
+      "Keeping your elbows steady, curl your wrists towards the sides of your head.",
+      "Contract your biceps and pause for a moment.",
+      "Then return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0238-relaxation.pdf",
+      "pdf/0238-tension.pdf"
+    ],
+    "png": [
+      "png/0238-relaxation.png",
+      "png/0238-tension.png"
+    ]
+  },
+  {
+    "uuid": "F2F17343-0B1C-46AA-8DDA-C6D4E14F3280",
+    "id": 239,
+    "name": "preacher-curl-with-barbell",
+    "title": "Preacher Curl: EZ Curl Bar",
+    "alias": [
+      "Preacher Biceps Curl: EZ Curl Bar"
+    ],
+    "primer": "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "&nbsp;",
+      "Adjust the seat of the bench so that your arms are level with the top of the bench.",
+      "Grasp the bar with palms facing up, shoulder width apart.",
+      "Picking up the bar, rest your arms against the bench and extend them fully.",
+      "Keeping your arms on the bench at all times, curl the bar up towards your head.",
+      "Pause for a moment and then lower the bar back to starting position.",
+      "Note: Perform this exercise in a slow controlled manner for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0239-relaxation.pdf",
+      "pdf/0239-tension.pdf"
+    ],
+    "png": [
+      "png/0239-relaxation.png",
+      "png/0239-tension.png"
+    ]
+  },
+  {
+    "uuid": "50EEDCAE-392D-419C-A09A-541D9CEB0B11",
+    "id": 240,
+    "name": "preacher-hammer-curl-with-dumbbell",
+    "title": "Preacher Curl: Dumbbell (Hammer)",
+    "alias": [
+      "Preacher Biceps Curl: Dumbbell (Hammer)"
+    ],
+    "primer": "This exercise combines a Hammer Curl with a Preacher bench.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Adjust the seat of the bench so that your arms are level with the top of the bench.",
+      "Grasp a dumbbell in each hand with your palms facing each other, shoulder width apart and extend your arms fully along the bench.",
+      "Keeping your arms and elbows on the bench at all times, curl the dumbbells up towards your head.",
+      "Pause for a moment and then lower the bar back to starting position.",
+      "Note: Perform this exercise in a slow controlled manner for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0240-relaxation.pdf",
+      "pdf/0240-tension.pdf"
+    ],
+    "png": [
+      "png/0240-relaxation.png",
+      "png/0240-tension.png"
+    ]
+  },
+  {
+    "uuid": "1E56859E-F4E2-42E0-B09E-767424F71AD0",
+    "id": 249,
+    "name": "two-arm-preacher-curl-with-dumbbell",
+    "title": "Preacher Curl: Dumbbell (Two Arm)",
+    "alias": [
+      "Preacher Biceps Curl: Dumbbell (Two Arm)"
+    ],
+    "primer": "This version of a Preacher Curl uses a special bench and dumbbells.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "A Preacher Curl uses a special bench to support the triceps and isolate the biceps to build the arms. This version of the exercise uses dumbbells.",
+      "Adjust the seat of the bench so your arms are level with the top of the bench.",
+      "Grasp a dumbbell in each hand with palms facing up.",
+      "Picking up the dumbbells, rest your arms against the bench and extend them fully towards the floor.",
+      "Keeping your arms on the bench at all times, curl the weight up towards your head.",
+      "Pause for a moment and then lower the weights back to starting position.",
+      "Note: Perform this exercise in a slow controlled manner for best results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0249-relaxation.pdf",
+      "pdf/0249-tension.pdf"
+    ],
+    "png": [
+      "png/0249-relaxation.png",
+      "png/0249-tension.png"
+    ]
+  },
+  {
+    "uuid": "83021373-8846-4BE0-97AD-83371064DA5F",
+    "id": 252,
+    "name": "zottman-preacher-curl-with-dumbbells",
+    "title": "Preacher Curl: Dumbbell (Zottman)",
+    "alias": [
+      "Preacher Biceps Curl: Dumbbell (Zottman)"
+    ],
+    "primer": "This is an advanced exercise where you turn the dumbbells up and out using a Preacher Curl bench for support.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Sit at a Preacher Curl Bench.",
+      "Grasp a dumbbell in your hand with your palms facing up.",
+      "Extend your arm fully along the bench.",
+      "Curl your arm up turning your wrist so it faces down as the dumbbell reaches your chest.",
+      "Pause for a moment and then return to the starting position and switch arms."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0252-relaxation.pdf",
+      "pdf/0252-tension.pdf"
+    ],
+    "png": [
+      "png/0252-relaxation.png",
+      "png/0252-tension.png"
+    ]
+  },
+  {
+    "uuid": "3FF4777D-42CE-4B76-B86E-3077165985BA",
+    "id": 253,
+    "name": "biceps-curl-with-machine",
+    "title": "Biceps Curl: Machine",
+    "alias": [],
+    "primer": "This exercise uses a machine to insure proper form.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Adjust the seat of the machine so your elbows are correctly aligned with the rotation axis.",
+      "Press your arms against the pads and keep them stationary throughout the exercise.",
+      "Curl your forearms until your arms are fully flexed.",
+      "Slowly lower your arms back to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0253-relaxation.pdf",
+      "pdf/0253-tension.pdf"
+    ],
+    "png": [
+      "png/0253-relaxation.png",
+      "png/0253-tension.png"
+    ]
+  },
+  {
+    "uuid": "A3A3B3C0-DBD1-4FAD-832A-04BF13B8D723",
+    "id": 257,
+    "name": "biceps-curl-reverse-with-dumbbells",
+    "title": "Biceps Curl: Dumbbell (Reverse)",
+    "alias": [],
+    "primer": "This is a reverse curl exercise that works all of the muscles of the arms.",
+    "type": "isolation",
+    "primary": [
+      "biceps brachii"
+    ],
+    "secondary": [
+      "forearm"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp a dumbbell in each hand with palms facing down.",
+      "Keeping your arms at your side your elbows steady, lift the dumbbells up towards your shoulders.",
+      "Pause for a moment and then return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0257-relaxation.pdf",
+      "pdf/0257-tension.pdf"
+    ],
+    "png": [
+      "png/0257-relaxation.png",
+      "png/0257-tension.png"
+    ]
+  },
+  {
+    "uuid": "FD79404B-8BB5-4971-864E-BF28B1E507A2",
+    "id": 273,
+    "name": "calf-press-on-leg-machine",
+    "title": "Calf Press: Leg Machine",
+    "alias": [],
+    "primer": "This exercise uses a Leg Press Machine to work your calves.",
+    "type": "isolation",
+    "primary": [
+      "gastrocnemius",
+      "soleus"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "This exercise uses a Leg Press Machine to work your calves. You can perform this exercise along with Leg Presses.",
+      "Sit down on a Leg Press Machine and press the plate up as if you were performing a leg press.",
+      "Slide your feet down so that the balls of your feet are pressing against the rack (with your heels hanging free).",
+      "Keeping the handles locked, press up and flex your toes and then slowly bring your toes back towards your body.",
+      "Perform theses movements slowly for maximum benefit.",
+      "Note: Use a lighter weight on this exercise than you are able to lift with a leg press until you are familiar with the movements."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0273-relaxation.pdf",
+      "pdf/0273-tension.pdf"
+    ],
+    "png": [
+      "png/0273-relaxation.png",
+      "png/0273-tension.png"
+    ]
+  },
+  {
+    "uuid": "E24A1E1E-D71C-40F5-8296-9B85E758337D",
+    "id": 279,
+    "name": "seated-calf-raise-using-machine",
+    "title": "Calf Raise: Machine (Seated)",
+    "alias": [],
+    "primer": "This is one of the simplest and most effective exercises for the calves.",
+    "type": "isolation",
+    "primary": [
+      "gastrocnemius",
+      "soleus"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "Sit at a calf raise machine.",
+      "Put the balls of your feet on the footpad.",
+      "Place your thighs under the leg pad above your knees.",
+      "Unlock the bar and slowly raise your toes up as far as possible.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: Practice slow and precise movements with this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0279-relaxation.pdf",
+      "pdf/0279-tension.pdf"
+    ],
+    "png": [
+      "png/0279-relaxation.png",
+      "png/0279-tension.png"
+    ]
+  },
+  {
+    "uuid": "68296D9A-DEAE-4B36-B16B-55F036CE52C0",
+    "id": 281,
+    "name": "standing-barbell-calf-raise",
+    "title": "Calf Raise: Barbell",
+    "alias": [],
+    "primer": "This is standing version of a Calf Raise.",
+    "type": "isolation",
+    "primary": [
+      "gastrocnemius",
+      "soleus"
+    ],
+    "secondary": [],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Place a block or two free weight plates on the floor.",
+      "Place a barbell across your back and step up so the balls of your feet are on the block.",
+      "Slowly lift your heels up and then lower them back to the floor getting as much of a stretch as possible.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0281-relaxation.pdf",
+      "pdf/0281-tension.pdf"
+    ],
+    "png": [
+      "png/0281-relaxation.png",
+      "png/0281-tension.png"
+    ]
+  },
+  {
+    "uuid": "4A5CE1F5-EF10-436C-8ACB-1D6D5928AEC3",
+    "id": 282,
+    "name": "standing-calf-raises-using-machine",
+    "title": "Calf Raise: Machine (Standing)",
+    "alias": [],
+    "primer": "This exercise uses a machine to allow for proper form.",
+    "type": "isolation",
+    "primary": [
+      "gastrocnemius",
+      "soleus"
+    ],
+    "secondary": [],
+    "equipment": [
+      "machine"
+    ],
+    "steps": [
+      "This exercise uses a machine to allow for proper form.",
+      "Stand with your toes on the footpad of the machine and adjust your shoulders under the upper pads.",
+      "Raise up on the balls of your feet, lifting your heels off the pad.",
+      "Hold for a moment and then return to the starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0282-relaxation.pdf",
+      "pdf/0282-tension.pdf"
+    ],
+    "png": [
+      "png/0282-relaxation.png",
+      "png/0282-tension.png"
+    ]
+  },
+  {
+    "uuid": "0405BCFA-2660-4984-A3A4-3E79F972573F",
+    "id": 283,
+    "name": "standing-calf-raise-with-dumbbell",
+    "title": "Calf Raise: Dumbbell",
+    "alias": [],
+    "primer": "This version of a Calf Raise uses dumbbells.",
+    "type": "isolation",
+    "primary": [
+      "gastrocnemius",
+      "soleus"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Place a block or two free weight plates on the floor.",
+      "Grasp a dumbbell in each hand and step up so the balls of your feet are on the block.",
+      "Slowly lift your heels up and then lower them back to the floor getting as much of a stretch as possible.",
+      "Lower your heels and bend your ankles to stretch your calves.",
+      "Return to starting position."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0283-relaxation.pdf"
+    ],
+    "png": [
+      "png/0283-relaxation.png"
+    ]
+  },
+  {
+    "uuid": "CDA8DA22-C98C-49DC-8157-6950AFE53184",
+    "id": 284,
+    "name": "air-bike",
+    "title": "Air Bike",
+    "alias": [],
+    "primer": "This exercise works your abs by raising your arms to meet your legs.",
+    "type": "compound",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "This exercise works your abs by raising your arms to meet your legs. The movements are similar to riding a bike.",
+      "Lie on your back on a mat.",
+      "Place your hands on either side of your head (over your ears).",
+      "Raise your legs up, bending your knees and keeping your calves parallel to the floor.",
+      "Bring your left arm elbow up to meet your right knee, as if riding a bike.",
+      "Repeat with your right elbow and left knee.",
+      "Continue alternating sides.",
+      "Note: Move your arms across your chest, squeezing your abs as you move."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0284-relaxation.pdf",
+      "pdf/0284-tension.pdf"
+    ],
+    "png": [
+      "png/0284-relaxation.png",
+      "png/0284-tension.png"
+    ]
+  },
+  {
+    "uuid": "D56A7119-1885-47C6-99AC-D0501F62944E",
+    "id": 288,
+    "name": "crunch-with-cable",
+    "title": "Crunch: Cable",
+    "alias": [
+      "Sit-Up: Cable"
+    ],
+    "primer": "This exercise uses the weight of a cable machine to assist in a crunch.",
+    "type": "isolation",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Attach a rope to a high cable pulley.",
+      "Place a bench in front of cable weight stack.",
+      "Grasp the rope over your shoulders and sit with your back towards the stack.",
+      "With your feet firmly on the floor and keeping your hips steady, flex at the waist bringing your elbows towards your knees.",
+      "Return to the starting position.",
+      "Note: Perform this exercise in a slow controlled manner."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0288-relaxation.pdf",
+      "pdf/0288-tension.pdf"
+    ],
+    "png": [
+      "png/0288-relaxation.png",
+      "png/0288-tension.png"
+    ]
+  },
+  {
+    "uuid": "61601FE7-2DBE-4EBA-B909-12EE8F588B88",
+    "id": 289,
+    "name": "cross-body-crunch",
+    "title": "Crunch (Cross Body)",
+    "alias": [
+      "Sit-Up (Cross Body)"
+    ],
+    "primer": "This version of the crunch works both the upper and lower portion of the abs.",
+    "type": "compound",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lie on your back and bring your knees up to a 60 degree angle, keep your feet flat on the floor.",
+      "Place your hands on either side of your head (over your ears).",
+      "Curl up raising your right elbow and your left knee so that they touch over your chest.",
+      "Return to the starting position and repeat with alternate arms and legs.",
+      "Note: Contract your abs as you twist during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0289-relaxation.pdf",
+      "pdf/0289-tension.pdf"
+    ],
+    "png": [
+      "png/0289-relaxation.png",
+      "png/0289-tension.png"
+    ]
+  },
+  {
+    "uuid": "5E270934-7A46-445D-8399-487A3C7355ED",
+    "id": 291,
+    "name": "crunches",
+    "title": "Crunch",
+    "alias": [
+      "Sit-Up"
+    ],
+    "primer": "",
+    "type": "isolation",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "This is the most common abdominal exercise and possibly the most often improperly performed. Here is how to perform it correctly.",
+      "Lie on your back with your feet up on a bench and your knees bent at a 90 degree angle.",
+      "Place your hands across your chest or on either side of your head (over your ears).",
+      "Raise your head, shoulders and chest off the floor and towards your knees, crunching your abs.",
+      "Hold the position for a moment and then lower to the starting position.",
+      "Note: Keep your hips straight and your lower back against the floor during this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0291-relaxation.pdf",
+      "pdf/0291-tension.pdf"
+    ],
+    "png": [
+      "png/0291-relaxation.png",
+      "png/0291-tension.png"
+    ]
+  },
+  {
+    "uuid": "A06460D0-17BA-4B5D-8241-D94329141399",
+    "id": 292,
+    "name": "decline-crunch",
+    "title": "Crunch (Decline)",
+    "alias": [
+      "Sit-Up (Decline)"
+    ],
+    "primer": "Using a decline crunch allows you keep your legs steady and isolate all of the abdominal muscles.",
+    "type": "isolation",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lie on a decline bench face up.",
+      "Place your feet securely under the pads.",
+      "Place your hands either across your chest or on either side of your head (over your ears).",
+      "Lay fully back and then rise slowly crunching your abs.",
+      "Pause for a moment and then return to the starting position.",
+      "Note: Use the full range of movement in this exercise for the optimal results."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0292-relaxation.pdf",
+      "pdf/0292-tension.pdf"
+    ],
+    "png": [
+      "png/0292-relaxation.png",
+      "png/0292-tension.png"
+    ]
+  },
+  {
+    "uuid": "B5D0B023-27D0-4516-AFA1-BE0B735FA600",
+    "id": 294,
+    "name": "side-bend-with-dumbbell",
+    "title": "Side Bend: Dumbbell",
+    "alias": [],
+    "primer": "This exercise works the obliques, the muscles on the sides of your abs.",
+    "type": "isolation",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "dumbbell"
+    ],
+    "steps": [
+      "Stand with your feet shoulder width apart, your knees slightly bent and your abs drawn in.",
+      "Grasp a dumbbell in one hand and standing straight upright, bend at the waist as far as possible to one side.",
+      "Slowly return back up to the staring position.",
+      "Switch the dumbbell to your other hand and repeat the exercise.",
+      "Note: Be careful to bend only at your waist and not at the hips or knees."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0294-relaxation.pdf",
+      "pdf/0294-tension.pdf"
+    ],
+    "png": [
+      "png/0294-relaxation.png",
+      "png/0294-tension.png"
+    ]
+  },
+  {
+    "uuid": "6F618906-444F-444C-8AA1-D272623B28D7",
+    "id": 296,
+    "name": "exercise-ball-pull-in",
+    "title": "Exercise Ball Pull In",
+    "alias": [],
+    "primer": "This exercise uses a ball to isolate and work the lower abdominal muscles.",
+    "type": "compound",
+    "primary": [
+      "abdominals"
+    ],
+    "secondary": [],
+    "equipment": [
+      "body"
+    ],
+    "steps": [
+      "Lay down as if you were performing a pushup.",
+      "Place your feet and shins over an exercise or stability ball.",
+      "Keeping your back straight and supporting your weight on your hands, pull your knees towards your chest, so the ball rolls forward under your ankles.",
+      "Crunch your abs and then roll the ball back to starting position straighten your legs.",
+      "Note: Keep your back straight as you perform this exercise."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0296-relaxation.pdf",
+      "pdf/0296-tension.pdf"
+    ],
+    "png": [
+      "png/0296-relaxation.png",
+      "png/0296-tension.png"
+    ]
+  },
+  {
+    "uuid": "6EB5B9C9-C953-459E-AFDE-2D31B1BEFAE0",
+    "id": 298,
+    "name": "bent-over-row-with-barbell",
+    "title": "Row: Barbell (Bent Over)",
+    "alias": [],
+    "primer": "This exercise focuses on the middle back.",
+    "type": "compound",
+    "primary": [
+      "latissimus dorsi"
+    ],
+    "secondary": [
+      "biceps brachii"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Place your feet shoulder width apart.",
+      "Bend over the bar so your back is flat and parallel to the floor.",
+      "Grasp the bar a bit wider than shoulder width apart with an overhand grip.",
+      "Hold the bar at arms length, this is starting position.",
+      "Slowly raise the bar to the lower part of your chest.",
+      "Pause for a moment than return to starting position.",
+      "Note: Keep your head up and your back straight while performing"
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/0298-relaxation.pdf",
+      "pdf/0298-tension.pdf"
+    ],
+    "png": [
+      "png/0298-relaxation.png",
+      "png/0298-tension.png"
+    ]
+  },
+  {
+    "uuid": "3D405857-F1A8-4F85-858C-231F0CEF653A",
+    "id": 9001,
+    "name": "overhead-press",
+    "title": "Overhead Press: Barbell",
+    "alias": [
+      "Shoulder Press: Barbell",
+      "Military Press: Barbell"
+    ],
+    "primer": "An exercise for the shoulder and triceps strengthening.",
+    "type": "compound",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [
+      "triceps brachii"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "steps": [
+      "Stand with the barbell on your upper chest, back straight and abs drawn in.",
+      "Grip the bar with your palms facing outwards and your hands shoulder width apart",
+      "With bar in front of your head, press upwards extending your arms but not locking them.",
+      "Pause at the top and then in a controlled movement lower the bar to the starting position."
+    ],
+    "tips": [
+      "This exercise can also be performed with the bar in the starting position behind your head."
+    ],
+    "references": [
+      "https://youtu.be/CnBmiBqp-AI"
+    ],
+    "pdf": [
+      "pdf/9001-relaxation.pdf",
+      "pdf/9001-tension.pdf"
+    ],
+    "png": [
+      "png/9001-relaxation.png",
+      "png/9001-tension.png"
+    ]
+  },
+  {
+    "uuid": "C4035736-EAF3-4DAD-8B74-BD1537E6B72D",
+    "id": 9002,
+    "name": "face-pulls",
+    "title": "Face Pulls",
+    "alias": [],
+    "primer": "An excellent exercise for the rear shoulders.",
+    "type": "isolation",
+    "primary": [
+      "deltoid"
+    ],
+    "secondary": [],
+    "equipment": [
+      "cable"
+    ],
+    "steps": [
+      "Stand in front of a pulley with a rope attached.",
+      "Pull the rope directly towards your face, while separating your hands and keeping your upper arms parallel to the ground."
+    ],
+    "tips": [],
+    "references": [],
+    "pdf": [
+      "pdf/9002-relaxation.pdf",
+      "pdf/9002-tension.pdf"
+    ],
+    "png": [
+      "png/9002-relaxation.png",
+      "png/9002-tension.png"
+    ]
+  }
+]

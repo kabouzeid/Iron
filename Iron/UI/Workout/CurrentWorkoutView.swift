@@ -188,7 +188,8 @@ struct CurrentWorkoutView: View {
         UserDefaults.standard.finishedWorkoutsCount += 1
         if UserDefaults.standard.finishedWorkoutsCount == 6 {
             // ask for review after the user finishes his third workout
-            SKStoreReviewController.requestReview()
+            // TODO: enable again
+//            SKStoreReviewController.requestReview()
         }
     }
     

@@ -87,6 +87,25 @@
 		8A59283022BD8B5C00BFD57E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59282F22BD8B5C00BFD57E /* HistoryView.swift */; };
 		8A59283222BE575300BFD57E /* MockWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59283122BE575300BFD57E /* MockWorkoutData.swift */; };
 		8A5989AB20D0212C00DB9104 /* UIFont+MonospacedDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */; };
+		8A5BC52527E9F45D00E437A1 /* IronData.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC52427E9F45D00E437A1 /* IronData.docc */; };
+		8A5BC52B27E9F45D00E437A1 /* IronData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5BC52127E9F45D00E437A1 /* IronData.framework */; };
+		8A5BC53227E9F45D00E437A1 /* IronDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC53127E9F45D00E437A1 /* IronDataTests.swift */; };
+		8A5BC53327E9F45D00E437A1 /* IronData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5BC52327E9F45D00E437A1 /* IronData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A5BC53627E9F45D00E437A1 /* IronData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5BC52127E9F45D00E437A1 /* IronData.framework */; };
+		8A5BC53727E9F45D00E437A1 /* IronData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5BC52127E9F45D00E437A1 /* IronData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8A5BC54027E9F48200E437A1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC53F27E9F48200E437A1 /* Persistence.swift */; };
+		8A5BC54227E9F48900E437A1 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC54127E9F48900E437A1 /* AppDatabase.swift */; };
+		8A5BC54427E9F4B600E437A1 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8A5BC54327E9F4B600E437A1 /* GRDB */; };
+		8A5BC54827E9F50100E437A1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC54527E9F50100E437A1 /* Workout.swift */; };
+		8A5BC54927E9F50100E437A1 /* WorkoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC54727E9F50100E437A1 /* WorkoutRequest.swift */; };
+		8A5BC54A27E9F50100E437A1 /* SwiftUI+AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC54627E9F50100E437A1 /* SwiftUI+AppDatabase.swift */; };
+		8A5BC54F27E9F57900E437A1 /* GRDBQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 8A5BC54E27E9F57900E437A1 /* GRDBQuery */; };
+		8A5BC55127EA150300E437A1 /* WorkoutExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC55027EA150300E437A1 /* WorkoutExercise.swift */; };
+		8A5BC55327EA150D00E437A1 /* WorkoutSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC55227EA150D00E437A1 /* WorkoutSet.swift */; };
+		8A5BC55527EA151800E437A1 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC55427EA151800E437A1 /* Exercise.swift */; };
+		8A5BC55A27EA409900E437A1 /* Exercise+Everkinetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC55927EA409900E437A1 /* Exercise+Everkinetic.swift */; };
+		8A5BC55C27EA429200E437A1 /* Everkinetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BC55B27EA429200E437A1 /* Everkinetic.swift */; };
+		8A5BC7DE27EA50AE00E437A1 /* everkinetic-data in Resources */ = {isa = PBXBuildFile; fileRef = 8A5BC7DD27EA50AE00E437A1 /* everkinetic-data */; };
 		8A5F9A11233B6B6D00C2F32A /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A10233B6B6D00C2F32A /* StoreObserver.swift */; };
 		8A5F9A13233B6B7D00C2F32A /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A12233B6B7D00C2F32A /* StoreManager.swift */; };
 		8A5F9A15233B702600C2F32A /* IAPIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F9A14233B702600C2F32A /* IAPIdentifiers.swift */; };
@@ -415,6 +434,27 @@
 			remoteGlobalIDString = 8AB5210D23992ABC008064B2;
 			remoteInfo = WorkoutDataKit;
 		};
+		8A5BC52C27E9F45D00E437A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A5BC52027E9F45D00E437A1;
+			remoteInfo = IronData;
+		};
+		8A5BC52E27E9F45D00E437A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
+			remoteInfo = Iron;
+		};
+		8A5BC53427E9F45D00E437A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A5BC52027E9F45D00E437A1;
+			remoteInfo = IronData;
+		};
 		8A604395239C4DBB00CFB7C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
@@ -542,6 +582,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8A5BC53727E9F45D00E437A1 /* IronData.framework in Embed Frameworks */,
 				8AB5211623992ABC008064B2 /* WorkoutDataKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -602,6 +643,22 @@
 		8A59282F22BD8B5C00BFD57E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		8A59283122BE575300BFD57E /* MockWorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWorkoutData.swift; sourceTree = "<group>"; };
 		8A5989AA20D0212C00DB9104 /* UIFont+MonospacedDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+MonospacedDigit.swift"; sourceTree = "<group>"; };
+		8A5BC52127E9F45D00E437A1 /* IronData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IronData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A5BC52327E9F45D00E437A1 /* IronData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IronData.h; sourceTree = "<group>"; };
+		8A5BC52427E9F45D00E437A1 /* IronData.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = IronData.docc; sourceTree = "<group>"; };
+		8A5BC52A27E9F45D00E437A1 /* IronDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A5BC53127E9F45D00E437A1 /* IronDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronDataTests.swift; sourceTree = "<group>"; };
+		8A5BC53F27E9F48200E437A1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8A5BC54127E9F48900E437A1 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		8A5BC54527E9F50100E437A1 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		8A5BC54627E9F50100E437A1 /* SwiftUI+AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+AppDatabase.swift"; sourceTree = "<group>"; };
+		8A5BC54727E9F50100E437A1 /* WorkoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRequest.swift; sourceTree = "<group>"; };
+		8A5BC55027EA150300E437A1 /* WorkoutExercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutExercise.swift; sourceTree = "<group>"; };
+		8A5BC55227EA150D00E437A1 /* WorkoutSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSet.swift; sourceTree = "<group>"; };
+		8A5BC55427EA151800E437A1 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		8A5BC55927EA409900E437A1 /* Exercise+Everkinetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+Everkinetic.swift"; sourceTree = "<group>"; };
+		8A5BC55B27EA429200E437A1 /* Everkinetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Everkinetic.swift; sourceTree = "<group>"; };
+		8A5BC7DD27EA50AE00E437A1 /* everkinetic-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "everkinetic-data"; sourceTree = "<group>"; };
 		8A5F9A10233B6B6D00C2F32A /* StoreObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
 		8A5F9A12233B6B7D00C2F32A /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		8A5F9A14233B702600C2F32A /* IAPIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPIdentifiers.swift; sourceTree = "<group>"; };
@@ -814,6 +871,23 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8A5BC51E27E9F45D00E437A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC54F27E9F57900E437A1 /* GRDBQuery in Frameworks */,
+				8A5BC54427E9F4B600E437A1 /* GRDB in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5BC52727E9F45D00E437A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC52B27E9F45D00E437A1 /* IronData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A60437F239C4DBB00CFB7C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -840,6 +914,7 @@
 				8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */,
 				8AB5211523992ABC008064B2 /* WorkoutDataKit.framework in Frameworks */,
 				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
+				8A5BC53627E9F45D00E437A1 /* IronData.framework in Frameworks */,
 				8A50F127243F5253003B3A6E /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -949,6 +1024,7 @@
 			isa = PBXGroup;
 			children = (
 				8A7D6EAE200BF92E00AA0FA7 /* IronTests */,
+				8A5BC53027E9F45D00E437A1 /* IronDataTests */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -956,10 +1032,10 @@
 		8A440806239C0FFD00A6D2C7 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
 				8AB5211023992ABC008064B2 /* WorkoutDataKit.h */,
 				8AB5211123992ABC008064B2 /* Info.plist */,
 				8A08D3D42349486800B09687 /* WorkoutData.xcdatamodeld */,
-				8A7D6EBC200C156500AA0FA7 /* everkinetic-data */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1181,6 +1257,58 @@
 			name = Support;
 			sourceTree = "<group>";
 		};
+		8A5BC52227E9F45D00E437A1 /* IronData */ = {
+			isa = PBXGroup;
+			children = (
+				8A5BC53E27E9F47500E437A1 /* Support */,
+				8A5BC55727EA30EC00E437A1 /* Models */,
+				8A5BC55827EA311500E437A1 /* Requests */,
+				8A5BC53F27E9F48200E437A1 /* Persistence.swift */,
+				8A5BC55B27EA429200E437A1 /* Everkinetic.swift */,
+				8A5BC54127E9F48900E437A1 /* AppDatabase.swift */,
+				8A5BC54627E9F50100E437A1 /* SwiftUI+AppDatabase.swift */,
+			);
+			path = IronData;
+			sourceTree = "<group>";
+		};
+		8A5BC53027E9F45D00E437A1 /* IronDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				8A5BC53127E9F45D00E437A1 /* IronDataTests.swift */,
+			);
+			path = IronDataTests;
+			sourceTree = "<group>";
+		};
+		8A5BC53E27E9F47500E437A1 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8A5BC7DD27EA50AE00E437A1 /* everkinetic-data */,
+				8A5BC52327E9F45D00E437A1 /* IronData.h */,
+				8A5BC52427E9F45D00E437A1 /* IronData.docc */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		8A5BC55727EA30EC00E437A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8A5BC55427EA151800E437A1 /* Exercise.swift */,
+				8A5BC54527E9F50100E437A1 /* Workout.swift */,
+				8A5BC55027EA150300E437A1 /* WorkoutExercise.swift */,
+				8A5BC55227EA150D00E437A1 /* WorkoutSet.swift */,
+				8A5BC55927EA409900E437A1 /* Exercise+Everkinetic.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8A5BC55827EA311500E437A1 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				8A5BC54727E9F50100E437A1 /* WorkoutRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		8A5F9A0F233B6B3600C2F32A /* StoreKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,13 +1388,14 @@
 			children = (
 				8AD39685239C075E0000E3C4 /* Shared */,
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
-				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
+				8A5BC52227E9F45D00E437A1 /* IronData */,
 				8AB5210F23992ABC008064B2 /* WorkoutDataKit */,
-				8A440805239C0F9C00A6D2C7 /* Tests */,
-				8A440804239C0F8000A6D2C7 /* Support */,
+				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
 				8A604383239C4DBB00CFB7C0 /* IronIntents */,
 				8A60438E239C4DBB00CFB7C0 /* IronIntentsUI */,
 				8AAFE3472534AB3800CF03E5 /* IronWidget */,
+				8A440805239C0F9C00A6D2C7 /* Tests */,
+				8A440804239C0F8000A6D2C7 /* Support */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				8A6F1729233A809D0048A75B /* Frameworks */,
 			);
@@ -1284,6 +1413,8 @@
 				8A604382239C4DBB00CFB7C0 /* IronIntents.appex */,
 				8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */,
 				8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */,
+				8A5BC52127E9F45D00E437A1 /* IronData.framework */,
+				8A5BC52A27E9F45D00E437A1 /* IronDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1649,6 +1780,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		8A5BC51C27E9F45D00E437A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC53327E9F45D00E437A1 /* IronData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AB5210923992ABC008064B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1660,6 +1799,47 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8A5BC52027E9F45D00E437A1 /* IronData */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A5BC53827E9F45D00E437A1 /* Build configuration list for PBXNativeTarget "IronData" */;
+			buildPhases = (
+				8A5BC51C27E9F45D00E437A1 /* Headers */,
+				8A5BC51D27E9F45D00E437A1 /* Sources */,
+				8A5BC51E27E9F45D00E437A1 /* Frameworks */,
+				8A5BC51F27E9F45D00E437A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IronData;
+			packageProductDependencies = (
+				8A5BC54327E9F4B600E437A1 /* GRDB */,
+				8A5BC54E27E9F57900E437A1 /* GRDBQuery */,
+			);
+			productName = IronData;
+			productReference = 8A5BC52127E9F45D00E437A1 /* IronData.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8A5BC52927E9F45D00E437A1 /* IronDataTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A5BC53B27E9F45D00E437A1 /* Build configuration list for PBXNativeTarget "IronDataTests" */;
+			buildPhases = (
+				8A5BC52627E9F45D00E437A1 /* Sources */,
+				8A5BC52727E9F45D00E437A1 /* Frameworks */,
+				8A5BC52827E9F45D00E437A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A5BC52D27E9F45D00E437A1 /* PBXTargetDependency */,
+				8A5BC52F27E9F45D00E437A1 /* PBXTargetDependency */,
+			);
+			name = IronDataTests;
+			productName = IronDataTests;
+			productReference = 8A5BC52A27E9F45D00E437A1 /* IronDataTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8A604381239C4DBB00CFB7C0 /* IronIntents */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A6043A1239C4DBB00CFB7C0 /* Build configuration list for PBXNativeTarget "IronIntents" */;
@@ -1723,6 +1903,7 @@
 				8A604396239C4DBB00CFB7C0 /* PBXTargetDependency */,
 				8A604399239C4DBB00CFB7C0 /* PBXTargetDependency */,
 				8AAFE34E2534AB3900CF03E5 /* PBXTargetDependency */,
+				8A5BC53527E9F45D00E437A1 /* PBXTargetDependency */,
 			);
 			name = Iron;
 			packageProductDependencies = (
@@ -1780,6 +1961,8 @@
 			dependencies = (
 			);
 			name = "WatchIron Extension";
+			packageProductDependencies = (
+			);
 			productName = "WatchIron Extension";
 			productReference = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -1798,6 +1981,8 @@
 				8A8A9C782534E9840087FD46 /* PBXTargetDependency */,
 			);
 			name = IronWidgetExtension;
+			packageProductDependencies = (
+			);
 			productName = IronWidgetExtension;
 			productReference = 8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1844,10 +2029,17 @@
 		8A7D6E8C200BF92E00AA0FA7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
+					8A5BC52027E9F45D00E437A1 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					8A5BC52927E9F45D00E437A1 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
+					};
 					8A604381239C4DBB00CFB7C0 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -1894,6 +2086,8 @@
 			mainGroup = 8A7D6E8B200BF92E00AA0FA7;
 			packageReferences = (
 				8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */,
+				8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				8A5BC54B27E9F55F00E437A1 /* XCRemoteSwiftPackageReference "GRDBQuery" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -1908,11 +2102,28 @@
 				8A604381239C4DBB00CFB7C0 /* IronIntents */,
 				8A60438A239C4DBB00CFB7C0 /* IronIntentsUI */,
 				8AAFE3412534AB3800CF03E5 /* IronWidgetExtension */,
+				8A5BC52027E9F45D00E437A1 /* IronData */,
+				8A5BC52927E9F45D00E437A1 /* IronDataTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8A5BC51F27E9F45D00E437A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC7DE27EA50AE00E437A1 /* everkinetic-data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5BC52827E9F45D00E437A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A604380239C4DBB00CFB7C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1995,6 +2206,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8A5BC51D27E9F45D00E437A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC54827E9F50100E437A1 /* Workout.swift in Sources */,
+				8A5BC55A27EA409900E437A1 /* Exercise+Everkinetic.swift in Sources */,
+				8A5BC54227E9F48900E437A1 /* AppDatabase.swift in Sources */,
+				8A5BC55327EA150D00E437A1 /* WorkoutSet.swift in Sources */,
+				8A5BC54A27E9F50100E437A1 /* SwiftUI+AppDatabase.swift in Sources */,
+				8A5BC55C27EA429200E437A1 /* Everkinetic.swift in Sources */,
+				8A5BC55127EA150300E437A1 /* WorkoutExercise.swift in Sources */,
+				8A5BC54927E9F50100E437A1 /* WorkoutRequest.swift in Sources */,
+				8A5BC52527E9F45D00E437A1 /* IronData.docc in Sources */,
+				8A5BC54027E9F48200E437A1 /* Persistence.swift in Sources */,
+				8A5BC55527EA151800E437A1 /* Exercise.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5BC52627E9F45D00E437A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A5BC53227E9F45D00E437A1 /* IronDataTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A60437E239C4DBB00CFB7C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2419,6 +2656,21 @@
 			target = 8AB5210D23992ABC008064B2 /* WorkoutDataKit */;
 			targetProxy = 8A0683BE239C77BB001F0A1E /* PBXContainerItemProxy */;
 		};
+		8A5BC52D27E9F45D00E437A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A5BC52027E9F45D00E437A1 /* IronData */;
+			targetProxy = 8A5BC52C27E9F45D00E437A1 /* PBXContainerItemProxy */;
+		};
+		8A5BC52F27E9F45D00E437A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A7D6E93200BF92E00AA0FA7 /* Iron */;
+			targetProxy = 8A5BC52E27E9F45D00E437A1 /* PBXContainerItemProxy */;
+		};
+		8A5BC53527E9F45D00E437A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A5BC52027E9F45D00E437A1 /* IronData */;
+			targetProxy = 8A5BC53427E9F45D00E437A1 /* PBXContainerItemProxy */;
+		};
 		8A604396239C4DBB00CFB7C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A60438A239C4DBB00CFB7C0 /* IronIntentsUI */;
@@ -2494,6 +2746,122 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8A5BC53927E9F45D00E437A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Karim Abou Zeid Software. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronData;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8A5BC53A27E9F45D00E437A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Karim Abou Zeid Software. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronData;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8A5BC53C27E9F45D00E437A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Iron.app/Iron";
+			};
+			name = Debug;
+		};
+		8A5BC53D27E9F45D00E437A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L6CX7XT2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Iron.app/Iron";
+			};
+			name = Release;
+		};
 		8A60439C239C4DBB00CFB7C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2504,7 +2872,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2531,7 +2899,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2557,7 +2925,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntentsUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2584,7 +2952,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronIntentsUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2727,7 +3095,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2752,7 +3120,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = Iron/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2928,7 +3296,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2957,7 +3325,7 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2L6CX7XT2U;
 				INFOPLIST_FILE = IronWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2989,7 +3357,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WorkoutDataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3024,7 +3392,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WorkoutDataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3089,6 +3457,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A5BC53827E9F45D00E437A1 /* Build configuration list for PBXNativeTarget "IronData" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A5BC53927E9F45D00E437A1 /* Debug */,
+				8A5BC53A27E9F45D00E437A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A5BC53B27E9F45D00E437A1 /* Build configuration list for PBXNativeTarget "IronDataTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A5BC53C27E9F45D00E437A1 /* Debug */,
+				8A5BC53D27E9F45D00E437A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A6043A0239C4DBB00CFB7C0 /* Build configuration list for PBXNativeTarget "IronIntentsUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3190,6 +3576,22 @@
 				minimumVersion = 3.4.0;
 			};
 		};
+		8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
+		8A5BC54B27E9F55F00E437A1 /* XCRemoteSwiftPackageReference "GRDBQuery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDBQuery";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3207,6 +3609,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		8A5BC54327E9F4B600E437A1 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
+		8A5BC54E27E9F57900E437A1 /* GRDBQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A5BC54B27E9F55F00E437A1 /* XCRemoteSwiftPackageReference "GRDBQuery" */;
+			productName = GRDBQuery;
 		};
 /* End XCSwiftPackageProductDependency section */
 
