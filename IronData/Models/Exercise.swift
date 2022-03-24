@@ -4,31 +4,31 @@ import Foundation
 /// Identifiable conformance supports SwiftUI list animations, and type-safe
 /// GRDB primary key methods.
 /// Equatable conformance supports tests.
-struct Exercise: Identifiable, Equatable {
-    var id: Int64?
-    var uuid: UUID
-    var title: String
-    var aliases: String?
-    var images: ImageURLs?
-    var movementType: MovementType?
-    var bodyPart: BodyPart?
-    var category: Category
+public struct Exercise: Identifiable, Equatable {
+    public var id: Int64?
+    public var uuid: UUID = UUID()
+    public var title: String
+    public var aliases: String?
+    public var images: ImageURLs?
+    public var movementType: MovementType?
+    public var bodyPart: BodyPart?
+    public var category: Category
     
-    enum MovementType: Codable, CaseIterable {
+    public enum MovementType: Codable, CaseIterable {
         case compound
         case isolation
     }
     
-    enum BodyPart: Codable, CaseIterable {
+    public enum BodyPart: Codable, CaseIterable {
         case chest, back, legs, arms, shoulders, core
     }
     
-    enum Category: Codable, CaseIterable {
+    public enum Category: Codable, CaseIterable {
         case barbell, dumbbell, machine, bodyweight, cardio, duration
     }
     
-    struct ImageURLs: Codable, Equatable {
-        let urls: [URL]
+    public struct ImageURLs: Codable, Equatable {
+        public let urls: [URL]
     }
 }
 
@@ -41,12 +41,8 @@ extension Exercise {
 }
 
 extension Exercise {
-    init(title: String, category: Exercise.Category) {
-        self.init(uuid: UUID(), title: title, category: category)
-    }
-    
     static func makeRandom() -> Exercise {
-        Exercise.init(uuid: UUID(), title: randomTitle(), aliases: nil, images: nil, movementType: MovementType.allCases.randomElement(), bodyPart: BodyPart.allCases.randomElement(), category: Category.allCases.randomElement()!)
+        Exercise.init(title: randomTitle(), aliases: nil, images: nil, movementType: MovementType.allCases.randomElement(), bodyPart: BodyPart.allCases.randomElement(), category: Category.allCases.randomElement()!)
     }
     
     private static func randomTitle() -> String {
@@ -68,7 +64,7 @@ extension Exercise: Codable, FetchableRecord, MutablePersistableRecord {
         static let category = Column(CodingKeys.category)
     }
     
-    mutating func didInsert(with rowID: Int64, for column: String?) {
+    public mutating func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
     }
 }

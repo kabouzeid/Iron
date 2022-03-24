@@ -4,13 +4,13 @@ import Foundation
 /// Identifiable conformance supports SwiftUI list animations, and type-safe
 /// GRDB primary key methods.
 /// Equatable conformance supports tests.
-struct WorkoutExercise: Identifiable, Equatable {
-    var id: Int64?
-    var uuid: UUID = UUID()
-    var order: Int = 0 // doesn't matter
-    var comment: String?
-    var exerciseId: Int64
-    var workoutId: Int64
+public struct WorkoutExercise: Identifiable, Equatable {
+    public var id: Int64?
+    public var uuid: UUID = UUID()
+    public var order: Int = 0 // doesn't matter
+    public var comment: String?
+    public var exerciseId: Int64
+    public var workoutId: Int64
 }
 
 extension WorkoutExercise {
@@ -54,7 +54,7 @@ extension WorkoutExercise: Codable, FetchableRecord, MutablePersistableRecord {
         static let workoutId = Column(CodingKeys.workoutId)
     }
 
-    mutating func didInsert(with rowID: Int64, for column: String?) {
+    public mutating func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
     }
 }

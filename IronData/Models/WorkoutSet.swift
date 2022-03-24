@@ -4,21 +4,21 @@ import Foundation
 /// Identifiable conformance supports SwiftUI list animations, and type-safe
 /// GRDB primary key methods.
 /// Equatable conformance supports tests.
-struct WorkoutSet: Identifiable, Equatable {
-    var id: Int64?
-    var uuid: UUID = UUID()
-    var order: Int = 0 // doesn't matter
-    var weight: Double?
-    var repetitions: Int?
-    var targetRepetitionsLower: Int?
-    var targetRepetitionsUpper: Int?
-    var rpe: Double?
-    var comment: String?
-    var tag: Tag?
-    var isCompleted: Bool = false
-    let workoutExerciseId: Int64
+public struct WorkoutSet: Identifiable, Equatable {
+    public var id: Int64?
+    public var uuid: UUID = UUID()
+    public var order: Int = 0 // doesn't matter
+    public var weight: Double?
+    public var repetitions: Int?
+    public var targetRepetitionsLower: Int?
+    public var targetRepetitionsUpper: Int?
+    public var rpe: Double?
+    public var comment: String?
+    public var tag: Tag?
+    public var isCompleted: Bool = false
+    public let workoutExerciseId: Int64
     
-    enum Tag: Codable, CaseIterable {
+    public enum Tag: Codable, CaseIterable {
         case warmup, dropset, failure
     }
 }
@@ -60,7 +60,7 @@ extension WorkoutSet: Codable, FetchableRecord, MutablePersistableRecord {
         static let workoutExerciseId = Column(CodingKeys.workoutExerciseId)
     }
     
-    mutating func didInsert(with rowID: Int64, for column: String?) {
+    public mutating func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
     }
 }

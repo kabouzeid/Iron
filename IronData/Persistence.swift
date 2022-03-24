@@ -10,7 +10,7 @@ import Foundation
 import GRDB
 
 extension AppDatabase {
-    static func makeShared(folderURL: URL) -> AppDatabase {
+    public static func makeShared(folderURL: URL) -> AppDatabase {
         do {
             // Folder for storing the SQLite database, as well as
             // the various temporary files created during normal database

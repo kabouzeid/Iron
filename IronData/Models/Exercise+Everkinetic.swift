@@ -14,14 +14,14 @@ extension Exercise {
     }
     
     private struct EverkineticExercise: Codable {
-        public let uuid: UUID
-        public let title: String
-        public let alias: [String]
-        public let type: String
-        public let primary: [String]
-        public let secondary: [String]
-        public let equipment: [String]
-        public let pdf: [String]
+        let uuid: UUID
+        let title: String
+        let alias: [String]
+        let type: String
+        let primary: [String]
+        let secondary: [String]
+        let equipment: [String]
+        let pdf: [String]
         
         var aliases: String? {
             alias.joined(separator: "\n")

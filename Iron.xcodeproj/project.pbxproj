@@ -417,6 +417,7 @@
 		8AFF0D842302C60000F762A2 /* MockWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D832302C60000F762A2 /* MockWorkoutData.swift */; };
 		8AFF0D882303062400F762A2 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16BBD822E337A0002150F0 /* Benchmark.swift */; };
 		8AFF0D8A23032DC700F762A2 /* DateFormatter+OptionalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */; };
+		8AFFBE6F27ECC6970070C528 /* AppDatabase+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFFBE6E27ECC6970070C528 /* AppDatabase+shared.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -868,6 +869,7 @@
 		8AFE11B3232CF2E2000E9393 /* SheetBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetBar.swift; sourceTree = "<group>"; };
 		8AFF0D832302C60000F762A2 /* MockWorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWorkoutData.swift; sourceTree = "<group>"; };
 		8AFF0D8923032DC700F762A2 /* DateFormatter+OptionalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+OptionalDate.swift"; sourceTree = "<group>"; };
+		8AFFBE6E27ECC6970070C528 /* AppDatabase+shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDatabase+shared.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1093,6 +1095,7 @@
 				8A982531241149FC0020A644 /* OSLog+Logs.swift */,
 				8AA68CF7242F7C9E00418F36 /* OSLog+trace.swift */,
 				8AF5DAF8242E74E500A90A60 /* NSManagedObjectContext+performAndWait.swift */,
+				8AFFBE6E27ECC6970070C528 /* AppDatabase+shared.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2436,6 +2439,7 @@
 				8AB0C950234540660009F031 /* HealthManager.swift in Sources */,
 				8AFDEBC6236B421800ABE234 /* GeneralSettingsView.swift in Sources */,
 				8AE0FC832339190100B234F9 /* EditCustomExerciseSheet.swift in Sources */,
+				8AFFBE6F27ECC6970070C528 /* AppDatabase+shared.swift in Sources */,
 				8AED58B4236491B600BF06D3 /* IronBackup.swift in Sources */,
 				8A204B39236729AB00F40F79 /* UbiquityContainer.swift in Sources */,
 				8A63B382232946E0001BD7B5 /* ExerciseSingleSelectionView.swift in Sources */,

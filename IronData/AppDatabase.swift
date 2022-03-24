@@ -13,7 +13,7 @@ import GRDB
 ///
 /// It applies the pratices recommended at
 /// <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
-struct AppDatabase {
+public struct AppDatabase {
     /// Creates an `AppDatabase`, and make sure the database schema is ready.
     init(_ dbWriter: DatabaseWriter) throws {
         self.dbWriter = dbWriter
@@ -114,14 +114,14 @@ struct AppDatabase {
 // MARK: - Database Access: Writes
 
 extension AppDatabase {
-    func saveWorkout(_ workout: inout Workout) async throws {
+    public func saveWorkout(_ workout: inout Workout) async throws {
         workout = try await dbWriter.write { [workout] db in
             try workout.saved(db)
         }
     }
     
     /// Delete the specified workouts
-    func deleteWorkouts(ids: [Int64]) async throws {
+    public func deleteWorkouts(ids: [Int64]) async throws {
         try await dbWriter.write { db in
             _ = try Workout.deleteAll(db, ids: ids)
         }
