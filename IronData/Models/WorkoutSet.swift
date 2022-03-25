@@ -4,7 +4,7 @@ import Foundation
 /// Identifiable conformance supports SwiftUI list animations, and type-safe
 /// GRDB primary key methods.
 /// Equatable conformance supports tests.
-public struct WorkoutSet: Identifiable, Equatable {
+public struct WorkoutSet: Identifiable, Equatable, Hashable {
     public var id: Int64?
     public var uuid: UUID = UUID()
     public var order: Int = 0 // doesn't matter

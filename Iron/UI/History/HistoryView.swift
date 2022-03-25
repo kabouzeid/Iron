@@ -17,51 +17,53 @@ struct HistoryView: View {
             ScrollView {
                 LazyVStack(spacing: 16) {
                     ForEach(viewModel.workouts) { workout in
-                        NavigationLink(destination: Text("TODO")) {
-                            WorkoutCell(viewModel: .init(workout: workout))
-                                .contentShape(Rectangle())
-                            //                            .contextMenu {
-                            //                                // TODO add images when SwiftUI fixes the image size
-                            //                                if UIDevice.current.userInterfaceIdiom != .pad {
-                            //                                    // not working on iPad, last checked iOS 13.4
-                            //                                    Button("Share") {
-                            //                                        guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
-                            //                                        self.activityItems = [logText]
-                            //                                    }
-                            //                                }
-                            //                                Button("Repeat") {
-                            //                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-                            //                                }
-                            //                                Button("Repeat (Blank)") {
-                            //                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-                            //                                }
-                            //                            }
+                        Section {
+                            NavigationLink {
+                                Text("hi")
+                            } label: {
+                                WorkoutCell(viewModel: .init(workout: workout))
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            .scenePadding()
+                            .background(Color(uiColor: .secondarySystemGroupedBackground))
+                            .cornerRadius(10)
+                            .contextMenu {
+                                Button {
+                                    viewModel.share(workout: workout)
+                                } label: {
+                                    Text("Share")
+                                    Image(systemName: "square.and.arrow.up")
+                                }
+                                
+                                Button {
+                                    viewModel.repeat(workout: workout)
+                                } label: {
+                                    Text("Repeat")
+                                    Image(systemName: "arrow.clockwise")
+                                }
+                                
+                                Button(role: .destructive) {
+                                    viewModel.confirmDelete(workout: workout)
+                                } label: {
+                                    Text("Delete")
+                                    Image(systemName: "trash")
+                                }
+
+                            }
                         }
-                        .buttonStyle(.plain)
-                        .scenePadding()
-                        .background(Color(uiColor: .secondarySystemGroupedBackground))
-                        .cornerRadius(10)
                     }
-                    //                .onDelete { offsets in
-                    //                    if self.needsConfirmBeforeDelete(offsets: offsets) {
-                    //                        self.offsetsToDelete = offsets
-                    //                    } else {
-                    //                        self.deleteAt(offsets: offsets)
-                    //                    }
-                    //                }
                 }
                 .scenePadding(.horizontal)
-                //                .padding([.horizontal], 4)
             }
-            .navigationBarItems(trailing: EditButton())
-            //            .actionSheet(item: $offsetsToDelete) { offsets in
-            //                ActionSheet(title: Text("This cannot be undone."), buttons: [
-            //                    .destructive(Text("Delete Workout"), action: {
-            //                        self.deleteAt(offsets: offsets)
-            //                    }),
-            //                    .cancel()
-            //                ])
-            //            }
+            .actionSheet(item: $viewModel.deletionWorkout) { workout in
+                ActionSheet(title: Text("This cannot be undone."), buttons: [
+                    .destructive(Text("Delete Workout"), action: {
+                        viewModel.delete(workout: workout)
+                    }),
+                    .cancel()
+                ])
+            }
             .background(Color(uiColor: .systemGroupedBackground))
             .placeholder(show: viewModel.workouts.isEmpty, Text("Your finished workouts will appear here.")
                 .multilineTextAlignment(.center)
@@ -73,9 +75,7 @@ struct HistoryView: View {
             Text("No workout selected")
                 .foregroundColor(.secondary)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        //        .background(Color(UIColor.systemGroupedBackground))
-        //        .overlay(ActivitySheet(activityItems: self.$activityItems))
+        .navigationViewStyle(.stack)
         .task {
             try! await viewModel.fetchData()
         }
@@ -88,17 +88,15 @@ struct HistoryView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 4) {
-                    Label(viewModel.title, systemImage: viewModel.bodyPartLetter)
-                        .font(.headline)
-                        .symbolVariant(.circle.fill)
-                        .foregroundStyle(viewModel.bodyPartColor)
-//                        .foregroundStyle(.orange)
-                    
-                    Label(viewModel.startString, systemImage: "calendar")
-                        .font(.body)
-                        .labelStyle(.titleOnly)
-//                        .foregroundColor(.blue)
-                        .foregroundColor(.secondary)
+                        Label(viewModel.title, systemImage: viewModel.bodyPartLetter)
+                            .font(.headline)
+                            .symbolVariant(.circle.fill)
+                            .foregroundStyle(viewModel.bodyPartColor)
+                        
+                        Label(viewModel.startString, systemImage: "calendar")
+                            .font(.body)
+                            .labelStyle(.titleOnly)
+                            .foregroundColor(.secondary)
                     }
                     
                     
@@ -159,15 +157,48 @@ extension HistoryView {
         let database: AppDatabase
         
         @Published var workouts: [IronData.Workout] = []
+        @Published var deletionWorkout: Workout?
         
         nonisolated init(database: AppDatabase) {
             self.database = database
         }
         
+        private func shouldConfirmDelete(workout: Workout) -> Bool {
+            // TODO: check that number of workoutExercises is zero.
+            return true
+        }
+        
+        func delete(workout: Workout) {
+            Task {
+                try! await database.deleteWorkouts(ids: [workout.id!])
+            }
+        }
+        
+        func confirmDelete(workout: Workout) {
+            if shouldConfirmDelete(workout: workout) {
+                deletionWorkout = workout
+            } else {
+                delete(workout: workout)
+            }
+        }
+        
         func fetchData() async throws {
             for try await workouts in database.workouts() {
-                self.workouts = workouts
+                withAnimation {
+                    self.workouts = workouts
+                }
             }
+        }
+        
+        func share(workout: Workout) {
+            // TODO
+            //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+            //            self.activityItems = [logText]
+        }
+        
+        func `repeat`(workout: Workout) {
+            // TODO
+            //            WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
         }
     }
 }
@@ -274,11 +305,9 @@ extension HistoryView.WorkoutCell {
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
         HistoryView.WorkoutCell(viewModel: .init(workout: workoutA))
-            .padding()
             .previewLayout(.sizeThatFits)
         
         HistoryView.WorkoutCell(viewModel: .init(workout: workoutB))
-            .padding()
             .previewLayout(.sizeThatFits)
         
         TabView {
