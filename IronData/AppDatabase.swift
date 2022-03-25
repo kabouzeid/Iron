@@ -127,19 +127,26 @@ extension AppDatabase {
         }
     }
     
-    /// Create random workouts if the database is empty.
-    func createRandomWorkoutsIfEmpty() throws {
-        try dbWriter.write { db in
-            if try Workout.all().isEmpty(db) {
-                try createRandomWorkouts(db)
-            }
-        }
+    public func workouts() -> AsyncValueObservation<[Workout]> {
+        ValueObservation.tracking(Workout.all().orderByStart().fetchAll)
+            .values(in: dbWriter, scheduling: .immediate)
     }
-
-    /// Support for `createRandomworkoutsIfEmpty()` and `refreshworkouts()`.
-    private func createRandomWorkouts(_ db: Database) throws {
-        for _ in 0..<8 {
-            _ = try Workout.makeRandom().inserted(db) // insert but ignore inserted id
+    
+    /// Create random workouts if the database is empty.
+    func createRandomWorkouts() throws {
+        try dbWriter.write { db in
+            try Workout.deleteAll(db)
+            
+            let exercises = try Exercise.fetchAll(db)
+            for _ in 0..<50 {
+                let workout = try Workout.makeRandom().inserted(db)
+                for _ in 0..<3 {
+                    let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
+                    for _ in 0..<5 {
+                        _ = try WorkoutSet.makeRandom(workoutExerciseId: workoutExercise.id!).inserted(db)
+                    }
+                }
+            }
         }
     }
     
@@ -153,10 +160,8 @@ extension AppDatabase {
     
     private func createDefaultExercises(_ db: Database) throws {
         let data = try Data(contentsOf: Everkinetic.resourcesURL.appendingPathComponent("exercises.json"))
-        try dbWriter.write { db in
-            for var exercise in try Exercise.fromJSON(data: data) {
-                try exercise.insert(db)
-            }
+        for var exercise in try Exercise.fromJSON(data: data) {
+            try exercise.insert(db)
         }
     }
 }

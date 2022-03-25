@@ -27,11 +27,15 @@ extension WorkoutExercise {
     }
     
     var workoutSets: QueryInterfaceRequest<WorkoutSet> {
-        request(for: Self.workoutSets).ordered()
+        request(for: Self.workoutSets).order()
     }
 }
 
 extension WorkoutExercise {
+    public static func new(exerciseId: Int64, workoutId: Int64) -> WorkoutExercise {
+        WorkoutExercise(exerciseId: exerciseId, workoutId: workoutId)
+    }
+    
     static func makeRandom(exerciseId: Int64, workoutId: Int64) -> WorkoutExercise {
         WorkoutExercise(comment: randomComment(), exerciseId: exerciseId, workoutId: workoutId)
     }
@@ -64,7 +68,7 @@ extension WorkoutExercise: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == WorkoutExercise {
-    func ordered() -> Self {
+    func order() -> Self {
         order(WorkoutExercise.Columns.order)
     }
 }

@@ -43,7 +43,7 @@ extension AppDatabase {
                 try appDatabase.createDefaultExercisesIfEmpty()
                 
                 // TODO: remove this
-                try appDatabase.createRandomWorkoutsIfEmpty()
+                try appDatabase.createRandomWorkouts()
             }
             
             return appDatabase
@@ -62,7 +62,7 @@ extension AppDatabase {
     }
     
     /// Creates an empty database for SwiftUI previews
-    static func empty() -> AppDatabase {
+    public static func empty() -> AppDatabase {
         // Connect to an in-memory database
         // See https://github.com/groue/GRDB.swift/blob/master/README.md#database-connections
         let dbQueue = DatabaseQueue()
@@ -70,9 +70,10 @@ extension AppDatabase {
     }
     
     /// Creates a database full of random players for SwiftUI previews
-    static func random() -> AppDatabase {
+    public static func random() -> AppDatabase {
         let appDatabase = empty()
-        try! appDatabase.createRandomWorkoutsIfEmpty()
+        try! appDatabase.createDefaultExercisesIfEmpty()
+        try! appDatabase.createRandomWorkouts()
         return appDatabase
     }
 }

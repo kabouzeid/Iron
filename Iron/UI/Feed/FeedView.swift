@@ -72,14 +72,14 @@ struct FeedView : View {
                     }
                 }
             }
-            .listStyleCompat_InsetGroupedListStyle()
+            .listStyle(.insetGrouped)
             .navigationBarTitle(Text("Feed"))
             .navigationBarItems(trailing: Button("Edit") { activeSheet = .pinnedChartEditor })
             .sheet(item: $activeSheet) { type in
                 sheetView(type: type)
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 }
 

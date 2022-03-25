@@ -41,6 +41,10 @@ extension Exercise {
 }
 
 extension Exercise {
+    public static func new(title: String, category: Category) -> Exercise {
+        Exercise(title: title, category: category)
+    }
+        
     static func makeRandom() -> Exercise {
         Exercise.init(title: randomTitle(), aliases: nil, images: nil, movementType: MovementType.allCases.randomElement(), bodyPart: BodyPart.allCases.randomElement(), category: Category.allCases.randomElement()!)
     }
@@ -74,7 +78,7 @@ extension Exercise: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == Exercise {
-    func orderedByStart() -> Self {
+    func orderByTitle() -> Self {
         order(Exercise.Columns.title.collating(.localizedCaseInsensitiveCompare))
     }
 }

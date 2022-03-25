@@ -32,6 +32,10 @@ extension WorkoutSet {
 }
 
 extension WorkoutSet {
+    public static func new(workoutExerciseId: Int64) -> WorkoutSet {
+        WorkoutSet(workoutExerciseId: workoutExerciseId)
+    }
+        
     static func makeRandom(workoutExerciseId: Int64) -> WorkoutSet {
         WorkoutSet(uuid: UUID(), weight: 2.5 * Double(Int.random(in: 8...40)), repetitions: .random(in: 5...12), targetRepetitionsLower: nil, targetRepetitionsUpper: nil, rpe: Double(Int.random(in: 12...20)) / 2, comment: randomComment(), tag: Tag.allCases.randomElement(), isCompleted: true, workoutExerciseId: workoutExerciseId)
     }
@@ -70,7 +74,7 @@ extension WorkoutSet: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == WorkoutSet {
-    func ordered() -> Self {
+    func order() -> Self {
         order(WorkoutSet.Columns.order)
     }
 }

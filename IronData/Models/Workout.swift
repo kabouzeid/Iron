@@ -18,13 +18,19 @@ extension Workout {
     static let workoutExercises = hasMany(WorkoutExercise.self).order(WorkoutExercise.Columns.order)
     
     var workoutExercises: QueryInterfaceRequest<WorkoutExercise> {
-        request(for: Self.workoutExercises).ordered()
+        request(for: Self.workoutExercises).order()
     }
 }
 
 extension Workout {
+    public static func new(start: Date) -> Workout {
+        Workout(start: start)
+    }
+    
     static func makeRandom() -> Workout {
-        Workout(start: Date(timeIntervalSinceNow: -60*60*1.5), end: Date(timeIntervalSinceNow: -60*60*0.2), title: randomTitle(), comment: randomComment(), isActive: false)
+        let daysAgo = Double.random(in: 1...60)
+        let duration = Double.random(in: 45...130)
+        return Workout(start: Date(timeIntervalSinceNow: -60*duration-daysAgo*60*60*24), end: Date(timeIntervalSinceNow: -daysAgo*60*60*24), title: randomTitle(), comment: randomComment(), isActive: false)
     }
     
     private static func randomTitle() -> String {
@@ -60,7 +66,15 @@ extension Workout: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == Workout {
-    func orderedByStart() -> Self {
+    func orderByStart() -> Self {
         order(Workout.Columns.start.desc)
+    }
+}
+
+// MARK: - Computed Properties
+
+extension Workout {
+    public var dateInterval: DateInterval? {
+        end.map { DateInterval(start: start, end: $0) }
     }
 }

@@ -1,157 +1,271 @@
 //
 //  HistoryView.swift
-//  Sunrise Fit
+//  Iron
 //
-//  Created by Karim Abou Zeid on 22.06.19.
-//  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
+//  Created by Karim Abou Zeid on 24.03.22.
+//  Copyright © 2022 Karim Abou Zeid Software. All rights reserved.
 //
 
 import SwiftUI
-import CoreData
-import WorkoutDataKit
+import IronData
 
-struct HistoryView : View {
-    @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var exerciseStore: ExerciseStore
-    @EnvironmentObject var sceneState: SceneState
-    @Environment(\.managedObjectContext) var managedObjectContext
+struct HistoryView: View {
+    @StateObject var viewModel: ViewModel = ViewModel(database: AppDatabase.shared)
     
-    @FetchRequest(fetchRequest: HistoryView.fetchRequest) var workouts
-
-    static var fetchRequest: NSFetchRequest<Workout> {
-        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
-        request.predicate = NSPredicate(format: "\(#keyPath(Workout.isCurrentWorkout)) != %@", NSNumber(booleanLiteral: true))
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.start, ascending: false)]
-        return request
-    }
-    
-    @State private var activityItems: [Any]?
-    
-    @State private var offsetsToDelete: IndexSet?
-    
-    /// Resturns `true` if at least one workout has workout exercises
-    private func needsConfirmBeforeDelete(offsets: IndexSet) -> Bool {
-        for index in offsets {
-            if workouts[index].workoutExercises?.count ?? 0 != 0 {
-                return true
-            }
-        }
-        return false
-    }
-    
-    private func deleteAt(offsets: IndexSet) {
-        let workouts = self.workouts
-        for i in offsets.sorted().reversed() {
-            workouts[i].deleteOrCrash()
-        }
-    }
-
     var body: some View {
         NavigationView {
-            List {
-                ForEach(workouts) { workout in
-                    NavigationLink(destination: WorkoutDetailView(workout: workout)
-                        .environmentObject(self.settingsStore)
-                    ) {
-                        WorkoutCell(workout: workout)
-                            .contextMenu {
-                                // TODO add images when SwiftUI fixes the image size
-                                if UIDevice.current.userInterfaceIdiom != .pad {
-                                    // not working on iPad, last checked iOS 13.4
-                                    Button("Share") {
-                                        guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
-                                        self.activityItems = [logText]
-                                    }
-                                }
-                                Button("Repeat") {
-                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-                                }
-                                Button("Repeat (Blank)") {
-                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-                                }
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    ForEach(viewModel.workouts) { workout in
+                        NavigationLink(destination: Text("TODO")) {
+                            WorkoutCell(viewModel: .init(workout: workout))
+                                .contentShape(Rectangle())
+                            //                            .contextMenu {
+                            //                                // TODO add images when SwiftUI fixes the image size
+                            //                                if UIDevice.current.userInterfaceIdiom != .pad {
+                            //                                    // not working on iPad, last checked iOS 13.4
+                            //                                    Button("Share") {
+                            //                                        guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+                            //                                        self.activityItems = [logText]
+                            //                                    }
+                            //                                }
+                            //                                Button("Repeat") {
+                            //                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
+                            //                                }
+                            //                                Button("Repeat (Blank)") {
+                            //                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
+                            //                                }
+                            //                            }
                         }
+                        .buttonStyle(.plain)
+                        .scenePadding()
+                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                        .cornerRadius(10)
                     }
+                    //                .onDelete { offsets in
+                    //                    if self.needsConfirmBeforeDelete(offsets: offsets) {
+                    //                        self.offsetsToDelete = offsets
+                    //                    } else {
+                    //                        self.deleteAt(offsets: offsets)
+                    //                    }
+                    //                }
                 }
-                .onDelete { offsets in
-                    if self.needsConfirmBeforeDelete(offsets: offsets) {
-                        self.offsetsToDelete = offsets
-                    } else {
-                        self.deleteAt(offsets: offsets)
-                    }
-                }
+                .scenePadding(.horizontal)
+                //                .padding([.horizontal], 4)
             }
-            .listStyleCompat_InsetGroupedListStyle()
             .navigationBarItems(trailing: EditButton())
-            .actionSheet(item: $offsetsToDelete) { offsets in
-                ActionSheet(title: Text("This cannot be undone."), buttons: [
-                    .destructive(Text("Delete Workout"), action: {
-                        self.deleteAt(offsets: offsets)
-                    }),
-                    .cancel()
-                ])
-            }
-            // FIXME: .placeholder() suddenly crashes the app when the last workout is deleted (iOS 13.4)
-            .placeholder(show: workouts.isEmpty,
-                         Text("Your finished workouts will appear here.")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.secondary)
-                            .padding()
+            //            .actionSheet(item: $offsetsToDelete) { offsets in
+            //                ActionSheet(title: Text("This cannot be undone."), buttons: [
+            //                    .destructive(Text("Delete Workout"), action: {
+            //                        self.deleteAt(offsets: offsets)
+            //                    }),
+            //                    .cancel()
+            //                ])
+            //            }
+            .background(Color(uiColor: .systemGroupedBackground))
+            .placeholder(show: viewModel.workouts.isEmpty, Text("Your finished workouts will appear here.")
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
             )
             .navigationBarTitle(Text("History"))
             
-            // Placeholder
+            // Double Column Placeholder
             Text("No workout selected")
                 .foregroundColor(.secondary)
         }
-        .padding(.leading, UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0) // hack that makes the master view show on iPad on portrait mode
-        .overlay(ActivitySheet(activityItems: self.$activityItems))
+        .navigationViewStyle(StackNavigationViewStyle())
+        //        .background(Color(UIColor.systemGroupedBackground))
+        //        .overlay(ActivitySheet(activityItems: self.$activityItems))
+        .task {
+            try! await viewModel.fetchData()
+        }
+    }
+    
+    struct WorkoutCell: View {
+        let viewModel: ViewModel
+        
+        var body: some View {
+            HStack {
+                VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
+                    Label(viewModel.title, systemImage: viewModel.bodyPartLetter)
+                        .font(.headline)
+                        .symbolVariant(.circle.fill)
+                        .foregroundStyle(viewModel.bodyPartColor)
+//                        .foregroundStyle(.orange)
+                    
+                    Label(viewModel.startString, systemImage: "calendar")
+                        .font(.body)
+                        .labelStyle(.titleOnly)
+//                        .foregroundColor(.blue)
+                        .foregroundColor(.secondary)
+                    }
+                    
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Divider()
+                        
+                        HStack(spacing: 24) {
+                            Label(viewModel.durationString, systemImage: "clock")
+                                .font(.body)
+                            
+                            Label(viewModel.totalWeight, systemImage: "scalemass")
+                                .font(.body)
+                            
+                            viewModel.bodyWeight.map {
+                                Label($0, systemImage: "person")
+                                    .font(.body)
+                            }
+                        }
+                        
+                        Divider()
+                    }
+                    
+                    
+                    viewModel.comment.map {
+                        Text($0.enquoted)
+                            .lineLimit(1)
+                            .font(Font.body.italic())
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        ForEach(viewModel.summary) { item in
+                            HStack {
+                                Text(item.exerciseDescription)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                                
+                                Spacer()
+                                
+                                if (item.isPR) {
+                                    Image(systemName: "star")
+                                        .symbolVariant(.circle.fill)
+                                        .symbolRenderingMode(.multicolor)
+                                }
+                            }
+                        }
+                    }
+                }
+                Spacer()
+            }
+        }
     }
 }
 
-private struct WorkoutCell: View {
-    @EnvironmentObject var settingsStore: SettingsStore
-    @EnvironmentObject var exerciseStore: ExerciseStore
-    @ObservedObject var workout: Workout
-
-    private var durationString: String? {
-        guard let duration = workout.duration else { return nil }
-        return Workout.durationFormatter.string(from: duration)
+extension HistoryView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        let database: AppDatabase
+        
+        @Published var workouts: [IronData.Workout] = []
+        
+        nonisolated init(database: AppDatabase) {
+            self.database = database
+        }
+        
+        func fetchData() async throws {
+            for try await workouts in database.workouts() {
+                self.workouts = workouts
+            }
+        }
     }
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(workout.displayTitle(in: self.exerciseStore.exercises))
-                    .font(.body)
-                
-                Text(Workout.dateFormatter.string(from: workout.start, fallback: "Unknown date"))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                workout.comment.map {
-                    Text($0.enquoted)
-                        .lineLimit(1)
-                        .font(Font.caption.italic())
-                        .foregroundColor(.secondary)
-                }
+}
+
+extension HistoryView.WorkoutCell {
+    struct ViewModel {
+        static let durationFormatter: DateComponentsFormatter = {
+            let formatter = DateComponentsFormatter()
+            formatter.unitsStyle = .abbreviated
+            formatter.allowedUnits = [.hour, .minute]
+            return formatter
+        }()
+        
+        let workout: Workout
+        
+        var title: String {
+            workout.title ?? "Untitled"
+            // TODO: use "display title" dependent on exercises etc
+        }
+        
+        var comment: String? {
+            workout.comment
+        }
+        
+        var startString: String {
+            workout.start.formatted(date: .abbreviated, time: .shortened)
+        }
+        
+        var durationString: String {
+            {
+                guard let duration = workout.dateInterval?.duration else { return nil }
+                return Self.durationFormatter.string(from: duration)
+            }() ?? "Unknown Duration"
+        }
+        
+        private let _totalWeight = "\(Int.random(in: 2000...10000).formatted()) kg"
+        var totalWeight: String {
+            _totalWeight
+        }
+        
+        var summary: [SummaryItem] {
+            [
+                SummaryItem(exerciseDescription: "5 × Squat: Barbell", isPR: Int.random(in: 0..<5) == 0),
+                SummaryItem(exerciseDescription: "5 × Bench Press: Barbell", isPR: Int.random(in: 0..<5) == 0),
+                SummaryItem(exerciseDescription: "3 × Dips", isPR: Int.random(in: 0..<5) == 0),
+                SummaryItem(exerciseDescription: "3 × Triceps Extensions", isPR: Int.random(in: 0..<5) == 0)
+            ]
+        }
+        
+        struct SummaryItem: Identifiable {
+            let exerciseDescription: String
+            let isPR: Bool
+            
+            var id: UUID { UUID() } // there are no ids for this item
+        }
+        
+        private let _bodyWeight = "\((Double(Int.random(in: 160...166)) / 2).formatted()) kg"
+        var bodyWeight: String? {
+            _bodyWeight
+        }
+        
+        private let _bodyPart = Exercise.BodyPart.allCases.randomElement()!
+        private var bodyPart: Exercise.BodyPart {
+            _bodyPart
+        }
+        
+        var bodyPartColor: Color {
+            switch bodyPart {
+            case .core:
+                return .teal
+            case .arms:
+                return .purple
+            case .shoulders:
+                return .orange
+            case .back:
+                return .blue
+            case .legs:
+                return .green
+            case .chest:
+                return .red
             }
-            .layoutPriority(1)
-            
-            Spacer()
-            
-            durationString.map {
-                Text($0)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .strokeBorder()
-                            .foregroundColor(Color(.systemFill))
-                    )
+        }
+        
+        var bodyPartLetter: String {
+            switch bodyPart {
+            case .core:
+                return "c"
+            case .arms:
+                return "a"
+            case .shoulders:
+                return "s"
+            case .back:
+                return "b"
+            case .legs:
+                return "l"
+            case .chest:
+                return "c"
             }
-            
-            workout.muscleGroupImage(in: self.exerciseStore.exercises)
         }
     }
 }
@@ -159,8 +273,33 @@ private struct WorkoutCell: View {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+        HistoryView.WorkoutCell(viewModel: .init(workout: workoutA))
+            .padding()
+            .previewLayout(.sizeThatFits)
+        
+        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB))
+            .padding()
+            .previewLayout(.sizeThatFits)
+        
+        TabView {
+            HistoryView(viewModel: .init(database: .random()))
+                .mockEnvironment(weightUnit: .metric, isPro: true)
+        }
+    }
+    
+    static var workoutA: Workout {
+        var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
+        workout.end = Date()
+        workout.comment = "Feeling strong today"
+        workout.title = "Chest & Arms"
+        return workout
+    }
+    
+    static var workoutB: Workout {
+        var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
+        workout.end = Date()
+        workout.title = "Back"
+        return workout
     }
 }
 #endif
