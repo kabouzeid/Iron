@@ -21,8 +21,13 @@ struct HistoryView: View {
                             NavigationLink {
                                 Text("hi")
                             } label: {
-                                WorkoutCell(viewModel: .init(workout: workout))
+                                WorkoutCell(viewModel: .init(workout: workout, bodyWeight: viewModel.bodyWeights[workout.start]))
                                     .contentShape(Rectangle())
+                                    .onChange(of: workout, perform: { newWorkout in
+                                        // TODO: the onChange logic should be the responsibility of the view model
+                                        Task { try? await viewModel.fetchBodyWeight(workout: newWorkout) }
+                                    })
+                                    .task { try? await viewModel.fetchBodyWeight(workout: workout) }
                             }
                             .buttonStyle(.plain)
                             .scenePadding()
@@ -71,14 +76,12 @@ struct HistoryView: View {
             )
             .navigationBarTitle(Text("History"))
             
-            // Double Column Placeholder
+            // Double Column Placeholder (iPad)
             Text("No workout selected")
                 .foregroundColor(.secondary)
         }
         .navigationViewStyle(.stack)
-        .task {
-            try! await viewModel.fetchData()
-        }
+        .task { try? await viewModel.fetchData() }
     }
     
     struct WorkoutCell: View {
@@ -110,7 +113,7 @@ struct HistoryView: View {
                             Label(viewModel.totalWeight, systemImage: "scalemass")
                                 .font(.body)
                             
-                            viewModel.bodyWeight.map {
+                            viewModel.bodyWeightFormatted.map {
                                 Label($0, systemImage: "person")
                                     .font(.body)
                             }
@@ -156,8 +159,9 @@ extension HistoryView {
     class ViewModel: ObservableObject {
         let database: AppDatabase
         
-        @Published var workouts: [IronData.Workout] = []
+        @Published var workouts: [Workout] = []
         @Published var deletionWorkout: Workout?
+        @Published var bodyWeights: [Date : Double] = [:]
         
         nonisolated init(database: AppDatabase) {
             self.database = database
@@ -190,6 +194,15 @@ extension HistoryView {
             }
         }
         
+        func fetchBodyWeight(workout: Workout) async throws {
+            let date = workout.start
+            guard bodyWeights[date] == nil else { return } // save power/performance by only loading the bodyweight once from HK
+            let bodyWeight = try await HealthManager.shared.healthStore.fetchBodyWeight(date: date)
+            withAnimation {
+                bodyWeights[date] = bodyWeight
+            }
+        }
+        
         func share(workout: Workout) {
             // TODO
             //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
@@ -213,6 +226,7 @@ extension HistoryView.WorkoutCell {
         }()
         
         let workout: Workout
+        let bodyWeight: Double?
         
         var title: String {
             workout.title ?? "Untitled"
@@ -255,9 +269,8 @@ extension HistoryView.WorkoutCell {
             var id: UUID { UUID() } // there are no ids for this item
         }
         
-        private let _bodyWeight = "\((Double(Int.random(in: 160...166)) / 2).formatted()) kg"
-        var bodyWeight: String? {
-            _bodyWeight
+        var bodyWeightFormatted: String? {
+            bodyWeight.map { "\($0.formatted()) kg" }
         }
         
         private let _bodyPart = Exercise.BodyPart.allCases.randomElement()!
@@ -304,10 +317,16 @@ extension HistoryView.WorkoutCell {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView.WorkoutCell(viewModel: .init(workout: workoutA))
+        HistoryView.WorkoutCell(viewModel: .init(workout: workoutA, bodyWeight: 82))
+            .scenePadding()
+            .previewLayout(.sizeThatFits)
+
+        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB, bodyWeight: 81.3))
+            .scenePadding()
             .previewLayout(.sizeThatFits)
         
-        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB))
+        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB, bodyWeight: nil))
+            .scenePadding()
             .previewLayout(.sizeThatFits)
         
         TabView {
