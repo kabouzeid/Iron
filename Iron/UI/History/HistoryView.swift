@@ -21,7 +21,7 @@ struct HistoryView: View {
                             NavigationLink {
                                 Text("hi")
                             } label: {
-                                WorkoutCell(viewModel: .init(workout: workout, bodyWeight: viewModel.bodyWeights[workout.start]))
+                                WorkoutCell(viewModel: .init(workout: workout, bodyWeight: viewModel.bodyWeight(for: workout)))
                                     .contentShape(Rectangle())
                                     .onChange(of: workout, perform: { newWorkout in
                                         // TODO: the onChange logic should be the responsibility of the view model
@@ -161,7 +161,7 @@ extension HistoryView {
         
         @Published var workouts: [Workout] = []
         @Published var deletionWorkout: Workout?
-        @Published var bodyWeights: [Date : Double] = [:]
+        @Published private var bodyWeights: [Date : Double] = [:]
         
         nonisolated init(database: AppDatabase) {
             self.database = database
@@ -201,6 +201,10 @@ extension HistoryView {
             withAnimation {
                 bodyWeights[date] = bodyWeight
             }
+        }
+        
+        func bodyWeight(for workout: Workout) -> Double? {
+            bodyWeights[workout.start]
         }
         
         func share(workout: Workout) {
