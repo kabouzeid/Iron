@@ -16,18 +16,25 @@ struct HistoryView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(viewModel.workouts) { workout in
+                    ForEach(viewModel.workoutInfos) { workoutInfo in
                         Section {
                             NavigationLink {
-                                Text("hi")
+                                Text("TODO")
                             } label: {
-                                WorkoutCell(viewModel: .init(workout: workout, bodyWeight: viewModel.bodyWeight(for: workout)))
-                                    .contentShape(Rectangle())
-                                    .onChange(of: workout, perform: { newWorkout in
-                                        // TODO: the onChange logic should be the responsibility of the view model
-                                        Task { try? await viewModel.fetchBodyWeight(workout: newWorkout) }
-                                    })
-                                    .task { try? await viewModel.fetchBodyWeight(workout: workout) }
+                                WorkoutCell(viewModel: .init(
+                                    workoutInfo: workoutInfo,
+                                    personalRecordInfo: viewModel.prInfo(for: workoutInfo),
+                                    bodyWeight: viewModel.bodyWeight(for: workoutInfo)
+                                ))
+                                .contentShape(Rectangle())
+                                .onChange(of: workoutInfo, perform: { newWorkoutInfo in
+                                    Task { try await viewModel.fetchBodyWeight(for: newWorkoutInfo) }
+                                })
+                                .onReceive(viewModel.personalRecordsStaleSubject, perform: {
+                                    Task { try await viewModel.fetchPRInfo(for: workoutInfo) }
+                                })
+                                .task { try? await viewModel.fetchBodyWeight(for: workoutInfo) }
+                                .task { try? await viewModel.fetchPRInfo(for: workoutInfo) }
                             }
                             .buttonStyle(.plain)
                             .scenePadding()
@@ -35,26 +42,26 @@ struct HistoryView: View {
                             .cornerRadius(10)
                             .contextMenu {
                                 Button {
-                                    viewModel.share(workout: workout)
+                                    viewModel.share(workoutInfo: workoutInfo)
                                 } label: {
                                     Text("Share")
                                     Image(systemName: "square.and.arrow.up")
                                 }
                                 
                                 Button {
-                                    viewModel.repeat(workout: workout)
+                                    viewModel.repeat(workoutInfo: workoutInfo)
                                 } label: {
                                     Text("Repeat")
                                     Image(systemName: "arrow.clockwise")
                                 }
                                 
                                 Button(role: .destructive) {
-                                    viewModel.confirmDelete(workout: workout)
+                                    viewModel.confirmDelete(workoutInfo: workoutInfo)
                                 } label: {
                                     Text("Delete")
                                     Image(systemName: "trash")
                                 }
-
+                                
                             }
                         }
                     }
@@ -70,11 +77,18 @@ struct HistoryView: View {
                 ])
             }
             .background(Color(uiColor: .systemGroupedBackground))
-            .placeholder(show: viewModel.workouts.isEmpty, Text("Your finished workouts will appear here.")
+            .placeholder(show: viewModel.workoutInfos.isEmpty, Text("Your finished workouts will appear here.")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
             )
             .navigationBarTitle(Text("History"))
+            .navigationBarItems(trailing:
+                                    Button {
+                try! AppDatabase.shared.createRandomWorkouts()
+            } label: {
+                Text("reset")
+            }
+            )
             
             // Double Column Placeholder (iPad)
             Text("No workout selected")
@@ -83,93 +97,32 @@ struct HistoryView: View {
         .navigationViewStyle(.stack)
         .task { try? await viewModel.fetchData() }
     }
-    
-    struct WorkoutCell: View {
-        let viewModel: ViewModel
-        
-        var body: some View {
-            HStack {
-                VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Label(viewModel.title, systemImage: viewModel.bodyPartLetter)
-                            .font(.headline)
-                            .symbolVariant(.circle.fill)
-                            .foregroundStyle(viewModel.bodyPartColor)
-                        
-                        Label(viewModel.startString, systemImage: "calendar")
-                            .font(.body)
-                            .labelStyle(.titleOnly)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Divider()
-                        
-                        HStack(spacing: 24) {
-                            Label(viewModel.durationString, systemImage: "clock")
-                                .font(.body)
-                            
-                            Label(viewModel.totalWeight, systemImage: "scalemass")
-                                .font(.body)
-                            
-                            viewModel.bodyWeightFormatted.map {
-                                Label($0, systemImage: "person")
-                                    .font(.body)
-                            }
-                        }
-                        
-                        Divider()
-                    }
-                    
-                    
-                    viewModel.comment.map {
-                        Text($0.enquoted)
-                            .lineLimit(1)
-                            .font(Font.body.italic())
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 2) {
-                        ForEach(viewModel.summary) { item in
-                            HStack {
-                                Text(item.exerciseDescription)
-                                    .font(.body)
-                                    .foregroundColor(.secondary)
-                                
-                                Spacer()
-                                
-                                if (item.isPR) {
-                                    Image(systemName: "star")
-                                        .symbolVariant(.circle.fill)
-                                        .symbolRenderingMode(.multicolor)
-                                }
-                            }
-                        }
-                    }
-                }
-                Spacer()
-            }
-        }
-    }
 }
 
+import Combine
 extension HistoryView {
     @MainActor
     class ViewModel: ObservableObject {
         let database: AppDatabase
         
-        @Published var workouts: [Workout] = []
+        @Published var workoutInfos: [AppDatabase.WorkoutInfo] = []
         @Published var deletionWorkout: Workout?
         @Published private var bodyWeights: [Date : Double] = [:]
+        @Published private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
+        
+        var personalRecordsStaleSubject = PassthroughSubject<Void, Never>() // sent whenever views should refetch PRs
         
         nonisolated init(database: AppDatabase) {
             self.database = database
         }
         
-        private func shouldConfirmDelete(workout: Workout) -> Bool {
-            // TODO: check that number of workoutExercises is zero.
-            return true
+        private func shouldConfirmDelete(workoutInfo: AppDatabase.WorkoutInfo) -> Bool {
+            /// returns true if there is at least one completed set
+            return workoutInfo.workoutExerciseInfos.contains { workoutExerciseInfo in
+                workoutExerciseInfo.workoutSets.contains { workoutSet in
+                    workoutSet.isCompleted
+                }
+            }
         }
         
         func delete(workout: Workout) {
@@ -178,24 +131,25 @@ extension HistoryView {
             }
         }
         
-        func confirmDelete(workout: Workout) {
-            if shouldConfirmDelete(workout: workout) {
-                deletionWorkout = workout
+        func confirmDelete(workoutInfo: AppDatabase.WorkoutInfo) {
+            if shouldConfirmDelete(workoutInfo: workoutInfo) {
+                deletionWorkout = workoutInfo.workout
             } else {
-                delete(workout: workout)
+                delete(workout: workoutInfo.workout)
             }
         }
         
         func fetchData() async throws {
-            for try await workouts in database.workouts() {
+            for try await workoutInfos in database.workoutInfos() {
                 withAnimation {
-                    self.workouts = workouts
+                    self.workoutInfos = workoutInfos
                 }
+                personalRecordsStaleSubject.send()
             }
         }
         
-        func fetchBodyWeight(workout: Workout) async throws {
-            let date = workout.start
+        func fetchBodyWeight(for workoutInfo: AppDatabase.WorkoutInfo) async throws {
+            let date = workoutInfo.workout.start
             guard bodyWeights[date] == nil else { return } // save power/performance by only loading the bodyweight once from HK
             let bodyWeight = try await HealthManager.shared.healthStore.fetchBodyWeight(date: date)
             withAnimation {
@@ -203,117 +157,44 @@ extension HistoryView {
             }
         }
         
-        func bodyWeight(for workout: Workout) -> Double? {
-            bodyWeights[workout.start]
+        func bodyWeight(for workoutInfo: AppDatabase.WorkoutInfo) -> Double? {
+            bodyWeights[workoutInfo.workout.start]
         }
         
-        func share(workout: Workout) {
+        typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Bool]
+        
+        func fetchPRInfo(for workoutInfo: AppDatabase.WorkoutInfo) async throws {
+            // NOTE: for now we don't return the cached value
+            // if we want to use the cached value here, then we also need to reset the cache in `fetchData`
+            // potential downside of this might be flickering everytime we reset the cache
+            
+            let prInfo = try await database.databaseReader.read { db -> PersonalRecordInfo in
+                var map = PersonalRecordInfo()
+                for workoutExerciseInfo in workoutInfo.workoutExerciseInfos {
+                    map[workoutExerciseInfo.workoutExercise.id!] = try workoutExerciseInfo.workoutSets.contains { workoutSet in
+                        try workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExerciseInfo.workoutExercise, workout: workoutInfo.workout))
+                    }
+                }
+                return map
+            }
+            withAnimation {
+                personalRecordInfos[workoutInfo.workout.id!] = prInfo
+            }
+        }
+        
+        func prInfo(for workoutInfo: AppDatabase.WorkoutInfo) -> PersonalRecordInfo? {
+            personalRecordInfos[workoutInfo.workout.id!]
+        }
+        
+        func share(workoutInfo: AppDatabase.WorkoutInfo) {
             // TODO
             //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
             //            self.activityItems = [logText]
         }
         
-        func `repeat`(workout: Workout) {
+        func `repeat`(workoutInfo: AppDatabase.WorkoutInfo) {
             // TODO
             //            WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-        }
-    }
-}
-
-extension HistoryView.WorkoutCell {
-    struct ViewModel {
-        static let durationFormatter: DateComponentsFormatter = {
-            let formatter = DateComponentsFormatter()
-            formatter.unitsStyle = .abbreviated
-            formatter.allowedUnits = [.hour, .minute]
-            return formatter
-        }()
-        
-        let workout: Workout
-        let bodyWeight: Double?
-        
-        var title: String {
-            workout.title ?? "Untitled"
-            // TODO: use "display title" dependent on exercises etc
-        }
-        
-        var comment: String? {
-            workout.comment
-        }
-        
-        var startString: String {
-            workout.start.formatted(date: .abbreviated, time: .shortened)
-        }
-        
-        var durationString: String {
-            {
-                guard let duration = workout.dateInterval?.duration else { return nil }
-                return Self.durationFormatter.string(from: duration)
-            }() ?? "Unknown Duration"
-        }
-        
-        private let _totalWeight = "\(Int.random(in: 2000...10000).formatted()) kg"
-        var totalWeight: String {
-            _totalWeight
-        }
-        
-        var summary: [SummaryItem] {
-            [
-                SummaryItem(exerciseDescription: "5 × Squat: Barbell", isPR: Int.random(in: 0..<5) == 0),
-                SummaryItem(exerciseDescription: "5 × Bench Press: Barbell", isPR: Int.random(in: 0..<5) == 0),
-                SummaryItem(exerciseDescription: "3 × Dips", isPR: Int.random(in: 0..<5) == 0),
-                SummaryItem(exerciseDescription: "3 × Triceps Extensions", isPR: Int.random(in: 0..<5) == 0)
-            ]
-        }
-        
-        struct SummaryItem: Identifiable {
-            let exerciseDescription: String
-            let isPR: Bool
-            
-            var id: UUID { UUID() } // there are no ids for this item
-        }
-        
-        var bodyWeightFormatted: String? {
-            bodyWeight.map { "\($0.formatted()) kg" }
-        }
-        
-        private let _bodyPart = Exercise.BodyPart.allCases.randomElement()!
-        private var bodyPart: Exercise.BodyPart {
-            _bodyPart
-        }
-        
-        var bodyPartColor: Color {
-            switch bodyPart {
-            case .core:
-                return .teal
-            case .arms:
-                return .purple
-            case .shoulders:
-                return .orange
-            case .back:
-                return .blue
-            case .legs:
-                return .green
-            case .chest:
-                return .red
-            }
-        }
-        
-        var bodyPartLetter: String {
-            switch bodyPart {
-            case .core:
-                return "c"
-            case .arms:
-                return "a"
-            case .shoulders:
-                return "s"
-            case .back:
-                return "b"
-            case .legs:
-                return "l"
-            case .chest:
-                return "c"
-            }
         }
     }
 }
@@ -321,37 +202,10 @@ extension HistoryView.WorkoutCell {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView.WorkoutCell(viewModel: .init(workout: workoutA, bodyWeight: 82))
-            .scenePadding()
-            .previewLayout(.sizeThatFits)
-
-        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB, bodyWeight: 81.3))
-            .scenePadding()
-            .previewLayout(.sizeThatFits)
-        
-        HistoryView.WorkoutCell(viewModel: .init(workout: workoutB, bodyWeight: nil))
-            .scenePadding()
-            .previewLayout(.sizeThatFits)
-        
         TabView {
             HistoryView(viewModel: .init(database: .random()))
                 .mockEnvironment(weightUnit: .metric, isPro: true)
         }
-    }
-    
-    static var workoutA: Workout {
-        var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
-        workout.end = Date()
-        workout.comment = "Feeling strong today"
-        workout.title = "Chest & Arms"
-        return workout
-    }
-    
-    static var workoutB: Workout {
-        var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
-        workout.end = Date()
-        workout.title = "Back"
-        return workout
     }
 }
 #endif

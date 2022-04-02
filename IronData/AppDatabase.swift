@@ -120,7 +120,6 @@ extension AppDatabase {
         }
     }
     
-    /// Delete the specified workouts
     public func deleteWorkouts(ids: [Int64]) async throws {
         try await dbWriter.write { db in
             _ = try Workout.deleteAll(db, ids: ids)
@@ -132,24 +131,37 @@ extension AppDatabase {
             .values(in: dbWriter, scheduling: .immediate)
     }
     
-    /// Create random workouts if the database is empty.
-    func createRandomWorkouts() throws {
-        try dbWriter.write { db in
-            try Workout.deleteAll(db)
-            
-            let exercises = try Exercise.fetchAll(db)
-            for _ in 0..<50 {
-                let workout = try Workout.makeRandom().inserted(db)
-                for _ in 0..<3 {
-                    let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
-                    for _ in 0..<5 {
-                        _ = try WorkoutSet.makeRandom(workoutExerciseId: workoutExercise.id!).inserted(db)
-                    }
-                }
-            }
+    public struct WorkoutInfo: Decodable, FetchableRecord, Equatable, Identifiable {
+        public var workout: Workout
+        public var workoutExerciseInfos: [WorkoutExerciseInfo]
+        
+        public var id: Workout.ID { workout.id }
+        
+        public struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
+            public var workoutExercise: WorkoutExercise
+            public var exercise: Exercise
+            public var workoutSets: [WorkoutSet]
+        }
+        
+        static func all() -> QueryInterfaceRequest<WorkoutInfo> {
+            Workout.including(all: Workout.workoutExercises
+                .forKey(CodingKeys.workoutExerciseInfos)
+                .including(all: WorkoutExercise.workoutSets)
+                .including(required: WorkoutExercise.exercise)
+            )
+            .orderByStart()
+            .asRequest(of: WorkoutInfo.self)
         }
     }
     
+    public func workoutInfos() -> AsyncValueObservation<[WorkoutInfo]> {
+        ValueObservation.tracking(WorkoutInfo.all().fetchAll)
+            .values(in: dbWriter, scheduling: .immediate)
+    }
+}
+
+// MARK: - Defaults
+extension AppDatabase {
     func createDefaultExercisesIfEmpty() throws {
         try dbWriter.write { db in
             if try Workout.all().isEmpty(db) {
@@ -166,6 +178,26 @@ extension AppDatabase {
     }
 }
 
+// MARK: - Tests
+extension AppDatabase {
+    public func createRandomWorkouts() throws {
+        try dbWriter.write { db in
+            try Workout.deleteAll(db)
+            
+            let exercises = try Exercise.fetchAll(db)
+            for _ in 0..<50 {
+                let workout = try Workout.makeRandom().inserted(db)
+                for _ in 0..<3 {
+                    let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
+                    for _ in 0..<5 {
+                        _ = try WorkoutSet.makeRandom(workoutExerciseId: workoutExercise.id!).inserted(db)
+                    }
+                }
+            }
+        }
+    }
+}
+
 // MARK: - Database Access: Reads
 
 // This demo app does not provide any specific reading method, and instead
@@ -174,7 +206,7 @@ extension AppDatabase {
 // reading methods.
 extension AppDatabase {
     /// Provides a read-only access to the database
-    var databaseReader: DatabaseReader {
+    public var databaseReader: DatabaseReader {
         dbWriter
     }
 }

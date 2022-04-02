@@ -70,11 +70,3 @@ extension DerivableRequest where RowDecoder == Workout {
         order(Workout.Columns.start.desc)
     }
 }
-
-// MARK: - Computed Properties
-
-extension Workout {
-    public var dateInterval: DateInterval? {
-        end.map { DateInterval(start: start, end: $0) }
-    }
-}

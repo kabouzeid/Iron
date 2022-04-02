@@ -29,6 +29,27 @@ class IronDataTests: XCTestCase {
         ).inserted(db)
     }
     
+    func populateDatabase(database: AppDatabase, dbWriter: DatabaseWriter, workouts: Int, workoutExercises: Int, workoutSets: Int) throws {
+        try database.createDefaultExercisesIfEmpty()
+        
+        try dbWriter.write { db in
+            let exercises = try Exercise.order(Exercise.Columns.title.localizedLowercased).fetchAll(db)
+            
+            for i in 0..<workouts {
+                let start = Date(timeIntervalSince1970: 60*60*24 * Double(i))
+                let workout = try Workout(start: start, end: start.addingTimeInterval(60*60*1.5), title: "Workout \(i)", comment: nil, isActive: false).inserted(db)
+                for j in 0..<workoutExercises {
+                    let workoutExercise = try WorkoutExercise(order: j, exerciseId: exercises[((i + j) % 20) % exercises.count].id!, workoutId: workout.id!).inserted(db)
+                    for k in 0..<workoutSets {
+                        let weight: Double = (sin(Double(i)) * 10 + (1 / 6) * Double(i) - Double(j) + 120).rounded() / 2
+                        let repetitions: Int = max(min(workoutExercises - j, 8), 3)
+                        _ = try WorkoutSet(order: k, weight: weight, repetitions: repetitions, isCompleted: true, workoutExerciseId: workoutExercise.id!).inserted(db)
+                    }
+                }
+            }
+        }
+    }
+    
     func testCascadeDelete() throws {
         let dbQueue = DatabaseQueue()
         _ = try AppDatabase(dbQueue)
@@ -67,7 +88,7 @@ class IronDataTests: XCTestCase {
         }
     }
     
-    func testabc() throws {
+    func testAssociations() throws {
         let dbQueue = DatabaseQueue()
         _ = try AppDatabase(dbQueue)
         
@@ -77,6 +98,139 @@ class IronDataTests: XCTestCase {
             XCTAssertNotNil(workoutExercise)
             let workout = try workoutExercise?.workout.fetchOne(db)
             XCTAssertNotNil(workout)
+        }
+    }
+    
+    func testPrefetchedAssociations() throws {
+        let dbQueue = DatabaseQueue()
+        _ = try AppDatabase(dbQueue)
+        
+        try dbQueue.write({ db in
+            _ = try insertedWorkoutSet(db)
+            let workoutInfo = try AppDatabase.WorkoutInfo.all().fetchOne(db)
+            XCTAssertNotNil(workoutInfo?.workoutExerciseInfos.first?.exercise)
+            XCTAssertNotNil(workoutInfo?.workoutExerciseInfos.first?.workoutSets.first)
+        })
+    }
+    
+    func testPRs() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 200, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.write { db in
+            let map = try ExercisePRMap.fetch(db)
+            
+            for (_, workoutSet) in map {
+                let count = try WorkoutSet.all()
+                    .filter(WorkoutSet.Columns.repetitions > workoutSet.repetitions!)
+                    .filter(WorkoutSet.Columns.weight > workoutSet.weight!)
+                    .fetchCount(db)
+                XCTAssertEqual(count, 0)
+            }
+        }
+    }
+    
+    func testPR() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 200, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.write { db in
+            struct WorkoutSetInfo: FetchableRecord, Decodable {
+                let workoutSet: WorkoutSet
+                let workoutExerciseInfo: WorkoutExerciseInfo
+                struct WorkoutExerciseInfo: Decodable {
+                    let workoutExercise: WorkoutExercise
+                    let workout: Workout
+                }
+            }
+            let workoutSetInfos = try WorkoutSet
+                .including(required: WorkoutSet.workoutExercise
+                    .including(required: WorkoutExercise.workout)
+                    .forKey("workoutExerciseInfo")
+                )
+                .asRequest(of: WorkoutSetInfo.self)
+                .fetchAll(db)
+            
+            for workoutSetInfo in workoutSetInfos {
+                let workoutSet = workoutSetInfo.workoutSet
+                let workoutExercise = workoutSetInfo.workoutExerciseInfo.workoutExercise
+                let workout = workoutSetInfo.workoutExerciseInfo.workout
+                
+                guard try workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExercise, workout: workout)) else { continue }
+                
+                let workoutAlias = TableAlias()
+                let workoutExerciseAlias = TableAlias()
+                let count = try WorkoutSet.all()
+                    .joining(required: WorkoutSet.workoutExercise.aliased(workoutExerciseAlias)
+                        .joining(required: WorkoutExercise.workout.aliased(workoutAlias))
+                    )
+                    .filter(WorkoutSet.Columns.repetitions > workoutSet.repetitions!)
+                    .filter(WorkoutSet.Columns.weight > workoutSet.weight!)
+                    .filter(workoutExerciseAlias[WorkoutExercise.Columns.exerciseId] == workoutExercise.exerciseId)
+                    .filter(workoutAlias[Workout.Columns.start] < workout.start)
+                    .fetchCount(db)
+                XCTAssertEqual(count, 0)
+            }
+        }
+    }
+    
+    func testPRPerformanceSmall() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 100, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.write { db in
+            measure {
+                _ = try! ExercisePRMap.fetch(db)
+            }
+        }
+    }
+    
+    func testPRPerformanceMid() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 250, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.write { db in
+            measure {
+                _ = try! ExercisePRMap.fetch(db)
+            }
+        }
+    }
+    
+    func testPRPerformanceLarge() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 1000, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.write { db in
+            measure {
+                _ = try! ExercisePRMap.fetch(db)
+            }
+        }
+    }
+    
+    func testCheckPRPerformance() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 1000, workoutExercises: 4, workoutSets: 5)
+        
+        try dbQueue.read { db in
+            let workoutSet = try WorkoutSet.fetchOne(db)!
+            let workoutExercise = try workoutSet.workoutExercise.fetchOne(db)!
+            let workout = try workoutExercise.workout.fetchOne(db)!
+            
+            measure {
+                _ = try! workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExercise, workout: workout))
+            }
         }
     }
     
