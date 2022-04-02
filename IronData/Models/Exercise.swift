@@ -33,9 +33,9 @@ public struct Exercise: Identifiable, Equatable {
 }
 
 extension Exercise {
-    static let workoutExercises = hasMany(WorkoutExercise.self)
+    public static let workoutExercises = hasMany(WorkoutExercise.self)
     
-    var workoutExercises: QueryInterfaceRequest<WorkoutExercise> {
+    public var workoutExercises: QueryInterfaceRequest<WorkoutExercise> {
         request(for: Self.workoutExercises)
     }
 }
@@ -58,14 +58,14 @@ extension Exercise {
 
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#records>
 extension Exercise: Codable, FetchableRecord, MutablePersistableRecord {
-    enum Columns {
-        static let uuid = Column(CodingKeys.uuid)
-        static let title = Column(CodingKeys.title)
-        static let aliases = Column(CodingKeys.aliases)
-        static let images = Column(CodingKeys.images)
-        static let movementType = Column(CodingKeys.movementType)
-        static let bodyPart = Column(CodingKeys.bodyPart)
-        static let category = Column(CodingKeys.category)
+    public enum Columns {
+        public static let uuid = Column(CodingKeys.uuid)
+        public static let title = Column(CodingKeys.title)
+        public static let aliases = Column(CodingKeys.aliases)
+        public static let images = Column(CodingKeys.images)
+        public static let movementType = Column(CodingKeys.movementType)
+        public static let bodyPart = Column(CodingKeys.bodyPart)
+        public static let category = Column(CodingKeys.category)
     }
     
     public mutating func didInsert(with rowID: Int64, for column: String?) {
@@ -78,7 +78,7 @@ extension Exercise: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == Exercise {
-    func orderByTitle() -> Self {
+    public func orderByTitle() -> Self {
         order(Exercise.Columns.title.collating(.localizedCaseInsensitiveCompare))
     }
 }

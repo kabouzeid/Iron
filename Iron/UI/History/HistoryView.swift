@@ -82,13 +82,6 @@ struct HistoryView: View {
                 .foregroundColor(.secondary)
             )
             .navigationBarTitle(Text("History"))
-            .navigationBarItems(trailing:
-                                    Button {
-                try! AppDatabase.shared.createRandomWorkouts()
-            } label: {
-                Text("reset")
-            }
-            )
             
             // Double Column Placeholder (iPad)
             Text("No workout selected")
@@ -100,47 +93,50 @@ struct HistoryView: View {
 }
 
 import Combine
+import GRDB
+
 extension HistoryView {
     @MainActor
     class ViewModel: ObservableObject {
         let database: AppDatabase
-        
-        @Published var workoutInfos: [AppDatabase.WorkoutInfo] = []
-        @Published var deletionWorkout: Workout?
-        @Published private var bodyWeights: [Date : Double] = [:]
-        @Published private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
-        
-        var personalRecordsStaleSubject = PassthroughSubject<Void, Never>() // sent whenever views should refetch PRs
-        
         nonisolated init(database: AppDatabase) {
             self.database = database
         }
         
-        private func shouldConfirmDelete(workoutInfo: AppDatabase.WorkoutInfo) -> Bool {
-            /// returns true if there is at least one completed set
-            return workoutInfo.workoutExerciseInfos.contains { workoutExerciseInfo in
-                workoutExerciseInfo.workoutSets.contains { workoutSet in
-                    workoutSet.isCompleted
-                }
+        // MARK: - Workout Infos
+        
+        @Published var workoutInfos: [WorkoutInfo] = []
+        
+        public struct WorkoutInfo: Decodable, FetchableRecord, Equatable, Identifiable {
+            public var workout: Workout
+            public var workoutExerciseInfos: [WorkoutExerciseInfo]
+            
+            public var id: Workout.ID { workout.id }
+            
+            public struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
+                public var workoutExercise: WorkoutExercise
+                public var exercise: Exercise
+                public var workoutSets: [WorkoutSet]
+            }
+            
+            static func all() -> QueryInterfaceRequest<WorkoutInfo> {
+                Workout.including(all: Workout.workoutExercises
+                    .forKey(CodingKeys.workoutExerciseInfos)
+                    .including(all: WorkoutExercise.workoutSets)
+                    .including(required: WorkoutExercise.exercise)
+                )
+                .orderByStart()
+                .asRequest(of: WorkoutInfo.self)
             }
         }
         
-        func delete(workout: Workout) {
-            Task {
-                try! await database.deleteWorkouts(ids: [workout.id!])
-            }
-        }
-        
-        func confirmDelete(workoutInfo: AppDatabase.WorkoutInfo) {
-            if shouldConfirmDelete(workoutInfo: workoutInfo) {
-                deletionWorkout = workoutInfo.workout
-            } else {
-                delete(workout: workoutInfo.workout)
-            }
+        private func workoutInfosStream() -> AsyncValueObservation<[WorkoutInfo]> {
+            ValueObservation.tracking(WorkoutInfo.all().fetchAll)
+                .values(in: database.databaseReader, scheduling: .immediate)
         }
         
         func fetchData() async throws {
-            for try await workoutInfos in database.workoutInfos() {
+            for try await workoutInfos in workoutInfosStream() {
                 withAnimation {
                     self.workoutInfos = workoutInfos
                 }
@@ -148,7 +144,11 @@ extension HistoryView {
             }
         }
         
-        func fetchBodyWeight(for workoutInfo: AppDatabase.WorkoutInfo) async throws {
+        // MARK: - Body Weight
+        
+        @Published private var bodyWeights: [Date : Double] = [:]
+        
+        func fetchBodyWeight(for workoutInfo: WorkoutInfo) async throws {
             let date = workoutInfo.workout.start
             guard bodyWeights[date] == nil else { return } // save power/performance by only loading the bodyweight once from HK
             let bodyWeight = try await HealthManager.shared.healthStore.fetchBodyWeight(date: date)
@@ -157,13 +157,18 @@ extension HistoryView {
             }
         }
         
-        func bodyWeight(for workoutInfo: AppDatabase.WorkoutInfo) -> Double? {
+        func bodyWeight(for workoutInfo: WorkoutInfo) -> Double? {
             bodyWeights[workoutInfo.workout.start]
         }
         
+        // MARK: - Personal Records
+        
+        @Published private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
+        var personalRecordsStaleSubject = PassthroughSubject<Void, Never>() // sent whenever views should refetch PRs
+        
         typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Bool]
         
-        func fetchPRInfo(for workoutInfo: AppDatabase.WorkoutInfo) async throws {
+        func fetchPRInfo(for workoutInfo: WorkoutInfo) async throws {
             // NOTE: for now we don't return the cached value
             // if we want to use the cached value here, then we also need to reset the cache in `fetchData`
             // potential downside of this might be flickering everytime we reset the cache
@@ -182,17 +187,44 @@ extension HistoryView {
             }
         }
         
-        func prInfo(for workoutInfo: AppDatabase.WorkoutInfo) -> PersonalRecordInfo? {
+        func prInfo(for workoutInfo: WorkoutInfo) -> PersonalRecordInfo? {
             personalRecordInfos[workoutInfo.workout.id!]
         }
         
-        func share(workoutInfo: AppDatabase.WorkoutInfo) {
+        // MARK: - Actions
+        
+        @Published var deletionWorkout: Workout?
+        
+        func delete(workout: Workout) {
+            Task {
+                try! await database.deleteWorkouts(ids: [workout.id!])
+            }
+        }
+        
+        private func shouldConfirmDelete(workoutInfo: WorkoutInfo) -> Bool {
+            /// returns true if there is at least one completed set
+            return workoutInfo.workoutExerciseInfos.contains { workoutExerciseInfo in
+                workoutExerciseInfo.workoutSets.contains { workoutSet in
+                    workoutSet.isCompleted
+                }
+            }
+        }
+        
+        func confirmDelete(workoutInfo: WorkoutInfo) {
+            if shouldConfirmDelete(workoutInfo: workoutInfo) {
+                deletionWorkout = workoutInfo.workout
+            } else {
+                delete(workout: workoutInfo.workout)
+            }
+        }
+        
+        func share(workoutInfo: WorkoutInfo) {
             // TODO
             //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
             //            self.activityItems = [logText]
         }
         
-        func `repeat`(workoutInfo: AppDatabase.WorkoutInfo) {
+        func `repeat`(workoutInfo: WorkoutInfo) {
             // TODO
             //            WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
         }

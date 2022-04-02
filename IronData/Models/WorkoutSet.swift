@@ -24,9 +24,9 @@ public struct WorkoutSet: Identifiable, Equatable, Hashable {
 }
 
 extension WorkoutSet {
-    static let workoutExercise = belongsTo(WorkoutExercise.self)
+    public static let workoutExercise = belongsTo(WorkoutExercise.self)
     
-    var workoutExercise: QueryInterfaceRequest<WorkoutExercise> {
+    public var workoutExercise: QueryInterfaceRequest<WorkoutExercise> {
         request(for: Self.workoutExercise)
     }
 }
@@ -49,19 +49,19 @@ extension WorkoutSet {
 
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#records>
 extension WorkoutSet: Codable, FetchableRecord, MutablePersistableRecord {
-    enum Columns {
-        static let id = Column(CodingKeys.id)
-        static let uuid = Column(CodingKeys.uuid)
-        static let order = Column(CodingKeys.order)
-        static let weight = Column(CodingKeys.weight)
-        static let repetitions = Column(CodingKeys.repetitions)
-        static let targetRepetitionsLower = Column(CodingKeys.targetRepetitionsLower)
-        static let targetRepetitionsUpper = Column(CodingKeys.targetRepetitionsUpper)
-        static let rpe = Column(CodingKeys.rpe)
-        static let comment = Column(CodingKeys.comment)
-        static let tag = Column(CodingKeys.tag)
-        static let isCompleted = Column(CodingKeys.isCompleted)
-        static let workoutExerciseId = Column(CodingKeys.workoutExerciseId)
+    public enum Columns {
+        public static let id = Column(CodingKeys.id)
+        public static let uuid = Column(CodingKeys.uuid)
+        public static let order = Column(CodingKeys.order)
+        public static let weight = Column(CodingKeys.weight)
+        public static let repetitions = Column(CodingKeys.repetitions)
+        public static let targetRepetitionsLower = Column(CodingKeys.targetRepetitionsLower)
+        public static let targetRepetitionsUpper = Column(CodingKeys.targetRepetitionsUpper)
+        public static let rpe = Column(CodingKeys.rpe)
+        public static let comment = Column(CodingKeys.comment)
+        public static let tag = Column(CodingKeys.tag)
+        public static let isCompleted = Column(CodingKeys.isCompleted)
+        public static let workoutExerciseId = Column(CodingKeys.workoutExerciseId)
     }
     
     public mutating func didInsert(with rowID: Int64, for column: String?) {
@@ -74,7 +74,7 @@ extension WorkoutSet: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == WorkoutSet {
-    func order() -> Self {
+    public func order() -> Self {
         order(WorkoutSet.Columns.order)
     }
 }

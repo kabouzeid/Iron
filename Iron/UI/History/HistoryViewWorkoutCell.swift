@@ -91,7 +91,7 @@ extension HistoryView.WorkoutCell {
             return formatter
         }()
         
-        let workoutInfo: AppDatabase.WorkoutInfo
+        let workoutInfo: HistoryView.ViewModel.WorkoutInfo
         let personalRecordInfo: HistoryView.ViewModel.PersonalRecordInfo?
         let bodyWeight: Double?
         

@@ -125,39 +125,6 @@ extension AppDatabase {
             _ = try Workout.deleteAll(db, ids: ids)
         }
     }
-    
-    public func workouts() -> AsyncValueObservation<[Workout]> {
-        ValueObservation.tracking(Workout.all().orderByStart().fetchAll)
-            .values(in: dbWriter, scheduling: .immediate)
-    }
-    
-    public struct WorkoutInfo: Decodable, FetchableRecord, Equatable, Identifiable {
-        public var workout: Workout
-        public var workoutExerciseInfos: [WorkoutExerciseInfo]
-        
-        public var id: Workout.ID { workout.id }
-        
-        public struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
-            public var workoutExercise: WorkoutExercise
-            public var exercise: Exercise
-            public var workoutSets: [WorkoutSet]
-        }
-        
-        static func all() -> QueryInterfaceRequest<WorkoutInfo> {
-            Workout.including(all: Workout.workoutExercises
-                .forKey(CodingKeys.workoutExerciseInfos)
-                .including(all: WorkoutExercise.workoutSets)
-                .including(required: WorkoutExercise.exercise)
-            )
-            .orderByStart()
-            .asRequest(of: WorkoutInfo.self)
-        }
-    }
-    
-    public func workoutInfos() -> AsyncValueObservation<[WorkoutInfo]> {
-        ValueObservation.tracking(WorkoutInfo.all().fetchAll)
-            .values(in: dbWriter, scheduling: .immediate)
-    }
 }
 
 // MARK: - Defaults
@@ -180,7 +147,7 @@ extension AppDatabase {
 
 // MARK: - Tests
 extension AppDatabase {
-    public func createRandomWorkouts() throws {
+    func createRandomWorkouts() throws {
         try dbWriter.write { db in
             try Workout.deleteAll(db)
             

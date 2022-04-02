@@ -15,9 +15,9 @@ public struct Workout: Identifiable, Equatable, Hashable {
 }
 
 extension Workout {
-    static let workoutExercises = hasMany(WorkoutExercise.self).order(WorkoutExercise.Columns.order)
+    public static let workoutExercises = hasMany(WorkoutExercise.self).order(WorkoutExercise.Columns.order)
     
-    var workoutExercises: QueryInterfaceRequest<WorkoutExercise> {
+    public var workoutExercises: QueryInterfaceRequest<WorkoutExercise> {
         request(for: Self.workoutExercises).order()
     }
 }
@@ -46,14 +46,14 @@ extension Workout {
 
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#records>
 extension Workout: Codable, FetchableRecord, MutablePersistableRecord {
-    enum Columns {
-        static let id = Column(CodingKeys.id)
-        static let uuid = Column(CodingKeys.uuid)
-        static let start = Column(CodingKeys.start)
-        static let end = Column(CodingKeys.end)
-        static let title = Column(CodingKeys.title)
-        static let comment = Column(CodingKeys.comment)
-        static let isActive = Column(CodingKeys.isActive)
+    public enum Columns {
+        public static let id = Column(CodingKeys.id)
+        public static let uuid = Column(CodingKeys.uuid)
+        public static let start = Column(CodingKeys.start)
+        public static let end = Column(CodingKeys.end)
+        public static let title = Column(CodingKeys.title)
+        public static let comment = Column(CodingKeys.comment)
+        public static let isActive = Column(CodingKeys.isActive)
     }
     
     public mutating func didInsert(with rowID: Int64, for column: String?) {
@@ -66,7 +66,7 @@ extension Workout: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == Workout {
-    func orderByStart() -> Self {
+    public func orderByStart() -> Self {
         order(Workout.Columns.start.desc)
     }
 }

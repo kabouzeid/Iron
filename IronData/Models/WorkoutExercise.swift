@@ -14,19 +14,19 @@ public struct WorkoutExercise: Identifiable, Equatable, Hashable {
 }
 
 extension WorkoutExercise {
-    static let exercise = belongsTo(Exercise.self)
-    static let workout = belongsTo(Workout.self)
-    static let workoutSets = hasMany(WorkoutSet.self).order(WorkoutSet.Columns.order)
+    public static let exercise = belongsTo(Exercise.self)
+    public static let workout = belongsTo(Workout.self)
+    public static let workoutSets = hasMany(WorkoutSet.self).order(WorkoutSet.Columns.order)
     
-    var exercise: QueryInterfaceRequest<Exercise> {
+    public var exercise: QueryInterfaceRequest<Exercise> {
         request(for: Self.exercise)
     }
     
-    var workout: QueryInterfaceRequest<Workout> {
+    public var workout: QueryInterfaceRequest<Workout> {
         request(for: Self.workout)
     }
     
-    var workoutSets: QueryInterfaceRequest<WorkoutSet> {
+    public var workoutSets: QueryInterfaceRequest<WorkoutSet> {
         request(for: Self.workoutSets).order()
     }
 }
@@ -49,13 +49,13 @@ extension WorkoutExercise {
 
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#records>
 extension WorkoutExercise: Codable, FetchableRecord, MutablePersistableRecord {
-    enum Columns {
-        static let id = Column(CodingKeys.id)
-        static let uuid = Column(CodingKeys.uuid)
-        static let order = Column(CodingKeys.order)
-        static let comment = Column(CodingKeys.comment)
-        static let exerciseId = Column(CodingKeys.exerciseId)
-        static let workoutId = Column(CodingKeys.workoutId)
+    public enum Columns {
+        public static let id = Column(CodingKeys.id)
+        public static let uuid = Column(CodingKeys.uuid)
+        public static let order = Column(CodingKeys.order)
+        public static let comment = Column(CodingKeys.comment)
+        public static let exerciseId = Column(CodingKeys.exerciseId)
+        public static let workoutId = Column(CodingKeys.workoutId)
     }
 
     public mutating func didInsert(with rowID: Int64, for column: String?) {
@@ -68,7 +68,7 @@ extension WorkoutExercise: Codable, FetchableRecord, MutablePersistableRecord {
 /// See <https://github.com/groue/GRDB.swift/blob/master/README.md#requests>
 /// See <https://github.com/groue/GRDB.swift/blob/master/Documentation/GoodPracticesForDesigningRecordTypes.md>
 extension DerivableRequest where RowDecoder == WorkoutExercise {
-    func order() -> Self {
+    public func order() -> Self {
         order(WorkoutExercise.Columns.order)
     }
 }
