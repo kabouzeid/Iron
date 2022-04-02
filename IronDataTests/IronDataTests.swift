@@ -113,25 +113,6 @@ class IronDataTests: XCTestCase {
         })
     }
     
-    func testPRs() throws {
-        let dbQueue = DatabaseQueue()
-        let database = try AppDatabase(dbQueue)
-        
-        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 200, workoutExercises: 4, workoutSets: 5)
-        
-        try dbQueue.write { db in
-            let map = try ExercisePRMap.fetch(db)
-            
-            for (_, workoutSet) in map {
-                let count = try WorkoutSet.all()
-                    .filter(WorkoutSet.Columns.repetitions > workoutSet.repetitions!)
-                    .filter(WorkoutSet.Columns.weight > workoutSet.weight!)
-                    .fetchCount(db)
-                XCTAssertEqual(count, 0)
-            }
-        }
-    }
-    
     func testPR() throws {
         let dbQueue = DatabaseQueue()
         let database = try AppDatabase(dbQueue)
@@ -174,45 +155,6 @@ class IronDataTests: XCTestCase {
                     .filter(workoutAlias[Workout.Columns.start] < workout.start)
                     .fetchCount(db)
                 XCTAssertEqual(count, 0)
-            }
-        }
-    }
-    
-    func testPRPerformanceSmall() throws {
-        let dbQueue = DatabaseQueue()
-        let database = try AppDatabase(dbQueue)
-        
-        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 100, workoutExercises: 4, workoutSets: 5)
-        
-        try dbQueue.write { db in
-            measure {
-                _ = try! ExercisePRMap.fetch(db)
-            }
-        }
-    }
-    
-    func testPRPerformanceMid() throws {
-        let dbQueue = DatabaseQueue()
-        let database = try AppDatabase(dbQueue)
-        
-        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 250, workoutExercises: 4, workoutSets: 5)
-        
-        try dbQueue.write { db in
-            measure {
-                _ = try! ExercisePRMap.fetch(db)
-            }
-        }
-    }
-    
-    func testPRPerformanceLarge() throws {
-        let dbQueue = DatabaseQueue()
-        let database = try AppDatabase(dbQueue)
-        
-        try populateDatabase(database: database, dbWriter: dbQueue, workouts: 1000, workoutExercises: 4, workoutSets: 5)
-        
-        try dbQueue.write { db in
-            measure {
-                _ = try! ExercisePRMap.fetch(db)
             }
         }
     }

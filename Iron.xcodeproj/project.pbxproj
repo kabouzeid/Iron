@@ -356,7 +356,6 @@
 		8AB5D3452342B3E600211F98 /* IronUISnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D3442342B3E600211F98 /* IronUISnapshots.swift */; };
 		8AB5D34D2342B9D100211F98 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D34C2342B9D100211F98 /* SnapshotHelper.swift */; };
 		8AB972F7203583E40099507B /* InMemoryPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* InMemoryPersistentContainer.swift */; };
-		8ABA34B827F0F4D9005AA2A7 /* ExercisePRMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA34B727F0F4D9005AA2A7 /* ExercisePRMap.swift */; };
 		8ABA34BA27F1173D005AA2A7 /* WorkoutSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA34B927F1173D005AA2A7 /* WorkoutSet+.swift */; };
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
@@ -805,7 +804,6 @@
 		8AB8A5962034C0AF004366F2 /* WorkoutExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExercise.swift; sourceTree = "<group>"; };
 		8AB8A5982034C0BA004366F2 /* WorkoutSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSet.swift; sourceTree = "<group>"; };
 		8AB972F6203583E40099507B /* InMemoryPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryPersistentContainer.swift; sourceTree = "<group>"; };
-		8ABA34B727F0F4D9005AA2A7 /* ExercisePRMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePRMap.swift; sourceTree = "<group>"; };
 		8ABA34B927F1173D005AA2A7 /* WorkoutSet+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutSet+.swift"; sourceTree = "<group>"; };
 		8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupsView.swift; sourceTree = "<group>"; };
 		8AC2B322200D2C8000DC68BE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -1274,7 +1272,6 @@
 			children = (
 				8A5BC53E27E9F47500E437A1 /* Support */,
 				8A5BC55727EA30EC00E437A1 /* Models */,
-				8ABA34B627F0F4BA005AA2A7 /* Requests */,
 				8A5BC53F27E9F48200E437A1 /* Persistence.swift */,
 				8A5BC55B27EA429200E437A1 /* Everkinetic.swift */,
 				8A5BC54127E9F48900E437A1 /* AppDatabase.swift */,
@@ -1650,14 +1647,6 @@
 				8AB5D3462342B3E600211F98 /* Info.plist */,
 			);
 			path = IronUISnapshots;
-			sourceTree = "<group>";
-		};
-		8ABA34B627F0F4BA005AA2A7 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				8ABA34B727F0F4D9005AA2A7 /* ExercisePRMap.swift */,
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		8ABB4C6422CE059E0075CCE6 /* Exercises */ = {
@@ -2240,7 +2229,6 @@
 				8A5BC55C27EA429200E437A1 /* Everkinetic.swift in Sources */,
 				8A5BC55127EA150300E437A1 /* WorkoutExercise.swift in Sources */,
 				8ABA34BA27F1173D005AA2A7 /* WorkoutSet+.swift in Sources */,
-				8ABA34B827F0F4D9005AA2A7 /* ExercisePRMap.swift in Sources */,
 				8A5BC52527E9F45D00E437A1 /* IronData.docc in Sources */,
 				8A5BC54027E9F48200E437A1 /* Persistence.swift in Sources */,
 				8A5BC55527EA151800E437A1 /* Exercise.swift in Sources */,
