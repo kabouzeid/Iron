@@ -36,6 +36,15 @@ extension Workout {
             } ?? []
         }.sortedByFrequency().uniqed().reversed()
     }
+    
+    public func totalWeight(infos: [[WorkoutSet]]) -> Measurement<UnitMass> {
+        let totalWeight = infos.reduce(0) { partialResult, workoutSets in
+            partialResult + workoutSets.reduce(0) { partialResult, workoutSet in
+                partialResult + (workoutSet.isCompleted ? (workoutSet.weight ?? 0 * Double(workoutSet.repetitions ?? 0)) : 0)
+            }
+        }
+        return Measurement(value: totalWeight, unit: UnitMass.kilograms)
+    }
 }
 
 private extension Array where Element : Hashable {

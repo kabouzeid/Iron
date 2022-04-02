@@ -146,7 +146,7 @@ extension HistoryView {
         
         // MARK: - Body Weight
         
-        @Published private var bodyWeights: [Date : Double] = [:]
+        @Published private var bodyWeights: [Date : Measurement<UnitMass>] = [:]
         
         func fetchBodyWeight(for workoutInfo: WorkoutInfo) async throws {
             let date = workoutInfo.workout.start
@@ -157,7 +157,7 @@ extension HistoryView {
             }
         }
         
-        func bodyWeight(for workoutInfo: WorkoutInfo) -> Double? {
+        func bodyWeight(for workoutInfo: WorkoutInfo) -> Measurement<UnitMass>? {
             bodyWeights[workoutInfo.workout.start]
         }
         

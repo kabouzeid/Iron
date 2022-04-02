@@ -55,7 +55,7 @@ class BodyWeightFetcher: ObservableObject {
 }
 
 extension HKHealthStore {
-    func fetchBodyWeight(date: Date) async throws -> Double? {
+    func fetchBodyWeight(date: Date) async throws -> Measurement<UnitMass>? {
         guard HKHealthStore.isHealthDataAvailable() else { return nil }
         
         try await HealthManager.shared.healthStore.requestAuthorization(
@@ -63,7 +63,7 @@ extension HKHealthStore {
             read: Set([.quantityType(forIdentifier: .bodyMass)].compactMap { $0 })
         )
         
-        return try await withCheckedThrowingContinuation({ (continuation: CheckedContinuation<Double?, Error>) in
+        return try await withCheckedThrowingContinuation({ (continuation: CheckedContinuation<Measurement<UnitMass>?, Error>) in
             guard let sampleType = HKObjectType.quantityType(forIdentifier: .bodyMass) else {
                 continuation.resume(returning: nil)
                 return
@@ -99,7 +99,7 @@ extension HKHealthStore {
                     }
                     
                     let bodyWeight = closestSample.quantity.doubleValue(for: kiloUnit)
-                    continuation.resume(returning: bodyWeight)
+                    continuation.resume(returning: Measurement(value: bodyWeight, unit: .kilograms))
                 }
             HealthManager.shared.healthStore.execute(query)
         })
