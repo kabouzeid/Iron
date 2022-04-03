@@ -168,6 +168,7 @@
 		8A95928727F859BC00FBED46 /* Workout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95928627F859BC00FBED46 /* Workout+.swift */; };
 		8A95928927F85A0E00FBED46 /* Exercise+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95928827F85A0E00FBED46 /* Exercise+.swift */; };
 		8A95928C27F85AF400FBED46 /* Exercise+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95928A27F85AC900FBED46 /* Exercise+UI.swift */; };
+		8A95929127F8A13100FBED46 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95929027F8A13100FBED46 /* ExerciseList.swift */; };
 		8A9598C724213B720039D57D /* DeveloperSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9598C624213B720039D57D /* DeveloperSettings.swift */; };
 		8A9742DD23F1811800D74CDD /* ExerciseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */; };
 		8A9742DF23F1819500D74CDD /* ExerciseGroup+Identifieable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */; };
@@ -736,6 +737,7 @@
 		8A95928627F859BC00FBED46 /* Workout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+.swift"; sourceTree = "<group>"; };
 		8A95928827F85A0E00FBED46 /* Exercise+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+.swift"; sourceTree = "<group>"; };
 		8A95928A27F85AC900FBED46 /* Exercise+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+UI.swift"; sourceTree = "<group>"; };
+		8A95929027F8A13100FBED46 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		8A9598C624213B720039D57D /* DeveloperSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettings.swift; sourceTree = "<group>"; };
 		8A9742D923F17B4700D74CDD /* ExerciseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGroup.swift; sourceTree = "<group>"; };
 		8A9742DE23F1819500D74CDD /* ExerciseGroup+Identifieable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseGroup+Identifieable.swift"; sourceTree = "<group>"; };
@@ -1508,6 +1510,26 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		8A95928D27F8A0FE00FBED46 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */,
+				8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */,
+				8AE0A79A233122AE0021EE23 /* CustomExercisesView.swift */,
+				8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */,
+				8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */,
+				8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */,
+				8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */,
+				8A63B37F232946E0001BD7B5 /* ExerciseMultiSelectionView.swift */,
+				8A63B380232946E0001BD7B5 /* ExerciseSingleSelectionView.swift */,
+				8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */,
+				8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */,
+				8AE0FC822339190100B234F9 /* EditCustomExerciseSheet.swift */,
+				8AE0FC80233918F500B234F9 /* CreateCustomExerciseSheet.swift */,
+			);
+			name = Old;
+			sourceTree = "<group>";
+		};
 		8A9598C424213AF90039D57D /* _debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -1652,19 +1674,8 @@
 		8ABB4C6422CE059E0075CCE6 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */,
-				8AA99C3622CE300700E0B6B9 /* ExercisesView.swift */,
-				8AE0A79A233122AE0021EE23 /* CustomExercisesView.swift */,
-				8AA99C3822CE347000E0B6B9 /* MuscleGroupSectionedExercisesView.swift */,
-				8AA99C3A22CE39B900E0B6B9 /* ExerciseDetailView.swift */,
-				8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */,
-				8AE2844622D1196C006D3295 /* ExerciseHistoryView.swift */,
-				8A63B37F232946E0001BD7B5 /* ExerciseMultiSelectionView.swift */,
-				8A63B380232946E0001BD7B5 /* ExerciseSingleSelectionView.swift */,
-				8A36F9E7231E932A0036E504 /* AddExercisesSheet.swift */,
-				8AE0A798233119C40021EE23 /* EditCustomExerciseView.swift */,
-				8AE0FC822339190100B234F9 /* EditCustomExerciseSheet.swift */,
-				8AE0FC80233918F500B234F9 /* CreateCustomExerciseSheet.swift */,
+				8A95928D27F8A0FE00FBED46 /* Old */,
+				8A95929027F8A13100FBED46 /* ExerciseList.swift */,
 			);
 			path = Exercises;
 			sourceTree = "<group>";
@@ -2406,6 +2417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3A11592426B667006DA244 /* WorkoutRoutineSetEditor.swift in Sources */,
+				8A95929127F8A13100FBED46 /* ExerciseList.swift in Sources */,
 				8A63B3772329463A001BD7B5 /* CurrentWorkoutView.swift in Sources */,
 				8AF92552232FD49600C6977D /* ExerciseFilter.swift in Sources */,
 				8A9E4F7E231436260038ACC5 /* String+Enquote.swift in Sources */,

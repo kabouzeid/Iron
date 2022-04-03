@@ -26,3 +26,22 @@ extension Exercise.BodyPart {
         }
     }
 }
+
+extension Exercise.Category {
+    public var name: String {
+        switch self {
+        case .barbell:
+            return "Barbell"
+        case .bodyweight:
+            return "Bodyweight"
+        case .cardio:
+            return "Cardio"
+        case .dumbbell:
+            return "Dumbbell"
+        case .duration:
+            return "Duration"
+        case .machine:
+            return "Machine"
+        }
+    }
+}

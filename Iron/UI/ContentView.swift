@@ -38,7 +38,7 @@ struct ContentView : View {
                     Label("Workout", image: "workout")
                 }
             
-            ExerciseMuscleGroupsView()
+            ExerciseList()
                 .tag(SceneState.Tab.exercises.rawValue)
                 .tabItem {
                     Label("Exercises", image: "list")

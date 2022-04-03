@@ -17,52 +17,50 @@ struct HistoryView: View {
             ScrollView {
                 LazyVStack(spacing: 16) {
                     ForEach(viewModel.workoutInfos) { workoutInfo in
-                        Section {
-                            NavigationLink {
-                                Text("TODO")
+                        NavigationLink {
+                            Text("TODO")
+                        } label: {
+                            WorkoutCell(viewModel: .init(
+                                workoutInfo: workoutInfo,
+                                personalRecordInfo: viewModel.prInfo(for: workoutInfo),
+                                bodyWeight: viewModel.bodyWeight(for: workoutInfo)
+                            ))
+                            .contentShape(Rectangle())
+                            .onChange(of: workoutInfo, perform: { newWorkoutInfo in
+                                Task { try await viewModel.fetchBodyWeight(for: newWorkoutInfo) }
+                            })
+                            .onReceive(viewModel.personalRecordsStaleSubject, perform: {
+                                Task { try await viewModel.fetchPRInfo(for: workoutInfo) }
+                            })
+                            .task { try? await viewModel.fetchBodyWeight(for: workoutInfo) }
+                            .task { try? await viewModel.fetchPRInfo(for: workoutInfo) }
+                        }
+                        .buttonStyle(.plain)
+                        .scenePadding()
+                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                        .cornerRadius(10)
+                        .contextMenu {
+                            Button {
+                                viewModel.share(workoutInfo: workoutInfo)
                             } label: {
-                                WorkoutCell(viewModel: .init(
-                                    workoutInfo: workoutInfo,
-                                    personalRecordInfo: viewModel.prInfo(for: workoutInfo),
-                                    bodyWeight: viewModel.bodyWeight(for: workoutInfo)
-                                ))
-                                .contentShape(Rectangle())
-                                .onChange(of: workoutInfo, perform: { newWorkoutInfo in
-                                    Task { try await viewModel.fetchBodyWeight(for: newWorkoutInfo) }
-                                })
-                                .onReceive(viewModel.personalRecordsStaleSubject, perform: {
-                                    Task { try await viewModel.fetchPRInfo(for: workoutInfo) }
-                                })
-                                .task { try? await viewModel.fetchBodyWeight(for: workoutInfo) }
-                                .task { try? await viewModel.fetchPRInfo(for: workoutInfo) }
+                                Text("Share")
+                                Image(systemName: "square.and.arrow.up")
                             }
-                            .buttonStyle(.plain)
-                            .scenePadding()
-                            .background(Color(uiColor: .secondarySystemGroupedBackground))
-                            .cornerRadius(10)
-                            .contextMenu {
-                                Button {
-                                    viewModel.share(workoutInfo: workoutInfo)
-                                } label: {
-                                    Text("Share")
-                                    Image(systemName: "square.and.arrow.up")
-                                }
-                                
-                                Button {
-                                    viewModel.repeat(workoutInfo: workoutInfo)
-                                } label: {
-                                    Text("Repeat")
-                                    Image(systemName: "arrow.clockwise")
-                                }
-                                
-                                Button(role: .destructive) {
-                                    viewModel.confirmDelete(workoutInfo: workoutInfo)
-                                } label: {
-                                    Text("Delete")
-                                    Image(systemName: "trash")
-                                }
-                                
+                            
+                            Button {
+                                viewModel.repeat(workoutInfo: workoutInfo)
+                            } label: {
+                                Text("Repeat")
+                                Image(systemName: "arrow.clockwise")
                             }
+                            
+                            Button(role: .destructive) {
+                                viewModel.confirmDelete(workoutInfo: workoutInfo)
+                            } label: {
+                                Text("Delete")
+                                Image(systemName: "trash")
+                            }
+                            
                         }
                     }
                 }
