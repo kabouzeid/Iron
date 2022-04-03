@@ -10,7 +10,7 @@ import SwiftUI
 import IronData
 
 struct HistoryView: View {
-    @StateObject var viewModel: ViewModel = ViewModel(database: .shared)
+    @StateObject var viewModel = ViewModel(database: .shared)
     
     var body: some View {
         NavigationView {
@@ -232,10 +232,7 @@ extension HistoryView {
 #if DEBUG
 struct HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        TabView {
-            HistoryView(viewModel: .init(database: .random()))
-                .mockEnvironment(weightUnit: .metric, isPro: true)
-        }
+        HistoryView(viewModel: .init(database: .random()))
     }
 }
 #endif

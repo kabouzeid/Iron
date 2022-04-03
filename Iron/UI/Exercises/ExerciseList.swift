@@ -10,7 +10,7 @@ import SwiftUI
 import IronData
 
 struct ExerciseList: View {
-    @StateObject private var viewModel = ViewModel(database: .shared)
+    @StateObject var viewModel = ViewModel(database: .shared)
     
     @State private var searchQuery: String = ""
     @State private var selectedBodyPart: Exercise.BodyPart?
@@ -129,6 +129,6 @@ extension ExerciseList {
 
 struct ExerciseList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseList()
+        ExerciseList(viewModel: .init(database: .random()))
     }
 }
