@@ -10,7 +10,7 @@ import SwiftUI
 import IronData
 
 struct HistoryView: View {
-    @StateObject var viewModel: ViewModel = ViewModel(database: AppDatabase.shared)
+    @StateObject var viewModel: ViewModel = ViewModel(database: .shared)
     
     var body: some View {
         NavigationView {
