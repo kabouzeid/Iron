@@ -53,7 +53,7 @@ struct CustomExercisesView: View {
     var body: some View {
         List {
             ForEach(exerciseStore.customExercises, id: \.id) { exercise in
-                NavigationLink(exercise.title, destination: ExerciseDetailView(exercise: exercise)
+                NavigationLink(exercise.title, destination: _ExerciseDetailView(exercise: exercise)
                     .environmentObject(self.settingsStore))
             }
             .onDelete { offsets in

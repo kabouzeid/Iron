@@ -27,8 +27,8 @@ extension Exercise {
             alias.joined(separator: "\n")
         }
         
-        var images: ImageURLs? {
-            ImageURLs(urls: pdf.map { Everkinetic.resourcesURL.appendingPathComponent($0) })
+        var images: ImageNames? {
+            ImageNames(names: pdf.map { "everkinetic-data/\($0)" })
         }
         
         var movementType: MovementType? {

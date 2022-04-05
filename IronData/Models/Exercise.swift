@@ -9,7 +9,7 @@ public struct Exercise: Identifiable, Equatable {
     public var uuid: UUID = UUID()
     public var title: String
     public var aliases: String?
-    public var images: ImageURLs?
+    public var images: ImageNames?
     public var movementType: MovementType?
     public var bodyPart: BodyPart?
     public var category: Category
@@ -27,8 +27,8 @@ public struct Exercise: Identifiable, Equatable {
         case barbell, dumbbell, machine, bodyweight, cardio, duration
     }
     
-    public struct ImageURLs: Codable, Equatable {
-        public let urls: [URL]
+    public struct ImageNames: Codable, Equatable {
+        public let names: [String]
     }
 }
 

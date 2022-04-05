@@ -9,7 +9,11 @@
 import Foundation
 
 class Everkinetic {
+    static var bundle: Bundle {
+        Bundle(for: Self.self)
+    }
+    
     static var resourcesURL: URL {
-        Bundle(for: Self.self).bundleURL.appendingPathComponent("everkinetic-data")
+        Everkinetic.bundle.bundleURL.appendingPathComponent("everkinetic-data")
     }
 }

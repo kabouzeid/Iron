@@ -62,7 +62,7 @@ struct ExerciseList: View {
                 
                 List(viewModel.exercises(searchQuery: searchQuery, bodyPart: selectedBodyPart, category: selectedCategory)) { exercise in
                     NavigationLink {
-                        Text("TODO")
+                        ExerciseDetailView(exercise: exercise)
                     } label: {
                         Text(exercise.title)
                     }

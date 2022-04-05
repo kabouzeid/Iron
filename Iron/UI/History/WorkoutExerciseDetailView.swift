@@ -317,7 +317,7 @@ struct WorkoutExerciseDetailView : View {
             } // TODO: else if workoutExercise is finished, show next exercise / finish workout button
             
             if let exercise = workoutExercise.exercise(in: exerciseStore.exercises) {
-                NavigationLink(destination: ExerciseDetailView(exercise: exercise).environmentObject(self.settingsStore), isActive: $showExerciseInfo) { EmptyView() }
+                NavigationLink(destination: _ExerciseDetailView(exercise: exercise).environmentObject(self.settingsStore), isActive: $showExerciseInfo) { EmptyView() }
             }
         }
         .navigationBarTitle(Text(workoutExercise.exercise(in: exerciseStore.exercises)?.title ?? ""), displayMode: .inline)

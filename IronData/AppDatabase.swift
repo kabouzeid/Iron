@@ -48,7 +48,7 @@ public struct AppDatabase {
                 t.column("uuid", .blob).notNull().unique()
                 t.column("title", .text).indexed().notNull()
                 t.column("aliases", .text).indexed() // \n separated for filtering in query
-                t.column("images", .text) // {urls: [URL]}
+                t.column("images", .text) // {names: [String]}
                 t.column("movementType", .text) // enum -- isolation, compound
                 t.column("bodyPart", .text) // enum -- chest, arms, ...
                 t.column("category", .text).notNull() // enum -- barbell, dumbbell, machine, cardio, ...

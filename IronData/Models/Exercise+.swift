@@ -8,21 +8,31 @@
 
 import Foundation
 
+extension Exercise {
+    public static var imagesBundle: Bundle { _Bundle.bundle }
+    
+    private class _Bundle {
+        static var bundle: Bundle {
+            Bundle(for: Self.self)
+        }
+    }
+}
+
 extension Exercise.BodyPart {
     public var name: String {
         switch self {
         case .core:
-            return "core"
+            return "Core"
         case .arms:
-            return "arm"
+            return "Arms"
         case .shoulders:
-            return "shoulders"
+            return "Shoulders"
         case .back:
-            return "back"
+            return "Back"
         case .legs:
-            return "legs"
+            return "Legs"
         case .chest:
-            return "chest"
+            return "Chest"
         }
     }
 }
@@ -42,6 +52,17 @@ extension Exercise.Category {
             return "Duration"
         case .machine:
             return "Machine"
+        }
+    }
+}
+
+extension Exercise.MovementType {
+    public var name: String {
+        switch self {
+        case .compound:
+            return "Compound"
+        case .isolation:
+            return "Isolation"
         }
     }
 }

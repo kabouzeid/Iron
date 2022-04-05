@@ -170,7 +170,7 @@ struct WorkoutRoutineExerciseView: View {
             HStack(spacing: NAVIGATION_BAR_SPACING) {
                 iOS13_3.map { // otherwise crashes when going back on iOS 13.2.2
                     workoutRoutineExercise.exercise(in: exerciseStore.exercises).map {
-                        NavigationLink(destination: ExerciseDetailView(exercise: $0)) {
+                        NavigationLink(destination: _ExerciseDetailView(exercise: $0)) {
                                 Image(systemName: "info.circle")
                                     .padding([.leading, .top, .bottom])
                         }
