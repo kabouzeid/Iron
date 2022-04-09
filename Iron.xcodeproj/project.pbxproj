@@ -1008,14 +1008,6 @@
 		8A1205F92801801200E3F2E1 /* Old */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = Old;
-			sourceTree = "<group>";
-		};
-		8A1D989422C7C6690071225D /* Workout */ = {
-			isa = PBXGroup;
-			children = (
-				8A1205F92801801200E3F2E1 /* Old */,
 				8A0ADC32232964E700081F4B /* WorkoutTab.swift */,
 				8A63B3762329463A001BD7B5 /* StartWorkoutView.swift */,
 				8AA39B0423AEB636005FAD84 /* WorkoutPlanView.swift */,
@@ -1029,6 +1021,14 @@
 				8A70A73623041542000A3C76 /* TimerBannerView.swift */,
 				8AFE11AF232CDDF6000E9393 /* EditCurrentWorkoutTimeView.swift */,
 				8A70A73823041637000A3C76 /* RestTimerView.swift */,
+			);
+			name = Old;
+			sourceTree = "<group>";
+		};
+		8A1D989422C7C6690071225D /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				8A1205F92801801200E3F2E1 /* Old */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
