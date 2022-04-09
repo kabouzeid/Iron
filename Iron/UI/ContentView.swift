@@ -26,7 +26,7 @@ struct ContentView : View {
                     Label("Feed", image: "today_apps")
                 }
             
-            HistoryView()
+            WorkoutList()
                 .tag(SceneState.Tab.history.rawValue)
                 .tabItem {
                     Label("History", image: "clock")

@@ -159,7 +159,7 @@ private struct WorkoutCell: View {
 #if DEBUG
 struct _HistoryView_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView()
+        _HistoryView()
             .mockEnvironment(weightUnit: .metric, isPro: true)
     }
 }

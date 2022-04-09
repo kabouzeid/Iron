@@ -1,5 +1,5 @@
 //
-//  HistoryViewWorkoutCell.swift
+//  WorkoutListCell.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 02.04.22.
@@ -9,7 +9,7 @@
 import SwiftUI
 import IronData
 
-extension HistoryView {
+extension WorkoutList {
     struct WorkoutCell: View {
         let viewModel: ViewModel
         
@@ -78,7 +78,7 @@ extension HistoryView {
     }
 }
 
-extension HistoryView.WorkoutCell {
+extension WorkoutList.WorkoutCell {
     struct ViewModel {
         static let durationFormatter: DateComponentsFormatter = {
             let formatter = DateComponentsFormatter()
@@ -87,8 +87,8 @@ extension HistoryView.WorkoutCell {
             return formatter
         }()
         
-        let workoutInfo: HistoryView.ViewModel.WorkoutInfo
-        let personalRecordInfo: HistoryView.ViewModel.PersonalRecordInfo?
+        let workoutInfo: WorkoutList.ViewModel.WorkoutInfo
+        let personalRecordInfo: WorkoutList.ViewModel.PersonalRecordInfo?
         let bodyWeight: Measurement<UnitMass>?
         
         var title: String {
@@ -168,17 +168,16 @@ extension HistoryView.WorkoutCell {
     }
 }
 
-#if DEBUG
-struct HistoryViewWorkoutCell_Previews : PreviewProvider {
+struct WorkoutListCell_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView.WorkoutCell(
+        WorkoutList.WorkoutCell(
             viewModel: .init(workoutInfo: workoutInfo, personalRecordInfo: [0 : false, 1 : true], bodyWeight: .init(value: 82, unit: .kilograms))
         )
         .scenePadding()
         .previewLayout(.sizeThatFits)
     }
     
-    static var workoutInfo: HistoryView.ViewModel.WorkoutInfo {
+    static var workoutInfo: WorkoutList.ViewModel.WorkoutInfo {
         var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
         workout.end = Date()
         workout.comment = "Feeling strong today"
@@ -211,4 +210,3 @@ struct HistoryViewWorkoutCell_Previews : PreviewProvider {
         ])
     }
 }
-#endif

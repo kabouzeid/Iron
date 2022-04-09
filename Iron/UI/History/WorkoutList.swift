@@ -1,5 +1,5 @@
 //
-//  HistoryView.swift
+//  WorkoutList.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 24.03.22.
@@ -9,7 +9,7 @@
 import SwiftUI
 import IronData
 
-struct HistoryView: View {
+struct WorkoutList: View {
     @StateObject var viewModel = ViewModel(database: .shared)
     
     var body: some View {
@@ -93,7 +93,7 @@ struct HistoryView: View {
 import Combine
 import GRDB
 
-extension HistoryView {
+extension WorkoutList {
     @MainActor
     class ViewModel: ObservableObject {
         let database: AppDatabase
@@ -229,10 +229,8 @@ extension HistoryView {
     }
 }
 
-#if DEBUG
-struct HistoryView_Previews : PreviewProvider {
+struct WorkoutList_Previews : PreviewProvider {
     static var previews: some View {
-        HistoryView(viewModel: .init(database: .random()))
+        WorkoutList(viewModel: .init(database: .random()))
     }
 }
-#endif
