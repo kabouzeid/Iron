@@ -48,7 +48,7 @@ struct BackupAndExportView: View {
     }
     
     var body: some View {
-        Form {
+        List {
             Section(header: Text("Export".uppercased())) {
                 Button("Workout Data") {
                     self.showExportWorkoutDataSheet = true

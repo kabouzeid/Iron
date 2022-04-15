@@ -67,7 +67,7 @@ struct GeneralSettingsView: View {
     }
     
     var body: some View {
-        Form {
+        List {
             weightPickerSection
             restTimerTimesSection
             restTimerSection

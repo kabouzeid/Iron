@@ -20,7 +20,7 @@ struct WatchSettingsView: View {
     }
     
     var body: some View {
-        Form {
+        List {
             Section(footer: Text(footer)) {
                 Toggle(isOn: $settingsStore.watchCompanion) {
                     Text("Apple Watch Companion")

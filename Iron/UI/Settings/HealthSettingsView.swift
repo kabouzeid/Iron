@@ -29,7 +29,7 @@ struct HealthSettingsView: View {
     }
     
     var body: some View {
-        Form {
+        List {
             Section(footer: Text("Adds missing workouts to Apple Health and removes workouts from Apple Health that are no longer present in Iron. This also updates workouts where the start or end time has been modified.")) {
                 Button("Update Apple Health Workouts") {
                     self.updating = true

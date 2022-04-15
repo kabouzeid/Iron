@@ -17,7 +17,7 @@ struct DeveloperSettings: View {
     @State private var activityItems: [Any]?
     
     var body: some View {
-        Form {
+        List {
             Button("Create default workout plans") {
                 createDefaultWorkoutPlans()
             }
