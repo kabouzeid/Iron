@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct WorkoutTab: View {
-    @ObservedObject var viewModel = ViewModel(database: .shared)
+    @StateObject var viewModel = ViewModel(database: .shared)
     
     var body: some View {
         Group {
