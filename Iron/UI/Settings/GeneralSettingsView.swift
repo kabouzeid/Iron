@@ -13,9 +13,9 @@ struct GeneralSettingsView: View {
     
     private var weightPickerSection: some View {
         Section {
-            Picker("Weight Unit", selection: $settingsStore.weightUnit) {
-                ForEach(WeightUnit.allCases, id: \.self) { weightUnit in
-                    Text(weightUnit.title).tag(weightUnit)
+            Picker("Weight Unit", selection: $settingsStore.massFormat) {
+                ForEach(MassFormat.allCases, id: \.self) { massFormat in
+                    Text(massFormat.title).tag(massFormat)
                 }
             }
         }
