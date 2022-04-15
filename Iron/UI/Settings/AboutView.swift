@@ -12,84 +12,65 @@ struct AboutView: View {
     @EnvironmentObject private var entitlementsStore: EntitlementStore
     
     var body: some View {
-        Form {
-            Section(
-                header:
-                HStack {
-                    Spacer()
-
-                    Image("rounded_app_icon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 80)
-
-                    VStack(alignment: .leading) {
-                        Text("Iron \(versionString)").font(.headline)
-                        if entitlementsStore.isPro {
-                            Text("Pro Version")
-                        }
-                        Text("by Karim Abou Zeid")
-                    }.padding()
-
-                    Spacer()
+        List {
+            HStack {
+                Image("rounded_app_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 80)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Iron \(versionString)")
+                        .font(.headline)
+                    
+                    if entitlementsStore.isPro {
+                        Text("Pro Version")
+                            .font(.subheadline)
+                    }
+                    
+                    Text("by Karim Abou Zeid")
+                        .font(.subheadline)
                 }
                 .padding()
-                .modifier(TextCaseNil())
-            ) {
+            }
+            .listRowBackground(Color.clear)
+            
+            Section {
                 Button(action: {
-                    guard let url = URL(string: "https://twitter.com/theironapp") else { return }
-                    UIApplication.shared.open(url)
+                    UIApplication.shared.open(URL(string: "https://twitter.com/theironapp")!)
                 }) {
-                    HStack {
-                        Text("Follow @theironapp")
-                        Spacer()
-                        Image("twitter")
-                    }
+                    Label("Follow @theironapp", systemImage: "eyes")
                 }
                 
                 Button(action: {
-                    guard let url = URL(string: "https://twitter.com/swiftkarim") else { return }
-                    UIApplication.shared.open(url)
+                    UIApplication.shared.open(URL(string: "https://twitter.com/kacodes")!)
                 }) {
-                    HStack {
-                        Text("Follow @swiftkarim")
-                        Spacer()
-                        Image("twitter")
-                    }
-                }
-                Button(action: {
-                    guard let url = URL(string: "https://www.reddit.com/r/ironapp/") else { return }
-                    UIApplication.shared.open(url)
-                }) {
-                    Text("Join /r/ironapp")
+                    Label("Follow @kacodes", systemImage: "eyes")
                 }
             }
             
             Section {
-                Button(action: {
-                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
-                        UIApplication.shared.open(url)
-                    }
-                }) {
-                    HStack {
-                        Text("Privacy Policy")
-                        Spacer()
-                        Image(systemName: "hand.raised")
-                    }
+                Button {
+                    UIApplication.shared.open(URL(string: "https://ironapp.io/privacypolicy")!)
+                } label: {
+                    Label("Privacy Policy", systemImage: "hand.raised")
                 }
             }
-        }.navigationBarTitle("About", displayMode: .inline)
+        }
+        .navigationBarTitle("About", displayMode: .inline)
     }
     
     private var versionString: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-//        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-//        return "\(version ?? "?") (\(build ?? "?"))"
+        #if DEBUG
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        return "\(version ?? "?") (\(build ?? "?")) DEBUG"
+        #else
         return "\(version ?? "?")"
+        #endif
     }
 }
 
-#if DEBUG
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -97,4 +78,3 @@ struct AboutView_Previews: PreviewProvider {
         }
     }
 }
-#endif
