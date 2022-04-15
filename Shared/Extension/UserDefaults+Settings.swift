@@ -11,6 +11,7 @@ import Foundation
 extension UserDefaults {
     enum SettingsKeys: String, CaseIterable {
         case weightUnit
+        case massFormat
         case defaultRestTime
         case defaultRestTimeDumbbellBased
         case defaultRestTimeBarbellBased
@@ -20,6 +21,7 @@ extension UserDefaults {
         case watchCompanion
     }
 
+    @available(*, deprecated)
     var weightUnit: WeightUnit {
         set {
             self.set(newValue.rawValue, forKey: SettingsKeys.weightUnit.rawValue)
@@ -31,6 +33,22 @@ extension UserDefaults {
             } else {
                 let fallback = Locale.current.usesMetricSystem ? WeightUnit.metric : WeightUnit.imperial
                 self.weightUnit = fallback // safe the new weight unit
+                return fallback
+            }
+        }
+    }
+    
+    var massFormat: MassFormat {
+        set {
+            self.set(newValue.rawValue, forKey: SettingsKeys.massFormat.rawValue)
+        }
+        get {
+            let massFormat = MassFormat(rawValue: self.string(forKey: SettingsKeys.massFormat.rawValue) ?? "")
+            if let massFormat = massFormat {
+                return massFormat
+            } else {
+                let fallback: MassFormat = Locale.current.usesMetricSystem ? .metric : .imperial
+                self.massFormat = fallback // safe the new mass format
                 return fallback
             }
         }

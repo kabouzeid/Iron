@@ -23,31 +23,31 @@ struct ContentView : View {
             FeedView()
                 .tag(SceneState.Tab.feed.rawValue)
                 .tabItem {
-                    Label("Feed", image: "today_apps")
+                    Label("Summary", systemImage: "person")
                 }
             
             WorkoutList()
                 .tag(SceneState.Tab.history.rawValue)
                 .tabItem {
-                    Label("History", image: "clock")
+                    Label("History", systemImage: "clock")
                 }
             
             WorkoutTab()
                 .tag(SceneState.Tab.workout.rawValue)
                 .tabItem {
-                    Label("Workout", image: "workout")
+                    Label("Workout", systemImage: "plus.diamond")
                 }
             
             ExerciseList()
                 .tag(SceneState.Tab.exercises.rawValue)
                 .tabItem {
-                    Label("Exercises", image: "list")
+                    Label("Exercises", systemImage: "tray.full")
                 }
             
             SettingsView()
                 .tag(SceneState.Tab.settings.rawValue)
                 .tabItem {
-                    Label("Settings", image: "settings")
+                    Label("Settings", systemImage: "gear")
                 }
         }
         .productionEnvironment()

@@ -7,32 +7,53 @@
 //
 
 import SwiftUI
-import WorkoutDataKit
 
 struct WorkoutTab: View {
-    @FetchRequest(fetchRequest: Workout.currentWorkoutFetchRequest) var currentWorkouts
-    
-    private var currentWorkout: Workout? {
-        assert(currentWorkouts.count <= 1)
-        return currentWorkouts.first
-    }
+    @ObservedObject var viewModel = ViewModel(database: .shared)
     
     var body: some View {
-        ZStack { // ZStack is needed because of a bug where the TabView switches to another Tab (iOS 14.0)
-            if let workout = currentWorkout {
-                CurrentWorkoutView(workout: workout)
+        Group {
+            if let workout = viewModel.activeWorkout {
+                ActiveWorkoutView(workout: workout)
             } else {
-                StartWorkoutView()
+                Text("TODO: Start Workout")
             }
+        }
+        .task {
+            try? await viewModel.fetchData()
         }
     }
 }
 
-#if DEBUG
-struct WorkoutTab_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutTab()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+import GRDB
+import IronData
+
+extension WorkoutTab {
+    @MainActor
+    class ViewModel: ObservableObject {
+        let database: AppDatabase
+        
+        nonisolated init(database: AppDatabase) {
+            self.database = database
+        }
+        
+        @Published var activeWorkout: Workout? = nil
+        
+        func fetchData() async throws {
+            for try await activeWorkout in activeWorkoutStream() {
+                self.activeWorkout = activeWorkout
+            }
+        }
+        
+        private func activeWorkoutStream() -> AsyncValueObservation<Workout?> {
+            ValueObservation.tracking(Workout.filter(Workout.Columns.isActive == true).fetchOne)
+                .values(in: database.databaseReader, scheduling: .immediate)
+        }
     }
 }
-#endif
+
+struct WorkoutTab_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkoutTab(viewModel: .init(database: .random()))
+    }
+}

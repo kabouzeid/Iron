@@ -101,18 +101,6 @@ class IronDataTests: XCTestCase {
         }
     }
     
-    func testPrefetchedAssociations() throws {
-        let dbQueue = DatabaseQueue()
-        _ = try AppDatabase(dbQueue)
-        
-        try dbQueue.write({ db in
-            _ = try insertedWorkoutSet(db)
-            let workoutInfo = try AppDatabase.WorkoutInfo.all().fetchOne(db)
-            XCTAssertNotNil(workoutInfo?.workoutExerciseInfos.first?.exercise)
-            XCTAssertNotNil(workoutInfo?.workoutExerciseInfos.first?.workoutSets.first)
-        })
-    }
-    
     func testPR() throws {
         let dbQueue = DatabaseQueue()
         let database = try AppDatabase(dbQueue)
@@ -187,8 +175,8 @@ class IronDataTests: XCTestCase {
         
         for exercise in exercises {
             print(exercise)
-            for url in exercise.images?.urls ?? [] {
-                XCTAssertNoThrow(try Data(contentsOf: url))
+            for name in exercise.images?.names ?? [] {
+                XCTAssertNoThrow(try Data(contentsOf: Exercise.imagesBundle.bundleURL.appendingPathComponent(name)))
             }
         }
         

@@ -114,6 +114,8 @@ public struct AppDatabase {
 // MARK: - Database Access: Writes
 
 extension AppDatabase {
+    // MARK: Workout
+    
     public func saveWorkout(_ workout: inout Workout) async throws {
         workout = try await dbWriter.write { [workout] db in
             try workout.saved(db)
@@ -123,6 +125,46 @@ extension AppDatabase {
     public func deleteWorkouts(ids: [Int64]) async throws {
         try await dbWriter.write { db in
             _ = try Workout.deleteAll(db, ids: ids)
+        }
+    }
+    
+    // MARK: WorkoutExercise
+    
+    public func deleteWorkoutExercises(ids: [Int64]) async throws {
+        try await dbWriter.write { db in
+            _ = try WorkoutExercise.deleteAll(db, ids: ids)
+        }
+    }
+    
+    // MARK: WorkoutSet
+    
+    public func saveWorkoutSet(_ workoutSet: inout WorkoutSet) async throws {
+        workoutSet = try await dbWriter.write { [workoutSet] db in
+            try workoutSet.saved(db)
+        }
+    }
+    
+    public func saveWorkoutSets(_ workoutSets: inout [WorkoutSet]) async throws {
+        workoutSets = try await dbWriter.write { [workoutSets] db in
+            try workoutSets.map { workoutSet in
+                try workoutSet.saved(db)
+            }
+        }
+    }
+    
+    public func saveWorkoutSetsOrdered(_ workoutSets: inout [WorkoutSet]) async throws {
+        workoutSets = try await dbWriter.write { [workoutSets] db in
+            try workoutSets.enumerated().map { (order, workoutSet) in
+                var workoutSet = workoutSet
+                workoutSet.order = order
+                return try workoutSet.saved(db)
+            }
+        }
+    }
+    
+    public func deleteWorkoutSets(ids: [Int64]) async throws {
+        try await dbWriter.write { db in
+            _ = try WorkoutSet.deleteAll(db, ids: ids)
         }
     }
 }
@@ -154,13 +196,18 @@ extension AppDatabase {
             let exercises = try Exercise.fetchAll(db)
             for _ in 0..<50 {
                 let workout = try Workout.makeRandom().inserted(db)
-                for _ in 0..<3 {
+                for _ in 0..<Int.random(in: 3...6) {
                     let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
-                    for _ in 0..<5 {
+                    for _ in 0..<Int.random(in: 3...5) {
                         _ = try WorkoutSet.makeRandom(workoutExerciseId: workoutExercise.id!).inserted(db)
                     }
                 }
             }
+            
+            var activeWorkout = try Workout.order(Workout.Columns.start.desc).fetchOne(db)
+            activeWorkout?.isActive = true
+            activeWorkout?.end = nil
+            try activeWorkout?.save(db)
         }
     }
 }

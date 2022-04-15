@@ -19,6 +19,7 @@ final class SettingsStore: ObservableObject {
         self.userDefaults = userDefaults
     }
 
+    @available(*, deprecated)
     var weightUnit: WeightUnit {
         get {
             userDefaults.weightUnit
@@ -26,6 +27,16 @@ final class SettingsStore: ObservableObject {
         set {
             self.objectWillChange.send()
             userDefaults.weightUnit = newValue
+        }
+    }
+    
+    var massFormat: MassFormat {
+        get {
+            userDefaults.massFormat
+        }
+        set {
+            self.objectWillChange.send()
+            userDefaults.massFormat = newValue
         }
     }
     

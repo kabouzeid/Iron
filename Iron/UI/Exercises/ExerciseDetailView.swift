@@ -106,7 +106,7 @@ struct ExerciseDetailView: View {
 
 extension ExerciseDetailView {
     init(exercise: Exercise) {
-        _viewModel = StateObject(wrappedValue: .init(database: .shared, exercise: exercise))
+        self.init(viewModel: .init(database: .shared, exercise: exercise))
     }
 }
 

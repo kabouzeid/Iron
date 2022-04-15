@@ -37,7 +37,18 @@ extension WorkoutSet {
     }
         
     static func makeRandom(workoutExerciseId: Int64) -> WorkoutSet {
-        WorkoutSet(uuid: UUID(), weight: 2.5 * Double(Int.random(in: 8...40)), repetitions: .random(in: 5...12), targetRepetitionsLower: nil, targetRepetitionsUpper: nil, rpe: Double(Int.random(in: 12...20)) / 2, comment: randomComment(), tag: Tag.allCases.randomElement(), isCompleted: true, workoutExerciseId: workoutExerciseId)
+        WorkoutSet(
+            uuid: UUID(),
+            weight: 2.5 * Double(Int.random(in: 8...40)),
+            repetitions: .random(in: 5...12),
+            targetRepetitionsLower: nil,
+            targetRepetitionsUpper: nil,
+            rpe: Int.random(in: 0..<5) == 0 ? Double(Int.random(in: 12...20)) / 2 : nil,
+            comment: randomComment(),
+            tag: Int.random(in: 0..<10) == 0 ? Tag.allCases.randomElement() : nil,
+            isCompleted: true,
+            workoutExerciseId: workoutExerciseId
+        )
     }
     
     private static func randomComment() -> String? {

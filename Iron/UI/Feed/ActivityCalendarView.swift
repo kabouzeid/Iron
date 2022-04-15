@@ -143,7 +143,7 @@ private struct ActivityCalendarCell: View {
     @ViewBuilder
     var navigationLink: some View {
         if let workout = workoutDay.workouts.first {
-            NavigationLink(destination: WorkoutDetailView(workout: workout), isActive: $showingWorkout, label: { EmptyView() }).hidden()
+            NavigationLink(destination: _WorkoutDetailView(workout: workout), isActive: $showingWorkout, label: { EmptyView() }).hidden()
         }
     }
     

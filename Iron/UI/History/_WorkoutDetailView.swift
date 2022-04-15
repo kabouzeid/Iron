@@ -10,7 +10,7 @@ import SwiftUI
 import WorkoutDataKit
 import os.log
 
-struct WorkoutDetailView : View {
+struct _WorkoutDetailView : View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
@@ -199,7 +199,7 @@ struct WorkoutDetailView : View {
 }
 
 // MARK: Actions
-extension WorkoutDetailView {
+extension _WorkoutDetailView {
     static func repeatWorkout(workout: Workout, settingsStore: SettingsStore, sceneState: SceneState) {
         guard let newWorkout = workout.copyForRepeat(blank: false) else { return }
         
@@ -233,13 +233,11 @@ extension WorkoutDetailView {
     }
 }
 
-#if DEBUG
-struct WorkoutDetailView_Previews : PreviewProvider {
+struct _WorkoutDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WorkoutDetailView(workout: MockWorkoutData.metricRandom.workout)
+            _WorkoutDetailView(workout: MockWorkoutData.metricRandom.workout)
                 .mockEnvironment(weightUnit: .metric, isPro: true)
         }
     }
 }
-#endif

@@ -117,19 +117,21 @@ extension WorkoutList {
                 public var workoutSets: [WorkoutSet]
             }
             
-            static func all() -> QueryInterfaceRequest<WorkoutInfo> {
-                Workout.including(all: Workout.workoutExercises
-                    .forKey(CodingKeys.workoutExerciseInfos)
-                    .including(all: WorkoutExercise.workoutSets)
-                    .including(required: WorkoutExercise.exercise)
-                )
+            static func filterFinished() -> QueryInterfaceRequest<WorkoutInfo> {
+                Workout
+                    .filter(Workout.Columns.isActive == false)
+                    .including(all: Workout.workoutExercises
+                        .forKey(CodingKeys.workoutExerciseInfos)
+                        .including(all: WorkoutExercise.workoutSets)
+                        .including(required: WorkoutExercise.exercise)
+                    )
                 .orderByStart()
                 .asRequest(of: WorkoutInfo.self)
             }
         }
         
         private func workoutInfosStream() -> AsyncValueObservation<[WorkoutInfo]> {
-            ValueObservation.tracking(WorkoutInfo.all().fetchAll)
+            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll)
                 .values(in: database.databaseReader, scheduling: .immediate)
         }
         
@@ -164,7 +166,7 @@ extension WorkoutList {
         @Published private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
         var personalRecordsStaleSubject = PassthroughSubject<Void, Never>() // sent whenever views should refetch PRs
         
-        typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Bool]
+        typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Int]
         
         func fetchPRInfo(for workoutInfo: WorkoutInfo) async throws {
             // NOTE: for now we don't return the cached value
@@ -174,9 +176,9 @@ extension WorkoutList {
             let prInfo = try await database.databaseReader.read { db -> PersonalRecordInfo in
                 var map = PersonalRecordInfo()
                 for workoutExerciseInfo in workoutInfo.workoutExerciseInfos {
-                    map[workoutExerciseInfo.workoutExercise.id!] = try workoutExerciseInfo.workoutSets.contains { workoutSet in
+                    map[workoutExerciseInfo.workoutExercise.id!] = try workoutExerciseInfo.workoutSets.filter { workoutSet in
                         try workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExerciseInfo.workoutExercise, workout: workoutInfo.workout))
-                    }
+                    }.count
                 }
                 return map
             }

@@ -63,10 +63,15 @@ extension WorkoutList {
                                 
                                 Spacer()
                                 
-                                if (item.containsPR) {
-                                    Image(systemName: "star")
-                                        .symbolVariant(.circle.fill)
-                                        .symbolRenderingMode(.multicolor)
+                                if item.prCount > 0 {
+                                    HStack(spacing: 0) {
+                                        if item.prCount > 1 {
+                                            Text("\(item.prCount) × ")
+                                        }
+                                        Image(systemName: "star")
+                                            .symbolVariant(.circle.fill)
+                                    }
+                                    .foregroundColor(.yellow)
                                 }
                             }
                         }
@@ -97,18 +102,6 @@ extension WorkoutList.WorkoutCell {
             )
         }
         
-        private var generatedTitle: String? {
-            let bodyParts = bodyParts
-            switch bodyParts.count {
-            case 1:
-                return bodyParts[0].name.capitalized
-            case 2...:
-                return "\(bodyParts[0].name.capitalized) & \(bodyParts[1].name.capitalized)"
-            default:
-                return nil
-            }
-        }
-        
         var comment: String? {
             workoutInfo.workout.comment
         }
@@ -134,14 +127,14 @@ extension WorkoutList.WorkoutCell {
             workoutInfo.workoutExerciseInfos.map { workoutExerciseInfo in
                 SummaryItem(
                     exerciseDescription: "\(workoutExerciseInfo.workoutSets.count) × \(workoutExerciseInfo.exercise.title)",
-                    containsPR: personalRecordInfo?[workoutExerciseInfo.workoutExercise.id!] ?? false
+                    prCount: personalRecordInfo?[workoutExerciseInfo.workoutExercise.id!] ?? 0
                 )
             }
         }
         
         struct SummaryItem: Identifiable {
             let exerciseDescription: String
-            let containsPR: Bool
+            let prCount: Int
             
             var id: UUID { UUID() } // there are no ids for this item
         }
@@ -171,7 +164,7 @@ extension WorkoutList.WorkoutCell {
 struct WorkoutListCell_Previews : PreviewProvider {
     static var previews: some View {
         WorkoutList.WorkoutCell(
-            viewModel: .init(workoutInfo: workoutInfo, personalRecordInfo: [0 : false, 1 : true], bodyWeight: .init(value: 82, unit: .kilograms))
+            viewModel: .init(workoutInfo: workoutInfo, personalRecordInfo: [0 : 0, 1 : 2], bodyWeight: .init(value: 82, unit: .kilograms))
         )
         .scenePadding()
         .previewLayout(.sizeThatFits)

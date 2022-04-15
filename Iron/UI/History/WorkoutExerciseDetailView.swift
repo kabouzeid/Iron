@@ -259,7 +259,7 @@ struct WorkoutExerciseDetailView : View {
     private var workoutSetEditor: some View {
         VStack(spacing: 0) {
             Divider()
-            WorkoutSetEditor(workoutSet: self.selectedWorkoutSet!, onDone: {
+            _WorkoutSetEditor(workoutSet: self.selectedWorkoutSet!, onDone: {
                 guard let set = self.selectedWorkoutSet else { return }
                 
                 if !set.isCompleted {

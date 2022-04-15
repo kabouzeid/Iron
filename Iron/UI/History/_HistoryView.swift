@@ -50,7 +50,7 @@ struct _HistoryView: View {
         NavigationView {
             List {
                 ForEach(workouts) { workout in
-                    NavigationLink(destination: WorkoutDetailView(workout: workout)
+                    NavigationLink(destination: _WorkoutDetailView(workout: workout)
                         .environmentObject(self.settingsStore)
                     ) {
                         WorkoutCell(workout: workout)
@@ -64,10 +64,10 @@ struct _HistoryView: View {
                                     }
                                 }
                                 Button("Repeat") {
-                                    WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
+                                    _WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
                                 }
                                 Button("Repeat (Blank)") {
-                                    WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
+                                    _WorkoutDetailView.repeatWorkoutBlank(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
                                 }
                         }
                     }
