@@ -129,6 +129,8 @@ extension ActiveWorkoutView.SetCell {
         let isPersonalRecordWeight: Bool
         let isPersonalRecordVolume: Bool
         
+        var massFormat: MassFormat = SettingsStore.shared.massFormat
+        
         enum State {
             case completed, next, pending
         }
@@ -138,7 +140,7 @@ extension ActiveWorkoutView.SetCell {
             
             switch exerciseCategory {
             case .barbell, .dumbbell, .machine, .bodyweight:
-                return "\(Measurement(value: workoutSet.weight ?? 0, unit: UnitMass.kilograms).formatted()) × \(workoutSet.repetitions ?? 0)"
+                return "\(massFormat.format(kg: workoutSet.weight ?? 0)) × \(workoutSet.repetitions ?? 0)"
             case .cardio:
                 let distance = Measurement(value: workoutSet.weight ?? 0, unit: UnitLength.kilometers)
                 let duration = Double(workoutSet.repetitions ?? 0)

@@ -96,6 +96,8 @@ extension WorkoutList.WorkoutCell {
         let personalRecordInfo: WorkoutList.ViewModel.PersonalRecordInfo?
         let bodyWeight: Measurement<UnitMass>?
         
+        let massFormat: MassFormat = SettingsStore.shared.massFormat
+        
         var title: String {
             workoutInfo.workout.displayTitle(
                 infos: workoutInfo.workoutExerciseInfos.map { (exercise: $0.exercise, workoutSets: $0.workoutSets) }
@@ -120,7 +122,9 @@ extension WorkoutList.WorkoutCell {
         var totalWeight: String {
             workoutInfo.workout.totalWeight(
                 infos: workoutInfo.workoutExerciseInfos.map { $0.workoutSets }
-            ).formatted()
+            )
+            .converted(to: massFormat.unit)
+            .formatted(.measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.rounded(rule: .up, increment: 1)))
         }
         
         var summary: [SummaryItem] {
@@ -140,7 +144,7 @@ extension WorkoutList.WorkoutCell {
         }
         
         var bodyWeightFormatted: String? {
-            bodyWeight.map { $0.formatted() }
+            bodyWeight.map { $0.formatted(.measurement(width: .abbreviated, usage: .personWeight)) }
         }
         
         private var bodyParts: [Exercise.BodyPart] {

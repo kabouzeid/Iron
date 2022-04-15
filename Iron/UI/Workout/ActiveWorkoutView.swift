@@ -148,7 +148,7 @@ struct ActiveWorkoutView: View {
 
 extension ActiveWorkoutView {
     init(workout: Workout) {
-        self.init(viewModel: .init(database: .shared, workout: workout))
+        self.init(viewModel: .init(database: .shared, settingsStore: .shared, workout: workout))
     }
 }
 
@@ -158,10 +158,12 @@ import IronData
 extension ActiveWorkoutView {
     @MainActor
     class ViewModel: ObservableObject {
-        let database: AppDatabase
+        private let database: AppDatabase
+        private let settingsStore: SettingsStore
         
-        nonisolated init(database: AppDatabase, workout: Workout) {
+        nonisolated init(database: AppDatabase, settingsStore: SettingsStore, workout: Workout) {
             self.database = database
+            self.settingsStore = settingsStore
             self._workoutInfo = Published(initialValue: .init(workout: workout, workoutExerciseInfos: []))
         }
         
@@ -313,7 +315,7 @@ extension ActiveWorkoutView {
             return .init(
                 workoutSet: Binding(get: { workoutSet }, set: { self.updateWorkoutSet($0) }),
                 exerciseCategory: exerciseCategory,
-                localWeightUnit: .kilograms, // TODO
+                massFormat: settingsStore.massFormat,
                 onDone: {
                     if !workoutSet.isCompleted {
                         workoutSet.isCompleted = true
@@ -396,6 +398,7 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         ActiveWorkoutView(viewModel: .init(
             database: database,
+            settingsStore: .shared,
             workout: try! database.databaseReader.read { db in try Workout.fetchOne(db)! }
         ))
     }

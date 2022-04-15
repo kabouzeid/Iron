@@ -239,17 +239,16 @@ extension WorkoutSetEditor {
     struct ViewModel {
         @Binding var workoutSet: WorkoutSet
         let exerciseCategory: Exercise.Category
-        let localWeightUnit: UnitMass
+        let massFormat: MassFormat
         var onDone: () -> Void = {}
         
         var weight: Binding<Double?> {
-            // TODO: actual local unit
             Binding(
                 get: {
-                    workoutSet.weight.map { Measurement(value: $0, unit: UnitMass.kilograms).converted(to: localWeightUnit).value }
+                    workoutSet.weight.map { Measurement(value: $0, unit: UnitMass.kilograms).converted(to: massFormat.unit).value }
                 },
                 set: { newValue in
-                    workoutSet.weight = newValue.map { Measurement(value: $0, unit: localWeightUnit).converted(to: .kilograms).value }
+                    workoutSet.weight = newValue.map { Measurement(value: $0, unit: massFormat.unit).converted(to: .kilograms).value }
                 }
             )
         }
@@ -265,13 +264,13 @@ extension WorkoutSetEditor {
             )
         }
         
-        var maximumFractionDigits: Int { 3 }
+        var maximumFractionDigits: Int { 2 }
         
         var defaultFractionDigits: Int {
-            if localWeightUnit == UnitMass.kilograms {
-                return 1
-            } else {
+            if weightStepSize.truncatingRemainder(dividingBy: 1) == 0 { // is integer
                 return 0
+            } else {
+                return 1
             }
         }
         
@@ -280,20 +279,15 @@ extension WorkoutSetEditor {
         func done() { onDone() }
         
         var weightStepSize: Double {
-            // TODO: let the user configure this for barbell, dumbell and others
             if exerciseCategory == .barbell {
-                if localWeightUnit == UnitMass.pounds {
-                    return 5
-                } else {
-                    return Measurement(value: 2.5, unit: UnitMass.kilograms).converted(to: localWeightUnit).value
-                }
+                return massFormat.barbellIncrement.value
             } else {
                 return 1
             }
         }
         
         var weightUnitSymbol: String {
-            localWeightUnit.symbol
+            massFormat.unit.symbol
         }
         
         func weightNumberFormatter(minimumFractionDigits: Int, alwaysShowDecimalSeparator: Bool) -> NumberFormatter {
