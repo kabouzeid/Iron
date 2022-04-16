@@ -12,15 +12,51 @@ struct WorkoutTab: View {
     @StateObject var viewModel = ViewModel(database: .shared)
     
     var body: some View {
-        Group {
-            if let workout = viewModel.activeWorkout {
-                ActiveWorkoutView(workout: workout)
-            } else {
-                Text("TODO: Start Workout")
+        NavigationView {
+            List {
+                Section {
+                    if let workout = viewModel.activeWorkout {
+                        Button {
+                            viewModel.resumeWorkout(workout: workout)
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Resume Workout") + Text(" 48:32").monospacedDigit() // TODO: real time
+                                Spacer()
+                            }
+                            .padding(6)
+                        }
+                        .buttonStyle(.borderedProminent)
+                    } else {
+                        Button {
+                            viewModel.startWorkout()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Start Workout")
+                                Spacer()
+                            }
+                            .padding(6)
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                
+                Text("Push")
+                
+                Text("Pull")
+                
+                Text("Legs")
             }
+            .navigationTitle("Workout")
         }
         .task {
             try? await viewModel.fetchData()
+        }
+        .sheet(item: $viewModel.displayedWorkout) { workout in
+            ActiveWorkoutView(workout: workout)
         }
     }
 }
@@ -39,6 +75,8 @@ extension WorkoutTab {
         
         @Published var activeWorkout: Workout? = nil
         
+        @Published var displayedWorkout: Workout? = nil
+        
         func fetchData() async throws {
             for try await activeWorkout in activeWorkoutStream() {
                 self.activeWorkout = activeWorkout
@@ -48,6 +86,16 @@ extension WorkoutTab {
         private func activeWorkoutStream() -> AsyncValueObservation<Workout?> {
             ValueObservation.tracking(Workout.filter(Workout.Columns.isActive == true).fetchOne)
                 .values(in: database.databaseReader, scheduling: .immediate)
+        }
+        
+        // MARK: - Actions
+        
+        func startWorkout() {
+            // TODO
+        }
+        
+        func resumeWorkout(workout: Workout) {
+            displayedWorkout = workout
         }
     }
 }
