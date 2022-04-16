@@ -21,10 +21,6 @@ struct ActiveWorkoutView: View {
         NavigationView {
             ScrollViewReader { scrollViewProxy in
                 VStack(spacing: 0) {
-                    Divider()
-                    timerBannerView
-                    Divider()
-                    
                     List {
                         Section {
                             TextField("Title", text: $inputTitle)
@@ -44,6 +40,7 @@ struct ActiveWorkoutView: View {
                                 }
                             }
                         }
+                        
                         ForEach(viewModel.workoutExerciseInfos) { workoutExerciseInfo in
                             Section {
                                 ExerciseSection(viewModel: .init(
@@ -78,30 +75,48 @@ struct ActiveWorkoutView: View {
                     }
                 }
             }
-            .navigationTitle(viewModel.title)
+            //            .navigationTitle(viewModel.title)
+            .navigationTitle("48:32")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        // TODO
+                        
                     } label: {
-                        Text("Cancel")
+                        HStack {
+                            Image(systemName: "timer")
+                            Text("1:19")
+                                .font(Font.body.monospacedDigit())
+                        }
                     }
                 }
                 ToolbarItem(placement: .automatic) {
                     Menu {
+                        Section {
+                            Button {
+                                // TODO
+                            } label: {
+                                Label("Reorder", systemImage: "arrow.triangle.swap")
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                Label("Set Start/End", systemImage: "clock")
+                            }
+                        }
+                        
                         Button {
                             // TODO
                         } label: {
                             Label("Share", systemImage: "square.and.arrow.up")
                         }
                         
-                        Button {
+                        Button(role: .destructive) {
                             // TODO
                         } label: {
-                            Label("Reorder", systemImage: "arrow.triangle.swap")
+                            Label("Cancel", systemImage: "xmark")
                         }
-
                     } label: {
                         Label("More", systemImage: "ellipsis.circle")
                     }
@@ -112,36 +127,6 @@ struct ActiveWorkoutView: View {
             try? await viewModel.fetchData(dismiss: {
                 dismiss()
             })
-        }
-    }
-    
-    // TODO: replace this
-    var timerBannerView: some View {
-        HStack {
-            Button(action: {
-                //
-            }) {
-                HStack {
-                    Image(systemName: "clock")
-                    Text("48:32")
-                        .font(Font.body.monospacedDigit())
-                }
-                .padding()
-            }
-
-            Spacer()
-
-            Button(action: {
-                
-            }) {
-                HStack {
-                    Image(systemName: "timer")
-                    Text("1:19")
-                        .font(Font.body.monospacedDigit())
-                }
-                .foregroundColor(nil)
-                .padding()
-            }
         }
     }
 }
@@ -200,12 +185,12 @@ extension ActiveWorkoutView {
                     .filter(Workout.Columns.isActive == true)
                     .order(Workout.Columns.id) // in case there is a bug and there are multiple active workouts
                     .including(all: Workout.workoutExercises
-                    .forKey(CodingKeys.workoutExerciseInfos)
-                    .including(all: WorkoutExercise.workoutSets)
-                    .including(required: WorkoutExercise.exercise)
-                )
-                .orderByStart()
-                .asRequest(of: WorkoutInfo.self)
+                        .forKey(CodingKeys.workoutExerciseInfos)
+                        .including(all: WorkoutExercise.workoutSets)
+                        .including(required: WorkoutExercise.exercise)
+                    )
+                    .orderByStart()
+                    .asRequest(of: WorkoutInfo.self)
             }
         }
         
@@ -221,7 +206,7 @@ extension ActiveWorkoutView {
                     return
                 }
                 
-                let updatedDatabase = try await Self.initWorkoutSets(database: database, workoutInfo: workoutInfo)
+                let updatedDatabase = try await initWorkoutSets(database: database, workoutInfo: workoutInfo)
                 
                 if !updatedDatabase {
                     withAnimation {
@@ -231,14 +216,14 @@ extension ActiveWorkoutView {
             }
         }
         
-        private static func initWorkoutSets(database: AppDatabase, workoutInfo: WorkoutInfo) async throws -> Bool {
+        private func initWorkoutSets(database: AppDatabase, workoutInfo: WorkoutInfo) async throws -> Bool {
             var updatedWorkoutSets = [WorkoutSet]()
             for workoutExerciseInfo in workoutInfo.workoutExerciseInfos {
                 let nextIndex = workoutExerciseInfo.workoutSets.firstIndex { !$0.isCompleted }
                 guard let nextIndex = nextIndex else { continue }
                 let workoutSet = workoutExerciseInfo.workoutSets[nextIndex]
                 guard workoutSet.weight == nil && workoutSet.repetitions == nil else { continue } // both nil
-
+                
                 let prediction = try await database.databaseReader.read { db in
                     try workoutSet.weightAndRepetitionsFromPreviousSet(db, info: (
                         previousWorkoutSets: Array(workoutExerciseInfo.workoutSets[0..<nextIndex]),
@@ -260,14 +245,12 @@ extension ActiveWorkoutView {
                     weight = 20 // TODO: proper initial weight
                     repetitions = 5
                 }
-
+                
                 var updatedWorkoutSet = workoutSet
                 updatedWorkoutSet.weight = weight
                 updatedWorkoutSet.repetitions = repetitions
                 updatedWorkoutSets.append(updatedWorkoutSet)
             }
-            
-            // TODO: write to DB
             
             try await database.saveWorkoutSets(&updatedWorkoutSets)
             

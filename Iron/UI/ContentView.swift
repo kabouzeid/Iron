@@ -23,7 +23,7 @@ struct ContentView : View {
             FeedView()
                 .tag(SceneState.Tab.feed.rawValue)
                 .tabItem {
-                    Label("Summary", systemImage: "person")
+                    Label("Home", systemImage: "house")
                 }
             
             WorkoutList()
