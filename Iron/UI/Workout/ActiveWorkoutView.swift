@@ -29,6 +29,7 @@ struct ActiveWorkoutView: View {
                             NavigationLink(isActive: $showNotesEditor) {
                                 TextEditor(text: $inputNotes)
                                     .navigationTitle("Notes")
+                                    .scenePadding()
                             } label: {
                                 Text(viewModel.notes ?? "Notes")
                                     .foregroundColor(viewModel.notes == nil ? Color(uiColor: .tertiaryLabel) : .primary)
@@ -59,6 +60,15 @@ struct ActiveWorkoutView: View {
                                         viewModel.deleteWorkoutSets(ids: ids)
                                     }
                                 ))
+                            }
+                        }
+                        
+                        Button {
+                            viewModel.finish()
+                        } label: {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                Text("Finish Workout")
                             }
                         }
                     }
@@ -102,7 +112,7 @@ struct ActiveWorkoutView: View {
                             Button {
                                 
                             } label: {
-                                Label("Set Start/End", systemImage: "clock")
+                                Label("Start/End Time", systemImage: "clock")
                             }
                         }
                         
@@ -305,6 +315,11 @@ extension ActiveWorkoutView {
                         self.updateWorkoutSet(workoutSet)
                     }
                     self.selectNextWorkoutSet()
+                },
+                onHide: {
+                    withAnimation {
+                        self.selectedWorkoutSetID = nil
+                    }
                 }
             )
         }
@@ -372,6 +387,19 @@ extension ActiveWorkoutView {
             withAnimation {
                 selectedWorkoutSetID = nextWorkoutSet.id!
             }
+        }
+        
+        func finish() {
+            Task {
+                var workout = workoutInfo.workout
+                workout.end = Date()
+                workout.isActive = false
+                try await database.saveWorkout(&workout)
+            }
+            
+            // TODO: properly finish
+            // 1. clean up sets
+            // 2. watch companion, health etc
         }
     }
 }

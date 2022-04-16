@@ -39,14 +39,21 @@ struct WorkoutSetEditor: View {
         }
     }
     
+    private var hideButton: some View {
+        Button {
+            viewModel.hide()
+        } label: {
+            Image(systemName: "chevron.down")
+                .padding(6)
+        }
+    }
+    
     private var tagButton: some View {
-        Button(action: {
-            self.showMoreSheet = true
-        }) {
-            HStack(spacing: 0) {
-                Image(systemName: "tag")
-                    .padding(6)
-            }
+        Button {
+            showMoreSheet = true
+        } label: {
+            Image(systemName: "tag")
+                .padding(6)
         }
     }
     
@@ -198,6 +205,7 @@ struct WorkoutSetEditor: View {
                 
                 if showKeyboard == .none {
                     HStack(spacing: 16) {
+                        hideButton
                         tagButton
                         doneButton
                     }
@@ -240,7 +248,8 @@ extension WorkoutSetEditor {
         @Binding var workoutSet: WorkoutSet
         let exerciseCategory: Exercise.Category
         let massFormat: MassFormat
-        var onDone: () -> Void = {}
+        var onDone: () -> Void
+        var onHide: () -> Void
         
         var weight: Binding<Double?> {
             Binding(
@@ -277,6 +286,8 @@ extension WorkoutSetEditor {
         var doneText: String { workoutSet.isCompleted ? "Ok" : "Complete Set" }
         
         func done() { onDone() }
+        
+        func hide() { onHide() }
         
         var weightStepSize: Double {
             if exerciseCategory == .barbell {

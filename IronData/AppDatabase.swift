@@ -194,7 +194,8 @@ extension AppDatabase {
             try Workout.deleteAll(db)
             
             let exercises = try Exercise.fetchAll(db)
-            for _ in 0..<50 {
+            // random workouts
+            for _ in 0..<700 {
                 let workout = try Workout.makeRandom().inserted(db)
                 for _ in 0..<Int.random(in: 3...6) {
                     let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
@@ -204,10 +205,21 @@ extension AppDatabase {
                 }
             }
             
-            var activeWorkout = try Workout.order(Workout.Columns.start.desc).fetchOne(db)
-            activeWorkout?.isActive = true
-            activeWorkout?.end = nil
-            try activeWorkout?.save(db)
+            // +1 active workout
+            var workout = Workout.makeRandom()
+            workout.isActive = true
+            workout.end = nil
+            workout = try workout.inserted(db)
+            for _ in 0..<Int.random(in: 3...6) {
+                let workoutExercise = try WorkoutExercise.makeRandom(exerciseId: exercises.randomElement()!.id!, workoutId: workout.id!).inserted(db)
+                for _ in 0..<Int.random(in: 3...5) {
+                    var workoutSet = WorkoutSet.makeRandom(workoutExerciseId: workoutExercise.id!)
+                    workoutSet.isCompleted = false
+                    workoutSet.weight = nil
+                    workoutSet.repetitions = nil
+                    workoutSet = try workoutSet.inserted(db)
+                }
+            }
         }
     }
 }

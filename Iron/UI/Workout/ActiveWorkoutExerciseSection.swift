@@ -12,26 +12,78 @@ extension ActiveWorkoutView {
     struct ExerciseSection: View {
         let viewModel: ViewModel
         
+        @State private var showExerciseDetails = false
+        
         var body: some View {
             ForEach(1...1, id: \.self) { _ in // hack to get `onDelete`
-                HStack {
-                    Text(viewModel.title)
-                        .font(.headline)
-                    Spacer()
+                Menu {
+                    Section {
+                        Button {
+                            // TODO
+                        } label: {
+                            Label("Move", systemImage: "arrow.triangle.swap")
+                        }
+                        
+                        Button {
+                            // TODO
+                        } label: {
+                            Label("Replace", systemImage: "arrow.left.arrow.right")
+                        }
+                        
+                        Button(role: .destructive) {
+                            // TODO
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+                    
+                    Section {
+                        Button {
+                            // TODO
+                        } label: {
+                            Label("Add Note", systemImage: "square.and.pencil")
+                        }
+                        
+                        Button {
+                            showExerciseDetails = true
+                        } label: {
+                            Label("Details", systemImage: "info.circle")
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Text(viewModel.title)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.leading)
+                        
+                        NavigationLink(isActive: $showExerciseDetails) {
+                            ExerciseDetailView(exercise: viewModel.workoutExerciseInfo.exercise)
+                        } label: {
+                            EmptyView()
+                        }
+                        .frame(width: 0, height: 0)
+                        .hidden()
+                        
+                        Spacer()
+                        
+                        Image(systemName: "ellipsis")
+                    }
                 }
-                .listRowSeparator(.hidden)
+//                .listRowSeparator(.hidden) // visual glitches witht this enabled (iOS 15.4)
             }
             .onDelete { _ in viewModel.deleteWorkoutExercise() }
             
             ForEach(viewModel.workoutSets, id: \.workoutSet.id) { workoutSet in
-                ActiveWorkoutView.SetCell(viewModel: workoutSet)
-                    .id(workoutSet.workoutSet.id!)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if workoutSet.state != .pending {
-                            viewModel.select(workoutSet: workoutSet)
-                        }
+                Button {
+                    if workoutSet.state != .pending {
+                        viewModel.select(workoutSet: workoutSet)
                     }
+                } label: {
+                    ActiveWorkoutView.SetCell(viewModel: workoutSet)
+                        .id(workoutSet.workoutSet.id!)
+                }
+                .foregroundColor(.primary)
             }
             .onDelete { indices in
                 viewModel.deleteWorkoutSets(at: indices)
@@ -45,17 +97,17 @@ extension ActiveWorkoutView {
                     Text("Add Set")
                     
                     Spacer()
-
+                    
                     HStack(spacing: 16) {
                         Button {
                             // TODO
                         } label: {
-//                            Text("\(viewModel.lastIndex)")
-//                                .hidden()
-//                                .overlay(
+                            //                            Text("\(viewModel.lastIndex)")
+                            //                                .hidden()
+                            //                                .overlay(
                             Label("History", systemImage: "clock.arrow.circlepath")
                                 .labelStyle(.iconOnly)
-//                                )
+                            //                                )
                         }
                         .buttonStyle(.borderless)
                     }
