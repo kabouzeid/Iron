@@ -196,6 +196,9 @@ extension WorkoutList {
         @Published var deletionWorkout: Workout?
         
         func delete(workout: Workout) {
+            withAnimation {
+                workoutInfos.removeAll { $0.id == workout.id }
+            }
             Task {
                 try! await database.deleteWorkouts(ids: [workout.id!])
             }

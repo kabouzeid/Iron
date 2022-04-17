@@ -190,6 +190,58 @@ class IronDataTests: XCTestCase {
             XCTAssertEqual(try Exercise.filter(Exercise.Columns.title == "Bench Press: Barbell").fetchCount(db), 1)
         }
     }
+    
+    func testFetchTime() throws {
+        struct WorkoutInfo: Decodable, FetchableRecord, Equatable {
+            var workout: Workout
+            var workoutExerciseInfos: [WorkoutExerciseInfo]
+            
+            struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
+                var workoutExercise: WorkoutExercise
+                var exercise: Exercise
+                var workoutSets: [WorkoutSet]
+            }
+            
+            static func filterFinished() -> QueryInterfaceRequest<WorkoutInfo> {
+                Workout
+                    .filter(Workout.Columns.isActive == false)
+                    .including(all: Workout.workoutExercises
+                        .forKey(CodingKeys.workoutExerciseInfos)
+                        .including(all: WorkoutExercise.workoutSets)
+                        .including(required: WorkoutExercise.exercise)
+                    )
+                .orderByStart()
+                .asRequest(of: WorkoutInfo.self)
+            }
+        }
+        
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try database.createDefaultExercisesIfEmpty()
+        try database.createRandomWorkouts()
+        
+        try database.databaseReader.read { db in
+            measure {
+                let workoutInfos = try! WorkoutInfo.filterFinished().fetchAll(db)
+                XCTAssertEqual(workoutInfos.count, 700)
+            }
+        }
+    }
+    
+    func testExercisesFetchTime() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try database.createDefaultExercisesIfEmpty()
+        
+        try database.databaseReader.read { db in
+            measure {
+                let exercises = try! Exercise.all().orderByTitle().fetchAll(db)
+                XCTAssertEqual(exercises.count, 159)
+            }
+        }
+    }
 }
 
 struct Err: Error {}

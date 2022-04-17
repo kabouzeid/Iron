@@ -21,8 +21,15 @@ struct WorkoutTab: View {
                         } label: {
                             HStack {
                                 Spacer()
-                                Text("Resume Workout") + Text(" 48:32").monospacedDigit() // TODO: real time
+                                Text("Resume Workout")
+                                    .font(.headline)
                                 Spacer()
+                            }
+                            .overlay {
+                                HStack {
+                                    Spacer()
+                                    Text("48:32").font(.subheadline.monospacedDigit()) // TODO
+                                }
                             }
                             .padding(6)
                         }

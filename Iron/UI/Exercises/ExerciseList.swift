@@ -89,7 +89,8 @@ extension ExerciseList {
         @Published private var exercises = [Exercise]()
         
         func exercises(searchQuery: String, bodyPart: Exercise.BodyPart?, category: Exercise.Category?) -> [Exercise] {
-            let searchQuery = searchQuery.lowercased()
+            let searchQuery = searchQuery.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !searchQuery.isEmpty else { return exercises }
 
             func fuzzyMatches(title: String, searchQuery: String) -> Bool {
                 for s in searchQuery.split(separator: " ") {
