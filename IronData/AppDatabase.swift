@@ -235,4 +235,9 @@ extension AppDatabase {
     public var databaseReader: DatabaseReader {
         dbWriter
     }
+    
+    /// Provides access to the database
+    public var databaseWriter: DatabaseWriter {
+        dbWriter
+    }
 }

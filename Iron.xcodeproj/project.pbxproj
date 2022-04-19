@@ -138,7 +138,6 @@
 		8A652C4422D1032A00DBE10E /* ExerciseStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */; };
 		8A652C4622D1055600DBE10E /* ChartsLineChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */; };
 		8A652C4822D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */; };
-		8A66B86727FA181300078C3F /* AppDatabase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A66B86627FA181300078C3F /* AppDatabase+Environment.swift */; };
 		8A66B86927FA2A2400078C3F /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A66B86827FA2A2400078C3F /* ExerciseDetailView.swift */; };
 		8A6B1A6922BE8B210067DD41 /* _WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* _WorkoutDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift */; };
@@ -153,6 +152,8 @@
 		8A799F5F22BF868500DD5E1B /* WorkoutExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */; };
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */; };
+		8A7D1424280DB8C70019B72D /* AppDatabase+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D1423280DB8C70019B72D /* AppDatabase+SwiftUI.swift */; };
+		8A7D1426280DBA690019B72D /* GRDBQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 8A7D1425280DBA690019B72D /* GRDBQuery */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
@@ -707,7 +708,6 @@
 		8A652C4322D1032A00DBE10E /* ExerciseStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatisticsView.swift; sourceTree = "<group>"; };
 		8A652C4522D1055600DBE10E /* ChartsLineChartViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsLineChartViewRepresentable.swift; sourceTree = "<group>"; };
 		8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsBarChartViewRepresentable.swift; sourceTree = "<group>"; };
-		8A66B86627FA181300078C3F /* AppDatabase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDatabase+Environment.swift"; sourceTree = "<group>"; };
 		8A66B86827FA2A2400078C3F /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A68F7C7236319040089263B /* WorkoutData v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkoutData v2.xcdatamodel"; sourceTree = "<group>"; };
 		8A68F7D1236329940089263B /* WorkoutExerciseMigrationPolicyV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseMigrationPolicyV1.swift; sourceTree = "<group>"; };
@@ -725,6 +725,7 @@
 		8A799F5E22BF868500DD5E1B /* WorkoutExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseDetailView.swift; sourceTree = "<group>"; };
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentWeight+Measurement.swift"; sourceTree = "<group>"; };
+		8A7D1423280DB8C70019B72D /* AppDatabase+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDatabase+SwiftUI.swift"; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Iron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -904,6 +905,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7D1426280DBA690019B72D /* GRDBQuery in Frameworks */,
 				8A5BC54427E9F4B600E437A1 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,8 +1309,8 @@
 				8A5BC55727EA30EC00E437A1 /* Models */,
 				8A5BC53F27E9F48200E437A1 /* Persistence.swift */,
 				8A5BC55B27EA429200E437A1 /* Everkinetic.swift */,
+				8A7D1423280DB8C70019B72D /* AppDatabase+SwiftUI.swift */,
 				8A5BC54127E9F48900E437A1 /* AppDatabase.swift */,
-				8A66B86627FA181300078C3F /* AppDatabase+Environment.swift */,
 			);
 			path = IronData;
 			sourceTree = "<group>";
@@ -1873,6 +1875,7 @@
 			name = IronData;
 			packageProductDependencies = (
 				8A5BC54327E9F4B600E437A1 /* GRDB */,
+				8A7D1425280DBA690019B72D /* GRDBQuery */,
 			);
 			productName = IronData;
 			productReference = 8A5BC52127E9F45D00E437A1 /* IronData.framework */;
@@ -2144,6 +2147,7 @@
 			packageReferences = (
 				8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */,
 				8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				8A7D1420280DB7FC0019B72D /* XCRemoteSwiftPackageReference "GRDBQuery" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -2266,11 +2270,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A66B86727FA181300078C3F /* AppDatabase+Environment.swift in Sources */,
 				8A5BC54827E9F50100E437A1 /* Workout.swift in Sources */,
 				8A5BC55A27EA409900E437A1 /* Exercise+Everkinetic.swift in Sources */,
 				8A5BC54227E9F48900E437A1 /* AppDatabase.swift in Sources */,
 				8A95928927F85A0E00FBED46 /* Exercise+.swift in Sources */,
+				8A7D1424280DB8C70019B72D /* AppDatabase+SwiftUI.swift in Sources */,
 				8A5BC55327EA150D00E437A1 /* WorkoutSet.swift in Sources */,
 				8A5BC55C27EA429200E437A1 /* Everkinetic.swift in Sources */,
 				8A5BC55127EA150300E437A1 /* WorkoutExercise.swift in Sources */,
@@ -3652,8 +3656,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift.git";
 			requirement = {
-				kind = upToNextMinorVersion;
+				kind = upToNextMajorVersion;
 				minimumVersion = 5.21.0;
+			};
+		};
+		8A7D1420280DB7FC0019B72D /* XCRemoteSwiftPackageReference "GRDBQuery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDBQuery";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -3678,6 +3690,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		8A7D1425280DBA690019B72D /* GRDBQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A7D1420280DB7FC0019B72D /* XCRemoteSwiftPackageReference "GRDBQuery" */;
+			productName = GRDBQuery;
 		};
 /* End XCSwiftPackageProductDependency section */
 

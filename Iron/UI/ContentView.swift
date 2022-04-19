@@ -50,6 +50,7 @@ struct ContentView : View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .environment(\.appDatabase, .shared)
         .productionEnvironment()
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.RestoreFromBackup)) { output in
             guard let backupData = output.userInfo?[restoreFromBackupDataUserInfoKey] as? Data else { return }

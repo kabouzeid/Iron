@@ -53,7 +53,7 @@ struct _HistoryView: View {
                     NavigationLink(destination: _WorkoutDetailView(workout: workout)
                         .environmentObject(self.settingsStore)
                     ) {
-                        WorkoutCell(workout: workout)
+                        _WorkoutCell(workout: workout)
                             .contextMenu {
                                 // TODO add images when SwiftUI fixes the image size
                                 if UIDevice.current.userInterfaceIdiom != .pad {
@@ -108,7 +108,7 @@ struct _HistoryView: View {
     }
 }
 
-private struct WorkoutCell: View {
+private struct _WorkoutCell: View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     @ObservedObject var workout: Workout

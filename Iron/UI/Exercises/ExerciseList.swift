@@ -7,10 +7,10 @@
 //
 
 import SwiftUI
-import IronData
+import GRDBQuery
 
 struct ExerciseList: View {
-    @StateObject var viewModel = ViewModel(database: .shared)
+    @Query(ExercisesRequest()) private var exercises: [Exercise]
     
     @State private var searchQuery: String = ""
     @State private var selectedBodyPart: Exercise.BodyPart?
@@ -60,9 +60,9 @@ struct ExerciseList: View {
                 
                 Divider()
                 
-                List(viewModel.exercises(searchQuery: searchQuery, bodyPart: selectedBodyPart, category: selectedCategory)) { exercise in
+                List(filteredExercises(searchQuery: searchQuery, bodyPart: selectedBodyPart, category: selectedCategory)) { exercise in
                     NavigationLink {
-                        ExerciseDetailView(exercise: exercise)
+                        ExerciseDetailView(exerciseID: exercise.id!)
                     } label: {
                         Text(exercise.title)
                     }
@@ -72,64 +72,56 @@ struct ExerciseList: View {
                 .navigationTitle("Exercises")
             }
         }
-        .task { try? await viewModel.fetchData() }
+        .mirrorAppearanceState(to: $exercises.isAutoupdating)
     }
 }
 
+// MARK: - View Model
+
+import IronData
 import GRDB
+import Combine
 
 extension ExerciseList {
-    @MainActor
-    class ViewModel: ObservableObject {
-        let database: AppDatabase
-        nonisolated init(database: AppDatabase) {
-            self.database = database
+    struct ExercisesRequest: Queryable {
+        static var defaultValue: [Exercise] { [] }
+        
+        func publisher(in database: AppDatabase) -> AnyPublisher<[Exercise], Error> {
+            ValueObservation.tracking(Exercise.fetchAll(_:))
+                .publisher(in: database.databaseReader, scheduling: .immediate)
+                .eraseToAnyPublisher()
         }
-        
-        @Published private var exercises = [Exercise]()
-        
-        func exercises(searchQuery: String, bodyPart: Exercise.BodyPart?, category: Exercise.Category?) -> [Exercise] {
-            let searchQuery = searchQuery.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !searchQuery.isEmpty else { return exercises }
+    }
+    
+    func filteredExercises(searchQuery: String, bodyPart: Exercise.BodyPart?, category: Exercise.Category?) -> [Exercise] {
+        let searchQuery = searchQuery.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !searchQuery.isEmpty else { return exercises }
 
-            func fuzzyMatches(title: String, searchQuery: String) -> Bool {
-                for s in searchQuery.split(separator: " ") {
-                    if !title.lowercased().contains(s) {
-                        return false
-                    }
+        func fuzzyMatches(title: String, searchQuery: String) -> Bool {
+            for s in searchQuery.split(separator: " ") {
+                if !title.lowercased().contains(s) {
+                    return false
                 }
-                return true
             }
+            return true
+        }
 
-            return exercises.filter { exercise in
-                if let bodyPart = bodyPart {
-                    guard exercise.bodyPart == bodyPart else { return false }
-                }
-                if let category = category {
-                    guard exercise.category == category else { return false }
-                }
-                return fuzzyMatches(title: exercise.title, searchQuery: searchQuery) ||
-                exercise.aliases.map { fuzzyMatches(title: $0, searchQuery: searchQuery) } ?? false
+        return exercises.filter { exercise in
+            if let bodyPart = bodyPart {
+                guard exercise.bodyPart == bodyPart else { return false }
             }
-        }
-        
-        func fetchData() async throws {
-            for try await exercises in exerciseStream() {
-                withAnimation {
-                    self.exercises = exercises
-                }
+            if let category = category {
+                guard exercise.category == category else { return false }
             }
-        }
-        
-        func exerciseStream() -> AsyncValueObservation<[Exercise]> {
-            ValueObservation.tracking(Exercise.all().orderByTitle().fetchAll)
-                .values(in: database.databaseReader, scheduling: .immediate)
+            return fuzzyMatches(title: exercise.title, searchQuery: searchQuery) ||
+            exercise.aliases.map { fuzzyMatches(title: $0, searchQuery: searchQuery) } ?? false
         }
     }
 }
 
 struct ExerciseList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseList(viewModel: .init(database: .random()))
+        ExerciseList()
+            .environment(\.appDatabase, .random())
     }
 }

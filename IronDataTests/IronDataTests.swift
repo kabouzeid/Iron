@@ -242,6 +242,89 @@ class IronDataTests: XCTestCase {
             }
         }
     }
+    
+    func testHistoryFetchTime() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try database.createDefaultExercisesIfEmpty()
+        try database.createRandomWorkouts()
+        
+        struct WorkoutInfo: Decodable, FetchableRecord, Equatable {
+            var workout: Workout
+            var workoutExerciseInfos: [WorkoutExerciseInfo]
+            
+            struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
+                var workoutExercise: WorkoutExercise
+                var workoutSets: [WorkoutSet]
+            }
+            
+            static func filter(exerciseID: Exercise.ID.Wrapped) -> QueryInterfaceRequest<WorkoutInfo> {
+                Workout
+                    .including(all: Workout.workoutExercises
+                        .forKey(CodingKeys.workoutExerciseInfos)
+                        .filter(WorkoutExercise.Columns.exerciseId == exerciseID)
+                        .including(all: WorkoutExercise.workoutSets
+                            .filter(WorkoutSet.Columns.isCompleted == true)
+                        )
+                    )
+                    .orderByStart()
+                    .asRequest(of: WorkoutInfo.self)
+            }
+        }
+        
+        try database.databaseReader.read { db in
+            measure {
+                let history = try! WorkoutInfo
+                    .filter(exerciseID: 1)
+                    .fetchAll(db)
+                    .filter { !$0.workoutExerciseInfos.isEmpty }
+                print(history.count)
+            }
+        }
+    }
+    
+    func testActiveWorkoutFetchTime() throws {
+        let dbQueue = DatabaseQueue()
+        let database = try AppDatabase(dbQueue)
+        
+        try database.createDefaultExercisesIfEmpty()
+        try database.createRandomWorkouts()
+        
+        struct WorkoutInfo: Decodable, FetchableRecord, Equatable {
+            var workout: Workout
+            var workoutExerciseInfos: [WorkoutExerciseInfo]
+            
+            struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable, Identifiable {
+                var workoutExercise: WorkoutExercise
+                var exercise: Exercise
+                var workoutSets: [WorkoutSet]
+                
+                var id: WorkoutExercise.ID { workoutExercise.id }
+            }
+            
+            static func allActive() -> QueryInterfaceRequest<WorkoutInfo> {
+                Workout
+                    .filter(Workout.Columns.isActive == true)
+                    .order(Workout.Columns.id) // in case there is a bug and there are multiple active workouts
+                    .including(all: Workout.workoutExercises
+                        .forKey(CodingKeys.workoutExerciseInfos)
+                        .including(all: WorkoutExercise.workoutSets)
+                        .including(required: WorkoutExercise.exercise)
+                    )
+                    .orderByStart()
+                    .asRequest(of: WorkoutInfo.self)
+            }
+        }
+        
+        try database.databaseReader.read { db in
+            measure {
+                _ = try! WorkoutInfo
+                    .allActive()
+                    .fetchOne(db)!
+            }
+        }
+    }
 }
 
 struct Err: Error {}

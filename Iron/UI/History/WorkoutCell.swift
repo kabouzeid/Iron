@@ -9,172 +9,170 @@
 import SwiftUI
 import IronData
 
-extension WorkoutList {
-    struct WorkoutCell: View {
-        let viewModel: ViewModel
-        
-        var body: some View {
-            HStack {
-                VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Label(viewModel.title, systemImage: viewModel.bodyPartLetter ?? "questionmark")
-                            .font(.headline)
-                            .symbolVariant(.circle.fill)
-                            .foregroundStyle(viewModel.bodyPartColor ?? .black)
-                        
-                        Label(viewModel.startString, systemImage: "calendar")
+struct WorkoutCell: View {
+    let workoutInfo: WorkoutList.WorkoutInfo
+    let personalRecordInfo: WorkoutList.PersonalRecordInfo?
+    let bodyWeight: Measurement<UnitMass>?
+    
+    let massFormat: MassFormat
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Label(title, systemImage: bodyPartLetter ?? "questionmark")
+                        .font(.headline)
+                        .symbolVariant(.circle.fill)
+                        .foregroundStyle(bodyPartColor ?? .black)
+                    
+                    Label(startString, systemImage: "calendar")
+                        .font(.body)
+                        .labelStyle(.titleOnly)
+                        .foregroundColor(.secondary)
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Divider()
+                    
+                    HStack(spacing: 24) {
+                        Label(durationString, systemImage: "clock")
                             .font(.body)
-                            .labelStyle(.titleOnly)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Divider()
                         
-                        HStack(spacing: 24) {
-                            Label(viewModel.durationString, systemImage: "clock")
+                        Label(totalWeight, systemImage: "scalemass")
+                            .font(.body)
+                        
+                        bodyWeightFormatted.map {
+                            Label($0, systemImage: "person")
                                 .font(.body)
-                            
-                            Label(viewModel.totalWeight, systemImage: "scalemass")
-                                .font(.body)
-                            
-                            viewModel.bodyWeightFormatted.map {
-                                Label($0, systemImage: "person")
-                                    .font(.body)
-                            }
                         }
-                        
-                        Divider()
                     }
                     
-                    viewModel.comment.map {
-                        Text($0.enquoted)
-                            .lineLimit(1)
-                            .font(Font.body.italic())
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 2) {
-                        ForEach(viewModel.summary) { item in
-                            HStack {
-                                Text(item.exerciseDescription)
-                                    .font(.body)
-                                    .foregroundColor(.secondary)
-                                
-                                Spacer()
-                                
-                                if item.prCount > 0 {
-                                    HStack(spacing: 0) {
-                                        if item.prCount > 1 {
-                                            Text("\(item.prCount) × ")
-                                        }
-                                        Image(systemName: "star")
-                                            .symbolVariant(.circle.fill)
+                    Divider()
+                }
+                
+                comment.map {
+                    Text($0.enquoted)
+                        .lineLimit(1)
+                        .font(Font.body.italic())
+                        .foregroundColor(.secondary)
+                }
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(summary) { item in
+                        HStack {
+                            Text(item.exerciseDescription)
+                                .font(.body)
+                                .foregroundColor(.secondary)
+                            
+                            Spacer()
+                            
+                            if item.prCount > 0 {
+                                HStack(spacing: 0) {
+                                    if item.prCount > 1 {
+                                        Text("\(item.prCount) × ")
                                     }
-                                    .foregroundColor(.yellow)
+                                    Image(systemName: "star")
+                                        .symbolVariant(.circle.fill)
                                 }
+                                .foregroundColor(.yellow)
                             }
                         }
                     }
                 }
-                Spacer()
             }
+            Spacer()
         }
     }
 }
 
-extension WorkoutList.WorkoutCell {
-    struct ViewModel {
-        static let durationFormatter: DateComponentsFormatter = {
-            let formatter = DateComponentsFormatter()
-            formatter.unitsStyle = .abbreviated
-            formatter.allowedUnits = [.hour, .minute]
-            return formatter
-        }()
-        
-        let workoutInfo: WorkoutList.ViewModel.WorkoutInfo
-        let personalRecordInfo: WorkoutList.ViewModel.PersonalRecordInfo?
-        let bodyWeight: Measurement<UnitMass>?
-        
-        let massFormat: MassFormat = SettingsStore.shared.massFormat
-        
-        var title: String {
-            workoutInfo.workout.displayTitle(
-                infos: workoutInfo.workoutExerciseInfos.map { (exercise: $0.exercise, workoutSets: $0.workoutSets) }
+extension WorkoutCell {
+    static let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute]
+        return formatter
+    }()
+    
+    
+    var title: String {
+        workoutInfo.workout.displayTitle(
+            infos: workoutInfo.workoutExerciseInfos.map { (exercise: $0.exercise, workoutSets: $0.workoutSets) }
+        )
+    }
+    
+    var comment: String? {
+        workoutInfo.workout.comment
+    }
+    
+    var startString: String {
+        workoutInfo.workout.start.formatted(date: .abbreviated, time: .shortened)
+    }
+    
+    var durationString: String {
+        {
+            guard let duration = workoutInfo.workout.dateInterval?.duration else { return nil }
+            return Self.durationFormatter.string(from: duration)
+        }() ?? "Unknown Duration"
+    }
+    
+    var totalWeight: String {
+        workoutInfo.workout.totalWeight(
+            infos: workoutInfo.workoutExerciseInfos.map { $0.workoutSets }
+        )
+        .converted(to: massFormat.unit)
+        .formatted(.measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.rounded(rule: .up, increment: 1)))
+    }
+    
+    var summary: [SummaryItem] {
+        workoutInfo.workoutExerciseInfos.map { workoutExerciseInfo in
+            SummaryItem(
+                exerciseDescription: "\(workoutExerciseInfo.workoutSets.count) × \(workoutExerciseInfo.exercise.title)",
+                prCount: personalRecordInfo?[workoutExerciseInfo.workoutExercise.id!] ?? 0
             )
         }
+    }
+    
+    struct SummaryItem: Identifiable {
+        let exerciseDescription: String
+        let prCount: Int
         
-        var comment: String? {
-            workoutInfo.workout.comment
-        }
-        
-        var startString: String {
-            workoutInfo.workout.start.formatted(date: .abbreviated, time: .shortened)
-        }
-        
-        var durationString: String {
-            {
-                guard let duration = workoutInfo.workout.dateInterval?.duration else { return nil }
-                return Self.durationFormatter.string(from: duration)
-            }() ?? "Unknown Duration"
-        }
-        
-        var totalWeight: String {
-            workoutInfo.workout.totalWeight(
-                infos: workoutInfo.workoutExerciseInfos.map { $0.workoutSets }
-            )
-            .converted(to: massFormat.unit)
-            .formatted(.measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.rounded(rule: .up, increment: 1)))
-        }
-        
-        var summary: [SummaryItem] {
-            workoutInfo.workoutExerciseInfos.map { workoutExerciseInfo in
-                SummaryItem(
-                    exerciseDescription: "\(workoutExerciseInfo.workoutSets.count) × \(workoutExerciseInfo.exercise.title)",
-                    prCount: personalRecordInfo?[workoutExerciseInfo.workoutExercise.id!] ?? 0
-                )
-            }
-        }
-        
-        struct SummaryItem: Identifiable {
-            let exerciseDescription: String
-            let prCount: Int
-            
-            var id: UUID { UUID() } // there are no ids for this item
-        }
-        
-        var bodyWeightFormatted: String? {
-            bodyWeight.map { $0.formatted(.measurement(width: .abbreviated, usage: .personWeight)) }
-        }
-        
-        private var bodyParts: [Exercise.BodyPart] {
-            workoutInfo.workoutExerciseInfos.flatMap { workoutExerciseInfo in
-                workoutExerciseInfo.exercise.bodyPart.map { bodyPart in
-                    Array(repeating: bodyPart, count: max(workoutExerciseInfo.workoutSets.count, 1))
-                } ?? []
-            }.sortedByFrequency().uniqed().reversed()
-        }
-        
-        var bodyPartLetter: String? {
-            bodyParts.first?.letter
-        }
-        
-        var bodyPartColor: Color? {
-            bodyParts.first?.color
-        }
+        var id: UUID { UUID() } // there are no ids for this item
+    }
+    
+    var bodyWeightFormatted: String? {
+        bodyWeight.map { $0.formatted(.measurement(width: .abbreviated, usage: .personWeight)) }
+    }
+    
+    private var bodyParts: [Exercise.BodyPart] {
+        workoutInfo.workoutExerciseInfos.flatMap { workoutExerciseInfo in
+            workoutExerciseInfo.exercise.bodyPart.map { bodyPart in
+                Array(repeating: bodyPart, count: max(workoutExerciseInfo.workoutSets.count, 1))
+            } ?? []
+        }.sortedByFrequency().uniqed().reversed()
+    }
+    
+    var bodyPartLetter: String? {
+        bodyParts.first?.letter
+    }
+    
+    var bodyPartColor: Color? {
+        bodyParts.first?.color
     }
 }
 
 struct WorkoutListCell_Previews : PreviewProvider {
     static var previews: some View {
-        WorkoutList.WorkoutCell(
-            viewModel: .init(workoutInfo: workoutInfo, personalRecordInfo: [0 : 0, 1 : 2], bodyWeight: .init(value: 82, unit: .kilograms))
+        WorkoutCell(
+            workoutInfo: workoutInfo,
+            personalRecordInfo: [0 : 0, 1 : 2],
+            bodyWeight: .init(value: 82, unit: .kilograms),
+            massFormat: .metric
         )
         .scenePadding()
         .previewLayout(.sizeThatFits)
     }
     
-    static var workoutInfo: WorkoutList.ViewModel.WorkoutInfo {
+    static var workoutInfo: WorkoutList.WorkoutInfo {
         var workout = Workout.new(start: Date(timeIntervalSinceNow: -60*60*1.5))
         workout.end = Date()
         workout.comment = "Feeling strong today"

@@ -7,33 +7,47 @@
 //
 
 import SwiftUI
-import IronData
+import GRDBQuery
 
 struct WorkoutList: View {
-    @StateObject var viewModel = ViewModel(database: .shared)
+    @Environment(\.appDatabase) private var database: AppDatabase
+    @EnvironmentObject private var settingsStore: SettingsStore
+    
+//    @Query(WorkoutInfosRequest()) private var workoutInfos: [WorkoutInfo]
+    @State private var workoutInfos: [WorkoutInfo] = []
+    
+    @State private var bodyWeights: [Date : Measurement<UnitMass>] = [:]
+    
+    @State private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
+    
+    @State private var deletionWorkout: Workout?
+    
+    @State private var loading = true
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(viewModel.workoutInfos) { workoutInfo in
+                    ForEach(workoutInfos) { workoutInfo in
                         NavigationLink {
                             Text("TODO")
                         } label: {
-                            WorkoutCell(viewModel: .init(
+                            WorkoutCell(
                                 workoutInfo: workoutInfo,
-                                personalRecordInfo: viewModel.prInfo(for: workoutInfo),
-                                bodyWeight: viewModel.bodyWeight(for: workoutInfo)
-                            ))
+                                personalRecordInfo: personalRecordInfo(for: workoutInfo),
+                                bodyWeight: bodyWeight(for: workoutInfo),
+                                massFormat: settingsStore.massFormat
+                            )
                             .contentShape(Rectangle())
                             .onChange(of: workoutInfo, perform: { newWorkoutInfo in
-                                Task { try await viewModel.fetchBodyWeight(for: newWorkoutInfo) }
+                                Task { try await fetchBodyWeight(for: newWorkoutInfo) }
                             })
-                            .onReceive(viewModel.personalRecordsStaleSubject, perform: {
-                                Task { try await viewModel.fetchPRInfo(for: workoutInfo) }
+                            .onChange(of: workoutInfos, perform: { newWorkoutInfos in
+                                guard let workoutInfo = newWorkoutInfos.first(where: { $0.id == workoutInfo.id }) else { return }
+                                Task { try await fetchPersonalRecordInfo(for: workoutInfo) }
                             })
-                            .task { try? await viewModel.fetchBodyWeight(for: workoutInfo) }
-                            .task { try? await viewModel.fetchPRInfo(for: workoutInfo) }
+                            .task { try? await fetchBodyWeight(for: workoutInfo) }
+                            .task { try? await fetchPersonalRecordInfo(for: workoutInfo) }
                         }
                         .buttonStyle(.plain)
                         .scenePadding()
@@ -41,21 +55,21 @@ struct WorkoutList: View {
                         .cornerRadius(10)
                         .contextMenu {
                             Button {
-                                viewModel.share(workoutInfo: workoutInfo)
+                                share(workoutInfo: workoutInfo)
                             } label: {
                                 Text("Share")
                                 Image(systemName: "square.and.arrow.up")
                             }
                             
                             Button {
-                                viewModel.repeat(workoutInfo: workoutInfo)
+                                self.repeat(workoutInfo: workoutInfo)
                             } label: {
                                 Text("Repeat")
                                 Image(systemName: "arrow.clockwise")
                             }
                             
                             Button(role: .destructive) {
-                                viewModel.confirmDelete(workoutInfo: workoutInfo)
+                                confirmDelete(workoutInfo: workoutInfo)
                             } label: {
                                 Text("Delete")
                                 Image(systemName: "trash")
@@ -66,19 +80,20 @@ struct WorkoutList: View {
                 }
                 .scenePadding(.horizontal)
             }
-            .actionSheet(item: $viewModel.deletionWorkout) { workout in
+            .actionSheet(item: $deletionWorkout) { workout in
                 ActionSheet(title: Text("This cannot be undone."), buttons: [
                     .destructive(Text("Delete Workout"), action: {
-                        viewModel.delete(workout: workout)
+                        delete(workout: workout)
                     }),
                     .cancel()
                 ])
             }
             .background(Color(uiColor: .systemGroupedBackground))
-            .placeholder(show: viewModel.workoutInfos.isEmpty, Text("Your finished workouts will appear here.")
+            .placeholder(show: workoutInfos.isEmpty, Text("Your finished workouts will appear here.")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
             )
+            .placeholder(show: loading, ProgressView())
             .navigationBarTitle(Text("History"))
             
             // Double Column Placeholder (iPad)
@@ -86,156 +101,149 @@ struct WorkoutList: View {
                 .foregroundColor(.secondary)
         }
         .navigationViewStyle(.stack)
-        .task { try? await viewModel.fetchData() }
+        .animation(.default, value: workoutInfos)
+//        .mirrorAppearanceState(to: $workoutInfos.isAutoupdating)
+        .task {
+            try? await fetchWorkoutInfos()
+        }
     }
 }
 
-import Combine
+// MARK: - View Model
+
+import IronData
 import GRDB
+import Combine
 
 extension WorkoutList {
-    @MainActor
-    class ViewModel: ObservableObject {
-        let database: AppDatabase
-        nonisolated init(database: AppDatabase) {
-            self.database = database
+    // MARK: - Workout Infos
+    
+    struct WorkoutInfo: Decodable, FetchableRecord, Equatable, Identifiable {
+        var workout: Workout
+        var workoutExerciseInfos: [WorkoutExerciseInfo]
+        
+        var id: Workout.ID { workout.id }
+        
+        struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
+            var workoutExercise: WorkoutExercise
+            var exercise: Exercise
+            var workoutSets: [WorkoutSet]
         }
         
-        // MARK: - Workout Infos
-        
-        @Published var workoutInfos: [WorkoutInfo] = []
-        
-        public struct WorkoutInfo: Decodable, FetchableRecord, Equatable, Identifiable {
-            public var workout: Workout
-            public var workoutExerciseInfos: [WorkoutExerciseInfo]
-            
-            public var id: Workout.ID { workout.id }
-            
-            public struct WorkoutExerciseInfo: Decodable, FetchableRecord, Equatable {
-                public var workoutExercise: WorkoutExercise
-                public var exercise: Exercise
-                public var workoutSets: [WorkoutSet]
-            }
-            
-            static func filterFinished() -> QueryInterfaceRequest<WorkoutInfo> {
-                Workout
-                    .filter(Workout.Columns.isActive == false)
-                    .including(all: Workout.workoutExercises
-                        .forKey(CodingKeys.workoutExerciseInfos)
-                        .including(all: WorkoutExercise.workoutSets)
-                        .including(required: WorkoutExercise.exercise)
-                    )
+        static func filterFinished() -> QueryInterfaceRequest<WorkoutInfo> {
+            Workout
+                .filter(Workout.Columns.isActive == false)
+                .including(all: Workout.workoutExercises
+                    .forKey(CodingKeys.workoutExerciseInfos)
+                    .including(all: WorkoutExercise.workoutSets)
+                    .including(required: WorkoutExercise.exercise)
+                )
                 .orderByStart()
                 .asRequest(of: WorkoutInfo.self)
+        }
+    }
+    
+//    struct WorkoutInfosRequest: Queryable {
+//        static var defaultValue: [WorkoutInfo] { [] }
+//
+//        func publisher(in database: AppDatabase) -> AnyPublisher<[WorkoutInfo], Error> {
+//            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll(_:))
+//                .publisher(in: database.databaseReader)
+//                .eraseToAnyPublisher()
+//        }
+//    }
+    
+    func fetchWorkoutInfos() async throws {
+        let observation = ValueObservation
+            .tracking(WorkoutInfo.filterFinished().fetchAll(_:))
+            .values(in: database.databaseReader)
+        for try await workoutInfos in observation {
+            self.workoutInfos = workoutInfos
+            loading = false
+        }
+    }
+    
+    // MARK: - Body Weight
+    
+    func fetchBodyWeight(for workoutInfo: WorkoutInfo) async throws {
+        let date = workoutInfo.workout.start
+        guard bodyWeights[date] == nil else { return } // save power/performance by only loading the bodyweight once from HK
+        let bodyWeight = try await HealthManager.shared.healthStore.fetchBodyWeight(date: date)
+        withAnimation {
+            bodyWeights[date] = bodyWeight
+        }
+    }
+    
+    func bodyWeight(for workoutInfo: WorkoutInfo) -> Measurement<UnitMass>? {
+        bodyWeights[workoutInfo.workout.start]
+    }
+    
+    // MARK: - Personal Records
+    
+    typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Int]
+    
+    func fetchPersonalRecordInfo(for workoutInfo: WorkoutInfo) async throws {
+        // NOTE: for now we don't return the cached value
+        // if we want to use the cached value here, then we also need to reset the cache in `fetchData`
+        // potential downside of this might be flickering everytime we reset the cache
+        
+        let personalRecordInfo = try await database.databaseReader.read { db -> PersonalRecordInfo in
+            var map = PersonalRecordInfo()
+            for workoutExerciseInfo in workoutInfo.workoutExerciseInfos {
+                map[workoutExerciseInfo.workoutExercise.id!] = try workoutExerciseInfo.workoutSets.filter { workoutSet in
+                    try workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExerciseInfo.workoutExercise, workout: workoutInfo.workout))
+                }.count
+            }
+            return map
+        }
+        withAnimation {
+            personalRecordInfos[workoutInfo.workout.id!] = personalRecordInfo
+        }
+    }
+    
+    func personalRecordInfo(for workoutInfo: WorkoutInfo) -> PersonalRecordInfo? {
+        personalRecordInfos[workoutInfo.workout.id!]
+    }
+    
+    // MARK: - Actions
+    
+    func delete(workout: Workout) {
+        Task { try! await database.deleteWorkouts(ids: [workout.id!]) }
+    }
+    
+    private func shouldConfirmDelete(workoutInfo: WorkoutInfo) -> Bool {
+        /// returns true if there is at least one completed set
+        return workoutInfo.workoutExerciseInfos.contains { workoutExerciseInfo in
+            workoutExerciseInfo.workoutSets.contains { workoutSet in
+                workoutSet.isCompleted
             }
         }
-        
-        private func workoutInfosStream() -> AsyncValueObservation<[WorkoutInfo]> {
-            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll)
-                .values(in: database.databaseReader, scheduling: .immediate)
+    }
+    
+    func confirmDelete(workoutInfo: WorkoutInfo) {
+        if shouldConfirmDelete(workoutInfo: workoutInfo) {
+            deletionWorkout = workoutInfo.workout
+        } else {
+            delete(workout: workoutInfo.workout)
         }
-        
-        func fetchData() async throws {
-            for try await workoutInfos in workoutInfosStream() {
-                withAnimation {
-                    self.workoutInfos = workoutInfos
-                }
-                personalRecordsStaleSubject.send()
-            }
-        }
-        
-        // MARK: - Body Weight
-        
-        @Published private var bodyWeights: [Date : Measurement<UnitMass>] = [:]
-        
-        func fetchBodyWeight(for workoutInfo: WorkoutInfo) async throws {
-            let date = workoutInfo.workout.start
-            guard bodyWeights[date] == nil else { return } // save power/performance by only loading the bodyweight once from HK
-            let bodyWeight = try await HealthManager.shared.healthStore.fetchBodyWeight(date: date)
-            withAnimation {
-                bodyWeights[date] = bodyWeight
-            }
-        }
-        
-        func bodyWeight(for workoutInfo: WorkoutInfo) -> Measurement<UnitMass>? {
-            bodyWeights[workoutInfo.workout.start]
-        }
-        
-        // MARK: - Personal Records
-        
-        @Published private var personalRecordInfos: [Workout.ID.Wrapped : PersonalRecordInfo] = [:]
-        var personalRecordsStaleSubject = PassthroughSubject<Void, Never>() // sent whenever views should refetch PRs
-        
-        typealias PersonalRecordInfo = [WorkoutExercise.ID.Wrapped : Int]
-        
-        func fetchPRInfo(for workoutInfo: WorkoutInfo) async throws {
-            // NOTE: for now we don't return the cached value
-            // if we want to use the cached value here, then we also need to reset the cache in `fetchData`
-            // potential downside of this might be flickering everytime we reset the cache
-            
-            let prInfo = try await database.databaseReader.read { db -> PersonalRecordInfo in
-                var map = PersonalRecordInfo()
-                for workoutExerciseInfo in workoutInfo.workoutExerciseInfos {
-                    map[workoutExerciseInfo.workoutExercise.id!] = try workoutExerciseInfo.workoutSets.filter { workoutSet in
-                        try workoutSet.isPersonalRecord(db, info: (workoutExercise: workoutExerciseInfo.workoutExercise, workout: workoutInfo.workout))
-                    }.count
-                }
-                return map
-            }
-            withAnimation {
-                personalRecordInfos[workoutInfo.workout.id!] = prInfo
-            }
-        }
-        
-        func prInfo(for workoutInfo: WorkoutInfo) -> PersonalRecordInfo? {
-            personalRecordInfos[workoutInfo.workout.id!]
-        }
-        
-        // MARK: - Actions
-        
-        @Published var deletionWorkout: Workout?
-        
-        func delete(workout: Workout) {
-            withAnimation {
-                workoutInfos.removeAll { $0.id == workout.id }
-            }
-            Task {
-                try! await database.deleteWorkouts(ids: [workout.id!])
-            }
-        }
-        
-        private func shouldConfirmDelete(workoutInfo: WorkoutInfo) -> Bool {
-            /// returns true if there is at least one completed set
-            return workoutInfo.workoutExerciseInfos.contains { workoutExerciseInfo in
-                workoutExerciseInfo.workoutSets.contains { workoutSet in
-                    workoutSet.isCompleted
-                }
-            }
-        }
-        
-        func confirmDelete(workoutInfo: WorkoutInfo) {
-            if shouldConfirmDelete(workoutInfo: workoutInfo) {
-                deletionWorkout = workoutInfo.workout
-            } else {
-                delete(workout: workoutInfo.workout)
-            }
-        }
-        
-        func share(workoutInfo: WorkoutInfo) {
-            // TODO
-            //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
-            //            self.activityItems = [logText]
-        }
-        
-        func `repeat`(workoutInfo: WorkoutInfo) {
-            // TODO
-            //            WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
-        }
+    }
+    
+    func share(workoutInfo: WorkoutInfo) {
+        // TODO
+        //            guard let logText = workout.logText(in: self.exerciseStore.exercises, weightUnit: self.settingsStore.weightUnit) else { return }
+        //            self.activityItems = [logText]
+    }
+    
+    func `repeat`(workoutInfo: WorkoutInfo) {
+        // TODO
+        //            WorkoutDetailView.repeatWorkout(workout: workout, settingsStore: self.settingsStore, sceneState: sceneState)
     }
 }
 
 struct WorkoutList_Previews : PreviewProvider {
     static var previews: some View {
-        WorkoutList(viewModel: .init(database: .random()))
+        WorkoutList()
+            .environment(\.appDatabase, .random())
+            .environmentObject(SettingsStore.mockMetric)
     }
 }

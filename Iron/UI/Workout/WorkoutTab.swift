@@ -7,17 +7,20 @@
 //
 
 import SwiftUI
+import GRDBQuery
 
 struct WorkoutTab: View {
-    @StateObject var viewModel = ViewModel(database: .shared)
+    @Query(ActiveWorkoutRequest()) private var activeWorkout: Workout?
+    
+    @State private var openWorkout: Workout?
     
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    if let workout = viewModel.activeWorkout {
+                    if let workout = activeWorkout {
                         Button {
-                            viewModel.resumeWorkout(workout: workout)
+                            resumeWorkout(workout: workout)
                         } label: {
                             HStack {
                                 Spacer()
@@ -36,7 +39,7 @@ struct WorkoutTab: View {
                         .buttonStyle(.borderedProminent)
                     } else {
                         Button {
-                            viewModel.startWorkout()
+                            startWorkout()
                         } label: {
                             HStack {
                                 Spacer()
@@ -59,56 +62,42 @@ struct WorkoutTab: View {
             }
             .navigationTitle("Workout")
         }
-        .task {
-            try? await viewModel.fetchData()
+        .sheet(item: $openWorkout) { workout in
+            ActiveWorkoutView()
         }
-        .sheet(item: $viewModel.displayedWorkout) { workout in
-            ActiveWorkoutView(workout: workout)
-        }
+        .mirrorAppearanceState(to: $activeWorkout.isAutoupdating)
     }
 }
 
-import GRDB
 import IronData
+import GRDB
+import Combine
 
 extension WorkoutTab {
-    @MainActor
-    class ViewModel: ObservableObject {
-        let database: AppDatabase
+    struct ActiveWorkoutRequest: Queryable {
+        static var defaultValue: Workout? { nil }
         
-        nonisolated init(database: AppDatabase) {
-            self.database = database
+        func publisher(in database: AppDatabase) -> AnyPublisher<Workout?, Error> {
+            ValueObservation.tracking(Workout.filter(Workout.Columns.isActive == true).fetchOne(_:))
+                .publisher(in: database.databaseReader, scheduling: .immediate)
+                .eraseToAnyPublisher()
         }
-        
-        @Published var activeWorkout: Workout? = nil
-        
-        @Published var displayedWorkout: Workout? = nil
-        
-        func fetchData() async throws {
-            for try await activeWorkout in activeWorkoutStream() {
-                self.activeWorkout = activeWorkout
-            }
-        }
-        
-        private func activeWorkoutStream() -> AsyncValueObservation<Workout?> {
-            ValueObservation.tracking(Workout.filter(Workout.Columns.isActive == true).fetchOne)
-                .values(in: database.databaseReader, scheduling: .immediate)
-        }
-        
-        // MARK: - Actions
-        
-        func startWorkout() {
-            // TODO
-        }
-        
-        func resumeWorkout(workout: Workout) {
-            displayedWorkout = workout
-        }
+    }
+    
+    // MARK: - Actions
+    
+    func startWorkout() {
+        // TODO
+    }
+    
+    func resumeWorkout(workout: Workout) {
+        openWorkout = workout
     }
 }
 
 struct WorkoutTab_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutTab(viewModel: .init(database: .random()))
+        WorkoutTab()
+            .environment(\.appDatabase, .random())
     }
 }

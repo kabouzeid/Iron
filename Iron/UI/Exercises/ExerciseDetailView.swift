@@ -7,13 +7,16 @@
 //
 
 import SwiftUI
+import GRDBQuery
 
 struct ExerciseDetailView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    @StateObject var viewModel: ViewModel
+    @Query<ExerciseRequest> private var exercise: Exercise
     
     @State private var currentTab: Tab = .about
+    
+    init(exerciseID: Exercise.ID.Wrapped) {
+        _exercise = Query(ExerciseRequest(exerciseID: exerciseID))
+    }
     
     enum Tab {
         case about, history, charts, records
@@ -42,17 +45,15 @@ struct ExerciseDetailView: View {
             }
             
         }
-        .navigationTitle(viewModel.title)
+        .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            try? await viewModel.fetchData(dismiss: { dismiss() })
-        }
+        .mirrorAppearanceState(to: $exercise.isAutoupdating)
     }
     
     var aboutView: some View {
         List {
             Section {
-                let images = viewModel.images
+                let images = images
                 if !images.isEmpty {
                     let interval = 1.0
                     TimelineView(.animation(minimumInterval: interval, paused: false)) { context in
@@ -70,7 +71,7 @@ struct ExerciseDetailView: View {
             
             Section {
                 Button {
-                    viewModel.searchWeb()
+                    searchWeb()
                 } label: {
                     Label("Search Web", systemImage: "magnifyingglass")
                 }
@@ -78,17 +79,17 @@ struct ExerciseDetailView: View {
             
             Section {
                 VStack(alignment: .leading, spacing: 12) {
-                    if let bodyPart = viewModel.bodyPart {
+                    if let bodyPart = bodyPart {
                         Text(bodyPart)
                     }
-                    Text(viewModel.category)
-                    if let movementType = viewModel.movementType {
+                    Text(category)
+                    if let movementType = movementType {
                         Text(movementType)
                     }
                 }.padding(.vertical, 12)
             }
             
-            let aliases = viewModel.aliases
+            let aliases = aliases
             if !aliases.isEmpty {
                 Section("Also known as") {
                     VStack(alignment: .leading, spacing: 12) {
@@ -104,111 +105,92 @@ struct ExerciseDetailView: View {
     }
 }
 
-extension ExerciseDetailView {
-    init(exercise: Exercise) {
-        self.init(viewModel: .init(database: .shared, exercise: exercise))
-    }
-}
+// MARK: - View Model
 
 import IronData
 import GRDB
+import Combine
 
 extension ExerciseDetailView {
-    @MainActor
-    class ViewModel: ObservableObject {
-        private let database: AppDatabase
-        nonisolated init(database: AppDatabase, exercise: Exercise) {
-            self.database = database
-            self._exercise = Published(initialValue: exercise)
+    struct ExerciseRequest: Queryable {
+        let exerciseID: Exercise.ID.Wrapped
+        
+        static var defaultValue: Exercise { .new(title: "Unknown Exercise", category: .barbell) }
+        
+        func publisher(in database: AppDatabase) -> AnyPublisher<Exercise, Error> {
+            ValueObservation.tracking(Exercise.filter(id: exerciseID).fetchOne(_:))
+                .publisher(in: database.databaseReader, scheduling: .immediate)
+                .map { $0 ?? Self.defaultValue }
+                .eraseToAnyPublisher()
         }
+    }
+    
+    var title: String {
+        exercise.title
+    }
+    
+    var bodyPart: String? {
+        exercise.bodyPart?.name
+    }
+    
+    var category: String {
+        exercise.category.name
+    }
+    
+    var movementType: String? {
+        exercise.movementType?.name
+    }
+    
+    var images: [UIImage] {
+        exercise.images?.names.compactMap {
+            pdfToUIImage(
+                url: Exercise.imagesBundle.bundleURL.appendingPathComponent($0),
+                fit: .init(width: 1000, height: 1000)
+            )
+        } ?? []
+    }
+    
+    var aliases: [String] {
+        exercise.aliases?.split(separator: "\n").map { String($0) } ?? []
+    }
+    
+    func searchWeb() {
+        var components = URLComponents(string: "https://google.com/search")!
+        components.queryItems = [URLQueryItem(name: "q", value: "How To \(title)")]
+        UIApplication.shared.open(components.url!)
+    }
+    
+    private func pdfToUIImage(url: URL, fit: CGSize) -> UIImage? {
+        guard let document = CGPDFDocument(url as CFURL) else { return nil }
+        guard let page = document.page(at: 1) else { return nil }
         
-        @Published private var exercise: Exercise
+        let pageRect = page.getBoxRect(.mediaBox)
+        let scale = min(fit.width / pageRect.width, fit.height / pageRect.height)
+        let size = CGSize(width: pageRect.width * scale, height: pageRect.height * scale)
         
-        func fetchData(dismiss: () -> Void) async throws {
-            for try await exercise in exerciseStream() {
-                withAnimation {
-                    if let exercise = exercise {
-                        self.exercise = exercise
-                    } else {
-                        dismiss()
-                    }
-                }
-            }
-        }
-        
-        func exerciseStream() -> AsyncValueObservation<Exercise?> {
-            ValueObservation.tracking(Exercise.filter(id: exercise.id!).fetchOne)
-                .removeDuplicates()
-                .values(in: database.databaseReader, scheduling: .immediate)
-        }
-        
-        var title: String {
-            exercise.title
-        }
-        
-        var bodyPart: String? {
-            exercise.bodyPart?.name
-        }
-        
-        var category: String {
-            exercise.category.name
-        }
-        
-        var movementType: String? {
-            exercise.movementType?.name
-        }
-        
-        var images: [UIImage] {
-            exercise.images?.names.compactMap {
-                pdfToUIImage(
-                    url: Exercise.imagesBundle.bundleURL.appendingPathComponent($0),
-                    fit: .init(width: 1000, height: 1000)
-                )
-            } ?? []
-        }
-        
-        var aliases: [String] {
-            exercise.aliases?.split(separator: "\n").map { String($0) } ?? []
-        }
-        
-        func searchWeb() {
-            var components = URLComponents(string: "https://google.com/search")!
-            components.queryItems = [URLQueryItem(name: "q", value: "How To \(title)")]
-            UIApplication.shared.open(components.url!)
-        }
-        
-        private func pdfToUIImage(url: URL, fit: CGSize) -> UIImage? {
-            guard let document = CGPDFDocument(url as CFURL) else { return nil }
-            guard let page = document.page(at: 1) else { return nil }
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let img = renderer.image { ctx in
+            // flip
+            ctx.cgContext.translateBy(x: 0, y: size.height)
+            ctx.cgContext.scaleBy(x: 1, y: -1)
             
-            let pageRect = page.getBoxRect(.mediaBox)
-            let scale = min(fit.width / pageRect.width, fit.height / pageRect.height)
-            let size = CGSize(width: pageRect.width * scale, height: pageRect.height * scale)
+            // aspect fit
+            ctx.cgContext.scaleBy(x: scale, y: scale)
             
-            let renderer = UIGraphicsImageRenderer(size: size)
-            let img = renderer.image { ctx in
-                // flip
-                ctx.cgContext.translateBy(x: 0, y: size.height)
-                ctx.cgContext.scaleBy(x: 1, y: -1)
-                
-                // aspect fit
-                ctx.cgContext.scaleBy(x: scale, y: scale)
-                
-                // draw
-                ctx.cgContext.drawPDFPage(page)
-            }
-            
-            return img
+            // draw
+            ctx.cgContext.drawPDFPage(page)
         }
+        
+        return img
     }
 }
 
 struct ExerciseDetailView_Previews: PreviewProvider {
     static let database = AppDatabase.random()
+    static let exercise = try! database.databaseReader.read { db in try Exercise.fetchOne(db)! }
+    
     static var previews: some View {
-        ExerciseDetailView(viewModel: .init(
-            database: database,
-            exercise: try! database.databaseReader.read { db in try Exercise.fetchOne(db)! }
-        ))
+        ExerciseDetailView(exerciseID: exercise.id!)
+            .environment(\.appDatabase, database)
     }
 }

@@ -10,7 +10,12 @@ import SwiftUI
 
 extension ActiveWorkoutView {
     struct ExerciseSection: View {
-        let viewModel: ViewModel
+        let workoutExerciseInfo: ActiveWorkoutView.WorkoutInfo.WorkoutExerciseInfo
+        let selectedWorkoutSetID: WorkoutSet.ID.Wrapped?
+        let onSelect: (WorkoutSet.ID.Wrapped) -> Void
+        let onAddWorkoutSet: () -> Void
+        let onDeleteWorkoutExercise: () -> Void
+        let onDeleteWorkoutSets: ([WorkoutSet.ID.Wrapped]) -> Void
         
         @State private var showExerciseDetails = false
         
@@ -52,13 +57,13 @@ extension ActiveWorkoutView {
                     }
                 } label: {
                     HStack {
-                        Text(viewModel.title)
+                        Text(title)
                             .font(.headline)
                             .foregroundColor(.primary)
                             .multilineTextAlignment(.leading)
                         
                         NavigationLink(isActive: $showExerciseDetails) {
-                            ExerciseDetailView(exercise: viewModel.workoutExerciseInfo.exercise)
+                            ExerciseDetailView(exerciseID: workoutExerciseInfo.exercise.id!)
                         } label: {
                             EmptyView()
                         }
@@ -72,12 +77,12 @@ extension ActiveWorkoutView {
                 }
 //                .listRowSeparator(.hidden) // visual glitches witht this enabled (iOS 15.4)
             }
-            .onDelete { _ in viewModel.deleteWorkoutExercise() }
+            .onDelete { _ in deleteWorkoutExercise() }
             
-            ForEach(viewModel.workoutSets, id: \.workoutSet.id) { workoutSet in
+            ForEach(workoutSets, id: \.workoutSet.id) { workoutSet in
                 Button {
                     if workoutSet.state != .pending {
-                        viewModel.select(workoutSet: workoutSet)
+                        select(workoutSet: workoutSet)
                     }
                 } label: {
                     ActiveWorkoutView.SetCell(viewModel: workoutSet)
@@ -86,11 +91,11 @@ extension ActiveWorkoutView {
                 .foregroundColor(.primary)
             }
             .onDelete { indices in
-                viewModel.deleteWorkoutSets(at: indices)
+                deleteWorkoutSets(at: indices)
             }
             
             Button {
-                viewModel.onAddWorkoutSet()
+                onAddWorkoutSet()
             } label: {
                 HStack {
                     Image(systemName: "plus")
@@ -102,7 +107,7 @@ extension ActiveWorkoutView {
                         Button {
                             // TODO
                         } label: {
-                            //                            Text("\(viewModel.lastIndex)")
+                            //                            Text("\(lastIndex)")
                             //                                .hidden()
                             //                                .overlay(
                             Label("History", systemImage: "clock.arrow.circlepath")
@@ -118,50 +123,41 @@ extension ActiveWorkoutView {
 }
 
 extension ActiveWorkoutView.ExerciseSection {
-    struct ViewModel {
-        let workoutExerciseInfo: ActiveWorkoutView.ViewModel.WorkoutInfo.WorkoutExerciseInfo
-        let selectedWorkoutSetID: WorkoutSet.ID.Wrapped?
-        let onSelect: (WorkoutSet.ID.Wrapped) -> Void
-        let onAddWorkoutSet: () -> Void
-        let onDeleteWorkoutExercise: () -> Void
-        let onDeleteWorkoutSets: ([WorkoutSet.ID.Wrapped]) -> Void
-        
-        var title: String {
-            workoutExerciseInfo.exercise.title
+    var title: String {
+        workoutExerciseInfo.exercise.title
+    }
+    
+    var workoutSets: [ActiveWorkoutView.SetCell.ViewModel] {
+        let nextIndex = workoutExerciseInfo.workoutSets.firstIndex { $0.isCompleted == false } ?? workoutExerciseInfo.workoutSets.count
+        return workoutExerciseInfo.workoutSets.enumerated().map { (index, workoutSet) in
+                .init(
+                    workoutSet: workoutSet,
+                    exerciseCategory: workoutExerciseInfo.exercise.category,
+                    index: index + 1,
+                    state: index == nextIndex ? .next : (workoutSet.isCompleted ? .completed : .pending),
+                    isSelected: selectedWorkoutSetID == workoutSet.id!,
+                    isPersonalRecord1RM: false, // TODO
+                    isPersonalRecordWeight: false, // TODO
+                    isPersonalRecordVolume: false // TODO
+                )
         }
-        
-        var workoutSets: [ActiveWorkoutView.SetCell.ViewModel] {
-            let nextIndex = workoutExerciseInfo.workoutSets.firstIndex { $0.isCompleted == false } ?? workoutExerciseInfo.workoutSets.count
-            return workoutExerciseInfo.workoutSets.enumerated().map { (index, workoutSet) in
-                    .init(
-                        workoutSet: workoutSet,
-                        exerciseCategory: workoutExerciseInfo.exercise.category,
-                        index: index + 1,
-                        state: index == nextIndex ? .next : (workoutSet.isCompleted ? .completed : .pending),
-                        isSelected: selectedWorkoutSetID == workoutSet.id!,
-                        isPersonalRecord1RM: false, // TODO
-                        isPersonalRecordWeight: false, // TODO
-                        isPersonalRecordVolume: false // TODO
-                    )
-            }
-        }
-        
-        var lastIndex: Int {
-            workoutExerciseInfo.workoutSets.count
-        }
-        
-        func select(workoutSet: ActiveWorkoutView.SetCell.ViewModel) {
-            self.onSelect(workoutSet.workoutSet.id!)
-        }
-        
-        func deleteWorkoutExercise() {
-            onDeleteWorkoutExercise()
-        }
-        
-        func deleteWorkoutSets(at indices: IndexSet) {
-            let ids = indices.map { workoutExerciseInfo.workoutSets[$0].id! }
-            onDeleteWorkoutSets(ids)
-        }
+    }
+    
+    var lastIndex: Int {
+        workoutExerciseInfo.workoutSets.count
+    }
+    
+    func select(workoutSet: ActiveWorkoutView.SetCell.ViewModel) {
+        self.onSelect(workoutSet.workoutSet.id!)
+    }
+    
+    func deleteWorkoutExercise() {
+        onDeleteWorkoutExercise()
+    }
+    
+    func deleteWorkoutSets(at indices: IndexSet) {
+        let ids = indices.map { workoutExerciseInfo.workoutSets[$0].id! }
+        onDeleteWorkoutSets(ids)
     }
 }
 
@@ -171,19 +167,19 @@ struct ActiveWorkoutViewExerciseCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
-                ActiveWorkoutView.ExerciseSection(viewModel: .init(
+                ActiveWorkoutView.ExerciseSection(
                     workoutExerciseInfo: workoutExerciseInfo,
                     selectedWorkoutSetID: workoutExerciseInfo.workoutSets.last?.id!,
                     onSelect: { _ in },
                     onAddWorkoutSet: { },
                     onDeleteWorkoutExercise: { },
                     onDeleteWorkoutSets: { _ in }
-                ))
+                )
             }
         }
     }
     
-    static var workoutExerciseInfo: ActiveWorkoutView.ViewModel.WorkoutInfo.WorkoutExerciseInfo {
+    static var workoutExerciseInfo: ActiveWorkoutView.WorkoutInfo.WorkoutExerciseInfo {
         var exercise = Exercise.new(title: "Bench Press: Barbell", category: .barbell)
         exercise.bodyPart = .chest
         exercise.id = 0
