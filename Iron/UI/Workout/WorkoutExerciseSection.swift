@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-extension ActiveWorkoutView {
+extension WorkoutView {
     struct ExerciseSection: View {
-        let workoutExerciseInfo: ActiveWorkoutView.WorkoutInfo.WorkoutExerciseInfo
+        let workoutExerciseInfo: WorkoutView.WorkoutInfo.WorkoutExerciseInfo
         let selectedWorkoutSetID: WorkoutSet.ID.Wrapped?
         let onSelect: (WorkoutSet.ID.Wrapped) -> Void
         let onAddWorkoutSet: () -> Void
@@ -85,7 +85,7 @@ extension ActiveWorkoutView {
                         select(workoutSet: workoutSet)
                     }
                 } label: {
-                    ActiveWorkoutView.SetCell(viewModel: workoutSet)
+                    WorkoutView.SetCell(viewModel: workoutSet)
                         .id(workoutSet.workoutSet.id!)
                 }
                 .foregroundColor(.primary)
@@ -122,12 +122,12 @@ extension ActiveWorkoutView {
     }
 }
 
-extension ActiveWorkoutView.ExerciseSection {
+extension WorkoutView.ExerciseSection {
     var title: String {
         workoutExerciseInfo.exercise.title
     }
     
-    var workoutSets: [ActiveWorkoutView.SetCell.ViewModel] {
+    var workoutSets: [WorkoutView.SetCell.ViewModel] {
         let nextIndex = workoutExerciseInfo.workoutSets.firstIndex { $0.isCompleted == false } ?? workoutExerciseInfo.workoutSets.count
         return workoutExerciseInfo.workoutSets.enumerated().map { (index, workoutSet) in
                 .init(
@@ -147,7 +147,7 @@ extension ActiveWorkoutView.ExerciseSection {
         workoutExerciseInfo.workoutSets.count
     }
     
-    func select(workoutSet: ActiveWorkoutView.SetCell.ViewModel) {
+    func select(workoutSet: WorkoutView.SetCell.ViewModel) {
         self.onSelect(workoutSet.workoutSet.id!)
     }
     
@@ -167,7 +167,7 @@ struct ActiveWorkoutViewExerciseCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
-                ActiveWorkoutView.ExerciseSection(
+                WorkoutView.ExerciseSection(
                     workoutExerciseInfo: workoutExerciseInfo,
                     selectedWorkoutSetID: workoutExerciseInfo.workoutSets.last?.id!,
                     onSelect: { _ in },
@@ -179,7 +179,7 @@ struct ActiveWorkoutViewExerciseCell_Previews: PreviewProvider {
         }
     }
     
-    static var workoutExerciseInfo: ActiveWorkoutView.WorkoutInfo.WorkoutExerciseInfo {
+    static var workoutExerciseInfo: WorkoutView.WorkoutInfo.WorkoutExerciseInfo {
         var exercise = Exercise.new(title: "Bench Press: Barbell", category: .barbell)
         exercise.bodyPart = .chest
         exercise.id = 0

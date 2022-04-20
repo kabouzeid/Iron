@@ -10,7 +10,7 @@ import SwiftUI
 import GRDBQuery
 
 struct ExerciseList: View {
-    @Query(ExercisesRequest()) private var exercises: [Exercise]
+    @Query(ExercisesRequest(), isAutoupdating: false) private var exercises: [Exercise]
     
     @State private var searchQuery: String = ""
     @State private var selectedBodyPart: Exercise.BodyPart?

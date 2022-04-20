@@ -29,7 +29,7 @@ extension EnvironmentValues {
 
 extension Query where Request.DatabaseContext == AppDatabase {
     /// Convenience initializer for requests that feed from `AppDatabase`.
-    public init(_ request: Request) {
-        self.init(request, in: \.appDatabase)
+    public init(_ request: Request, isAutoupdating: Bool = true) {
+        self.init(request, in: \.appDatabase, isAutoupdating: isAutoupdating)
     }
 }

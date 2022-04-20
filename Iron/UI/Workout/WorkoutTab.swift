@@ -10,7 +10,9 @@ import SwiftUI
 import GRDBQuery
 
 struct WorkoutTab: View {
-    @Query(ActiveWorkoutRequest()) private var activeWorkout: Workout?
+    @Query(ActiveWorkoutRequest(), isAutoupdating: false) private var activeWorkout: Workout?
+    
+    @Environment(\.appDatabase) private var database
     
     @State private var openWorkout: Workout?
     
@@ -18,14 +20,13 @@ struct WorkoutTab: View {
         NavigationView {
             List {
                 Section {
-                    if let workout = activeWorkout {
+                    if activeWorkout != nil {
                         Button {
-                            resumeWorkout(workout: workout)
+                            resumeWorkout()
                         } label: {
                             HStack {
                                 Spacer()
-                                Text("Resume Workout")
-                                    .font(.headline)
+                                Text("Resume Workout").font(.headline)
                                 Spacer()
                             }
                             .overlay {
@@ -43,7 +44,7 @@ struct WorkoutTab: View {
                         } label: {
                             HStack {
                                 Spacer()
-                                Text("Start Workout")
+                                Text("Start Workout").font(.headline)
                                 Spacer()
                             }
                             .padding(6)
@@ -62,8 +63,15 @@ struct WorkoutTab: View {
             }
             .navigationTitle("Workout")
         }
+        .onChange(of: activeWorkout) { _ in
+            if activeWorkout == nil {
+                openWorkout = nil
+            } else if openWorkout != nil {
+                openWorkout = activeWorkout
+            }
+        }
         .sheet(item: $openWorkout) { workout in
-            ActiveWorkoutView()
+            WorkoutView(workoutID: workout.id!)
         }
         .mirrorAppearanceState(to: $activeWorkout.isAutoupdating)
     }
@@ -87,11 +95,24 @@ extension WorkoutTab {
     // MARK: - Actions
     
     func startWorkout() {
-        // TODO
+        Task {
+            let workout: Workout? = try await database.databaseWriter.write { db in
+                guard try Workout.filter(Workout.Columns.isActive == true).fetchCount(db) == 0 else { return nil }
+                
+                var workout = Workout.new(start: .init())
+                workout.isActive = true
+                try workout.save(db)
+                return workout
+            }
+            guard let workout = workout else { return }
+            openWorkout = workout
+        }
+        
+        // TODO: properly start workout: watch, health, etc
     }
     
-    func resumeWorkout(workout: Workout) {
-        openWorkout = workout
+    func resumeWorkout() {
+        openWorkout = activeWorkout
     }
 }
 

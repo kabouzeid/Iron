@@ -1,5 +1,5 @@
 //
-//  ActiveWorkoutView.swift
+//  WorkoutView.swift
 //  Iron
 //
 //  Created by Karim Abou Zeid on 09.04.22.
@@ -9,12 +9,12 @@
 import SwiftUI
 import GRDBQuery
 
-struct ActiveWorkoutView: View {
+struct WorkoutView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.appDatabase) private var database: AppDatabase
     @EnvironmentObject private var settingsStore: SettingsStore
     
-    @Query(WorkoutInfoRequest()) private var workoutInfo: WorkoutInfo
+    @Query<WorkoutInfoRequest> private var workoutInfo: WorkoutInfo?
     
     @State private var inputTitle: String = ""
     @State private var inputNotes: String = ""
@@ -22,7 +22,11 @@ struct ActiveWorkoutView: View {
     
     @State private var selectedWorkoutSet: WorkoutSet?
     
-    @State private var shouldSelectNextWorkoutSet = false
+    @State private var shouldSelectNextWorkoutSet = true
+    
+    init(workoutID: Workout.ID.Wrapped) {
+        _workoutInfo = Query(WorkoutInfoRequest(workoutID: workoutID))
+    }
     
     var body: some View {
         NavigationView {
@@ -49,33 +53,37 @@ struct ActiveWorkoutView: View {
                             }
                         }
                         
-                        ForEach(workoutInfo.workoutExerciseInfos) { workoutExerciseInfo in
-                            Section {
-                                ExerciseSection(
-                                    workoutExerciseInfo: workoutExerciseInfo,
-                                    selectedWorkoutSetID: selectedWorkoutSet?.id!,
-                                    onSelect: { workoutSetID in
-                                        select(workoutSetID: workoutSetID)
-                                    },
-                                    onAddWorkoutSet: {
-                                        addWorkoutSet(to: workoutExerciseInfo)
-                                    },
-                                    onDeleteWorkoutExercise: {
-                                        deleteWorkoutExercise(id: workoutExerciseInfo.workoutExercise.id!)
-                                    },
-                                    onDeleteWorkoutSets: { ids in
-                                        deleteWorkoutSets(ids: ids)
-                                    }
-                                )
+                        if let workoutInfo = workoutInfo {
+                            ForEach(workoutInfo.workoutExerciseInfos) { workoutExerciseInfo in
+                                Section {
+                                    ExerciseSection(
+                                        workoutExerciseInfo: workoutExerciseInfo,
+                                        selectedWorkoutSetID: selectedWorkoutSet?.id!,
+                                        onSelect: { workoutSetID in
+                                            select(workoutSetID: workoutSetID)
+                                        },
+                                        onAddWorkoutSet: {
+                                            addWorkoutSet(to: workoutExerciseInfo)
+                                        },
+                                        onDeleteWorkoutExercise: {
+                                            deleteWorkoutExercise(id: workoutExerciseInfo.workoutExercise.id!)
+                                        },
+                                        onDeleteWorkoutSets: { ids in
+                                            deleteWorkoutSets(ids: ids)
+                                        }
+                                    )
+                                }
                             }
                         }
                         
-                        Button {
-                            finish()
-                        } label: {
-                            HStack {
-                                Image(systemName: "checkmark")
-                                Text("Finish Workout")
+                        if isActive {
+                            Button {
+                                finish()
+                            } label: {
+                                HStack {
+                                    Image(systemName: "checkmark")
+                                    Text("Finish Workout")
+                                }
                             }
                         }
                     }
@@ -97,13 +105,15 @@ struct ActiveWorkoutView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        
-                    } label: {
-                        HStack {
-                            Image(systemName: "timer")
-                            Text("1:19")
-                                .font(Font.body.monospacedDigit())
+                    if isActive {
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                Image(systemName: "timer")
+                                Text("1:19")
+                                    .font(Font.body.monospacedDigit())
+                            }
                         }
                     }
                 }
@@ -151,13 +161,20 @@ import IronData
 import GRDB
 import Combine
 
-extension ActiveWorkoutView {
+extension WorkoutView {
     var title: String {
-        workoutInfo.workout.displayTitle(infos: workoutInfo.workoutExerciseInfos.map { ($0.exercise, $0.workoutSets) })
+        guard let workoutInfo = workoutInfo else { return "" }
+        return workoutInfo.workout.displayTitle(infos: workoutInfo.workoutExerciseInfos.map { ($0.exercise, $0.workoutSets) })
     }
     
     var notes: String? {
-        workoutInfo.workout.comment
+        guard let workoutInfo = workoutInfo else { return nil }
+        return workoutInfo.workout.comment
+    }
+    
+    var isActive: Bool {
+        guard let workoutInfo = workoutInfo else { return false }
+        return workoutInfo.workout.isActive
     }
     
     // MARK: - Workout Info
@@ -174,9 +191,8 @@ extension ActiveWorkoutView {
             var id: WorkoutExercise.ID { workoutExercise.id }
         }
         
-        static func allActive() -> QueryInterfaceRequest<WorkoutInfo> {
+        static func filter(workoutID: Workout.ID.Wrapped) -> QueryInterfaceRequest<WorkoutInfo> {
             Workout
-                .filter(Workout.Columns.isActive == true)
                 .order(Workout.Columns.id) // in case there is a bug and there are multiple active workouts
                 .including(all: Workout.workoutExercises
                     .forKey(CodingKeys.workoutExerciseInfos)
@@ -189,20 +205,17 @@ extension ActiveWorkoutView {
     }
     
     struct WorkoutInfoRequest: Queryable {
-        static var defaultValue: WorkoutInfo {
-            WorkoutInfo(
-                workout: .new(start: .distantFuture),
-                workoutExerciseInfos: []
-            )
-        }
+        let workoutID: Workout.ID.Wrapped
         
-        func publisher(in database: AppDatabase) -> AnyPublisher<WorkoutInfo, Error> {
-            ValueObservation.tracking(WorkoutInfo.allActive().fetchOne(_:))
+        static var defaultValue: WorkoutInfo? { nil }
+        
+        func publisher(in database: AppDatabase) -> AnyPublisher<WorkoutInfo?, Error> {
+            ValueObservation.tracking(WorkoutInfo.filter(workoutID: workoutID).fetchOne(_:))
                 .publisher(in: database.databaseReader, scheduling: .immediate)
-                .tryCompactMap { workoutInfo in
-                    guard let workoutInfo = workoutInfo else { return Self.defaultValue }
+                .tryFilter { workoutInfo in
+                    guard let workoutInfo = workoutInfo else { return true }
                     let madeChanges = try initWorkoutSets(database: database, workoutInfo: workoutInfo)
-                    return madeChanges ? nil : workoutInfo
+                    return !madeChanges
                 }
                 .eraseToAnyPublisher()
         }
@@ -252,6 +265,11 @@ extension ActiveWorkoutView {
     }
     
     func onWorkoutInfoChanged() {
+        guard workoutInfo != nil else {
+            dismiss()
+            return
+        }
+        
         if shouldSelectNextWorkoutSet {
             selectNextWorkoutSet()
             shouldSelectNextWorkoutSet = false
@@ -261,6 +279,7 @@ extension ActiveWorkoutView {
     // MARK: - Selected Set
     
     func select(workoutSetID: WorkoutSet.ID.Wrapped) {
+        guard let workoutInfo = workoutInfo else { return }
         if workoutSetID == selectedWorkoutSet?.id! {
             selectedWorkoutSet = nil
         } else {
@@ -272,6 +291,7 @@ extension ActiveWorkoutView {
     // MARK: - Set Editor
     
     private func indexForWorkoutSet(id: WorkoutSet.ID.Wrapped) -> IndexPath? {
+        guard let workoutInfo = workoutInfo else { return nil }
         for (i, workoutExericseInfo) in workoutInfo.workoutExerciseInfos.enumerated() {
             for (j, workoutSet) in workoutExericseInfo.workoutSets.enumerated() {
                 if workoutSet.id! == id {
@@ -283,6 +303,7 @@ extension ActiveWorkoutView {
     }
     
     var workoutSetEditorViewModel: WorkoutSetEditor.ViewModel? {
+        guard let workoutInfo = workoutInfo else { return nil }
         guard let workoutSet = selectedWorkoutSet else { return nil }
         guard let index = indexForWorkoutSet(id: workoutSet.id!) else { return nil }
         let exerciseCategory = workoutInfo.workoutExerciseInfos[index[0]].exercise.category
@@ -323,6 +344,7 @@ extension ActiveWorkoutView {
     // MARK: - Actions
     
     func setTitle(_ title: String) async throws {
+        guard let workoutInfo = workoutInfo else { return }
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         var workout = workoutInfo.workout
         workout.title = title.isEmpty ? nil : title
@@ -330,6 +352,7 @@ extension ActiveWorkoutView {
     }
     
     func setNotes(_ notes: String) async throws {
+        guard let workoutInfo = workoutInfo else { return }
         let notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
         var workout = workoutInfo.workout
         workout.comment = notes.isEmpty ? nil : notes
@@ -341,9 +364,7 @@ extension ActiveWorkoutView {
     }
     
     func deleteWorkoutSets(ids: [WorkoutSet.ID.Wrapped]) {
-        Task {
-            try await database.deleteWorkoutSets(ids: ids)
-        }
+        Task { try await database.deleteWorkoutSets(ids: ids) }
     }
     
     func addWorkoutSet(to workoutExerciseInfo: WorkoutInfo.WorkoutExerciseInfo) {
@@ -355,6 +376,7 @@ extension ActiveWorkoutView {
     }
     
     private func selectNextWorkoutSet() {
+        guard let workoutInfo = workoutInfo else { return }
         guard let id = selectedWorkoutSet?.id!, let index = indexForWorkoutSet(id: id) else { return }
         
         guard let nextWorkoutSet = workoutInfo.workoutExerciseInfos[index[0]]
@@ -371,11 +393,23 @@ extension ActiveWorkoutView {
     }
     
     func finish() {
+        guard let workoutInfo = workoutInfo else { return }
+        
+        enum FinishWorkoutError: Error {
+            case workoutNotActive
+        }
+        
         Task {
-            var workout = workoutInfo.workout
-            workout.end = Date()
-            workout.isActive = false
-            try await database.saveWorkout(&workout)
+            try await database.databaseWriter.write { db in
+                guard try Workout.fetchOne(db, id: workoutInfo.workout.id!)?.isActive ?? false else { throw FinishWorkoutError.workoutNotActive }
+                
+                var workout = workoutInfo.workout
+                if workout.end == nil {
+                    workout.end = Date()
+                }
+                workout.isActive = false
+                try workout.save(db)
+            }
         }
         
         // TODO: properly finish
@@ -383,50 +417,30 @@ extension ActiveWorkoutView {
         // 2. watch companion, health etc
     }
     
-//    struct WorkoutRequest: Queryable {
-//        static var defaultValue: [Workout] { [] }
-//
-//        func initial(in database: AppDatabase) throws -> [Workout] {
-//            try database.databaseReader.read(request)
-//        }
-//
-//        func publisher(in database: AppDatabase) -> AnyPublisher<[Workout], Error> {
-//            ValueObservation.tracking(request)
-//                .publisher(in: database.databaseReader)
-//                .eraseToAnyPublisher()
-//        }
-//
-//        // not a protocol requirement
-//        var request: (Database) throws -> [Workout] {
-//            Workout.fetchAll(_:)
-//        }
+    //    struct WorkoutRequest: Queryable {
+    //        static var defaultValue: [Workout] { [] }
+    //
+    //        func initial(in database: AppDatabase) throws -> [Workout] {
+    //            try database.databaseReader.read(request)
+    //        }
+    //
+    //        func publisher(in database: AppDatabase) -> AnyPublisher<[Workout], Error> {
+    //            ValueObservation.tracking(request)
+    //                .publisher(in: database.databaseReader)
+    //                .eraseToAnyPublisher()
+    //        }
+    //
+    //        // not a protocol requirement
+    //        var request: (Database) throws -> [Workout] {
+    //            Workout.fetchAll(_:)
+    //        }
+    //    }
+}
+
+//struct ActiveWorkoutView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkoutView()
+//            .environment(\.appDatabase, .random())
+//            .environmentObject(SettingsStore.mockMetric)
 //    }
-    
-    struct WorkoutRequest: Queryable {
-        static var defaultValue: [Workout] { [] }
-        
-        func initial(in database: AppDatabase) throws -> [Workout] {
-            try database.databaseReader.read(request)
-        }
-        
-        func publisher(in database: AppDatabase) -> AnyPublisher<[Workout], Error> {
-            ValueObservation.tracking(request)
-                .publisher(in: database.databaseReader)
-                .eraseToAnyPublisher()
-        }
-        
-        // not a protocol requirement
-        var request: (Database) throws -> [Workout] {
-            Workout.fetchAll(_:)
-        }
-    }
-
-}
-
-struct ActiveWorkoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActiveWorkoutView()
-            .environment(\.appDatabase, .random())
-            .environmentObject(SettingsStore.mockMetric)
-    }
-}
+//}

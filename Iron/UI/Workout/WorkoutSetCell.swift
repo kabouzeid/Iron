@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension ActiveWorkoutView {
+extension WorkoutView {
     struct SetCell: View {
         let viewModel: ViewModel
         
@@ -116,7 +116,7 @@ extension ActiveWorkoutView {
 }
 
 import IronData
-extension ActiveWorkoutView.SetCell {
+extension WorkoutView.SetCell {
     struct ViewModel {
         let workoutSet: WorkoutSet
         let exerciseCategory: Exercise.Category
@@ -212,33 +212,33 @@ struct ActiveWorkoutSetCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
-                ActiveWorkoutView.SetCell(
+                WorkoutView.SetCell(
                     viewModel: .init(workoutSet: workoutSetInfo1.0, exerciseCategory: workoutSetInfo1.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: true, isPersonalRecordWeight: true, isPersonalRecordVolume: false)
                 )
                 
-                ActiveWorkoutView.SetCell(
+                WorkoutView.SetCell(
                     viewModel: .init(workoutSet: workoutSetInfo1.0, exerciseCategory: workoutSetInfo1.1, index: 2, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false)
                 )
                 
-                ActiveWorkoutView.SetCell(
+                WorkoutView.SetCell(
                     viewModel: .init(workoutSet: workoutSetInfo1.0, exerciseCategory: workoutSetInfo1.1, index: 3, state: .next, isSelected: true, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false)
                 )
                 
-                ActiveWorkoutView.SetCell(
+                WorkoutView.SetCell(
                     viewModel: .init(workoutSet: workoutSetInfo1.0, exerciseCategory: workoutSetInfo1.1, index: 4, state: .pending, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false)
                 )
             }
             
             Section {
-                ActiveWorkoutView.SetCell(viewModel: .init(workoutSet: workoutSetInfo3.0, exerciseCategory: workoutSetInfo3.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false))
+                WorkoutView.SetCell(viewModel: .init(workoutSet: workoutSetInfo3.0, exerciseCategory: workoutSetInfo3.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false))
             }
             
             Section {
-                ActiveWorkoutView.SetCell(viewModel: .init(workoutSet: workoutSetInfo4.0, exerciseCategory: workoutSetInfo4.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false))
+                WorkoutView.SetCell(viewModel: .init(workoutSet: workoutSetInfo4.0, exerciseCategory: workoutSetInfo4.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false))
             }
             
             Section {
-                ActiveWorkoutView.SetCell(
+                WorkoutView.SetCell(
                     viewModel: .init(workoutSet: workoutSetInfo2.0, exerciseCategory: workoutSetInfo2.1, index: 1, state: .completed, isSelected: false, isPersonalRecord1RM: false, isPersonalRecordWeight: false, isPersonalRecordVolume: false)
                 )
             }

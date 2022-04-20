@@ -13,8 +13,8 @@ struct WorkoutList: View {
     @Environment(\.appDatabase) private var database: AppDatabase
     @EnvironmentObject private var settingsStore: SettingsStore
     
-//    @Query(WorkoutInfosRequest()) private var workoutInfos: [WorkoutInfo]
-    @State private var workoutInfos: [WorkoutInfo] = []
+    @Query(WorkoutInfosRequest(), isAutoupdating: false) private var workoutInfos: [WorkoutInfo]
+//    @State private var workoutInfos: [WorkoutInfo] = []
     
     @State private var bodyWeights: [Date : Measurement<UnitMass>] = [:]
     
@@ -22,7 +22,7 @@ struct WorkoutList: View {
     
     @State private var deletionWorkout: Workout?
     
-    @State private var loading = true
+//    @State private var loading = true
     
     var body: some View {
         NavigationView {
@@ -93,7 +93,7 @@ struct WorkoutList: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
             )
-            .placeholder(show: loading, ProgressView())
+//            .placeholder(show: loading, ProgressView())
             .navigationBarTitle(Text("History"))
             
             // Double Column Placeholder (iPad)
@@ -102,10 +102,8 @@ struct WorkoutList: View {
         }
         .navigationViewStyle(.stack)
         .animation(.default, value: workoutInfos)
-//        .mirrorAppearanceState(to: $workoutInfos.isAutoupdating)
-        .task {
-            try? await fetchWorkoutInfos()
-        }
+        .mirrorAppearanceState(to: $workoutInfos.isAutoupdating)
+//        .task { try? await fetchWorkoutInfos() }
     }
 }
 
@@ -143,25 +141,25 @@ extension WorkoutList {
         }
     }
     
-//    struct WorkoutInfosRequest: Queryable {
-//        static var defaultValue: [WorkoutInfo] { [] }
-//
-//        func publisher(in database: AppDatabase) -> AnyPublisher<[WorkoutInfo], Error> {
-//            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll(_:))
-//                .publisher(in: database.databaseReader)
-//                .eraseToAnyPublisher()
-//        }
-//    }
-    
-    func fetchWorkoutInfos() async throws {
-        let observation = ValueObservation
-            .tracking(WorkoutInfo.filterFinished().fetchAll(_:))
-            .values(in: database.databaseReader)
-        for try await workoutInfos in observation {
-            self.workoutInfos = workoutInfos
-            loading = false
+    struct WorkoutInfosRequest: Queryable {
+        static var defaultValue: [WorkoutInfo] { [] }
+
+        func publisher(in database: AppDatabase) -> AnyPublisher<[WorkoutInfo], Error> {
+            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll(_:))
+                .publisher(in: database.databaseReader)
+                .eraseToAnyPublisher()
         }
     }
+    
+//    func fetchWorkoutInfos() async throws {
+//        let observation = ValueObservation
+//            .tracking(WorkoutInfo.filterFinished().fetchAll(_:))
+//            .values(in: database.databaseReader)
+//        for try await workoutInfos in observation {
+//            self.workoutInfos = workoutInfos
+//            loading = false
+//        }
+//    }
     
     // MARK: - Body Weight
     

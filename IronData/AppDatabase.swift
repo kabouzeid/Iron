@@ -208,6 +208,7 @@ extension AppDatabase {
             // +1 active workout
             var workout = Workout.makeRandom()
             workout.isActive = true
+            workout.start = Date()
             workout.end = nil
             workout = try workout.inserted(db)
             for _ in 0..<Int.random(in: 3...6) {
