@@ -10,7 +10,9 @@ import SwiftUI
 import GRDBQuery
 
 struct ExerciseDetailView: View {
-    @Query<ExerciseRequest> private var exercise: Exercise
+    @Environment(\.dismiss) private var dismiss
+    
+    @Query<ExerciseRequest> private var exercise: Exercise?
     
     @State private var currentTab: Tab = .about
     
@@ -47,6 +49,7 @@ struct ExerciseDetailView: View {
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: exercise) { if $0 == nil { dismiss() } }
         .mirrorAppearanceState(to: $exercise.isAutoupdating)
     }
     
@@ -115,34 +118,33 @@ extension ExerciseDetailView {
     struct ExerciseRequest: Queryable {
         let exerciseID: Exercise.ID.Wrapped
         
-        static var defaultValue: Exercise { .new(title: "Unknown Exercise", category: .barbell) }
+        static var defaultValue: Exercise? { nil }
         
-        func publisher(in database: AppDatabase) -> AnyPublisher<Exercise, Error> {
+        func publisher(in database: AppDatabase) -> AnyPublisher<Exercise?, Error> {
             ValueObservation.tracking(Exercise.filter(id: exerciseID).fetchOne(_:))
                 .publisher(in: database.databaseReader, scheduling: .immediate)
-                .map { $0 ?? Self.defaultValue }
                 .eraseToAnyPublisher()
         }
     }
     
     var title: String {
-        exercise.title
+        exercise?.title ?? ""
     }
     
     var bodyPart: String? {
-        exercise.bodyPart?.name
+        exercise?.bodyPart?.name ?? nil
     }
     
     var category: String {
-        exercise.category.name
+        exercise?.category.name ?? ""
     }
     
     var movementType: String? {
-        exercise.movementType?.name
+        exercise?.movementType?.name ?? nil
     }
     
     var images: [UIImage] {
-        exercise.images?.names.compactMap {
+        exercise?.images?.names.compactMap {
             pdfToUIImage(
                 url: Exercise.imagesBundle.bundleURL.appendingPathComponent($0),
                 fit: .init(width: 1000, height: 1000)
@@ -151,7 +153,7 @@ extension ExerciseDetailView {
     }
     
     var aliases: [String] {
-        exercise.aliases?.split(separator: "\n").map { String($0) } ?? []
+        exercise?.aliases?.split(separator: "\n").map { String($0) } ?? []
     }
     
     func searchWeb() {
@@ -161,6 +163,7 @@ extension ExerciseDetailView {
     }
     
     private func pdfToUIImage(url: URL, fit: CGSize) -> UIImage? {
+        // TODO: move this off the UI thread
         guard let document = CGPDFDocument(url as CFURL) else { return nil }
         guard let page = document.page(at: 1) else { return nil }
         

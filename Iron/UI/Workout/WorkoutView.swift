@@ -168,13 +168,11 @@ extension WorkoutView {
     }
     
     var notes: String? {
-        guard let workoutInfo = workoutInfo else { return nil }
-        return workoutInfo.workout.comment
+        workoutInfo?.workout.comment ?? nil
     }
     
     var isActive: Bool {
-        guard let workoutInfo = workoutInfo else { return false }
-        return workoutInfo.workout.isActive
+        workoutInfo?.workout.isActive ?? false
     }
     
     // MARK: - Workout Info
