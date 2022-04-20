@@ -192,6 +192,7 @@ extension WorkoutView {
         
         static func filter(workoutID: Workout.ID.Wrapped) -> QueryInterfaceRequest<WorkoutInfo> {
             Workout
+                .filter(id: workoutID)
                 .order(Workout.Columns.id) // in case there is a bug and there are multiple active workouts
                 .including(all: Workout.workoutExercises
                     .forKey(CodingKeys.workoutExerciseInfos)

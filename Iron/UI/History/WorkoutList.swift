@@ -30,7 +30,7 @@ struct WorkoutList: View {
                 LazyVStack(spacing: 16) {
                     ForEach(workoutInfos) { workoutInfo in
                         NavigationLink {
-                            Text("TODO")
+                            WorkoutView(workoutID: workoutInfo.workout.id!)
                         } label: {
                             WorkoutCell(
                                 workoutInfo: workoutInfo,
@@ -145,7 +145,7 @@ extension WorkoutList {
         static var defaultValue: [WorkoutInfo] { [] }
 
         func publisher(in database: AppDatabase) -> AnyPublisher<[WorkoutInfo], Error> {
-            ValueObservation.tracking(WorkoutInfo.filterFinished().fetchAll(_:))
+            ValueObservation.trackingConstantRegion(WorkoutInfo.filterFinished().fetchAll(_:))
                 .publisher(in: database.databaseReader)
                 .eraseToAnyPublisher()
         }
