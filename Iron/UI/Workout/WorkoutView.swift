@@ -21,6 +21,7 @@ struct WorkoutView: View {
     @State private var showNotesEditor = false
     
     @State private var selectedWorkoutSet: WorkoutSet?
+    @State private var selectedWorkoutSetInDatabase: WorkoutSet?
     
     @State private var shouldSelectNextWorkoutSet = true
     
@@ -29,129 +30,129 @@ struct WorkoutView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ScrollViewReader { scrollViewProxy in
-                VStack(spacing: 0) {
-                    List {
-                        Section {
-                            TextField("Title", text: $inputTitle)
-                                .onSubmit { Task { try await setTitle(inputTitle) } }
-                            
-                            NavigationLink(isActive: $showNotesEditor) {
-                                TextEditor(text: $inputNotes)
-                                    .navigationTitle("Notes")
-                                    .scenePadding()
-                            } label: {
-                                Text(notes ?? "Notes")
-                                    .foregroundColor(notes == nil ? Color(uiColor: .tertiaryLabel) : .primary)
-                                    .disabled(true)
-                            }
-                            .onChange(of: showNotesEditor) { isShown in
-                                if !isShown {
-                                    Task { try await setNotes(inputNotes) }
-                                }
-                            }
-                        }
+        ScrollViewReader { scrollViewProxy in
+            VStack(spacing: 0) {
+                List {
+                    Section {
+                        TextField("Title", text: $inputTitle)
+                            .onSubmit { Task { try await setTitle(inputTitle) } }
                         
-                        if let workoutInfo = workoutInfo {
-                            ForEach(workoutInfo.workoutExerciseInfos) { workoutExerciseInfo in
-                                Section {
-                                    ExerciseSection(
-                                        workoutExerciseInfo: workoutExerciseInfo,
-                                        selectedWorkoutSetID: selectedWorkoutSet?.id!,
-                                        onSelect: { workoutSetID in
-                                            select(workoutSetID: workoutSetID)
-                                        },
-                                        onAddWorkoutSet: {
-                                            addWorkoutSet(to: workoutExerciseInfo)
-                                        },
-                                        onDeleteWorkoutExercise: {
-                                            deleteWorkoutExercise(id: workoutExerciseInfo.workoutExercise.id!)
-                                        },
-                                        onDeleteWorkoutSets: { ids in
-                                            deleteWorkoutSets(ids: ids)
-                                        }
-                                    )
-                                }
-                            }
+                        NavigationLink(isActive: $showNotesEditor) {
+                            TextEditor(text: $inputNotes)
+                                .navigationTitle("Notes")
+                                .scenePadding()
+                        } label: {
+                            Text(notes ?? "Notes")
+                                .foregroundColor(notes == nil ? Color(uiColor: .tertiaryLabel) : .primary)
+                                .disabled(true)
                         }
-                        
-                        if isActive {
-                            Button {
-                                finish()
-                            } label: {
-                                HStack {
-                                    Image(systemName: "checkmark")
-                                    Text("Finish Workout")
-                                }
+                        .onChange(of: showNotesEditor) { isShown in
+                            if !isShown {
+                                Task { try await setNotes(inputNotes) }
                             }
-                        }
-                    }
-                    .listStyle(.insetGrouped)
-                    .onChange(of: selectedWorkoutSet?.id) { id in
-                        withAnimation {
-                            scrollViewProxy.scrollTo(id, anchor: .center)
                         }
                     }
                     
-                    if let viewModel = workoutSetEditorViewModel {
-                        Divider()
-                        WorkoutSetEditor(viewModel: viewModel)
+                    if let workoutInfo = workoutInfo {
+                        ForEach(workoutInfo.workoutExerciseInfos) { workoutExerciseInfo in
+                            Section {
+                                ExerciseSection(
+                                    workoutExerciseInfo: workoutExerciseInfo,
+                                    selectedWorkoutSetID: selectedWorkoutSet?.id!,
+                                    onSelect: { workoutSetID in
+                                        select(workoutSetID: workoutSetID)
+                                    },
+                                    onAddWorkoutSet: {
+                                        addWorkoutSet(to: workoutExerciseInfo)
+                                    },
+                                    onDeleteWorkoutExercise: {
+                                        deleteWorkoutExercise(id: workoutExerciseInfo.workoutExercise.id!)
+                                    },
+                                    onDeleteWorkoutSets: { ids in
+                                        deleteWorkoutSets(ids: ids)
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    
+                    if isActive {
+                        Button {
+                            finish()
+                        } label: {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                Text("Finish Workout")
+                            }
+                        }
+                    }
+                }
+                .listStyle(.insetGrouped)
+                .onChange(of: selectedWorkoutSet?.id) { id in
+                    withAnimation {
+                        scrollViewProxy.scrollTo(id, anchor: .center)
+                    }
+                }
+                
+                if let viewModel = workoutSetEditorViewModel {
+                    Divider()
+                    WorkoutSetEditor(viewModel: viewModel)
+                }
+            }
+        }
+        //            .navigationTitle(title)
+        .navigationTitle("48:32")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if isActive {
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Image(systemName: "timer")
+                            Text("1:19")
+                                .font(Font.body.monospacedDigit())
+                        }
                     }
                 }
             }
-            //            .navigationTitle(title)
-            .navigationTitle("48:32")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if isActive {
+            ToolbarItem(placement: .automatic) {
+                Menu {
+                    Section {
+                        Button {
+                            // TODO
+                        } label: {
+                            Label("Reorder", systemImage: "arrow.triangle.swap")
+                        }
+                        
                         Button {
                             
                         } label: {
-                            HStack {
-                                Image(systemName: "timer")
-                                Text("1:19")
-                                    .font(Font.body.monospacedDigit())
-                            }
+                            Label("Start/End Time", systemImage: "clock")
                         }
                     }
-                }
-                ToolbarItem(placement: .automatic) {
-                    Menu {
-                        Section {
-                            Button {
-                                // TODO
-                            } label: {
-                                Label("Reorder", systemImage: "arrow.triangle.swap")
-                            }
-                            
-                            Button {
-                                
-                            } label: {
-                                Label("Start/End Time", systemImage: "clock")
-                            }
-                        }
-                        
-                        Button {
-                            // TODO
-                        } label: {
-                            Label("Share", systemImage: "square.and.arrow.up")
-                        }
-                        
-                        Button(role: .destructive) {
-                            // TODO
-                        } label: {
-                            Label("Cancel", systemImage: "xmark")
-                        }
+                    
+                    Button {
+                        // TODO
                     } label: {
-                        Label("More", systemImage: "ellipsis.circle")
+                        Label("Share", systemImage: "square.and.arrow.up")
                     }
+                    
+                    Button(role: .destructive) {
+                        // TODO
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
+                } label: {
+                    Label("More", systemImage: "ellipsis.circle")
                 }
             }
         }
         .onChange(of: workoutInfo) { _ in onWorkoutInfoChanged() }
-        .animation(.default, value: selectedWorkoutSet)
+        .onChange(of: selectedWorkoutSetInDatabase) { _ in onSelectedWorkoutSetInDatabaseChanged() }
+        .animation(.default.speed(3), value: selectedWorkoutSet)
+        .animation(.default, value: workoutInfo)
     }
 }
 
@@ -272,17 +273,27 @@ extension WorkoutView {
             selectNextWorkoutSet()
             shouldSelectNextWorkoutSet = false
         }
+        
+        if let selectedWorkoutSet = selectedWorkoutSet {
+            selectedWorkoutSetInDatabase = workoutSet(id: selectedWorkoutSet.id!)
+        } else {
+            selectedWorkoutSetInDatabase = nil
+        }
+    }
+    
+    func onSelectedWorkoutSetInDatabaseChanged() {
+        // the workout set editor has it's own copy of the selected workout set, this helps to avoid visual glitches
+        // this function is called whenever there was a change in the database for this specific workout set
+        selectedWorkoutSet = selectedWorkoutSetInDatabase
     }
     
     // MARK: - Selected Set
     
     func select(workoutSetID: WorkoutSet.ID.Wrapped) {
-        guard let workoutInfo = workoutInfo else { return }
-        if workoutSetID == selectedWorkoutSet?.id! {
+        if workoutSetID == selectedWorkoutSet?.id! { // toggle
             selectedWorkoutSet = nil
         } else {
-            guard let index = indexForWorkoutSet(id: workoutSetID) else { return }
-            self.selectedWorkoutSet = workoutInfo.workoutExerciseInfos[index[0]].workoutSets[index[1]]
+            selectedWorkoutSet = workoutSet(id: workoutSetID)
         }
     }
     
@@ -298,6 +309,12 @@ extension WorkoutView {
             }
         }
         return nil
+    }
+    
+    private func workoutSet(id: WorkoutSet.ID.Wrapped) -> WorkoutSet? {
+        guard let workoutInfo = workoutInfo else { return nil }
+        guard let index = indexForWorkoutSet(id: id) else { return nil }
+        return workoutInfo.workoutExerciseInfos[index[0]].workoutSets[index[1]]
     }
     
     var workoutSetEditorViewModel: WorkoutSetEditor.ViewModel? {
@@ -414,25 +431,6 @@ extension WorkoutView {
         // 1. clean up sets
         // 2. watch companion, health etc
     }
-    
-    //    struct WorkoutRequest: Queryable {
-    //        static var defaultValue: [Workout] { [] }
-    //
-    //        func initial(in database: AppDatabase) throws -> [Workout] {
-    //            try database.databaseReader.read(request)
-    //        }
-    //
-    //        func publisher(in database: AppDatabase) -> AnyPublisher<[Workout], Error> {
-    //            ValueObservation.tracking(request)
-    //                .publisher(in: database.databaseReader)
-    //                .eraseToAnyPublisher()
-    //        }
-    //
-    //        // not a protocol requirement
-    //        var request: (Database) throws -> [Workout] {
-    //            Workout.fetchAll(_:)
-    //        }
-    //    }
 }
 
 //struct ActiveWorkoutView_Previews: PreviewProvider {

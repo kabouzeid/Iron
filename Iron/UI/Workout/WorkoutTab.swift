@@ -71,7 +71,9 @@ struct WorkoutTab: View {
             }
         }
         .sheet(item: $openWorkout) { workout in
-            WorkoutView(workoutID: workout.id!)
+            NavigationView {
+                WorkoutView(workoutID: workout.id!)
+            }
         }
         .mirrorAppearanceState(to: $activeWorkout.isAutoupdating)
     }
