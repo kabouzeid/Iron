@@ -89,6 +89,7 @@ extension WorkoutView {
                         .id(workoutSet.workoutSet.id!)
                 }
                 .foregroundColor(.primary)
+                .buttonStyle(.borderless)
             }
             .onDelete { indices in
                 deleteWorkoutSets(at: indices)
