@@ -384,9 +384,21 @@ extension WorkoutView {
     }
     
     func addWorkoutSet(to workoutExerciseInfo: WorkoutInfo.WorkoutExerciseInfo) {
+        guard let workoutInfo = workoutInfo else { return }
         Task {
             var workoutSets = workoutExerciseInfo.workoutSets
-            workoutSets.append(WorkoutSet.new(workoutExerciseId: workoutExerciseInfo.workoutExercise.id!))
+            var workoutSet = WorkoutSet.new(workoutExerciseId: workoutExerciseInfo.workoutExercise.id!)
+            if !workoutInfo.workout.isActive {
+                if let previousSet = workoutSets.last {
+                    workoutSet.weight = previousSet.weight
+                    workoutSet.repetitions = previousSet.repetitions
+                } else {
+                    workoutSet.weight = 20 // TODO: use proper initial weight here
+                    workoutSet.repetitions = 5
+                }
+            }
+            workoutSet.isCompleted = !workoutInfo.workout.isActive
+            workoutSets.append(workoutSet)
             try await database.saveWorkoutSetsOrdered(&workoutSets)
         }
     }
