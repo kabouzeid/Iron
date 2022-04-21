@@ -153,7 +153,6 @@
 		8A799F6622BFD33F00DD5E1B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A799F6522BFD33F00DD5E1B /* BannerView.swift */; };
 		8A7B3EAC23A2B42500BF2664 /* IntentWeight+Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */; };
 		8A7D1424280DB8C70019B72D /* AppDatabase+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D1423280DB8C70019B72D /* AppDatabase+SwiftUI.swift */; };
-		8A7D142A280EAFED0019B72D /* GRDBQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 8A7D1429280EAFED0019B72D /* GRDBQuery */; };
 		8A7D6E98200BF92E00AA0FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */; };
 		8A7D6EA2200BF92E00AA0FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */; };
 		8A7D6EA5200BF92E00AA0FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7D6EA3200BF92E00AA0FA7 /* LaunchScreen.storyboard */; };
@@ -367,6 +366,7 @@
 		8AB5213E23999ED4008064B2 /* WorkoutDataStorage+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5213D23999ED4008064B2 /* WorkoutDataStorage+shared.swift */; };
 		8AB5D3452342B3E600211F98 /* IronUISnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D3442342B3E600211F98 /* IronUISnapshots.swift */; };
 		8AB5D34D2342B9D100211F98 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D34C2342B9D100211F98 /* SnapshotHelper.swift */; };
+		8AB8F65F28113FF80042EC6D /* GRDBQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 8AB8F65E28113FF80042EC6D /* GRDBQuery */; };
 		8AB972F7203583E40099507B /* InMemoryPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* InMemoryPersistentContainer.swift */; };
 		8ABA34BA27F1173D005AA2A7 /* WorkoutSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA34B927F1173D005AA2A7 /* WorkoutSet+.swift */; };
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
@@ -726,7 +726,6 @@
 		8A799F6522BFD33F00DD5E1B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		8A7B3EAB23A2B42500BF2664 /* IntentWeight+Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentWeight+Measurement.swift"; sourceTree = "<group>"; };
 		8A7D1423280DB8C70019B72D /* AppDatabase+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDatabase+SwiftUI.swift"; sourceTree = "<group>"; };
-		8A7D1428280EAFCB0019B72D /* GRDBQuery */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = GRDBQuery; path = ../GRDBQuery; sourceTree = "<group>"; };
 		8A7D6E94200BF92E00AA0FA7 /* Iron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7D6E97200BF92E00AA0FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A7D6EA1200BF92E00AA0FA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -906,7 +905,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A7D142A280EAFED0019B72D /* GRDBQuery in Frameworks */,
+				8AB8F65F28113FF80042EC6D /* GRDBQuery in Frameworks */,
 				8A5BC54427E9F4B600E437A1 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1424,18 +1423,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8A7D1427280EAFCB0019B72D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				8A7D1428280EAFCB0019B72D /* GRDBQuery */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		8A7D6E8B200BF92E00AA0FA7 = {
 			isa = PBXGroup;
 			children = (
-				8A7D1427280EAFCB0019B72D /* Packages */,
 				8AD39685239C075E0000E3C4 /* Shared */,
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
 				8A5BC52227E9F45D00E437A1 /* IronData */,
@@ -1885,7 +1875,7 @@
 			name = IronData;
 			packageProductDependencies = (
 				8A5BC54327E9F4B600E437A1 /* GRDB */,
-				8A7D1429280EAFED0019B72D /* GRDBQuery */,
+				8AB8F65E28113FF80042EC6D /* GRDBQuery */,
 			);
 			productName = IronData;
 			productReference = 8A5BC52127E9F45D00E437A1 /* IronData.framework */;
@@ -2157,6 +2147,7 @@
 			packageReferences = (
 				8A50F125243F5253003B3A6E /* XCRemoteSwiftPackageReference "Charts" */,
 				8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				8AB8F65D28113FF80042EC6D /* XCRemoteSwiftPackageReference "GRDBQuery" */,
 			);
 			productRefGroup = 8A7D6E95200BF92E00AA0FA7 /* Products */;
 			projectDirPath = "";
@@ -3105,7 +3096,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3160,7 +3150,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -3669,6 +3658,14 @@
 				minimumVersion = 5.21.0;
 			};
 		};
+		8AB8F65D28113FF80042EC6D /* XCRemoteSwiftPackageReference "GRDBQuery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDBQuery";
+			requirement = {
+				kind = revision;
+				revision = 1083fc20fbfe9f8275c6e466d659631586ade5ee;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3692,8 +3689,9 @@
 			package = 8A5BC4E827E9EFCF00E437A1 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
 		};
-		8A7D1429280EAFED0019B72D /* GRDBQuery */ = {
+		8AB8F65E28113FF80042EC6D /* GRDBQuery */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 8AB8F65D28113FF80042EC6D /* XCRemoteSwiftPackageReference "GRDBQuery" */;
 			productName = GRDBQuery;
 		};
 /* End XCSwiftPackageProductDependency section */
