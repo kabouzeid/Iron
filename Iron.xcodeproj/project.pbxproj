@@ -109,7 +109,6 @@
 		8A652C4822D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A652C4722D10C4900DBE10E /* ChartsBarChartViewRepresentable.swift */; };
 		8A6B1A6922BE8B210067DD41 /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6822BE8B210067DD41 /* WorkoutDetailView.swift */; };
 		8A6B1A6B22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B1A6A22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift */; };
-		8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6F172A233A809D0048A75B /* StoreKit.framework */; };
 		8A70A73723041542000A3C76 /* TimerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73623041542000A3C76 /* TimerBannerView.swift */; };
 		8A70A73923041637000A3C76 /* RestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70A73823041637000A3C76 /* RestTimerView.swift */; };
 		8A743DE1252B6DFA0037C162 /* ActivitySummaryLast7DaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A743DE0252B6DFA0037C162 /* ActivitySummaryLast7DaysCell.swift */; };
@@ -604,7 +603,6 @@
 		8A68F7D1236329940089263B /* WorkoutExerciseMigrationPolicyV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseMigrationPolicyV1.swift; sourceTree = "<group>"; };
 		8A6B1A6822BE8B210067DD41 /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
 		8A6B1A6A22BE8F9B0067DD41 /* WorkoutDetailBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailBannerView.swift; sourceTree = "<group>"; };
-		8A6F172A233A809D0048A75B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8A70A73623041542000A3C76 /* TimerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBannerView.swift; sourceTree = "<group>"; };
 		8A70A73823041637000A3C76 /* RestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimerView.swift; sourceTree = "<group>"; };
 		8A743DE0252B6DFA0037C162 /* ActivitySummaryLast7DaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySummaryLast7DaysCell.swift; sourceTree = "<group>"; };
@@ -801,7 +799,6 @@
 			files = (
 				8AB0C94D23453F080009F031 /* HealthKit.framework in Frameworks */,
 				8AB5211523992ABC008064B2 /* WorkoutDataKit.framework in Frameworks */,
-				8A6F172B233A809D0048A75B /* StoreKit.framework in Frameworks */,
 				8A50F127243F5253003B3A6E /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,7 +1191,6 @@
 			children = (
 				8ADC1B60237221D90019C01A /* HealthKit.framework */,
 				8AB0C94C23453F080009F031 /* HealthKit.framework */,
-				8A6F172A233A809D0048A75B /* StoreKit.framework */,
 				8A60438C239C4DBB00CFB7C0 /* IntentsUI.framework */,
 				8AAFE3432534AB3800CF03E5 /* WidgetKit.framework */,
 				8AAFE3452534AB3800CF03E5 /* SwiftUI.framework */,
