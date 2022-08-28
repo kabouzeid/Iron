@@ -10,20 +10,11 @@ import SwiftUI
 import WorkoutDataKit
 
 struct ExerciseChartViewCell : View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
     var exercise: Exercise
     var measurementType: WorkoutExerciseChartData.MeasurementType
     
     private var chartView: some View {
-        Group {
-            if entitlementStore.isPro {
-                ExerciseChartView(exercise: exercise, measurementType: measurementType)
-            } else {
-                ExerciseDemoChartView(exercise: exercise, measurementType: measurementType)
-                    .overlay(UnlockProOverlay())
-            }
-        }
+        ExerciseChartView(exercise: exercise, measurementType: measurementType)
     }
     
     var body: some View {
@@ -33,11 +24,7 @@ struct ExerciseChartViewCell : View {
                 .font(.subheadline)
                 .foregroundColor(exercise.muscleGroupColor)
             
-            HStack {
-                Text(measurementType.title).font(.headline)
-                Spacer()
-                Text(entitlementStore.isPro ? "" : " (Demo Data)").foregroundColor(.secondary)
-            }
+            Text(measurementType.title).font(.headline)
             
             Divider()
             
@@ -53,12 +40,12 @@ struct PinnedChartViewCell_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ExerciseChartViewCell(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
             
             List {
                 ExerciseChartViewCell(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!, measurementType: .oneRM)
-                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .mockEnvironment(weightUnit: .metric)
                     .previewLayout(.sizeThatFits)
             }.listStyleCompat_InsetGroupedListStyle()
         }

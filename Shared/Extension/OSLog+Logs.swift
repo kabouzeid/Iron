@@ -12,7 +12,6 @@ import os.log
 extension OSLog {
     private static let subsystem = Bundle.main.bundleIdentifier ?? "com.kabouzeid.Iron.nobundle"
     
-    static let iap = OSLog(subsystem: subsystem, category: "IAP")
     static let migration = OSLog(subsystem: subsystem, category: "Migration")
     static let backup = OSLog(subsystem: subsystem, category: "Backup")
     static let ubiquityContainer = OSLog(subsystem: subsystem, category: "Ubiquity Container")

@@ -146,7 +146,7 @@ struct BackupAndExportView: View {
 struct BackupAndExportView_Previews: PreviewProvider {
     static var previews: some View {
         BackupAndExportView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

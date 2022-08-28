@@ -140,7 +140,7 @@ struct WorkoutRoutineView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             WorkoutRoutineView(workoutRoutine: MockWorkoutData.metric.workoutRoutine)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
         }
     }
 }

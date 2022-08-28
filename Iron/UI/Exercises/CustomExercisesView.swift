@@ -12,7 +12,6 @@ import WorkoutDataKit
 
 struct CustomExercisesView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var entitlementStore: EntitlementStore
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
     
@@ -20,7 +19,6 @@ struct CustomExercisesView: View {
     
     private enum SheetType: Identifiable {
         case createCustomExercise
-        case buyPro
         
         var id: Self { self }
     }
@@ -30,10 +28,6 @@ struct CustomExercisesView: View {
         case .createCustomExercise:
             return CreateCustomExerciseSheet()
                 .environmentObject(exerciseStore)
-                .typeErased
-        case .buyPro:
-            return PurchaseSheet()
-                .environmentObject(entitlementStore)
                 .typeErased
         }
     }
@@ -64,18 +58,11 @@ struct CustomExercisesView: View {
                 self.offsetsToDelete = offsets
             }
             Button(action: {
-                self.activeSheet = self.entitlementStore.isPro ? .createCustomExercise : .buyPro
+                self.activeSheet = .createCustomExercise
             }) {
                 HStack {
                     Image(systemName: "plus")
                     Text("Create Exercise")
-                    if !entitlementStore.isPro {
-                        Spacer()
-                        Group {
-                            Text("Iron Pro")
-                            Image(systemName: "lock")
-                        }.foregroundColor(.secondary)
-                    }
                 }
             }
         }
@@ -106,7 +93,7 @@ struct CustomExercisesView: View {
 struct CustomExercisesView_Previews: PreviewProvider {
     static var previews: some View {
         CustomExercisesView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

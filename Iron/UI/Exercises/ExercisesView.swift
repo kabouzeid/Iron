@@ -25,7 +25,7 @@ struct ExercisesView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExercisesView(exercises: ExerciseStore.shared.shownExercises)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
         }
     }
 }

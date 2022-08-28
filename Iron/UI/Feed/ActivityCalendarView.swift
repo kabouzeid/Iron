@@ -14,7 +14,6 @@ struct ActivityCalendarView: View {
     @Environment(\.calendar) var calendar
     
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @EnvironmentObject var entitlementStore: EntitlementStore
     
     @FetchRequest(fetchRequest: Workout.fetchRequest()) var workoutHistory // will be overwritten in init()
     
@@ -83,9 +82,6 @@ struct ActivityCalendarView: View {
                 }
             }
         }
-        .modifier(if: !entitlementStore.isPro) {
-            $0.overlay(UnlockProOverlay(size: .fill).padding())
-        }
         .preference(key: WorkoutsLast28DaysKey.self, value: numberOfWorkouts)
     }
 }
@@ -121,8 +117,6 @@ struct ActivityCalendarHeaderView: View {
 
 private struct ActivityCalendarCell: View {
     @Environment(\.calendar) var calendar
-    
-    @EnvironmentObject var entitlementStore: EntitlementStore
     
     @State private var showingWorkout = false
     
@@ -163,10 +157,8 @@ private struct ActivityCalendarCell: View {
                     }
                 }
             )
-            .modifier(if: entitlementStore.isPro) {
-                $0.onTapGesture {
-                    self.showingWorkout = true
-                }
+            .onTapGesture {
+                self.showingWorkout = true
             }
             .background(navigationLink)
     }
@@ -235,7 +227,7 @@ struct ActivityCalendarView_Previews: PreviewProvider {
             }
             .listStyleCompat_InsetGroupedListStyle()
         }
-        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .mockEnvironment(weightUnit: .metric)
         .previewLayout(.sizeThatFits)
     }
 }

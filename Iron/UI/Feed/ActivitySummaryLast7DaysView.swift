@@ -128,7 +128,7 @@ struct ActivitySummaryLast7DaysView_Previews: PreviewProvider {
             .padding([.top, .bottom], 8)
         }
         .listStyleCompat_InsetGroupedListStyle()
-        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

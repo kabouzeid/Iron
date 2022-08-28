@@ -139,7 +139,7 @@ struct WorkoutRoutineSetCell_Previews: PreviewProvider {
             WorkoutRoutineSetCell(workoutRoutineSet: workoutRoutineSet6, index: 6, isSelected: true)
         }
         .listStyle(GroupedListStyle())
-        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

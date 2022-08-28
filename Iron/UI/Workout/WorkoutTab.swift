@@ -32,7 +32,7 @@ struct WorkoutTab: View {
 struct WorkoutTab_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutTab()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

@@ -15,7 +15,6 @@ struct ActivityWorkoutsPerWeekView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @EnvironmentObject var entitlementStore: EntitlementStore
     
     @FetchRequest(fetchRequest: Workout.fetchRequest()) var workoutHistory
     
@@ -90,10 +89,7 @@ struct ActivityWorkoutsPerWeekView: View {
     var body: some View {
         Group {
             if hasData {
-                BarChartView(bars: chartData, showLabels: entitlementStore.isPro, minimumMaxValue: 4)
-                    .modifier(if: !entitlementStore.isPro) {
-                        $0.redacted_compat()
-                    }
+                BarChartView(bars: chartData, minimumMaxValue: 4)
             } else {
                 ZStack {
                     Rectangle().hidden()
@@ -101,9 +97,6 @@ struct ActivityWorkoutsPerWeekView: View {
                         .foregroundColor(.secondary)
                 }
             }
-        }
-        .modifier(if: !entitlementStore.isPro) {
-            $0.overlay(UnlockProOverlay(size: .fill).padding())
         }
         .preference(key: WorkoutsPerWeekMeanKey.self, value: meanWorkoutsPerWeek)
     }
@@ -128,13 +121,13 @@ struct MyActivityBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ActivityWorkoutsPerWeekView()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .frame(height: 250)
                 .previewLayout(.sizeThatFits)
             
             List {
                 ActivityWorkoutsPerWeekView()
-                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .mockEnvironment(weightUnit: .metric)
                     .frame(height: 250)
             }.listStyleCompat_InsetGroupedListStyle()
         }

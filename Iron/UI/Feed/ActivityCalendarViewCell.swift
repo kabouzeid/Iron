@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ActivityCalendarViewCell: View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
     @State private var workoutsLast28Days = WorkoutsLast28DaysKey.defaultValue
     
     var body: some View {
@@ -29,7 +27,6 @@ struct ActivityCalendarViewCell: View {
                 if let workoutsLast28Days = workoutsLast28Days {
                     Text("\(workoutsLast28Days) workouts")
                         .foregroundColor(.secondary)
-                        .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
                 }
             }
             
@@ -55,12 +52,12 @@ struct ActivityCalendarViewCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ActivityCalendarViewCell()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
             
             List {
                 ActivityCalendarViewCell()
-                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .mockEnvironment(weightUnit: .metric)
             }.listStyleCompat_InsetGroupedListStyle()
         }
     }

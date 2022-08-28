@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Combine
-import StoreKit
 import WorkoutDataKit
 import Intents
 import os.log
@@ -21,15 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ExerciseStore.migrateCustomExercisesToAppGroupIfNecessary()
         WorkoutDataStorage.migrateToAppGroupIfNecessary()
         SettingsStore.migrateToAppGroupIfNecessary()
-        EntitlementStore.migrateToAppGroupIfNecessary()
         ExerciseStore.migrateHiddenExercisesToAppGroupIfNecessary()
         
-        StoreObserver.shared.addToPaymentQueue()
-        #if DEBUG
-        os_log("Skipping license verification in DEBUG build", log: .iap, type: .default)
-        #else
-        refreshEntitlements()
-        #endif
         WatchConnectionManager.shared.activateSession()
         Shortcuts.setShortcutSuggestions()
 //        Shortcuts.setRelevantShortcuts() // This doesn't work, the watch shows the suggestion but gets an error when executed (tested with iOS 13.4)
@@ -47,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        SKPaymentQueue.default().remove(StoreObserver.shared)
-        
         if SettingsStore.shared.autoBackup {
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
@@ -158,22 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-    
-    // MARK: - IAP
-    
-    private func refreshEntitlements() {
-        ReceiptFetcher.fetch { result in
-            if let data = try? result.get() {
-                ReceiptVerifier.verify(receipt: data) { result in
-                    if let response = try? result.get() {
-                        DispatchQueue.main.async {
-                            EntitlementStore.shared.updateEntitlements(response: response)
-                        }
-                    }
-                }
-            }
-        }
     }
     
     // MARK: - Custom

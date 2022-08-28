@@ -233,7 +233,7 @@ struct WorkoutSetCell_Previews: PreviewProvider {
             }
         }
         .listStyleCompat_InsetGroupedListStyle()
-        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

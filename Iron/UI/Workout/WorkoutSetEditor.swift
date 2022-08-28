@@ -437,17 +437,17 @@ struct WorkoutSetEditor_Previews : PreviewProvider {
     static var previews: some View {
         return Group {
             WorkoutSetEditor(workoutSet: MockWorkoutData.metricRandom.workoutSet)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewDisplayName("Metric")
                 .previewLayout(.sizeThatFits)
             
             WorkoutSetEditor(workoutSet: MockWorkoutData.imperialRandom.workoutSet)
-                .mockEnvironment(weightUnit: .imperial, isPro: true)
+                .mockEnvironment(weightUnit: .imperial)
                 .previewDisplayName("Imperial")
                 .previewLayout(.sizeThatFits)
             
             MoreView(workoutSet: MockWorkoutData.metricRandom.workoutSet)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
                 .listStyle(GroupedListStyle())
         }

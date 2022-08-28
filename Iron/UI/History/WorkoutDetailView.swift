@@ -238,7 +238,7 @@ struct WorkoutDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             WorkoutDetailView(workout: MockWorkoutData.metricRandom.workout)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
         }
     }
 }

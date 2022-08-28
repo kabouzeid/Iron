@@ -220,7 +220,7 @@ struct StartWorkoutView_Previews: PreviewProvider {
             StartWorkoutView()
                 .previewDevice(.init("iPhone 11 Pro Max"))
         }
-        .mockEnvironment(weightUnit: .metric, isPro: true)
+        .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

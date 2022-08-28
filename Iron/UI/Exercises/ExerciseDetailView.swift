@@ -12,7 +12,6 @@ import WorkoutDataKit
 struct ExerciseDetailView : View {
     @EnvironmentObject var settingsStore: SettingsStore
     @EnvironmentObject var exerciseStore: ExerciseStore
-    @EnvironmentObject var entitlementStore: EntitlementStore
     @Environment(\.managedObjectContext) var managedObjectContext
     var exercise: Exercise
     
@@ -24,7 +23,6 @@ struct ExerciseDetailView : View {
         case statistics
         case history
         case editExercise
-        case buyPro
         
         var id: Self { self }
     }
@@ -38,10 +36,6 @@ struct ExerciseDetailView : View {
         case .editExercise:
             return EditCustomExerciseSheet(exercise: exercise)
                 .environmentObject(self.exerciseStore)
-                .typeErased
-        case .buyPro:
-            return PurchaseSheet()
-                .environmentObject(entitlementStore)
                 .typeErased
         }
     }
@@ -104,7 +98,6 @@ struct ExerciseDetailView : View {
                 .navigationBarTitle("Statistics", displayMode: .inline)
                 .navigationBarItems(leading: closeSheetButton)
                 .environmentObject(self.settingsStore)
-                .environmentObject(self.entitlementStore)
                 .environment(\.managedObjectContext, self.managedObjectContext)
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -255,7 +248,7 @@ struct ExerciseDetailView : View {
                 }
                 if exercise.isCustom {
                     Button("Edit") {
-                        self.activeSheet = self.entitlementStore.isPro ? .editExercise : .buyPro
+                        self.activeSheet = .editExercise
                     }
                 }
             }
@@ -268,7 +261,7 @@ struct ExerciseDetailView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExerciseDetailView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 99 })!)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
         }
     }
 }

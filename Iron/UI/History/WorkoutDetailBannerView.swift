@@ -31,7 +31,7 @@ struct WorkoutDetailBannerView : View {
 struct WorkoutDetailSummaryView_Previews : PreviewProvider {
     static var previews: some View {
         WorkoutDetailBannerView(workout: MockWorkoutData.metricRandom.workout)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
             .previewLayout(.sizeThatFits)
     }
 }

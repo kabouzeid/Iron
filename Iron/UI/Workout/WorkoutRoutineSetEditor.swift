@@ -424,11 +424,11 @@ struct WorkoutRoutineSetEditor_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             WorkoutRoutineSetEditor(workoutRoutineSet: MockWorkoutData.metric.workoutRoutineSet, overwriteRepetitionsMin: tempRepetitionsMinBinding, overwriteRepetitionsMax: tempRepetitionsMaxBinding, showNext: false)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
             
             MoreView(workoutRoutineSet: MockWorkoutData.metric.workoutRoutineSet)
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
                 .listStyle(GroupedListStyle())
         }

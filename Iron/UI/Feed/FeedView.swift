@@ -197,7 +197,7 @@ struct FeedView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             FeedView()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
         }
     }
 }

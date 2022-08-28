@@ -64,7 +64,6 @@ struct WorkoutExerciseSectionHeader_Previews: PreviewProvider {
             }
         }
         .listStyle(GroupedListStyle())
-        .mockEnvironment(weightUnit: .metric, isPro: false)
     }
 }
 #endif

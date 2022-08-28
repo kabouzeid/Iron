@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ActivityWorkoutsPerWeekCell : View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
     @State private var workoutsPerWeekMean = WorkoutsPerWeekMeanKey.defaultValue
     
     var body: some View {
@@ -29,7 +27,6 @@ struct ActivityWorkoutsPerWeekCell : View {
                 if let mean = workoutsPerWeekMean {
                     Text("Ø\(String(format: "%.1f", mean))")
                         .foregroundColor(.secondary)
-                        .modifier(if: !entitlementStore.isPro) { $0.redacted_compat() }
                 }
             }
             
@@ -50,12 +47,12 @@ struct ActivityWorkoutsPerWeekViewCell_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ActivityWorkoutsPerWeekCell()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
             
             List {
                 ActivityWorkoutsPerWeekCell()
-                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .mockEnvironment(weightUnit: .metric)
                     .previewLayout(.sizeThatFits)
             }.listStyleCompat_InsetGroupedListStyle()
         }

@@ -129,7 +129,6 @@ private extension View {
             .environmentObject(SettingsStore.shared)
             .environmentObject(RestTimerStore.shared)
             .environmentObject(ExerciseStore.shared)
-            .environmentObject(EntitlementStore.shared)
             .environment(\.managedObjectContext, WorkoutDataStorage.shared.persistentContainer.viewContext)
     }
 }
@@ -138,7 +137,7 @@ private extension View {
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

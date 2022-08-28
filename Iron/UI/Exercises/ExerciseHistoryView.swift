@@ -52,7 +52,7 @@ struct ExerciseHistoryView : View {
 struct ExerciseHistoryView_Previews : PreviewProvider {
     static var previews: some View {
         ExerciseHistoryView(exercise: ExerciseStore.shared.exercises.first(where: { $0.everkineticId == 42 })!)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

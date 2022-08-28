@@ -11,28 +11,11 @@ import Charts
 import WorkoutDataKit
 
 struct OneRepMaxView: View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
     let exercise: Exercise
     let highlightDate: Date
     
     private var chartView: some View {
-        Group {
-            if entitlementStore.isPro {
-                OneRepMaxChartView(exercise: exercise, highlightDate: highlightDate)
-            } else {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Text("Unlock charts with Iron Pro").font(.headline)
-                        Image(systemName: "lock")
-                        Spacer()
-                    }
-                    Spacer()
-                }
-            }
-        }
+        OneRepMaxChartView(exercise: exercise, highlightDate: highlightDate)
     }
     
     var body: some View {

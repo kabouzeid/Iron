@@ -11,12 +11,11 @@ import SwiftUI
 import WorkoutDataKit
 
 extension View {
-    func mockEnvironment(weightUnit: WeightUnit, isPro: Bool) -> some View {
+    func mockEnvironment(weightUnit: WeightUnit) -> some View {
         self
             .environmentObject(weightUnit == .metric ? SettingsStore.mockMetric : SettingsStore.mockImperial)
             .environmentObject(RestTimerStore.shared)
             .environmentObject(ExerciseStore.shared)
-            .environmentObject(isPro ? EntitlementStore.mockPro : EntitlementStore.mockNoPro)
             .environmentObject(SceneState())
             .environment(\.managedObjectContext, weightUnit == .metric ? MockWorkoutData.metricRandom.context : MockWorkoutData.imperialRandom.context)
     }
@@ -24,7 +23,7 @@ extension View {
     func screenshotEnvironment(weightUnit: WeightUnit) -> some View {
         self
             .environment(\.managedObjectContext, weightUnit == .metric ? MockWorkoutData.metric.context : MockWorkoutData.imperial.context)
-            .mockEnvironment(weightUnit: weightUnit, isPro: true)
+            .mockEnvironment(weightUnit: weightUnit)
     }
 }
 #endif

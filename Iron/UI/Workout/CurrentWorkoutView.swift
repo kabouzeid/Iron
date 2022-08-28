@@ -334,7 +334,7 @@ struct WorkoutView_Previews: PreviewProvider {
             RestTimerStore.shared.restTimerDuration = 10
         }
         return CurrentWorkoutView(workout: MockWorkoutData.metricRandom.currentWorkout)
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

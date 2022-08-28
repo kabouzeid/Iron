@@ -12,8 +12,6 @@ import SwiftUI
 import WorkoutDataKit
 
 struct DeveloperSettings: View {
-    @EnvironmentObject var entitlementStore: EntitlementStore
-    
     @State private var activityItems: [Any]?
     
     var body: some View {
@@ -22,27 +20,12 @@ struct DeveloperSettings: View {
                 createDefaultWorkoutPlans()
             }
             
-            Toggle("Pro", isOn: isPro)
-            
             Button("Export Database") {
                 self.shareFile(url: WorkoutDataStorage.groupStoreURL)
             }
         }
         .navigationBarTitle("Developer", displayMode: .inline)
         .overlay(ActivitySheet(activityItems: $activityItems))
-    }
-    
-    var isPro: Binding<Bool> {
-        Binding {
-            entitlementStore.isPro
-        } set: { newValue in
-            if newValue {
-                entitlementStore.entitlements = IAPIdentifiers.pro
-            } else {
-                entitlementStore.entitlements = []
-            }
-        }
-
     }
     
     private func shareFile(url: URL) {

@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct AboutView: View {
-    @EnvironmentObject private var entitlementsStore: EntitlementStore
-    
     var body: some View {
         Form {
             Section(
@@ -25,9 +23,6 @@ struct AboutView: View {
 
                     VStack(alignment: .leading) {
                         Text("Iron \(versionString)").font(.headline)
-                        if entitlementsStore.isPro {
-                            Text("Pro Version")
-                        }
                         Text("by Karim Abou Zeid")
                     }.padding()
 
@@ -93,7 +88,7 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AboutView().mockEnvironment(weightUnit: .metric, isPro: true)
+            AboutView().mockEnvironment(weightUnit: .metric)
         }
     }
 }

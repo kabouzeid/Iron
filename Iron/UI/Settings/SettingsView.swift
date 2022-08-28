@@ -7,19 +7,10 @@
 //
 
 import SwiftUI
-import StoreKit
 import MessageUI
 
 struct SettingsView : View {
     @EnvironmentObject var settingsStore: SettingsStore
-    
-    private var ironProSection: some View {
-        Section {
-            NavigationLink(destination: PurchaseView()) {
-                Text("Iron Pro")
-            }
-        }
-    }
     
     private var mainSection: some View {
         Section {
@@ -113,8 +104,6 @@ struct SettingsView : View {
     var body: some View {
         NavigationView {
             Form {
-                ironProSection
-                
                 mainSection
                 
                 aboutRatingAndSupportSection
@@ -145,7 +134,7 @@ private class MailCloseDelegate: NSObject, MFMailComposeViewControllerDelegate {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
-            .mockEnvironment(weightUnit: .metric, isPro: true)
+            .mockEnvironment(weightUnit: .metric)
     }
 }
 #endif

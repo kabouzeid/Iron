@@ -32,12 +32,12 @@ struct ActivityLast7DaysCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ActivitySummaryLast7DaysCell()
-                .mockEnvironment(weightUnit: .metric, isPro: true)
+                .mockEnvironment(weightUnit: .metric)
                 .previewLayout(.sizeThatFits)
             
             List {
                 ActivitySummaryLast7DaysCell()
-                    .mockEnvironment(weightUnit: .metric, isPro: true)
+                    .mockEnvironment(weightUnit: .metric)
             }.listStyleCompat_InsetGroupedListStyle()
         }
     }

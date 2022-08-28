@@ -56,7 +56,6 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
                 OneRepMaxView(exercise: exercise, highlightDate: highlightDate)
                     .environment(\.managedObjectContext, WorkoutDataStorage.shared.persistentContainer.viewContext)
                     .environmentObject(SettingsStore.shared)
-                    .environmentObject(EntitlementStore.shared)
                     .accentColor(.blue)
                     .padding()
             ))
