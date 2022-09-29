@@ -311,8 +311,6 @@
 		8AB5213A2399944B008064B2 /* Workout+WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB521392399944B008064B2 /* Workout+WeightUnit.swift */; };
 		8AB5213C239999C7008064B2 /* WorkoutDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5213B239999C7008064B2 /* WorkoutDataStorage.swift */; };
 		8AB5213E23999ED4008064B2 /* WorkoutDataStorage+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5213D23999ED4008064B2 /* WorkoutDataStorage+shared.swift */; };
-		8AB5D3452342B3E600211F98 /* IronUISnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D3442342B3E600211F98 /* IronUISnapshots.swift */; };
-		8AB5D34D2342B9D100211F98 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5D34C2342B9D100211F98 /* SnapshotHelper.swift */; };
 		8AB972F7203583E40099507B /* InMemoryPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB972F6203583E40099507B /* InMemoryPersistentContainer.swift */; };
 		8ABB4C6622CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB4C6522CE05DD0075CCE6 /* ExerciseMuscleGroupsView.swift */; };
 		8AC4C9D223254A7E008E474A /* quotes in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4C9D123254A7E008E474A /* quotes */; };
@@ -445,13 +443,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8AB5210D23992ABC008064B2;
 			remoteInfo = WorkoutDataKit;
-		};
-		8AB5D3472342B3E600211F98 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A7D6E8C200BF92E00AA0FA7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8A7D6E93200BF92E00AA0FA7;
-			remoteInfo = Iron;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -696,10 +687,6 @@
 		8AB521392399944B008064B2 /* Workout+WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+WeightUnit.swift"; sourceTree = "<group>"; };
 		8AB5213B239999C7008064B2 /* WorkoutDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataStorage.swift; sourceTree = "<group>"; };
 		8AB5213D23999ED4008064B2 /* WorkoutDataStorage+shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutDataStorage+shared.swift"; sourceTree = "<group>"; };
-		8AB5D3422342B3E600211F98 /* IronUISnapshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronUISnapshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AB5D3442342B3E600211F98 /* IronUISnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronUISnapshots.swift; sourceTree = "<group>"; };
-		8AB5D3462342B3E600211F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AB5D34C2342B9D100211F98 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		8AB8A5942034C097004366F2 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		8AB8A5962034C0AF004366F2 /* WorkoutExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExercise.swift; sourceTree = "<group>"; };
 		8AB8A5982034C0BA004366F2 /* WorkoutSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSet.swift; sourceTree = "<group>"; };
@@ -835,13 +822,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AB5D33F2342B3E600211F98 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -898,7 +878,6 @@
 		8A440804239C0F8000A6D2C7 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				8AB5D3432342B3E600211F98 /* IronUISnapshots */,
 				8A86191D236DAB6E00C1E96C /* WatchIron */,
 			);
 			name = Support;
@@ -1205,11 +1184,11 @@
 				8A7D6E96200BF92E00AA0FA7 /* Iron */,
 				8A86192C236DAB7000C1E96C /* WatchIron Extension */,
 				8AB5210F23992ABC008064B2 /* WorkoutDataKit */,
-				8A440805239C0F9C00A6D2C7 /* Tests */,
-				8A440804239C0F8000A6D2C7 /* Support */,
 				8A604383239C4DBB00CFB7C0 /* IronIntents */,
 				8A60438E239C4DBB00CFB7C0 /* IronIntentsUI */,
 				8AAFE3472534AB3800CF03E5 /* IronWidget */,
+				8A440805239C0F9C00A6D2C7 /* Tests */,
+				8A440804239C0F8000A6D2C7 /* Support */,
 				8A7D6E95200BF92E00AA0FA7 /* Products */,
 				8A6F1729233A809D0048A75B /* Frameworks */,
 			);
@@ -1220,7 +1199,6 @@
 			children = (
 				8A7D6E94200BF92E00AA0FA7 /* Iron.app */,
 				8A7D6EAB200BF92E00AA0FA7 /* IronTests.xctest */,
-				8AB5D3422342B3E600211F98 /* IronUISnapshots.xctest */,
 				8A86191C236DAB6E00C1E96C /* WatchIron.app */,
 				8A861928236DAB7000C1E96C /* WatchIron Extension.appex */,
 				8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */,
@@ -1429,16 +1407,6 @@
 				8AE0A084241188E000A0C419 /* OSLog+Logs.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		8AB5D3432342B3E600211F98 /* IronUISnapshots */ = {
-			isa = PBXGroup;
-			children = (
-				8AB5D34C2342B9D100211F98 /* SnapshotHelper.swift */,
-				8AB5D3442342B3E600211F98 /* IronUISnapshots.swift */,
-				8AB5D3462342B3E600211F98 /* Info.plist */,
-			);
-			path = IronUISnapshots;
 			sourceTree = "<group>";
 		};
 		8ABB4C6422CE059E0075CCE6 /* Exercises */ = {
@@ -1732,24 +1700,6 @@
 			productReference = 8AB5210E23992ABC008064B2 /* WorkoutDataKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8AB5D3412342B3E600211F98 /* IronUISnapshots */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8AB5D3492342B3E600211F98 /* Build configuration list for PBXNativeTarget "IronUISnapshots" */;
-			buildPhases = (
-				8AB5D33E2342B3E600211F98 /* Sources */,
-				8AB5D33F2342B3E600211F98 /* Frameworks */,
-				8AB5D3402342B3E600211F98 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8AB5D3482342B3E600211F98 /* PBXTargetDependency */,
-			);
-			name = IronUISnapshots;
-			productName = IronUISnapshots;
-			productReference = 8AB5D3422342B3E600211F98 /* IronUISnapshots.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1789,10 +1739,6 @@
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1120;
 					};
-					8AB5D3412342B3E600211F98 = {
-						CreatedOnToolsVersion = 11.1;
-						TestTargetID = 8A7D6E93200BF92E00AA0FA7;
-					};
 				};
 			};
 			buildConfigurationList = 8A7D6E8F200BF92E00AA0FA7 /* Build configuration list for PBXProject "Iron" */;
@@ -1813,7 +1759,6 @@
 			targets = (
 				8A7D6E93200BF92E00AA0FA7 /* Iron */,
 				8A7D6EAA200BF92E00AA0FA7 /* IronTests */,
-				8AB5D3412342B3E600211F98 /* IronUISnapshots */,
 				8A86191B236DAB6E00C1E96C /* WatchIron */,
 				8A861927236DAB7000C1E96C /* WatchIron Extension */,
 				8AB5210D23992ABC008064B2 /* WorkoutDataKit */,
@@ -1894,13 +1839,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AB5212A2399329D008064B2 /* everkinetic-data in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AB5D3402342B3E600211F98 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2285,15 +2223,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AB5D33E2342B3E600211F98 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8AB5D3452342B3E600211F98 /* IronUISnapshots.swift in Sources */,
-				8AB5D34D2342B9D100211F98 /* SnapshotHelper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2346,11 +2275,6 @@
 			isa = PBXTargetDependency;
 			target = 8AB5210D23992ABC008064B2 /* WorkoutDataKit */;
 			targetProxy = 8AB5211323992ABC008064B2 /* PBXContainerItemProxy */;
-		};
-		8AB5D3482342B3E600211F98 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8A7D6E93200BF92E00AA0FA7 /* Iron */;
-			targetProxy = 8AB5D3472342B3E600211F98 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2929,51 +2853,6 @@
 			};
 			name = Release;
 		};
-		8AB5D34A2342B3E600211F98 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = IronUISnapshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronUISnapshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Iron;
-			};
-			name = Debug;
-		};
-		8AB5D34B2342B3E600211F98 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L6CX7XT2U;
-				INFOPLIST_FILE = IronUISnapshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kabouzeid.IronUISnapshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Iron;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3054,15 +2933,6 @@
 			buildConfigurations = (
 				8AB5211823992ABC008064B2 /* Debug */,
 				8AB5211923992ABC008064B2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8AB5D3492342B3E600211F98 /* Build configuration list for PBXNativeTarget "IronUISnapshots" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8AB5D34A2342B3E600211F98 /* Debug */,
-				8AB5D34B2342B3E600211F98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
