@@ -45,31 +45,31 @@ struct ContentView : View {
                 FeedView()
                     .tag(SceneState.Tab.feed.rawValue)
                     .tabItem {
-                        Label("Feed", image: "today_apps")
+                        Label("Feed", systemImage: "house")
                     }
 
                 HistoryView()
                     .tag(SceneState.Tab.history.rawValue)
                     .tabItem {
-                        Label("History", image: "clock")
+                        Label("History", systemImage: "clock")
                     }
 
                 WorkoutTab()
                     .tag(SceneState.Tab.workout.rawValue)
                     .tabItem {
-                        Label("Workout", image: "workout")
+                        Label("Workout", systemImage: "plus.diamond")
                     }
 
                 ExerciseMuscleGroupsView()
                     .tag(SceneState.Tab.exercises.rawValue)
                     .tabItem {
-                        Label("Exercises", image: "list")
+                        Label("Exercises", systemImage: "tray.full")
                     }
 
                 SettingsView()
                     .tag(SceneState.Tab.settings.rawValue)
                     .tabItem {
-                        Label("Settings", image: "settings")
+                        Label("Settings", systemImage: "gear")
                     }
             }
             .productionEnvironment()
@@ -82,27 +82,27 @@ struct ContentView : View {
                 FeedView()
                     .productionEnvironment()
                     .hostingController()
-                    .tabItem(title: "Feed", image: UIImage(named: "today_apps"), tag: 0),
+                    .tabItem(title: "Feed", image: UIImage(systemName: "house"), tag: 0),
 
                 HistoryView()
                     .productionEnvironment()
                     .hostingController()
-                    .tabItem(title: "History", image: UIImage(named: "clock"), tag: 1),
+                    .tabItem(title: "History", image: UIImage(systemName: "clock"), tag: 1),
 
                 WorkoutTab()
                     .productionEnvironment()
                     .hostingController()
-                    .tabItem(title: "Workout", image: UIImage(named: "workout"), tag: 2),
+                    .tabItem(title: "Workout", image: UIImage(systemName: "plus.square"), tag: 2),
 
                 ExerciseMuscleGroupsView()
                     .productionEnvironment()
                     .hostingController()
-                    .tabItem(title: "Exercises", image: UIImage(named: "list"), tag: 3),
+                    .tabItem(title: "Exercises", image: UIImage(systemName: "tray.full"), tag: 3),
 
                 SettingsView()
                     .productionEnvironment()
                     .hostingController()
-                    .tabItem(title: "Settings", image: UIImage(named: "settings"), tag: 4),
+                    .tabItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 4),
             ], selection: sceneState.selectedTabNumber)
         }
     }
