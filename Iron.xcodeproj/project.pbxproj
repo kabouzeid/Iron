@@ -91,8 +91,8 @@
 		8A60438D239C4DBB00CFB7C0 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A60438C239C4DBB00CFB7C0 /* IntentsUI.framework */; };
 		8A604390239C4DBB00CFB7C0 /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60438F239C4DBB00CFB7C0 /* IntentViewController.swift */; };
 		8A604393239C4DBB00CFB7C0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A604391239C4DBB00CFB7C0 /* MainInterface.storyboard */; };
-		8A604397239C4DBB00CFB7C0 /* IronIntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A604382239C4DBB00CFB7C0 /* IronIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A604397239C4DBB00CFB7C0 /* IronIntentsUI.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A60438B239C4DBB00CFB7C0 /* IronIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A604382239C4DBB00CFB7C0 /* IronIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A6043A3239C4E1F00CFB7C0 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8A6043A2239C4E1F00CFB7C0 /* Intents.intentdefinition */; };
 		8A6043A7239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6043A6239C537A00CFB7C0 /* ViewPersonalRecordsIntentHandler.swift */; };
 		8A63B3772329463A001BD7B5 /* CurrentWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63B3752329463A001BD7B5 /* CurrentWorkoutView.swift */; };
@@ -129,7 +129,7 @@
 		8A82AB9222DDDB7E007C0293 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82AB9122DDDB7E007C0293 /* SettingsStore.swift */; };
 		8A857E3E237B63490065BEBE /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A857E3D237B63490065BEBE /* WatchSettingsView.swift */; };
 		8A861922236DAB7000C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861921236DAB7000C1E96C /* Assets.xcassets */; };
-		8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A861928236DAB7000C1E96C /* WatchIron Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A86192E236DAB7000C1E96C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86192D236DAB7000C1E96C /* ContentView.swift */; };
 		8A861934236DAB7100C1E96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861933236DAB7100C1E96C /* Assets.xcassets */; };
 		8A861937236DAB7100C1E96C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A861936236DAB7100C1E96C /* Preview Assets.xcassets */; };
@@ -269,7 +269,7 @@
 		8AAFE3462534AB3800CF03E5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAFE3452534AB3800CF03E5 /* SwiftUI.framework */; };
 		8AAFE3492534AB3800CF03E5 /* IronWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE3482534AB3800CF03E5 /* IronWidget.swift */; };
 		8AAFE34B2534AB3900CF03E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AAFE34A2534AB3900CF03E5 /* Assets.xcassets */; };
-		8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8AAFE3422534AB3800CF03E5 /* IronWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8AAFE35C2534B4BA00CF03E5 /* WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */; };
 		8AAFE36F2534B51000CF03E5 /* WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFE35B2534B4BA00CF03E5 /* WidgetKind.swift */; };
 		8AAFE3832534B68700CF03E5 /* WorkoutDataStorage+shared2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF07874239B246600CA95D6 /* WorkoutDataStorage+shared2.swift */; };
@@ -465,17 +465,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A60439B239C4DBB00CFB7C0 /* Embed App Extensions */ = {
+		8A60439B239C4DBB00CFB7C0 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed App Extensions */,
-				8A604397239C4DBB00CFB7C0 /* IronIntentsUI.appex in Embed App Extensions */,
-				8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed App Extensions */,
+				8A60439A239C4DBB00CFB7C0 /* IronIntents.appex in Embed Foundation Extensions */,
+				8A604397239C4DBB00CFB7C0 /* IronIntentsUI.appex in Embed Foundation Extensions */,
+				8AAFE34F2534AB3900CF03E5 /* IronWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8A86193C236DAB7100C1E96C /* Embed Watch Content */ = {
@@ -489,15 +489,15 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A86193F236DAB7100C1E96C /* Embed App Extensions */ = {
+		8A86193F236DAB7100C1E96C /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed App Extensions */,
+				8A861929236DAB7000C1E96C /* WatchIron Extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8AB5211723992ABC008064B2 /* Embed Frameworks */ = {
@@ -1585,7 +1585,7 @@
 				8A7D6E92200BF92E00AA0FA7 /* Resources */,
 				8A86193C236DAB7100C1E96C /* Embed Watch Content */,
 				8AB5211723992ABC008064B2 /* Embed Frameworks */,
-				8A60439B239C4DBB00CFB7C0 /* Embed App Extensions */,
+				8A60439B239C4DBB00CFB7C0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1627,7 +1627,7 @@
 			buildConfigurationList = 8A861943236DAB7100C1E96C /* Build configuration list for PBXNativeTarget "WatchIron" */;
 			buildPhases = (
 				8A86191A236DAB6E00C1E96C /* Resources */,
-				8A86193F236DAB7100C1E96C /* Embed App Extensions */,
+				8A86193F236DAB7100C1E96C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1699,7 +1699,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Karim Abou Zeid Software";
 				TargetAttributes = {
 					8A604381239C4DBB00CFB7C0 = {
