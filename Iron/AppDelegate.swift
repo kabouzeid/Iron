@@ -31,9 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // disable the transparent tab bar in iOS 15, there is a bug and it doesn't work correctly with the TimerBannerView for now
         if #available(iOS 15.0, *) {
-            let barAppearance = UITabBarAppearance()
-            barAppearance.configureWithOpaqueBackground()
-            UITabBar.appearance().scrollEdgeAppearance = barAppearance
+            if #unavailable(iOS 16.0) { // fixed in iOS 16
+                let barAppearance = UITabBarAppearance()
+                barAppearance.configureWithOpaqueBackground()
+                UITabBar.appearance().scrollEdgeAppearance = barAppearance
+            }
         }
         return true
     }
