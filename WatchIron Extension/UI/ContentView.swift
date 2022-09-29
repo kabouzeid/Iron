@@ -40,7 +40,12 @@ private struct _ContentView: View {
                 if let s = errorMessage {
                     Text(s).foregroundColor(.red)
                 } else {
-                    Text("Start a workout on your iPhone.")
+                    VStack(spacing: 8) {
+                        Image(systemName: "iphone")
+                            .imageScale(.large)
+                        Text("Start a workout on your iPhone.")
+                            .multilineTextAlignment(.center)
+                    }
                 }
             }.onAppear {
                 self.selectedTab = "workout"

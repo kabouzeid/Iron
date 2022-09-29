@@ -18,13 +18,10 @@ class NotificationManager: NSObject {
         super.init()
         self.notificationCenter.delegate = self
     }
-    
-    func awake() {}
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        print(#function)
         return [.banner, .sound]
     }
 }

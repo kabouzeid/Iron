@@ -1,33 +1,37 @@
 //
-//  ExtensionDelegate.swift
-//  WatchIron Extension
+//  IronApp.swift
+//  IronWatch WatchKit Extension
 //
-//  Created by Karim Abou Zeid on 02.11.19.
-//  Copyright © 2019 Karim Abou Zeid Software. All rights reserved.
+//  Created by Karim Abou Zeid on 27.05.22.
 //
 
-import WatchKit
+import SwiftUI
+
+@main
+struct IronApp: App {
+    @WKApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
+    @SceneBuilder var body: some Scene {
+        WindowGroup {
+            NavigationView {
+                ContentView()
+            }
+        }
+    }
+}
+
 import HealthKit
-import Foundation
-import Combine
 import os.log
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class AppDelegate: NSObject, WKApplicationDelegate {
+    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "watch")
+    
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
-        os_log("Checking whether active workout session can be recovered")
+        Self.logger.log("Checking whether active workout session can be recovered")
         handleActiveWorkoutRecovery() // somehow this isn't automatically called by the system?! last checked watchOS 8
         PhoneConnectionManager.shared.activateSession()
-        NotificationManager.shared.awake()
-    }
-
-    func applicationDidBecomeActive() {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
+        _ = NotificationManager.shared
     }
 
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -61,17 +65,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
     
     func handleActiveWorkoutRecovery() {
-        os_log("Recovering active workout session")
+        Self.logger.log("Recovering active workout session")
         WorkoutSessionManager.healthStore.recoverActiveWorkoutSession { workoutSession, error in
             guard let workoutSession = workoutSession else {
                 if let error = error {
-                    os_log("Could not recover active workout session: %@", error.localizedDescription)
+                    Self.logger.error("Could not recover active workout session: \(error.localizedDescription)")
                 } else {
-                    os_log("No active workout session to recover", type: .info)
+                    Self.logger.info("No active workout session to recover")
                 }
                 return
             }
-            os_log("Successfully recovered active workout session", type: .info)
+            Self.logger.info("Successfully recovered active workout session")
             WorkoutSessionManagerStore.shared.recoverWorkoutSession(workoutSession: workoutSession)
         }
     }
