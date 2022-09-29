@@ -74,13 +74,13 @@ struct LastWorkoutWidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            Color(red: 255/255, green: 105/255, blue: 0/255, opacity: 1)
+            Color(.systemGroupedBackground)
             VStack(alignment: .leading) {
                 Spacer()
                 
                 Text("Activity")
                     .font(.headline)
-                    .foregroundColor(Color(white: 1, opacity: 0.9))
+                    .foregroundColor(.primary)
                 
                 Spacer()
                 
@@ -88,30 +88,28 @@ struct LastWorkoutWidgetEntryView : View {
                     VStack(alignment: .leading) {
                         Text("Last Workout")
                             .font(.subheadline)
-                            .foregroundColor(Color.primary.opacity(0.8))
-                        //                                .foregroundColor(.secondary)
-                        //                                .foregroundColor(Color.primary.opacity(0.7))
+                            .foregroundColor(Color.white.opacity(0.8))
                         
                         if let days = daysSinceLastWorkout {
                             Text(String(days))
                                 .font(.system(.title3, design: .rounded))
-                                .foregroundColor(.primary)
+                                .foregroundColor(.white)
                                 +
                                 Text(" ")
                                 +
                                 Text(days == 1 ? "day" : "days")
                                 .font(.system(.body, design: .rounded))
-                                .foregroundColor(.primary)
                         } else {
                             Text("-")
                                 .font(.system(.title3, design: .rounded))
                         }
                     }
+                    .foregroundColor(Color.white.opacity(0.9))
                     .padding(8)
                     
                     Spacer()
                 }
-                .background(ContainerRelativeShape().fill(Color(.systemBackground).opacity(0.6)))
+                .background(ContainerRelativeShape().fill(Color.accentColor))
             }
             .padding()
         }
