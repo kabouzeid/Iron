@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://ironapp.io" target="_blank" rel="noopener noreferrer">
+  <a href="https://apps.apple.com/us/app/iron-workout-tracker/id1479893244?itsct=apps_box_link&itscg=30200" target="_blank" rel="noopener noreferrer">
     <img width="180" height="180" src="assets/app_icon_rounded.png" alt="Iron App Icon">
   </a>
 </p>
