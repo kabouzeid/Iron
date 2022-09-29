@@ -15,7 +15,7 @@ import Foundation
 import UIKit
 import Charts
 
-class BalloonMarker: IMarker
+class BalloonMarker: Marker
 {
     weak var chartView: ChartViewBase?
     var valueFormatter: BalloonValueFormatter?

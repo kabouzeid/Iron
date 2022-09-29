@@ -53,11 +53,11 @@ struct OneRepMaxChartView : View {
         ).lineChartData(label: WorkoutExerciseChartData.MeasurementType.oneRM.title)
     }
     
-    private var xAxisFormatter: IAxisValueFormatter {
+    private var xAxisFormatter: AxisValueFormatter {
         WorkoutExerciseChartData.xAxisValueFormatter(for: .oneRM, weightUnit: settingsStore.weightUnit)
     }
     
-    private var yAxisFormatter: IAxisValueFormatter {
+    private var yAxisFormatter: AxisValueFormatter {
         WorkoutExerciseChartData.yAxisValueFormatter(for: .oneRM, weightUnit: settingsStore.weightUnit)
     }
     

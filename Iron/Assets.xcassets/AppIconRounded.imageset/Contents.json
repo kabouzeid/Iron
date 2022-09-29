@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "AppIconRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-twitter (3).pdf",
+      "filename" : "AppIconRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "AppIconRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

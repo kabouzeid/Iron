@@ -55,17 +55,6 @@ struct SettingsView : View {
             }
             
             Button(action: {
-                guard let fiderURL = URL(string: "https://fider.ironapp.io") else { return }
-                UIApplication.shared.open(fiderURL)
-            }) {
-                HStack {
-                    Text("Request a Feature")
-                    Spacer()
-                    Image(systemName: "square.and.pencil")
-                }
-            }
-
-            Button(action: {
                 guard MFMailComposeViewController.canSendMail() else {
                     self.showSupportMailAlert = true // fallback
                     return
@@ -73,7 +62,7 @@ struct SettingsView : View {
                 
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = MailCloseDelegate.shared
-                mail.setToRecipients(["support@ironapp.io"])
+                mail.setToRecipients(["iron@ka.codes"])
                 
                 // TODO: replace this hack with a proper way to retreive the rootViewController
                 guard let rootVC = UIApplication.shared.activeSceneKeyWindow?.rootViewController else { return }
@@ -86,7 +75,7 @@ struct SettingsView : View {
                 }
             }
             .alert(isPresented: $showSupportMailAlert) {
-                Alert(title: Text("Support E-Mail"), message: Text("support@ironapp.io"))
+                Alert(title: Text("Support E-Mail"), message: Text("iron@ka.codes"))
             }
         }
     }

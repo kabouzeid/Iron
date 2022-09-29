@@ -11,8 +11,8 @@ import Charts
 
 struct ChartsBarChartViewRepresentable : UIViewRepresentable {
     var chartData: ChartData
-    var xAxisValueFormatter: IAxisValueFormatter
-    var yAxisValueFormatter: IAxisValueFormatter
+    var xAxisValueFormatter: AxisValueFormatter
+    var yAxisValueFormatter: AxisValueFormatter
     var preCustomization: ((Charts.BarChartView, ChartData) -> ())?
     var postCustomization: ((Charts.BarChartView) -> ())?
 

@@ -11,11 +11,11 @@ import Charts
 import WorkoutDataKit
 
 enum WorkoutExerciseChartData {
-    static func xAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> IAxisValueFormatter {
+    static func xAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> AxisValueFormatter {
         WorkoutExerciseChartDataGenerator.DateAxisFormatter()
     }
     
-    static func yAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> IAxisValueFormatter {
+    static func yAxisValueFormatter(for measurementType: MeasurementType, weightUnit: WeightUnit) -> AxisValueFormatter {
         DefaultAxisValueFormatter(decimals: 0)
     }
     

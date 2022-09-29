@@ -11,8 +11,8 @@ import Charts
 
 struct ChartsLineChartViewRepresentable : UIViewRepresentable {
     let chartData: ChartData
-    let xAxisValueFormatter: IAxisValueFormatter?
-    let yAxisValueFormatter: IAxisValueFormatter?
+    let xAxisValueFormatter: AxisValueFormatter?
+    let yAxisValueFormatter: AxisValueFormatter?
     let balloonValueFormatter: BalloonValueFormatter?
     var preCustomization: ((Charts.LineChartView, ChartData) -> ())?
     var postCustomization: ((Charts.LineChartView) -> ())?

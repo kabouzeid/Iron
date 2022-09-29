@@ -10,81 +10,94 @@ import SwiftUI
 
 struct AboutView: View {
     var body: some View {
-        Form {
-            Section(
-                header:
-                HStack {
-                    Spacer()
-
-                    Image("rounded_app_icon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 80)
-
-                    VStack(alignment: .leading) {
-                        Text("Iron \(versionString)").font(.headline)
-                        Text("by Karim Abou Zeid")
-                    }.padding()
-
-                    Spacer()
+        List {
+            HStack {
+                Image("AppIconRounded")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 80)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Iron \(versionString)")
+                        .font(.headline)
+                    
+                    Text("by Karim Abou Zeid")
+                        .font(.subheadline)
                 }
                 .padding()
-                .modifier(TextCaseNil())
-            ) {
+            }
+            .listRowBackground(Color.clear)
+            
+            Section {
                 Button(action: {
-                    guard let url = URL(string: "https://twitter.com/theironapp") else { return }
-                    UIApplication.shared.open(url)
+                    UIApplication.shared.open(URL(string: "https://github.com/kabouzeid/Iron")!)
                 }) {
-                    HStack {
-                        Text("Follow @theironapp")
-                        Spacer()
-                        Image("twitter")
+                    if #available(iOS 14.0, *) {
+                        Label("Source Code", image: "github.fill")
+                    } else {
+                        HStack {
+                            Image("github.fill")
+                            Text("Source Code")
+                        }
                     }
                 }
                 
                 Button(action: {
-                    guard let url = URL(string: "https://twitter.com/swiftkarim") else { return }
-                    UIApplication.shared.open(url)
+                    UIApplication.shared.open(URL(string: "https://twitter.com/kacodes")!)
                 }) {
-                    HStack {
-                        Text("Follow @swiftkarim")
-                        Spacer()
-                        Image("twitter")
+                    if #available(iOS 14.0, *) {
+                        Label("@kacodes", image: "twitter.fill")
+                    } else {
+                        HStack {
+                            Image("twitter.fill")
+                            Text("@kacodes")
+                        }
                     }
                 }
+                
                 Button(action: {
-                    guard let url = URL(string: "https://www.reddit.com/r/ironapp/") else { return }
-                    UIApplication.shared.open(url)
+                    UIApplication.shared.open(URL(string: "https://ka.codes")!)
                 }) {
-                    Text("Join /r/ironapp")
+                    if #available(iOS 14.0, *) {
+                        Label("Website", systemImage: "globe")
+                    } else {
+                        HStack {
+                            Image(systemName: "globe")
+                            Text("Website")
+                        }
+                    }
                 }
             }
             
             Section {
-                Button(action: {
-                    if let url = URL(string: "https://ironapp.io/privacypolicy/") {
-                        UIApplication.shared.open(url)
-                    }
-                }) {
-                    HStack {
-                        Text("Privacy Policy")
-                        Spacer()
-                        Image(systemName: "hand.raised")
+                Button {
+                    UIApplication.shared.open(URL(string: "https://iron.ka.codes/privacy.html")!)
+                } label: {
+                    if #available(iOS 14.0, *) {
+                        Label("Privacy Policy", systemImage: "hand.raised")
+                    } else {
+                        HStack {
+                            Image("hand.raised")
+                            Text("Privacy Policy")
+                        }
                     }
                 }
             }
-        }.navigationBarTitle("About", displayMode: .inline)
+        }
+        .navigationBarTitle("About", displayMode: .inline)
     }
     
     private var versionString: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-//        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-//        return "\(version ?? "?") (\(build ?? "?"))"
+        #if DEBUG
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        return "\(version ?? "?") (\(build ?? "?")) DEBUG"
+        #else
         return "\(version ?? "?")"
+        #endif
     }
 }
 
-#if DEBUG
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -92,4 +105,3 @@ struct AboutView_Previews: PreviewProvider {
         }
     }
 }
-#endif

@@ -16,7 +16,7 @@ extension BarLineChartViewBase {
         self.scaleYEnabled = false
         self.doubleTapToZoomEnabled = false
         self.legend.enabled = false
-        self.chartDescription?.enabled = false
+        self.chartDescription.enabled = false
         
         let gridColor = UIColor.systemGray5
         let axisLineColor = UIColor.systemGray4

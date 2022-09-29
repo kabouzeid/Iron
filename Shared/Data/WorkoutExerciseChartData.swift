@@ -55,7 +55,7 @@ extension WorkoutExerciseChartDataGenerator {
 
 // MARK: - Formatter
 extension WorkoutExerciseChartDataGenerator {
-    class DateAxisFormatter: IAxisValueFormatter {
+    class DateAxisFormatter: AxisValueFormatter {
         let dateFormatter: DateFormatter
         let yearDateFormatter: DateFormatter
 

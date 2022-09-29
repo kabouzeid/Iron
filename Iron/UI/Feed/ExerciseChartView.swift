@@ -32,11 +32,11 @@ struct ExerciseChartView : View {
         ).lineChartData(label: measurementType.title)
     }
     
-    private var xAxisFormatter: IAxisValueFormatter {
+    private var xAxisFormatter: AxisValueFormatter {
         WorkoutExerciseChartData.xAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
-    private var yAxisFormatter: IAxisValueFormatter {
+    private var yAxisFormatter: AxisValueFormatter {
         WorkoutExerciseChartData.yAxisValueFormatter(for: measurementType, weightUnit: settingsStore.weightUnit)
     }
     
