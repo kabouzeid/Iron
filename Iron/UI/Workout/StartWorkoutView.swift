@@ -29,8 +29,34 @@ struct StartWorkoutView: View {
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    StartEmptyWorkoutCell()
+                if #available(iOS 15.0, *) {
+                    Button {
+                        Workout.create(context: self.managedObjectContext).startOrCrash()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Start Workout").font(.headline)
+                            Spacer()
+                        }
+                        .padding(6)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .buttonStyle(.borderedProminent)
+                } else {
+                    Button {
+                        Workout.create(context: self.managedObjectContext).startOrCrash()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Start Workout").font(.headline)
+                            Spacer()
+                        }
+                        .padding(6)
+                    }
+                    .foregroundColor(.white)
+                    .listRowBackground(Color.accentColor)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 
                 ForEach(workoutPlans) { workoutPlan in
@@ -94,55 +120,6 @@ struct StartWorkoutView: View {
             self.managedObjectContext.delete(workoutPlans[i])
         }
         self.managedObjectContext.saveOrCrash()
-    }
-}
-
-private struct StartEmptyWorkoutCell: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    @EnvironmentObject var settingsStore: SettingsStore
-    
-    let quote: Quote? = Quotes.quotes[4]
-    
-    private var plateImage: some View {
-        Image(settingsStore.weightUnit == .imperial ? "plate_lbs" : "plate_kg")
-            .resizable()
-            .aspectRatio(contentMode: ContentMode.fit)
-            .frame(maxWidth: 100)
-    }
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            Group {
-                if colorScheme == .dark {
-                    plateImage.colorInvert()
-                } else {
-                    plateImage
-                }
-            }
-            
-            quote.map {
-                Text($0.displayText)
-                     .multilineTextAlignment(.center)
-                     .foregroundColor(.secondary)
-            }
-            
-            Button(action: {
-                Workout.create(context: self.managedObjectContext).startOrCrash()
-            }) {
-                HStack {
-                    Spacer()
-                    Text("Start Workout")
-                    Spacer()
-                }
-                .padding()
-                .foregroundColor(.accentColor)
-                .background(RoundedRectangle(cornerRadius: 8, style: .continuous).foregroundColor(Color(.systemFill)))
-            }.buttonStyle(BorderlessButtonStyle())
-        }
-        .padding(.top, 8)
-        .padding(.bottom, 8)
     }
 }
 
