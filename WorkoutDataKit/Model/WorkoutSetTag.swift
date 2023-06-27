@@ -15,8 +15,8 @@ public enum WorkoutSetTag: String, CaseIterable {
     
     public var title: String {
         switch self {
-//        case .warmUp:
-//            return "warm up"
+        case .warmUp:
+            return "warm up"
         case .dropSet:
             return "drop set"
         case .failure:
