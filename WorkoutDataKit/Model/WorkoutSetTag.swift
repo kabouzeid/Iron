@@ -9,7 +9,7 @@
 import Foundation
 
 public enum WorkoutSetTag: String, CaseIterable {
-//    case warmUp // disable for now, see if there is a need for this
+    case warmUp
     case dropSet
     case failure
     
