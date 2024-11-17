@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://apps.apple.com/us/app/iron-workout-tracker/id1479893244?itsct=apps_box_badge&amp;itscg=30200" target="_blank" rel="noopener noreferrer" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1570320000&h=451eec3a78491471632d869e4532a641" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
+  <a href="https://apps.apple.com/us/app/iron-workout-tracker/id1479893244?itsct=apps_box_badge&amp;itscg=30200" target="_blank" rel="noopener noreferrer"><img src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Download on the App Store" style="width: 160px"></a>
 </p>
 
 # Iron
