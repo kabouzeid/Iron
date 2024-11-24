@@ -9,14 +9,14 @@
 import Foundation
 
 public enum WorkoutSetTag: String, CaseIterable {
-//    case warmUp // disable for now, see if there is a need for this
+    case warmUp
     case dropSet
     case failure
     
     public var title: String {
         switch self {
-//        case .warmUp:
-//            return "warm up"
+        case .warmUp:
+            return "warm up"
         case .dropSet:
             return "drop set"
         case .failure:
